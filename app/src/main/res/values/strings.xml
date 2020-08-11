@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">Dinamo</string>
     <string name="action_settings">Settings</string>
+
+    <string name="title_activity_settings">Settings</string>
+
+    <string name="title_activity_device_pair_start">Start</string>
+    <string name="title_activity_device_pair_search">Search devices</string>
+
+    <string name="messages_header">Messages</string>
+    <string name="signature_title">Your Signature</string>
+    <string name="reply_title">Default reply action</string>
+    <string name="sync_header">Sync</string>
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_summary_off">attachment_summary_off</string>
+    <string name="attachment_summary_on">attachment_summary_on</string>
+    <string name="attachment_title">attachment_title</string>
+
 </resources>
