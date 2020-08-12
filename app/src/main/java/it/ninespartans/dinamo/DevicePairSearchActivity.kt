@@ -10,41 +10,38 @@ import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
+import android.view.ViewGroup
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 
 import kotlinx.android.synthetic.main.activity_device_pair_search.*
-import kotlinx.android.synthetic.main.content_device_pair_start.*
+import kotlinx.android.synthetic.main.content_device_pair_search.*
+import kotlinx.android.synthetic.main.content_device_pair_start.nextButton
+import kotlinx.android.synthetic.main.row_device.view.*
+
 
 class DevicePairSearchActivity : AppCompatActivity() {
     private var m_bluetoothAdapter: BluetoothAdapter? = null
-    private lateinit var m_pairedDevices: Set<BluetoothDevice>
-    private lateinit var discoveredDevices: ArrayList<BluetoothDevice>
+    private var discoveredDevices: ArrayList<BluetoothDevice> = ArrayList()
+
+    private lateinit var adapter: MyCustomAdapter
+    //private var items: ArrayList<BluetoothDevice> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device_pair_search)
         setSupportActionBar(toolbar)
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        discoveredDevices = ArrayList()
         m_bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
 
         var bluetoothAdapter = m_bluetoothAdapter?.takeIf { it != null } ?: return
 
-        if (bluetoothAdapter.isDiscovering) {
-            bluetoothAdapter.cancelDiscovery()
-        }
-
-        if (bluetoothAdapter.startDiscovery()) {
-            Toast.makeText(this, "Discovering did start", Toast.LENGTH_LONG).show()
-        } else {
-            Toast.makeText(this, "Discovering did not start", Toast.LENGTH_LONG).show()
-        }
+        if (bluetoothAdapter.isDiscovering) { bluetoothAdapter.cancelDiscovery() }
+        bluetoothAdapter.startDiscovery()
 
         nextButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -62,17 +59,23 @@ class DevicePairSearchActivity : AppCompatActivity() {
         bluetoothIntentFilter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)
         bluetoothIntentFilter.addAction(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE)
         registerReceiver(onBroadcastReceiver, bluetoothIntentFilter)
+
+        adapter = MyCustomAdapter(this, discoveredDevices)
+        //adapter.notifyDataSetChanged()
+        list_view.adapter = adapter
+        list_view.setOnItemClickListener { adapterView, view, i, l ->
+
+        }
     }
 
     override fun onStart() {
         super.onStart()
 
-
-
     }
 
     override fun onResume() {
         super.onResume()
+
     }
 
     override fun onDestroy() {
@@ -92,6 +95,44 @@ class DevicePairSearchActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
+
+    /**
+     * Adapter
+     * ListView Adapter
+     */
+    private class MyCustomAdapter(context: Context, items: ArrayList<BluetoothDevice>): BaseAdapter() {
+        private val mContext: Context
+        private val mItems: ArrayList<BluetoothDevice>
+        private var inflater: LayoutInflater
+
+        init {
+            mContext = context
+            mItems = items
+            inflater = LayoutInflater.from(mContext)
+        }
+
+        override fun getCount(): Int {
+            return mItems.size
+        }
+
+        override fun getItemId(position: Int): Long {
+            return  position.toLong()
+        }
+
+        override fun getItem(position: Int): Any {
+            return "TEST STRING"
+        }
+
+        override fun getView(position: Int, convertView : View?, viewGroup: ViewGroup?): View {
+            val rowDevice = inflater.inflate(R.layout.row_device, viewGroup, false)
+
+            rowDevice.textView.text = mItems.get(position).name
+            rowDevice.textView2.text = mItems.get(position).address
+
+            return rowDevice
+        }
+
+    }
 
     /**
      * BroadcastReceiver
@@ -126,6 +167,8 @@ class DevicePairSearchActivity : AppCompatActivity() {
 
                     discoveredDevices.add(device)
                     discoveredDevices = ArrayList(discoveredDevices.distinctBy { it.address })
+
+                    adapter.notifyDataSetChanged()
                 }
 
                 /**
@@ -167,7 +210,7 @@ class DevicePairSearchActivity : AppCompatActivity() {
                  */
                 BluetoothAdapter.ACTION_DISCOVERY_STARTED -> {
                     Toast.makeText(this@DevicePairSearchActivity, "ACTION_DISCOVERY_STARTED", Toast.LENGTH_SHORT).show()
-                    //circular_progress_bar.visibility = View.VISIBLE
+                    circular_progress_bar.visibility = View.VISIBLE
                 }
 
                 /**
@@ -176,7 +219,7 @@ class DevicePairSearchActivity : AppCompatActivity() {
                  */
                 BluetoothAdapter.ACTION_DISCOVERY_FINISHED -> {
                     Toast.makeText(this@DevicePairSearchActivity, "ACTION_DISCOVERY_FINISHED", Toast.LENGTH_SHORT).show()
-                    //circular_progress_bar.visibility = View.GONE
+                    circular_progress_bar.visibility = View.GONE
                     var bluetoothAdapter = m_bluetoothAdapter?.takeIf { it != null } ?: return
                     bluetoothAdapter.cancelDiscovery()
                     showNearDevices()
@@ -202,6 +245,7 @@ class DevicePairSearchActivity : AppCompatActivity() {
         builderSingle.setTitle("Near bluetooth devices")
         val devices = discoveredDevices.filter { it.name != null }
         val names = devices.map { it.name }.filterNotNull()
+
         val arrayAdapter = ArrayAdapter(this, android.R.layout.select_dialog_item, names)
         builderSingle.setAdapter(arrayAdapter) { dialog, which ->
             val deviceName = arrayAdapter.getItem(which).takeIf { it != null } ?: return@setAdapter

@@ -8,11 +8,21 @@
     tools:context=".DevicePairSearchActivity"
     tools:showIn="@layout/activity_device_pair_search">
 
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f285"
+        android:layout_above="@+id/bottom_section">
+    </ListView>
+
+
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="bottom"
-        android:orientation="vertical"
+        android:id="@+id/bottom_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:padding="20dp">
 
         <Button
@@ -22,5 +32,15 @@
             android:text="Next"/>
 
     </LinearLayout>
+
+
+    <ProgressBar
+        android:id="@+id/circular_progress_bar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+    </ProgressBar>
 
 </RelativeLayout>

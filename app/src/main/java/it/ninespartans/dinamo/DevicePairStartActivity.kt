@@ -2,9 +2,14 @@ package it.ninespartans.dinamo
 
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -38,8 +43,6 @@ class DevicePairStartActivity : AppCompatActivity() {
                 val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                 startActivityForResult(enableBluetoothIntent, REQUEST_ENABLE_BLUETOOTH)
             }
-            val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-            startActivityForResult(enableBluetoothIntent, REQUEST_ENABLE_BLUETOOTH)
         }
 
         activateCoarseLocation.setOnClickListener {
@@ -59,35 +62,13 @@ class DevicePairStartActivity : AppCompatActivity() {
             finish()
         }
 
-    }
-
-    private fun update() {
-        var bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()?.takeIf { it != null } ?: return
-
-        var debugString = ""
-        debugString = if (bluetoothAdapter.isEnabled) "BLUETOOTH: ENABLED \n" else "BLUETOOTH: DISABLED \n"
-        debugString += if (bluetoothIsActive) "BLUETOOTH: GRANTED \n" else "BLUETOOTH: DENIED \n"
-        debugString += if(bluetoothAdminIsActive) "BLUETOOTH ADMIN: GRANTED \n" else "BLUETOOTH ADMIN: DENIED \n"
-        debugString += if(coarseLocationIsGranted) "COARSE LOCATION: GRANTED \n" else "COARSE LOCATION: DENIED \n"
-        debugString += if(fineLocationGranted) "FINE LOCATION: GRANTED \n" else "FINE LOCATION: DENIED \n"
-        debugTextView.text = debugString
-
-        nextButton.isEnabled = nextEnabled && bluetoothAdapter.isEnabled
-        nextButton.isClickable = nextEnabled && bluetoothAdapter.isEnabled
-
-        activateBluetooth.isEnabled = !bluetoothAdapter.isEnabled
-        activateBluetooth.isClickable = !bluetoothAdapter.isEnabled
-
-        activateCoarseLocation.isEnabled = !coarseLocationIsGranted
-        activateCoarseLocation.isClickable = !coarseLocationIsGranted
-
-        activateFineLocation.isEnabled = !fineLocationGranted
-        activateFineLocation.isClickable = !fineLocationGranted
+        val bluetoothIntentFilter = IntentFilter()
+        bluetoothIntentFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED)
+        registerReceiver(onBroadcastReceiver, bluetoothIntentFilter)
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-
         //overridePendingTransition(R.anim.bottom_down, R.anim.nothing)
     }
 
@@ -104,6 +85,9 @@ class DevicePairStartActivity : AppCompatActivity() {
          * Check if we are requesting to enable the Bluetooth
          */
         if (requestCode == REQUEST_ENABLE_BLUETOOTH) {
+
+            Log.d("XBLUETOOTH", requestCode.toString())
+
             when (requestCode) {
                 Activity.RESULT_OK -> {
                     /**
@@ -149,6 +133,71 @@ class DevicePairStartActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun update() {
+        var bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()?.takeIf { it != null } ?: return
+
+        var debugString = ""
+        debugString = if (bluetoothAdapter.isEnabled) "BLUETOOTH: ENABLED \n" else "BLUETOOTH: DISABLED \n"
+        debugString += if (bluetoothIsActive) "BLUETOOTH: GRANTED \n" else "BLUETOOTH: DENIED \n"
+        debugString += if(bluetoothAdminIsActive) "BLUETOOTH ADMIN: GRANTED \n" else "BLUETOOTH ADMIN: DENIED \n"
+        debugString += if(coarseLocationIsGranted) "COARSE LOCATION: GRANTED \n" else "COARSE LOCATION: DENIED \n"
+        debugString += if(fineLocationGranted) "FINE LOCATION: GRANTED \n" else "FINE LOCATION: DENIED \n"
+        debugTextView.text = debugString
+
+        nextButton.isEnabled = nextEnabled && bluetoothAdapter.isEnabled
+        nextButton.isClickable = nextEnabled && bluetoothAdapter.isEnabled
+
+        activateBluetooth.isEnabled = !bluetoothAdapter.isEnabled
+        activateBluetooth.isClickable = !bluetoothAdapter.isEnabled
+
+        activateCoarseLocation.isEnabled = !coarseLocationIsGranted
+        activateCoarseLocation.isClickable = !coarseLocationIsGranted
+
+        activateFineLocation.isEnabled = !fineLocationGranted
+        activateFineLocation.isClickable = !fineLocationGranted
+    }
+
+    /**
+     * BroadcastReceiver
+     * Object class to manage the broadcasting
+     */
+    private val onBroadcastReceiver = object : BroadcastReceiver() {
+
+        override fun onReceive(contxt: Context?, intent: Intent?) {
+
+
+            when(intent?.action) {
+
+                BluetoothAdapter.ACTION_STATE_CHANGED -> {
+                    var bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()?.takeIf { it != null } ?: return
+                    when (bluetoothAdapter.state) {
+
+                        BluetoothAdapter.STATE_TURNING_ON -> {
+                            Toast.makeText(
+                                this@DevicePairStartActivity,
+                                "BLUETOOTH TURNING ON",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                        }
+
+                        BluetoothAdapter.STATE_TURNING_OFF -> {
+                            Toast.makeText(
+                                this@DevicePairStartActivity,
+                                "BLUETOOTH TURNING OFF",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                        }
+                    }
+
+                    update()
+                }
+            }
+        }
+    }
+
     /**
      * Util function
      * Function to check if some permission is granted
