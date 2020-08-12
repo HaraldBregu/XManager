@@ -77,6 +77,11 @@ class DevicePairStartActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(onBroadcastReceiver)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         update()

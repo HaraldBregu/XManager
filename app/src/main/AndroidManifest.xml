@@ -24,9 +24,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".DevicePairSetActivity"
+            android:label="@string/title_activity_device_pair_set"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".DevicePairSearchActivity"
             android:label="@string/title_activity_device_pair_search"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".DevicePairStartActivity"
             android:label="@string/title_activity_device_pair_start"
