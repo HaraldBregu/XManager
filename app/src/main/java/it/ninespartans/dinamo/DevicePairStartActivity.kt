@@ -2,7 +2,6 @@ package it.ninespartans.dinamo
 
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothDevice
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -14,12 +13,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import it.ninespartans.dinamo.bluetooth.BLEManager
 
 import kotlinx.android.synthetic.main.activity_device_pair_start.*
 import kotlinx.android.synthetic.main.content_device_pair_start.*
 
 class DevicePairStartActivity : AppCompatActivity() {
-    private var m_bluetoothAdapter: BluetoothAdapter? = null
     private val REQUEST_ENABLE_BLUETOOTH = 1
     private val COARSE_FINE_LOCATION = 1
     private val FINE_LOCATION = 1
@@ -29,8 +28,7 @@ class DevicePairStartActivity : AppCompatActivity() {
         setContentView(R.layout.activity_device_pair_start)
         setSupportActionBar(toolbar)
 
-        m_bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-        if (m_bluetoothAdapter == null) {
+        if (BLEManager.adapter == null) {
             finish()
             Toast.makeText(this, "This device doesn't support bluetooth", Toast.LENGTH_LONG).show()
             return
@@ -39,7 +37,7 @@ class DevicePairStartActivity : AppCompatActivity() {
         update()
 
         activateBluetooth.setOnClickListener {
-            if (!BluetoothAdapter.getDefaultAdapter().isEnabled) {
+            if (!BLEManager.adapterEnabled) {
                 val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                 startActivityForResult(enableBluetoothIntent, REQUEST_ENABLE_BLUETOOTH)
             }
@@ -75,6 +73,10 @@ class DevicePairStartActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return super.onSupportNavigateUp()
+    }
+
+    override fun onStart() {
+        super.onStart()
     }
 
     override fun onDestroy() {

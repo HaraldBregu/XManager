@@ -12,7 +12,8 @@
         android:id="@+id/top_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
@@ -20,6 +21,12 @@
             android:text="This is the section of the mesage to show">
 
         </TextView>
+
+        <Button
+            android:id="@+id/scanButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scan"/>
     </LinearLayout>
 
     <ListView
@@ -29,7 +36,6 @@
         android:layout_below="@+id/top_section"
         android:layout_above="@+id/bottom_section">
     </ListView>
-
 
     <LinearLayout
         android:id="@+id/bottom_section"
@@ -44,21 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Next"/>
-
-        <Button
-            android:id="@+id/scanButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Scan"/>
-
-        <Button
-            android:id="@+id/disconnectButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Disconnect"/>
-
     </LinearLayout>
-
 
     <ProgressBar
         android:id="@+id/circular_progress_bar"

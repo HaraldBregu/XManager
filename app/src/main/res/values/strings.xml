@@ -15,6 +15,7 @@
     <string name="attachment_summary_off">attachment_summary_off</string>
     <string name="attachment_summary_on">attachment_summary_on</string>
     <string name="attachment_title">attachment_title</string>
-    <string name="title_activity_device_pair_set">DevicePairSetActivity</string>
+    <string name="title_activity_device_pair_set">Set data</string>
+    <string name="title_activity_device_pair_select">Select the shoe</string>
 
 </resources>
