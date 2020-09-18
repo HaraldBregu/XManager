@@ -21,22 +21,36 @@
             android:textColor="#000"
             android:textSize="10sp">
         </TextView>
-        <Button
-            android:id="@+id/activateBluetooth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bluetooth"/>
-        <Button
-            android:id="@+id/activateCoarseLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Coarse Location"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/activateBluetooth"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Bluetooth"
+            android:backgroundTint="@color/primaryDarkColor"
+            app:cornerRadius="5dp">
+        </com.google.android.material.button.MaterialButton>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/activateCoarseLocation"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Coarse Location"
+            android:backgroundTint="@color/primaryDarkColor"
+            app:cornerRadius="5dp">
+        </com.google.android.material.button.MaterialButton>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/activateFineLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fine Location"/>
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Fine Location"
+            android:backgroundTint="@color/primaryDarkColor"
+            app:cornerRadius="5dp">
+        </com.google.android.material.button.MaterialButton>
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -46,19 +60,24 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/nextButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Next"/>
-
-
-        <Button
+            android:layout_height="60dp"
+            android:text="Next"
+            android:backgroundTint="@color/primaryDarkColor"
+            app:cornerRadius="5dp">
+        </com.google.android.material.button.MaterialButton>
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:id="@+id/closeButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Close"/>
-
+            android:layout_height="60dp"
+            android:text="Close"
+            android:textColor="@color/primaryDarkColor"
+            android:backgroundTint="@color/primaryTextColor"
+            app:cornerRadius="5dp">
+        </com.google.android.material.button.MaterialButton>
 
     </LinearLayout>
 

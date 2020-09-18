@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="15dp"
+    android:paddingBottom="0dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
+
+    <LinearLayout
+        android:id="@+id/container_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/card_shape">
+
+        <RelativeLayout
+            android:id="@+id/header_view"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="5dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="0dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CENTROCAMPISTA"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="6dp"
+                    android:textStyle="normal"
+                    android:textColor="@color/primaryDarkColor"/>
+                <TextView
+                    android:id="@+id/textViewName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Mario Balotelli"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/showOptions"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="14dp"
+                app:icon="@drawable/ic_more_vert_white_24dp"
+                app:iconTint="@color/primaryColor"
+                android:textAlignment="center"
+                android:layout_alignParentRight="true">
+            </com.google.android.material.button.MaterialButton>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="25dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp">
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/ic_player_pair_shoes_completed">
+                </ImageView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="8dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/deviceName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dinamo"
+                        android:fontFamily="@font/montserrat"
+                        android:textColor="@color/primaryColor"/>
+                    <TextView
+                        android:id="@+id/deviceVersion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:text="1.0"
+                        android:fontFamily="@font/montserrat"
+                        android:textSize="10dp"
+                        android:textColor="@color/primaryDarkColor"/>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/stateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PAIRED, UPDATED"
+                    android:fontFamily="@font/montserrat"
+                    android:textSize="8dp"
+                    android:textColor="@color/primaryDarkColor"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/programSessionSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="25dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Passaggio veloce"
+                android:fontFamily="@font/montserrat"
+                android:textSize="16dp"
+                android:textColor="@color/primaryDarkColor"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/roboto"
+                android:text="Countdown timer"
+                android:textColor="@color/primaryDarkColor"
+                android:textSize="10dp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="10:00"
+                android:textColor="@color/primaryDarkColor"
+                android:textSize="12dp"
+                android:textStyle="normal" />
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:progressTint="@color/primaryColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:indeterminate="false"
+                android:max="100"
+                android:minHeight="6dp"
+                android:minWidth="200dp"
+                android:progress="30"
+                android:progressDrawable="@drawable/horizontal_progress_drawable_red"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/playPauseButton"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:icon="@drawable/ic_play_white"
+                app:iconTint="@color/primaryTextColor"
+                android:layout_marginRight="5dp"
+                android:backgroundTint="@color/primaryDarkColor">
+            </com.google.android.material.button.MaterialButton>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/programTrainingSetup"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginRight="5dp"
+                android:text="program"
+                android:textSize="12dp"
+                android:backgroundTint="@color/primaryDarkColor">
+            </com.google.android.material.button.MaterialButton>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/completePairingDevices"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginRight="5dp"
+                android:text="Complete"
+                android:textSize="12dp"
+                android:backgroundTint="@color/primaryDarkColor">
+            </com.google.android.material.button.MaterialButton>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/updateDevices"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginRight="5dp"
+                android:text="Update"
+                android:textSize="12dp"
+                android:backgroundTint="@color/primaryDarkColor">
+            </com.google.android.material.button.MaterialButton>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

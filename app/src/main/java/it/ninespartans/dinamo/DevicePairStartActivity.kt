@@ -145,24 +145,24 @@ class DevicePairStartActivity : AppCompatActivity() {
         var bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()?.takeIf { it != null } ?: return
 
         var debugString = ""
-        debugString = if (bluetoothAdapter.isEnabled) "BLUETOOTH: ENABLED \n" else "BLUETOOTH: DISABLED \n"
-        debugString += if (bluetoothIsActive) "BLUETOOTH: GRANTED \n" else "BLUETOOTH: DENIED \n"
-        debugString += if(bluetoothAdminIsActive) "BLUETOOTH ADMIN: GRANTED \n" else "BLUETOOTH ADMIN: DENIED \n"
-        debugString += if(coarseLocationIsGranted) "COARSE LOCATION: GRANTED \n" else "COARSE LOCATION: DENIED \n"
-        debugString += if(fineLocationGranted) "FINE LOCATION: GRANTED \n" else "FINE LOCATION: DENIED \n"
+        debugString = if (BLEManager.bleIsEnabled()) "BLUETOOTH: ENABLED \n" else "BLUETOOTH: DISABLED \n"
+        debugString += if (BLEManager.bleGranted(this)) "BLUETOOTH: GRANTED \n" else "BLUETOOTH: DENIED \n"
+        debugString += if(BLEManager.bleAdminGranted(this)) "BLUETOOTH ADMIN: GRANTED \n" else "BLUETOOTH ADMIN: DENIED \n"
+        debugString += if(BLEManager.coarseLocationGranted(this)) "COARSE LOCATION: GRANTED \n" else "COARSE LOCATION: DENIED \n"
+        debugString += if(BLEManager.fineLocationGranted(this)) "FINE LOCATION: GRANTED \n" else "FINE LOCATION: DENIED \n"
         debugTextView.text = debugString
 
-        nextButton.isEnabled = nextEnabled && bluetoothAdapter.isEnabled
-        nextButton.isClickable = nextEnabled && bluetoothAdapter.isEnabled
+        //nextButton.isEnabled = nextEnabled && bluetoothAdapter.isEnabled
+        //nextButton.isClickable = nextEnabled && bluetoothAdapter.isEnabled
 
         activateBluetooth.isEnabled = !bluetoothAdapter.isEnabled
         activateBluetooth.isClickable = !bluetoothAdapter.isEnabled
 
-        activateCoarseLocation.isEnabled = !coarseLocationIsGranted
-        activateCoarseLocation.isClickable = !coarseLocationIsGranted
+        activateCoarseLocation.isEnabled = !BLEManager.coarseLocationGranted(this)
+        activateCoarseLocation.isClickable = !BLEManager.coarseLocationGranted(this)
 
-        activateFineLocation.isEnabled = !fineLocationGranted
-        activateFineLocation.isClickable = !fineLocationGranted
+        activateFineLocation.isEnabled = !BLEManager.fineLocationGranted(this)
+        activateFineLocation.isClickable = !BLEManager.fineLocationGranted(this)
     }
 
     /**
@@ -172,10 +172,7 @@ class DevicePairStartActivity : AppCompatActivity() {
     private val onBroadcastReceiver = object : BroadcastReceiver() {
 
         override fun onReceive(contxt: Context?, intent: Intent?) {
-
-
             when(intent?.action) {
-
                 BluetoothAdapter.ACTION_STATE_CHANGED -> {
                     var bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()?.takeIf { it != null } ?: return
                     when (bluetoothAdapter.state) {
@@ -204,25 +201,4 @@ class DevicePairStartActivity : AppCompatActivity() {
             }
         }
     }
-
-    /**
-     * Util function
-     * Function to check if some permission is granted
-     */
-    fun isPermissionGranted(permission:String):Boolean = ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
-
-    var bluetoothIsActive: Boolean = false
-        get() = isPermissionGranted(android.Manifest.permission.BLUETOOTH)
-
-    var bluetoothAdminIsActive: Boolean = false
-        get() = isPermissionGranted(android.Manifest.permission.BLUETOOTH_ADMIN)
-
-    var coarseLocationIsGranted: Boolean = false
-        get() = isPermissionGranted(android.Manifest.permission.ACCESS_COARSE_LOCATION)
-
-    var fineLocationGranted: Boolean = false
-        get() = isPermissionGranted(android.Manifest.permission.ACCESS_FINE_LOCATION)
-
-    var nextEnabled: Boolean = false
-        get() = bluetoothIsActive && bluetoothAdminIsActive && coarseLocationIsGranted && fineLocationGranted
 }

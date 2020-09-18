@@ -1,8 +1,10 @@
 package it.ninespartans.dinamo
 
+import android.app.AlertDialog
 import android.bluetooth.*
 import android.content.Context
 import android.content.Intent
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,8 @@ import kotlinx.android.synthetic.main.content_device_pair_search.*
 import kotlinx.android.synthetic.main.content_device_pair_start.nextButton
 import kotlinx.android.synthetic.main.row_device.view.*
 import android.os.*
+import io.realm.Realm
+import io.realm.RealmList
 import it.ninespartans.dinamo.bluetooth.BLEManager
 import kotlin.collections.ArrayList
 
@@ -20,41 +24,74 @@ import kotlin.collections.ArrayList
 class DevicePairSearchActivity : AppCompatActivity() {
     private var discoveredDevices: ArrayList<BluetoothDevice> = ArrayList()
     private lateinit var adapter: DeviceAdapter
+    var playerId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device_pair_search)
         setSupportActionBar(toolbar)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+
+        playerId = intent.getStringExtra("player_id")
+
+        //nextButton.visibility = View.GONE
+        //nextButton.isEnabled = false
 
         adapter = DeviceAdapter(this)
         adapter.items = ArrayList()
         list_view.adapter = adapter
         list_view.setOnItemClickListener { parent, view, position, id ->
+            //nextButton.visibility = View.GONE
+            //nextButton.isEnabled = false
             BLEManager.stopScanning()
 
             val element = adapter.getItem(position) as BluetoothDevice
             BLEManager.selectDevice(element)
 
+            // Before connecting to new device,
+            // disconnect to old devices if available.
             BLEManager.disconnectDevice({
                 BLEManager.connectDevice(this)
-            }, 1000)
+                //nextButton.visibility = View.VISIBLE
+                //nextButton.isEnabled = true
+            }, 2000)
         }
 
         nextButton.setOnClickListener {
-            val intent = Intent(this, DevicePairSelectActivity::class.java)
-            //intent.putExtra("selected_device", deviceSelected)
-            startActivity(intent)
+            if (BLEManager.connected()) {
+                val intent = Intent(this, DevicePairSelectActivity::class.java)
+                intent.putExtra("player_id", playerId)
+                //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
+                return@setOnClickListener
+            }
+
+            val builderInner = AlertDialog.Builder(this)
+            builderInner.setTitle("Please connect")
+            builderInner.setMessage("To continue pairing with devices is important to connect first. Please get near to the device you need and try to connect by selecting the items on the list.")
+            builderInner.setPositiveButton("I understand") { dialog, which ->
+                dialog.dismiss()
+            }
+            builderInner.show()
+        }
+
+        closeButton.setOnClickListener {
+            finish()
         }
 
         updateScanButton()
         scanButton.setOnClickListener {
-            if (BLEManager.scanning) {
-                BLEManager.stopScanning()
-            } else {
-                BLEManager.startScanning(3000)
-            }
+            //nextButton.visibility = View.GONE
+
+            BLEManager.disconnectDevice({
+                if (BLEManager.scanning) {
+                    BLEManager.stopScanning()
+                } else {
+                    BLEManager.startScanning(3000)
+                }
+            }, 1000)
         }
 
         BLEManager.startScanning(3000)
@@ -69,7 +106,7 @@ class DevicePairSearchActivity : AppCompatActivity() {
         }
 
         BLEManager.onStartScanning = {
-            circular_progress_bar.visibility = View.VISIBLE
+            //circular_progress_bar.visibility = View.VISIBLE
             discoveredDevices.clear()
             adapter.items.clear()
             adapter.notifyDataSetChanged()
@@ -77,7 +114,7 @@ class DevicePairSearchActivity : AppCompatActivity() {
         }
 
         BLEManager.onStopScanning = {
-            circular_progress_bar.visibility = View.GONE
+            //circular_progress_bar.visibility = View.GONE
             updateScanButton()
         }
 
@@ -144,8 +181,8 @@ class DevicePairSearchActivity : AppCompatActivity() {
         override fun getView(position: Int, convertView : View?, viewGroup: ViewGroup?): View {
             val rowDevice = inflater.inflate(R.layout.row_device, viewGroup, false)
 
-            rowDevice.textView.text = items.get(position).name
-            rowDevice.textView2.text = items.get(position).address
+            rowDevice.textViewName.text = items.get(position).name
+            rowDevice.textViewMacAddress.text = items.get(position).address
 
             return rowDevice
         }

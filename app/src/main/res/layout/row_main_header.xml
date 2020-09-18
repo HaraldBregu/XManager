@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="0dp"
+        android:paddingHorizontal="15dp"
+        android:paddingBottom="15dp"
+        android:orientation="vertical"
+        android:background="@color/primaryDarkColor">
+
+        <LinearLayout
+            android:id="@+id/header_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="0dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Session training"
+                android:textColor="@color/primaryTextColor"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="30sp"
+                android:layout_marginTop="0dp"/>
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Harald Bregu"
+                android:textColor="@color/primaryTextColor"
+                android:fontFamily="@font/roboto"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/userCoachLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Uefa Coach Level 4"
+                android:textColor="@color/primaryTextColor"
+                android:fontFamily="@font/roboto"
+                android:textStyle="normal"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:padding="0dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:id="@+id/addNewProgram"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="program"
+                app:icon="@drawable/ic_add_plus"
+                android:textSize="12dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/primaryColor">
+            </com.google.android.material.button.MaterialButton>
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:id="@+id/addNewPlayer"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="player"
+                app:icon="@drawable/ic_add_plus"
+                android:textSize="12dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/primaryColor">
+            </com.google.android.material.button.MaterialButton>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/programSessionSectionCoach"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Passaggio veloce"
+                android:fontFamily="@font/montserrat"
+                android:textSize="16dp"
+                android:textColor="@color/primaryTextColor"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/roboto"
+                android:text="Countdown timer"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="10dp"
+                android:textStyle="normal"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="10:00"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="12dp"
+                android:textStyle="normal"/>
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:progressTint="@color/primaryLightColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:indeterminate="false"
+                android:max="100"
+                android:minHeight="8dp"
+                android:minWidth="200dp"
+                android:progress="30"
+                android:progressDrawable="@drawable/horizontal_progress_drawable_red"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/startStopTrainingProgram"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:icon="@drawable/ic_play_white"
+                app:iconTint="@color/primaryTextColor"
+                android:layout_marginRight="5dp"
+                android:backgroundTint="@color/primaryColor">
+            </com.google.android.material.button.MaterialButton>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/selectTrainingProgram"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginRight="5dp"
+                android:text="Select"
+                android:textSize="12dp"
+                android:backgroundTint="@color/primaryColor">
+            </com.google.android.material.button.MaterialButton>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

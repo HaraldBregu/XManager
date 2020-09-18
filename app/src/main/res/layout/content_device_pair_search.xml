@@ -8,6 +8,9 @@
     tools:context=".DevicePairSearchActivity"
     tools:showIn="@layout/activity_device_pair_search">
 
+
+
+
     <LinearLayout
         android:id="@+id/top_section"
         android:layout_width="match_parent"
@@ -18,21 +21,34 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="This is the section of the mesage to show">
-
+            android:text="Device testing"
+            android:textSize="24dp"
+            android:textColor="@color/primaryDarkColor"
+            android:fontFamily="@font/montserrat_bold">
         </TextView>
 
-        <Button
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please, get close to the devices and start testing by selecting the items above."
+            android:textColor="@color/primaryDarkColor"
+            android:fontFamily="@font/montserrat"
+            android:layout_marginBottom="5dp">
+        </TextView>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/scanButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Scan"/>
+            android:text="scan">
+        </com.google.android.material.button.MaterialButton>
     </LinearLayout>
 
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:divider="@null"
         android:layout_below="@+id/top_section"
         android:layout_above="@+id/bottom_section">
     </ListView>
@@ -45,20 +61,27 @@
         android:padding="20dp"
         android:orientation="vertical">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/nextButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Next"/>
+            android:layout_height="60dp"
+            android:text="Next"
+            android:backgroundTint="@color/primaryDarkColor"
+            app:cornerRadius="5dp">
+        </com.google.android.material.button.MaterialButton>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:id="@+id/closeButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Close"
+            android:textColor="@color/primaryDarkColor"
+            android:backgroundTint="@color/primaryTextColor"
+            app:cornerRadius="5dp">
+        </com.google.android.material.button.MaterialButton>
+
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/circular_progress_bar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:visibility="gone"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
-    </ProgressBar>
 
 </RelativeLayout>

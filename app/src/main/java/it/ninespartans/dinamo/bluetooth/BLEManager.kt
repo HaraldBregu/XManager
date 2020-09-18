@@ -1,5 +1,6 @@
 package it.ninespartans.dinamo.bluetooth
 
+import android.annotation.SuppressLint
 import android.bluetooth.*
 import android.bluetooth.le.*
 import android.content.Context
@@ -9,12 +10,17 @@ import android.util.Log
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.util.*
+import android.bluetooth.BluetoothDevice
+import android.content.pm.PackageManager
+import androidx.core.content.ContextCompat
 
 
 object BLEManager {
     lateinit var didFoundDevice: ((BluetoothDevice) -> Unit)
     lateinit var onStartScanning: (() -> Unit)
     lateinit var onStopScanning: (() -> Unit)
+
+    var onCharacteristicRead: ((BluetoothGattCharacteristic?) -> Unit)? = null
 
     var scanning: Boolean = false
 
@@ -25,6 +31,8 @@ object BLEManager {
     private lateinit var selectedCharacteristic: BluetoothGattCharacteristic
     private lateinit var selectedDescriptor: BluetoothGattDescriptor
 
+    private var reading: Boolean = false
+
     var adapter: BluetoothAdapter? = null
         get() = BluetoothAdapter.getDefaultAdapter()
 
@@ -32,6 +40,7 @@ object BLEManager {
         get() = BluetoothAdapter.getDefaultAdapter().isEnabled
 
     var scanner: BluetoothLeScanner = adapter!!.bluetoothLeScanner
+
 
     /**
      * Scan for devices
@@ -55,12 +64,19 @@ object BLEManager {
                 onStartScanning.invoke()
             }
         }
-
-
+        
         Handler().postDelayed(Runnable {
             stopScanning()
         }, stopAfter)
 
+    }
+
+    /**
+     * Get Device by MAC
+     */
+    fun getDevice(address: String) {
+        val device = adapter?.getRemoteDevice(address).takeIf { it != null } ?: return
+        selectedDevice = device
     }
 
     fun stopScanning() {
@@ -85,7 +101,7 @@ object BLEManager {
     }
 
     /**
-     * Connect to device
+     * Select the device
      */
     fun selectDevice(device: BluetoothDevice) {
         selectedDevice = device
@@ -102,10 +118,16 @@ object BLEManager {
         }
 
         bluetoothGatt?.disconnect()
+        //bluetoothGatt?.close()
+
         Handler().postDelayed({
             bleConnected = false
             completion?.invoke()
         }, after)
+    }
+
+    fun connected(): Boolean {
+        return bleConnected
     }
 
     /**
@@ -118,6 +140,9 @@ object BLEManager {
 
             override fun onConnectionStateChange(gatt: BluetoothGatt?, status: Int, newState: Int) {
                 super.onConnectionStateChange(gatt, status, newState)
+
+                Log.i("SERVICE_DISCOVERED", "Start discovering")
+
                 val bleGatt = gatt.takeIf { it != null } ?: return
                 bleGatt.discoverServices()
             }
@@ -127,8 +152,10 @@ object BLEManager {
 
                 Log.i("SERVICE_DISCOVERED", status.toString())
 
-                val gatt = gatt.takeIf { it != null } ?: return
-                selectedService = gatt.getService(UUID.fromString("a327169a-31c0-4010-aebf-3e68ee255144"))
+                val gattObject = gatt.takeIf { it != null } ?: return
+
+                val service = gattObject.getService(UUID.fromString("a327169a-31c0-4010-aebf-3e68ee255144")).takeIf { it !=null } ?: return
+                selectedService = service
                 selectedCharacteristic = selectedService.getCharacteristic(UUID.fromString("e8e0d1f9-d24d-41b8-9a81-38be02772944"))
                 selectedDescriptor = selectedCharacteristic.getDescriptor(UUID.fromString("29976087-4812-4e67-8624-67d10df59231"))
             }
@@ -147,6 +174,13 @@ object BLEManager {
             override fun onCharacteristicRead(gatt: BluetoothGatt?, characteristic: BluetoothGattCharacteristic?, status: Int) {
                 super.onCharacteristicRead(gatt, characteristic, status)
 
+                onCharacteristicRead?.let {
+                    enableReading()
+                    it(characteristic)
+                } ?: run {
+                    // If b is null.
+                }
+
                 Log.i("CHARACTERISTIC_READ", characteristic?.value.toString())
             }
 
@@ -158,6 +192,9 @@ object BLEManager {
 
             override fun onDescriptorRead(gatt: BluetoothGatt?, descriptor: BluetoothGattDescriptor?, status: Int) {
                 super.onDescriptorRead(gatt, descriptor, status)
+
+                //bluetoothGatt?.readDescriptor(selectedDescriptor)
+                //selectedDescriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE)
 
                 Log.i("DESCRIPTOR_READ", descriptor?.value.toString())
             }
@@ -176,15 +213,54 @@ object BLEManager {
         }
     }
 
-    fun read() {
-        bluetoothGatt?.readCharacteristic(selectedCharacteristic)
+    fun deviceConnected(): Boolean {
+        return bleConnected
+    }
+
+    fun enableReading() {
         bluetoothGatt?.setCharacteristicNotification(selectedCharacteristic, true)
-        selectedDescriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE)
-        bluetoothGatt?.writeDescriptor(selectedDescriptor)
+        bluetoothGatt?.readCharacteristic(selectedCharacteristic)
+    }
+
+    fun disableReading() {
+        onCharacteristicRead = null
+    }
+
+    fun write(byteArray: ByteArray) {
+        selectedCharacteristic.setValue(byteArray)
+        bluetoothGatt?.setCharacteristicNotification(selectedCharacteristic, true)
+        bluetoothGatt?.writeCharacteristic(selectedCharacteristic)
+        //selectedDescriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE)
+        //bluetoothGatt?.writeDescriptor(selectedDescriptor)
+    }
+
+    fun write(string: String) {
+        selectedCharacteristic.setValue(string)
+        bluetoothGatt?.setCharacteristicNotification(selectedCharacteristic, true)
+        bluetoothGatt?.writeCharacteristic(selectedCharacteristic)
+        //selectedDescriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE)
+        //bluetoothGatt?.writeDescriptor(selectedDescriptor)
     }
 
     fun close() {
         bluetoothGatt?.close()
+    }
+
+    /**
+     * Util function
+     * Function to check if some permission is granted
+     */
+    fun isPermissionGranted(permission:String, context: Context):Boolean = ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
+    fun bleGranted(context: Context): Boolean = isPermissionGranted(android.Manifest.permission.BLUETOOTH, context)
+    fun bleAdminGranted(context: Context): Boolean = isPermissionGranted(android.Manifest.permission.BLUETOOTH_ADMIN, context)
+    fun coarseLocationGranted(context: Context):Boolean = isPermissionGranted(android.Manifest.permission.ACCESS_COARSE_LOCATION, context)
+    fun fineLocationGranted(context: Context):Boolean = isPermissionGranted(android.Manifest.permission.ACCESS_FINE_LOCATION, context)
+    fun bleIsEnabled(): Boolean {
+        BluetoothAdapter.getDefaultAdapter()?.let { return it.isEnabled }
+        return false
+    }
+    fun canStart(context: Context): Boolean {
+        return bleIsEnabled() && bleGranted(context) && bleAdminGranted(context) && coarseLocationGranted(context) && fineLocationGranted(context)
     }
 
 }

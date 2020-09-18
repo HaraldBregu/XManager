@@ -17,5 +17,9 @@
     <string name="attachment_title">attachment_title</string>
     <string name="title_activity_device_pair_set">Set data</string>
     <string name="title_activity_device_pair_select">Select the shoe</string>
+    <string name="title_activity_create_player">Create</string>
+    <string name="title_activity_update_player">Update</string>
+    <string name="title_activity_home">Manager</string>
+    <string name="title_activity_create_program">CreateProgramActivity</string>
 
 </resources>
