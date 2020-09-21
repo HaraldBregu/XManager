@@ -26,9 +26,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".CreateUserActivity"
+            android:label="@string/title_activity_create_user"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".CreateProgramActivity"
             android:label="@string/title_activity_create_program"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CreatePlayerActivity"
             android:label="@string/title_activity_create_player"

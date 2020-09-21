@@ -9,12 +9,14 @@
     tools:showIn="@layout/activity_create_player">
 
     <LinearLayout
-        android:id="@+id/top_section"
+        android:id="@+id/containerSection"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="20dp"
-        android:orientation="vertical">
-
+        android:orientation="vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,7 +26,6 @@
             android:fontFamily="@font/montserrat_bold"
             android:layout_marginBottom="20dp">
         </TextView>
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameInputText"
             android:layout_width="match_parent"
@@ -39,7 +40,6 @@
                 android:inputType="textCapWords"
                 android:maxLines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/roleInputText"
             android:layout_width="match_parent"

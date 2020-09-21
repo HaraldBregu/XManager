@@ -24,8 +24,6 @@ import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 
-
-
 class DevicePairSelectActivity : AppCompatActivity() {
     lateinit var deviceInfo: DeviceInfo
     private lateinit var player: Player
@@ -55,38 +53,6 @@ class DevicePairSelectActivity : AppCompatActivity() {
                         })
                         this.player.leftDevice = device
                     }
-
-                    /*
-                    realm.where<Device>().equalTo("id", it.leftDevice?.id).findFirst()?.let { device ->
-                        realm.executeTransaction {
-                            val device = realm.copyToRealmOrUpdate(device.apply {
-                                name = deviceInfo.name
-                                firmwareVersion = deviceInfo.version
-                                mac = deviceInfo.efuse_mac
-                                bleMAC = deviceInfo.ble.mac
-                                wifiMAC = deviceInfo.wifi.mac
-                            })
-                            this.player.leftDevice = device
-                            //Toast.makeText(this, "Updated: " + device.name, Toast.LENGTH_SHORT).show()
-                        }
-                    }*/
-                } ?: run {
-                    realm.executeTransaction {
-                        var device = realm.copyToRealmOrUpdate(Device().apply {
-                            name = deviceInfo.name
-                            firmwareVersion = deviceInfo.version
-                            mac = deviceInfo.efuse_mac
-                            bleMAC = deviceInfo.ble.mac
-                            wifiMAC = deviceInfo.wifi.mac
-
-                        })
-                        player = realm.copyToRealmOrUpdate(Player().apply {
-                            name = "Robert Lewandowski"
-                            leftDevice = device
-                        })
-                        playerId = player.id
-                        //Toast.makeText(this, "Did create new pair device", Toast.LENGTH_SHORT).show()
-                    }
                 }
             }
         }
@@ -104,41 +70,6 @@ class DevicePairSelectActivity : AppCompatActivity() {
                             wifiMAC = deviceInfo.wifi.mac
                         })
                         this.player.rightDevice = device
-                    }
-
-
-/*
-                    realm.where<Device>().equalTo("id", it.leftDevice?.id).findFirst()?.let { device ->
-                        realm.executeTransaction {
-                            val device = realm.copyToRealmOrUpdate(device.apply {
-                                id = device.id
-                                name = deviceInfo.name
-                                firmwareVersion = deviceInfo.version
-                                mac = deviceInfo.efuse_mac
-                                bleMAC = deviceInfo.ble.mac
-                                wifiMAC = deviceInfo.wifi.mac
-                            })
-                            this.player.rightDevice = device
-                            //Toast.makeText(this, "Updated: " + device.name, Toast.LENGTH_SHORT).show()
-                        }
-
-                    }*/
-                } ?: run {
-                    realm.executeTransaction {
-                        var device = realm.copyToRealmOrUpdate(Device().apply {
-                            name = deviceInfo.name
-                            firmwareVersion = deviceInfo.version
-                            mac = deviceInfo.efuse_mac
-                            bleMAC = deviceInfo.ble.mac
-                            wifiMAC = deviceInfo.wifi.mac
-
-                        })
-                        player = realm.copyToRealmOrUpdate(Player().apply {
-                            name = "Robert Lewandowski"
-                            rightDevice = device
-                        })
-                        playerId = player.id
-                        //Toast.makeText(this, "Did create new pair device", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

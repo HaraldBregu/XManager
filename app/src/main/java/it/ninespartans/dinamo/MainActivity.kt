@@ -1,31 +1,28 @@
 package it.ninespartans.dinamo
 
 import android.app.AlertDialog
-import android.bluetooth.BluetoothGattCharacteristic
 import android.content.Context
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import android.widget.BaseAdapter
-import android.widget.PopupMenu
-import android.widget.Toast
 import io.realm.Realm
 import io.realm.RealmResults
 import it.ninespartans.dinamo.bluetooth.BLEManager
 import it.ninespartans.dinamo.model.Player
+import it.ninespartans.dinamo.model.Program
 import it.ninespartans.dinamo.model.User
-import it.ninespartans.dinamo.model.Version
-import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.content_main.list_view
 import kotlinx.android.synthetic.main.row_main_header.view.*
 import kotlinx.android.synthetic.main.row_main_player.view.*
-import java.util.*
-import kotlin.collections.ArrayList
+import kotlinx.android.synthetic.main.row_main_player_empty.view.*
+import kotlinx.android.synthetic.main.row_main_player_header.view.*
+import kotlinx.android.synthetic.main.row_main_program_empty.view.*
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.widget.*
+import it.ninespartans.dinamo.model.Version
 
 
 class MainActivity : AppCompatActivity() {
@@ -38,12 +35,30 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         title = getString(R.string.title_activity_home)
 
-        adapter = DeviceAdapter(this)
-        adapter.items = ArrayList()
+        var realm = Realm.getDefaultInstance()
+        val players = realm.where(Player::class.java).findAll()
+        val programs = realm.where(Program::class.java).findAll()
+        adapter = DeviceAdapter(this, players, programs)
+
         list_view.adapter = adapter
 
         adapter.onClickAction = {
             when (it) {
+                DeviceAdapter.Action.CREATE_USER -> {
+                    val intent = Intent(this, CreateUserActivity::class.java)
+                    startActivity(intent)
+                }
+                DeviceAdapter.Action.DELETE_PROGRAM -> {
+                    Realm.getDefaultInstance().use { realm ->
+                        realm.executeTransaction {
+                            realm.where(Program::class.java).findAll()?.let {
+                                it.deleteAllFromRealm()
+                                adapter.programs = realm.where(Program::class.java).findAll()
+                                adapter.notifyDataSetChanged()
+                            }
+                        }
+                    }
+                }
                 DeviceAdapter.Action.START_PROGRAM -> {
                     Toast.makeText(this, "start all", Toast.LENGTH_SHORT).show()
                 }
@@ -67,7 +82,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        adapter.onClickActionOnItem = { action, dinamoPairDevice ->
+        adapter.onClickActionOnItem = { action, player ->
             when (action) {
                 DeviceAdapter.Action.DELETE_PLAYER -> {
                     val builderInner = AlertDialog.Builder(this)
@@ -78,7 +93,7 @@ class MainActivity : AppCompatActivity() {
                     builderInner.setPositiveButton("Ok") { dialog, which ->
                         Realm.getDefaultInstance().use { realm ->
                             realm.executeTransaction {
-                                var pairDevice = it.where(Player::class.java).equalTo("id", dinamoPairDevice.id).findAll()
+                                var pairDevice = it.where(Player::class.java).equalTo("id", player.id).findAll()
                                 pairDevice.deleteAllFromRealm()
                                 updateList()
                             }
@@ -88,7 +103,12 @@ class MainActivity : AppCompatActivity() {
                 }
                 DeviceAdapter.Action.COMPLETE_PLAYER -> {
                     val intent = Intent(this, DevicePairSearchActivity::class.java)
-                    intent.putExtra("dinamo_pair_device_id", dinamoPairDevice.id)
+                    intent.putExtra("player_id", player.id)
+                    startActivity(intent)
+                }
+                DeviceAdapter.Action.UPDATE_PLAYER -> {
+                    val intent = Intent(this, CreatePlayerActivity::class.java)
+                    intent.putExtra("player_id", player.id)
                     startActivity(intent)
                 }
             }
@@ -97,7 +117,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
         updateList()
     }
 
@@ -125,26 +144,18 @@ class MainActivity : AppCompatActivity() {
     fun updateList() {
         Realm.getDefaultInstance().use { realm ->
 
-            // Players
-            realm.where(Player::class.java).findAll()?.let {
-                var list = ArrayList<Player>()
-                it.forEach { player ->
-                    var objectItem = Player()
-                    objectItem.id = player.id
-                    objectItem.name = player.name
-                    objectItem.leftDevice = player.leftDevice
-                    objectItem.rightDevice = player.rightDevice
-                    list.add(objectItem)
-                }
-                adapter.items = list
-                adapter.notifyDataSetChanged()
-            }
-
             // User
             realm.where(User::class.java).findFirst()?.let {
                 user = it
-                //Toast.makeText(this, user.createdAt.toString(), Toast.LENGTH_SHORT).show()
             }
+
+            //Programs
+            adapter.programs = realm.where(Program::class.java).findAll()
+
+            // Players
+            adapter.players = realm.where(Player::class.java).findAll()
+
+            adapter.notifyDataSetChanged()
         }
     }
 
@@ -152,62 +163,121 @@ class MainActivity : AppCompatActivity() {
      * Adapter
      * ListView Adapter
      */
-
-    private class DeviceAdapter(context: Context): BaseAdapter() {
+    private class DeviceAdapter(context: Context, players: RealmResults<Player>, programs: RealmResults<Program>): BaseAdapter() {
         private val mContext: Context
         private var inflater: LayoutInflater
-        var items: ArrayList<Player> = ArrayList()
+        var programs: RealmResults<Program>
+        var players: RealmResults<Player>
 
         enum class Action {
+            CREATE_USER,
             ADD_PLAYER,
-            CREATE_PROGRAM,
-            UPLOAD_PROGRAM,
-            START_PROGRAM,
-            STOP_PROGRAM,
+            UPDATE_PLAYER,
             DELETE_PLAYER,
             COMPLETE_PLAYER,
-            UPDATE_PLAYER,
-            TURN_OFF_PLAYER
+            TURN_OFF_PLAYER,
+            CREATE_PROGRAM,
+            DELETE_PROGRAM,
+            UPLOAD_PROGRAM,
+            START_PROGRAM,
+            STOP_PROGRAM
         }
 
         var onClickAction: ((Action) -> Unit)? = null
         var onClickActionOnItem: ((Action, Player) -> Unit)? = null
 
         init {
+            this.players = players
+            this.programs = programs
             mContext = context
             inflater = LayoutInflater.from(mContext)
         }
 
         override fun getCount(): Int {
-            return items.size + 1
+            val header = 1
+            val itemsHeader = 1
+            val program = if (programs.size == 0) 1 else 0
+            val count = header + program + itemsHeader + players.size
+            return count
         }
 
         override fun getItemId(position: Int): Long {
             return position.toLong()
         }
 
-        override fun getItem(position: Int): Any {
-            return items.get(position - 1)
+        override fun getItem(position: Int): Player? {
+            val header = 1
+            val itemsHeader = 1
+            val program = if (programs.size == 0) 1 else 0
+            val offset = header + itemsHeader + program
+            return players.get(position - offset)
         }
 
         override fun getView(position: Int, convertView : View?, viewGroup: ViewGroup?): View {
+            val noItems = players.size == 0
+            val hasItems = players.size > 0
+            val noPrograms = programs.size == 0
+            val hasPrograms = programs.size > 0
+
+            val isHeader = position==0
+            val isRowPlayerEmpty = position == 1 && noItems
+            val isRowProgramEmpty = (position == 1 && hasItems && noPrograms) || (position == 2 && noItems && noPrograms)
+            val isRowHeaderPlayer = (position == 1 && hasItems && hasPrograms) || (position == 2 && hasItems && noPrograms)
+            var rowPlayerPosition = 0
+            rowPlayerPosition = if (hasItems && hasPrograms) position - 2 else 0
+            rowPlayerPosition = if (hasItems && !hasPrograms) position - 3 else rowPlayerPosition
 
             /**
              * Header Row
              * This row is for the manager
              */
             val rowHeader = inflater.inflate(R.layout.row_main_header, viewGroup, false)
-            if (position == 0) {
+            if (isHeader) {
+
+                /*
+                val timer = object: CountDownTimer(10000, 1000) {
+                    override fun onTick(millisUntilFinished: Long) {
+                        rowHeader.countDownTimerLabel.text = millisUntilFinished.toString()
+                        //rowHeader.programProgressBar.progress = (millisUntilFinished/100).toInt()
+                    }
+                    override fun onFinish() {
+                        rowHeader.countDownTimerLabel.text = "0"
+                        //rowHeader.programProgressBar.progress = 100
+                    }
+                }
+                timer.start()
+                */
+
+                rowHeader.programProgressBar.progress = 40
+                //rowHeader.userSection.visibility = View.GONE
+
+                rowHeader.userData.text = "Players: " + players.size.toString() + " | " + "Programs: " + programs.size.toString()
+
+                rowHeader.createUser.setOnClickListener {
+                    onClickAction?.let {
+                        it(Action.CREATE_USER)
+                    }
+                }
+
+                rowHeader.showAllPrograms.setOnClickListener {
+                    val popupMenu = PopupMenu(mContext, it)
+                    popupMenu.menuInflater.inflate(R.menu.popup_menu_card, popupMenu.menu)
+                    popupMenu.menu.findItem(R.id.action_delete_all_programs).setVisible(true)
+                    popupMenu.setOnMenuItemClickListener {
+                        when (it.itemId) {
+                            R.id.action_delete_all_programs ->
+                                onClickAction?.let {
+                                    it(Action.DELETE_PROGRAM)
+                                }
+                        }
+                        true
+                    }
+                    popupMenu.show()
+                }
 
                 rowHeader.addNewProgram.setOnClickListener {
                     onClickAction?.let {
                         it(Action.CREATE_PROGRAM)
-                    }
-                }
-
-                rowHeader.addNewPlayer.setOnClickListener {
-                    onClickAction?.let {
-                        it(Action.ADD_PLAYER)
                     }
                 }
 
@@ -228,48 +298,143 @@ class MainActivity : AppCompatActivity() {
             }
 
             /**
+             * Row for player empty
+             */
+            val rowPlayerEmpty = inflater.inflate(R.layout.row_main_player_empty, viewGroup, false)
+            if (isRowPlayerEmpty) {
+                rowPlayerEmpty.noPlayerCardCreateButton.setOnClickListener {
+                    onClickAction?.let {
+                        it(Action.ADD_PLAYER)
+                    }
+                }
+                return rowPlayerEmpty
+            }
+
+            /**
+             * Row for program empty
+             */
+            val rowProgramEmpty = inflater.inflate(R.layout.row_main_program_empty, viewGroup, false)
+            if (isRowProgramEmpty) {
+                rowProgramEmpty.noProgramCardCreateButton.setOnClickListener {
+                    onClickAction?.let {
+                        it(Action.CREATE_PROGRAM)
+                    }
+                }
+                return rowProgramEmpty
+            }
+
+            /**
+             * Header Player
+             */
+            val rowPlayerHeader = inflater.inflate(R.layout.row_main_player_header, viewGroup, false)
+            if (isRowHeaderPlayer) {
+                rowPlayerHeader.addNewPlayer.setOnClickListener {
+                    onClickAction?.let {
+                        it(Action.ADD_PLAYER)
+                    }
+                }
+
+                return rowPlayerHeader
+            }
+
+            /**
              * Player Row
              * This row is for single player
              */
             val rowPlayer = inflater.inflate(R.layout.row_main_player, viewGroup, false)
-            val player = items.get(position - 1)
 
+            val player = players.get(rowPlayerPosition)
+            val leftdevice = player?.leftDevice
+            val rightDevice = player?.rightDevice
 
-            rowPlayer.textViewName.text = player.name
+            val noDevices = leftdevice == null && rightDevice == null
+            val missingOneDevice = leftdevice == null || rightDevice == null
 
-            var pairIncomplete = (player.leftDevice == null) || (player.rightDevice == null)
+            val hasProgram = player?.program != null
 
-            var stateString = ""
-            stateString += if (pairIncomplete) "INCOMPLETE" else "COMPLETE"
+            val leftDeviceVersion =  leftdevice?.firmwareVersion ?: "0"
+            val rightDeviceVersion =  rightDevice?.firmwareVersion ?: "0"
+            val leftVersion = Version(leftDeviceVersion)
+            val rightVersion = Version(rightDeviceVersion)
+            val deviceVersionEqual = leftVersion.equals(rightVersion)
 
+            /**
+             * Player informations
+             */
+            rowPlayer.textViewPlayerName.text = player?.name
+            rowPlayer.textViewPlayerRole.text = if (player?.role!!.isEmpty()) "Ruolo" else player.role
 
-            //Log.i("left_device", player.leftDevice.toString())
-            //Log.i("rightDevice", player.rightDevice.toString())
-            //val device = player.leftDevice?.bleMAC
-            //val string = item.leftDevice?.firmwareVersion
+            /**
+             * Device informations
+             */
+            if (noDevices) {
+                rowPlayer.deviceInfoSection.visibility = View.GONE
+            } else if (missingOneDevice) {
+                rowPlayer.deviceInfoSection.visibility = View.VISIBLE
 
-            /*
-            if (Version("1.0.0").equals(Version("1.0.1"))) {
-                Toast.makeText(this, "Is equal version", Toast.LENGTH_SHORT).show()
+                leftdevice?.let {
+                    rowPlayer.deviceName.text = it.name
+                    rowPlayer.deviceVersion.text = it.firmwareVersion
+                    rowPlayer.stateText.text =  "MISSING RIGHT"
+                }
+
+                rightDevice?.let {
+                    rowPlayer.deviceName.text = it.name
+                    rowPlayer.deviceVersion.text = it.firmwareVersion
+                    rowPlayer.stateText.text =  "MISSING LEFT"
+                }
+
+            } else if (!deviceVersionEqual) {
+                
             } else {
-                Toast.makeText(this, "Is not equal version", Toast.LENGTH_SHORT).show()
-            }*/
+                rowPlayer.stateText.text = "COMPLETED"
+            }
 
-            //if (item.leftDevice?.version != null) {
-            //}
-
-            rowPlayer.stateText.text = stateString
-
-            rowPlayer.programTrainingSetup.visibility = View.VISIBLE
-            rowPlayer.completePairingDevices.visibility = View.VISIBLE
+            /**
+             * Action section
+             */
+            rowPlayer.playPauseButton.visibility = View.GONE
+            rowPlayer.programSelection.visibility = View.GONE
+            rowPlayer.completePairingDevices.visibility = View.GONE
             rowPlayer.updateDevices.visibility = View.GONE
 
-            if (position == 2) {
-                rowPlayer.programSessionSection.visibility = View.GONE
-                rowPlayer.playPauseButton.visibility = View.GONE
-            } else {
+            rowPlayer.programSessionSection.visibility = if (missingOneDevice) View.GONE else View.VISIBLE
+            rowPlayer.completePairingDevices.visibility = if (missingOneDevice) View.VISIBLE else View.GONE
 
+            rowPlayer.playerProgressProgram.progress = (0..100).random()
+
+            /**
+             * 1. Has program running or not
+             * 2. Has unpair devices
+             * 3. Has new version to update
+             */
+            var hasUnpairedDevices = false
+            var hasNewVersion = false
+
+            if (hasUnpairedDevices) {
+                // no program are allowed to work
+                // no new version are allowed to upload
             }
+
+            if (hasNewVersion) {
+                // can work if devices are paired both
+                // if devices has different versions
+            }
+
+            //player.program?.let {
+
+            //}
+
+            if (hasProgram) {
+                // only when devices are paired correctly
+                // only when the program is active or finished
+                // can stop/start the program when the device is near
+                // can change the program that is running and chose another one
+
+                // Can have version to update
+                // if you want to update, the program will stop
+            }
+
 
             /**
              * Start session exercise for single player
@@ -284,7 +449,7 @@ class MainActivity : AppCompatActivity() {
             /**
              * Upload program to single player and start directly
              */
-            rowPlayer.programTrainingSetup.setOnClickListener {
+            rowPlayer.programSelection.setOnClickListener {
                 onClickActionOnItem?.let {
                     it(Action.UPLOAD_PROGRAM, player)
                 }
@@ -314,15 +479,22 @@ class MainActivity : AppCompatActivity() {
             rowPlayer.showOptions.setOnClickListener {
                 val popupMenu = PopupMenu(mContext, it)
                 popupMenu.menuInflater.inflate(R.menu.popup_menu_card, popupMenu.menu)
-
-                popupMenu.menu.findItem(R.id.action_complete).setEnabled(pairIncomplete)
-                //popupMenu.menu.findItem(R.id.action_complete).setVisible(false)
+                popupMenu.menu.findItem(R.id.action_complete).setEnabled(missingOneDevice)
+                popupMenu.menu.findItem(R.id.action_update_player).setVisible(true)
+                popupMenu.menu.findItem(R.id.action_update_devices).setVisible(true)
+                popupMenu.menu.findItem(R.id.action_complete).setVisible(true)
+                popupMenu.menu.findItem(R.id.action_delete).setVisible(true)
+                popupMenu.menu.findItem(R.id.turn_off_player).setVisible(true)
 
                 popupMenu.setOnMenuItemClickListener {
                     when (it.itemId) {
-                        R.id.action_update ->
+                        R.id.action_update_player ->
                             onClickActionOnItem?.let {
                                 it(Action.UPDATE_PLAYER, player)
+                            }
+                        R.id.action_update_devices ->
+                            onClickActionOnItem?.let {
+                                it(Action.COMPLETE_PLAYER, player)
                             }
                         R.id.action_complete ->
                             onClickActionOnItem?.let {
@@ -344,6 +516,6 @@ class MainActivity : AppCompatActivity() {
 
             return rowPlayer
         }
-
     }
+
 }

@@ -12,5 +12,6 @@ open class Player(
     var role: String = "",
     var leftDevice: Device? = null,
     var rightDevice: Device? = null,
-    var program: Program? = null
+    var program: Program? = null,
+    var active: Boolean = true
 ) : RealmObject()

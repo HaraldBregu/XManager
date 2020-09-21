@@ -12,6 +12,5 @@ open class User(
     var createdAt: Date = Date(),
     var firstName: String = "",
     var lastName: String = "",
-    var emailAddress: String = "",
-    var players: RealmList<Player> = RealmList()
+    var emailAddress: String = ""
     ):RealmObject()

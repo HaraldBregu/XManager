@@ -9,8 +9,8 @@ class Version(private val version: String?) : Comparable<Version> {
     }
 
     init {
-        requireNotNull(version) { "Version can not be null" }
-        require(version.matches("[0-9]+(\\.[0-9]+)*".toRegex())) { "Invalid version format" }
+        //requireNotNull(version) { "Version can not be null" }
+        //require(version.matches("[0-9]+(\\.[0-9]+)*".toRegex())) { "Invalid version format" }
     }
 
     override fun compareTo(that: Version): Int {

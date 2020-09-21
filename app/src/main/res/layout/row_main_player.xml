@@ -5,18 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="15dp"
-    android:paddingBottom="0dp"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp">
-
+    android:paddingTop="0dp"
+    android:paddingBottom="15dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
     <LinearLayout
         android:id="@+id/container_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@drawable/card_shape">
-
         <RelativeLayout
             android:id="@+id/header_view"
             android:layout_width="match_parent"
@@ -31,15 +29,17 @@
                 android:orientation="vertical"
                 android:layout_marginTop="5dp">
                 <TextView
+                    android:id="@+id/textViewPlayerRole"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="CENTROCAMPISTA"
-                    android:fontFamily="@font/roboto"
+                    android:text="Ruolo"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/roboto_regular"
                     android:textSize="6dp"
                     android:textStyle="normal"
                     android:textColor="@color/primaryDarkColor"/>
                 <TextView
-                    android:id="@+id/textViewName"
+                    android:id="@+id/textViewPlayerName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
@@ -62,25 +62,15 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/deviceInfoSection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingHorizontal="25dp">
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="5dp">
-                <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:src="@drawable/ic_player_pair_shoes_completed">
-                </ImageView>
-            </LinearLayout>
-            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginLeft="8dp">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -90,7 +80,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Dinamo"
-                        android:fontFamily="@font/montserrat"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textSize="15sp"
                         android:textColor="@color/primaryColor"/>
                     <TextView
                         android:id="@+id/deviceVersion"
@@ -98,8 +89,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:text="1.0"
-                        android:fontFamily="@font/montserrat"
-                        android:textSize="10dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textSize="12sp"
                         android:textColor="@color/primaryDarkColor"/>
                 </LinearLayout>
                 <TextView
@@ -107,8 +98,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="PAIRED, UPDATED"
-                    android:fontFamily="@font/montserrat"
-                    android:textSize="8dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="10dp"
+                    android:layout_marginTop="2dp"
                     android:textColor="@color/primaryDarkColor"/>
             </LinearLayout>
         </LinearLayout>
@@ -120,38 +112,62 @@
             android:orientation="vertical"
             android:paddingHorizontal="25dp"
             android:layout_marginTop="20dp">
-
-            <TextView
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Passaggio veloce"
-                android:fontFamily="@font/montserrat"
-                android:textSize="16dp"
-                android:textColor="@color/primaryDarkColor"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:fontFamily="@font/roboto"
-                android:text="Countdown timer"
-                android:textColor="@color/primaryDarkColor"
-                android:textSize="10dp"
-                android:textStyle="normal" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="10:00"
-                android:textColor="@color/primaryDarkColor"
-                android:textSize="12dp"
-                android:textStyle="normal" />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/programPlayerTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_toLeftOf="@+id/labelTimer"
+                    android:layout_alignParentLeft="true"
+                    android:text="Programma default"
+                    android:textColor="@color/primaryDarkColor"
+                    android:textSize="16dp" />
+                <TextView
+                    android:id="@+id/programPlayerState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Pausa"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/programPlayerTitle"
+                    android:textColor="@color/primaryDarkColor"
+                    android:textSize="12dp"
+                    android:textStyle="normal"/>
+                <TextView
+                    android:id="@+id/programPlayerTimerTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Complentamento"
+                    android:textAllCaps="true"
+                    android:layout_marginTop="4dp"
+                    android:layout_alignParentRight="true"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/primaryDarkColor"
+                    android:textSize="10dp"
+                    android:textStyle="normal"/>
+                <TextView
+                    android:id="@+id/programPlayerTimer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="00:10:40"
+                    android:layout_below="@+id/programPlayerTimerTitle"
+                    android:layout_alignParentRight="true"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/primaryDarkColor"
+                    android:textSize="16dp"
+                    android:textStyle="normal"/>
+            </RelativeLayout>
             <ProgressBar
-                android:id="@+id/progressBar"
+                android:id="@+id/playerProgressProgram"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:progressTint="@color/primaryColor"
+                android:progressTint="@color/primaryActionColor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -168,8 +184,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingHorizontal="25dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="20dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp">
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/playPauseButton"
                 style="@style/Widget.MaterialComponents.Button.Icon"
@@ -178,14 +194,16 @@
                 app:icon="@drawable/ic_play_white"
                 app:iconTint="@color/primaryTextColor"
                 android:layout_marginRight="5dp"
+                android:textSize="12dp"
+                android:layout_alignParentRight="true"
                 android:backgroundTint="@color/primaryDarkColor">
             </com.google.android.material.button.MaterialButton>
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/programTrainingSetup"
+                android:id="@+id/programSelection"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_marginRight="5dp"
-                android:text="program"
+                android:text="select"
                 android:textSize="12dp"
                 android:backgroundTint="@color/primaryDarkColor">
             </com.google.android.material.button.MaterialButton>

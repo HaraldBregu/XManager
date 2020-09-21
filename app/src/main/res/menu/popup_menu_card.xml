@@ -4,23 +4,42 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/action_complete"
-        android:title="Complete Pairing"
-        app:showAsAction="never"/>
+        android:title="Complete configuration"
+        app:showAsAction="never"
+        android:visible="false"/>
     <item
-        android:id="@+id/action_update"
-        android:title="Update Firmware"
-        app:showAsAction="never"/>
+        android:id="@+id/action_update_player"
+        android:title="Update player"
+        app:showAsAction="never"
+        android:visible="false"/>
+    <item
+        android:id="@+id/action_update_devices"
+        android:title="Update devices"
+        app:showAsAction="never"
+        android:visible="false"/>
     <item
         android:id="@+id/action_edit"
-        android:title="Edit Player"
-        app:showAsAction="never"/>
+        android:title="Edit player"
+        app:showAsAction="never"
+        android:visible="false"/>
     <item
         android:id="@+id/turn_off_player"
         android:title="Turn off player"
-        app:showAsAction="never"/>
+        app:showAsAction="never"
+        android:visible="false"/>
     <item
         android:id="@+id/action_delete"
-        android:title="Delete Player"
-        app:showAsAction="never"/>
-
+        android:title="Delete player"
+        app:showAsAction="never"
+        android:visible="false"/>
+    <item
+        android:id="@+id/action_disable"
+        android:title="Disable player"
+        app:showAsAction="never"
+        android:visible="false"/>
+    <item
+        android:id="@+id/action_delete_all_programs"
+        android:title="Delete all programs"
+        app:showAsAction="never"
+        android:visible="false"/>
 </menu>

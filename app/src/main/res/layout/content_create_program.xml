@@ -64,19 +64,17 @@
         android:layout_alignParentBottom="true"
         android:padding="20dp"
         android:orientation="vertical">
-
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/nextButton"
+            android:id="@+id/saveProgram"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Next"
+            android:text="Save"
             android:backgroundTint="@color/primaryDarkColor"
             app:cornerRadius="5dp">
         </com.google.android.material.button.MaterialButton>
-
         <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:id="@+id/cancelButton"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="Back"
@@ -84,6 +82,5 @@
             android:backgroundTint="@color/primaryTextColor"
             app:cornerRadius="5dp">
         </com.google.android.material.button.MaterialButton>
-
     </LinearLayout>
 </RelativeLayout>

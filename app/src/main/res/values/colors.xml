@@ -4,6 +4,17 @@
     <color name="primaryLightColor">#353535</color>
     <color name="primaryDarkColor">#000000</color>
     <color name="primaryTextColor">#ffffff</color>
+    <color name="primaryTextColor95">#F2ffffff</color>
+    <color name="primaryTextColor90">#E6ffffff</color>
+    <color name="primaryTextColor85">#D9ffffff</color>
+    <color name="primaryLargeTextColor95">#F2ffffff</color>
+    <color name="primaryLargeTextColor90">#E6ffffff</color>
+    <color name="primaryLargeTextColor85">#D9ffffff</color>
+
     <color name="secondaryColor">#e1e2e1</color>
     <color name="whiteColor">#ffffff</color>
+
+    <color name="primaryActionColor">#f85a21</color>
+
+
 </resources>

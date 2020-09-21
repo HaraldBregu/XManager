@@ -17,9 +17,17 @@
     <string name="attachment_title">attachment_title</string>
     <string name="title_activity_device_pair_set">Set data</string>
     <string name="title_activity_device_pair_select">Select the shoe</string>
+
     <string name="title_activity_create_player">Create</string>
     <string name="title_activity_update_player">Update</string>
+    <string name="title_activity_create_player_button">Continue</string>
+    <string name="title_activity_update_player_button">Update</string>
+    <string name="title_activity_update_player_cancel_button">Cancel</string>
+
+
     <string name="title_activity_home">Manager</string>
-    <string name="title_activity_create_program">CreateProgramActivity</string>
+    <string name="title_activity_create_program">Create Program</string>
+    <string name="title_activity_update_program">Update Program</string>
+    <string name="title_activity_create_user">CreateUserActivity</string>
 
 </resources>
