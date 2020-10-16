@@ -1,4 +1,4 @@
-package it.ninespartans.dinamo.model
+package it.ninespartans.dinamo.common
 
 
 class Version(private val version: String?) : Comparable<Version> {

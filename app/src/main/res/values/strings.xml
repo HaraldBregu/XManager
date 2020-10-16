@@ -26,8 +26,15 @@
 
 
     <string name="title_activity_home">Manager</string>
+
     <string name="title_activity_create_program">Create Program</string>
     <string name="title_activity_update_program">Update Program</string>
-    <string name="title_activity_create_user">CreateUserActivity</string>
+
+    <string name="title_program_save">Save</string>
+    <string name="title_program_create">Create</string>
+
+    <string name="title_activity_create_user">Create user</string>
+
+    <string name="title_activity_program_list">Program list</string>
 
 </resources>

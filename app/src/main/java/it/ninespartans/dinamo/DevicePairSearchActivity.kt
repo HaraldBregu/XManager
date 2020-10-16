@@ -32,7 +32,7 @@ class DevicePairSearchActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         //supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        //intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
 
         playerId = intent.getStringExtra("player_id")
 
@@ -171,7 +171,7 @@ class DevicePairSearchActivity : AppCompatActivity() {
         }
 
         override fun getItemId(position: Int): Long {
-            return position.toLong() //mItems.get(position).address.toLong()
+            return position.toLong()
         }
 
         override fun getItem(position: Int): Any {
@@ -186,7 +186,6 @@ class DevicePairSearchActivity : AppCompatActivity() {
 
             return rowDevice
         }
-
     }
 
 }

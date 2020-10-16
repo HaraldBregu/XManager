@@ -28,6 +28,7 @@ class CreatePlayerActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         title = getString(R.string.title_activity_create_player)
 
+        // Allievi = pupils
         intent.getStringExtra("player_id")?.let {
             playerId = it
         }

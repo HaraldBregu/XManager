@@ -3,13 +3,8 @@
 xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_complete"
-        android:title="Complete configuration"
-        app:showAsAction="never"
-        android:visible="false"/>
-    <item
-        android:id="@+id/action_update_player"
-        android:title="Update player"
+        android:id="@+id/action_complete_devices"
+        android:title="Complete devices"
         app:showAsAction="never"
         android:visible="false"/>
     <item
@@ -18,28 +13,38 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
         app:showAsAction="never"
         android:visible="false"/>
     <item
-        android:id="@+id/action_edit"
+        android:id="@+id/action_delete_devices"
+        android:title="Delete devices"
+        app:showAsAction="never"
+        android:visible="false"/>
+    <item
+        android:id="@+id/turn_off_devices"
+        android:title="Turn off devices"
+        app:showAsAction="never"
+        android:visible="false"/>
+
+
+    <item
+        android:id="@+id/action_edit_player"
         android:title="Edit player"
         app:showAsAction="never"
         android:visible="false"/>
     <item
-        android:id="@+id/turn_off_player"
-        android:title="Turn off player"
-        app:showAsAction="never"
-        android:visible="false"/>
-    <item
-        android:id="@+id/action_delete"
+        android:id="@+id/action_delete_player"
         android:title="Delete player"
         app:showAsAction="never"
         android:visible="false"/>
     <item
-        android:id="@+id/action_disable"
+        android:id="@+id/action_disable_player"
         android:title="Disable player"
         app:showAsAction="never"
         android:visible="false"/>
+
+
+
     <item
         android:id="@+id/action_delete_all_programs"
-        android:title="Delete all programs"
+        android:title="Delete all programs (test)"
         app:showAsAction="never"
         android:visible="false"/>
 </menu>
