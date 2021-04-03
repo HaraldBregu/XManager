@@ -42,8 +42,8 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
         STOP_PROGRAM
     }
 
-    var onClickAction: ((it.ninespartans.xmanager.adapters.MainListAdapter.Action) -> Unit)? = null
-    var onClickActionOnItem: ((it.ninespartans.xmanager.adapters.MainListAdapter.Action, Player) -> Unit)? = null
+    var onClickAction: ((Action) -> Unit)? = null
+    var onClickActionOnItem: ((Action, Player) -> Unit)? = null
 
     init {
         this.players = players
@@ -93,6 +93,9 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
         val rowHeader = inflater.inflate(R.layout.row_main_header, viewGroup, false)
         if (isHeader) {
 
+            // User section
+            rowHeader.user_section_header.visibility = View.GONE
+
             /*
             val timer = object: CountDownTimer(10000, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
@@ -106,6 +109,9 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
             }
             timer.start()
             */
+
+            // Current program section
+            rowHeader.current_program_section.visibility = View.GONE
 
             rowHeader.programProgressBar.progress = 40
             //rowHeader.userSection.visibility = View.GONE

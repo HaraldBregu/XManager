@@ -24,8 +24,19 @@
     <string name="title_activity_update_player_button">Update</string>
     <string name="title_activity_update_player_cancel_button">Cancel</string>
 
+    <string name="title_activity_home">XManager</string>
+    <string name="main_header_title">Dashboard</string>
 
-    <string name="title_activity_home">Manager</string>
+    <string name="row_empty_player_title">New player</string>
+    <string name="row_empty_player_description">Create your first player by registering all data needed. Add a name and a role and than register the devices.</string>
+    <string name="row_empty_player_action_title">Create player</string>
+
+    <string name="row_empty_program_title">New program</string>
+    <string name="row_empty_program_description">Seams that you don\'t have any programs. Create a new program and start training.</string>
+    <string name="row_empty_program_action_title">Create program</string>
+
+
+
 
     <string name="title_activity_create_program">Create Program</string>
     <string name="title_activity_update_program">Update Program</string>

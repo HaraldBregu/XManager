@@ -7,8 +7,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -155,14 +157,26 @@ class DevicePairStartActivity : AppCompatActivity() {
         //nextButton.isEnabled = nextEnabled && bluetoothAdapter.isEnabled
         //nextButton.isClickable = nextEnabled && bluetoothAdapter.isEnabled
 
-        activateBluetooth.isEnabled = !bluetoothAdapter.isEnabled
-        activateBluetooth.isClickable = !bluetoothAdapter.isEnabled
+        activateBluetooth.visibility = when (bluetoothAdapter.isEnabled) {
+            true -> View.GONE
+            false -> View.VISIBLE
+        }
+        //activateBluetooth.isEnabled = !bluetoothAdapter.isEnabled
+        //activateBluetooth.isClickable = !bluetoothAdapter.isEnabled
 
-        activateCoarseLocation.isEnabled = !BLEManager.coarseLocationGranted(this)
-        activateCoarseLocation.isClickable = !BLEManager.coarseLocationGranted(this)
+        activateCoarseLocation.visibility = when (BLEManager.coarseLocationGranted(this)) {
+            true -> View.GONE
+            false -> View.VISIBLE
+        }
+        //activateCoarseLocation.isEnabled = !BLEManager.coarseLocationGranted(this)
+        //activateCoarseLocation.isClickable = !BLEManager.coarseLocationGranted(this)
 
-        activateFineLocation.isEnabled = !BLEManager.fineLocationGranted(this)
-        activateFineLocation.isClickable = !BLEManager.fineLocationGranted(this)
+        activateFineLocation.visibility = when (BLEManager.fineLocationGranted(this)) {
+            true -> View.GONE
+            false -> View.VISIBLE
+        }
+        //activateFineLocation.isEnabled = !BLEManager.fineLocationGranted(this)
+        //activateFineLocation.isClickable = !BLEManager.fineLocationGranted(this)
     }
 
     /**

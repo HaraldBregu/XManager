@@ -11,7 +11,7 @@
         android:background="@color/primaryColor"
         android:orientation="vertical"
         android:paddingHorizontal="15dp"
-        android:paddingTop="20dp"
+        android:paddingTop="15dp"
         android:paddingBottom="15dp">
 
         <LinearLayout
@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Training dashboard"
+                android:text="@string/main_header_title"
                 android:textColor="@color/primaryLargeTextColor90"
                 android:textSize="30sp" />
             <TextView
@@ -38,6 +38,7 @@
         </LinearLayout>
 
         <RelativeLayout
+            android:id="@+id/user_section_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">
@@ -106,6 +107,7 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/current_program_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -140,7 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="Complentamento"
+                    android:text="Completamento"
                     android:textAllCaps="true"
                     android:layout_marginTop="4dp"
                     android:layout_alignParentRight="true"

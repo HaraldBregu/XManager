@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Create a new program"
+                android:text="@string/row_empty_program_title"
                 android:textColor="@color/primaryDarkColor"
                 android:textSize="26dp"
                 android:layout_centerVertical="true"/>
@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                android:text="@string/row_empty_program_description"
                 android:textColor="@color/primaryDarkColor"
                 android:textSize="14dp"
                 android:layout_centerVertical="true"/>
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="55dp"
                 android:layout_marginTop="10dp"
-                android:text="Create a program"
+                android:text="@string/row_empty_program_action_title"
                 android:textSize="14dp"
                 android:backgroundTint="@color/primaryDarkColor">
             </com.google.android.material.button.MaterialButton>
