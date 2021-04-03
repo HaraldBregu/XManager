@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".DevicePairStartActivity"
+    tools:context="it.ninespartans.xmanager.DevicePairStartActivity"
     tools:showIn="@layout/activity_device_pair_start">
 
     <LinearLayout

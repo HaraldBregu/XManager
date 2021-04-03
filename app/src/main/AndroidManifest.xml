@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="it.ninespartans.dinamo">
+    package="it.ninespartans.xmanager">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -18,7 +18,7 @@
         android:required="true" />
 
     <application
-        android:name=".DinamoApplication"
+        android:name="it.ninespartans.xmanager.XManagerApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -26,42 +26,43 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ProgramListActivity"
-            android:label="@string/title_activity_program_list"
+            android:name="it.ninespartans.xmanager.DebugActivity"
+            android:label="@string/title_activity_debug"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".CreateUserActivity"
+            android:name="it.ninespartans.xmanager.ProgramListActivity"
+            android:label="@string/title_activity_program_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="it.ninespartans.xmanager.CreateUserActivity"
             android:label="@string/title_activity_create_user"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".CreateProgramActivity"
+            android:name="it.ninespartans.xmanager.CreateProgramActivity"
             android:label="@string/title_activity_create_program"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".CreatePlayerActivity"
+            android:name="it.ninespartans.xmanager.CreatePlayerActivity"
             android:label="@string/title_activity_create_player"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".DevicePairSelectActivity"
+            android:name="it.ninespartans.xmanager.DevicePairSelectActivity"
             android:label="@string/title_activity_device_pair_select"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".DevicePairSetupActivity"
+            android:name="it.ninespartans.xmanager.DevicePairSetupActivity"
             android:label="@string/title_activity_device_pair_set"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".DevicePairSearchActivity"
+            android:name="it.ninespartans.xmanager.DevicePairSearchActivity"
             android:label="@string/title_activity_device_pair_search"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".DevicePairStartActivity"
+            android:name="it.ninespartans.xmanager.DevicePairStartActivity"
             android:label="@string/title_activity_device_pair_start"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" />
-        <activity
-            android:name=".MainActivity"
+            android:name="it.ninespartans.xmanager.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

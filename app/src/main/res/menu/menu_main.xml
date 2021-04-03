@@ -1,11 +1,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="it.ninespartans.dinamo.MainActivity">
+    tools:context="it.ninespartans.xmanager.it.ninespartans.xmanager.MainActivity">
+
+    <item
+        android:id="@+id/action_debug"
+        android:icon="@drawable/ic_debug"
+        app:showAsAction="ifRoom"
+        android:title="TODO" />
 
     <item
         android:id="@+id/action_profile"
         android:icon="@drawable/ic_person_white_24dp"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"
+        android:title="TODO" />
 
 </menu>

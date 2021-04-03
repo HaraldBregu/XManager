@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dinamo</string>
+    <string name="app_name">XManager</string>
     <string name="action_settings">Settings</string>
 
     <string name="title_activity_settings">Settings</string>
@@ -36,5 +36,6 @@
     <string name="title_activity_create_user">Create user</string>
 
     <string name="title_activity_program_list">Program list</string>
+    <string name="title_activity_debug">DebugActivity</string>
 
 </resources>
