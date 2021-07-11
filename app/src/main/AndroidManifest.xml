@@ -18,7 +18,7 @@
         android:required="true" />
 
     <application
-        android:name="it.ninespartans.xmanager.XManagerApplication"
+        android:name="it.ninespartans.xmanager.XmanagerApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

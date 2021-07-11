@@ -3,8 +3,12 @@ package it.ninespartans.xmanager
 import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
+import android.text.Editable
+import android.text.TextWatcher
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
+import android.view.View
+import android.widget.RadioButton
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +28,11 @@ class DevicePairSelectActivity : AppCompatActivity() {
     lateinit var deviceInfo: DeviceInfo
     private lateinit var player: Player
     var playerId: String = ""
+    var animationType: Byte = 0u.toByte()
+    var ledPosition: Byte = 0u.toByte()
+    var hours: Byte = 0u.toByte()
+    var minutes: Byte = 0u.toByte()
+    var seconds: Byte = 0u.toByte()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -179,22 +188,30 @@ class DevicePairSelectActivity : AppCompatActivity() {
         /**
          * Program parameters
          * 1. Led position (top, topright, ecc)
-         * 2. Time duration
-         * 3. Time unit (minutes, seconds)
-         * 3. Animation to be applied (fixed, fade, blink ecc)
+         * 2. Animation to be applied (fixed, fade, blink ecc)
+         * 3. Time duration Hours
+         * 4. Time duration Minutes
+         * 5. Time duration Seconds
          */
         setProgram.setOnClickListener {
+
+            //Toast.makeText(this, hoursEditText?.text.toString(), Toast.LENGTH_SHORT).show()
+
+
+            // Tipo di comando
             var commandByteArray = byteArrayOf(0x7E)
 
-            //var parameterCountByte:Byte = 0x01
-            //commandByteArray = commandByteArray.plus(byteArrayOf(parameterCountByte))
+            hours = hoursEditText.text.toString().toByte()
+            minutes = minutesEditText.text.toString().toByte()
+            seconds = secondsEditText.text.toString().toByte()
 
-
-            commandByteArray = commandByteArray.plus(byteArrayOf(1u.toByte(), 0x01, 60u.toByte(), 0x01))
-            //commandByteArray = commandByteArray.plus(byteArrayOf(1u.toByte(), 0x02, 5u.toByte(), 0x00))
-            //commandByteArray = commandByteArray.plus(byteArrayOf(2u.toByte(), 0x01, 1u.toByte(), 0x00))
-            //commandByteArray = commandByteArray.plus(byteArrayOf(3u.toByte(), 0x01, 1u.toByte(), 0x00))
-            //commandByteArray = commandByteArray.plus(byteArrayOf(4u.toByte(), 0x01, 1u.toByte(), 0x00))
+            commandByteArray = commandByteArray.plus(
+                byteArrayOf(
+                    ledPosition,   // LED position (0, 1, 2, 3, 4)
+                    animationType,          // Animation (fixed, blink, fade)
+                    hours,   // Hours
+                    minutes,   // Minutes
+                    seconds)) // Seconds
 
             BLEManager.write(commandByteArray)
         }
@@ -226,5 +243,61 @@ class DevicePairSelectActivity : AppCompatActivity() {
 
         return super.onSupportNavigateUp()
     }
+
+    fun onRadioButtonClicked(view: View) {
+        if (view is RadioButton) {
+            // Is the button now checked?
+            val checked = view.isChecked
+
+            // Check which radio button was clicked
+            when (view.getId()) {
+                R.id.radioStatic ->
+                    if (checked) {
+                        animationType = 0u.toByte()
+                    }
+                R.id.radioBlink ->
+                    if (checked) {
+                        animationType = 1u.toByte()
+                    }
+                R.id.radioFade ->
+                    if (checked) {
+                        animationType = 2u.toByte()
+                    }
+            }
+        }
+    }
+
+    fun onRadioLedClicked(view: View) {
+        if (view is RadioButton) {
+            // Is the button now checked?
+            val checked = view.isChecked
+
+            // Check which radio button was clicked
+            when (view.getId()) {
+                R.id.ledPosition0 ->
+                    if (checked) {
+                        ledPosition = 0u.toByte()
+                    }
+                R.id.ledPosition1 ->
+                    if (checked) {
+                        ledPosition = 1u.toByte()
+                    }
+                R.id.ledPosition2 ->
+                    if (checked) {
+                        ledPosition = 2u.toByte()
+                    }
+                R.id.ledPosition3 ->
+                    if (checked) {
+                        ledPosition = 3u.toByte()
+                    }
+                R.id.ledPosition4 ->
+                    if (checked) {
+                        ledPosition = 4u.toByte()
+                    }
+            }
+        }
+    }
+
+
 
 }

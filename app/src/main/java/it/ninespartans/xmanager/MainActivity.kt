@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity() {
                         //overridePendingTransition(R.anim.bottom_up, R.anim.nothing)
                     } else {
                         val intent = Intent(this, CreatePlayerActivity::class.java)
+                        intent.putExtra("mode", "create")
                         startActivity(intent)
                     }
                 }
@@ -82,6 +83,7 @@ class MainActivity : AppCompatActivity() {
                 MainListAdapter.Action.EDIT_PLAYER -> {
                     val intent = Intent(this, CreatePlayerActivity::class.java)
                     intent.putExtra("player_id", player.id)
+                    intent.putExtra("mode", "edit")
                     startActivity(intent)
                 }
                 MainListAdapter.Action.DELETE_PLAYER -> {
@@ -106,6 +108,7 @@ class MainActivity : AppCompatActivity() {
                 MainListAdapter.Action.COMPLETE_DEVICES -> {
                     val intent = Intent(this, DevicePairSearchActivity::class.java)
                     intent.putExtra("player_id", player.id)
+                    intent.putExtra("player_name", player.name)
                     startActivity(intent)
                 }
                 MainListAdapter.Action.DELETE_DEVICES -> {

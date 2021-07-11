@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">XManager</string>
+    <string name="app_name">Xmanager</string>
     <string name="action_settings">Settings</string>
 
     <string name="title_activity_settings">Settings</string>
@@ -18,13 +18,13 @@
     <string name="title_activity_device_pair_set">Set data</string>
     <string name="title_activity_device_pair_select">Select the shoe</string>
 
-    <string name="title_activity_create_player">Create</string>
-    <string name="title_activity_update_player">Update</string>
+    <string name="title_activity_create_player">Create player</string>
+    <string name="title_activity_update_player">Update player</string>
     <string name="title_activity_create_player_button">Continue</string>
     <string name="title_activity_update_player_button">Update</string>
     <string name="title_activity_update_player_cancel_button">Cancel</string>
 
-    <string name="title_activity_home">XManager</string>
+    <string name="title_activity_home">Xmanager</string>
     <string name="main_header_title">Dashboard</string>
 
     <string name="row_empty_player_title">New player</string>

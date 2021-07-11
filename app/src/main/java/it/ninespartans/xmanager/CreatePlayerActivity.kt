@@ -24,7 +24,14 @@ class CreatePlayerActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         title = getString(R.string.title_activity_create_player)
 
-        // Allievi = pupils
+        intent.getStringExtra("mode")?.let {
+            if (it == "edit") {
+                title = getString(R.string.title_activity_update_player)
+            } else {
+                title = getString(R.string.title_activity_create_player)
+            }
+        }
+
         intent.getStringExtra("player_id")?.let {
             playerId = it
         }
@@ -47,6 +54,11 @@ class CreatePlayerActivity : AppCompatActivity() {
         nextButton.setOnClickListener {
             Realm.getDefaultInstance().use { realm ->
                 playerId?.let {
+                    /**
+                     * When player already exists
+                     * Save new data
+                     * close activity
+                     */
                     realm.where<Player>().equalTo("id", it).findFirst()?.let { player ->
                         realm.executeTransaction {
                             realm.copyToRealmOrUpdate(player.apply {
@@ -58,6 +70,11 @@ class CreatePlayerActivity : AppCompatActivity() {
                     finish()
 
                 } ?: run {
+                    /**
+                     * When player doesn't exists
+                     * Save new player
+                     * Push to new activity
+                     */
                     realm.executeTransaction {
                         player = it.copyToRealmOrUpdate(Player().apply {
                             name = nameInputText.editText?.text.toString()
@@ -66,6 +83,7 @@ class CreatePlayerActivity : AppCompatActivity() {
                         val intent = Intent(this, DevicePairSearchActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         intent.putExtra("player_id", player?.id)
+                        intent.putExtra("player_name", player?.name)
                         startActivity(intent)
                         finish()
                     }

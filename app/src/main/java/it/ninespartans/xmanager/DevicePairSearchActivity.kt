@@ -17,9 +17,12 @@ import kotlinx.android.synthetic.main.row_device.view.*
 import android.os.*
 import io.realm.Realm
 import io.realm.RealmList
+import io.realm.kotlin.where
 import it.ninespartans.xmanager.bluetooth.BLEManager
+import it.ninespartans.xmanager.model.Player
+import it.ninespartans.xmanager.model.Device
+import kotlinx.android.synthetic.main.content_create_player.*
 import kotlin.collections.ArrayList
-
 
 class DevicePairSearchActivity : AppCompatActivity() {
     private var discoveredDevices: ArrayList<BluetoothDevice> = ArrayList()
@@ -31,6 +34,7 @@ class DevicePairSearchActivity : AppCompatActivity() {
         setContentView(it.ninespartans.xmanager.R.layout.activity_device_pair_search)
         setSupportActionBar(toolbar)
 
+        title = "Search and pair"
         //supportActionBar?.setDisplayHomeAsUpEnabled(true)
         //intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
 
@@ -38,6 +42,17 @@ class DevicePairSearchActivity : AppCompatActivity() {
 
         //nextButton.visibility = View.GONE
         //nextButton.isEnabled = false
+
+
+
+
+        /**
+         * Show Player Name
+         */
+        intent.getStringExtra("player_name")?.let {
+            deviceSearchTitle.text = it
+        }
+
 
         adapter = it.ninespartans.xmanager.DevicePairSearchActivity.DeviceAdapter(this)
         adapter.items = ArrayList()
@@ -57,6 +72,27 @@ class DevicePairSearchActivity : AppCompatActivity() {
                 //nextButton.visibility = View.VISIBLE
                 //nextButton.isEnabled = true
             }, 2000)
+
+
+            /**
+             * Update player with the new device
+             */
+            Realm.getDefaultInstance().use { realm ->
+                playerId?.let {
+                    realm.where<Player>().equalTo("id", it).findFirst()?.let { player ->
+                        realm.executeTransaction {
+                            realm.copyToRealmOrUpdate(player.apply {
+                                val device = Device()
+                                device.name = element.name
+                                device.bleMAC = element.address
+                                leftDevice = device
+                            })
+                        }
+                    }
+                    finish()
+
+                }
+            }
         }
 
         nextButton.setOnClickListener {
@@ -94,8 +130,8 @@ class DevicePairSearchActivity : AppCompatActivity() {
             }, 1000)
         }
 
-        it.ninespartans.xmanager.bluetooth.BLEManager.startScanning(3000)
-        it.ninespartans.xmanager.bluetooth.BLEManager.didFoundDevice = {
+        BLEManager.startScanning(3000)
+        BLEManager.didFoundDevice = {
 
             discoveredDevices.add(it)
             discoveredDevices = ArrayList(discoveredDevices.distinctBy { it.address })
@@ -146,10 +182,10 @@ class DevicePairSearchActivity : AppCompatActivity() {
 
     fun updateScanButton() {
         if (it.ninespartans.xmanager.bluetooth.BLEManager.scanning) {
-            scanButton.text = "STOP SCANNING"
+            scanButton.text = "STOP SEARCHING"
             return
         }
-        scanButton.text = "SCAN"
+        scanButton.text = "SEARCH DEVICES"
     }
 
     /**
@@ -181,8 +217,36 @@ class DevicePairSearchActivity : AppCompatActivity() {
         override fun getView(position: Int, convertView : View?, viewGroup: ViewGroup?): View {
             val rowDevice = inflater.inflate(it.ninespartans.xmanager.R.layout.row_device, viewGroup, false)
 
-            rowDevice.textViewName.text = items.get(position).name
-            rowDevice.textViewMacAddress.text = items.get(position).address
+            val device = items.get(position)
+            rowDevice.textViewName.text = device.name
+            rowDevice.textViewMacAddress.text = device.address
+
+            rowDevice.textViewPlayer.visibility = View.GONE
+            rowDevice.textViewState.visibility = View.GONE
+
+            Realm.getDefaultInstance().where<Player>()
+                .equalTo("leftDevice.name", device.name)
+                .equalTo("leftDevice.bleMAC", device.address)
+                .findFirst()?.let { player ->
+
+                    rowDevice.textViewPlayer.visibility = View.VISIBLE
+                    rowDevice.textViewState.visibility = View.VISIBLE
+
+                    rowDevice.textViewPlayer.text = player.name
+                    rowDevice.textViewState.text = "PAIRED LEFT"
+                }
+
+            Realm.getDefaultInstance().where<Player>(Player::class.java)
+                .equalTo("rightDevice.name", device.name)
+                .equalTo("rightDevice.bleMAC", device.address)
+                .findFirst()?.let { player ->
+
+                    rowDevice.textViewPlayer.visibility = View.VISIBLE
+                    rowDevice.textViewState.visibility = View.VISIBLE
+
+                    rowDevice.textViewPlayer.text = player.name
+                    rowDevice.textViewState.text = "PAIRED RIGHT"
+                }
 
             return rowDevice
         }

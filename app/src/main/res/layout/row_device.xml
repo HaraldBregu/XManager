@@ -35,6 +35,29 @@
             android:textColor="@color/primaryDarkColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+
+        <TextView
+            android:id="@+id/textViewPlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Johny"
+            android:fontFamily="@font/montserrat"
+            android:textSize="12dp"
+            android:textColor="@color/primaryDarkColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+
+        <TextView
+            android:id="@+id/textViewState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PAIRED"
+            android:fontFamily="@font/montserrat"
+            android:textSize="12dp"
+            android:textColor="@color/primaryDarkColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
