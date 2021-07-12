@@ -76,10 +76,13 @@ class CreatePlayerActivity : AppCompatActivity() {
                      * Push to new activity
                      */
                     realm.executeTransaction {
+
+
                         player = it.copyToRealmOrUpdate(Player().apply {
                             name = nameInputText.editText?.text.toString()
                             role = roleInputText.editText?.text.toString()
                         })
+
                         val intent = Intent(this, DevicePairSearchActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         intent.putExtra("player_id", player?.id)

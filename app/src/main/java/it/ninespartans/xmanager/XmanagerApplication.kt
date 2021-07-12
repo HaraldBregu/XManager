@@ -12,10 +12,12 @@ class XmanagerApplication: Application() {
 
         Realm.init(this)
         val configuration = RealmConfiguration.Builder()
-            .name("xmanager.realm")
             .deleteRealmIfMigrationNeeded()
+            .allowWritesOnUiThread(true)
+            .name("xmanager.realm")
             .schemaVersion(0)
             .build()
+
         Realm.setDefaultConfiguration(configuration)
 
         //val d = configuration.realmDirectory

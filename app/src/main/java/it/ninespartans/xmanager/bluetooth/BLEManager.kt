@@ -19,6 +19,8 @@ object BLEManager {
     lateinit var onStartScanning: (() -> Unit)
     lateinit var onStopScanning: (() -> Unit)
 
+    var onConnectionStateChange: ((status: Int, newState: Int) -> Unit)? = null
+    var onServiceDiscovered: ((Boolean) -> Unit)? = null
     var onCharacteristicRead: ((BluetoothGattCharacteristic?) -> Unit)? = null
 
     var scanning: Boolean = false
@@ -144,6 +146,10 @@ object BLEManager {
 
                 val bleGatt = gatt.takeIf { it != null } ?: return
                 bleGatt.discoverServices()
+
+                onConnectionStateChange?.let {
+                    it(status, newState)
+                }
             }
 
             override fun onServicesDiscovered(gatt: BluetoothGatt?, status: Int) {
@@ -151,12 +157,17 @@ object BLEManager {
 
                 Log.i("SERVICE_DISCOVERED", status.toString())
 
+
                 val gattObject = gatt.takeIf { it != null } ?: return
 
                 val service = gattObject.getService(UUID.fromString("a327169a-31c0-4010-aebf-3e68ee255144")).takeIf { it !=null } ?: return
                 selectedService = service
                 selectedCharacteristic = selectedService.getCharacteristic(UUID.fromString("e8e0d1f9-d24d-41b8-9a81-38be02772944"))
                 selectedDescriptor = selectedCharacteristic.getDescriptor(UUID.fromString("29976087-4812-4e67-8624-67d10df59231"))
+
+                onServiceDiscovered?.let {
+                    it(true)
+                }
             }
 
             override fun onCharacteristicChanged(gatt: BluetoothGatt?, characteristic: BluetoothGattCharacteristic?) {

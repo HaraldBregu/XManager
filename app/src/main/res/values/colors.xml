@@ -17,4 +17,7 @@
     <color name="primaryActionColor">#f85a21</color>
 
 
+    <color name="unselectedShoeColor">#eeeee4</color>
+    <color name="selectedShoeColor">#21130d</color>
+
 </resources>
