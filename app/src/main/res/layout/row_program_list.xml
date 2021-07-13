@@ -4,14 +4,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="5dp">
 
-    <LinearLayout
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="horizontal"
+      android:padding="10dp"
+      android:background="@color/rowGrayColor">
+
+    <RelativeLayout
+        android:id="@+id/header_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="20dp"
-        android:orientation="vertical">
-
+        android:layout_height="match_parent">
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
         <TextView
             android:id="@+id/nameProgram"
             android:layout_width="wrap_content"
@@ -35,6 +46,22 @@
             android:textColor="@color/primaryDarkColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewName" />
-    </LinearLayout>
+      </LinearLayout>
+      <com.google.android.material.button.MaterialButton
+          android:id="@+id/showProgramOptions"
+          style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+          android:focusable="false"
+          android:focusableInTouchMode="false"
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:padding="14dp"
+          app:icon="@drawable/ic_more_vert_white_24dp"
+          app:iconTint="@color/primaryColor"
+          android:textAlignment="center"
+          android:layout_alignParentRight="true">
+      </com.google.android.material.button.MaterialButton>
+    </RelativeLayout>
+
+  </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

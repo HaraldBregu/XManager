@@ -10,7 +10,7 @@ import io.realm.RealmResults
 import it.ninespartans.xmanager.R
 import it.ninespartans.xmanager.common.Version
 import it.ninespartans.xmanager.model.Player
-import it.ninespartans.xmanager.model.TrainingProgram
+import it.ninespartans.xmanager.model.TrainingSessionProgram
 import kotlinx.android.synthetic.main.row_main_header.view.*
 import kotlinx.android.synthetic.main.row_main_player.view.*
 import kotlinx.android.synthetic.main.row_main_player_empty.view.*
@@ -19,10 +19,10 @@ import kotlinx.android.synthetic.main.row_main_program_empty.view.*
 
 
 
-class MainListAdapter(context: Context, players: RealmResults<Player>, programs: RealmResults<TrainingProgram>): BaseAdapter() {
+class MainListAdapter(context: Context, players: RealmResults<Player>, programs: RealmResults<TrainingSessionProgram>): BaseAdapter() {
     private val mContext: Context
     private var inflater: LayoutInflater
-    var programs: RealmResults<TrainingProgram>
+    var programs: RealmResults<TrainingSessionProgram>
     var players: RealmResults<Player>
 
     enum class Action {
@@ -35,6 +35,7 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
         UPDATE_DEVICES,
         DELETE_DEVICES,
         TURN_OFF_DEVICES,
+        SHOW_PROGRAM,
         CREATE_PROGRAM, // Program
         DELETE_PROGRAM,
         UPLOAD_PROGRAM,
@@ -128,11 +129,16 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
                 val popupMenu = PopupMenu(mContext, it)
                 popupMenu.menuInflater.inflate(R.menu.popup_menu_card, popupMenu.menu)
                 popupMenu.menu.findItem(R.id.action_delete_all_programs).setVisible(true)
+                popupMenu.menu.findItem(R.id.action_show_all_programs).setVisible(true)
                 popupMenu.setOnMenuItemClickListener {
                     when (it.itemId) {
                         R.id.action_delete_all_programs ->
                             onClickAction?.let {
                                 it(Action.DELETE_PROGRAM)
+                            }
+                        R.id.action_show_all_programs  ->
+                            onClickAction?.let {
+                                it(Action.SHOW_PROGRAM)
                             }
                     }
                     true

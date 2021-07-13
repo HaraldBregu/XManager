@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.bluetooth.*
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,22 +11,14 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_device_pair_search.*
 import kotlinx.android.synthetic.main.content_device_pair_search.*
-import kotlinx.android.synthetic.main.content_device_pair_start.nextButton
 import kotlinx.android.synthetic.main.row_device.view.*
 import android.os.*
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.realm.Realm
 import io.realm.kotlin.where
 import it.ninespartans.xmanager.bluetooth.BLEManager
 import it.ninespartans.xmanager.model.Player
-import it.ninespartans.xmanager.model.Device
 import kotlin.collections.ArrayList
-import java.nio.file.Files.delete
-import android.widget.LinearLayout
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.util.Log
 import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
@@ -35,13 +26,13 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import it.ninespartans.xmanager.model.DeviceInfo
 import kotlinx.android.synthetic.main.content_device_pair_search.closeButton
-import kotlinx.android.synthetic.main.content_device_pair_select.*
 
 
 class DevicePairSearchActivity : AppCompatActivity() {
     private var discoveredDevices: ArrayList<BluetoothDevice> = ArrayList()
     private lateinit var adapter: DeviceAdapter
     var playerId: String? = null
+    val debug = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -198,7 +189,24 @@ class DevicePairSearchActivity : AppCompatActivity() {
 
         }
 
-        nextButton.setOnClickListener {
+        updateSearchDevicesButton()
+        searchDevicesButton.setOnClickListener {
+            BLEManager.disconnectDevice({
+                if (!BLEManager.scanning) {
+                    BLEManager.startScanning(3000)
+                }
+
+                /*
+                if (BLEManager.scanning) {
+                    BLEManager.stopScanning()
+                } else {
+                    BLEManager.startScanning(3000)
+                }*/
+            }, 1000)
+        }
+
+        debugButton.visibility = if (debug) View.VISIBLE else View.GONE
+        debugButton.setOnClickListener {
             if (BLEManager.connected()) {
                 val intent = Intent(this, DevicePairSelectActivity::class.java)
                 intent.putExtra("player_id", playerId)
@@ -216,21 +224,9 @@ class DevicePairSearchActivity : AppCompatActivity() {
             builderInner.show()
         }
 
+        closeButton.visibility = if (debug) View.VISIBLE else View.GONE
         closeButton.setOnClickListener {
             finish()
-        }
-
-        updateScanButton()
-        scanButton.setOnClickListener {
-            //nextButton.visibility = View.GONE
-
-            BLEManager.disconnectDevice({
-                if (BLEManager.scanning) {
-                    BLEManager.stopScanning()
-                } else {
-                    BLEManager.startScanning(3000)
-                }
-            }, 1000)
         }
 
         BLEManager.startScanning(3000)
@@ -249,12 +245,12 @@ class DevicePairSearchActivity : AppCompatActivity() {
             discoveredDevices.clear()
             adapter.items.clear()
             adapter.notifyDataSetChanged()
-            updateScanButton()
+            updateSearchDevicesButton()
         }
 
         BLEManager.onStopScanning = {
             //circular_progress_bar.visibility = View.GONE
-            updateScanButton()
+            updateSearchDevicesButton()
         }
 
 
@@ -284,12 +280,12 @@ class DevicePairSearchActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
-    fun updateScanButton() {
+    fun updateSearchDevicesButton() {
         if (BLEManager.scanning) {
-            scanButton.text = "STOP SEARCHING"
+            searchDevicesButton.text = "SEARCHING..."
             return
         }
-        scanButton.text = "SEARCH DEVICES"
+        searchDevicesButton.text = "SEARCH DEVICES"
     }
 
     /**

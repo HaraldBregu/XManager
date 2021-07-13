@@ -13,6 +13,7 @@ class XmanagerApplication: Application() {
         Realm.init(this)
         val configuration = RealmConfiguration.Builder()
             .deleteRealmIfMigrationNeeded()
+            .allowQueriesOnUiThread(true)
             .allowWritesOnUiThread(true)
             .name("xmanager.realm")
             .schemaVersion(0)

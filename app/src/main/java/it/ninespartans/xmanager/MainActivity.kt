@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import io.realm.Realm
 import it.ninespartans.xmanager.bluetooth.BLEManager
 import it.ninespartans.xmanager.model.Player
-import it.ninespartans.xmanager.model.TrainingProgram
+import it.ninespartans.xmanager.model.TrainingSessionProgram
 import it.ninespartans.xmanager.model.User
 import kotlinx.android.synthetic.main.content_main.list_view
 import android.widget.*
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         var realm = Realm.getDefaultInstance()
         val players = realm.where(Player::class.java).findAll()
-        val programs = realm.where(TrainingProgram::class.java).findAll()
+        val programs = realm.where(TrainingSessionProgram::class.java).findAll()
         adapter = MainListAdapter(this, players, programs)
 
         list_view.adapter = adapter
@@ -42,9 +42,9 @@ class MainActivity : AppCompatActivity() {
                 MainListAdapter.Action.DELETE_PROGRAM -> {
                     Realm.getDefaultInstance().use { realm ->
                         realm.executeTransaction {
-                            realm.where(TrainingProgram::class.java).findAll()?.let {
+                            realm.where(TrainingSessionProgram::class.java).findAll()?.let {
                                 it.deleteAllFromRealm()
-                                adapter.programs = realm.where(TrainingProgram::class.java).findAll()
+                                adapter.programs = realm.where(TrainingSessionProgram::class.java).findAll()
                                 adapter.notifyDataSetChanged()
                             }
                         }
@@ -55,6 +55,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 MainListAdapter.Action.STOP_PROGRAM -> {
                     Toast.makeText(this, "Stop all", Toast.LENGTH_SHORT).show()
+                }
+                MainListAdapter.Action.SHOW_PROGRAM -> {
+                    val intent = Intent(this, ProgramListActivity::class.java)
+                    startActivity(intent)
                 }
                 MainListAdapter.Action.CREATE_PROGRAM -> {
                     val intent = Intent(this, CreateProgramActivity::class.java)
@@ -168,7 +172,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             //Programs
-            adapter.programs = realm.where(TrainingProgram::class.java).findAll()
+            adapter.programs = realm.where(TrainingSessionProgram::class.java).findAll()
 
             // Players
             adapter.players = realm.where(Player::class.java).findAll()

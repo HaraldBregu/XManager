@@ -16,6 +16,8 @@
 
     <color name="primaryActionColor">#f85a21</color>
 
+    <color name="rowGrayColor">#e6e6e6</color>
+    <color name="rowGrayColorSecondary">#cfcfcf</color>
 
     <color name="unselectedShoeColor">#eeeee4</color>
     <color name="selectedShoeColor">#21130d</color>

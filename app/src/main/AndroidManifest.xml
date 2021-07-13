@@ -39,7 +39,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="it.ninespartans.xmanager.CreateProgramActivity"
-            android:label="@string/title_activity_create_program"
+            android:label="@string/title_activity_create_program_nav_title"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="it.ninespartans.xmanager.CreatePlayerActivity"

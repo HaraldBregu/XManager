@@ -12,7 +12,6 @@ open class Player(
     var role: String = "",
     var leftDevice: Device? = null,
     var rightDevice: Device? = null,
-    var sessionStartDate: Date = Date(),
-    var sessionProgram: TrainingProgram? = null,
+    var sessionProgram: TrainingSessionProgram? = null,
     var active: Boolean = true
 ) : RealmObject()

@@ -82,10 +82,11 @@ object BLEManager {
     }
 
     fun stopScanning() {
-        if (!it.ninespartans.xmanager.bluetooth.BLEManager.scanning) return
+        if (!scanning) return
 
         doAsync {
-            it.ninespartans.xmanager.bluetooth.BLEManager.scanner.stopScan(it.ninespartans.xmanager.bluetooth.BLEManager.scanCallBack)
+            scanner.stopScan(scanCallBack)
+
             uiThread {
                 scanning = false
                 onStopScanning.invoke()
@@ -99,6 +100,16 @@ object BLEManager {
 
             val device = result?.device.takeIf { it != null } ?: return
             didFoundDevice(device)
+        }
+
+        override fun onBatchScanResults(results: MutableList<ScanResult>?) {
+            super.onBatchScanResults(results)
+
+        }
+
+        override fun onScanFailed(errorCode: Int) {
+            super.onScanFailed(errorCode)
+
         }
     }
 
