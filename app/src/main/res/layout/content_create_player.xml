@@ -18,42 +18,86 @@
         android:focusable="true"
         android:focusableInTouchMode="true">
         <TextView
+            android:id="@+id/header_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Player informations"
             android:textSize="24dp"
             android:textColor="@color/primaryDarkColor"
             android:fontFamily="@font/montserrat_bold"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="5dp">
         </TextView>
+        <TextView
+            android:id="@+id/header_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please, get close to the devices and start testing by selecting the items above."
+            android:textColor="@color/primaryDarkColor"
+            android:fontFamily="@font/montserrat">
+        </TextView>
+
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:id="@+id/nameInputText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
-            app:helperText="The player name"
-            app:endIconMode="clear_text"
+            android:hint="Full Name"
+            app:helperText=""
+            app:endIconMode="none"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords"
+                android:imeOptions="actionDone"
                 android:maxLines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/roleInputText"
+
+        <LinearLayout
+            android:id="@+id/input_fields"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Role"
-            app:helperText="The player role (optional)"
-            app:endIconMode="clear_text"
-            android:layout_marginBottom="20dp">
-        <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                android:id="@+id/roleInputText"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_marginRight="5dp"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="Role"
+                app:helperText=""
+                app:endIconMode="dropdown_menu"
+                android:layout_marginBottom="20dp">
+                <AutoCompleteTextView
+                    android:id="@+id/dropdown_role_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                android:id="@+id/ageInputText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="Age"
+                android:layout_marginLeft="5dp"
+                app:helperText=""
+                app:endIconMode="dropdown_menu"
+                android:layout_marginBottom="20dp">
+                <AutoCompleteTextView
+                    android:id="@+id/dropdown_age_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -64,24 +108,12 @@
         android:layout_alignParentBottom="true"
         android:padding="20dp"
         android:orientation="vertical">
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/nextButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="Next"
             android:backgroundTint="@color/primaryDarkColor"
-            app:cornerRadius="5dp">
-        </com.google.android.material.button.MaterialButton>
-
-        <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:id="@+id/cancelButton"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="Back"
-            android:textColor="@color/primaryDarkColor"
-            android:backgroundTint="@color/primaryTextColor"
             app:cornerRadius="5dp">
         </com.google.android.material.button.MaterialButton>
 

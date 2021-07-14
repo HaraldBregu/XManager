@@ -1,9 +1,14 @@
 package it.ninespartans.xmanager
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.bluetooth.*
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.LayerDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_device_pair_search.*
 import kotlinx.android.synthetic.main.content_device_pair_search.*
 import kotlinx.android.synthetic.main.row_device.view.*
 import android.os.*
+import android.util.DisplayMetrics
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.realm.Realm
 import io.realm.kotlin.where
@@ -20,6 +26,7 @@ import it.ninespartans.xmanager.bluetooth.BLEManager
 import it.ninespartans.xmanager.model.Player
 import kotlin.collections.ArrayList
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
 import com.google.gson.Gson
@@ -34,12 +41,13 @@ class DevicePairSearchActivity : AppCompatActivity() {
     var playerId: String? = null
     val debug = false
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device_pair_search)
         setSupportActionBar(toolbar)
 
-        title = "Search and pair"
+        title = "Connect to device"
         //supportActionBar?.setDisplayHomeAsUpEnabled(true)
         //intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
 
@@ -59,134 +67,7 @@ class DevicePairSearchActivity : AppCompatActivity() {
         adapter.items = ArrayList()
         list_view.adapter = adapter
         list_view.setOnItemClickListener { parent, view, position, id ->
-
-            /**
-             * BottomSheetDialog
-             */
-            val bottomSheetDialog = BottomSheetDialog(this)
-            bottomSheetDialog.setContentView(R.layout.content_device_pair_bottom_sheet)
-            bottomSheetDialog.behavior.isDraggable = false
-
-            val title = bottomSheetDialog.findViewById<TextView>(R.id.title)
-            title?.text = "Connectin to device..."
-
-            val description = bottomSheetDialog.findViewById<TextView>(R.id.description)
-            description?.text = "Descrizione di questa..."
-
-            var leftSelected = false
-            var rightSelected = false
-            val leftShoeImage = bottomSheetDialog.findViewById<ImageView>(R.id.leftShoeImage)
-            val rightShoeImage = bottomSheetDialog.findViewById<ImageView>(R.id.rightShoeImage)
-
-            leftShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.unselectedShoeColor))
-            leftShoeImage?.setOnClickListener {
-                leftShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.unselectedShoeColor))
-                rightShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.unselectedShoeColor))
-                rightSelected = false
-
-                if (!leftSelected) {
-                    rightShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.unselectedShoeColor))
-                    leftShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.selectedShoeColor))
-                }
-
-                leftSelected = !leftSelected
-            }
-
-            rightShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.unselectedShoeColor))
-            rightShoeImage?.setOnClickListener {
-                leftShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.unselectedShoeColor))
-                rightShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.unselectedShoeColor))
-                leftSelected = false
-
-                if (!rightSelected) {
-                    leftShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.unselectedShoeColor))
-                    rightShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.selectedShoeColor))
-                }
-
-                rightSelected = !rightSelected
-            }
-
-            bottomSheetDialog.show()
-
-
-            //nextButton.visibility = View.GONE
-            //nextButton.isEnabled = false
-            BLEManager.stopScanning()
-
-            val element = adapter.getItem(position) as BluetoothDevice
-            BLEManager.selectDevice(element)
-            // Before connecting to new device,
-            // disconnect to old devices if available.
-            BLEManager.disconnectDevice({
-                BLEManager.connectDevice(this)
-                //nextButton.visibility = View.VISIBLE
-                //nextButton.isEnabled = true
-            }, 2000)
-
-
-            BLEManager.onConnectionStateChange = { state, newState ->
-                if (state == BluetoothGatt.GATT_SUCCESS) {
-                    Log.i("state", "success")
-
-                    if (newState == BluetoothProfile.STATE_CONNECTED) {
-                        Log.i("newState", "Connected")
-                        //title?.text = "Connected"
-                    }
-                    if (newState == BluetoothProfile.STATE_DISCONNECTED) {
-                        Log.i("newState", "disconnected")
-                    }
-                } else {
-                    Log.i("state", "unsuccess")
-                }
-            }
-
-            BLEManager.onServiceDiscovered = {
-                Log.i("SERVICE_DISCOVERED_b", "Connected")
-                BLEManager.enableReading()
-            }
-
-            BLEManager.onCharacteristicRead = {
-                Log.i("SERVICE_DISCOVERED_2", "chars")
-                title?.text = "Connected"
-
-                val jsonString = it?.getStringValue(0)
-                val deviceInfo = Gson().fromJson<DeviceInfo>(jsonString, DeviceInfo::class.java)
-
-                val gson = GsonBuilder().setPrettyPrinting().create()
-                description?.text = gson.toJson(deviceInfo)
-
-                BLEManager.disableReading()
-            }
-
-            val saveButton = bottomSheetDialog.findViewById<MaterialButton>(R.id.saveButton)
-            saveButton?.setOnClickListener {
-                Log.i("SAVE_BUTTON", "chars")
-
-
-                /**
-                 * Show
-                 * Update player with the new device
-                 */
-                /*
-                Realm.getDefaultInstance().use { realm ->
-                    playerId?.let {
-                        realm.where<Player>().equalTo("id", it).findFirst()?.let { player ->
-                            realm.executeTransaction {
-                                realm.copyToRealmOrUpdate(player.apply {
-                                    val device = Device()
-                                    device.name = element.name
-                                    device.bleMAC = element.address
-                                    leftDevice = device
-                                })
-                            }
-                        }
-                        finish()
-                    }
-                }
-                */
-
-            }
-
+            presentBottomSheet(position)
         }
 
         updateSearchDevicesButton()
@@ -288,6 +169,137 @@ class DevicePairSearchActivity : AppCompatActivity() {
         searchDevicesButton.text = "SEARCH DEVICES"
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun presentBottomSheet(position: Int) {
+
+        /**
+         * BottomSheetDialog
+         */
+        val bottomSheetDialog = BottomSheetDialog(this)
+        bottomSheetDialog.setContentView(R.layout.content_device_pair_bottom_sheet)
+        bottomSheetDialog.behavior.isDraggable = false
+
+        val title = bottomSheetDialog.findViewById<TextView>(R.id.title)
+        title?.text = "Connectin to device..."
+
+        val description = bottomSheetDialog.findViewById<TextView>(R.id.description)
+        description?.text = "Descrizione di questa..."
+
+        var leftSelected = false
+        var rightSelected = false
+        val leftShoeImage = bottomSheetDialog.findViewById<ImageView>(R.id.leftShoeImage)
+        val rightShoeImage = bottomSheetDialog.findViewById<ImageView>(R.id.rightShoeImage)
+
+        leftShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.unselectedShoeColor))
+        leftShoeImage?.setOnClickListener {
+            leftShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.unselectedShoeColor))
+            rightShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.unselectedShoeColor))
+            rightSelected = false
+
+            if (!leftSelected) {
+                rightShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.unselectedShoeColor))
+                leftShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.selectedShoeColor))
+            }
+
+            leftSelected = !leftSelected
+        }
+
+        rightShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.unselectedShoeColor))
+        rightShoeImage?.setOnClickListener {
+            leftShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.unselectedShoeColor))
+            rightShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.unselectedShoeColor))
+            leftSelected = false
+
+            if (!rightSelected) {
+                leftShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.unselectedShoeColor))
+                rightShoeImage?.setColorFilter(ContextCompat.getColor(this, R.color.selectedShoeColor))
+            }
+
+            rightSelected = !rightSelected
+        }
+
+        bottomSheetDialog.show()
+        setWhiteNavigationBar(bottomSheetDialog)
+
+        //nextButton.visibility = View.GONE
+        //nextButton.isEnabled = false
+        BLEManager.stopScanning()
+
+        val element = adapter.getItem(position) as BluetoothDevice
+        BLEManager.selectDevice(element)
+        // Before connecting to new device,
+        // disconnect to old devices if available.
+        BLEManager.disconnectDevice({
+            BLEManager.connectDevice(this)
+            //nextButton.visibility = View.VISIBLE
+            //nextButton.isEnabled = true
+        }, 2000)
+
+
+        BLEManager.onConnectionStateChange = { state, newState ->
+            if (state == BluetoothGatt.GATT_SUCCESS) {
+                Log.i("state", "success")
+
+                if (newState == BluetoothProfile.STATE_CONNECTED) {
+                    Log.i("newState", "Connected")
+                    //title?.text = "Connected"
+                }
+                if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+                    Log.i("newState", "disconnected")
+                }
+            } else {
+                Log.i("state", "unsuccess")
+            }
+        }
+
+        BLEManager.onServiceDiscovered = {
+            Log.i("SERVICE_DISCOVERED_b", "Connected")
+            BLEManager.enableReading()
+        }
+
+        BLEManager.onCharacteristicRead = {
+            Log.i("SERVICE_DISCOVERED_2", "chars")
+            title?.text = "Connected"
+
+            val jsonString = it?.getStringValue(0)
+            val deviceInfo = Gson().fromJson<DeviceInfo>(jsonString, DeviceInfo::class.java)
+
+            val gson = GsonBuilder().setPrettyPrinting().create()
+            description?.text = gson.toJson(deviceInfo)
+
+            BLEManager.disableReading()
+        }
+
+        val saveButton = bottomSheetDialog.findViewById<MaterialButton>(R.id.saveButton)
+        saveButton?.setOnClickListener {
+            Log.i("SAVE_BUTTON", "chars")
+
+
+            /**
+             * Show
+             * Update player with the new device
+             */
+            /*
+            Realm.getDefaultInstance().use { realm ->
+                playerId?.let {
+                    realm.where<Player>().equalTo("id", it).findFirst()?.let { player ->
+                        realm.executeTransaction {
+                            realm.copyToRealmOrUpdate(player.apply {
+                                val device = Device()
+                                device.name = element.name
+                                device.bleMAC = element.address
+                                leftDevice = device
+                            })
+                        }
+                    }
+                    finish()
+                }
+            }
+            */
+        }
+
+    }
+
     /**
      * Adapter
      * ListView Adapter
@@ -352,4 +364,26 @@ class DevicePairSearchActivity : AppCompatActivity() {
         }
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private fun setWhiteNavigationBar(dialog: Dialog) {
+        val window = dialog.getWindow()
+        if (window != null) {
+            val metrics = DisplayMetrics()
+            window!!.getWindowManager().getDefaultDisplay().getMetrics(metrics)
+
+            val dimDrawable = GradientDrawable()
+
+            val navigationBarDrawable = GradientDrawable()
+            navigationBarDrawable.shape = GradientDrawable.RECTANGLE
+            navigationBarDrawable.setColor(Color.WHITE)// Set color here
+
+            val layers = arrayOf<Drawable>(dimDrawable, navigationBarDrawable)
+
+            val windowBackground = LayerDrawable(layers)
+            windowBackground.setLayerInsetTop(1, metrics.heightPixels)
+
+            window!!.setBackgroundDrawable(windowBackground)
+        }
+    }
 }

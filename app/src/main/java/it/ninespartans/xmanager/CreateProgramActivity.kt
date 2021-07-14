@@ -1,5 +1,7 @@
 package it.ninespartans.xmanager
 
+import android.app.Dialog
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -18,10 +20,16 @@ import kotlinx.android.synthetic.main.content_create_program.list_view
 import com.google.android.material.button.MaterialButton
 import io.realm.RealmList
 import it.ninespartans.xmanager.model.Program
-import kotlinx.android.synthetic.main.content_create_player.*
 import kotlinx.android.synthetic.main.content_create_program.nameInputText
 import org.bson.types.ObjectId
 import java.util.*
+import android.graphics.drawable.LayerDrawable
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
+import android.util.DisplayMetrics
+import androidx.annotation.NonNull
+import android.os.Build
+import androidx.annotation.RequiresApi
 
 
 class CreateProgramActivity : AppCompatActivity() {
@@ -29,6 +37,7 @@ class CreateProgramActivity : AppCompatActivity() {
     private var trainingSessionProgram: TrainingSessionProgram? = null
     private var programId: String? = null
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_program)
@@ -131,17 +140,19 @@ class CreateProgramActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     fun addSessionProgram() {
         val bottomSheetDialog = BottomSheetDialog(this)
         bottomSheetDialog.setContentView(R.layout.content_program_create_session_bottom_sheet)
         bottomSheetDialog.behavior.isDraggable = false
-
+        bottomSheetDialog
         val title = bottomSheetDialog.findViewById<TextView>(R.id.title)
         title?.text = "Create a session"
 
         val description = bottomSheetDialog.findViewById<TextView>(R.id.description)
         description?.text = "Select the parts of the shoes you want to use, animation type and the duration of the session."
         bottomSheetDialog.show()
+        setWhiteNavigationBar(bottomSheetDialog)
 
         val saveButton = bottomSheetDialog.findViewById<MaterialButton>(R.id.saveButton)
         saveButton?.setOnClickListener {
@@ -200,6 +211,28 @@ class CreateProgramActivity : AppCompatActivity() {
                 createSession.visibility = View.VISIBLE
             }
             adapter.notifyDataSetChanged()
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private fun setWhiteNavigationBar(dialog: Dialog) {
+        val window = dialog.getWindow()
+        if (window != null) {
+            val metrics = DisplayMetrics()
+            window!!.getWindowManager().getDefaultDisplay().getMetrics(metrics)
+
+            val dimDrawable = GradientDrawable()
+
+            val navigationBarDrawable = GradientDrawable()
+            navigationBarDrawable.shape = GradientDrawable.RECTANGLE
+            navigationBarDrawable.setColor(Color.WHITE)// Set color here
+
+            val layers = arrayOf<Drawable>(dimDrawable, navigationBarDrawable)
+
+            val windowBackground = LayerDrawable(layers)
+            windowBackground.setLayerInsetTop(1, metrics.heightPixels)
+
+            window!!.setBackgroundDrawable(windowBackground)
         }
     }
 

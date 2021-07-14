@@ -75,7 +75,6 @@ class MainActivity : AppCompatActivity() {
                         //overridePendingTransition(R.anim.bottom_up, R.anim.nothing)
                     } else {
                         val intent = Intent(this, CreatePlayerActivity::class.java)
-                        intent.putExtra("mode", "create")
                         startActivity(intent)
                     }
                 }
@@ -87,7 +86,6 @@ class MainActivity : AppCompatActivity() {
                 MainListAdapter.Action.EDIT_PLAYER -> {
                     val intent = Intent(this, CreatePlayerActivity::class.java)
                     intent.putExtra("player_id", player.id)
-                    intent.putExtra("mode", "edit")
                     startActivity(intent)
                 }
                 MainListAdapter.Action.DELETE_PLAYER -> {

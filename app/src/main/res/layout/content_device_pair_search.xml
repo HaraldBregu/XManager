@@ -16,22 +16,31 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/textViewPlayerNameDetailTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="player name"
+            android:textAllCaps="true"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="10dp"
+            android:textStyle="normal"
+            android:textColor="@color/primaryDarkColor"/>
+        <TextView
             android:id="@+id/deviceSearchTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Device testing"
+            android:text="John Doe"
             android:textSize="24dp"
             android:textColor="@color/primaryDarkColor"
-            android:fontFamily="@font/montserrat_bold">
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_marginBottom="5dp">
         </TextView>
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Please, get close to the devices and start testing by selecting the items above."
             android:textColor="@color/primaryDarkColor"
-            android:fontFamily="@font/montserrat"
-            android:layout_marginBottom="5dp">
+            android:fontFamily="@font/montserrat">
         </TextView>
 
     </LinearLayout>
@@ -41,6 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@null"
+        android:listSelector="@android:color/transparent"
         android:layout_below="@+id/top_section"
         android:layout_above="@+id/bottom_section">
     </ListView>
