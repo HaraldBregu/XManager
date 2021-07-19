@@ -1,6 +1,7 @@
 package it.ninespartans.xmanager.adapters
 
 import android.content.Context
+import android.opengl.Visibility
 import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
@@ -160,7 +161,6 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
                         if (millisecStr.length < 2) millisecStr = "0$millisec"
 
                         rowHeader.countDownTimerLabel.text = "$hoursStr:$minutesStr:$secondsStr:$millisecStr"
-
                         rowHeader.programProgressBar.progress = (duration.toInt()) - millisUntilFinished.toInt()
                     }
 
@@ -243,11 +243,6 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
          */
         val rowPlayerHeader = inflater.inflate(R.layout.row_main_player_header, viewGroup, false)
         if (isRowHeaderPlayer) {
-            /*rowPlayerHeader.addNewPlayer.setOnClickListener {
-                onClickAction?.let {
-                    it(Action.ADD_PLAYER)
-                }
-            }*/
             rowPlayerHeader.textViewPlayersCount.text = players.size.toString()
             return rowPlayerHeader
         }
@@ -274,6 +269,18 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
         val rightVersion = Version(rightDeviceVersion)
         val deviceVersionEqual = leftVersion.equals(rightVersion)
 
+        leftdevice?.let {
+            rowPlayer.leftShoeImage.setImageResource(R.drawable.left)
+        } ?: run {
+            rowPlayer.leftShoeImage.setImageResource(R.drawable.left_unactive)
+        }
+
+        rightDevice?.let {
+            rowPlayer.rightShoeImage.setImageResource(R.drawable.right)
+        } ?: run {
+            rowPlayer.rightShoeImage.setImageResource(R.drawable.right_unactive)
+        }
+
         /**
          * Player informations
          */
@@ -284,34 +291,51 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
          * Device informations
          */
         if (noDevices) {
-            rowPlayer.deviceInfoSection.visibility = View.GONE
+            rowPlayer.deviceName.text = "No connected devices"
+            rowPlayer.stateText.text = "Complete pairing"
             rowPlayer.statusLayout.setBackgroundResource(R.color.primaryUnactiveColor)
         } else if (missingOneDevice) {
-            rowPlayer.deviceInfoSection.visibility = View.VISIBLE
             rowPlayer.statusLayout.setBackgroundResource(R.color.primaryActiveColor)
 
             leftdevice?.let {
                 rowPlayer.deviceName.text = it.name
-                rowPlayer.deviceVersion.text = it.firmwareVersion
-                rowPlayer.stateText.text =  "MISSING RIGHT"
+                rowPlayer.stateText.text = "FOOT: LEFT"
             }
 
             rightDevice?.let {
                 rowPlayer.deviceName.text = it.name
-                rowPlayer.deviceVersion.text = it.firmwareVersion
-                rowPlayer.stateText.text =  "MISSING LEFT"
+                rowPlayer.stateText.text = "FOOT: RIGHT"
+            }
+            
+        } else {
+            rowPlayer.statusLayout.setBackgroundResource(R.color.primaryActiveColor)
+
+            var deviceNames = ""
+            var footNames = "FOOT: "
+
+            leftdevice?.let {
+                deviceNames += it.name
+                footNames += "LEFT"
             }
 
-        } else if (!deviceVersionEqual) {
+            rightDevice?.let {
+                deviceNames = if (deviceNames.length > 0 && deviceNames != it.name) "$deviceNames | ${it.name}" else it.name
 
-        } else {
-            rowPlayer.stateText.text = "COMPLETED"
+                leftdevice?.let {
+                    footNames += " | RIGHT"
+                } ?: run {
+                    footNames += "RIGHT"
+                }
+            }
+
+            rowPlayer.deviceName.text = deviceNames
+            rowPlayer.stateText.text = footNames
         }
 
         /**
          * Program data
          */
-        rowPlayer.programSessionSection.visibility = if (hasSessionProgram) View.VISIBLE else View.GONE
+        rowPlayer.programSessionSection.visibility = View.GONE //if (hasSessionProgram) View.VISIBLE else View.GONE
         rowPlayer.playerProgressProgram.progress = (0..100).random()
         rowPlayer.programPlayerTitle.text = player?.sessionProgram?.title
         rowPlayer.programPlayerState.text = "State of the program"
@@ -325,7 +349,7 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
         /**
          * Start session exercise for single player
          */
-        rowPlayer.playPauseButton.visibility = if (hasSessionProgram) View.VISIBLE else View.GONE
+        rowPlayer.playPauseButton.visibility = View.GONE //if (hasSessionProgram) View.VISIBLE else View.GONE
         rowPlayer.playPauseButton.setOnClickListener {
             onClickActionOnItem?.let {
                 it(Action.STOP_PROGRAM, player)
@@ -336,7 +360,7 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
         /**
          * Upload program to single player and start directly
          */
-        rowPlayer.programSelection.visibility = if (noDevices || missingOneDevice) View.GONE else View.VISIBLE
+        rowPlayer.programSelection.visibility = View.GONE //if (noDevices || missingOneDevice) View.GONE else View.VISIBLE
         rowPlayer.programSelection.text = if (hasSessionProgram) "Change program" else "Select program"
         rowPlayer.programSelection.setOnClickListener {
             onClickActionOnItem?.let {

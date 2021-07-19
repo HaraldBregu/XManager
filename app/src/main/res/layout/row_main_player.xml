@@ -84,9 +84,29 @@
                 android:orientation="horizontal"
                 android:paddingHorizontal="25dp">
                 <LinearLayout
+                    android:id="@+id/shoePairContainer"
+                    android:layout_width="24dp"
+                    android:layout_height="32dp"
+                    android:padding="0dp"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/leftShoeImage"
+                        android:layout_width="12dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/left_unactive">
+                    </ImageView>
+                    <ImageView
+                        android:id="@+id/rightShoeImage"
+                        android:layout_width="12dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/right_unactive">
+                    </ImageView>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -97,17 +117,8 @@
                             android:layout_height="wrap_content"
                             android:text="Dinamo"
                             android:fontFamily="@font/roboto_regular"
-                            android:textSize="15sp"
+                            android:textSize="13sp"
                             android:textColor="@color/primaryColor"/>
-                        <TextView
-                            android:id="@+id/deviceVersion"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
-                            android:text="1.0"
-                            android:fontFamily="@font/roboto_regular"
-                            android:textSize="12sp"
-                            android:textColor="@color/primaryDarkColor"/>
                     </LinearLayout>
                     <TextView
                         android:id="@+id/stateText"
@@ -115,7 +126,7 @@
                         android:layout_height="wrap_content"
                         android:text="PAIRED, UPDATED"
                         android:fontFamily="@font/roboto_regular"
-                        android:textSize="10dp"
+                        android:textSize="8dp"
                         android:layout_marginTop="2dp"
                         android:textColor="@color/primaryDarkColor"/>
                 </LinearLayout>
@@ -228,7 +239,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:layout_marginRight="5dp"
-                    android:text="PAIR"
+                    android:text="Complete"
                     android:textSize="12dp"
                     android:backgroundTint="@color/primaryDarkColor">
                 </com.google.android.material.button.MaterialButton>
