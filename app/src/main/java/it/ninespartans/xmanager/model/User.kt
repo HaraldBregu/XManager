@@ -10,7 +10,10 @@ open class User(
     @PrimaryKey
     var id: String = UUID.randomUUID().toString(),
     var createdAt: Date = Date(),
+    var fullName: String = "",
     var firstName: String = "",
     var lastName: String = "",
+    var headline: String = "",
+    var age: String = "",
     var emailAddress: String = ""
     ):RealmObject()

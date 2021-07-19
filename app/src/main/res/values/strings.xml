@@ -46,7 +46,7 @@
     <string name="title_program_save">Save program</string>
     <string name="title_program_create">Create program</string>
 
-    <string name="title_activity_create_user">Create user</string>
+    <string name="title_activity_create_user">Account</string>
 
     <string name="title_activity_program_list">Programs</string>
     <string name="title_activity_program_list_header_title">Your training programs</string>

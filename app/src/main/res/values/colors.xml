@@ -16,6 +16,11 @@
 
     <color name="primaryActionColor">#f85a21</color>
 
+    <color name="primarySuccessColor">#388e3c</color>
+    <color name="primaryErrorColor">#d32f2f</color>
+    <color name="primaryUnactiveColor">#cfcfcf</color>
+    <color name="primaryActiveColor">#1976d2</color>
+
     <color name="rowGrayColor">#e6e6e6</color>
     <color name="rowGrayColorSecondary">#cfcfcf</color>
 

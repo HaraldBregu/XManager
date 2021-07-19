@@ -41,7 +41,8 @@
             android:id="@+id/user_section_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp">
             <LinearLayout
                 android:id="@+id/userSection"
                 android:layout_width="wrap_content"
@@ -53,8 +54,9 @@
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="6dp">
                     <ImageView
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
+                        android:id="@+id/userImageView"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/ic_launcher_background"
                         android:scaleType="centerCrop">
                     </ImageView>
@@ -65,15 +67,15 @@
                     android:orientation="vertical"
                     android:layout_marginLeft="10dp">
                     <TextView
-                        android:id="@+id/userName"
+                        android:id="@+id/fullname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto"
                         android:text="Harald Bregu"
                         android:textColor="@color/primaryTextColor90"
-                        android:textSize="19sp" />
+                        android:textSize="17sp" />
                     <TextView
-                        android:id="@+id/userCoachLevel"
+                        android:id="@+id/userTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
@@ -82,35 +84,15 @@
                         android:textColor="@color/primaryTextColor85"
                         android:textSize="12sp"
                         android:textStyle="normal"/>
-                    <TextView
-                        android:id="@+id/userData"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/roboto"
-                        android:text="PLAYERS: 4 | PROGRAMS: 3"
-                        android:textAllCaps="true"
-                        android:textColor="@color/primaryTextColor85"
-                        android:textSize="10sp"
-                        android:textStyle="normal"/>
                 </LinearLayout>
             </LinearLayout>
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/createUser"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:backgroundTint="@color/primaryDarkColor"
-                android:layout_alignParentRight="true"
-                android:text="Update"
-                android:textSize="10dp">
-            </com.google.android.material.button.MaterialButton>
         </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/current_program_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -123,15 +105,16 @@
                     android:layout_toLeftOf="@+id/labelTimer"
                     android:layout_alignParentLeft="true"
                     android:text="Programma default"
+                    android:textAllCaps="true"
                     android:textColor="@color/primaryTextColor85"
-                    android:textSize="17dp" />
+                    android:textSize="14dp" />
                 <TextView
-                    android:id="@+id/labelDescriptionProgram"
+                    android:id="@+id/programDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="Pausa"
+                    android:text="In corso"
                     android:layout_alignParentLeft="true"
                     android:layout_below="@+id/programTitle"
                     android:textColor="@color/primaryTextColor85"
@@ -148,7 +131,7 @@
                     android:layout_alignParentRight="true"
                     android:textAlignment="textEnd"
                     android:textColor="@color/primaryTextColor85"
-                    android:textSize="10dp"
+                    android:textSize="10sp"
                     android:textStyle="normal"/>
                 <TextView
                     android:id="@+id/countDownTimerLabel"
@@ -161,7 +144,7 @@
                     android:layout_alignParentRight="true"
                     android:textAlignment="textEnd"
                     android:textColor="@color/primaryTextColor85"
-                    android:textSize="17dp"
+                    android:textSize="15sp"
                     android:textStyle="normal"/>
             </RelativeLayout>
 
@@ -181,47 +164,41 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/programSectionActions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/startStopTrainingProgram"
-                    style="@style/Widget.MaterialComponents.Button.Icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="@color/primaryDarkColor"
+                <TextView
+                    android:id="@+id/labelDescriptionCreateProgram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Seleziona un altro programma"
+                    android:layout_alignParentLeft="true"
+                    android:textColor="@color/primaryTextColor85"
                     android:textSize="12dp"
-                    app:icon="@drawable/ic_play_white"
-                    app:iconTint="@color/primaryTextColor">
-                </com.google.android.material.button.MaterialButton>
+                    android:layout_centerVertical="true"
+                    android:textStyle="normal"
+                    android:layout_marginRight="20dp"
+                    android:layout_toLeftOf="@+id/selectProgram"/>
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/selectTrainingProgram"
+                    android:id="@+id/selectProgram"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:layout_toRightOf="@id/startStopTrainingProgram"
-                    android:layout_marginLeft="5dp"
+                    android:layout_toLeftOf="@id/showProgramSectionMenu"
+                    android:layout_marginRight="5dp"
                     android:backgroundTint="@color/primaryDarkColor"
-                    android:text="Select"
+                    android:text="select program"
                     android:textSize="12dp">
                 </com.google.android.material.button.MaterialButton>
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/addNewProgram"
-                    style="@style/Widget.MaterialComponents.Button.Icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_toLeftOf="@id/showAllPrograms"
-                    android:layout_marginRight="5dp"
-                    android:backgroundTint="@color/primaryDarkColor"
-                    android:text="create"
-                    android:textSize="12dp"
-                    app:icon="@drawable/ic_add_plus">
-                </com.google.android.material.button.MaterialButton>
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/showAllPrograms"
+                    android:id="@+id/showProgramSectionMenu"
                     style="@style/Widget.MaterialComponents.Button.Icon"
                     android:layout_alignParentRight="true"
                     android:layout_width="50dp"
@@ -233,6 +210,7 @@
                 </com.google.android.material.button.MaterialButton>
             </RelativeLayout>
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

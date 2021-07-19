@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select a program"
+            android:textSize="24dp"
+            android:textColor="@color/primaryDarkColor"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_marginBottom="10dp">
+        </TextView>
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="After selecting the program you will start to connect to players and upload the program."
+            android:textSize="14dp"
+            android:textColor="@color/primaryDarkColor"
+            android:fontFamily="@font/montserrat"
+            android:layout_marginBottom="20dp">
+        </TextView>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:listSelector="@android:color/transparent"
+        android:layout_below="@+id/top_section"
+        android:layout_above="@+id/bottom_section">
+    </ListView>
+
+</LinearLayout>

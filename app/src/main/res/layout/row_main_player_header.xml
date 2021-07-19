@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="10dp"
+    android:paddingHorizontal="20dp"
     android:paddingVertical="10dp">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_regular"
+        android:fontFamily="@font/roboto_medium"
         android:text="Players"
-        android:textColor="@color/primaryDarkColor"
-        android:textSize="24dp"
+        android:textAllCaps="true"
+        android:textColor="@color/primaryLightColor"
+        android:textSize="14dp"
         android:layout_centerVertical="true"/>
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/addNewPlayer"
-        style="@style/Widget.MaterialComponents.Button.Icon"
+    <TextView
+        android:id="@+id/textViewPlayersCount"
         android:layout_width="wrap_content"
-        android:layout_height="55dp"
-        android:layout_alignParentRight="true"
-        android:backgroundTint="@color/primaryDarkColor"
-        android:text="player"
-        android:textSize="12dp"
-        app:icon="@drawable/ic_add_plus"
-        android:layout_centerVertical="true">
-    </com.google.android.material.button.MaterialButton>
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:text="23"
+        android:textAllCaps="true"
+        android:textColor="@color/primaryLightColor"
+        android:textSize="14dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"/>
 </RelativeLayout>

@@ -53,8 +53,8 @@ class DevicePairSelectActivity : AppCompatActivity() {
                             name = deviceInfo.name
                             firmwareVersion = deviceInfo.version
                             mac = deviceInfo.efuse_mac
-                            bleMAC = deviceInfo.ble.mac
-                            wifiMAC = deviceInfo.wifi.mac
+                            ble_mac = deviceInfo.ble.mac
+                            wifi_mac = deviceInfo.wifi.mac
                         })
                         this.player.leftDevice = device
                     }
@@ -71,8 +71,8 @@ class DevicePairSelectActivity : AppCompatActivity() {
                             name = deviceInfo.name
                             firmwareVersion = deviceInfo.version
                             mac = deviceInfo.efuse_mac
-                            bleMAC = deviceInfo.ble.mac
-                            wifiMAC = deviceInfo.wifi.mac
+                            ble_mac = deviceInfo.ble.mac
+                            wifi_mac = deviceInfo.wifi.mac
                         })
                         this.player.rightDevice = device
                     }

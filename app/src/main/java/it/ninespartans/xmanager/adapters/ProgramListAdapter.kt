@@ -9,7 +9,6 @@ import android.widget.PopupMenu
 import io.realm.RealmResults
 import it.ninespartans.xmanager.R
 import it.ninespartans.xmanager.model.TrainingSessionProgram
-import kotlinx.android.synthetic.main.row_main_player.view.*
 import kotlinx.android.synthetic.main.row_program_list.view.*
 
 

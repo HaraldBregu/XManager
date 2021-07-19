@@ -11,5 +11,6 @@ open class TrainingSessionProgram(
     var id: String = UUID.randomUUID().toString(),
     var title: String = "",
     var description: String = "",
-    var programList:  RealmList<Program> = RealmList()
+    var programList:  RealmList<Program> = RealmList(),
+    var active:Boolean = false
 ): RealmObject()

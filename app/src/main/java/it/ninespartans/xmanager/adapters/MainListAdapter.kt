@@ -1,16 +1,21 @@
 package it.ninespartans.xmanager.adapters
 
 import android.content.Context
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.PopupMenu
+import io.realm.Realm
+import io.realm.RealmMap
 import io.realm.RealmResults
+import io.realm.kotlin.where
 import it.ninespartans.xmanager.R
 import it.ninespartans.xmanager.common.Version
 import it.ninespartans.xmanager.model.Player
 import it.ninespartans.xmanager.model.TrainingSessionProgram
+import it.ninespartans.xmanager.model.User
 import kotlinx.android.synthetic.main.row_main_header.view.*
 import kotlinx.android.synthetic.main.row_main_player.view.*
 import kotlinx.android.synthetic.main.row_main_player_empty.view.*
@@ -24,6 +29,7 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
     private var inflater: LayoutInflater
     var programs: RealmResults<TrainingSessionProgram>
     var players: RealmResults<Player>
+    val realm: Realm = Realm.getDefaultInstance()
 
     enum class Action {
         CREATE_USER, // User
@@ -51,6 +57,12 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
         this.programs = programs
         mContext = context
         inflater = LayoutInflater.from(mContext)
+
+
+            //.sortedWith(compareBy<Player, String?>(nullsLast(), {
+              //  it.name
+                //it.leftDevice// && it.rightDevice
+            //}))
     }
 
     override fun getCount(): Int {
@@ -94,38 +106,67 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
         val rowHeader = inflater.inflate(R.layout.row_main_header, viewGroup, false)
         if (isHeader) {
 
-            // User section
+            /**
+             * User section
+             */
             rowHeader.user_section_header.visibility = View.GONE
-
-            /*
-            val timer = object: CountDownTimer(10000, 1000) {
-                override fun onTick(millisUntilFinished: Long) {
-                    rowHeader.countDownTimerLabel.text = millisUntilFinished.toString()
-                    //rowHeader.programProgressBar.progress = (millisUntilFinished/100).toInt()
-                }
-                override fun onFinish() {
-                    rowHeader.countDownTimerLabel.text = "0"
-                    //rowHeader.programProgressBar.progress = 100
-                }
+            realm.where<User>().findFirst()?.let {
+                rowHeader.user_section_header.visibility = View.VISIBLE
+                rowHeader.fullname.text = it.fullName
+                rowHeader.userTitle.text = it.headline
             }
-            timer.start()
-            */
 
-            // Current program section
+
+            /**
+             * Training Session Section
+             */
             rowHeader.current_program_section.visibility = View.GONE
+            rowHeader.programSectionActions.visibility = if (noPrograms) View.GONE else View.VISIBLE
 
-            rowHeader.programProgressBar.progress = 40
-            //rowHeader.userSection.visibility = View.GONE
+            val activeSessionProgram = realm.where<TrainingSessionProgram>()
+                .equalTo("active", true)
+                .findFirst()
 
-            rowHeader.userData.text = "Players: " + players.size.toString() + " | " + "Programs: " + programs.size.toString()
+            rowHeader.programTitle.text = "Default program"
+            rowHeader.programDescription.text = "In corso"
 
-            rowHeader.createUser.setOnClickListener {
-                onClickAction?.let {
-                    it(Action.CREATE_USER)
+            rowHeader.labelDescriptionCreateProgram.text ="Select the program and start session."
+
+            activeSessionProgram?.let {
+                rowHeader.current_program_section.visibility = View.VISIBLE
+                rowHeader.programProgressBar.progress = 40
+
+                val timer = object: CountDownTimer(10000, 1000) {
+
+                    override fun onTick(millisUntilFinished: Long) {
+                        rowHeader.countDownTimerLabel.text = millisUntilFinished.toString()
+                        rowHeader.programProgressBar.progress = 100 - (millisUntilFinished/100).toInt()
+                    }
+
+                    override fun onFinish() {
+                        rowHeader.countDownTimerLabel.text = "0"
+                        rowHeader.programProgressBar.progress = 100
+                    }
                 }
+
+                timer.start()
+
+                rowHeader.programTitle.text = it.title
+                rowHeader.programDescription.text = "In corso"
+                rowHeader.labelDescriptionCreateProgram.text = ""
             }
 
-            rowHeader.showAllPrograms.setOnClickListener {
+
+            rowHeader.selectProgram.setOnClickListener {
+                onClickAction?.let {
+                    it(Action.UPLOAD_PROGRAM)
+                }
+            }
+            rowHeader.showProgramSectionMenu.setOnClickListener {
+                onClickAction?.let {
+                    it(Action.SHOW_PROGRAM)
+                }
+                /*
                 val popupMenu = PopupMenu(mContext, it)
                 popupMenu.menuInflater.inflate(R.menu.popup_menu_card, popupMenu.menu)
                 popupMenu.menu.findItem(R.id.action_delete_all_programs).setVisible(true)
@@ -144,25 +185,7 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
                     true
                 }
                 popupMenu.show()
-            }
-
-            rowHeader.addNewProgram.setOnClickListener {
-                onClickAction?.let {
-                    it(Action.CREATE_PROGRAM)
-                }
-            }
-
-            rowHeader.startStopTrainingProgram.setOnClickListener {
-                onClickAction?.let {
-                    it(Action.START_PROGRAM)
-                    it(Action.STOP_PROGRAM)
-                }
-            }
-
-            rowHeader.selectTrainingProgram.setOnClickListener {
-                onClickAction?.let {
-                    it(Action.UPLOAD_PROGRAM)
-                }
+                */
             }
 
             return rowHeader
@@ -199,12 +222,12 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
          */
         val rowPlayerHeader = inflater.inflate(R.layout.row_main_player_header, viewGroup, false)
         if (isRowHeaderPlayer) {
-            rowPlayerHeader.addNewPlayer.setOnClickListener {
+            /*rowPlayerHeader.addNewPlayer.setOnClickListener {
                 onClickAction?.let {
                     it(Action.ADD_PLAYER)
                 }
-            }
-
+            }*/
+            rowPlayerHeader.textViewPlayersCount.text = players.size.toString()
             return rowPlayerHeader
         }
 
@@ -220,6 +243,7 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
 
         val noDevices = leftdevice == null && rightDevice == null
         val missingOneDevice = leftdevice == null || rightDevice == null
+        val missingBothDevices = leftdevice == null && rightDevice == null
 
         val hasSessionProgram = player?.sessionProgram != null
 
@@ -240,8 +264,10 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
          */
         if (noDevices) {
             rowPlayer.deviceInfoSection.visibility = View.GONE
+            rowPlayer.statusLayout.setBackgroundResource(R.color.primaryUnactiveColor)
         } else if (missingOneDevice) {
             rowPlayer.deviceInfoSection.visibility = View.VISIBLE
+            rowPlayer.statusLayout.setBackgroundResource(R.color.primaryActiveColor)
 
             leftdevice?.let {
                 rowPlayer.deviceName.text = it.name
@@ -300,7 +326,7 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
         /**
          * Complete pairing with devices if not complete
          */
-        rowPlayer.completePairingDevices.visibility = if (missingOneDevice) View.VISIBLE else View.GONE
+        rowPlayer.completePairingDevices.visibility = if (missingBothDevices) View.VISIBLE else View.GONE
         rowPlayer.completePairingDevices.setOnClickListener {
             onClickActionOnItem?.let {
                 it(Action.COMPLETE_DEVICES, player)

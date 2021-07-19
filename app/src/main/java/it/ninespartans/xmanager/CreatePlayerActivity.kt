@@ -124,9 +124,23 @@ class CreatePlayerActivity : AppCompatActivity() {
             }
         })*/
 
+        /**
+         * Roles list
+         */
+        dropdown_role_text.setAdapter(
+            ArrayAdapter(this,
+                R.layout.dropdown_role_item,
+                arrayOf("Attacante", "Difensore")))
 
-        dropdown_role_text.setAdapter(ArrayAdapter(this, R.layout.dropdown_role_item, arrayOf("Attacante", "Difensore")))
-        dropdown_age_text.setAdapter(ArrayAdapter(this, R.layout.dropdown_role_item, arrayOf("13", "14", "15", "16")))
+        /**
+         * Ages list
+         */
+        var ages = arrayOf<String>()
+        for (i in 8..20) { ages += i.toString() }
+        dropdown_age_text.setAdapter(
+            ArrayAdapter(this,
+                R.layout.dropdown_role_item,
+                ages))
 
         roleInputText.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {

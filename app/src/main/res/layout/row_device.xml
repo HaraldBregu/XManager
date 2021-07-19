@@ -8,63 +8,89 @@
     android:paddingHorizontal="20dp"
     android:paddingVertical="5dp">
 
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:padding="10dp"
         android:background="@color/rowGrayColor">
 
-        <TextView
-            android:id="@+id/textViewName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dinamo device"
-            android:fontFamily="@font/montserrat"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            android:textColor="@color/primaryDarkColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginBottom="5dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_toLeftOf="@+id/shoePairContainer">
 
-        <TextView
-            android:id="@+id/textViewMacAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="mac address"
-            android:fontFamily="@font/montserrat"
-            android:textSize="12dp"
-            android:textColor="@color/primaryDarkColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:id="@+id/textViewDeviceNameTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Device name"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="6dp"
+                    android:textStyle="normal"
+                    android:textColor="@color/primaryDarkColor"/>
+                <TextView
+                    android:id="@+id/textViewDeviceName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Dinamo Basic"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="16dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/textViewPlayer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Johny"
-            android:fontFamily="@font/montserrat"
-            android:textSize="12dp"
-            android:textColor="@color/primaryDarkColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+            <TextView
+                android:id="@+id/textViewMacAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MAC: d4:t5:y6:t5:e3"
+                android:textAllCaps="true"
+                android:fontFamily="@font/montserrat"
+                android:textSize="10dp"
+                android:textColor="@color/primaryDarkColor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+            <TextView
+                android:id="@+id/textViewPlayer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Tomas Muller"
+                android:fontFamily="@font/montserrat"
+                android:textSize="12dp"
+                android:textColor="@color/primaryDarkColor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewName" />
 
-        <TextView
-            android:id="@+id/textViewState"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PAIRED"
-            android:fontFamily="@font/montserrat"
-            android:textSize="12dp"
-            android:textColor="@color/primaryDarkColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+        </LinearLayout>
 
-
-    </LinearLayout>
-
-
+        <LinearLayout
+            android:id="@+id/shoePairContainer"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:padding="0dp"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/leftShoeImage"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/left_unactive">
+            </ImageView>
+            <ImageView
+                android:id="@+id/rightShoeImage"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/right_unactive">
+            </ImageView>
+        </LinearLayout>
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

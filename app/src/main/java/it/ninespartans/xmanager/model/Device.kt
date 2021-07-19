@@ -6,13 +6,13 @@ import io.realm.annotations.RealmClass
 import java.util.*
 
 
-@RealmClass(embedded = true)
+//@RealmClass(embedded = true)
 open class Device(
-    //@PrimaryKey
+    @PrimaryKey
     var id: String = UUID.randomUUID().toString(),
     var name: String = "",
     var firmwareVersion: String = "",
     var mac: String = "",
-    var bleMAC: String = "",
-    var wifiMAC: String = ""
+    var ble_mac: String = "",
+    var wifi_mac: String = ""
 ): RealmObject()

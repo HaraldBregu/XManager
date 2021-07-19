@@ -7,7 +7,8 @@
         android:id="@+id/action_debug"
         android:icon="@drawable/ic_debug"
         app:showAsAction="ifRoom"
-        android:title="TODO" />
+        android:title="TODO"
+        android:visible="false"/>
 
     <item
         android:id="@+id/action_profile"
