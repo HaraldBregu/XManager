@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.row_main_player.view.*
 import kotlinx.android.synthetic.main.row_main_player_empty.view.*
 import kotlinx.android.synthetic.main.row_main_player_header.view.*
 import kotlinx.android.synthetic.main.row_main_program_empty.view.*
-
+import java.util.concurrent.TimeUnit
 
 
 class MainListAdapter(context: Context, players: RealmResults<Player>, programs: RealmResults<TrainingSessionProgram>): BaseAdapter() {
@@ -136,16 +136,37 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
                 rowHeader.current_program_section.visibility = View.VISIBLE
                 rowHeader.programProgressBar.progress = 40
 
-                val timer = object: CountDownTimer(10000, 1000) {
+                val duration:Long = 1 * 1 * 10 * 1000
+
+                rowHeader.programProgressBar.max = duration.toInt()
+
+                val timer = object: CountDownTimer(duration, 10) {
 
                     override fun onTick(millisUntilFinished: Long) {
-                        rowHeader.countDownTimerLabel.text = millisUntilFinished.toString()
-                        rowHeader.programProgressBar.progress = 100 - (millisUntilFinished/100).toInt()
+                        val hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished) % 60
+                        var hoursStr = hours.toString()
+                        if (hoursStr.length < 2) hoursStr = "0$hours"
+
+                        val minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) % 60
+                        var minutesStr = minutes.toString()
+                        if (minutesStr.length < 2) minutesStr = "0$minutes"
+
+                        val seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) % 60
+                        var secondsStr = seconds.toString()
+                        if (secondsStr.length < 2) secondsStr = "0$seconds"
+
+                        val millisec= TimeUnit.MILLISECONDS.toMillis(millisUntilFinished) % 60
+                        var millisecStr = millisec.toString()
+                        if (millisecStr.length < 2) millisecStr = "0$millisec"
+
+                        rowHeader.countDownTimerLabel.text = "$hoursStr:$minutesStr:$secondsStr:$millisecStr"
+
+                        rowHeader.programProgressBar.progress = (duration.toInt()) - millisUntilFinished.toInt()
                     }
 
                     override fun onFinish() {
-                        rowHeader.countDownTimerLabel.text = "0"
-                        rowHeader.programProgressBar.progress = 100
+                        rowHeader.countDownTimerLabel.text = "00:00:00:00"
+                        rowHeader.programProgressBar.progress = duration.toInt()
                     }
                 }
 

@@ -10,7 +10,6 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp">
 
-
     <RelativeLayout
         android:id="@+id/container_view"
         android:layout_width="match_parent"

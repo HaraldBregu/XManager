@@ -139,7 +139,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="00:10:40"
+                    android:text="0"
                     android:layout_below="@+id/labelTimer"
                     android:layout_alignParentRight="true"
                     android:textAlignment="textEnd"
@@ -158,7 +158,7 @@
                 android:max="100"
                 android:minWidth="200dp"
                 android:minHeight="8dp"
-                android:progress="30"
+                android:progress="0"
                 android:progressDrawable="@drawable/horizontal_progress_drawable_red"
                 android:progressTint="@color/primaryActionColor"/>
         </LinearLayout>
