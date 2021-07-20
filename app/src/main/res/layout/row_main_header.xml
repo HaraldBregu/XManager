@@ -191,11 +191,23 @@
                     style="@style/Widget.MaterialComponents.Button.Icon"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:layout_toLeftOf="@id/showProgramSectionMenu"
+                    android:layout_toLeftOf="@id/stopButton"
                     android:layout_marginRight="5dp"
                     android:backgroundTint="@color/primaryDarkColor"
                     android:text="select program"
                     android:textSize="12dp">
+                </com.google.android.material.button.MaterialButton>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/stopButton"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:icon="@drawable/ic_stop_white"
+                    app:iconTint="@color/primaryTextColor"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@id/showProgramSectionMenu"
+                    android:textSize="12dp"
+                    android:backgroundTint="@color/primaryDarkColor">
                 </com.google.android.material.button.MaterialButton>
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/showProgramSectionMenu"

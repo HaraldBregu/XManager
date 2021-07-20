@@ -3,7 +3,6 @@ package it.ninespartans.xmanager.model
 import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
-import io.realm.annotations.RealmClass
 import java.util.*
 
 open class TrainingSessionProgram(
@@ -12,5 +11,6 @@ open class TrainingSessionProgram(
     var title: String = "",
     var description: String = "",
     var programList:  RealmList<Program> = RealmList(),
-    var active:Boolean = false
+    var startDate: Date? = null,
+    var active: Boolean = false
 ): RealmObject()

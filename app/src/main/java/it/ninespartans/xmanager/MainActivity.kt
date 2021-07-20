@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                 MainListAdapter.Action.DELETE_PROGRAM -> {
                     Realm.getDefaultInstance().use { realm ->
                         realm.executeTransaction {
-                            realm.where(TrainingSessionProgram::class.java).findAll()?.let {
+                            realm.where<TrainingSessionProgram>().findAll()?.let {
                                 it.deleteAllFromRealm()
                                 adapter.programs = realm.where(TrainingSessionProgram::class.java).findAll()
                                 adapter.notifyDataSetChanged()
@@ -72,7 +72,12 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, "start all", Toast.LENGTH_SHORT).show()
                 }
                 MainListAdapter.Action.STOP_PROGRAM -> {
-                    Toast.makeText(this, "Stop all", Toast.LENGTH_SHORT).show()
+                    var realm = Realm.getDefaultInstance()
+                    val programs = realm.where<TrainingSessionProgram>().findAll()
+                    realm.executeTransaction { realm ->
+                        programs.forEach { it.active = false }
+                    }
+                    updateList()
                 }
                 MainListAdapter.Action.SHOW_PROGRAM -> {
                     val intent = Intent(this, ProgramListActivity::class.java)
@@ -226,15 +231,15 @@ class MainActivity : AppCompatActivity() {
         Realm.getDefaultInstance().use { realm ->
 
             // User
-            realm.where(User::class.java).findFirst()?.let {
+            realm.where<User>().findFirst()?.let {
                 user = it
             }
 
             //Programs
-            adapter.programs = realm.where(TrainingSessionProgram::class.java).findAll()
+            adapter.programs = realm.where<TrainingSessionProgram>().findAll()
 
             // Players
-            adapter.players = realm.where(Player::class.java).findAll()
+            adapter.players = realm.where<Player>().findAll()
 
             adapter.notifyDataSetChanged()
         }

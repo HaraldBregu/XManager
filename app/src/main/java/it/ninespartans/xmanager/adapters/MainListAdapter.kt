@@ -131,7 +131,7 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
             rowHeader.programTitle.text = "Default program"
             rowHeader.programDescription.text = "In corso"
 
-            rowHeader.labelDescriptionCreateProgram.text ="Select the program and start session."
+            rowHeader.labelDescriptionCreateProgram.text =""
 
             activeSessionProgram?.let {
                 rowHeader.current_program_section.visibility = View.VISIBLE
@@ -177,7 +177,6 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
                 rowHeader.labelDescriptionCreateProgram.text = ""
             }
 
-
             rowHeader.selectProgram.setOnClickListener {
                 onClickAction?.let {
                     it(Action.UPLOAD_PROGRAM)
@@ -207,6 +206,12 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
                 }
                 popupMenu.show()
                 */
+            }
+
+            rowHeader.stopButton.setOnClickListener {
+                onClickAction?.let {
+                    it(Action.STOP_PROGRAM)
+                }
             }
 
             return rowHeader
@@ -306,7 +311,7 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
                 rowPlayer.deviceName.text = it.name
                 rowPlayer.stateText.text = "FOOT: RIGHT"
             }
-            
+
         } else {
             rowPlayer.statusLayout.setBackgroundResource(R.color.primaryActiveColor)
 
