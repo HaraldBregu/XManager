@@ -12,7 +12,7 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select a program"
+            android:text="Uploading the program"
             android:textSize="24dp"
             android:textColor="@color/primaryDarkColor"
             android:fontFamily="@font/montserrat_bold"
@@ -30,15 +30,18 @@
         </TextView>
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/list_view"
+    <ProgressBar
+        android:id="@+id/uploadProgressProgram"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:progressTint="@color/primaryActionColor"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null"
-        android:scrollbars="none"
-        android:listSelector="@android:color/transparent"
-        android:layout_below="@+id/top_section"
-        android:layout_above="@+id/bottom_section">
-    </ListView>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:minHeight="10dp"
+        android:minWidth="200dp"
+        android:progress="30"
+        android:progressDrawable="@drawable/horizontal_progress_drawable_red"/>
 
 </LinearLayout>

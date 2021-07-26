@@ -131,8 +131,6 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
             rowHeader.programTitle.text = "Default program"
             rowHeader.programDescription.text = "In corso"
 
-            rowHeader.labelDescriptionCreateProgram.text =""
-
             activeSessionProgram?.let {
                 rowHeader.current_program_section.visibility = View.VISIBLE
                 rowHeader.programProgressBar.progress = 40
@@ -174,7 +172,6 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
 
                 rowHeader.programTitle.text = it.title
                 rowHeader.programDescription.text = "In corso"
-                rowHeader.labelDescriptionCreateProgram.text = ""
             }
 
             rowHeader.selectProgram.setOnClickListener {

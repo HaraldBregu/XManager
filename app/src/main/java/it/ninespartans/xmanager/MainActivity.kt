@@ -9,26 +9,30 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import io.realm.Realm
 import it.ninespartans.xmanager.bluetooth.BLEManager
-import it.ninespartans.xmanager.model.Player
-import it.ninespartans.xmanager.model.TrainingSessionProgram
-import it.ninespartans.xmanager.model.User
 import android.widget.*
 import androidx.annotation.RequiresApi
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.gson.Gson
 import io.realm.Sort
 import io.realm.kotlin.where
 import it.ninespartans.xmanager.adapters.MainListAdapter
 import it.ninespartans.xmanager.adapters.ProgramListAdapter
 import it.ninespartans.xmanager.adapters.ProgramSelectAdapter
-import it.ninespartans.xmanager.model.Device
+import it.ninespartans.xmanager.model.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.content_upload_program_bottom_sheet.*
+import kotlinx.android.synthetic.main.row_main_header.view.*
+import org.w3c.dom.Text
+import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity() {
@@ -202,13 +206,15 @@ class MainActivity : AppCompatActivity() {
     fun presentProgramBottomSheet() {
         var bottomSheetDialog = BottomSheetDialog(this)
         bottomSheetDialog.setContentView(R.layout.content_program_select_bottom_sheet)
-        bottomSheetDialog.behavior?.isDraggable = false
+        //bottomSheetDialog.behavior?.isDraggable = false
 
 
         var realm = Realm.getDefaultInstance()
         val programs = realm.where<TrainingSessionProgram>().findAll()
 
         var listView = bottomSheetDialog.findViewById<ListView>(R.id.list_view)
+        listView?.isNestedScrollingEnabled = true
+
         var adapter = ProgramSelectAdapter(this, programs)
         listView?.adapter = adapter
         listView?.setOnItemClickListener { parent, view, position, id ->
@@ -221,10 +227,80 @@ class MainActivity : AppCompatActivity() {
 
             bottomSheetDialog.hide()
             updateList()
+
+            uploadProgram()
         }
 
         bottomSheetDialog?.show()
         setWhiteNavigationBar(bottomSheetDialog)
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    fun uploadProgram() {
+        var bottomSheetDialog = BottomSheetDialog(this)
+        bottomSheetDialog.setContentView(R.layout.content_upload_program_bottom_sheet)
+        bottomSheetDialog.behavior?.isDraggable = false
+        bottomSheetDialog.setCancelable(false)
+        bottomSheetDialog?.show()
+        setWhiteNavigationBar(bottomSheetDialog)
+
+        var title = bottomSheetDialog.findViewById<TextView>(R.id.title)
+
+        var realm = Realm.getDefaultInstance()
+        val players = realm.where<Player>().findAll().first()
+
+        val ble_mac = players?.leftDevice?.ble_mac?.toUpperCase()
+        val f2 = players?.rightDevice?.ble_mac
+
+        title?.text = "Getting the device..."
+        ble_mac?.let {
+            BLEManager.getDevice(it)
+        }
+
+        BLEManager.disconnectDevice({
+            title?.text = "Connecting..."
+            BLEManager.connectDevice(this)
+        }, 2000)
+        BLEManager.onServiceDiscovered = {
+            title?.text = "Service discovered"
+
+            BLEManager.enableReading()
+        }
+        BLEManager.onCharacteristicRead = {
+            title?.text = "Characteristic Read..."
+
+            val jsonString = it?.getStringValue(0)
+            val deviceInfo = Gson().fromJson<DeviceInfo>(jsonString, DeviceInfo::class.java)
+
+            Log.i("LOG_UTIL_BLE", "on chars read")
+
+            //val gson = GsonBuilder().setPrettyPrinting().create()
+            //description?.text = gson.toJson(deviceInfo)
+            //BLEManager.disableReading()
+        }
+
+/*
+
+        var uploadProgressProgram = bottomSheetDialog.findViewById<ProgressBar>(R.id.uploadProgressProgram)
+
+        val duration:Long = 5000
+        uploadProgressProgram?.programProgressBar?.max = duration.toInt()
+
+        val timer = object: CountDownTimer(duration, 10) {
+            override fun onTick(millisUntilFinished: Long) {
+                uploadProgressProgram?.progress = (duration.toInt()) - millisUntilFinished.toInt()
+            }
+
+            override fun onFinish() {
+                bottomSheetDialog?.hide()
+                uploadProgram()
+                uploadProgressProgram?.progress = duration.toInt()
+            }
+        }
+
+        timer.start()
+        */
+
     }
 
     fun updateList() {

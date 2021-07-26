@@ -172,27 +172,11 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/labelDescriptionCreateProgram"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="Seleziona un altro programma"
-                    android:layout_alignParentLeft="true"
-                    android:textColor="@color/primaryTextColor85"
-                    android:textSize="12dp"
-                    android:layout_centerVertical="true"
-                    android:textStyle="normal"
-                    android:layout_marginRight="20dp"
-                    android:layout_toLeftOf="@+id/selectProgram"/>
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/selectProgram"
                     style="@style/Widget.MaterialComponents.Button.Icon"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:layout_toLeftOf="@id/stopButton"
-                    android:layout_marginRight="5dp"
                     android:backgroundTint="@color/primaryDarkColor"
                     android:text="select program"
                     android:textSize="12dp">

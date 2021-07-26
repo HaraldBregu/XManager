@@ -44,7 +44,7 @@ class DevicePairSearchActivity : AppCompatActivity() {
     private var deviceInfo: DeviceInfo? = null
     private var player: Player? = null
     var playerId: String? = null
-    val debug = false
+    val debug = true
     var bottomSheetDialog: BottomSheetDialog? = null
 
     @RequiresApi(Build.VERSION_CODES.M)

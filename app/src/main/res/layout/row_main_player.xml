@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:id="@+id/statusLayout"
-            android:layout_width="5dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="@color/primaryActiveColor"
             android:orientation="horizontal">
