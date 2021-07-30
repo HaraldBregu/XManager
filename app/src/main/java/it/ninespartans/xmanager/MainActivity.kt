@@ -1,15 +1,17 @@
 package it.ninespartans.xmanager
 
+import android.animation.ArgbEvaluator
+import android.animation.ValueAnimator
 import android.app.AlertDialog
 import android.app.Dialog
+import android.bluetooth.BluetoothGatt
+import android.bluetooth.BluetoothProfile
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
-import android.os.Build
-import android.os.Bundle
-import android.os.CountDownTimer
+import android.os.*
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
@@ -18,28 +20,20 @@ import kotlinx.android.synthetic.main.activity_main.*
 import io.realm.Realm
 import it.ninespartans.xmanager.bluetooth.BLEManager
 import android.widget.*
-import androidx.annotation.RequiresApi
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.gson.Gson
-import io.realm.Sort
+import io.realm.RealmResults
 import io.realm.kotlin.where
 import it.ninespartans.xmanager.adapters.MainListAdapter
-import it.ninespartans.xmanager.adapters.ProgramListAdapter
 import it.ninespartans.xmanager.adapters.ProgramSelectAdapter
+import it.ninespartans.xmanager.common.Common
 import it.ninespartans.xmanager.model.*
 import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.android.synthetic.main.content_upload_program_bottom_sheet.*
-import kotlinx.android.synthetic.main.row_main_header.view.*
-import org.w3c.dom.Text
-import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var adapter: MainListAdapter
     private lateinit var user: User
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -95,14 +89,8 @@ class MainActivity : AppCompatActivity() {
                     presentProgramBottomSheet()
                 }
                 MainListAdapter.Action.ADD_PLAYER -> {
-                    if (BLEManager.canStart(this) == false) {
-                        val intent = Intent(this, DevicePairStartActivity::class.java)
-                        startActivity(intent)
-                        //overridePendingTransition(R.anim.bottom_up, R.anim.nothing)
-                    } else {
-                        val intent = Intent(this, CreatePlayerActivity::class.java)
-                        startActivity(intent)
-                    }
+                    val intent = Intent(this, CreatePlayerActivity::class.java)
+                    startActivity(intent)
                 }
             }
         }
@@ -202,12 +190,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    /**
+     * Present list of programs to select
+     */
     fun presentProgramBottomSheet() {
         var bottomSheetDialog = BottomSheetDialog(this)
         bottomSheetDialog.setContentView(R.layout.content_program_select_bottom_sheet)
         //bottomSheetDialog.behavior?.isDraggable = false
-
 
         var realm = Realm.getDefaultInstance()
         val programs = realm.where<TrainingSessionProgram>().findAll()
@@ -228,79 +217,277 @@ class MainActivity : AppCompatActivity() {
             bottomSheetDialog.hide()
             updateList()
 
-            uploadProgram()
+
+            /**
+             * Read Players that have at least 1 device connected
+             * If there are no device connected to the players show an alert
+             */
+            var realm = Realm.getDefaultInstance()
+            var playersQuery = realm.where<Player>()
+            val allPlayers = playersQuery.findAll()
+
+            val players = playersQuery
+                .isNotNull("leftDevice")
+                .or()
+                .isNotNull("rightDevice")
+                .findAll()
+
+            /**
+             * When there are no players registered
+             */
+            if (allPlayers.isEmpty()) {
+                val builderInner = AlertDialog.Builder(this)
+                builderInner.setTitle("Attenzione!")
+                builderInner.setMessage("Non hai nessun giocatore registrato. Inizia a crearne uno e associa i device.")
+                builderInner.setNegativeButton("Chiudi") { dialog, which ->
+                    dialog.dismiss()
+                }
+                builderInner.setPositiveButton("Crea giocatore") { dialog, which ->
+                    dialog.dismiss()
+                    startActivity(Intent(this, CreatePlayerActivity::class.java))
+                }
+                builderInner.show()
+                return@setOnItemClickListener
+            }
+
+            /**
+             * When there are no players registered with devices
+             */
+            if (players.isEmpty()) {
+                val builderInner = AlertDialog.Builder(this)
+                builderInner.setTitle("Attenzione!")
+                builderInner.setMessage("Sembra che i giocatori che hai registrato non hanno nessun dispositivo Bluetooth collegato! Inizia a collegare i dispositivi bluetooth con i giocatori e poi riprova a caricare il programma di allenamento.")
+                builderInner.setPositiveButton("Riprova") { dialog, which ->
+                    dialog.dismiss()
+                }
+                builderInner.show()
+                return@setOnItemClickListener
+            }
+
+            uploadProgramToPlayer(selectedProgram, players)
         }
 
         bottomSheetDialog?.show()
-        setWhiteNavigationBar(bottomSheetDialog)
+        Common.setWhiteNavigationBar(bottomSheetDialog)
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    fun uploadProgram() {
+    fun uploadProgramToPlayer(trainingProgram: TrainingSessionProgram?, players: RealmResults<Player>, playerIndex: Int = 0) {
+
+        /**
+         * When index exceed the player size, do not continue
+         * Otherwise continue
+         */
+        if (playerIndex >= players.size) { return }
+        val player = players[playerIndex]
+
+        val hasLeftDevice = if (player?.leftDevice != null) true else false
+        val hasRightDevice = if (player?.rightDevice != null) true else false
+        val hasBothDevices = hasLeftDevice && hasRightDevice
+
+        player?.leftDevice?.let {
+            //this.uploadProgramToPlayer(playerIndex)
+            //return
+        }
+
+        player?.rightDevice?.let {
+            //this.uploadProgramToPlayer(playerIndex)
+            //return
+        }
+
+        /*
+        if (device == null) {
+            player?.leftDevice?.let {
+                this.uploadProgramToPlayer(playerIndex, player?.leftDevice)
+                return
+            }
+            player?.rightDevice?.let {
+                this.uploadProgramToPlayer(playerIndex, player?.rightDevice)
+                return
+            }
+        }*/
+
         var bottomSheetDialog = BottomSheetDialog(this)
         bottomSheetDialog.setContentView(R.layout.content_upload_program_bottom_sheet)
         bottomSheetDialog.behavior?.isDraggable = false
         bottomSheetDialog.setCancelable(false)
         bottomSheetDialog?.show()
-        setWhiteNavigationBar(bottomSheetDialog)
+        Common.setWhiteNavigationBar(bottomSheetDialog)
 
+        /**
+         * Title Sheet
+         */
         var title = bottomSheetDialog.findViewById<TextView>(R.id.title)
+        title?.text = getString(R.string.upload_program_sheet_title)
 
-        var realm = Realm.getDefaultInstance()
-        val players = realm.where<Player>().findAll().first()
+        /**
+         * Description Sheet
+         */
+        var description = bottomSheetDialog.findViewById<TextView>(R.id.description)
+        description?.text = getString(R.string.upload_program_sheet_description)
 
-        val ble_mac = players?.leftDevice?.ble_mac?.toUpperCase()
-        val f2 = players?.rightDevice?.ble_mac
+        /**
+         * Player Name
+         */
+        var playerNameTextView = bottomSheetDialog.findViewById<TextView>(R.id.playerNameTextView)
+        playerNameTextView?.text = player?.fullname
 
-        title?.text = "Getting the device..."
-        ble_mac?.let {
-            BLEManager.getDevice(it)
+        /**
+         * Progress Bar Title
+         * ProgressBar
+         */
+        var descriptionProgress = bottomSheetDialog.findViewById<TextView>(R.id.progressBarTitle)
+        descriptionProgress?.text = getString(R.string.upload_program_sheet_state_initial_title)
+        var uploadProgressProgram = bottomSheetDialog.findViewById<ProgressBar>(R.id.uploadProgressProgram)
+        uploadProgressProgram?.max = 100
+        val numDevices = if (player?.leftDevice != null && player?.rightDevice != null)  2 else 1
+        uploadProgressProgram?.setProgress(0)
+
+        /**
+         * Left & Right Shoe Image
+         */
+        val leftShoeImage = bottomSheetDialog.findViewById<ImageView>(R.id.leftShoeImage)
+        leftShoeImage?.setColorFilter(R.color.primaryDisabledColor)
+        val rightShoeImage = bottomSheetDialog.findViewById<ImageView>(R.id.rightShoeImage)
+        rightShoeImage?.setColorFilter(R.color.primaryDisabledColor)
+
+        val animator = ValueAnimator()
+        animator.setIntValues(getColor(R.color.primaryDisabledColor), getColor(R.color.primaryActiveColor))
+        animator.setEvaluator(ArgbEvaluator())
+        animator.addUpdateListener {
+            val animatedValue = animator.animatedValue as Int
+            leftShoeImage?.setColorFilter(animatedValue)
+        }
+        animator.setDuration(500)
+        animator.repeatCount = ValueAnimator.INFINITE
+        animator.repeatMode = ValueAnimator.REVERSE
+        animator.start()
+
+
+        player?.leftDevice?.let {
+            //this.uploadProgramToPlayer(playerIndex)
+            //return
+            uploadProgressProgram?.setProgress(20)
+            BLEManager.getDevice(it.ble_mac.toUpperCase())
+
+        }?:run {
+            player?.rightDevice?.let {
+                //this.uploadProgramToPlayer(playerIndex)
+                //return
+                uploadProgressProgram?.setProgress(20)
+                BLEManager.getDevice(it.ble_mac.toUpperCase())
+            }
         }
 
+
+
+        /**
+         * Connect to the device
+         */
         BLEManager.disconnectDevice({
-            title?.text = "Connecting..."
+            runOnUiThread {
+                descriptionProgress?.text = getString(R.string.upload_program_sheet_state_connecting_title)
+                //description?.text = getString(R.string.upload_program_sheet_state_connecting_description)
+                uploadProgressProgram?.setProgress(40)
+            }
             BLEManager.connectDevice(this)
         }, 2000)
+
+        /**
+         * Listen connection changes
+         */
+        BLEManager.onConnectionStateChange = { gatt, status, newState ->
+
+            if (status != BluetoothGatt.GATT_SUCCESS) {
+                runOnUiThread {
+                    descriptionProgress?.text = getString(R.string.upload_program_sheet_state_error_connection_title)
+                    //description?.text = getString(R.string.upload_program_sheet_state_error_connection_description)
+                }
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    bottomSheetDialog.hide()
+                    this.uploadProgramToPlayer(trainingProgram, players, playerIndex + 1)
+                }, 2000)
+            }
+
+            when (newState) {
+                BluetoothProfile.STATE_DISCONNECTED -> {
+                    runOnUiThread {
+                        descriptionProgress?.text = getString(R.string.upload_program_sheet_state_disconnected_title)
+                        //description?.text = getString(R.string.upload_program_sheet_state_disconnected_description)
+                    }
+
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        bottomSheetDialog.hide()
+                        this.uploadProgramToPlayer(trainingProgram, players, playerIndex + 1)
+                    }, 2000)
+
+                }
+                BluetoothProfile.STATE_CONNECTED -> {
+                    runOnUiThread {
+                        descriptionProgress?.text = getString(R.string.upload_program_sheet_state_connected_title)
+                        uploadProgressProgram?.setProgress(50)
+                        //description?.text = getString(R.string.upload_program_sheet_state_connected_description)
+                    }
+                }
+            }
+        }
+
+        /**
+         * Listen services
+         */
         BLEManager.onServiceDiscovered = {
-            title?.text = "Service discovered"
+            runOnUiThread {
+                descriptionProgress?.text = getString(R.string.upload_program_sheet_state_reading_resources_title)
+                //description?.text = getString(R.string.upload_program_sheet_state_reading_resources_description)
 
-            BLEManager.enableReading()
-        }
-        BLEManager.onCharacteristicRead = {
-            title?.text = "Characteristic Read..."
-
-            val jsonString = it?.getStringValue(0)
-            val deviceInfo = Gson().fromJson<DeviceInfo>(jsonString, DeviceInfo::class.java)
-
-            Log.i("LOG_UTIL_BLE", "on chars read")
-
-            //val gson = GsonBuilder().setPrettyPrinting().create()
-            //description?.text = gson.toJson(deviceInfo)
-            //BLEManager.disableReading()
-        }
-
-/*
-
-        var uploadProgressProgram = bottomSheetDialog.findViewById<ProgressBar>(R.id.uploadProgressProgram)
-
-        val duration:Long = 5000
-        uploadProgressProgram?.programProgressBar?.max = duration.toInt()
-
-        val timer = object: CountDownTimer(duration, 10) {
-            override fun onTick(millisUntilFinished: Long) {
-                uploadProgressProgram?.progress = (duration.toInt()) - millisUntilFinished.toInt()
+                descriptionProgress?.text = "Caricamento programma"
+                //description?.text = getString(R.string.upload_program_sheet_state_reading_resources_description)
+                uploadProgressProgram?.setProgress(80)
             }
 
-            override fun onFinish() {
-                bottomSheetDialog?.hide()
-                uploadProgram()
-                uploadProgressProgram?.progress = duration.toInt()
+            trainingProgram?.let {
+
+                // Tipo di comando
+                var commandByteArray = byteArrayOf(0x7E)
+
+                commandByteArray = commandByteArray.plus(
+                    byteArrayOf(
+                        0u.toByte(),   // LED position (0, 1, 2, 3, 4)
+                        1u.toByte(),          // Animation (fixed, blink, fade)
+                        "0".toByte(),   // Hours
+                        "0".toByte(),   // Minutes
+                        "3".toByte())) // Seconds
+
+                commandByteArray = commandByteArray.plus(
+                    byteArrayOf(
+                        3u.toByte(),   // LED position (0, 1, 2, 3, 4)
+                        1u.toByte(),          // Animation (fixed, blink, fade)
+                        "0".toByte(),   // Hours
+                        "0".toByte(),   // Minutes
+                        "3".toByte())) // Seconds
+
+
+                BLEManager.write(commandByteArray)
             }
         }
 
-        timer.start()
-        */
+        /**
+         * When data are send
+         */
+        BLEManager.onCharacteristicWrite = {
+            Log.i("CHARACTERISTIC_WRITE", it?.value.toString())
+            runOnUiThread {
+                descriptionProgress?.text = "Programma caricato"
+                uploadProgressProgram?.setProgress(100)
+                //description?.text = getString(R.string.upload_program_sheet_state_reading_resources_description)
+            }
 
+            BLEManager.disconnectDevice({
+                bottomSheetDialog.hide()
+                this.uploadProgramToPlayer(trainingProgram, players, playerIndex + 1)
+            }, 5000)
+        }
+        
     }
 
     fun updateList() {
@@ -318,28 +505,6 @@ class MainActivity : AppCompatActivity() {
             adapter.players = realm.where<Player>().findAll()
 
             adapter.notifyDataSetChanged()
-        }
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private fun setWhiteNavigationBar(dialog: Dialog) {
-        val window = dialog.getWindow()
-        if (window != null) {
-            val metrics = DisplayMetrics()
-            window!!.getWindowManager().getDefaultDisplay().getMetrics(metrics)
-
-            val dimDrawable = GradientDrawable()
-
-            val navigationBarDrawable = GradientDrawable()
-            navigationBarDrawable.shape = GradientDrawable.RECTANGLE
-            navigationBarDrawable.setColor(Color.WHITE)// Set color here
-
-            val layers = arrayOf<Drawable>(dimDrawable, navigationBarDrawable)
-
-            val windowBackground = LayerDrawable(layers)
-            windowBackground.setLayerInsetTop(1, metrics.heightPixels)
-
-            window!!.setBackgroundDrawable(windowBackground)
         }
     }
 }

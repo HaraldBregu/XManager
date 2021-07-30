@@ -8,7 +8,7 @@ import java.util.*
 open class Player(
     @PrimaryKey
     var id: String = UUID.randomUUID().toString(),
-    var name: String = "",
+    var fullname: String = "",
     var role: String = "",
     var age: String = "",
     var leftDevice: Device? = null,

@@ -45,7 +45,7 @@ class CreatePlayerActivity : AppCompatActivity() {
             Realm.getDefaultInstance().use { realm ->
                 realm.where<Player>().equalTo("id", playerId).findFirst()?.let {
                     this.player = it
-                    this.nameInputText.editText?.setText(it.name)
+                    this.nameInputText.editText?.setText(it.fullname)
                     this.roleInputText.editText?.setText(it.role)
                     this.ageInputText.editText?.setText(it.age)
                 }
@@ -63,7 +63,7 @@ class CreatePlayerActivity : AppCompatActivity() {
                     realm.where<Player>().equalTo("id", it).findFirst()?.let { player ->
                         realm.executeTransaction {
                             realm.copyToRealmOrUpdate(player.apply {
-                                name = nameInputText.editText?.text.toString()
+                                fullname = nameInputText.editText?.text.toString()
                                 role = roleInputText.editText?.text.toString()
                                 age = ageInputText.editText?.text.toString()
                             })
@@ -81,7 +81,7 @@ class CreatePlayerActivity : AppCompatActivity() {
 
 
                         player = it.copyToRealmOrUpdate(Player().apply {
-                            name = nameInputText.editText?.text.toString()
+                            fullname = nameInputText.editText?.text.toString()
                             role = roleInputText.editText?.text.toString()
                             age = ageInputText.editText?.text.toString()
                         })
@@ -89,7 +89,7 @@ class CreatePlayerActivity : AppCompatActivity() {
                         val intent = Intent(this, DevicePairSearchActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         intent.putExtra("player_id", player?.id)
-                        intent.putExtra("player_name", player?.name)
+                        intent.putExtra("player_name", player?.fullname)
                         startActivity(intent)
                         finish()
                     }

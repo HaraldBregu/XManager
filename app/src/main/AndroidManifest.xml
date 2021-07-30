@@ -3,22 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="it.ninespartans.xmanager">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
-    <uses-feature android:name="android.software.feature_companion_device_setup" />
-
+    <uses-feature
+        android:name="android.software.feature_companion_device_setup"
+        android:required="false"
+        tools:node="replace" />
     <uses-feature
         android:name="android.hardware.bluetooth"
-        android:required="true" />
+        android:required="false"
+        tools:node="replace" />
     <uses-feature
         android:name="android.hardware.bluetooth_le"
-        android:required="true" />
+        android:required="false"
+        tools:node="replace" />
+
 
     <application
         android:name="it.ninespartans.xmanager.XmanagerApplication"
@@ -39,7 +44,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="it.ninespartans.xmanager.CreateUserActivity"
-            android:label="@string/title_activity_create_user"
+            android:label="@string/title_activity_create_profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="it.ninespartans.xmanager.CreateProgramActivity"
@@ -51,19 +56,15 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="it.ninespartans.xmanager.DevicePairSelectActivity"
-            android:label="@string/title_activity_device_pair_select"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="it.ninespartans.xmanager.DevicePairSetupActivity"
-            android:label="@string/title_activity_device_pair_set"
+            android:label="Seleziona***"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="it.ninespartans.xmanager.DevicePairSearchActivity"
             android:label="@string/title_activity_device_pair_search"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="it.ninespartans.xmanager.DevicePairStartActivity"
-            android:label="@string/title_activity_device_pair_start"
+            android:name="it.ninespartans.xmanager.PermissionsManagerActivity"
+            android:label="@string/activity_permissions_nav_title"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="it.ninespartans.xmanager.MainActivity"

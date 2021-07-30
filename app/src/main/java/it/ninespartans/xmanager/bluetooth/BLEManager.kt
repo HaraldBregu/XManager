@@ -19,9 +19,10 @@ object BLEManager {
     lateinit var onStartScanning: (() -> Unit)
     lateinit var onStopScanning: (() -> Unit)
 
-    var onConnectionStateChange: ((status: Int, newState: Int) -> Unit)? = null
+    var onConnectionStateChange: ((bleGatt: BluetoothGatt, status: Int, newState: Int) -> Unit)? = null
     var onServiceDiscovered: ((Boolean) -> Unit)? = null
     var onCharacteristicRead: ((BluetoothGattCharacteristic?) -> Unit)? = null
+    var onCharacteristicWrite: ((BluetoothGattCharacteristic?) -> Unit)? = null
 
     var scanning: Boolean = false
 
@@ -153,24 +154,20 @@ object BLEManager {
             override fun onConnectionStateChange(gatt: BluetoothGatt?, status: Int, newState: Int) {
                 super.onConnectionStateChange(gatt, status, newState)
 
-                Log.i("SERVICE_DISCOVERED", "Start discovering")
+                gatt?.let { gatt ->
+                    gatt.discoverServices()
 
-                val bleGatt = gatt.takeIf { it != null } ?: return
-                bleGatt.discoverServices()
-
-                onConnectionStateChange?.let {
-                    it(status, newState)
+                    onConnectionStateChange?.let {
+                        it(gatt, status, newState)
+                    }
                 }
             }
 
             override fun onServicesDiscovered(gatt: BluetoothGatt?, status: Int) {
                 super.onServicesDiscovered(gatt, status)
-
                 Log.i("SERVICE_DISCOVERED", status.toString())
 
-
                 val gattObject = gatt.takeIf { it != null } ?: return
-
                 val service = gattObject.getService(UUID.fromString("a327169a-31c0-4010-aebf-3e68ee255144")).takeIf { it !=null } ?: return
                 selectedService = service
                 selectedCharacteristic = selectedService.getCharacteristic(UUID.fromString("e8e0d1f9-d24d-41b8-9a81-38be02772944"))
@@ -195,20 +192,20 @@ object BLEManager {
             override fun onCharacteristicRead(gatt: BluetoothGatt?, characteristic: BluetoothGattCharacteristic?, status: Int) {
                 super.onCharacteristicRead(gatt, characteristic, status)
 
+                Log.i("CHARACTERISTIC_READ", characteristic?.value.toString())
                 onCharacteristicRead?.let {
                     enableReading()
                     it(characteristic)
-                } ?: run {
-                    // If b is null.
                 }
-
-                Log.i("CHARACTERISTIC_READ", characteristic?.value.toString())
             }
 
             override fun onCharacteristicWrite(gatt: BluetoothGatt?, characteristic: BluetoothGattCharacteristic?, status: Int) {
                 super.onCharacteristicWrite(gatt, characteristic, status)
 
                 Log.i("CHARACTERISTIC_WRITE", characteristic?.value.toString())
+                onCharacteristicWrite?.let {
+                    it(characteristic)
+                }
             }
 
             override fun onDescriptorRead(gatt: BluetoothGatt?, descriptor: BluetoothGattDescriptor?, status: Int) {
@@ -300,11 +297,12 @@ object BLEManager {
         return false
     }
     fun canStart(context: Context): Boolean {
-        return bleIsEnabled() && bleGranted(
-            context
-        ) && bleAdminGranted(context) && coarseLocationGranted(
-            context
-        ) && fineLocationGranted(context)
+        return bleIsEnabled() &&
+                bleGranted(context) &&
+                bleAdminGranted(context) &&
+                fineLocationGranted(context)
+                //coarseLocationGranted(context) &&
+
     }
 
 }

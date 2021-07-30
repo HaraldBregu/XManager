@@ -36,7 +36,7 @@ class DevicePairSelectActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(it.ninespartans.xmanager.R.layout.activity_device_pair_select)
+        setContentView(R.layout.activity_device_pair_select)
         setSupportActionBar(toolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -79,10 +79,6 @@ class DevicePairSelectActivity : AppCompatActivity() {
                 }
             }
         }
-
-        //val intent = Intent(this, DevicePairSetupActivity::class.java)
-        //intent.putExtra("selected_device", deviceSelected)
-        //startActivity(intent)
 
         BLEManager.onCharacteristicRead = {
 

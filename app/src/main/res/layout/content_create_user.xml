@@ -6,89 +6,96 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="it.ninespartans.xmanager.CreatePlayerActivity"
-    tools:showIn="@layout/activity_create_player">
+    tools:showIn="@layout/activity_create_user">
 
     <LinearLayout
         android:id="@+id/containerSection"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp"
-        android:orientation="vertical"
         android:clickable="true"
         android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:padding="20dp">
+
         <TextView
             android:id="@+id/header_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Coach profile"
-            android:textSize="24dp"
-            android:textColor="@color/primaryDarkColor"
+            android:layout_marginBottom="5dp"
+            android:baselineAligned="false"
             android:fontFamily="@font/montserrat_bold"
-            android:layout_marginBottom="5dp">
+            android:text="@string/title_activity_create_profile_header_title"
+            android:textColor="@color/primaryDarkColor"
+            android:textSize="24dp">
         </TextView>
+
         <TextView
             android:id="@+id/header_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Please, get close to the devices and start testing by selecting the items above."
-            android:textColor="@color/primaryDarkColor"
-            android:fontFamily="@font/montserrat">
+            android:fontFamily="@font/montserrat"
+            android:text="@string/title_activity_create_profile_header_description"
+            android:textColor="@color/primaryDarkColor">
         </TextView>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:id="@+id/fullNameInputText"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Full Name"
-            app:helperText=""
-            app:endIconMode="none"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:hint="@string/title_activity_create_profile_field_fullname"
+            app:endIconMode="none"
+            app:helperText="">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords"
                 android:imeOptions="actionDone"
-                android:maxLines="1"/>
+                android:inputType="textCapWords"
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:id="@+id/input_fields"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:id="@+id/headlineInputText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="0dp"
-                android:layout_weight="2"
                 android:layout_height="wrap_content"
-                android:hint="Headline"
-                app:helperText=""
+                android:layout_marginBottom="20dp"
+                android:layout_weight="2"
+                android:hint="@string/title_activity_create_profile_field_headline"
                 app:endIconMode="none"
-                android:layout_marginBottom="20dp">
+                app:helperText="">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textCapWords"
                     android:imeOptions="actionDone"
-                    android:maxLines="1"/>
+                    android:inputType="textCapWords"
+                    android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:id="@+id/ageInputText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:hint="Age"
                 android:layout_marginLeft="5dp"
-                app:helperText=""
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:hint="@string/title_activity_create_profile_field_age"
                 app:endIconMode="dropdown_menu"
-                android:layout_marginBottom="20dp">
+                app:helperText="">
+
                 <AutoCompleteTextView
                     android:id="@+id/dropdown_age_text"
                     android:layout_width="match_parent"
@@ -111,7 +118,7 @@
             android:id="@+id/saveButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="SAVE"
+            android:text="@string/title_activity_create_profile_button_save"
             android:backgroundTint="@color/primaryDarkColor"
             app:cornerRadius="5dp">
         </com.google.android.material.button.MaterialButton>

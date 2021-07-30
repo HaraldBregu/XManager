@@ -20,6 +20,7 @@
     <color name="primaryErrorColor">#d32f2f</color>
     <color name="primaryUnactiveColor">#cfcfcf</color>
     <color name="primaryActiveColor">#1976d2</color>
+    <color name="primaryDisabledColor">#BDBDBD</color>
 
     <color name="rowGrayColor">#e6e6e6</color>
     <color name="rowGrayColorSecondary">#cfcfcf</color>

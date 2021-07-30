@@ -1,22 +1,108 @@
 <resources>
     <string name="app_name">Xmanager</string>
-    <string name="action_settings">Settings</string>
 
-    <string name="title_activity_settings">Settings</string>
+    <!--  Profile Activity  -->
+    <string name="title_activity_create_profile">Profilo</string>
+    <string name="title_activity_create_profile_header_title">Profilo coach</string>
+    <string name="title_activity_create_profile_header_description">Inserisci e salva i tuoi dati da coach.</string>
+    <string name="title_activity_create_profile_field_fullname">Nome e cognome</string>
+    <string name="title_activity_create_profile_field_headline">Titolo</string>
+    <string name="title_activity_create_profile_field_age">Età</string>
+    <string name="title_activity_create_profile_button_save">SALVA</string>
 
-    <string name="title_activity_device_pair_start">Start</string>
+    <!--  Main Activity Header -->
+    <string name="title_activity_home">Xmanager</string>
+    <string name="main_header_title">Pannello di controllo</string>
+    <string name="main_header_description">Qui puoi creare e gestire tutti i tuoi giocatori, i programmi di training e i dispositivi associati. Puoi caricare programmi e iniziare le sessioni di allenamento.</string>
+    <string name="main_header_user_no_title">Preparatore atletico</string>
+    <string name="main_header_action_run_program">AVVIA PROGRAMMA</string>
+    <string name="main_header_program_running">In corso</string>
+    <string name="main_header_program_complation">COMPLETAMENTO</string>
+
+    <!--  Select Program Bottom Sheet -->
+    <string name="select_program_sheet_title">Scegli un programma</string>
+    <string name="select_program_sheet_description">Dopo aver scelto il programma che si vuole utilizzare, inizierà la connessione con tutti i dispositivi registrati a tutti i giocatori. Dopo la connessione verra caricato il programma scelto.</string>
+
+    <!--  Select Program Bottom Sheet -->
+    <string name="upload_program_sheet_title">Caricamento programma</string>
+    <string name="upload_program_sheet_description">In questa fase viene caricato il programma sui dispositivi dei giocatori. Cerca di restare più vicino ai dispositivi Bluetooth in modo da caricare i programmi senza ritardi.</string>
+    <string name="upload_program_sheet_state_initial_title">Cercando il dispositivo...</string>
+    <string name="upload_program_sheet_state_initial_description">In cerca di dispositivi bluetooth associati ai giocatori. Assicurati di essere il più vicino possibile ai dispositivi bluetooth.</string>
+    <string name="upload_program_sheet_state_connecting_title">In connessione...</string>
+    <string name="upload_program_sheet_state_connecting_description">In cerca di dispositivi bluetooth associati ai giocatori. Assicurati di essere il più vicino possibile ai dispositivi bluetooth.</string>
+    <string name="upload_program_sheet_state_connected_title">Connesso al dispositivo</string>
+    <string name="upload_program_sheet_state_connected_description">In cerca di dispositivi bluetooth associati ai giocatori. Assicurati di essere il più vicino possibile ai dispositivi bluetooth.</string>
+    <string name="upload_program_sheet_state_disconnected_title">Dispositivo disconnesso</string>
+    <string name="upload_program_sheet_state_disconnected_description">Il dispositivo bluetooth che si stava tentando di connettersi non si trova nelle vicinanze o è spento.</string>
+    <string name="upload_program_sheet_state_error_connection_title">Errore connessione dispositivo</string>
+    <string name="upload_program_sheet_state_error_connection_description">Nel tentativo di connettersi con il dispositivo bluetooth, c\'\è stato un errore sconosciuto.</string>
+    <string name="upload_program_sheet_state_reading_resources_title">Lettura risorse...</string>
+    <string name="upload_program_sheet_state_reading_resources_description">In cerca di dispositivi bluetooth associati ai giocatori. Assicurati di essere il più vicino possibile ai dispositivi bluetooth.</string>
+    <string name="upload_program_sheet_state_writing_data_title">Scrittura dati...</string>
+    <string name="upload_program_sheet_state_writing_data_description">In cerca di dispositivi bluetooth associati ai giocatori. Assicurati di essere il più vicino possibile ai dispositivi bluetooth.</string>
+
+
+    <!--  Cell main no player -->
+    <string name="row_empty_player_title">Registra un giocatore</string>
+    <string name="row_empty_player_description">Registra un nuovo giocatore inserendo tutti i dati importanti. Inserisci un nome, ruolo e i dispositivi Bluetooth.</string>
+    <string name="row_empty_player_action_title">Crea giocatore</string>
+    <!--  Cell main no program -->
+    <string name="row_empty_program_title">Nuovo programma</string>
+    <string name="row_empty_program_description">Non hai ancora nessun proramma. Crea un programma inserendo tutte le sessioni personalizzati.</string>
+    <string name="row_empty_program_action_title">Crea programma</string>
+
+    <!--  Cell main player header -->
+    <string name="row_player_header_title">Giocatori</string>
+
+    <!--  Cell main player -->
+    <string name="row_player_device_empty_title">Connetti almeno un dispositivo</string>
+    <string name="row_player_device_version_title">Versione:</string>
+    <string name="row_player_device_left_title">Sinistra</string>
+    <string name="row_player_device_right_title">Destra</string>
+
+
+    <!--  Program Create Activity  -->
+    <string name="title_activity_create_program_nav_title">Programma</string>
+    <string name="title_activity_create_program_header_title">Crea un programma</string>
+    <string name="title_activity_update_program_header_title">Aggiorna il programma</string>
+    <string name="title_activity_create_program_header_description">Scegli un nome per il nuovo programma di allenamento, aggiungi delle sessioni, la durata e inizia ad usarla.</string>
+    <string name="title_activity_update_program_header_description">Cambia il nome del programma di allenamento selezionato, modifica le sessioni, cambia la durata e inizia ad usarla.</string>
+    <string name="title_activity_create_program_field_name">Titolo del programma</string>
+    <string name="title_activity_create_program_row_add_session">Inserisci sessione</string>
+    <string name="title_activity_create_program_button_save">Salva programma</string>
+    <string name="title_activity_create_program_button_create">Crea programma</string>
+
+    <!--  Program List Activity  -->
+    <string name="title_activity_program_list">Programmi</string>
+    <string name="title_activity_program_list_header_title">Your training programs</string>
+    <string name="title_activity_program_list_header_description">This is you program list. Select, update or delete them.</string>
+
+
+    <!--  Permissions Activity  -->
+    <string name="activity_permissions_nav_title">Permessi e autorizzazioni</string>
+    <string name="activity_permissions_title">Gestione permessi</string>
+    <string name="activity_permissions_description">Per poter utilizzare tutte le funzionalità previste, Xmanager necessita alcuni permessi e funzionalità. É necessario attivarle tutte!</string>
+    <string name="activity_permissions_bluetooth_title">Bluetooth</string>
+    <string name="activity_permissions_bluetooth_description">Il Bluetooth è necessario per eseguire qualsiasi comunicazione Bluetooth, come richiedere una connessione, accettare una connessione e trasferire dati.</string>
+    <string name="activity_permissions_bluetooth_active_button_title">ATTIVA BLUETOOTH</string>
+    <string name="activity_permissions_bluetooth_status_active_text">Attivo</string>
+    <string name="activity_permissions_fine_location_title">Posizione</string>
+    <string name="activity_permissions_fine_location_description">La posizione è necessario perché una scansione Bluetooth può raccogliere informazioni sulla posizione dell\'utente. Queste informazioni possono provenire dai dispositivi dell\'utente.</string>
+    <string name="activity_permissions_fine_location_active_button_title">ATTIVA POSIZIONE</string>
+    <string name="activity_permissions_fine_location_status_in_use_text">In uso</string>
+    <string name="activity_permissions_fine_location_status_denied_text">Disabilitato</string>
+    <string name="activity_permissions_fine_location_go_to_settings_text">Vai in impostazioni</string>
+
+    <string name="alert_dialog_">DebugActivity</string>
+
+
+    <string name="title_activity_debug">DebugActivity</string>
+
+
+
+
     <string name="title_activity_device_pair_search">Search devices</string>
 
-    <string name="messages_header">Messages</string>
-    <string name="signature_title">Your Signature</string>
-    <string name="reply_title">Default reply action</string>
-    <string name="sync_header">Sync</string>
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_summary_off">attachment_summary_off</string>
-    <string name="attachment_summary_on">attachment_summary_on</string>
-    <string name="attachment_title">attachment_title</string>
-    <string name="title_activity_device_pair_set">Set data</string>
-    <string name="title_activity_device_pair_select">Select the shoe</string>
 
     <string name="title_activity_create_player">Create player</string>
     <string name="title_activity_update_player">Update player</string>
@@ -24,34 +110,5 @@
     <string name="title_activity_update_player_button">Update</string>
     <string name="title_activity_update_player_cancel_button">Cancel</string>
 
-    <string name="title_activity_home">Xmanager</string>
-    <string name="main_header_title">Dashboard</string>
-
-    <string name="row_empty_player_title">New player</string>
-    <string name="row_empty_player_description">Create your first player by registering all data needed. Add a name and a role and than register the devices.</string>
-    <string name="row_empty_player_action_title">Create player</string>
-
-    <string name="row_empty_program_title">New program</string>
-    <string name="row_empty_program_description">Seams that you don\'t have any programs. Create a new program and start training.</string>
-    <string name="row_empty_program_action_title">Create program</string>
-
-
-
-    <string name="title_activity_create_program_nav_title">Program</string>
-    <string name="title_activity_create_program_header_title">Create a new program</string>
-    <string name="title_activity_update_program_header_title">Update the program</string>
-    <string name="title_activity_create_program_header_description">Choose a name for your new program, add training steps, timers, features and start using it.</string>
-    <string name="title_activity_update_program_header_description">Change the name of the program, modify training steps, timers, features and start using it.</string>
-
-    <string name="title_program_save">Save program</string>
-    <string name="title_program_create">Create program</string>
-
-    <string name="title_activity_create_user">Account</string>
-
-    <string name="title_activity_program_list">Programs</string>
-    <string name="title_activity_program_list_header_title">Your training programs</string>
-    <string name="title_activity_program_list_header_description">This is you program list. Select, update or delete them.</string>
-
-    <string name="title_activity_debug">DebugActivity</string>
 
 </resources>

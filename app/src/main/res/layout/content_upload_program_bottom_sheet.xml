@@ -12,7 +12,7 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Uploading the program"
+            android:text="@string/upload_program_sheet_title"
             android:textSize="24dp"
             android:textColor="@color/primaryDarkColor"
             android:fontFamily="@font/montserrat_bold"
@@ -22,26 +22,76 @@
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="After selecting the program you will start to connect to players and upload the program."
+            android:text="@string/upload_program_sheet_description"
             android:textSize="14dp"
             android:textColor="@color/primaryDarkColor"
             android:fontFamily="@font/montserrat"
             android:layout_marginBottom="20dp">
         </TextView>
     </LinearLayout>
-
-    <ProgressBar
-        android:id="@+id/uploadProgressProgram"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:progressTint="@color/primaryActionColor"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:indeterminate="false"
-        android:max="100"
-        android:minHeight="10dp"
-        android:minWidth="200dp"
-        android:progress="30"
-        android:progressDrawable="@drawable/horizontal_progress_drawable_red"/>
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/playerNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="John Terry"
+            android:textSize="20sp"
+            android:textColor="@color/primaryDarkColor"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_marginBottom="5dp">
+        </TextView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/progressBarTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/shoePairContainer"
+                android:text="Piede sinistro. Caricamento programma..."
+                android:textSize="14dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/primaryDarkColor"
+                android:fontFamily="@font/montserrat">
+            </TextView>
+            <LinearLayout
+                android:id="@+id/shoePairContainer"
+                android:layout_width="24dp"
+                android:layout_height="32dp"
+                android:padding="0dp"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/leftShoeImage"
+                    android:layout_width="12dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/left_unactive">
+                </ImageView>
+                <ImageView
+                    android:id="@+id/rightShoeImage"
+                    android:layout_width="12dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/right_unactive">
+                </ImageView>
+            </LinearLayout>
+        </RelativeLayout>
+        <ProgressBar
+            android:id="@+id/uploadProgressProgram"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:progressTint="@color/primaryActiveColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:indeterminate="false"
+            android:max="100"
+            android:minHeight="10dp"
+            android:minWidth="200dp"
+            android:progress="30"
+            android:progressDrawable="@drawable/horizontal_progress_drawable_red"/>
+    </LinearLayout>
 
 </LinearLayout>

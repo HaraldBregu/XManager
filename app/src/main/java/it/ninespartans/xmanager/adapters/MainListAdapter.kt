@@ -87,18 +87,18 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
     }
 
     override fun getView(position: Int, convertView : View?, viewGroup: ViewGroup?): View {
-        val noItems = players.size == 0
-        val hasItems = players.size > 0
+        val noPlayers = players.size == 0
+        val hasPlayers = players.size > 0
         val noPrograms = programs.size == 0
         val hasPrograms = programs.size > 0
 
         val isHeader = position==0
-        val isRowPlayerEmpty = position == 1 && noItems
-        val isRowProgramEmpty = (position == 1 && hasItems && noPrograms) || (position == 2 && noItems && noPrograms)
-        val isRowHeaderPlayer = (position == 1 && hasItems && hasPrograms) || (position == 2 && hasItems && noPrograms)
+        val isRowPlayerEmpty = position == 1 && noPlayers
+        val isRowProgramEmpty = (position == 1 && hasPlayers && noPrograms) || (position == 2 && noPlayers && noPrograms)
+        val isRowHeaderPlayer = (position == 1 && hasPlayers && hasPrograms) || (position == 2 && hasPlayers && noPrograms)
         var rowPlayerPosition = 0
-        rowPlayerPosition = if (hasItems && hasPrograms) position - 2 else 0
-        rowPlayerPosition = if (hasItems && !hasPrograms) position - 3 else rowPlayerPosition
+        rowPlayerPosition = if (hasPlayers && hasPrograms) position - 2 else 0
+        rowPlayerPosition = if (hasPlayers && !hasPrograms) position - 3 else rowPlayerPosition
 
         /**
          * Header Row
@@ -114,7 +114,11 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
             realm.where<User>().findFirst()?.let {
                 rowHeader.user_section_header.visibility = View.VISIBLE
                 rowHeader.fullname.text = it.fullName
-                rowHeader.userTitle.text = it.headline
+                if (it.headline != null && it.headline.length != 0) {
+                    rowHeader.userTitle.text = it.headline
+                } else {
+                    rowHeader.userTitle.text = mContext.getString(R.string.main_header_user_no_title)
+                }
             }
 
 
@@ -127,9 +131,6 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
             val activeSessionProgram = realm.where<TrainingSessionProgram>()
                 .equalTo("active", true)
                 .findFirst()
-
-            rowHeader.programTitle.text = "Default program"
-            rowHeader.programDescription.text = "In corso"
 
             activeSessionProgram?.let {
                 rowHeader.current_program_section.visibility = View.VISIBLE
@@ -272,66 +273,57 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
         val deviceVersionEqual = leftVersion.equals(rightVersion)
 
         leftdevice?.let {
-            rowPlayer.leftShoeImage.setImageResource(R.drawable.left)
+            rowPlayer.leftChipDevice.setChipIconTintResource(R.color.primaryActiveColor)
         } ?: run {
-            rowPlayer.leftShoeImage.setImageResource(R.drawable.left_unactive)
+            rowPlayer.leftChipDevice.setChipIconTintResource(R.color.primaryDisabledColor)
         }
 
         rightDevice?.let {
-            rowPlayer.rightShoeImage.setImageResource(R.drawable.right)
+            rowPlayer.rightChipDevice.setChipIconTintResource(R.color.primaryActiveColor)
         } ?: run {
-            rowPlayer.rightShoeImage.setImageResource(R.drawable.right_unactive)
+            rowPlayer.rightChipDevice.setChipIconTintResource(R.color.primaryDisabledColor)
         }
 
         /**
          * Player informations
          */
-        rowPlayer.textViewPlayerName.text = player?.name
+        rowPlayer.textViewPlayerName.text = player?.fullname
         rowPlayer.textViewPlayerRole.text = if (player?.role!!.isEmpty()) "Ruolo" else player.role
 
         /**
          * Device informations
          */
         if (noDevices) {
-            rowPlayer.deviceName.text = "No connected devices"
-            rowPlayer.stateText.text = "Complete pairing"
+            rowPlayer.deviceName.text = mContext.getString(R.string.row_player_device_empty_title)
             rowPlayer.statusLayout.setBackgroundResource(R.color.primaryUnactiveColor)
         } else if (missingOneDevice) {
             rowPlayer.statusLayout.setBackgroundResource(R.color.primaryActiveColor)
 
             leftdevice?.let {
-                rowPlayer.deviceName.text = it.name
-                rowPlayer.stateText.text = "FOOT: LEFT"
+                rowPlayer.deviceName.text = mContext.getString(R.string.row_player_device_version_title) + " " + it.name + " " + it.firmwareVersion
             }
 
             rightDevice?.let {
-                rowPlayer.deviceName.text = it.name
-                rowPlayer.stateText.text = "FOOT: RIGHT"
+                rowPlayer.deviceName.text = mContext.getString(R.string.row_player_device_version_title) + " " + it.name + " " + it.firmwareVersion
             }
 
         } else {
             rowPlayer.statusLayout.setBackgroundResource(R.color.primaryActiveColor)
 
             var deviceNames = ""
-            var footNames = "FOOT: "
 
             leftdevice?.let {
-                deviceNames += it.name
-                footNames += "LEFT"
+                deviceNames += it.name + " " + it.firmwareVersion
             }
 
             rightDevice?.let {
-                deviceNames = if (deviceNames.length > 0 && deviceNames != it.name) "$deviceNames | ${it.name}" else it.name
-
-                leftdevice?.let {
-                    footNames += " | RIGHT"
-                } ?: run {
-                    footNames += "RIGHT"
-                }
+                deviceNames =
+                    if (deviceNames.length > 0 && deviceNames != (it.name + " " + it.firmwareVersion))
+                        "$deviceNames | ${it.name + " " + it.firmwareVersion}"
+                    else it.name + " " + it.firmwareVersion
             }
 
-            rowPlayer.deviceName.text = deviceNames
-            rowPlayer.stateText.text = footNames
+            rowPlayer.deviceName.text = mContext.getString(R.string.row_player_device_version_title) + " " + deviceNames
         }
 
         /**
@@ -373,12 +365,17 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
         /**
          * Complete pairing with devices if not complete
          */
-        rowPlayer.completePairingDevices.visibility = if (missingBothDevices) View.VISIBLE else View.GONE
-        rowPlayer.completePairingDevices.setOnClickListener {
+        rowPlayer.leftChipDevice.setOnClickListener {
             onClickActionOnItem?.let {
                 it(Action.COMPLETE_DEVICES, player)
             }
         }
+        rowPlayer.rightChipDevice.setOnClickListener {
+            onClickActionOnItem?.let {
+                it(Action.COMPLETE_DEVICES, player)
+            }
+        }
+
 
         /**
          * Update devices firmware if there is a new version available

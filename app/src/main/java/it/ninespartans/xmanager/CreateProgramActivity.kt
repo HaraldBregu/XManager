@@ -37,7 +37,6 @@ class CreateProgramActivity : AppCompatActivity() {
     private var trainingSessionProgram: TrainingSessionProgram? = null
     private var programId: String? = null
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_program)
@@ -50,14 +49,14 @@ class CreateProgramActivity : AppCompatActivity() {
         title = getString(R.string.title_activity_create_program_nav_title)
         header_title.text = getString(R.string.title_activity_create_program_header_title)
         header_description.text = getString(R.string.title_activity_create_program_header_description)
-        saveProgram.text = getString(R.string.title_program_create)
+        saveProgram.text = getString(R.string.title_activity_create_program_button_create)
 
         createSession.visibility = View.GONE
 
         programId?.let {
             header_title.text = getString(R.string.title_activity_update_program_header_title)
             header_description.text = getString(R.string.title_activity_update_program_header_description)
-            saveProgram.text = getString(R.string.title_program_save)
+            saveProgram.text = getString(R.string.title_activity_create_program_button_save)
 
             Realm.getDefaultInstance().use { realm ->
                 realm.where<TrainingSessionProgram>().equalTo("id", it).findFirst()?.let {
@@ -140,7 +139,6 @@ class CreateProgramActivity : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     fun addSessionProgram() {
         val bottomSheetDialog = BottomSheetDialog(this)
         bottomSheetDialog.setContentView(R.layout.content_program_create_session_bottom_sheet)
@@ -214,7 +212,6 @@ class CreateProgramActivity : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     private fun setWhiteNavigationBar(dialog: Dialog) {
         val window = dialog.getWindow()
         if (window != null) {

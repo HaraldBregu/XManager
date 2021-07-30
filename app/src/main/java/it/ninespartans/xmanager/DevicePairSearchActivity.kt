@@ -47,7 +47,6 @@ class DevicePairSearchActivity : AppCompatActivity() {
     val debug = true
     var bottomSheetDialog: BottomSheetDialog? = null
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device_pair_search)
@@ -62,7 +61,7 @@ class DevicePairSearchActivity : AppCompatActivity() {
         Realm.getDefaultInstance().use { realm ->
             realm.where<Player>().equalTo("id", playerId).findFirst()?.let {
                 this.player = it
-                deviceSearchTitle.text = it.name
+                deviceSearchTitle.text = it.fullname
             }
         }
 
@@ -134,6 +133,13 @@ class DevicePairSearchActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+
+        if (BLEManager.canStart(this) == false) {
+            val intent = Intent(this, PermissionsManagerActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
     }
 
     override fun onResume() {
@@ -164,7 +170,6 @@ class DevicePairSearchActivity : AppCompatActivity() {
         searchDevicesButton.text = "SEARCH DEVICES"
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     fun presentBottomSheet(position: Int) {
         var activeSaveButton = false
         var leftSelected = false
@@ -375,7 +380,7 @@ class DevicePairSearchActivity : AppCompatActivity() {
                     .equalTo("leftDevice.ble_mac", device.address, Case.INSENSITIVE)
                     .findFirst()?.let { player ->
                         rowDevice.textViewPlayer.visibility = View.VISIBLE
-                        rowDevice.textViewPlayer.text = "Player: " + player.name
+                        rowDevice.textViewPlayer.text = "Player: " + player.fullname
                         rowDevice.leftShoeImage?.setImageResource(R.drawable.left)
                     }
                 it.where<Player>()
@@ -383,7 +388,7 @@ class DevicePairSearchActivity : AppCompatActivity() {
                     .equalTo("rightDevice.ble_mac", device.address, Case.INSENSITIVE)
                     .findFirst()?.let { player ->
                         rowDevice.textViewPlayer.visibility = View.VISIBLE
-                        rowDevice.textViewPlayer.text = "Player: " + player.name
+                        rowDevice.textViewPlayer.text = "Player: " + player.fullname
                         rowDevice.rightShoeImage?.setImageResource(R.drawable.right)
                     }
             }
@@ -392,8 +397,6 @@ class DevicePairSearchActivity : AppCompatActivity() {
         }
     }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
     private fun setWhiteNavigationBar(dialog: Dialog) {
         val window = dialog.getWindow()
         if (window != null) {

@@ -19,7 +19,7 @@ class CreateUserActivity : AppCompatActivity() {
         setContentView(R.layout.activity_create_user)
         setSupportActionBar(toolbar)
 
-        title = getString(R.string.title_activity_create_user)
+        title = getString(R.string.title_activity_create_profile)
 
         Realm.getDefaultInstance().use { realm ->
             realm.where<User>().findFirst()?.let {

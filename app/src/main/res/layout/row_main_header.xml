@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
+            android:layout_marginBottom="5dp"
             android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
@@ -26,13 +27,13 @@
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/main_header_title"
                 android:textColor="@color/primaryLargeTextColor90"
-                android:textSize="30sp" />
+                android:textSize="26sp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="5dp"
                 android:fontFamily="@font/roboto"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                android:text="@string/main_header_description"
                 android:textColor="@color/primaryTextColor85"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -114,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="In corso"
+                    android:text="@string/main_header_program_running"
                     android:layout_alignParentLeft="true"
                     android:layout_below="@+id/programTitle"
                     android:textColor="@color/primaryTextColor85"
@@ -125,7 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="Completamento"
+                    android:text="@string/main_header_program_complation"
                     android:textAllCaps="true"
                     android:layout_marginTop="4dp"
                     android:layout_alignParentRight="true"
@@ -178,7 +179,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:backgroundTint="@color/primaryDarkColor"
-                    android:text="select program"
+                    android:text="@string/main_header_action_run_program"
                     android:textSize="12dp">
                 </com.google.android.material.button.MaterialButton>
                 <com.google.android.material.button.MaterialButton
