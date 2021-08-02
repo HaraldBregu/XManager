@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="it.ninespartans.xmanager"
+    android:versionCode="19"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="26"
+        android:targetSdkVersion="30" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-feature
+        android:name="android.software.feature_companion_device_setup"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.bluetooth"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="false" />
+
+    <application
+        android:name="it.ninespartans.xmanager.XmanagerApplication"
+        android:allowBackup="true"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:debuggable="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:testOnly="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="it.ninespartans.xmanager.DebugActivity"
+            android:label="@string/title_activity_debug"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="it.ninespartans.xmanager.ProgramListActivity"
+            android:label="@string/title_activity_program_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="it.ninespartans.xmanager.CreateUserActivity"
+            android:label="@string/title_activity_create_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="it.ninespartans.xmanager.CreateProgramActivity"
+            android:label="@string/title_activity_create_program_nav_title"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="it.ninespartans.xmanager.CreatePlayerActivity"
+            android:label="@string/title_activity_create_player"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="it.ninespartans.xmanager.DevicePairSelectActivity"
+            android:label="Seleziona***"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="it.ninespartans.xmanager.DevicePairSearchActivity"
+            android:label="@string/title_activity_device_pair_search"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="it.ninespartans.xmanager.PermissionsManagerActivity"
+            android:label="@string/activity_permissions_nav_title"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="it.ninespartans.xmanager.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <provider
+            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+            android:authorities="it.ninespartans.xmanager.lifecycle-process"
+            android:exported="false"
+            android:multiprocess="true" />
+    </application>
+
+</manifest>
