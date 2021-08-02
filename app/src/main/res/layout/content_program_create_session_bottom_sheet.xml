@@ -15,24 +15,22 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create session"
+            android:text="Sessione di allenamento"
             android:textSize="24dp"
             android:textColor="@color/primaryDarkColor"
             android:fontFamily="@font/montserrat_bold"
             android:layout_marginBottom="10dp">
         </TextView>
-
         <TextView
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Connecing to device"
+            android:text="Seleziona le parti della scarpa che vuoi utilizzare per questa sessione, l'animazione e la durata. Salva la sessione e crea un altra se preferisci."
             android:textSize="14dp"
             android:textColor="@color/primaryDarkColor"
             android:fontFamily="@font/montserrat"
             android:layout_marginBottom="20dp">
         </TextView>
-
     </LinearLayout>
 
     <LinearLayout
@@ -40,6 +38,62 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/durationTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Durata"
+                android:textSize="20dp"
+                android:textColor="@color/primaryDarkColor"
+                android:fontFamily="@font/roboto_regular">
+            </TextView>
+            <TextView
+                android:id="@+id/durationDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 secondi"
+                android:textSize="18dp"
+                android:textColor="@color/primaryDarkColor"
+                android:fontFamily="@font/roboto_regular">
+            </TextView>
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:checkedButton="@+id/radio_button_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+                <RadioButton
+                    android:id="@+id/radio_button_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:buttonTint="@color/primaryColor"
+                    android:text="Luce Statica"
+                    android:fontFamily="@font/roboto"/>
+                <RadioButton
+                    android:id="@+id/radio_button_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/primaryColor"
+                    android:text="Lampeggiante"
+                    android:fontFamily="@font/roboto"/>
+                <RadioButton
+                    android:id="@+id/radio_button_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/primaryDisabledColor"
+                    android:text="Dissolvenza (funzionalità in arrivo)"
+                    android:enabled="false"
+                    android:fontFamily="@font/roboto"/>
+            </RadioGroup>
+        </LinearLayout>
+
         <ImageView
             android:id="@+id/leftShoeImage"
             android:layout_width="0dp"
@@ -47,32 +101,7 @@
             android:layout_height="300dp"
             android:src="@drawable/shoe_pair">
         </ImageView>
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:checkedButton="@+id/radio_button_2"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp">
-            <RadioButton
-                android:id="@+id/radio_button_1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:buttonTint="@color/primaryColor"
-                android:text="Static light"/>
-            <RadioButton
-                android:id="@+id/radio_button_2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:buttonTint="@color/primaryColor"
-                android:text="Blink animation"/>
-            <RadioButton
-                android:id="@+id/radio_button_3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:buttonTint="@color/primaryColor"
-                android:text="Fade animation"/>
-        </RadioGroup>
+
     </LinearLayout>
 
     <LinearLayout
@@ -80,12 +109,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <com.google.android.material.slider.Slider
+            android:id="@+id/durationSlider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:valueFrom="0.0"
-            android:valueTo="60.0"
-            android:value="0.0"
-            android:stepSize="1.0">
+            android:valueFrom="0"
+            android:valueTo="104"
+            android:value="0"
+            android:stepSize="1"
+            app:labelBehavior="gone">
         </com.google.android.material.slider.Slider>
     </LinearLayout>
 
@@ -93,7 +124,7 @@
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="Create session"
+        android:text="Salva"
         android:backgroundTint="@color/primaryDarkColor"
         app:cornerRadius="5dp">
     </com.google.android.material.button.MaterialButton>

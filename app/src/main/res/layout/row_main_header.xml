@@ -105,7 +105,7 @@
                     android:fontFamily="@font/roboto_regular"
                     android:layout_toLeftOf="@+id/labelTimer"
                     android:layout_alignParentLeft="true"
-                    android:text="Programma default"
+                    android:text="-"
                     android:textAllCaps="true"
                     android:textColor="@color/primaryTextColor85"
                     android:textSize="14dp" />

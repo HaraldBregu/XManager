@@ -11,6 +11,7 @@ import org.jetbrains.anko.uiThread
 import java.util.*
 import android.bluetooth.BluetoothDevice
 import android.content.pm.PackageManager
+import android.os.Looper
 import androidx.core.content.ContextCompat
 
 
@@ -134,7 +135,8 @@ object BLEManager {
         bluetoothGatt?.disconnect()
         //bluetoothGatt?.close()
 
-        Handler().postDelayed({bleConnected = false
+        Handler(Looper.getMainLooper()).postDelayed({
+            bleConnected = false
             completion?.invoke()
         }, after)
     }

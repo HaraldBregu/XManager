@@ -67,11 +67,33 @@ class ProgramStepItemAdapter(context: Context, programList: RealmResults<Program
             }
 
             val program = programs.elementAt(position)
-
             val view = inflater.inflate(R.layout.row_create_program_step, viewGroup, false)
 
             val stepNumber = position + 1
             view.stepNumber.text = stepNumber.toString()
+
+            var description = ""
+
+            var minutesStr = ""
+            program.durationMinutesByte?.let {
+                if (it.toInt() == 1) {
+                    minutesStr = "${it.toInt()} minuto "
+                } else if (it > 1) {
+                    minutesStr = "${it.toInt()} minuti "
+                }
+            }
+            description += minutesStr
+
+            var secondsStr = ""
+            program.durationSecondsByte?.let {
+                if (it.toInt() == 1) {
+                    secondsStr = "${it} secondo "
+                } else if (it.toInt() > 1) {
+                    secondsStr = "${it} secondi "
+                }
+            }
+            description += secondsStr
+            view.descriptionProgram.text = description
 
             view.cancelProgramStep.setOnClickListener {
                 onDeleteStepItem?.let {

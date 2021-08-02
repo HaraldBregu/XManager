@@ -22,7 +22,11 @@ import kotlinx.android.synthetic.main.row_main_player.view.*
 import kotlinx.android.synthetic.main.row_main_player_empty.view.*
 import kotlinx.android.synthetic.main.row_main_player_header.view.*
 import kotlinx.android.synthetic.main.row_main_program_empty.view.*
+import org.jetbrains.anko.runOnUiThread
+import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.concurrent.fixedRateTimer
+import kotlin.concurrent.scheduleAtFixedRate
 
 
 class MainListAdapter(context: Context, players: RealmResults<Player>, programs: RealmResults<TrainingSessionProgram>): BaseAdapter() {
@@ -58,12 +62,6 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
         this.programs = programs
         mContext = context
         inflater = LayoutInflater.from(mContext)
-
-
-            //.sortedWith(compareBy<Player, String?>(nullsLast(), {
-              //  it.name
-                //it.leftDevice// && it.rightDevice
-            //}))
     }
 
     override fun getCount(): Int {
@@ -133,16 +131,46 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
                 .findFirst()
 
             activeSessionProgram?.let {
+                rowHeader.programTitle.text = it.title
+                rowHeader.programDescription.text = mContext.getString(R.string.main_header_program_running)
+
                 rowHeader.current_program_section.visibility = View.VISIBLE
                 rowHeader.programProgressBar.progress = 40
 
-                val duration:Long = 1 * 1 * 10 * 1000
+                var startDate = Date()
+                var endDate = Date()
+                it.startDate?.let {date ->
+                    startDate = date
+                    val calendar = Calendar.getInstance()
+                    calendar.time = startDate
+                    calendar.add(Calendar.SECOND, it.durationSeconds())
+                    calendar.add(Calendar.MINUTE, it.durationMinutes())
+                    calendar.add(Calendar.HOUR, it.durationHours())
+                    endDate = calendar.time
+                }
 
+                var duration = endDate.time - startDate.time
                 rowHeader.programProgressBar.max = duration.toInt()
 
-                val timer = object: CountDownTimer(duration, 10) {
 
-                    override fun onTick(millisUntilFinished: Long) {
+                fixedRateTimer("timer", true, 0L, 10) {
+                    val progress = Date().time - startDate.time
+
+                    if (progress >= duration) {
+                        this.cancel()
+                    }
+
+                    mContext.runOnUiThread {
+
+                        rowHeader.programProgressBar.progress = progress.toInt()
+
+                        val millisUntilFinished = duration - progress
+                        if (millisUntilFinished <= 0) {
+                            rowHeader.countDownTimerLabel.text = "00:00:00:00"
+                            rowHeader.programDescription.text = mContext.getString(R.string.main_header_program_finished)
+                            return@runOnUiThread
+                        }
+
                         val hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished) % 60
                         var hoursStr = hours.toString()
                         if (hoursStr.length < 2) hoursStr = "0$hours"
@@ -160,19 +188,8 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
                         if (millisecStr.length < 2) millisecStr = "0$millisec"
 
                         rowHeader.countDownTimerLabel.text = "$hoursStr:$minutesStr:$secondsStr:$millisecStr"
-                        rowHeader.programProgressBar.progress = (duration.toInt()) - millisUntilFinished.toInt()
-                    }
-
-                    override fun onFinish() {
-                        rowHeader.countDownTimerLabel.text = "00:00:00:00"
-                        rowHeader.programProgressBar.progress = duration.toInt()
                     }
                 }
-
-                timer.start()
-
-                rowHeader.programTitle.text = it.title
-                rowHeader.programDescription.text = "In corso"
             }
 
             rowHeader.selectProgram.setOnClickListener {

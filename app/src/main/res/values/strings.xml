@@ -17,6 +17,7 @@
     <string name="main_header_user_no_title">Preparatore atletico</string>
     <string name="main_header_action_run_program">AVVIA PROGRAMMA</string>
     <string name="main_header_program_running">In corso</string>
+    <string name="main_header_program_finished">Terminato</string>
     <string name="main_header_program_complation">COMPLETAMENTO</string>
 
     <!--  Select Program Bottom Sheet -->
@@ -27,19 +28,11 @@
     <string name="upload_program_sheet_title">Caricamento programma</string>
     <string name="upload_program_sheet_description">In questa fase viene caricato il programma sui dispositivi dei giocatori. Cerca di restare più vicino ai dispositivi Bluetooth in modo da caricare i programmi senza ritardi.</string>
     <string name="upload_program_sheet_state_initial_title">Cercando il dispositivo...</string>
-    <string name="upload_program_sheet_state_initial_description">In cerca di dispositivi bluetooth associati ai giocatori. Assicurati di essere il più vicino possibile ai dispositivi bluetooth.</string>
     <string name="upload_program_sheet_state_connecting_title">In connessione...</string>
-    <string name="upload_program_sheet_state_connecting_description">In cerca di dispositivi bluetooth associati ai giocatori. Assicurati di essere il più vicino possibile ai dispositivi bluetooth.</string>
     <string name="upload_program_sheet_state_connected_title">Connesso al dispositivo</string>
-    <string name="upload_program_sheet_state_connected_description">In cerca di dispositivi bluetooth associati ai giocatori. Assicurati di essere il più vicino possibile ai dispositivi bluetooth.</string>
     <string name="upload_program_sheet_state_disconnected_title">Dispositivo disconnesso</string>
-    <string name="upload_program_sheet_state_disconnected_description">Il dispositivo bluetooth che si stava tentando di connettersi non si trova nelle vicinanze o è spento.</string>
     <string name="upload_program_sheet_state_error_connection_title">Errore connessione dispositivo</string>
-    <string name="upload_program_sheet_state_error_connection_description">Nel tentativo di connettersi con il dispositivo bluetooth, c\'\è stato un errore sconosciuto.</string>
-    <string name="upload_program_sheet_state_reading_resources_title">Lettura risorse...</string>
-    <string name="upload_program_sheet_state_reading_resources_description">In cerca di dispositivi bluetooth associati ai giocatori. Assicurati di essere il più vicino possibile ai dispositivi bluetooth.</string>
-    <string name="upload_program_sheet_state_writing_data_title">Scrittura dati...</string>
-    <string name="upload_program_sheet_state_writing_data_description">In cerca di dispositivi bluetooth associati ai giocatori. Assicurati di essere il più vicino possibile ai dispositivi bluetooth.</string>
+    <string name="upload_program_sheet_state_writing_data_title">Caricamento programma...</string>
 
 
     <!--  Cell main no player -->

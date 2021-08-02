@@ -48,7 +48,7 @@
                     android:id="@+id/descriptionProgram"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="mac address"
+                    android:text="Durata: 2 Ore 3 Minuti 23 Secondi \nSessioni: 2"
                     android:fontFamily="@font/montserrat"
                     android:textSize="12dp"
                     android:textColor="@color/primaryDarkColor"

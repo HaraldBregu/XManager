@@ -29,7 +29,11 @@ import android.graphics.drawable.GradientDrawable
 import android.util.DisplayMetrics
 import androidx.annotation.NonNull
 import android.os.Build
+import android.widget.RadioButton
 import androidx.annotation.RequiresApi
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.slider.Slider
+import it.ninespartans.xmanager.common.Common
 
 
 class CreateProgramActivity : AppCompatActivity() {
@@ -143,20 +147,45 @@ class CreateProgramActivity : AppCompatActivity() {
         val bottomSheetDialog = BottomSheetDialog(this)
         bottomSheetDialog.setContentView(R.layout.content_program_create_session_bottom_sheet)
         bottomSheetDialog.behavior.isDraggable = false
-        bottomSheetDialog
-        val title = bottomSheetDialog.findViewById<TextView>(R.id.title)
-        title?.text = "Create a session"
-
-        val description = bottomSheetDialog.findViewById<TextView>(R.id.description)
-        description?.text = "Select the parts of the shoes you want to use, animation type and the duration of the session."
+        bottomSheetDialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
         bottomSheetDialog.show()
-        setWhiteNavigationBar(bottomSheetDialog)
+        Common.setWhiteNavigationBar(bottomSheetDialog)
+
+        val radioButton = bottomSheetDialog.findViewById<RadioButton>(R.id.radio_button_3)
+        radioButton?.isEnabled = false
+
+        val durationDescription = bottomSheetDialog.findViewById<TextView>(R.id.durationDescription)
+
+        /**
+         * Slider
+         */
+        val slider = bottomSheetDialog.findViewById<Slider>(R.id.durationSlider)
+        durationDescription?.text = slider?.value?.toInt()?.let { updateTimerByValueSlider(it) }
+
+        slider?.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
+            override fun onStartTrackingTouch(slider: Slider) {
+                durationDescription?.text = updateTimerByValueSlider(slider.value.toInt())
+            }
+            override fun onStopTrackingTouch(slider: Slider) {
+                durationDescription?.text = updateTimerByValueSlider(slider.value.toInt())
+            }
+        })
+        slider?.addOnChangeListener { slider, value, fromUser ->
+            durationDescription?.text = updateTimerByValueSlider(slider.value.toInt())
+        }
+
 
         val saveButton = bottomSheetDialog.findViewById<MaterialButton>(R.id.saveButton)
         saveButton?.setOnClickListener {
 
             val program = Program()
-            program.duration = 1000
+            program.setData(
+                Program.ShoeLedPosition.TOP,
+                Program.ShoeLedPosition.TOP,
+                Program.ShoeLedAnimation.BLINK,
+                hoursBySliderValue(slider?.value),
+                minutesBySliderValue(slider?.value),
+                secondsBySliderValue(slider?.value))
 
             Realm.getDefaultInstance().use { realm ->
 
@@ -212,25 +241,98 @@ class CreateProgramActivity : AppCompatActivity() {
         }
     }
 
-    private fun setWhiteNavigationBar(dialog: Dialog) {
-        val window = dialog.getWindow()
-        if (window != null) {
-            val metrics = DisplayMetrics()
-            window!!.getWindowManager().getDefaultDisplay().getMetrics(metrics)
+    fun updateTimerByValueSlider(value: Int): String {
+        /*
+        var hoursStr = "00"
+        var minutesStr = "00"
+        var secondsStr = "00"
 
-            val dimDrawable = GradientDrawable()
+        val one_minute = 60
 
-            val navigationBarDrawable = GradientDrawable()
-            navigationBarDrawable.shape = GradientDrawable.RECTANGLE
-            navigationBarDrawable.setColor(Color.WHITE)// Set color here
-
-            val layers = arrayOf<Drawable>(dimDrawable, navigationBarDrawable)
-
-            val windowBackground = LayerDrawable(layers)
-            windowBackground.setLayerInsetTop(1, metrics.heightPixels)
-
-            window!!.setBackgroundDrawable(windowBackground)
+        when (value) {
+            in 0..9 -> {
+                secondsStr = "0$value"
+            }
+            in 10..59 -> {
+                secondsStr = "$value"
+            }
+            one_minute -> {
+                minutesStr = "0${1}"
+            }
+            in one_minute+1..one_minute+8 -> {
+                minutesStr = "0${(value - one_minute + 1)}"
+            }
+            in one_minute+9..one_minute+58 -> {
+                minutesStr = "${(value - one_minute + 1)}"
+            }
+            one_minute+59 -> {
+                hoursStr = "0${1}"
+            }
+            one_minute+60 -> {
+                hoursStr = "0${2}"
+            }
         }
+
+        return "$hoursStr:$minutesStr:$secondsStr"
+        */
+
+        val one_minute = 60
+
+        when (value) {
+            0 -> {
+                return "$value secondi"
+            }
+            1 -> {
+                return "$value secondo"
+            }
+            in 2..59 -> {
+                return "$value secondi"
+            }
+            one_minute -> {
+                return "1 minuto"
+            }
+            in one_minute+1..one_minute+58 -> {
+                return "${(value - one_minute + 1)} minuti"
+            }
+            one_minute+59 -> {
+                return "1 ora"
+            }
+            one_minute+60 -> {
+                return "2 ore"
+            }
+        }
+
+        return  ""
+    }
+
+    fun hoursBySliderValue(value: Float?): Long {
+        value?.let {
+            val value = it.toInt()
+            if (value >= 120)
+                return 1
+        }
+        return 0
+    }
+
+    fun minutesBySliderValue(value: Float?): Long {
+        value?.let {
+            val value = it.toInt()
+            if (value >= 60 && value < 120) {
+                var min = (value - 60) + 1
+                if (min == 60) min = 0
+                return min.toLong()
+            }
+        }
+        return 0
+    }
+
+    fun secondsBySliderValue(value: Float?): Long {
+        value?.let {
+            val value = it.toInt()
+            if (value > 0 && value < 60)
+                return value.toLong()
+        }
+        return 0
     }
 
 }

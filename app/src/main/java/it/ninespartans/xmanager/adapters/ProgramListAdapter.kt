@@ -46,9 +46,39 @@ class ProgramListAdapter(context: Context, programs: RealmResults<TrainingSessio
 
         val program = programs.get(position)
         rowProgram.nameProgram.text = program?.title
-        //rowDevice.descriptionProgram.text = program?.description
-        rowProgram.descriptionProgram.text = "This is the description of the program"
 
+        var totalSeconds = 0
+        program?.durationHours()?.let { totalSeconds += it * 60 * 60 }
+        program?.durationMinutes()?.let { totalSeconds += it * 60 }
+        program?.durationSeconds()?.let { totalSeconds += it }
+
+        var description = "Durata: "
+        if (((totalSeconds/(60 * 60)) % 60) == 1) {
+            description += "${((totalSeconds/(60 * 60)) % 60)} ora "
+        }
+        if (((totalSeconds/(60 * 60)) % 60) > 1) {
+            description += "${((totalSeconds/(60 * 60)) % 60)} ore "
+        }
+        if (((totalSeconds/60) % 60) == 1) {
+            description += "${((totalSeconds/60) % 60)} minuto "
+        }
+        if (((totalSeconds/60) % 60) > 1) {
+            description += "${((totalSeconds/60) % 60)} minuti "
+        }
+        if ((totalSeconds % 60) == 1) {
+            description += "${totalSeconds % 60} secondo"
+        }
+        if ((totalSeconds % 60) > 1) {
+            description += "${totalSeconds % 60} secondi"
+        }
+
+        var sessions = ""
+        program?.programList?.let {
+            sessions = "\nSessioni: ${it.size}"
+        }
+        description += sessions
+
+        rowProgram.descriptionProgram.text = description
 
         /**
          * Options of the player
@@ -61,8 +91,8 @@ class ProgramListAdapter(context: Context, programs: RealmResults<TrainingSessio
                 when (it.itemId) {
                     R.id.action_delete ->
                         onClickActionOnItem?.let {
-                            program?.let { program ->
-                                it(Action.DELETE_PROGRAM, program)
+                            program?.let {
+                                it(Action.DELETE_PROGRAM, it)
                             }
                         }
                 }

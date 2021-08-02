@@ -8,7 +8,6 @@ import android.widget.BaseAdapter
 import io.realm.RealmResults
 import it.ninespartans.xmanager.R
 import it.ninespartans.xmanager.model.TrainingSessionProgram
-import kotlinx.android.synthetic.main.row_program_list.view.*
 import kotlinx.android.synthetic.main.row_program_list.view.descriptionProgram
 import kotlinx.android.synthetic.main.row_program_list.view.nameProgram
 import kotlinx.android.synthetic.main.row_program_select_list.view.*
@@ -40,8 +39,7 @@ class ProgramSelectAdapter(context: Context, programs: RealmResults<TrainingSess
         val rowProgram = inflater.inflate(R.layout.row_program_select_list, viewGroup, false)
 
         val program = programs.get(position)
-
-        //val sel = if (program?.active == true) "SELECTED" else "NOT SELECT"
+        rowProgram.nameProgram.text = program?.title
 
         if (program?.active == true) {
             rowProgram.statusView.setBackgroundResource(R.color.primaryActionColor)
@@ -49,8 +47,39 @@ class ProgramSelectAdapter(context: Context, programs: RealmResults<TrainingSess
             rowProgram.statusView.setBackgroundResource(R.color.primaryUnactiveColor)
         }
 
-        rowProgram.nameProgram.text = program?.title //+ " " + sel
-        rowProgram.descriptionProgram.text = "This is the description of the program"
+        var totalSeconds = 0
+        program?.durationHours()?.let { totalSeconds += it * 60 * 60 }
+        program?.durationMinutes()?.let { totalSeconds += it * 60 }
+        program?.durationSeconds()?.let { totalSeconds += it }
+
+        var description = "Durata: "
+        if (((totalSeconds/(60 * 60)) % 60) == 1) {
+            description += "${((totalSeconds/(60 * 60)) % 60)} ora "
+        }
+        if (((totalSeconds/(60 * 60)) % 60) > 1) {
+            description += "${((totalSeconds/(60 * 60)) % 60)} ore "
+        }
+        if (((totalSeconds/60) % 60) == 1) {
+            description += "${((totalSeconds/60) % 60)} minuto "
+        }
+        if (((totalSeconds/60) % 60) > 1) {
+            description += "${((totalSeconds/60) % 60)} minuti "
+        }
+        if ((totalSeconds % 60) == 1) {
+            description += "${totalSeconds % 60} secondo"
+        }
+        if ((totalSeconds % 60) > 1) {
+            description += "${totalSeconds % 60} secondi"
+        }
+
+        var sessions = ""
+        program?.programList?.let {
+            sessions = "\nSessioni: ${it.size}"
+        }
+        description += sessions
+
+        rowProgram.descriptionProgram.text = description
+
         return rowProgram
     }
 }
