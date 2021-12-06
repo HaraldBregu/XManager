@@ -26,7 +26,6 @@
             android:baselineAligned="false"
             android:fontFamily="@font/montserrat_bold"
             android:text="@string/title_activity_create_profile_header_title"
-            android:textColor="@color/primaryDarkColor"
             android:textSize="24dp">
         </TextView>
 
@@ -35,8 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
-            android:text="@string/title_activity_create_profile_header_description"
-            android:textColor="@color/primaryDarkColor">
+            android:text="@string/title_activity_create_profile_header_description">
         </TextView>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -119,7 +117,6 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="@string/title_activity_create_profile_button_save"
-            android:backgroundTint="@color/primaryDarkColor"
             app:cornerRadius="5dp">
         </com.google.android.material.button.MaterialButton>
 

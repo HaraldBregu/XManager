@@ -21,7 +21,6 @@
             android:layout_height="wrap_content"
             android:text="@string/activity_permissions_title"
             android:textSize="28dp"
-            android:textColor="@color/primaryDarkColor"
             android:fontFamily="@font/montserrat_bold"
             android:layout_marginBottom="5dp">
         </TextView>
@@ -31,7 +30,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:text="@string/activity_permissions_description"
-            android:textColor="@color/primaryDarkColor"
             android:fontFamily="@font/montserrat">
         </TextView>
 
@@ -45,7 +43,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/activity_permissions_bluetooth_title"
                 android:textSize="20dp"
-                android:textColor="@color/primaryDarkColor"
                 android:fontFamily="@font/montserrat_bold"
                 android:layout_marginBottom="5dp">
             </TextView>
@@ -67,7 +64,6 @@
                     android:id="@+id/bleStatusImage"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:tint="@color/primarySuccessColor"
                     android:src="@drawable/ic_check_circle_green_24dp"/>
                 <TextView
                     android:id="@+id/bleStatusTextView"
@@ -76,7 +72,6 @@
                     android:layout_marginLeft="5dp"
                     android:text="@string/activity_permissions_bluetooth_status_active_text"
                     android:textSize="16dp"
-                    android:textColor="@color/primaryDarkColor"
                     android:fontFamily="@font/roboto_medium">
                 </TextView>
             </LinearLayout>
@@ -85,7 +80,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:text="@string/activity_permissions_bluetooth_active_button_title"
-                android:backgroundTint="@color/primaryDarkColor"
                 app:cornerRadius="5dp">
             </com.google.android.material.button.MaterialButton>
         </LinearLayout>
@@ -99,7 +93,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/activity_permissions_fine_location_title"
                 android:textSize="20dp"
-                android:textColor="@color/primaryDarkColor"
                 android:fontFamily="@font/montserrat_bold"
                 android:layout_marginBottom="5dp">
             </TextView>
@@ -125,7 +118,6 @@
                         android:id="@+id/fineLocationStatusImage"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:tint="@color/primarySuccessColor"
                         android:src="@drawable/ic_check_circle_green_24dp"/>
                     <TextView
                         android:id="@+id/fineLocationStatusTextView"
@@ -134,7 +126,6 @@
                         android:layout_marginLeft="5dp"
                         android:text="@string/activity_permissions_fine_location_status_in_use_text"
                         android:textSize="16dp"
-                        android:textColor="@color/primaryDarkColor"
                         android:fontFamily="@font/roboto_medium">
                     </TextView>
                 </LinearLayout>
@@ -151,14 +142,12 @@
                         android:text="@string/activity_permissions_fine_location_go_to_settings_text"
                         android:textSize="14dp"
                         android:layout_gravity="center_vertical"
-                        android:textColor="@color/primaryActiveColor"
                         android:fontFamily="@font/montserrat_bold">
                     </TextView>
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center_vertical"
-                        android:tint="@color/primaryActiveColor"
                         android:src="@drawable/ic_arrow_forward_24dp"/>
                 </LinearLayout>
 
@@ -168,7 +157,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:text="@string/activity_permissions_fine_location_active_button_title"
-                android:backgroundTint="@color/primaryDarkColor"
                 app:cornerRadius="5dp">
             </com.google.android.material.button.MaterialButton>
         </LinearLayout>
@@ -187,7 +175,6 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="chiudi"
-            android:backgroundTint="@color/primaryDarkColor"
             app:cornerRadius="5dp">
         </com.google.android.material.button.MaterialButton>
 

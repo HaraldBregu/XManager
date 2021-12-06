@@ -6,9 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="it.ninespartans.xmanager.MainActivity"
-    tools:showIn="@layout/activity_main"
-    android:background="@color/secondaryColor">
-
+    tools:showIn="@layout/activity_main">
 
     <ListView
         android:id="@+id/list_view"
@@ -25,12 +23,8 @@
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
         android:focusable="true"
-        app:backgroundTint="#00FFFFFF"
-        android:backgroundTint="@color/primaryDarkColor"
-        android:tint="@color/primaryTextColor"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        app:tint="@null"
         android:src="@drawable/ic_fab_add_white">
 
     </com.google.android.material.floatingactionbutton.FloatingActionButton>

@@ -11,7 +11,7 @@
     <string name="title_activity_create_profile_button_save">SALVA</string>
 
     <!--  Main Activity Header -->
-    <string name="title_activity_home">Xmanager</string>
+    <string name="title_activity_home">Dashboard</string>
     <string name="main_header_title">Pannello di controllo</string>
     <string name="main_header_description">Qui puoi creare e gestire tutti i tuoi giocatori, i programmi di training e i dispositivi associati. Puoi caricare programmi e iniziare le sessioni di allenamento.</string>
     <string name="main_header_user_no_title">Preparatore atletico</string>

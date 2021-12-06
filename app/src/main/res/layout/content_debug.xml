@@ -132,7 +132,6 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="Next"
-            android:backgroundTint="@color/primaryDarkColor"
             app:cornerRadius="5dp">
         </com.google.android.material.button.MaterialButton>
 
@@ -142,8 +141,6 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="Close"
-            android:textColor="@color/primaryDarkColor"
-            android:backgroundTint="@color/primaryTextColor"
             app:cornerRadius="5dp">
         </com.google.android.material.button.MaterialButton>
 

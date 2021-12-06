@@ -290,15 +290,15 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
         val deviceVersionEqual = leftVersion.equals(rightVersion)
 
         leftdevice?.let {
-            rowPlayer.leftChipDevice.setChipIconTintResource(R.color.primaryActiveColor)
+            //rowPlayer.leftChipDevice.setChipIconTintResource(R.color.primaryActiveColor)
         } ?: run {
-            rowPlayer.leftChipDevice.setChipIconTintResource(R.color.primaryDisabledColor)
+            //rowPlayer.leftChipDevice.setChipIconTintResource(R.color.primaryDisabledColor)
         }
 
         rightDevice?.let {
-            rowPlayer.rightChipDevice.setChipIconTintResource(R.color.primaryActiveColor)
+            //rowPlayer.rightChipDevice.setChipIconTintResource(R.color.primaryActiveColor)
         } ?: run {
-            rowPlayer.rightChipDevice.setChipIconTintResource(R.color.primaryDisabledColor)
+            //rowPlayer.rightChipDevice.setChipIconTintResource(R.color.primaryDisabledColor)
         }
 
         /**
@@ -312,9 +312,9 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
          */
         if (noDevices) {
             rowPlayer.deviceName.text = mContext.getString(R.string.row_player_device_empty_title)
-            rowPlayer.statusLayout.setBackgroundResource(R.color.primaryUnactiveColor)
+            //rowPlayer.statusLayout.setBackgroundResource(R.color.primaryUnactiveColor)
         } else if (missingOneDevice) {
-            rowPlayer.statusLayout.setBackgroundResource(R.color.primaryActiveColor)
+            //rowPlayer.statusLayout.setBackgroundResource(R.color.primaryActiveColor)
 
             leftdevice?.let {
                 rowPlayer.deviceName.text = mContext.getString(R.string.row_player_device_version_title) + " " + it.name + " " + it.firmwareVersion
@@ -325,7 +325,7 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
             }
 
         } else {
-            rowPlayer.statusLayout.setBackgroundResource(R.color.primaryActiveColor)
+            //rowPlayer.statusLayout.setBackgroundResource(R.color.primaryActiveColor)
 
             var deviceNames = ""
 

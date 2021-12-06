@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:cardCornerRadius="0dp">
+
     <LinearLayout
+        android:elevation="50dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/primaryColor"
         android:orientation="vertical"
         android:paddingHorizontal="15dp"
-        android:paddingTop="15dp"
+        android:paddingTop="17dp"
         android:paddingBottom="15dp">
 
         <LinearLayout
@@ -23,19 +24,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/main_header_title"
-                android:textColor="@color/primaryLargeTextColor90"
-                android:textSize="26sp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:fontFamily="@font/roboto"
                 android:text="@string/main_header_description"
-                android:textColor="@color/primaryTextColor85"
-                android:textSize="14sp" />
+                android:textSize="14dp" />
         </LinearLayout>
 
         <RelativeLayout
@@ -73,7 +64,6 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto"
                         android:text="Harald Bregu"
-                        android:textColor="@color/primaryTextColor90"
                         android:textSize="17sp" />
                     <TextView
                         android:id="@+id/userTitle"
@@ -82,7 +72,6 @@
                         android:layout_marginTop="0dp"
                         android:fontFamily="@font/roboto"
                         android:text="UEFA Pro 4"
-                        android:textColor="@color/primaryTextColor85"
                         android:textSize="12sp"
                         android:textStyle="normal"/>
                 </LinearLayout>
@@ -107,7 +96,6 @@
                     android:layout_alignParentLeft="true"
                     android:text="-"
                     android:textAllCaps="true"
-                    android:textColor="@color/primaryTextColor85"
                     android:textSize="14dp" />
                 <TextView
                     android:id="@+id/programDescription"
@@ -118,7 +106,6 @@
                     android:text="@string/main_header_program_running"
                     android:layout_alignParentLeft="true"
                     android:layout_below="@+id/programTitle"
-                    android:textColor="@color/primaryTextColor85"
                     android:textSize="13dp"
                     android:textStyle="normal"/>
                 <TextView
@@ -131,7 +118,6 @@
                     android:layout_marginTop="4dp"
                     android:layout_alignParentRight="true"
                     android:textAlignment="textEnd"
-                    android:textColor="@color/primaryTextColor85"
                     android:textSize="10sp"
                     android:textStyle="normal"/>
                 <TextView
@@ -144,7 +130,6 @@
                     android:layout_below="@+id/labelTimer"
                     android:layout_alignParentRight="true"
                     android:textAlignment="textEnd"
-                    android:textColor="@color/primaryTextColor85"
                     android:textSize="15sp"
                     android:textStyle="normal"/>
             </RelativeLayout>
@@ -160,8 +145,7 @@
                 android:minWidth="200dp"
                 android:minHeight="8dp"
                 android:progress="0"
-                android:progressDrawable="@drawable/horizontal_progress_drawable_red"
-                android:progressTint="@color/primaryActionColor"/>
+                android:progressDrawable="@drawable/horizontal_progress_drawable_red"/>
         </LinearLayout>
 
         <LinearLayout
@@ -173,26 +157,24 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/selectProgram"
-                    style="@style/Widget.MaterialComponents.Button.Icon"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:backgroundTint="@color/primaryDarkColor"
-                    android:text="@string/main_header_action_run_program"
-                    android:textSize="12dp">
+                    android:text="@string/main_header_action_run_program">
                 </com.google.android.material.button.MaterialButton>
+
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/stopButton"
                     style="@style/Widget.MaterialComponents.Button.Icon"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     app:icon="@drawable/ic_stop_white"
-                    app:iconTint="@color/primaryTextColor"
                     android:layout_marginRight="5dp"
                     android:layout_toLeftOf="@id/showProgramSectionMenu"
-                    android:textSize="12dp"
-                    android:backgroundTint="@color/primaryDarkColor">
+                    android:textSize="12dp">
                 </com.google.android.material.button.MaterialButton>
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/showProgramSectionMenu"
@@ -200,7 +182,6 @@
                     android:layout_alignParentRight="true"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:backgroundTint="@color/primaryDarkColor"
                     android:text=""
                     android:textSize="12dp"
                     app:icon="@drawable/ic_list_white">
@@ -210,4 +191,4 @@
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

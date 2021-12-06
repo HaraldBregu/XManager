@@ -96,35 +96,30 @@
                         android:layout_height="wrap_content"
                         android:text="Pos 0"
                         android:checked="true"
-                        android:buttonTint="@color/primaryDarkColor"
                         android:onClick="onRadioLedClicked"/>
                     <RadioButton
                         android:id="@+id/ledPosition1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Pos 1"
-                        android:buttonTint="@color/primaryDarkColor"
                         android:onClick="onRadioLedClicked"/>
                     <RadioButton
                         android:id="@+id/ledPosition2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Pos 2"
-                        android:buttonTint="@color/primaryDarkColor"
                         android:onClick="onRadioLedClicked"/>
                     <RadioButton
                         android:id="@+id/ledPosition3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Pos 3"
-                        android:buttonTint="@color/primaryDarkColor"
                         android:onClick="onRadioLedClicked"/>
                     <RadioButton
                         android:id="@+id/ledPosition4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Pos 4"
-                        android:buttonTint="@color/primaryDarkColor"
                         android:onClick="onRadioLedClicked"/>
                 </RadioGroup>
 
@@ -145,7 +140,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Static"
-                        android:buttonTint="@color/primaryDarkColor"
                         android:checked="true"
                         android:onClick="onRadioButtonClicked"/>
                     <RadioButton
@@ -153,14 +147,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Blink"
-                        android:buttonTint="@color/primaryDarkColor"
                         android:onClick="onRadioButtonClicked"/>
                     <RadioButton
                         android:id="@+id/radioFade"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Fade"
-                        android:buttonTint="@color/primaryDarkColor"
                         android:onClick="onRadioButtonClicked"/>
                 </RadioGroup>
 
@@ -282,7 +274,6 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="Next"
-            android:backgroundTint="@color/primaryDarkColor"
             app:cornerRadius="5dp">
         </com.google.android.material.button.MaterialButton>
 
@@ -292,8 +283,6 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="Close"
-            android:textColor="@color/primaryDarkColor"
-            android:backgroundTint="@color/primaryTextColor"
             app:cornerRadius="5dp">
         </com.google.android.material.button.MaterialButton>
     </LinearLayout>

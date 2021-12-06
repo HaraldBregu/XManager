@@ -13,10 +13,6 @@
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:text="@string/title_activity_create_program_row_add_session"
-        android:textColor="@color/primaryDarkColor"
-        android:backgroundTint="@color/whiteColor"
-        android:foregroundTint="@color/primaryTextColor"
-        android:drawableTint="@color/primaryDarkColor"
         android:layout_gravity="center_horizontal|center_vertical"
         android:drawableLeft="@drawable/ic_add_circle_black_24dp"
         style="@style/Widget.MaterialComponents.Button.TextButton"/>

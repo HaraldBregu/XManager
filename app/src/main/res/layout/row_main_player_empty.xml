@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="15dp"
@@ -12,40 +11,56 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:paddingVertical="20dp"
+            android:paddingHorizontal="16dp">
             <TextView
                 android:id="@+id/noPlayerCardTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/row_empty_player_title"
-                android:textColor="@color/primaryDarkColor"
-                android:textSize="26dp"
+                android:textSize="18dp"
+                android:textColor="?attr/colorOnPrimary"
                 android:layout_centerVertical="true"/>
             <TextView
                 android:id="@+id/noPlayerCardDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:fontFamily="@font/roboto_regular"
                 android:text="@string/row_empty_player_description"
-                android:textColor="@color/primaryDarkColor"
                 android:textSize="14dp"
                 android:layout_centerVertical="true"/>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/noPlayerCardCreateButton"
                 android:layout_width="wrap_content"
-                android:layout_height="55dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/row_empty_player_action_title"
+                android:layout_height="38dp"
+                android:layout_marginTop="14dp"
                 android:textSize="14dp"
-                android:backgroundTint="@color/primaryDarkColor">
-            </com.google.android.material.button.MaterialButton>
+                android:text="Crea"
+                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/outlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Outlined button"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Outlined button"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

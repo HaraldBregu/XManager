@@ -12,7 +12,9 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,7 +27,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/row_empty_program_title"
-                android:textColor="@color/primaryDarkColor"
                 android:textSize="26dp"
                 android:layout_centerVertical="true"/>
             <TextView
@@ -34,7 +35,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
                 android:text="@string/row_empty_program_description"
-                android:textColor="@color/primaryDarkColor"
                 android:textSize="14dp"
                 android:layout_centerVertical="true"/>
             <com.google.android.material.button.MaterialButton
@@ -43,11 +43,11 @@
                 android:layout_height="55dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/row_empty_program_action_title"
-                android:textSize="14dp"
-                android:backgroundTint="@color/primaryDarkColor">
+                android:textSize="14dp">
             </com.google.android.material.button.MaterialButton>
 
         </LinearLayout>
+
     </com.google.android.material.card.MaterialCardView>
 
 

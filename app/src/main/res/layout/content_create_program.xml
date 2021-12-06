@@ -26,7 +26,6 @@
             android:layout_height="wrap_content"
             android:text="Program title"
             android:textSize="24dp"
-            android:textColor="@color/primaryDarkColor"
             android:fontFamily="@font/montserrat_bold"
             android:layout_marginBottom="5dp">
         </TextView>
@@ -35,7 +34,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Please, get close to the devices and start testing by selecting the items above."
-            android:textColor="@color/primaryDarkColor"
             android:fontFamily="@font/montserrat">
         </TextView>
         <com.google.android.material.textfield.TextInputLayout
@@ -81,7 +79,6 @@
             android:layout_weight="3"
             android:layout_height="60dp"
             android:text="@string/title_activity_create_program_button_save"
-            android:backgroundTint="@color/primaryDarkColor"
             app:cornerRadius="5dp">
         </com.google.android.material.button.MaterialButton>
 
@@ -91,9 +88,7 @@
             android:layout_height="60dp"
             android:text="Session"
             android:layout_marginLeft="5dp"
-            android:backgroundTint="@color/primaryDarkColor"
             app:icon="@drawable/ic_add_plus"
-            app:iconTint="@color/primaryTextColor"
             app:cornerRadius="5dp">
         </com.google.android.material.button.MaterialButton>
     </LinearLayout>

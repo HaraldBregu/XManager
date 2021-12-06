@@ -22,7 +22,6 @@
             android:layout_height="wrap_content"
             android:text="Programs"
             android:textSize="24dp"
-            android:textColor="@color/primaryDarkColor"
             android:fontFamily="@font/montserrat_bold">
         </TextView>
         <TextView
@@ -30,7 +29,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Please, get close to the devices and start testing by selecting the items above."
-            android:textColor="@color/primaryDarkColor"
             android:fontFamily="@font/montserrat">
         </TextView>
     </LinearLayout>
@@ -58,7 +56,6 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="Create New program"
-            android:backgroundTint="@color/primaryDarkColor"
             app:cornerRadius="5dp">
         </com.google.android.material.button.MaterialButton>
 

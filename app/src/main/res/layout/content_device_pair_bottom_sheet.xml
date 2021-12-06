@@ -17,7 +17,6 @@
             android:layout_height="wrap_content"
             android:text="Connecing to device"
             android:textSize="24dp"
-            android:textColor="@color/primaryDarkColor"
             android:fontFamily="@font/montserrat_bold"
             android:layout_marginBottom="10dp">
         </TextView>
@@ -27,7 +26,6 @@
             android:layout_height="wrap_content"
             android:text="Connecing to device"
             android:textSize="14dp"
-            android:textColor="@color/primaryDarkColor"
             android:fontFamily="@font/montserrat"
             android:layout_marginBottom="20dp">
         </TextView>
@@ -68,7 +66,6 @@
         android:layout_height="wrap_content"
         android:text="Select the shoe which is blinking and than save."
         android:textSize="14dp"
-        android:textColor="@color/primaryDarkColor"
         android:fontFamily="@font/montserrat"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="10dp">
@@ -78,7 +75,6 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text="Save"
-        android:backgroundTint="@color/primaryDarkColor"
         app:cornerRadius="5dp">
     </com.google.android.material.button.MaterialButton>
 

@@ -192,14 +192,14 @@ class PermissionsManagerActivity : AppCompatActivity() {
             activateFineLocation.visibility = View.GONE
             fine_location_status_active_section.visibility = View.VISIBLE
             fineLocationStatusImage?.setImageResource(R.drawable.ic_check_circle_green_24dp)
-            fineLocationStatusImage?.setColorFilter(ContextCompat.getColor(this, R.color.primarySuccessColor))
+            //fineLocationStatusImage?.setColorFilter(ContextCompat.getColor(this, R.color.primarySuccessColor))
             fineLocationStatusTextView.text = getString(R.string.activity_permissions_fine_location_status_in_use_text)
         }
        else if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == false) {
             activateFineLocation.visibility = View.GONE
             fine_location_status_active_section.visibility = View.VISIBLE
             fineLocationStatusImage?.setImageResource(R.drawable.ic_warning_24dp)
-            fineLocationStatusImage?.setColorFilter(ContextCompat.getColor(this, R.color.primaryErrorColor))
+            //fineLocationStatusImage?.setColorFilter(ContextCompat.getColor(this, R.color.primaryErrorColor))
             fineLocationStatusTextView.text = getString(R.string.activity_permissions_fine_location_status_denied_text)
             settingsSection.visibility = View.VISIBLE
 

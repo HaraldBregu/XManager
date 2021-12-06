@@ -12,14 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:padding="10dp"
-        android:background="@color/rowGrayColor">
+        android:padding="10dp">
         <LinearLayout
             android:id="@+id/statusView"
             android:layout_width="20dp"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:background="@color/primaryActionColor">
+            android:orientation="horizontal">
         </LinearLayout>
         <RelativeLayout
             android:id="@+id/header_view"
@@ -39,7 +37,6 @@
                     android:fontFamily="@font/montserrat"
                     android:textSize="15dp"
                     android:textStyle="bold"
-                    android:textColor="@color/primaryDarkColor"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginBottom="5dp"/>
@@ -51,9 +48,7 @@
                     android:text="Durata: 2 Ore 3 Minuti 23 Secondi \nSessioni: 2"
                     android:fontFamily="@font/montserrat"
                     android:textSize="12dp"
-                    android:textColor="@color/primaryDarkColor"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+                    app:layout_constraintStart_toStartOf="parent"/>
             </LinearLayout>
         </RelativeLayout>
 

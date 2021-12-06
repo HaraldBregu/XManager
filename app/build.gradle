@@ -34,7 +34,11 @@ android {
         // but continue the build even when errors are found:
         abortOnError false
     }
-    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/layout/permissions'] } }
+    sourceSets {
+        main {
+            res.srcDirs = ['src/main/res', 'src/main/res/layout/permissions', 'src/main/res/elevation']
+        }
+    }
 }
 
 dependencies {

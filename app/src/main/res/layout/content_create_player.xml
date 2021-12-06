@@ -23,7 +23,6 @@
             android:layout_height="wrap_content"
             android:text="Player informations"
             android:textSize="24dp"
-            android:textColor="@color/primaryDarkColor"
             android:fontFamily="@font/montserrat_bold"
             android:layout_marginBottom="5dp">
         </TextView>
@@ -32,7 +31,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Please, get close to the devices and start testing by selecting the items above."
-            android:textColor="@color/primaryDarkColor"
             android:fontFamily="@font/montserrat">
         </TextView>
 
@@ -113,7 +111,6 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="Next"
-            android:backgroundTint="@color/primaryDarkColor"
             app:cornerRadius="5dp">
         </com.google.android.material.button.MaterialButton>
 

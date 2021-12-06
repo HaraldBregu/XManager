@@ -6,7 +6,6 @@
     android:text="Item 0"
     android:maxLines="1"
     android:textSize="14dp"
-    android:textColor="@color/primaryDarkColor"
     android:fontFamily="@font/montserrat">
 
 </TextView>

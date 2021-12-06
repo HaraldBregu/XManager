@@ -15,8 +15,7 @@
       android:paddingLeft="15dp"
       android:paddingRight="10dp"
       android:paddingTop="15dp"
-      android:paddingBottom="10dp"
-      android:background="@color/rowGrayColor">
+      android:paddingBottom="10dp">
 
     <RelativeLayout
         android:id="@+id/header_view"
@@ -34,7 +33,6 @@
             android:fontFamily="@font/montserrat"
             android:textSize="15dp"
             android:textStyle="bold"
-            android:textColor="@color/primaryDarkColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginBottom="5dp"/>
@@ -46,9 +44,7 @@
             android:text="mac address"
             android:fontFamily="@font/montserrat"
             android:textSize="12dp"
-            android:textColor="@color/primaryDarkColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+            app:layout_constraintStart_toStartOf="parent" />
       </LinearLayout>
       <com.google.android.material.button.MaterialButton
           android:id="@+id/showProgramOptions"
@@ -59,7 +55,6 @@
           android:layout_height="50dp"
           android:padding="14dp"
           app:icon="@drawable/ic_more_vert_white_24dp"
-          app:iconTint="@color/primaryColor"
           android:textAlignment="center"
           android:layout_alignParentRight="true">
       </com.google.android.material.button.MaterialButton>

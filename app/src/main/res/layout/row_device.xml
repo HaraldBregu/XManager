@@ -11,8 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
-        android:background="@color/rowGrayColor">
+        android:padding="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,15 +32,13 @@
                     android:textAllCaps="true"
                     android:fontFamily="@font/roboto_regular"
                     android:textSize="6dp"
-                    android:textStyle="normal"
-                    android:textColor="@color/primaryDarkColor"/>
+                    android:textStyle="normal"/>
                 <TextView
                     android:id="@+id/textViewDeviceName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
                     android:text="Dinamo Basic"
-                    android:textColor="@color/primaryColor"
                     android:textSize="16dp"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -54,9 +51,7 @@
                 android:textAllCaps="true"
                 android:fontFamily="@font/montserrat"
                 android:textSize="10dp"
-                android:textColor="@color/primaryDarkColor"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+                app:layout_constraintStart_toStartOf="parent" />
             <TextView
                 android:id="@+id/textViewPlayer"
                 android:layout_width="wrap_content"
@@ -65,9 +60,7 @@
                 android:text="Tomas Muller"
                 android:fontFamily="@font/montserrat"
                 android:textSize="12dp"
-                android:textColor="@color/primaryDarkColor"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+                app:layout_constraintStart_toStartOf="parent"/>
 
         </LinearLayout>
 

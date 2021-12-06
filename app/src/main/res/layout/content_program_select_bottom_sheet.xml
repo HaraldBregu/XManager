@@ -14,7 +14,6 @@
             android:layout_height="wrap_content"
             android:text="@string/select_program_sheet_title"
             android:textSize="24dp"
-            android:textColor="@color/primaryDarkColor"
             android:fontFamily="@font/montserrat_bold"
             android:layout_marginBottom="10dp">
         </TextView>
@@ -24,7 +23,6 @@
             android:layout_height="wrap_content"
             android:text="@string/select_program_sheet_description"
             android:textSize="14dp"
-            android:textColor="@color/primaryDarkColor"
             android:fontFamily="@font/montserrat"
             android:layout_marginBottom="20dp">
         </TextView>

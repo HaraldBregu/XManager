@@ -1,11 +1,11 @@
 [
     {
-        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/layout_mtrl_picker_dialog.xml.flat",
-        "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/100209c5e68b3af9ce092da6ff6f69fd/material-1.2.1/res/layout/mtrl_picker_dialog.xml"
-    },
-    {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/color_test_mtrl_calendar_day_selected.xml.flat",
         "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/100209c5e68b3af9ce092da6ff6f69fd/material-1.2.1/res/color/test_mtrl_calendar_day_selected.xml"
+    },
+    {
+        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/layout_mtrl_picker_dialog.xml.flat",
+        "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/100209c5e68b3af9ce092da6ff6f69fd/material-1.2.1/res/layout/mtrl_picker_dialog.xml"
     },
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/layout_mtrl_calendar_days_of_week.xml.flat",

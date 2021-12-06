@@ -6,6 +6,8 @@ import android.app.AlertDialog
 import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothProfile
 import android.content.Intent
+import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.*
 import android.util.Log
 import android.view.*
@@ -14,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import io.realm.Realm
 import it.ninespartans.xmanager.bluetooth.BLEManager
 import android.widget.*
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.realm.RealmResults
 import io.realm.kotlin.where
@@ -22,6 +25,7 @@ import it.ninespartans.xmanager.adapters.ProgramSelectAdapter
 import it.ninespartans.xmanager.common.Common
 import it.ninespartans.xmanager.model.*
 import kotlinx.android.synthetic.main.content_main.*
+import org.jetbrains.anko.configuration
 import java.util.*
 
 
@@ -170,6 +174,26 @@ class MainActivity : AppCompatActivity() {
             popupMenu.show()
         }
 
+        /*
+        val appSettingPrefs: SharedPreferences = getSharedPreferences("AppSettingPrefs", 0)
+        val isNightModeOn: Boolean = appSettingPrefs.getBoolean("NightMode", false)
+
+        if (isNightModeOn) {
+            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+
+        val currentNightMode = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        when (currentNightMode) {
+            Configuration.UI_MODE_NIGHT_NO -> {
+
+            } // Night mode is not active, we're using the light theme
+            Configuration.UI_MODE_NIGHT_YES -> {
+
+            } // Night mode is active, we're using dark theme
+        }
+*/
     }
 
     override fun onStart() {
@@ -354,14 +378,14 @@ class MainActivity : AppCompatActivity() {
         val rightShoeImage = bottomSheetDialog.findViewById<ImageView>(R.id.rightShoeImage)
         playerNameTextView?.text = player?.fullname
         descriptionProgress?.text = getString(R.string.upload_program_sheet_state_initial_title)
-        leftShoeImage?.setColorFilter(R.color.primaryDisabledColor)
-        rightShoeImage?.setColorFilter(R.color.primaryDisabledColor)
+        //leftShoeImage?.setColorFilter(R.color.primaryDisabledColor)
+        //rightShoeImage?.setColorFilter(R.color.primaryDisabledColor)
 
         animator.removeAllUpdateListeners()
         animator.removeAllListeners()
         if (animator.isStarted) { animator.end() }
         animator.cancel()
-        animator.setIntValues(getColor(R.color.primaryDisabledColor), getColor(R.color.primaryActiveColor))
+        //animator.setIntValues(getColor(R.color.primaryDisabledColor), getColor(R.color.primaryActiveColor))
         animator.setEvaluator(ArgbEvaluator())
         animator.addUpdateListener {
             val animatedValue = animator.animatedValue as Int

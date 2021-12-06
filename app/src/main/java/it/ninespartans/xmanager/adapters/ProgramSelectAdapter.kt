@@ -42,9 +42,9 @@ class ProgramSelectAdapter(context: Context, programs: RealmResults<TrainingSess
         rowProgram.nameProgram.text = program?.title
 
         if (program?.active == true) {
-            rowProgram.statusView.setBackgroundResource(R.color.primaryActionColor)
+            //rowProgram.statusView.setBackgroundResource(R.color.primaryActionColor)
         } else {
-            rowProgram.statusView.setBackgroundResource(R.color.primaryUnactiveColor)
+            //rowProgram.statusView.setBackgroundResource(R.color.primaryUnactiveColor)
         }
 
         var totalSeconds = 0

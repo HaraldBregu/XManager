@@ -12,7 +12,6 @@
         android:fontFamily="@font/roboto_medium"
         android:text="@string/row_player_header_title"
         android:textAllCaps="true"
-        android:textColor="@color/primaryLightColor"
         android:textSize="14dp"
         android:layout_centerVertical="true"/>
     <TextView
@@ -22,7 +21,6 @@
         android:fontFamily="@font/roboto_medium"
         android:text="23"
         android:textAllCaps="true"
-        android:textColor="@color/primaryLightColor"
         android:textSize="14dp"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"/>
