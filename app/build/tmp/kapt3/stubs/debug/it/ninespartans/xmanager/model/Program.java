@@ -100,11 +100,11 @@ public class Program extends io.realm.RealmObject {
     
     @kotlin.Metadata(mv = {1, 1, 15}, bv = {1, 0, 3}, k = 1, d1 = {"\u0000\f\n\u0002\u0018\u0002\n\u0002\u0010\u0010\n\u0002\b\u0007\b\u0086\u0001\u0018\u00002\b\u0012\u0004\u0012\u00020\u00000\u0001B\u0007\b\u0002\u00a2\u0006\u0002\u0010\u0002j\u0002\b\u0003j\u0002\b\u0004j\u0002\b\u0005j\u0002\b\u0006j\u0002\b\u0007\u00a8\u0006\b"}, d2 = {"Lit/ninespartans/xmanager/model/Program$ShoeLedPosition;", "", "(Ljava/lang/String;I)V", "TOP", "TOPEXT", "BOTTOMEXT", "TOPINT", "BOTTOMINT", "app_debug"})
     public static enum ShoeLedPosition {
-        /*public static final*/ TOP /* = new TOP() */,
-        /*public static final*/ TOPEXT /* = new TOPEXT() */,
-        /*public static final*/ BOTTOMEXT /* = new BOTTOMEXT() */,
-        /*public static final*/ TOPINT /* = new TOPINT() */,
-        /*public static final*/ BOTTOMINT /* = new BOTTOMINT() */;
+        /*public static final*/ TOP /* = new TOP() */ /*enum*/ ,
+        /*public static final*/ TOPEXT /* = new TOPEXT() */ /*enum*/ ,
+        /*public static final*/ BOTTOMEXT /* = new BOTTOMEXT() */ /*enum*/ ,
+        /*public static final*/ TOPINT /* = new TOPINT() */ /*enum*/ ,
+        /*public static final*/ BOTTOMINT /* = new BOTTOMINT() */ /*enum*/ ;
         
         ShoeLedPosition() {
         }
@@ -112,9 +112,9 @@ public class Program extends io.realm.RealmObject {
     
     @kotlin.Metadata(mv = {1, 1, 15}, bv = {1, 0, 3}, k = 1, d1 = {"\u0000\f\n\u0002\u0018\u0002\n\u0002\u0010\u0010\n\u0002\b\u0005\b\u0086\u0001\u0018\u00002\b\u0012\u0004\u0012\u00020\u00000\u0001B\u0007\b\u0002\u00a2\u0006\u0002\u0010\u0002j\u0002\b\u0003j\u0002\b\u0004j\u0002\b\u0005\u00a8\u0006\u0006"}, d2 = {"Lit/ninespartans/xmanager/model/Program$ShoeLedAnimation;", "", "(Ljava/lang/String;I)V", "STATIC", "BLINK", "FADE", "app_debug"})
     public static enum ShoeLedAnimation {
-        /*public static final*/ STATIC /* = new STATIC() */,
-        /*public static final*/ BLINK /* = new BLINK() */,
-        /*public static final*/ FADE /* = new FADE() */;
+        /*public static final*/ STATIC /* = new STATIC() */ /*enum*/ ,
+        /*public static final*/ BLINK /* = new BLINK() */ /*enum*/ ,
+        /*public static final*/ FADE /* = new FADE() */ /*enum*/ ;
         
         ShoeLedAnimation() {
         }

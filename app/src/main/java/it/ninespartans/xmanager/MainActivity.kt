@@ -378,14 +378,14 @@ class MainActivity : AppCompatActivity() {
         val rightShoeImage = bottomSheetDialog.findViewById<ImageView>(R.id.rightShoeImage)
         playerNameTextView?.text = player?.fullname
         descriptionProgress?.text = getString(R.string.upload_program_sheet_state_initial_title)
-        //leftShoeImage?.setColorFilter(R.color.primaryDisabledColor)
-        //rightShoeImage?.setColorFilter(R.color.primaryDisabledColor)
+        leftShoeImage?.setColorFilter(R.color.colorPrimaryLight)
+        rightShoeImage?.setColorFilter(R.color.colorPrimaryLight)
 
         animator.removeAllUpdateListeners()
         animator.removeAllListeners()
         if (animator.isStarted) { animator.end() }
         animator.cancel()
-        //animator.setIntValues(getColor(R.color.primaryDisabledColor), getColor(R.color.primaryActiveColor))
+        animator.setIntValues(getColor(R.color.colorPrimaryLight), getColor(R.color.colorPrimaryVariant))
         animator.setEvaluator(ArgbEvaluator())
         animator.addUpdateListener {
             val animatedValue = animator.animatedValue as Int

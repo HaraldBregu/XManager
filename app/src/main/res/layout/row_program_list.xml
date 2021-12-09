@@ -12,10 +12,11 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:orientation="horizontal"
-      android:paddingLeft="15dp"
-      android:paddingRight="10dp"
+      android:paddingStart="15dp"
+      android:paddingEnd="10dp"
       android:paddingTop="15dp"
-      android:paddingBottom="10dp">
+      android:paddingBottom="10dp"
+      android:background="@color/colorSurface">
 
     <RelativeLayout
         android:id="@+id/header_view"
@@ -27,37 +28,33 @@
           android:orientation="vertical">
         <TextView
             android:id="@+id/nameProgram"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Program one"
-            android:fontFamily="@font/montserrat"
-            android:textSize="15dp"
-            android:textStyle="bold"
+            android:text="@string/program_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginBottom="5dp"/>
-
         <TextView
             android:id="@+id/descriptionProgram"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="mac address"
-            android:fontFamily="@font/montserrat"
-            android:textSize="12dp"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:text="@string/program_description"
+            app:layout_constraintStart_toStartOf="parent"/>
       </LinearLayout>
+
       <com.google.android.material.button.MaterialButton
           android:id="@+id/showProgramOptions"
           style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-          android:focusable="false"
-          android:focusableInTouchMode="false"
           android:layout_width="50dp"
           android:layout_height="50dp"
+          android:layout_alignParentEnd="true"
+          android:focusable="false"
+          android:focusableInTouchMode="false"
           android:padding="14dp"
-          app:icon="@drawable/ic_more_vert_white_24dp"
           android:textAlignment="center"
-          android:layout_alignParentRight="true">
-      </com.google.android.material.button.MaterialButton>
+          app:icon="@drawable/ic_more_vert_white_24dp"/>
     </RelativeLayout>
 
   </LinearLayout>

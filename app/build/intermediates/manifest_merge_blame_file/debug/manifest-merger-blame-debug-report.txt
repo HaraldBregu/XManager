@@ -58,7 +58,7 @@
 31        android:allowBackup="true"
 31-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:30:9-35
 32        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-32-->[androidx.core:core:1.2.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/c7241923916bd5d9b035cf3d2f208da3/core-1.2.0/AndroidManifest.xml:24:18-86
+32-->[androidx.core:core:1.5.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/a0ef44bc1aff644be6e07240d6142e07/core-1.5.0/AndroidManifest.xml:24:18-86
 33        android:debuggable="true"
 34        android:icon="@mipmap/ic_launcher"
 34-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:31:9-43

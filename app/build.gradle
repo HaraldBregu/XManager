@@ -58,7 +58,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
     implementation "org.jetbrains.anko:anko-commons:0.10.4"
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'com.google.android.material:material:1.4.0'
 
     implementation 'io.realm:android-adapters:2.1.1'
 

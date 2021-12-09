@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="15dp"
+    android:paddingTop="10dp"
     android:paddingBottom="0dp"
     android:paddingLeft="10dp"
     android:paddingRight="10dp">
@@ -13,9 +13,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardElevation="4dp"
         app:cardUseCompatPadding="true">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,27 +21,22 @@
             android:padding="20dp">
             <TextView
                 android:id="@+id/noProgramCardTitle"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/row_empty_program_title"
-                android:textSize="26dp"
-                android:layout_centerVertical="true"/>
+                android:text="@string/row_empty_program_title"/>
             <TextView
                 android:id="@+id/noProgramCardDescription"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:text="@string/row_empty_program_description"
-                android:textSize="14dp"
-                android:layout_centerVertical="true"/>
+                android:text="@string/row_empty_program_description"/>
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/noProgramCardCreateButton"
                 android:layout_width="wrap_content"
-                android:layout_height="55dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/row_empty_program_action_title"
-                android:textSize="14dp">
+                android:layout_height="45dp"
+                android:layout_marginTop="14dp"
+                android:text="@string/row_empty_program_action_title">
             </com.google.android.material.button.MaterialButton>
 
         </LinearLayout>

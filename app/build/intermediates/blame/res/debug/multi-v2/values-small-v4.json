@@ -4,7 +4,7 @@
             "outputFile": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-small-v4/values-small-v4.xml",
             "map": [
                 {
-                    "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/100209c5e68b3af9ce092da6ff6f69fd/material-1.2.1/res/values-small-v4/values-small-v4.xml",
+                    "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9106a80cd21e4d2549bcadac3deff5f3/material-1.4.0/res/values-small-v4/values-small-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

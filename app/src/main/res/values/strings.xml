@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">Xmanager</string>
 
+    <!--  Utils/General tests  -->
+    <string name="firstname_lastname">Firstname Lastname</string>
+    <string name="device_name">Device name</string>
+    <string name="program_name">Program name</string>
+    <string name="program_description">Program description</string>
+    <string name="device_mac_address">device mac address</string>
+    <string name="upload_program_subtitle">Caricamento programma...</string>
+
     <!--  Profile Activity  -->
     <string name="title_activity_create_profile">Profilo</string>
     <string name="title_activity_create_profile_header_title">Profilo coach</string>
@@ -15,7 +23,7 @@
     <string name="main_header_title">Pannello di controllo</string>
     <string name="main_header_description">Qui puoi creare e gestire tutti i tuoi giocatori, i programmi di training e i dispositivi associati. Puoi caricare programmi e iniziare le sessioni di allenamento.</string>
     <string name="main_header_user_no_title">Preparatore atletico</string>
-    <string name="main_header_action_run_program">AVVIA PROGRAMMA</string>
+    <string name="main_header_action_run_program">START</string>
     <string name="main_header_program_running">In corso</string>
     <string name="main_header_program_finished">Terminato</string>
     <string name="main_header_program_complation">COMPLETAMENTO</string>
@@ -34,25 +42,26 @@
     <string name="upload_program_sheet_state_error_connection_title">Errore connessione dispositivo</string>
     <string name="upload_program_sheet_state_writing_data_title">Caricamento programma...</string>
 
-
     <!--  Cell main no player -->
     <string name="row_empty_player_title">Registra un giocatore</string>
     <string name="row_empty_player_description">Registra un nuovo giocatore inserendo tutti i dati importanti. Inserisci un nome, ruolo e i dispositivi Bluetooth.</string>
-    <string name="row_empty_player_action_title">Crea giocatore</string>
+    <string name="row_empty_player_action_title">Registra</string>
+
     <!--  Cell main no program -->
-    <string name="row_empty_program_title">Nuovo programma</string>
+    <string name="row_empty_program_title">Crea un programma</string>
     <string name="row_empty_program_description">Non hai ancora nessun proramma. Crea un programma inserendo tutte le sessioni personalizzati.</string>
-    <string name="row_empty_program_action_title">Crea programma</string>
+    <string name="row_empty_program_action_title">Crea</string>
 
     <!--  Cell main player header -->
     <string name="row_player_header_title">Giocatori</string>
 
     <!--  Cell main player -->
-    <string name="row_player_device_empty_title">Connetti almeno un dispositivo</string>
+    <string name="row_player_no_device_subtitle">Nessun dispositivo connesso</string>
     <string name="row_player_device_version_title">Versione:</string>
     <string name="row_player_device_left_title">Sinistra</string>
     <string name="row_player_device_right_title">Destra</string>
-
+    <string name="row_player_devices_programs_title">Devices and programs</string>
+    <string name="row_player_add_device_button_title">Aggiungi dispositivo</string>
 
     <!--  Program Create Activity  -->
     <string name="title_activity_create_program_nav_title">Programma</string>
@@ -61,14 +70,36 @@
     <string name="title_activity_create_program_header_description">Scegli un nome per il nuovo programma di allenamento, aggiungi delle sessioni, la durata e inizia ad usarla.</string>
     <string name="title_activity_update_program_header_description">Cambia il nome del programma di allenamento selezionato, modifica le sessioni, cambia la durata e inizia ad usarla.</string>
     <string name="title_activity_create_program_field_name">Titolo del programma</string>
-    <string name="title_activity_create_program_row_add_session">Inserisci sessione</string>
-    <string name="title_activity_create_program_button_save">Salva programma</string>
+    <string name="activity_create_program_row_add_session_title">Inserisci sessione</string>
     <string name="title_activity_create_program_button_create">Crea programma</string>
+    <string name="activity_create_program_button_save">salva programma</string>
+    <string name="activity_create_program_button_new_session">sessione</string>
+    <string name="activity_create_program_row_number">3</string>
+    <string name="activity_create_program_row_title">Sessione</string>
+    <string name="activity_create_program_row_description">Tempo</string>
+
+    <!--  Create Session Program Bottom Sheet -->
+    <string name="sheet_create_session_title">Sessione di allenamento</string>
+    <string name="sheet_create_session_description">Seleziona le parti della scarpa che vuoi utilizzare per questa sessione, l\'animazione e la durata.</string>
+    <string name="sheet_create_session_duration_title">Durata sessione</string>
+    <string name="sheet_create_session_duration_description">0 secondi</string>
+    <string name="sheet_create_session_type_0">Static</string>
+    <string name="sheet_create_session_type_1">Blink</string>
+    <string name="sheet_create_session_type_2">Fade (comming soon)</string>
+    <string name="sheet_create_session_button_save">Salva</string>
+
+
 
     <!--  Program List Activity  -->
     <string name="title_activity_program_list">Programmi</string>
     <string name="title_activity_program_list_header_title">Your training programs</string>
     <string name="title_activity_program_list_header_description">This is you program list. Select, update or delete them.</string>
+
+    <!--  Program Search List Activity  -->
+    <string name="activity_device_search_header_subtitle">player name</string>
+    <string name="activity_device_search_header_description">Please, get close to the devices and start testing by selecting the items above.</string>
+    <string name="activity_device_search_row_subtitle">device name</string>
+
 
 
     <!--  Permissions Activity  -->

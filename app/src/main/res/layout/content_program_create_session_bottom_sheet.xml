@@ -4,102 +4,166 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="20dp">
-
+    android:padding="20dp"
+    android:background="@color/colorBackground">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
             android:id="@+id/title"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sessione di allenamento"
-            android:textSize="24dp"
-            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/sheet_create_session_title"
             android:layout_marginBottom="10dp">
         </TextView>
         <TextView
             android:id="@+id/description"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Seleziona le parti della scarpa che vuoi utilizzare per questa sessione, l'animazione e la durata. Salva la sessione e crea un altra se preferisci."
-            android:textSize="14dp"
-            android:fontFamily="@font/montserrat"
+            android:text="@string/sheet_create_session_description"
             android:layout_marginBottom="20dp">
         </TextView>
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center">
-
+        android:layout_marginBottom="10dp">
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/durationTitle"
+                android:id="@+id/ledTypeTitle"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Durata"
-                android:textSize="20dp"
-                android:fontFamily="@font/roboto_regular">
+                android:text="Tipo indicatore">
             </TextView>
             <TextView
-                android:id="@+id/durationDescription"
+                android:id="@+id/ledTypeDescription"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3 secondi"
-                android:textSize="18dp"
-                android:fontFamily="@font/roboto_regular">
+                android:text="Lampeggiante">
             </TextView>
             <RadioGroup
                 android:id="@+id/radioGroup"
                 android:checkedButton="@+id/radio_button_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="10dp">
                 <RadioButton
                     android:id="@+id/radio_button_1"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Luce Statica"
-                    android:fontFamily="@font/roboto"/>
+                    android:text="@string/sheet_create_session_type_0"/>
                 <RadioButton
                     android:id="@+id/radio_button_2"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lampeggiante"
-                    android:fontFamily="@font/roboto"/>
+                    android:text="@string/sheet_create_session_type_1"/>
                 <RadioButton
                     android:id="@+id/radio_button_3"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Dissolvenza (funzionalità in arrivo)"
-                    android:enabled="false"
-                    android:fontFamily="@font/roboto"/>
+                    android:text="@string/sheet_create_session_type_2"
+                    android:enabled="false"/>
             </RadioGroup>
         </LinearLayout>
-
         <ImageView
             android:id="@+id/leftShoeImage"
             android:layout_width="0dp"
             android:layout_weight="3"
-            android:layout_height="300dp"
+            android:layout_height="270dp"
             android:src="@drawable/shoe_pair">
         </ImageView>
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <TextView
+            android:id="@+id/lightPositionTitle"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Posizione indicatore led">
+        </TextView>
+        <TextView
+            android:id="@+id/lightPositionDescription"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Esterno">
+        </TextView>
+        <RadioGroup
+            android:checkedButton="@+id/radio_position_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/radio_position_0"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="ext"/>
+            <RadioButton
+                android:id="@+id/radio_position_1"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="t-ext"/>
+            <RadioButton
+                android:id="@+id/radio_position_2"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="top"/>
+            <RadioButton
+                android:id="@+id/radio_position_3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="t-int"/>
+            <RadioButton
+                android:id="@+id/radio_position_4"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="int"/>
+        </RadioGroup>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp">
+        <TextView
+            android:id="@+id/durationTitle"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sheet_create_session_duration_title">
+        </TextView>
+        <TextView
+            android:id="@+id/durationDescription"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sheet_create_session_duration_description">
+        </TextView>
         <com.google.android.material.slider.Slider
             android:id="@+id/durationSlider"
             android:layout_width="match_parent"
@@ -111,14 +175,11 @@
             app:labelBehavior="gone">
         </com.google.android.material.slider.Slider>
     </LinearLayout>
-
     <com.google.android.material.button.MaterialButton
+        style="@style/Widget.MaterialComponents.Button"
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="Salva"
-        app:cornerRadius="5dp">
+        android:text="@string/sheet_create_session_button_save">
     </com.google.android.material.button.MaterialButton>
-
-
 </LinearLayout>

@@ -4,24 +4,22 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="20dp"
-    android:paddingVertical="10dp">
+    android:paddingHorizontal="18dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="6dp">
     <TextView
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/row_player_header_title"
-        android:textAllCaps="true"
-        android:textSize="14dp"
-        android:layout_centerVertical="true"/>
+        android:textAllCaps="true"/>
     <TextView
         android:id="@+id/textViewPlayersCount"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
-        android:text="23"
         android:textAllCaps="true"
-        android:textSize="14dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentEnd="true"/>
 </RelativeLayout>

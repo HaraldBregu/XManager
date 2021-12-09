@@ -3,19 +3,19 @@
 
     <color name="colorPrimary">#212121</color>
     <color name="colorPrimaryVariant">#000000</color>
-    <color name="colorOnPrimary">#FFFFFF</color>
     <color name="colorPrimaryLight">#484848</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
 
-    <color name="colorSecondary">#2962FF</color>
-    <color name="colorSecondaryVariant">#0039CB</color>
-    <color name="colorOnSecondary">#FFFFFF</color>
-    <color name="colorSecondaryLight">#6ec6ff</color>
+    <color name="colorSecondary">#1976d2</color>
+    <color name="colorSecondaryVariant">#004ba0</color>
+    <color name="colorSecondaryLight">#63a4ff</color>
+    <color name="colorOnSecondary">#ffffff</color>
 
-    <color name="colorBackground">#FAFAFA</color>
+    <color name="colorBackground">#E1E1E1</color>
     <color name="colorOnBackground">#212121</color>
 
-    <color name="colorSurface">#FFFFFF</color>
-    <color name="colorOnSurface">#212121</color>
+    <color name="colorSurface">#F5F5F5</color>
+    <color name="colorOnSurface">#000000</color>
 
     <color name="colorError">#F44336</color>
     <color name="colorOnError">#FFFFFF</color>

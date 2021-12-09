@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="it.ninespartans.xmanager.CreateProgramActivity"
-    tools:showIn="@layout/activity_create_program">
+    tools:showIn="@layout/activity_create_program"
+    android:background="@color/colorBackground">
 
     <LinearLayout
         android:id="@+id/top_section"
@@ -22,18 +22,18 @@
         android:paddingBottom="10dp">
         <TextView
             android:id="@+id/header_title"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Program title"
-            android:textSize="24dp"
-            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/title_activity_create_program_header_title"
             android:layout_marginBottom="5dp">
         </TextView>
         <TextView
             android:id="@+id/header_description"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Please, get close to the devices and start testing by selecting the items above."
+            android:text="@string/title_activity_create_program_header_description"
             android:fontFamily="@font/montserrat">
         </TextView>
         <com.google.android.material.textfield.TextInputLayout
@@ -51,7 +51,6 @@
                 android:maxLines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
-
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
@@ -64,7 +63,6 @@
         android:scrollbars="none"
         android:layout_marginBottom="0dp">
     </ListView>
-
     <LinearLayout
         android:id="@+id/bottom_section"
         android:layout_width="match_parent"
@@ -72,24 +70,20 @@
         android:layout_alignParentBottom="true"
         android:padding="20dp"
         android:orientation="horizontal">
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/saveProgram"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="60dp"
-            android:text="@string/title_activity_create_program_button_save"
-            app:cornerRadius="5dp">
+            android:text="@string/activity_create_program_button_save">
         </com.google.android.material.button.MaterialButton>
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/createSession"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:text="Session"
-            android:layout_marginLeft="5dp"
-            app:icon="@drawable/ic_add_plus"
-            app:cornerRadius="5dp">
+            android:text="@string/activity_create_program_button_new_session"
+            android:layout_marginStart="5dp"
+            app:icon="@drawable/ic_add_plus">
         </com.google.android.material.button.MaterialButton>
     </LinearLayout>
 

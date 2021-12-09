@@ -1,5 +1,6 @@
 package it.ninespartans.xmanager.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.opengl.Visibility
 import android.os.CountDownTimer
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.LinearLayout
 import android.widget.PopupMenu
 import io.realm.Realm
 import io.realm.RealmMap
@@ -15,10 +17,12 @@ import io.realm.kotlin.where
 import it.ninespartans.xmanager.R
 import it.ninespartans.xmanager.common.Version
 import it.ninespartans.xmanager.model.Player
+import it.ninespartans.xmanager.model.PlayerDeviceData
 import it.ninespartans.xmanager.model.TrainingSessionProgram
 import it.ninespartans.xmanager.model.User
 import kotlinx.android.synthetic.main.row_main_header.view.*
 import kotlinx.android.synthetic.main.row_main_player.view.*
+import kotlinx.android.synthetic.main.row_main_player_device_item.view.*
 import kotlinx.android.synthetic.main.row_main_player_empty.view.*
 import kotlinx.android.synthetic.main.row_main_player_header.view.*
 import kotlinx.android.synthetic.main.row_main_program_empty.view.*
@@ -100,7 +104,8 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
 
         /**
          * Header Row
-         * This row is for the manager
+         * This Row is for the manager
+         * It can be used to show data and information about the training
          */
         val rowHeader = inflater.inflate(R.layout.row_main_header, viewGroup, false)
         if (isHeader) {
@@ -131,8 +136,7 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
                 .findFirst()
 
             activeSessionProgram?.let {
-                rowHeader.programTitle.text = it.title
-                rowHeader.programDescription.text = mContext.getString(R.string.main_header_program_running)
+                rowHeader.programTitle.text = it.title //mContext.getString(R.string.main_header_program_running)
 
                 rowHeader.current_program_section.visibility = View.VISIBLE
                 rowHeader.programProgressBar.progress = 40
@@ -152,7 +156,6 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
                 var duration = endDate.time - startDate.time
                 rowHeader.programProgressBar.max = duration.toInt()
 
-
                 fixedRateTimer("timer", true, 0L, 10) {
                     val progress = Date().time - startDate.time
 
@@ -166,8 +169,7 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
 
                         val millisUntilFinished = duration - progress
                         if (millisUntilFinished <= 0) {
-                            rowHeader.countDownTimerLabel.text = "00:00:00:00"
-                            rowHeader.programDescription.text = mContext.getString(R.string.main_header_program_finished)
+                            rowHeader.countDownTimerLabel.text = "00:00:00"
                             return@runOnUiThread
                         }
 
@@ -187,7 +189,8 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
                         var millisecStr = millisec.toString()
                         if (millisecStr.length < 2) millisecStr = "0$millisec"
 
-                        rowHeader.countDownTimerLabel.text = "$hoursStr:$minutesStr:$secondsStr:$millisecStr"
+                        rowHeader.countDownTimerLabel.text = "$hoursStr:$minutesStr:$secondsStr"
+                        //rowHeader.countDownTimerLabel.text = "$hoursStr:$minutesStr:$secondsStr:$millisecStr"
                     }
                 }
             }
@@ -223,17 +226,12 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
                 */
             }
 
-            rowHeader.stopButton.setOnClickListener {
-                onClickAction?.let {
-                    it(Action.STOP_PROGRAM)
-                }
-            }
-
             return rowHeader
         }
 
         /**
          * Row for player empty
+         * This Row is visible when there are not player registered
          */
         val rowPlayerEmpty = inflater.inflate(R.layout.row_main_player_empty, viewGroup, false)
         if (isRowPlayerEmpty) {
@@ -247,6 +245,7 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
 
         /**
          * Row for program empty
+         * This row is visible when there are no programs created
          */
         val rowProgramEmpty = inflater.inflate(R.layout.row_main_program_empty, viewGroup, false)
         if (isRowProgramEmpty) {
@@ -259,7 +258,9 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
         }
 
         /**
-         * Header Player
+         * Row Header Player
+         * This Row is visible when there are players
+         * Yuo can show info about the number of players or other info
          */
         val rowPlayerHeader = inflater.inflate(R.layout.row_main_player_header, viewGroup, false)
         if (isRowHeaderPlayer) {
@@ -269,63 +270,124 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
 
         /**
          * Player Row
-         * This row is for single player
+         * This Row is for single player
+         * You can show infor about the player,
+         * the device of the player and programs running
          */
         val rowPlayer = inflater.inflate(R.layout.row_main_player, viewGroup, false)
         val player = players.get(rowPlayerPosition)
 
         val leftdevice = player?.leftDevice
         val rightDevice = player?.rightDevice
-
         val noDevices = leftdevice == null && rightDevice == null
         val missingOneDevice = leftdevice == null || rightDevice == null
         val missingBothDevices = leftdevice == null && rightDevice == null
-
         val hasSessionProgram = player?.sessionProgram != null
-
         val leftDeviceVersion =  leftdevice?.firmwareVersion ?: "0"
         val rightDeviceVersion =  rightDevice?.firmwareVersion ?: "0"
         val leftVersion = Version(leftDeviceVersion)
         val rightVersion = Version(rightDeviceVersion)
         val deviceVersionEqual = leftVersion.equals(rightVersion)
 
+        /** Hide info section if there are no devices */
+        rowPlayer.deviceInfoSection.visibility = if (noDevices) View.GONE else View.VISIBLE
+
+        /** Player informations */
+        rowPlayer.textViewPlayerName.text = player?.fullname
+        rowPlayer.showOptions.setOnClickListener {
+            val popupMenu = PopupMenu(mContext, it)
+            popupMenu.menuInflater.inflate(R.menu.popup_menu_card, popupMenu.menu)
+            popupMenu.menu.findItem(R.id.action_complete_devices).setEnabled(missingOneDevice)
+            popupMenu.menu.findItem(R.id.action_complete_devices).setVisible(true)
+            popupMenu.menu.findItem(R.id.action_update_devices).setVisible(true)
+            popupMenu.menu.findItem(R.id.action_delete_devices).setVisible(true)
+            popupMenu.menu.findItem(R.id.turn_off_devices).setVisible(true)
+            popupMenu.menu.findItem(R.id.action_edit_player).setVisible(true)
+            popupMenu.menu.findItem(R.id.action_delete_player).setVisible(true)
+            popupMenu.menu.findItem(R.id.action_disable_player).setVisible(true)
+
+            popupMenu.setOnMenuItemClickListener {
+                when (it.itemId) {
+
+                    R.id.action_complete_devices ->
+                        onClickActionOnItem?.let {
+                            player?.let { it1 -> it(Action.COMPLETE_DEVICES, it1) }
+                        }
+                    R.id.action_update_devices ->
+                        onClickActionOnItem?.let {
+                            player?.let { it1 -> it(Action.UPDATE_DEVICES, it1) }
+                        }
+                    R.id.action_delete_devices ->
+                        onClickActionOnItem?.let {
+                            player?.let { it1 -> it(Action.DELETE_DEVICES, it1) }
+                        }
+                    R.id.turn_off_devices ->
+                        onClickActionOnItem?.let {
+                            player?.let { it1 -> it(Action.TURN_OFF_DEVICES, it1) }
+                        }
+                    R.id.action_edit_player ->
+                        onClickActionOnItem?.let {
+                            player?.let { it1 -> it(Action.EDIT_PLAYER, it1) }
+
+                        }
+                    R.id.action_delete_player ->
+                        onClickActionOnItem?.let {
+                            player?.let { it1 -> it(Action.DELETE_PLAYER, it1) }
+                        }
+                    R.id.action_disable_player ->
+                        onClickActionOnItem?.let {
+                            player?.let { it1 -> it(Action.DISABLE_PLAYER, it1) }
+                        }
+                }
+                true
+            }
+            popupMenu.show()
+        }
+
+        /** Player Devices and Programs */
+        val views = mutableListOf<PlayerDeviceData>()
+
         leftdevice?.let {
-            //rowPlayer.leftChipDevice.setChipIconTintResource(R.color.primaryActiveColor)
-        } ?: run {
-            //rowPlayer.leftChipDevice.setChipIconTintResource(R.color.primaryDisabledColor)
+            val view = inflater.inflate(R.layout.row_main_player_device_item, rowPlayer.deviceInfoSection, false)
+            views.add(PlayerDeviceData(view, it))
         }
 
         rightDevice?.let {
-            //rowPlayer.rightChipDevice.setChipIconTintResource(R.color.primaryActiveColor)
-        } ?: run {
-            //rowPlayer.rightChipDevice.setChipIconTintResource(R.color.primaryDisabledColor)
+            val view = inflater.inflate(R.layout.row_main_player_device_item, rowPlayer.deviceInfoSection, false)
         }
 
-        /**
-         * Player informations
-         */
-        rowPlayer.textViewPlayerName.text = player?.fullname
-        rowPlayer.textViewPlayerRole.text = if (player?.role!!.isEmpty()) "Ruolo" else player.role
+        views.forEach {
+            rowPlayer.deviceInfoSection.addView(it.view)
+            it.view.deviceName.text = it.device.name
+            it.view.deviceNameVersion.text = it.device.firmwareVersion
 
-        /**
-         * Device informations
-         */
+            it.view.programSessionSection.visibility = View.GONE//if (hasSessionProgram) View.VISIBLE else View.GONE
+            it.view.programPlayerTitle.text = player?.sessionProgram?.title
+            it.view.programPlayerTimer.text = "00:23:00"
+            it.view.playerProgressProgram.progress = (0..100).random()
+        }
+
+/*
         if (noDevices) {
-            rowPlayer.deviceName.text = mContext.getString(R.string.row_player_device_empty_title)
-            //rowPlayer.statusLayout.setBackgroundResource(R.color.primaryUnactiveColor)
+            rowPlayer.deviceName.text = "" // mContext.getString(R.string.row_player_no_device_subtitle)
+            rowPlayer.deviceNameVersion.text = ""
+            rowPlayer.statusLayout.setBackgroundResource(R.color.colorPrimaryLight)
         } else if (missingOneDevice) {
-            //rowPlayer.statusLayout.setBackgroundResource(R.color.primaryActiveColor)
+            rowPlayer.statusLayout.setBackgroundResource(R.color.colorPrimaryVariant)
 
             leftdevice?.let {
-                rowPlayer.deviceName.text = mContext.getString(R.string.row_player_device_version_title) + " " + it.name + " " + it.firmwareVersion
+                rowPlayer.deviceName.text = it.name
+                rowPlayer.deviceNameVersion.text = it.firmwareVersion
             }
 
             rightDevice?.let {
-                rowPlayer.deviceName.text = mContext.getString(R.string.row_player_device_version_title) + " " + it.name + " " + it.firmwareVersion
+                rowPlayer.deviceName.text = it.name
+                rowPlayer.deviceNameVersion.text = it.firmwareVersion
             }
 
+
         } else {
-            //rowPlayer.statusLayout.setBackgroundResource(R.color.primaryActiveColor)
+            rowPlayer.statusLayout.setBackgroundResource(R.color.colorPrimaryVariant)
 
             var deviceNames = ""
 
@@ -340,18 +402,13 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
                     else it.name + " " + it.firmwareVersion
             }
 
-            rowPlayer.deviceName.text = mContext.getString(R.string.row_player_device_version_title) + " " + deviceNames
+            rowPlayer.deviceName.text = deviceNames
         }
 
+*/
         /**
          * Program data
          */
-        rowPlayer.programSessionSection.visibility = View.GONE //if (hasSessionProgram) View.VISIBLE else View.GONE
-        rowPlayer.playerProgressProgram.progress = (0..100).random()
-        rowPlayer.programPlayerTitle.text = player?.sessionProgram?.title
-        rowPlayer.programPlayerState.text = "State of the program"
-        rowPlayer.programPlayerTimerTitle.text = "Complentamento"
-        rowPlayer.programPlayerTimer.text = "23:00"
 
         /**
          * Action section
@@ -360,105 +417,29 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
         /**
          * Start session exercise for single player
          */
+        /*
         rowPlayer.playPauseButton.visibility = View.GONE //if (hasSessionProgram) View.VISIBLE else View.GONE
         rowPlayer.playPauseButton.setOnClickListener {
             onClickActionOnItem?.let {
                 it(Action.STOP_PROGRAM, player)
                 it(Action.STOP_PROGRAM, player)
             }
-        }
-
-        /**
-         * Upload program to single player and start directly
-         */
-        rowPlayer.programSelection.visibility = View.GONE //if (noDevices || missingOneDevice) View.GONE else View.VISIBLE
-        rowPlayer.programSelection.text = if (hasSessionProgram) "Change program" else "Select program"
-        rowPlayer.programSelection.setOnClickListener {
-            onClickActionOnItem?.let {
-                it(Action.UPLOAD_PROGRAM, player)
-            }
-        }
+        }*/
 
         /**
          * Complete pairing with devices if not complete
          */
-        rowPlayer.leftChipDevice.setOnClickListener {
+        /*rowPlayer.leftChipDevice.setOnClickListener {
             onClickActionOnItem?.let {
-                it(Action.COMPLETE_DEVICES, player)
+                player?.let { it1 -> it(Action.COMPLETE_DEVICES, it1) }
             }
         }
         rowPlayer.rightChipDevice.setOnClickListener {
             onClickActionOnItem?.let {
-                it(Action.COMPLETE_DEVICES, player)
+                player?.let { it1 -> it(Action.COMPLETE_DEVICES, it1) }
             }
-        }
+        }*/
 
-
-        /**
-         * Update devices firmware if there is a new version available
-         */
-        rowPlayer.updateDevices.visibility = View.GONE
-        rowPlayer.updateDevices.setOnClickListener {
-            onClickActionOnItem?.let {
-                it(Action.UPDATE_DEVICES, player)
-            }
-        }
-
-        /**
-         * Options of the player
-         */
-        rowPlayer.showOptions.setOnClickListener {
-            val popupMenu = PopupMenu(mContext, it)
-            popupMenu.menuInflater.inflate(R.menu.popup_menu_card, popupMenu.menu)
-
-            popupMenu.menu.findItem(R.id.action_complete_devices).setEnabled(missingOneDevice)
-
-            popupMenu.menu.findItem(R.id.action_complete_devices).setVisible(true)
-            popupMenu.menu.findItem(R.id.action_update_devices).setVisible(true)
-            popupMenu.menu.findItem(R.id.action_delete_devices).setVisible(true)
-            popupMenu.menu.findItem(R.id.turn_off_devices).setVisible(true)
-
-            popupMenu.menu.findItem(R.id.action_edit_player).setVisible(true)
-            popupMenu.menu.findItem(R.id.action_delete_player).setVisible(true)
-            popupMenu.menu.findItem(R.id.action_disable_player).setVisible(true)
-
-            popupMenu.setOnMenuItemClickListener {
-                when (it.itemId) {
-
-                    R.id.action_complete_devices ->
-                        onClickActionOnItem?.let {
-                            it(Action.COMPLETE_DEVICES, player)
-                        }
-                    R.id.action_update_devices ->
-                        onClickActionOnItem?.let {
-                            it(Action.UPDATE_DEVICES, player)
-                        }
-                    R.id.action_delete_devices ->
-                        onClickActionOnItem?.let {
-                            it(Action.DELETE_DEVICES, player)
-                        }
-                    R.id.turn_off_devices ->
-                        onClickActionOnItem?.let {
-                            it(Action.TURN_OFF_DEVICES, player)
-                        }
-
-                    R.id.action_edit_player ->
-                        onClickActionOnItem?.let {
-                            it(Action.EDIT_PLAYER, player)
-                        }
-                    R.id.action_delete_player ->
-                        onClickActionOnItem?.let {
-                            it(Action.DELETE_PLAYER, player)
-                        }
-                    R.id.action_disable_player ->
-                        onClickActionOnItem?.let {
-                            it(Action.DISABLE_PLAYER, player)
-                        }
-                }
-                true
-            }
-            popupMenu.show()
-        }
 
         return rowPlayer
     }

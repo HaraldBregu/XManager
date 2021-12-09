@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:cardCornerRadius="0dp">
+    app:cardCornerRadius="3dp">
 
     <LinearLayout
         android:elevation="50dp"
@@ -22,6 +22,7 @@
             android:layout_marginBottom="5dp"
             android:orientation="vertical">
             <TextView
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
@@ -88,55 +89,38 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/programTitle"
+                    android:id="@+id/program"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:layout_toLeftOf="@+id/labelTimer"
-                    android:layout_alignParentLeft="true"
-                    android:text="-"
-                    android:textAllCaps="true"
-                    android:textSize="14dp" />
+                    android:layout_toStartOf="@+id/countDownTimerLabel"
+                    android:layout_alignParentStart="true"
+                    android:text="Programma" />
                 <TextView
-                    android:id="@+id/programDescription"
+                    android:id="@+id/programTitle"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:layout_below="@+id/program"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="@string/main_header_program_running"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/programTitle"
+                    android:text="Passaggio veloce con la sinistra"
+                    android:layout_alignParentStart="true"
                     android:textSize="13dp"
                     android:textStyle="normal"/>
                 <TextView
-                    android:id="@+id/labelTimer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="@string/main_header_program_complation"
-                    android:textAllCaps="true"
-                    android:layout_marginTop="4dp"
-                    android:layout_alignParentRight="true"
-                    android:textAlignment="textEnd"
-                    android:textSize="10sp"
-                    android:textStyle="normal"/>
-                <TextView
                     android:id="@+id/countDownTimerLabel"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="0"
-                    android:layout_below="@+id/labelTimer"
-                    android:layout_alignParentRight="true"
-                    android:textAlignment="textEnd"
-                    android:textSize="15sp"
-                    android:textStyle="normal"/>
+                    android:text="00:00:00"
+                    android:layout_marginTop="16dp"
+                    android:layout_alignParentEnd="true"
+                    android:textAlignment="textEnd"/>
             </RelativeLayout>
 
-            <ProgressBar
+            <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:id="@+id/programProgressBar"
-                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -144,8 +128,10 @@
                 android:max="100"
                 android:minWidth="200dp"
                 android:minHeight="8dp"
-                android:progress="0"
-                android:progressDrawable="@drawable/horizontal_progress_drawable_red"/>
+                android:progress="40"
+                app:trackThickness="6dp"
+                app:trackCornerRadius="3dp"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -161,31 +147,20 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/selectProgram"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:text="@string/main_header_action_run_program">
-                </com.google.android.material.button.MaterialButton>
+                    android:layout_height="45dp"
+                    android:text="@string/main_header_action_run_program"/>
 
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/stopButton"
-                    style="@style/Widget.MaterialComponents.Button.Icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    app:icon="@drawable/ic_stop_white"
-                    android:layout_marginRight="5dp"
-                    android:layout_toLeftOf="@id/showProgramSectionMenu"
-                    android:textSize="12dp">
-                </com.google.android.material.button.MaterialButton>
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/showProgramSectionMenu"
-                    style="@style/Widget.MaterialComponents.Button.Icon"
-                    android:layout_alignParentRight="true"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                    android:layout_alignParentEnd="true"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:padding="14dp"
+                    android:textAlignment="center"
                     android:text=""
-                    android:textSize="12dp"
-                    app:icon="@drawable/ic_list_white">
-                </com.google.android.material.button.MaterialButton>
+                    android:textSize="12sp"
+                    app:icon="@drawable/outline_list_alt_24"/>
             </RelativeLayout>
         </LinearLayout>
 

@@ -5,10 +5,35 @@
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
     </configurations>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/content_create_program.xml" value="0.25625" />
+        <entry key="app/src/main/res/layout/content_device_pair_search.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/content_device_pair_select.xml" value="0.1421875" />
+        <entry key="app/src/main/res/layout/content_program_create_session_bottom_sheet.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/row_create_program_step.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/row_create_program_step_new.xml" value="0.271875" />
+        <entry key="app/src/main/res/layout/row_device.xml" value="0.278130387548551" />
+        <entry key="app/src/main/res/layout/row_main_header.xml" value="0.25625" />
+        <entry key="app/src/main/res/layout/row_main_player.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/row_main_player_device_item.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/row_main_player_header.xml" value="0.271875" />
+        <entry key="app/src/main/res/layout/row_program_list.xml" value="0.45" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.5" />
+      </ProjectState>
+    </option>
   </component>
 </project>

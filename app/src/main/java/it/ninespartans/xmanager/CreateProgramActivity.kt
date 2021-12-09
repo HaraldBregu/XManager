@@ -60,7 +60,7 @@ class CreateProgramActivity : AppCompatActivity() {
         programId?.let {
             header_title.text = getString(R.string.title_activity_update_program_header_title)
             header_description.text = getString(R.string.title_activity_update_program_header_description)
-            saveProgram.text = getString(R.string.title_activity_create_program_button_save)
+            saveProgram.text = getString(R.string.activity_create_program_button_save)
 
             Realm.getDefaultInstance().use { realm ->
                 realm.where<TrainingSessionProgram>().equalTo("id", it).findFirst()?.let {

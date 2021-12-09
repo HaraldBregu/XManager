@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:background="@color/colorSurface">
         <LinearLayout
             android:id="@+id/statusView"
             android:layout_width="20dp"
@@ -24,30 +25,25 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp">
+            android:layout_marginStart="10dp">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/nameProgram"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Program one"
-                    android:fontFamily="@font/montserrat"
-                    android:textSize="15dp"
-                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginBottom="5dp"/>
-
+                    app:layout_constraintTop_toTopOf="parent"/>
                 <TextView
                     android:id="@+id/descriptionProgram"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Durata: 2 Ore 3 Minuti 23 Secondi \nSessioni: 2"
-                    android:fontFamily="@font/montserrat"
-                    android:textSize="12dp"
                     app:layout_constraintStart_toStartOf="parent"/>
             </LinearLayout>
         </RelativeLayout>
