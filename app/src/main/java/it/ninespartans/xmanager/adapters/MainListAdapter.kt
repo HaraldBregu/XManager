@@ -360,11 +360,16 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
             rowPlayer.deviceInfoSection.addView(it.view)
             it.view.deviceName.text = it.device.name
             it.view.deviceNameVersion.text = it.device.firmwareVersion
-
             it.view.programSessionSection.visibility = View.GONE//if (hasSessionProgram) View.VISIBLE else View.GONE
             it.view.programPlayerTitle.text = player?.sessionProgram?.title
-            it.view.programPlayerTimer.text = "00:23:00"
+            it.view.programPlayerTimer.text = "00:00:00"
             it.view.playerProgressProgram.progress = (0..100).random()
+        }
+
+        rowPlayer.addPlayerDevice.setOnClickListener {
+            onClickActionOnItem?.let {
+                player?.let { it1 -> it(Action.COMPLETE_DEVICES, it1) }
+            }
         }
 
 /*

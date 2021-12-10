@@ -28,6 +28,10 @@
         "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3a27b12f805c2a262fa84a871ed49494/appcompat-1.2.0/res/layout/abc_list_menu_item_radio.xml"
     },
     {
+        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-v24_shoe_pair_light_top_ext.png.flat",
+        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable-v24/shoe_pair_light_top_ext.png"
+    },
+    {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/layout_mtrl_picker_actions.xml.flat",
         "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9106a80cd21e4d2549bcadac3deff5f3/material-1.4.0/res/layout/mtrl_picker_actions.xml"
     },
@@ -286,10 +290,6 @@
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3a27b12f805c2a262fa84a871ed49494/appcompat-1.2.0/res/drawable-mdpi-v4/abc_ic_menu_cut_mtrl_alpha.png"
-    },
-    {
-        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable_shoe_pair.png.flat",
-        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable/shoe_pair.png"
     },
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ic_star_black_48dp.png.flat",
@@ -1216,6 +1216,10 @@
         "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable-xxxhdpi/ic_player_pair_shoes.png"
     },
     {
+        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-v24_shoe_pair_light_ext.png.flat",
+        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable-v24/shoe_pair_light_ext.png"
+    },
+    {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_list_longpressed_holo.9.png.flat",
         "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3a27b12f805c2a262fa84a871ed49494/appcompat-1.2.0/res/drawable-hdpi-v4/abc_list_longpressed_holo.9.png"
     },
@@ -1548,6 +1552,10 @@
         "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9106a80cd21e4d2549bcadac3deff5f3/material-1.4.0/res/animator/design_fab_hide_motion_spec.xml"
     },
     {
+        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-v24_shoe_pair_light_top.png.flat",
+        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable-v24/shoe_pair_light_top.png"
+    },
+    {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_scrubber_track_mtrl_alpha.9.png.flat",
         "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3a27b12f805c2a262fa84a871ed49494/appcompat-1.2.0/res/drawable-xxhdpi-v4/abc_scrubber_track_mtrl_alpha.9.png"
     },
@@ -1714,6 +1722,10 @@
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/animator_mtrl_btn_unelevated_state_list_anim.xml.flat",
         "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9106a80cd21e4d2549bcadac3deff5f3/material-1.4.0/res/animator/mtrl_btn_unelevated_state_list_anim.xml"
+    },
+    {
+        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-v24_shoe_pair_light_int.png.flat",
+        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable-v24/shoe_pair_light_int.png"
     },
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
@@ -1946,6 +1958,10 @@
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
         "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-v24_shoe_pair_light_off.png.flat",
+        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable-v24/shoe_pair_light_off.png"
     },
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-hdpi_ic_list_white.png.flat",
@@ -2998,6 +3014,10 @@
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-v21_preference_list_divider_material.xml.flat",
         "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/13dbdba9daf1658637154daca3cf8628/preference-1.1.0-alpha05/res/drawable-v21/preference_list_divider_material.xml"
+    },
+    {
+        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-v24_shoe_pair_light_top_int.png.flat",
+        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable-v24/shoe_pair_light_top_int.png"
     },
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",

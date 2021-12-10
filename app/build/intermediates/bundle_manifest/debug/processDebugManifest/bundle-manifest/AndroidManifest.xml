@@ -43,7 +43,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="it.ninespartans.xmanager.ProgramListActivity"
-            android:label="@string/title_activity_program_list"
+            android:label="@string/activity_program_list_title"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="it.ninespartans.xmanager.CreateUserActivity"

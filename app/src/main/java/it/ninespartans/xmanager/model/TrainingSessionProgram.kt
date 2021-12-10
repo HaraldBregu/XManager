@@ -15,6 +15,20 @@ open class TrainingSessionProgram(
     var active: Boolean = false
 ): RealmObject() {
 
+    fun programBytesDevice(): ByteArray {
+        var commandByteArray = byteArrayOf(0x7E)
+        programList.forEach {
+            commandByteArray = commandByteArray.plus(
+                byteArrayOf(
+                    it.deviceLedPositionByte!!,           // LED position (0, 1, 2, 3, 4)
+                    it.animationByte!!,                   // Animation (fixed, blink, fade)
+                    it.durationHoursByte!!,               // Hours
+                    it.durationMinutesByte!!,             // Minutes
+                    it.durationSecondsByte!!))            // Seconds
+        }
+        return commandByteArray
+    }
+    /*
     fun programBytesLeftDevice(): ByteArray {
         var commandByteArray = byteArrayOf(0x7E)
         programList.forEach {
@@ -44,7 +58,7 @@ open class TrainingSessionProgram(
 
         return commandByteArray
     }
-
+*/
     fun durationHours():Int {
         var amount: Int = 0
         programList.forEach {

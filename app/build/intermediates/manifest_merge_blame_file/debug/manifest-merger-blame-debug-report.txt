@@ -83,7 +83,7 @@
 44-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:41:9-44:59
 45            android:name="it.ninespartans.xmanager.ProgramListActivity"
 45-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:42:13-72
-46            android:label="@string/title_activity_program_list"
+46            android:label="@string/activity_program_list_title"
 46-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:43:13-64
 47            android:theme="@style/AppTheme.NoActionBar" />
 47-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:44:13-56

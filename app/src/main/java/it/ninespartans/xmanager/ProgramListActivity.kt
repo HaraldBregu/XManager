@@ -18,17 +18,12 @@ class ProgramListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_program_list)
         setSupportActionBar(toolbar)
 
-        title = getString(R.string.title_activity_program_list)
-        header_title.text = getString(R.string.title_activity_program_list_header_title)
-        header_description.text = getString(R.string.title_activity_program_list_header_description)
-
-        var realm = Realm.getDefaultInstance()
+        val realm = Realm.getDefaultInstance()
         val programs = realm.where(TrainingSessionProgram::class.java).findAll()
 
         adapter = ProgramListAdapter(this, programs)
         list_view.adapter = adapter
         list_view.setOnItemClickListener { parent, view, position, id ->
-
             val selectedProgram = programs.get(position)
             val intent = Intent(this, CreateProgramActivity::class.java)
             intent.putExtra("program_id", selectedProgram?.id)
@@ -37,6 +32,11 @@ class ProgramListActivity : AppCompatActivity() {
 
         adapter.onClickActionOnItem = { action, program ->
             when (action) {
+                ProgramListAdapter.Action.UPDATE_PROGRAM -> {
+                    val intent = Intent(this, CreateProgramActivity::class.java)
+                    intent.putExtra("program_id", program.id)
+                    startActivity(intent)
+                }
                 ProgramListAdapter.Action.DELETE_PROGRAM -> {
                     val builderInner = AlertDialog.Builder(this)
                     builderInner.setTitle("Attention!")

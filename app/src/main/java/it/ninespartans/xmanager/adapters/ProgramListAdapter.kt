@@ -18,6 +18,7 @@ class ProgramListAdapter(context: Context, programs: RealmResults<TrainingSessio
     var programs: RealmResults<TrainingSessionProgram>
 
     enum class Action {
+        UPDATE_PROGRAM,
         DELETE_PROGRAM
     }
 
@@ -95,6 +96,13 @@ class ProgramListAdapter(context: Context, programs: RealmResults<TrainingSessio
                                 it(Action.DELETE_PROGRAM, it)
                             }
                         }
+                    R.id.action_update -> {
+                        onClickActionOnItem?.let {
+                            program?.let {
+                                it(Action.UPDATE_PROGRAM, it)
+                            }
+                        }
+                    }
                 }
                 true
             }

@@ -476,12 +476,15 @@ class MainActivity : AppCompatActivity() {
                 descriptionProgress?.text = getString(R.string.upload_program_sheet_state_writing_data_title)
                 uploadProgressProgram?.setProgress(80)
 
+                BLEManager.write(trainingProgram.programBytesDevice())
+
+                /*
                 when (foot) {
                     Foot.LEFT ->
                         BLEManager.write(trainingProgram.programBytesLeftDevice())
                     Foot.RIGHT ->
                         BLEManager.write(trainingProgram.programBytesRightDevice())
-                }
+                }*/
             }
         }
 

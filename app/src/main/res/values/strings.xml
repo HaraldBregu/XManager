@@ -83,17 +83,34 @@
     <string name="sheet_create_session_description">Seleziona le parti della scarpa che vuoi utilizzare per questa sessione, l\'animazione e la durata.</string>
     <string name="sheet_create_session_duration_title">Durata sessione</string>
     <string name="sheet_create_session_duration_description">0 secondi</string>
-    <string name="sheet_create_session_type_0">Static</string>
-    <string name="sheet_create_session_type_1">Blink</string>
-    <string name="sheet_create_session_type_2">Fade (comming soon)</string>
+    <string name="sheet_create_session_anim_type_title">Animazione led</string>
+    <string name="sheet_create_session_type_static">Static</string>
+    <string name="sheet_create_session_type_blink">Blink</string>
+    <string name="sheet_create_session_type_fade">Fade (comming soon)</string>
+    <string name="sheet_create_session_dir_title">Posizione indicatore led</string>
+    <string name="sheet_create_session_dir_col_title">Collo Pieno</string>
+    <string name="sheet_create_session_dir_col_ext_title">Collo Esterno</string>
+    <string name="sheet_create_session_dir_col_int_title">Collo Interno</string>
+    <string name="sheet_create_session_dir_foot_ext_title">Esterno Piede</string>
+    <string name="sheet_create_session_dir_foot_int_title">Interno Piede</string>
+
+    <string name="sheet_create_session_dir_description">Seleziona la posizione che vuoi utilizzare</string>
+    <string name="sheet_create_session_dir_ext">ext</string>
+    <string name="sheet_create_session_dir_top_ext">t-ext</string>
+    <string name="sheet_create_session_dir_top">top</string>
+    <string name="sheet_create_session_dir_top_int">t-int</string>
+    <string name="sheet_create_session_dir_int">int</string>
+
     <string name="sheet_create_session_button_save">Salva</string>
 
 
-
     <!--  Program List Activity  -->
-    <string name="title_activity_program_list">Programmi</string>
-    <string name="title_activity_program_list_header_title">Your training programs</string>
-    <string name="title_activity_program_list_header_description">This is you program list. Select, update or delete them.</string>
+    <string name="activity_program_list_title">Programmi</string>
+    <string name="activity_program_list_header_title">Programmi di allenamento</string>
+    <string name="activity_program_list_header_description">Qui puoi gestire tutti i tuoi programmi di allenamento.</string>
+    <string name="activity_program_list_button_create_new">nuovo programma</string>
+    <string name="activity_program_list_row_menu_update">Modifica</string>
+    <string name="activity_program_list_row_menu_delete">Elimina</string>
 
     <!--  Program Search List Activity  -->
     <string name="activity_device_search_header_subtitle">player name</string>

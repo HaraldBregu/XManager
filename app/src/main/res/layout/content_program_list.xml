@@ -18,15 +18,15 @@
         android:paddingBottom="10dp"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/header_title"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:text="@string/activity_program_list_header_title">
         </TextView>
         <TextView
-            android:id="@+id/header_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/activity_program_list_header_description"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2">
         </TextView>
     </LinearLayout>
@@ -53,7 +53,7 @@
             android:id="@+id/createNewProgram"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Create New program">
+            android:text="@string/activity_program_list_button_create_new">
         </com.google.android.material.button.MaterialButton>
 
     </LinearLayout>

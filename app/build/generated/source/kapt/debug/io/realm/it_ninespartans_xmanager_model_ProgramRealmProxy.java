@@ -43,18 +43,16 @@ public class it_ninespartans_xmanager_model_ProgramRealmProxy extends it.ninespa
     implements RealmObjectProxy, it_ninespartans_xmanager_model_ProgramRealmProxyInterface {
 
     static final class ProgramColumnInfo extends ColumnInfo {
-        long leftDeviceLedPositionByteColKey;
-        long rightDeviceLedPositionByteColKey;
+        long deviceLedPositionByteColKey;
         long animationByteColKey;
         long durationHoursByteColKey;
         long durationMinutesByteColKey;
         long durationSecondsByteColKey;
 
         ProgramColumnInfo(OsSchemaInfo schemaInfo) {
-            super(6);
+            super(5);
             OsObjectSchemaInfo objectSchemaInfo = schemaInfo.getObjectSchemaInfo("Program");
-            this.leftDeviceLedPositionByteColKey = addColumnDetails("leftDeviceLedPositionByte", "leftDeviceLedPositionByte", objectSchemaInfo);
-            this.rightDeviceLedPositionByteColKey = addColumnDetails("rightDeviceLedPositionByte", "rightDeviceLedPositionByte", objectSchemaInfo);
+            this.deviceLedPositionByteColKey = addColumnDetails("deviceLedPositionByte", "deviceLedPositionByte", objectSchemaInfo);
             this.animationByteColKey = addColumnDetails("animationByte", "animationByte", objectSchemaInfo);
             this.durationHoursByteColKey = addColumnDetails("durationHoursByte", "durationHoursByte", objectSchemaInfo);
             this.durationMinutesByteColKey = addColumnDetails("durationMinutesByte", "durationMinutesByte", objectSchemaInfo);
@@ -75,8 +73,7 @@ public class it_ninespartans_xmanager_model_ProgramRealmProxy extends it.ninespa
         protected final void copy(ColumnInfo rawSrc, ColumnInfo rawDst) {
             final ProgramColumnInfo src = (ProgramColumnInfo) rawSrc;
             final ProgramColumnInfo dst = (ProgramColumnInfo) rawDst;
-            dst.leftDeviceLedPositionByteColKey = src.leftDeviceLedPositionByteColKey;
-            dst.rightDeviceLedPositionByteColKey = src.rightDeviceLedPositionByteColKey;
+            dst.deviceLedPositionByteColKey = src.deviceLedPositionByteColKey;
             dst.animationByteColKey = src.animationByteColKey;
             dst.durationHoursByteColKey = src.durationHoursByteColKey;
             dst.durationMinutesByteColKey = src.durationMinutesByteColKey;
@@ -110,68 +107,35 @@ public class it_ninespartans_xmanager_model_ProgramRealmProxy extends it.ninespa
 
     @Override
     @SuppressWarnings("cast")
-    public Byte realmGet$leftDeviceLedPositionByte() {
+    public Byte realmGet$deviceLedPositionByte() {
         proxyState.getRealm$realm().checkIfValid();
-        if (proxyState.getRow$realm().isNull(columnInfo.leftDeviceLedPositionByteColKey)) {
+        if (proxyState.getRow$realm().isNull(columnInfo.deviceLedPositionByteColKey)) {
             return null;
         }
-        return (byte) proxyState.getRow$realm().getLong(columnInfo.leftDeviceLedPositionByteColKey);
+        return (byte) proxyState.getRow$realm().getLong(columnInfo.deviceLedPositionByteColKey);
     }
 
     @Override
-    public void realmSet$leftDeviceLedPositionByte(Byte value) {
+    public void realmSet$deviceLedPositionByte(Byte value) {
         if (proxyState.isUnderConstruction()) {
             if (!proxyState.getAcceptDefaultValue$realm()) {
                 return;
             }
             final Row row = proxyState.getRow$realm();
             if (value == null) {
-                row.getTable().setNull(columnInfo.leftDeviceLedPositionByteColKey, row.getObjectKey(), true);
+                row.getTable().setNull(columnInfo.deviceLedPositionByteColKey, row.getObjectKey(), true);
                 return;
             }
-            row.getTable().setLong(columnInfo.leftDeviceLedPositionByteColKey, row.getObjectKey(), value, true);
+            row.getTable().setLong(columnInfo.deviceLedPositionByteColKey, row.getObjectKey(), value, true);
             return;
         }
 
         proxyState.getRealm$realm().checkIfValid();
         if (value == null) {
-            proxyState.getRow$realm().setNull(columnInfo.leftDeviceLedPositionByteColKey);
+            proxyState.getRow$realm().setNull(columnInfo.deviceLedPositionByteColKey);
             return;
         }
-        proxyState.getRow$realm().setLong(columnInfo.leftDeviceLedPositionByteColKey, value);
-    }
-
-    @Override
-    @SuppressWarnings("cast")
-    public Byte realmGet$rightDeviceLedPositionByte() {
-        proxyState.getRealm$realm().checkIfValid();
-        if (proxyState.getRow$realm().isNull(columnInfo.rightDeviceLedPositionByteColKey)) {
-            return null;
-        }
-        return (byte) proxyState.getRow$realm().getLong(columnInfo.rightDeviceLedPositionByteColKey);
-    }
-
-    @Override
-    public void realmSet$rightDeviceLedPositionByte(Byte value) {
-        if (proxyState.isUnderConstruction()) {
-            if (!proxyState.getAcceptDefaultValue$realm()) {
-                return;
-            }
-            final Row row = proxyState.getRow$realm();
-            if (value == null) {
-                row.getTable().setNull(columnInfo.rightDeviceLedPositionByteColKey, row.getObjectKey(), true);
-                return;
-            }
-            row.getTable().setLong(columnInfo.rightDeviceLedPositionByteColKey, row.getObjectKey(), value, true);
-            return;
-        }
-
-        proxyState.getRealm$realm().checkIfValid();
-        if (value == null) {
-            proxyState.getRow$realm().setNull(columnInfo.rightDeviceLedPositionByteColKey);
-            return;
-        }
-        proxyState.getRow$realm().setLong(columnInfo.rightDeviceLedPositionByteColKey, value);
+        proxyState.getRow$realm().setLong(columnInfo.deviceLedPositionByteColKey, value);
     }
 
     @Override
@@ -307,9 +271,8 @@ public class it_ninespartans_xmanager_model_ProgramRealmProxy extends it.ninespa
     }
 
     private static OsObjectSchemaInfo createExpectedObjectSchemaInfo() {
-        OsObjectSchemaInfo.Builder builder = new OsObjectSchemaInfo.Builder(NO_ALIAS, "Program", true, 6, 0);
-        builder.addPersistedProperty(NO_ALIAS, "leftDeviceLedPositionByte", RealmFieldType.INTEGER, !Property.PRIMARY_KEY, !Property.INDEXED, !Property.REQUIRED);
-        builder.addPersistedProperty(NO_ALIAS, "rightDeviceLedPositionByte", RealmFieldType.INTEGER, !Property.PRIMARY_KEY, !Property.INDEXED, !Property.REQUIRED);
+        OsObjectSchemaInfo.Builder builder = new OsObjectSchemaInfo.Builder(NO_ALIAS, "Program", true, 5, 0);
+        builder.addPersistedProperty(NO_ALIAS, "deviceLedPositionByte", RealmFieldType.INTEGER, !Property.PRIMARY_KEY, !Property.INDEXED, !Property.REQUIRED);
         builder.addPersistedProperty(NO_ALIAS, "animationByte", RealmFieldType.INTEGER, !Property.PRIMARY_KEY, !Property.INDEXED, !Property.REQUIRED);
         builder.addPersistedProperty(NO_ALIAS, "durationHoursByte", RealmFieldType.INTEGER, !Property.PRIMARY_KEY, !Property.INDEXED, !Property.REQUIRED);
         builder.addPersistedProperty(NO_ALIAS, "durationMinutesByte", RealmFieldType.INTEGER, !Property.PRIMARY_KEY, !Property.INDEXED, !Property.REQUIRED);
@@ -340,18 +303,11 @@ public class it_ninespartans_xmanager_model_ProgramRealmProxy extends it.ninespa
         it.ninespartans.xmanager.model.Program obj = realm.createEmbeddedObject(it.ninespartans.xmanager.model.Program.class, parent, parentProperty);
 
         final it_ninespartans_xmanager_model_ProgramRealmProxyInterface objProxy = (it_ninespartans_xmanager_model_ProgramRealmProxyInterface) obj;
-        if (json.has("leftDeviceLedPositionByte")) {
-            if (json.isNull("leftDeviceLedPositionByte")) {
-                objProxy.realmSet$leftDeviceLedPositionByte(null);
+        if (json.has("deviceLedPositionByte")) {
+            if (json.isNull("deviceLedPositionByte")) {
+                objProxy.realmSet$deviceLedPositionByte(null);
             } else {
-                objProxy.realmSet$leftDeviceLedPositionByte((byte) json.getInt("leftDeviceLedPositionByte"));
-            }
-        }
-        if (json.has("rightDeviceLedPositionByte")) {
-            if (json.isNull("rightDeviceLedPositionByte")) {
-                objProxy.realmSet$rightDeviceLedPositionByte(null);
-            } else {
-                objProxy.realmSet$rightDeviceLedPositionByte((byte) json.getInt("rightDeviceLedPositionByte"));
+                objProxy.realmSet$deviceLedPositionByte((byte) json.getInt("deviceLedPositionByte"));
             }
         }
         if (json.has("animationByte")) {
@@ -395,19 +351,12 @@ public class it_ninespartans_xmanager_model_ProgramRealmProxy extends it.ninespa
         while (reader.hasNext()) {
             String name = reader.nextName();
             if (false) {
-            } else if (name.equals("leftDeviceLedPositionByte")) {
+            } else if (name.equals("deviceLedPositionByte")) {
                 if (reader.peek() != JsonToken.NULL) {
-                    objProxy.realmSet$leftDeviceLedPositionByte((byte) reader.nextInt());
+                    objProxy.realmSet$deviceLedPositionByte((byte) reader.nextInt());
                 } else {
                     reader.skipValue();
-                    objProxy.realmSet$leftDeviceLedPositionByte(null);
-                }
-            } else if (name.equals("rightDeviceLedPositionByte")) {
-                if (reader.peek() != JsonToken.NULL) {
-                    objProxy.realmSet$rightDeviceLedPositionByte((byte) reader.nextInt());
-                } else {
-                    reader.skipValue();
-                    objProxy.realmSet$rightDeviceLedPositionByte(null);
+                    objProxy.realmSet$deviceLedPositionByte(null);
                 }
             } else if (name.equals("animationByte")) {
                 if (reader.peek() != JsonToken.NULL) {
@@ -485,8 +434,7 @@ public class it_ninespartans_xmanager_model_ProgramRealmProxy extends it.ninespa
         OsObjectBuilder builder = new OsObjectBuilder(table, flags);
 
         // Add all non-"object reference" fields
-        builder.addInteger(columnInfo.leftDeviceLedPositionByteColKey, unmanagedSource.realmGet$leftDeviceLedPositionByte());
-        builder.addInteger(columnInfo.rightDeviceLedPositionByteColKey, unmanagedSource.realmGet$rightDeviceLedPositionByte());
+        builder.addInteger(columnInfo.deviceLedPositionByteColKey, unmanagedSource.realmGet$deviceLedPositionByte());
         builder.addInteger(columnInfo.animationByteColKey, unmanagedSource.realmGet$animationByte());
         builder.addInteger(columnInfo.durationHoursByteColKey, unmanagedSource.realmGet$durationHoursByte());
         builder.addInteger(columnInfo.durationMinutesByteColKey, unmanagedSource.realmGet$durationMinutesByte());
@@ -507,13 +455,9 @@ public class it_ninespartans_xmanager_model_ProgramRealmProxy extends it.ninespa
         ProgramColumnInfo columnInfo = (ProgramColumnInfo) realm.getSchema().getColumnInfo(it.ninespartans.xmanager.model.Program.class);
         long objKey = OsObject.createEmbeddedObject(parentObjectTable, parentObjectKey, parentColumnKey);
         cache.put(object, objKey);
-        Number realmGet$leftDeviceLedPositionByte = ((it_ninespartans_xmanager_model_ProgramRealmProxyInterface) object).realmGet$leftDeviceLedPositionByte();
-        if (realmGet$leftDeviceLedPositionByte != null) {
-            Table.nativeSetLong(tableNativePtr, columnInfo.leftDeviceLedPositionByteColKey, objKey, realmGet$leftDeviceLedPositionByte.longValue(), false);
-        }
-        Number realmGet$rightDeviceLedPositionByte = ((it_ninespartans_xmanager_model_ProgramRealmProxyInterface) object).realmGet$rightDeviceLedPositionByte();
-        if (realmGet$rightDeviceLedPositionByte != null) {
-            Table.nativeSetLong(tableNativePtr, columnInfo.rightDeviceLedPositionByteColKey, objKey, realmGet$rightDeviceLedPositionByte.longValue(), false);
+        Number realmGet$deviceLedPositionByte = ((it_ninespartans_xmanager_model_ProgramRealmProxyInterface) object).realmGet$deviceLedPositionByte();
+        if (realmGet$deviceLedPositionByte != null) {
+            Table.nativeSetLong(tableNativePtr, columnInfo.deviceLedPositionByteColKey, objKey, realmGet$deviceLedPositionByte.longValue(), false);
         }
         Number realmGet$animationByte = ((it_ninespartans_xmanager_model_ProgramRealmProxyInterface) object).realmGet$animationByte();
         if (realmGet$animationByte != null) {
@@ -550,13 +494,9 @@ public class it_ninespartans_xmanager_model_ProgramRealmProxy extends it.ninespa
             }
             long objKey = OsObject.createEmbeddedObject(parentObjectTable, parentObjectKey, parentColumnKey);
             cache.put(object, objKey);
-            Number realmGet$leftDeviceLedPositionByte = ((it_ninespartans_xmanager_model_ProgramRealmProxyInterface) object).realmGet$leftDeviceLedPositionByte();
-            if (realmGet$leftDeviceLedPositionByte != null) {
-                Table.nativeSetLong(tableNativePtr, columnInfo.leftDeviceLedPositionByteColKey, objKey, realmGet$leftDeviceLedPositionByte.longValue(), false);
-            }
-            Number realmGet$rightDeviceLedPositionByte = ((it_ninespartans_xmanager_model_ProgramRealmProxyInterface) object).realmGet$rightDeviceLedPositionByte();
-            if (realmGet$rightDeviceLedPositionByte != null) {
-                Table.nativeSetLong(tableNativePtr, columnInfo.rightDeviceLedPositionByteColKey, objKey, realmGet$rightDeviceLedPositionByte.longValue(), false);
+            Number realmGet$deviceLedPositionByte = ((it_ninespartans_xmanager_model_ProgramRealmProxyInterface) object).realmGet$deviceLedPositionByte();
+            if (realmGet$deviceLedPositionByte != null) {
+                Table.nativeSetLong(tableNativePtr, columnInfo.deviceLedPositionByteColKey, objKey, realmGet$deviceLedPositionByte.longValue(), false);
             }
             Number realmGet$animationByte = ((it_ninespartans_xmanager_model_ProgramRealmProxyInterface) object).realmGet$animationByte();
             if (realmGet$animationByte != null) {
@@ -586,17 +526,11 @@ public class it_ninespartans_xmanager_model_ProgramRealmProxy extends it.ninespa
         ProgramColumnInfo columnInfo = (ProgramColumnInfo) realm.getSchema().getColumnInfo(it.ninespartans.xmanager.model.Program.class);
         long objKey = OsObject.createEmbeddedObject(parentObjectTable, parentObjectKey, parentColumnKey);
         cache.put(object, objKey);
-        Number realmGet$leftDeviceLedPositionByte = ((it_ninespartans_xmanager_model_ProgramRealmProxyInterface) object).realmGet$leftDeviceLedPositionByte();
-        if (realmGet$leftDeviceLedPositionByte != null) {
-            Table.nativeSetLong(tableNativePtr, columnInfo.leftDeviceLedPositionByteColKey, objKey, realmGet$leftDeviceLedPositionByte.longValue(), false);
+        Number realmGet$deviceLedPositionByte = ((it_ninespartans_xmanager_model_ProgramRealmProxyInterface) object).realmGet$deviceLedPositionByte();
+        if (realmGet$deviceLedPositionByte != null) {
+            Table.nativeSetLong(tableNativePtr, columnInfo.deviceLedPositionByteColKey, objKey, realmGet$deviceLedPositionByte.longValue(), false);
         } else {
-            Table.nativeSetNull(tableNativePtr, columnInfo.leftDeviceLedPositionByteColKey, objKey, false);
-        }
-        Number realmGet$rightDeviceLedPositionByte = ((it_ninespartans_xmanager_model_ProgramRealmProxyInterface) object).realmGet$rightDeviceLedPositionByte();
-        if (realmGet$rightDeviceLedPositionByte != null) {
-            Table.nativeSetLong(tableNativePtr, columnInfo.rightDeviceLedPositionByteColKey, objKey, realmGet$rightDeviceLedPositionByte.longValue(), false);
-        } else {
-            Table.nativeSetNull(tableNativePtr, columnInfo.rightDeviceLedPositionByteColKey, objKey, false);
+            Table.nativeSetNull(tableNativePtr, columnInfo.deviceLedPositionByteColKey, objKey, false);
         }
         Number realmGet$animationByte = ((it_ninespartans_xmanager_model_ProgramRealmProxyInterface) object).realmGet$animationByte();
         if (realmGet$animationByte != null) {
@@ -641,17 +575,11 @@ public class it_ninespartans_xmanager_model_ProgramRealmProxy extends it.ninespa
             }
             long objKey = OsObject.createEmbeddedObject(parentObjectTable, parentObjectKey, parentColumnKey);
             cache.put(object, objKey);
-            Number realmGet$leftDeviceLedPositionByte = ((it_ninespartans_xmanager_model_ProgramRealmProxyInterface) object).realmGet$leftDeviceLedPositionByte();
-            if (realmGet$leftDeviceLedPositionByte != null) {
-                Table.nativeSetLong(tableNativePtr, columnInfo.leftDeviceLedPositionByteColKey, objKey, realmGet$leftDeviceLedPositionByte.longValue(), false);
+            Number realmGet$deviceLedPositionByte = ((it_ninespartans_xmanager_model_ProgramRealmProxyInterface) object).realmGet$deviceLedPositionByte();
+            if (realmGet$deviceLedPositionByte != null) {
+                Table.nativeSetLong(tableNativePtr, columnInfo.deviceLedPositionByteColKey, objKey, realmGet$deviceLedPositionByte.longValue(), false);
             } else {
-                Table.nativeSetNull(tableNativePtr, columnInfo.leftDeviceLedPositionByteColKey, objKey, false);
-            }
-            Number realmGet$rightDeviceLedPositionByte = ((it_ninespartans_xmanager_model_ProgramRealmProxyInterface) object).realmGet$rightDeviceLedPositionByte();
-            if (realmGet$rightDeviceLedPositionByte != null) {
-                Table.nativeSetLong(tableNativePtr, columnInfo.rightDeviceLedPositionByteColKey, objKey, realmGet$rightDeviceLedPositionByte.longValue(), false);
-            } else {
-                Table.nativeSetNull(tableNativePtr, columnInfo.rightDeviceLedPositionByteColKey, objKey, false);
+                Table.nativeSetNull(tableNativePtr, columnInfo.deviceLedPositionByteColKey, objKey, false);
             }
             Number realmGet$animationByte = ((it_ninespartans_xmanager_model_ProgramRealmProxyInterface) object).realmGet$animationByte();
             if (realmGet$animationByte != null) {
@@ -700,8 +628,7 @@ public class it_ninespartans_xmanager_model_ProgramRealmProxy extends it.ninespa
         it_ninespartans_xmanager_model_ProgramRealmProxyInterface unmanagedCopy = (it_ninespartans_xmanager_model_ProgramRealmProxyInterface) unmanagedObject;
         it_ninespartans_xmanager_model_ProgramRealmProxyInterface realmSource = (it_ninespartans_xmanager_model_ProgramRealmProxyInterface) realmObject;
         Realm objectRealm = (Realm) ((RealmObjectProxy) realmObject).realmGet$proxyState().getRealm$realm();
-        unmanagedCopy.realmSet$leftDeviceLedPositionByte(realmSource.realmGet$leftDeviceLedPositionByte());
-        unmanagedCopy.realmSet$rightDeviceLedPositionByte(realmSource.realmGet$rightDeviceLedPositionByte());
+        unmanagedCopy.realmSet$deviceLedPositionByte(realmSource.realmGet$deviceLedPositionByte());
         unmanagedCopy.realmSet$animationByte(realmSource.realmGet$animationByte());
         unmanagedCopy.realmSet$durationHoursByte(realmSource.realmGet$durationHoursByte());
         unmanagedCopy.realmSet$durationMinutesByte(realmSource.realmGet$durationMinutesByte());
@@ -715,8 +642,7 @@ public class it_ninespartans_xmanager_model_ProgramRealmProxy extends it.ninespa
         it_ninespartans_xmanager_model_ProgramRealmProxyInterface realmObjectSource = (it_ninespartans_xmanager_model_ProgramRealmProxyInterface) newObject;
         Table table = realm.getTable(it.ninespartans.xmanager.model.Program.class);
         OsObjectBuilder builder = new OsObjectBuilder(table, flags);
-        builder.addInteger(columnInfo.leftDeviceLedPositionByteColKey, realmObjectSource.realmGet$leftDeviceLedPositionByte());
-        builder.addInteger(columnInfo.rightDeviceLedPositionByteColKey, realmObjectSource.realmGet$rightDeviceLedPositionByte());
+        builder.addInteger(columnInfo.deviceLedPositionByteColKey, realmObjectSource.realmGet$deviceLedPositionByte());
         builder.addInteger(columnInfo.animationByteColKey, realmObjectSource.realmGet$animationByte());
         builder.addInteger(columnInfo.durationHoursByteColKey, realmObjectSource.realmGet$durationHoursByte());
         builder.addInteger(columnInfo.durationMinutesByteColKey, realmObjectSource.realmGet$durationMinutesByte());
@@ -737,12 +663,8 @@ public class it_ninespartans_xmanager_model_ProgramRealmProxy extends it.ninespa
             return "Invalid object";
         }
         StringBuilder stringBuilder = new StringBuilder("Program = proxy[");
-        stringBuilder.append("{leftDeviceLedPositionByte:");
-        stringBuilder.append(realmGet$leftDeviceLedPositionByte() != null ? realmGet$leftDeviceLedPositionByte() : "null");
-        stringBuilder.append("}");
-        stringBuilder.append(",");
-        stringBuilder.append("{rightDeviceLedPositionByte:");
-        stringBuilder.append(realmGet$rightDeviceLedPositionByte() != null ? realmGet$rightDeviceLedPositionByte() : "null");
+        stringBuilder.append("{deviceLedPositionByte:");
+        stringBuilder.append(realmGet$deviceLedPositionByte() != null ? realmGet$deviceLedPositionByte() : "null");
         stringBuilder.append("}");
         stringBuilder.append(",");
         stringBuilder.append("{animationByte:");

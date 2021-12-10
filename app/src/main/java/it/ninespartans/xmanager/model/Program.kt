@@ -8,18 +8,18 @@ import kotlin.math.min
 @RealmClass(embedded = true)
 open class Program: RealmObject() {
 
-    enum class ShoeLedPosition { TOP, TOPEXT, BOTTOMEXT, TOPINT, BOTTOMINT }
+    enum class ShoeLedPosition { TOP, TOPEXT, EXT, TOPINT, INT }
     fun ledPositionToByte(position: ShoeLedPosition): Byte {
         when (position) {
             ShoeLedPosition.TOP ->
                 return 0u.toByte()
             ShoeLedPosition.TOPEXT ->
                 return 1u.toByte()
-            ShoeLedPosition.BOTTOMEXT ->
+            ShoeLedPosition.EXT ->
                 return 2u.toByte()
             ShoeLedPosition.TOPINT ->
                 return 3u.toByte()
-            ShoeLedPosition.BOTTOMINT ->
+            ShoeLedPosition.INT ->
                 return 4u.toByte()
         }
 
@@ -37,8 +37,9 @@ open class Program: RealmObject() {
         }
     }
 
-    var leftDeviceLedPositionByte: Byte? = null
-    var rightDeviceLedPositionByte: Byte? = null
+    //var leftDeviceLedPositionByte: Byte? = null
+    //var rightDeviceLedPositionByte: Byte? = null
+    var deviceLedPositionByte: Byte? = null
     var animationByte: Byte? = null
     var durationHoursByte: Byte? = null
     var durationMinutesByte: Byte? = null
@@ -84,9 +85,10 @@ open class Program: RealmObject() {
     var rightDeviceLedPositionByte: Byte = rightDeviceLedPosition.value
 */
 
-    fun setData(leftLedPosition: ShoeLedPosition, rightLedPosition: ShoeLedPosition, animation: ShoeLedAnimation, hours: Long, minutes: Long, seconds: Long) {
-        leftDeviceLedPositionByte = ledPositionToByte(leftLedPosition)
-        rightDeviceLedPositionByte = ledPositionToByte(rightLedPosition)
+    fun setData(ledPosition: ShoeLedPosition, animation: ShoeLedAnimation, hours: Long, minutes: Long, seconds: Long) {
+        //leftDeviceLedPositionByte = ledPositionToByte(leftLedPosition)
+        //rightDeviceLedPositionByte = ledPositionToByte(rightLedPosition)
+        deviceLedPositionByte = ledPositionToByte(ledPosition)
         animationByte = animationToByte(animation)
         durationHoursByte = hours.toByte()
         durationMinutesByte = minutes.toByte()

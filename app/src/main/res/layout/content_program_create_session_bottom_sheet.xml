@@ -31,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:baselineAligned="false"
         android:layout_marginBottom="10dp">
         <LinearLayout
             android:layout_width="0dp"
@@ -43,107 +44,112 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Tipo indicatore">
-            </TextView>
-            <TextView
-                android:id="@+id/ledTypeDescription"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Lampeggiante">
+                android:text="@string/sheet_create_session_anim_type_title">
             </TextView>
             <RadioGroup
-                android:id="@+id/radioGroup"
-                android:checkedButton="@+id/radio_button_2"
+                android:id="@+id/radioGroupIndicator"
+                android:checkedButton="@+id/blink_light"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
                 <RadioButton
-                    android:id="@+id/radio_button_1"
+                    android:id="@+id/static_light"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/sheet_create_session_type_0"/>
+                    android:text="@string/sheet_create_session_type_static"/>
                 <RadioButton
-                    android:id="@+id/radio_button_2"
+                    android:id="@+id/blink_light"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/sheet_create_session_type_1"/>
+                    android:text="@string/sheet_create_session_type_blink"/>
                 <RadioButton
-                    android:id="@+id/radio_button_3"
+                    android:id="@+id/fade_light"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/sheet_create_session_type_2"
+                    android:text="@string/sheet_create_session_type_fade"
                     android:enabled="false"/>
             </RadioGroup>
         </LinearLayout>
-        <ImageView
-            android:id="@+id/leftShoeImage"
+        <LinearLayout
+            android:id="@+id/shoePairImageViewContainer"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="270dp"
-            android:src="@drawable/shoe_pair">
-        </ImageView>
+            android:background="@drawable/shoe_pair_light_off">
+            <ImageView
+                android:id="@+id/shoePairImageView"
+                android:contentDescription="@string/activity_create_program_row_add_session_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shoe_pair_light_top">
+            </ImageView>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:orientation="vertical">
         <TextView
             android:id="@+id/lightPositionTitle"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Posizione indicatore led">
+            android:text="@string/sheet_create_session_dir_title">
         </TextView>
-        <TextView
-            android:id="@+id/lightPositionDescription"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/toggleButtonDirection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Esterno">
-        </TextView>
-        <RadioGroup
-            android:checkedButton="@+id/radio_position_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            app:checkedButton="@+id/top"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
-            <RadioButton
-                android:id="@+id/radio_position_0"
+            app:singleSelection="true"
+            app:selectionRequired="true">
+            <Button
+                android:id="@+id/extern"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="ext"/>
-            <RadioButton
-                android:id="@+id/radio_position_1"
+                android:padding="0dp"
+                android:text="@string/sheet_create_session_dir_ext"/>
+            <Button
+                android:id="@+id/top_extern"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="t-ext"/>
-            <RadioButton
-                android:id="@+id/radio_position_2"
+                android:padding="0dp"
+                android:text="@string/sheet_create_session_dir_top_ext"/>
+            <Button
+                android:id="@+id/top"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="top"/>
-            <RadioButton
-                android:id="@+id/radio_position_3"
+                android:text="@string/sheet_create_session_dir_top"
+                android:padding="0dp" />
+            <Button
+                android:id="@+id/top_intern"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="t-int"/>
-            <RadioButton
-                android:id="@+id/radio_position_4"
+                android:padding="0dp"
+                android:text="@string/sheet_create_session_dir_top_int"/>
+            <Button
+                android:id="@+id/intern"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="int"/>
-        </RadioGroup>
+                android:text="@string/sheet_create_session_dir_int"
+                android:padding="0dp" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -180,6 +186,7 @@
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:enabled="false"
         android:text="@string/sheet_create_session_button_save">
     </com.google.android.material.button.MaterialButton>
 </LinearLayout>
