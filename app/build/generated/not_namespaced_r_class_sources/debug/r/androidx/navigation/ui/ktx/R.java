@@ -1274,23 +1274,23 @@ public final class R {
         public static final int abc_shareactionprovider_share_with = 0x7f110018;
         public static final int abc_shareactionprovider_share_with_application = 0x7f110019;
         public static final int abc_toolbar_collapse_description = 0x7f11001a;
-        public static final int appbar_scrolling_view_behavior = 0x7f110039;
-        public static final int bottom_sheet_behavior = 0x7f11003a;
-        public static final int character_counter_content_description = 0x7f11003c;
-        public static final int character_counter_pattern = 0x7f11003e;
-        public static final int fab_transformation_scrim_behavior = 0x7f110047;
-        public static final int fab_transformation_sheet_behavior = 0x7f110048;
-        public static final int hide_bottom_view_on_scroll_behavior = 0x7f11004a;
-        public static final int mtrl_chip_close_icon_content_description = 0x7f110069;
-        public static final int nav_app_bar_navigate_up_description = 0x7f11008b;
-        public static final int nav_app_bar_open_drawer_description = 0x7f11008c;
-        public static final int password_toggle_content_description = 0x7f11008e;
-        public static final int path_password_eye = 0x7f11008f;
-        public static final int path_password_eye_mask_strike_through = 0x7f110090;
-        public static final int path_password_eye_mask_visible = 0x7f110091;
-        public static final int path_password_strike_through = 0x7f110092;
-        public static final int search_menu_title = 0x7f1100a3;
-        public static final int status_bar_notification_info_overflow = 0x7f1100bb;
+        public static final int appbar_scrolling_view_behavior = 0x7f110041;
+        public static final int bottom_sheet_behavior = 0x7f110042;
+        public static final int character_counter_content_description = 0x7f110044;
+        public static final int character_counter_pattern = 0x7f110046;
+        public static final int fab_transformation_scrim_behavior = 0x7f11004f;
+        public static final int fab_transformation_sheet_behavior = 0x7f110050;
+        public static final int hide_bottom_view_on_scroll_behavior = 0x7f110052;
+        public static final int mtrl_chip_close_icon_content_description = 0x7f110071;
+        public static final int nav_app_bar_navigate_up_description = 0x7f110093;
+        public static final int nav_app_bar_open_drawer_description = 0x7f110094;
+        public static final int password_toggle_content_description = 0x7f110096;
+        public static final int path_password_eye = 0x7f110097;
+        public static final int path_password_eye_mask_strike_through = 0x7f110098;
+        public static final int path_password_eye_mask_visible = 0x7f110099;
+        public static final int path_password_strike_through = 0x7f11009a;
+        public static final int search_menu_title = 0x7f1100ab;
+        public static final int status_bar_notification_info_overflow = 0x7f1100c3;
     }
     public static final class style {
         private style() {}

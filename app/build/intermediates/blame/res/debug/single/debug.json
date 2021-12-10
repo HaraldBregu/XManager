@@ -508,6 +508,10 @@
         "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3a27b12f805c2a262fa84a871ed49494/appcompat-1.2.0/res/drawable-hdpi-v4/abc_list_selector_disabled_holo_light.9.png"
     },
     {
+        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/layout_content_create_account.xml.flat",
+        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/layout/content_create_account.xml"
+    },
+    {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_cab_background_top_mtrl_alpha.9.png.flat",
         "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3a27b12f805c2a262fa84a871ed49494/appcompat-1.2.0/res/drawable-mdpi-v4/abc_cab_background_top_mtrl_alpha.9.png"
     },
@@ -814,6 +818,10 @@
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/layout_mtrl_picker_fullscreen.xml.flat",
         "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9106a80cd21e4d2549bcadac3deff5f3/material-1.4.0/res/layout/mtrl_picker_fullscreen.xml"
+    },
+    {
+        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/layout_activity_create_account.xml.flat",
+        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/layout/activity_create_account.xml"
     },
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
@@ -1216,12 +1224,12 @@
         "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable-xxxhdpi/ic_player_pair_shoes.png"
     },
     {
-        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-v24_shoe_pair_light_ext.png.flat",
-        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable-v24/shoe_pair_light_ext.png"
-    },
-    {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_list_longpressed_holo.9.png.flat",
         "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3a27b12f805c2a262fa84a871ed49494/appcompat-1.2.0/res/drawable-hdpi-v4/abc_list_longpressed_holo.9.png"
+    },
+    {
+        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-v24_shoe_pair_light_ext.png.flat",
+        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable-v24/shoe_pair_light_ext.png"
     },
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
@@ -1534,10 +1542,6 @@
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/layout_test_reflow_chipgroup.xml.flat",
         "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9106a80cd21e4d2549bcadac3deff5f3/material-1.4.0/res/layout/test_reflow_chipgroup.xml"
-    },
-    {
-        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/layout_content_create_player.xml.flat",
-        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/layout/content_create_player.xml"
     },
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/color_mtrl_tabs_icon_color_selector_colored.xml.flat",
@@ -2394,10 +2398,6 @@
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/layout_abc_search_dropdown_item_icons_2line.xml.flat",
         "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3a27b12f805c2a262fa84a871ed49494/appcompat-1.2.0/res/layout/abc_search_dropdown_item_icons_2line.xml"
-    },
-    {
-        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/layout_activity_create_player.xml.flat",
-        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/layout/activity_create_player.xml"
     },
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_scrubber_control_to_pressed_mtrl_005.png.flat",

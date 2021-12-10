@@ -11,7 +11,11 @@
         <entry key="../../../../../../layout/custom_preview.xml" value="0.18125" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.18229166666666666" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_create_account.xml" value="0.16614583333333333" />
+        <entry key="app/src/main/res/layout/activity_create_user.xml" value="0.16614583333333333" />
+        <entry key="app/src/main/res/layout/content_create_player.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/layout/content_create_program.xml" value="0.25625" />
+        <entry key="app/src/main/res/layout/content_create_user.xml" value="0.335" />
         <entry key="app/src/main/res/layout/content_device_pair_search.xml" value="0.375" />
         <entry key="app/src/main/res/layout/content_device_pair_select.xml" value="0.1421875" />
         <entry key="app/src/main/res/layout/content_program_create_session_bottom_sheet.xml" value="0.351981351981352" />

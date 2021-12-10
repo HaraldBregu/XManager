@@ -89,8 +89,8 @@
 47-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:44:13-56
 48        <activity
 48-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:45:9-48:59
-49            android:name="it.ninespartans.xmanager.CreateUserActivity"
-49-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:46:13-71
+49            android:name="it.ninespartans.xmanager.CreateAccountActivity"
+49-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:46:13-74
 50            android:label="@string/title_activity_create_profile"
 50-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:47:13-66
 51            android:theme="@style/AppTheme.NoActionBar" />
@@ -105,10 +105,10 @@
 55-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:52:13-56
 56        <activity
 56-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:53:9-56:59
-57            android:name="it.ninespartans.xmanager.CreatePlayerActivity"
-57-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:54:13-73
-58            android:label="@string/title_activity_create_player"
-58-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:55:13-65
+57            android:name="it.ninespartans.xmanager.CreateUserActivity"
+57-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:54:13-71
+58            android:label="@string/activity_create_user_title"
+58-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:55:13-63
 59            android:theme="@style/AppTheme.NoActionBar" />
 59-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:56:13-56
 60        <activity

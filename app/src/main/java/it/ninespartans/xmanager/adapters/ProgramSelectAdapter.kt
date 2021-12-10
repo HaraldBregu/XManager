@@ -7,15 +7,15 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import io.realm.RealmResults
 import it.ninespartans.xmanager.R
-import it.ninespartans.xmanager.model.TrainingSessionProgram
+import it.ninespartans.xmanager.model.TrainingProgram
 import kotlinx.android.synthetic.main.row_program_list.view.descriptionProgram
 import kotlinx.android.synthetic.main.row_program_list.view.nameProgram
 import kotlinx.android.synthetic.main.row_program_select_list.view.*
 
-class ProgramSelectAdapter(context: Context, programs: RealmResults<TrainingSessionProgram>): BaseAdapter() {
+class ProgramSelectAdapter(context: Context, programs: RealmResults<TrainingProgram>): BaseAdapter() {
     private val mContext: Context
     private var inflater: LayoutInflater
-    var programs: RealmResults<TrainingSessionProgram>
+    var programs: RealmResults<TrainingProgram>
 
     init {
         mContext = context
@@ -31,7 +31,7 @@ class ProgramSelectAdapter(context: Context, programs: RealmResults<TrainingSess
         return position.toLong()
     }
 
-    override fun getItem(position: Int): TrainingSessionProgram? {
+    override fun getItem(position: Int): TrainingProgram? {
         return programs.get(position)
     }
 
@@ -73,7 +73,7 @@ class ProgramSelectAdapter(context: Context, programs: RealmResults<TrainingSess
         }
 
         var sessions = ""
-        program?.programList?.let {
+        program?.programs?.let {
             sessions = "\nSessioni: ${it.size}"
         }
         description += sessions

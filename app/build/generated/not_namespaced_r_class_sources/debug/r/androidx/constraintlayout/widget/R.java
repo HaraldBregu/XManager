@@ -1146,8 +1146,8 @@ public final class R {
         public static final int abc_shareactionprovider_share_with = 0x7f110018;
         public static final int abc_shareactionprovider_share_with_application = 0x7f110019;
         public static final int abc_toolbar_collapse_description = 0x7f11001a;
-        public static final int search_menu_title = 0x7f1100a3;
-        public static final int status_bar_notification_info_overflow = 0x7f1100bb;
+        public static final int search_menu_title = 0x7f1100ab;
+        public static final int status_bar_notification_info_overflow = 0x7f1100c3;
     }
     public static final class style {
         private style() {}

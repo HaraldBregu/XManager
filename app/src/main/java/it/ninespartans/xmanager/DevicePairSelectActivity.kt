@@ -2,9 +2,6 @@ package it.ninespartans.xmanager
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Environment
-import android.text.Editable
-import android.text.TextWatcher
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.View
@@ -26,7 +23,7 @@ import kotlinx.android.synthetic.main.content_device_pair_select.*
 
 class DevicePairSelectActivity : AppCompatActivity() {
     lateinit var deviceInfo: DeviceInfo
-    private lateinit var player: Player
+    private lateinit var player: User
     var playerId: String = ""
     var animationType: Byte = 0u.toByte()
     var ledPosition: Byte = 0u.toByte()
@@ -46,7 +43,7 @@ class DevicePairSelectActivity : AppCompatActivity() {
 
         setLeftDevice.setOnClickListener {
             Realm.getDefaultInstance().use { realm ->
-                realm.where<Player>().equalTo("id", playerId).findFirst()?.let {
+                realm.where<User>().equalTo("id", playerId).findFirst()?.let {
                     this.player = it
                     realm.executeTransaction {
                         var device = realm.copyToRealmOrUpdate(Device().apply {
@@ -56,7 +53,7 @@ class DevicePairSelectActivity : AppCompatActivity() {
                             ble_mac = deviceInfo.ble.mac
                             wifi_mac = deviceInfo.wifi.mac
                         })
-                        this.player.leftDevice = device
+                        //this.player.leftDevice = device
                     }
                 }
             }
@@ -64,7 +61,7 @@ class DevicePairSelectActivity : AppCompatActivity() {
 
         setRightDevice.setOnClickListener {
             Realm.getDefaultInstance().use { realm ->
-                realm.where<Player>().equalTo("id", playerId).findFirst()?.let {
+                realm.where<User>().equalTo("id", playerId).findFirst()?.let {
                     this.player = it
                     realm.executeTransaction {
                         var device = realm.copyToRealmOrUpdate(Device().apply {
@@ -74,7 +71,7 @@ class DevicePairSelectActivity : AppCompatActivity() {
                             ble_mac = deviceInfo.ble.mac
                             wifi_mac = deviceInfo.wifi.mac
                         })
-                        this.player.rightDevice = device
+                        //this.player.rightDevice = device
                     }
                 }
             }

@@ -5,15 +5,16 @@ import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import java.util.*
 
-
 open class User(
     @PrimaryKey
     var id: String = UUID.randomUUID().toString(),
-    var createdAt: Date = Date(),
-    var fullName: String = "",
-    var firstName: String = "",
-    var lastName: String = "",
+    var account: Account? = null,
+    var fullname: String = "",
     var headline: String = "",
+    var role: String = "",
     var age: String = "",
-    var emailAddress: String = ""
-    ):RealmObject()
+    var emailAddress: String = "",
+    var phoneNumber: String = "",
+    var createdAt: Date = Date(),
+    var updatedAt: Date = Date()
+) : RealmObject()

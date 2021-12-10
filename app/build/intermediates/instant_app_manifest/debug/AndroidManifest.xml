@@ -47,7 +47,7 @@
             android:label="@string/activity_program_list_title"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="it.ninespartans.xmanager.CreateUserActivity"
+            android:name="it.ninespartans.xmanager.CreateAccountActivity"
             android:label="@string/title_activity_create_profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -55,8 +55,8 @@
             android:label="@string/title_activity_create_program_nav_title"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="it.ninespartans.xmanager.CreatePlayerActivity"
-            android:label="@string/title_activity_create_player"
+            android:name="it.ninespartans.xmanager.CreateUserActivity"
+            android:label="@string/activity_create_user_title"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="it.ninespartans.xmanager.DevicePairSelectActivity"

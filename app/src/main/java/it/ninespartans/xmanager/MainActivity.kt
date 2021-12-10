@@ -6,8 +6,6 @@ import android.app.AlertDialog
 import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothProfile
 import android.content.Intent
-import android.content.SharedPreferences
-import android.content.res.Configuration
 import android.os.*
 import android.util.Log
 import android.view.*
@@ -16,7 +14,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import io.realm.Realm
 import it.ninespartans.xmanager.bluetooth.BLEManager
 import android.widget.*
-import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.realm.RealmResults
 import io.realm.kotlin.where
@@ -25,7 +22,6 @@ import it.ninespartans.xmanager.adapters.ProgramSelectAdapter
 import it.ninespartans.xmanager.common.Common
 import it.ninespartans.xmanager.model.*
 import kotlinx.android.synthetic.main.content_main.*
-import org.jetbrains.anko.configuration
 import java.util.*
 
 
@@ -45,26 +41,25 @@ class MainActivity : AppCompatActivity() {
         title = getString(R.string.title_activity_home)
 
         var realm = Realm.getDefaultInstance()
-        val players = realm.where<Player>()
-            .findAll()
+        val users = realm.where<User>().findAll()
 
-        val programs = realm.where<TrainingSessionProgram>().findAll()
-        adapter = MainListAdapter(this, players, programs)
+        val programs = realm.where<TrainingProgram>().findAll()
+        adapter = MainListAdapter(this, users, programs)
 
         list_view.adapter = adapter
 
         adapter.onClickAction = {
             when (it) {
                 MainListAdapter.Action.CREATE_USER -> {
-                    val intent = Intent(this, CreateUserActivity::class.java)
+                    val intent = Intent(this, CreateAccountActivity::class.java)
                     startActivity(intent)
                 }
                 MainListAdapter.Action.DELETE_PROGRAM -> {
                     Realm.getDefaultInstance().use { realm ->
                         realm.executeTransaction {
-                            realm.where<TrainingSessionProgram>().findAll()?.let {
+                            realm.where<TrainingProgram>().findAll()?.let {
                                 it.deleteAllFromRealm()
-                                adapter.programs = realm.where(TrainingSessionProgram::class.java).findAll()
+                                adapter.programs = realm.where(TrainingProgram::class.java).findAll()
                                 adapter.notifyDataSetChanged()
                             }
                         }
@@ -82,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     builderInner.setPositiveButton("Termina") { dialog, which ->
                         var realm = Realm.getDefaultInstance()
-                        val programs = realm.where<TrainingSessionProgram>().findAll()
+                        val programs = realm.where<TrainingProgram>().findAll()
                         realm.executeTransaction { realm ->
                             programs.forEach {
                                 val calendar = Calendar.getInstance()
@@ -106,7 +101,7 @@ class MainActivity : AppCompatActivity() {
                     presentProgramBottomSheet()
                 }
                 MainListAdapter.Action.ADD_PLAYER -> {
-                    val intent = Intent(this, CreatePlayerActivity::class.java)
+                    val intent = Intent(this, CreateUserActivity::class.java)
                     startActivity(intent)
                 }
             }
@@ -115,8 +110,8 @@ class MainActivity : AppCompatActivity() {
         adapter.onClickActionOnItem = { action, player ->
             when (action) {
                 MainListAdapter.Action.EDIT_PLAYER -> {
-                    val intent = Intent(this, CreatePlayerActivity::class.java)
-                    intent.putExtra("player_id", player.id)
+                    val intent = Intent(this, CreateUserActivity::class.java)
+                    intent.putExtra("user_id", player.id)
                     startActivity(intent)
                 }
                 MainListAdapter.Action.DELETE_PLAYER -> {
@@ -129,8 +124,8 @@ class MainActivity : AppCompatActivity() {
                     builderInner.setPositiveButton("Delete") { dialog, which ->
                         Realm.getDefaultInstance().use { realm ->
                             realm.executeTransaction {
-                                player.leftDevice?.deleteFromRealm()
-                                player.rightDevice?.deleteFromRealm()
+                                //player.leftDevice?.deleteFromRealm()
+                                //player.rightDevice?.deleteFromRealm()
                                 player.deleteFromRealm()
                                 updateList()
                             }
@@ -140,14 +135,14 @@ class MainActivity : AppCompatActivity() {
                 }
                 MainListAdapter.Action.COMPLETE_DEVICES -> {
                     val intent = Intent(this, DevicePairSearchActivity::class.java)
-                    intent.putExtra("player_id", player.id)
+                    intent.putExtra("user_id", player.id)
                     startActivity(intent)
                 }
                 MainListAdapter.Action.DELETE_DEVICES -> {
                     Realm.getDefaultInstance().use { realm ->
                         realm.executeTransaction {
-                            player.leftDevice?.deleteFromRealm()
-                            player.rightDevice?.deleteFromRealm()
+                            //player.leftDevice?.deleteFromRealm()
+                            //player.rightDevice?.deleteFromRealm()
                             updateList()
                         }
                     }
@@ -167,7 +162,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.action_create_program ->
                         startActivity(Intent(this, CreateProgramActivity::class.java))
                     R.id.action_create_player  ->
-                        startActivity(Intent(this, CreatePlayerActivity::class.java))
+                        startActivity(Intent(this, CreateUserActivity::class.java))
                 }
                 true
             }
@@ -214,12 +209,12 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.action_profile -> {
-                val intent = Intent(this, CreateUserActivity::class.java)
+                val intent = Intent(this, CreateAccountActivity::class.java)
                 startActivity(intent)
                 return true
             }
             android.R.id.home -> {
-                val intent = Intent(this, CreateUserActivity::class.java)
+                val intent = Intent(this, CreateAccountActivity::class.java)
                 startActivity(intent)
                 return true
             }
@@ -235,7 +230,7 @@ class MainActivity : AppCompatActivity() {
         bottomSheetDialog.setContentView(R.layout.content_program_select_bottom_sheet)
 
         var realm = Realm.getDefaultInstance()
-        val programs = realm.where<TrainingSessionProgram>().findAll()
+        val programs = realm.where<TrainingProgram>().findAll()
 
         var listView = bottomSheetDialog.findViewById<ListView>(R.id.list_view)
         listView?.isNestedScrollingEnabled = true
@@ -258,7 +253,7 @@ class MainActivity : AppCompatActivity() {
              * If there are no device connected to the players show an alert
              */
             var realm = Realm.getDefaultInstance()
-            var playersQuery = realm.where<Player>()
+            var playersQuery = realm.where<User>()
             val allPlayers = playersQuery.findAll()
 
             val players = playersQuery
@@ -279,7 +274,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 builderInner.setPositiveButton("Crea giocatore") { dialog, which ->
                     dialog.dismiss()
-                    startActivity(Intent(this, CreatePlayerActivity::class.java))
+                    startActivity(Intent(this, CreateUserActivity::class.java))
                 }
                 builderInner.show()
                 return@setOnItemClickListener
@@ -308,7 +303,7 @@ class MainActivity : AppCompatActivity() {
         Common.setWhiteNavigationBar(bottomSheetDialog)
     }
 
-    fun presenBottomtSheetUploader(trainingProgram: TrainingSessionProgram, players: RealmResults<Player>, playerIndex: Int = 0, foot: Foot = Foot.LEFT) {
+    fun presenBottomtSheetUploader(trainingProgram: TrainingProgram, players: RealmResults<User>, playerIndex: Int = 0, foot: Foot = Foot.LEFT) {
         if (playerIndex >= players.size) {
             startTrainingProgram(trainingProgram)
             return
@@ -340,15 +335,22 @@ class MainActivity : AppCompatActivity() {
         uploadProgramToPlayer(trainingProgram, players, playerIndex, foot)
     }
 
-    fun uploadProgramToPlayer(trainingProgram: TrainingSessionProgram, players: RealmResults<Player>, playerIndex: Int = 0, foot: Foot = Foot.LEFT) {
-        val player = players[playerIndex]
+    fun uploadProgramToPlayer(trainingProgram: TrainingProgram, users: RealmResults<User>, playerIndex: Int = 0, foot: Foot = Foot.LEFT) {
+        val user = users[playerIndex]
         bottomSheetDialog.setCancelable(true)
 
         uploadProgressProgram?.setProgress(0)
 
+        /** Fix */
+        /**
+         * Query for devices for this user and than upload the program
+         */
+
+        /*
         when (foot) {
             Foot.LEFT -> {
-                player?.leftDevice?.let {
+
+                user?.leftDevice?.let {
                     BLEManager.getDevice(it.ble_mac.toUpperCase())
                 }?: run {
                     this.uploadProgramToPlayer(trainingProgram, players, playerIndex, Foot.RIGHT)
@@ -364,7 +366,7 @@ class MainActivity : AppCompatActivity() {
                     return
                 }
             }
-        }
+        }*/
 
         /**
          * Player Name
@@ -376,7 +378,7 @@ class MainActivity : AppCompatActivity() {
         var descriptionProgress = bottomSheetDialog.findViewById<TextView>(R.id.progressBarTitle)
         val leftShoeImage = bottomSheetDialog.findViewById<ImageView>(R.id.leftShoeImage)
         val rightShoeImage = bottomSheetDialog.findViewById<ImageView>(R.id.rightShoeImage)
-        playerNameTextView?.text = player?.fullname
+        playerNameTextView?.text = user?.fullname
         descriptionProgress?.text = getString(R.string.upload_program_sheet_state_initial_title)
         leftShoeImage?.setColorFilter(R.color.colorPrimaryLight)
         rightShoeImage?.setColorFilter(R.color.colorPrimaryLight)
@@ -426,10 +428,10 @@ class MainActivity : AppCompatActivity() {
                 Handler(Looper.getMainLooper()).postDelayed({
                     when (foot) {
                         Foot.LEFT ->
-                            this.uploadProgramToPlayer(trainingProgram, players, playerIndex, Foot.RIGHT)
+                            this.uploadProgramToPlayer(trainingProgram, users, playerIndex, Foot.RIGHT)
                         Foot.RIGHT -> {
                             bottomSheetDialog.hide()
-                            this.presenBottomtSheetUploader(trainingProgram, players, playerIndex + 1, Foot.LEFT)
+                            this.presenBottomtSheetUploader(trainingProgram, users, playerIndex + 1, Foot.LEFT)
                         }
                     }
                 }, 2000)
@@ -447,10 +449,10 @@ class MainActivity : AppCompatActivity() {
                         programUploaded == false
                         when (foot) {
                             Foot.LEFT ->
-                                this.uploadProgramToPlayer(trainingProgram, players, playerIndex, Foot.RIGHT)
+                                this.uploadProgramToPlayer(trainingProgram, users, playerIndex, Foot.RIGHT)
                             Foot.RIGHT -> {
                                 bottomSheetDialog.hide()
-                                this.presenBottomtSheetUploader(trainingProgram, players, playerIndex + 1, Foot.LEFT)
+                                this.presenBottomtSheetUploader(trainingProgram, users, playerIndex + 1, Foot.LEFT)
                             }
                         }
                     }, 2000)
@@ -475,16 +477,7 @@ class MainActivity : AppCompatActivity() {
             runOnUiThread {
                 descriptionProgress?.text = getString(R.string.upload_program_sheet_state_writing_data_title)
                 uploadProgressProgram?.setProgress(80)
-
                 BLEManager.write(trainingProgram.programBytesDevice())
-
-                /*
-                when (foot) {
-                    Foot.LEFT ->
-                        BLEManager.write(trainingProgram.programBytesLeftDevice())
-                    Foot.RIGHT ->
-                        BLEManager.write(trainingProgram.programBytesRightDevice())
-                }*/
             }
         }
 
@@ -505,7 +498,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun startTrainingProgram(trainingProgram: TrainingSessionProgram) {
+    fun startTrainingProgram(trainingProgram: TrainingProgram) {
         Realm.getDefaultInstance().use { realm ->
             realm.executeTransaction { realm ->
                 realm.copyToRealmOrUpdate(trainingProgram.apply {
@@ -525,10 +518,10 @@ class MainActivity : AppCompatActivity() {
             }
 
             //Programs
-            adapter.programs = realm.where<TrainingSessionProgram>().findAll()
+            adapter.programs = realm.where<TrainingProgram>().findAll()
 
             // Players
-            adapter.players = realm.where<Player>().findAll()
+            adapter.players = realm.where<User>().findAll()
 
             adapter.notifyDataSetChanged()
         }

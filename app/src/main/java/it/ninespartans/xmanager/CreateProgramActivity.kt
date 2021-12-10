@@ -1,7 +1,6 @@
 package it.ninespartans.xmanager
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -11,7 +10,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.realm.Realm
 import io.realm.kotlin.where
 import it.ninespartans.xmanager.adapters.ProgramStepItemAdapter
-import it.ninespartans.xmanager.model.TrainingSessionProgram
 import kotlinx.android.synthetic.main.activity_create_program.*
 import kotlinx.android.synthetic.main.content_create_program.*
 import kotlinx.android.synthetic.main.content_create_program.list_view
@@ -22,11 +20,13 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.slider.Slider
 import it.ninespartans.xmanager.common.Common
+import it.ninespartans.xmanager.model.TrainingProgram
+
 
 
 class CreateProgramActivity : AppCompatActivity() {
     private lateinit var adapter: ProgramStepItemAdapter
-    private var trainingSessionProgram: TrainingSessionProgram? = null
+    private var trainingSessionProgram: TrainingProgram? = null
     private var programId: String? = null
     private var checkedRadioButtonAnimationId:Int? = null
     private var checkedButtonDirectionId:Int? = null
@@ -58,11 +58,11 @@ class CreateProgramActivity : AppCompatActivity() {
             saveProgram.text = getString(R.string.activity_create_program_button_save)
 
             Realm.getDefaultInstance().use { realm ->
-                realm.where<TrainingSessionProgram>().equalTo("id", it).findFirst()?.let {
+                realm.where<TrainingProgram>().equalTo("id", it).findFirst()?.let {
                     this.trainingSessionProgram = it
                     this.nameInputText.editText?.setText(it.title)
 
-                    if (it.programList.size > 3) {
+                    if (it.programs.size > 3) {
                         createSession.visibility = View.VISIBLE
                     }
                 }
@@ -100,7 +100,7 @@ class CreateProgramActivity : AppCompatActivity() {
                      * close the page
                      */
                     realm.executeTransaction {
-                        trainingSessionProgram = it.copyToRealmOrUpdate(TrainingSessionProgram().apply {
+                        trainingSessionProgram = it.copyToRealmOrUpdate(TrainingProgram().apply {
                             title = nameInputText.editText?.text.toString()
                             finish()
                         })
@@ -112,7 +112,7 @@ class CreateProgramActivity : AppCompatActivity() {
         /**
          * Adapter program step
          */
-        adapter = ProgramStepItemAdapter(this, trainingSessionProgram?.programList?.where()?.findAll())
+        adapter = ProgramStepItemAdapter(this, trainingSessionProgram?.programs?.where()?.findAll())
         list_view.adapter = adapter
 
 
@@ -129,7 +129,7 @@ class CreateProgramActivity : AppCompatActivity() {
                 trainingSessionProgram?.let {
                     realm.executeTransaction { realm ->
                         realm.copyToRealmOrUpdate(it.apply {
-                            this.programList.remove(item)
+                            this.programs.remove(item)
                             updateList()
                         })
                     }
@@ -229,16 +229,16 @@ class CreateProgramActivity : AppCompatActivity() {
                     realm.executeTransaction { realm ->
                         realm.copyToRealmOrUpdate(trainingSessionProgram.apply {
                             this.title = nameInputText.editText?.text.toString()
-                            this.programList.add(program)
+                            this.programs.add(program)
                             bottomSheetDialog.hide()
                             updateList()
                         })
                     }
                 } ?: run {
                     realm.executeTransaction {
-                        trainingSessionProgram = it.copyToRealmOrUpdate(TrainingSessionProgram().apply {
+                        trainingSessionProgram = it.copyToRealmOrUpdate(TrainingProgram().apply {
                             this.title = nameInputText.editText?.text.toString()
-                            this.programList.add(program)
+                            this.programs.add(program)
                         })
                         bottomSheetDialog.hide()
                         updateList()
@@ -353,9 +353,9 @@ class CreateProgramActivity : AppCompatActivity() {
     }
     fun updateList() {
         trainingSessionProgram?.let {
-            adapter.programList = it.programList.where()?.findAll()
+            adapter.programList = it.programs.where()?.findAll()
             createSession.visibility = View.GONE
-            if (it.programList.size > 5) {
+            if (it.programs.size > 5) {
                 createSession.visibility = View.VISIBLE
             }
             adapter.notifyDataSetChanged()

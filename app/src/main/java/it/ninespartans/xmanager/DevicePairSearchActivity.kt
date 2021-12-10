@@ -23,18 +23,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.realm.Realm
 import io.realm.kotlin.where
 import it.ninespartans.xmanager.bluetooth.BLEManager
-import it.ninespartans.xmanager.model.Player
 import kotlin.collections.ArrayList
-import android.util.Log
-import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import io.realm.Case
-import io.realm.ImportFlag
 import it.ninespartans.xmanager.model.Device
 import it.ninespartans.xmanager.model.DeviceInfo
+import it.ninespartans.xmanager.model.User
 import kotlinx.android.synthetic.main.content_device_pair_search.closeButton
 
 
@@ -42,7 +37,7 @@ class DevicePairSearchActivity : AppCompatActivity() {
     private var discoveredDevices: ArrayList<BluetoothDevice> = ArrayList()
     private lateinit var adapter: DeviceAdapter
     private var deviceInfo: DeviceInfo? = null
-    private var player: Player? = null
+    private var player: User? = null
     var playerId: String? = null
     val debug = true
     var bottomSheetDialog: BottomSheetDialog? = null
@@ -59,7 +54,7 @@ class DevicePairSearchActivity : AppCompatActivity() {
          * Show Player Name
          */
         Realm.getDefaultInstance().use { realm ->
-            realm.where<Player>().equalTo("id", playerId).findFirst()?.let {
+            realm.where<User>().equalTo("id", playerId).findFirst()?.let {
                 this.player = it
                 deviceSearchTitle.text = it.fullname
             }
@@ -277,21 +272,23 @@ class DevicePairSearchActivity : AppCompatActivity() {
                                      * Delete from other player
                                      */
 
-                                    realm.where<Player>()
+                                    realm.where<User>()
                                         .equalTo("leftDevice.ble_mac", device.ble_mac)
                                         .or()
                                         .equalTo("rightDevice.ble_mac", device.ble_mac)
                                         .findAll()?.let {
-                                            it.forEach {
+
+                                            /** Fix This **/
+                                            /*it.forEach {
                                                 if (it.leftDevice?.ble_mac == device.ble_mac) {
                                                     it.leftDevice = null
                                                 }
                                                 if (it.rightDevice?.ble_mac == device.ble_mac) {
                                                     it.rightDevice = null
                                                 }
-                                            }
+                                            }*/
                                         }
-
+/*
                                     if (leftSelected) {
                                         player.leftDevice = device
                                         if (player.rightDevice?.ble_mac == device.ble_mac)
@@ -303,7 +300,7 @@ class DevicePairSearchActivity : AppCompatActivity() {
                                             player.leftDevice = null
                                         player.rightDevice = device
                                     }
-
+*/
                                 }
                             }
                         } ?: run {
@@ -317,7 +314,8 @@ class DevicePairSearchActivity : AppCompatActivity() {
                                         wifi_mac = it.wifi.mac
                                     }
                                 })
-
+                            /** Fix this */
+                            /*
                                 if (leftSelected) {
                                     it.leftDevice = device
                                     it.rightDevice = null
@@ -326,7 +324,7 @@ class DevicePairSearchActivity : AppCompatActivity() {
                                 if (rightSelected) {
                                     it.leftDevice = null
                                     it.rightDevice = device
-                                }
+                                }*/
                             }
                         }
                     }
@@ -375,7 +373,7 @@ class DevicePairSearchActivity : AppCompatActivity() {
             rowDevice.rightShoeImage?.setImageResource(R.drawable.right_unactive)
 
             Realm.getDefaultInstance().use {
-                it.where<Player>()
+                it.where<User>()
                     .equalTo("leftDevice.name", device.name)
                     .equalTo("leftDevice.ble_mac", device.address, Case.INSENSITIVE)
                     .findFirst()?.let { player ->
@@ -383,7 +381,7 @@ class DevicePairSearchActivity : AppCompatActivity() {
                         rowDevice.textViewPlayer.text = "Player: " + player.fullname
                         rowDevice.leftShoeImage?.setImageResource(R.drawable.left)
                     }
-                it.where<Player>()
+                it.where<User>()
                     .equalTo("rightDevice.name", device.name)
                     .equalTo("rightDevice.ble_mac", device.address, Case.INSENSITIVE)
                     .findFirst()?.let { player ->

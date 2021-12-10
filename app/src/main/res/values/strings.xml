@@ -144,12 +144,15 @@
 
     <string name="title_activity_device_pair_search">Search devices</string>
 
-
-    <string name="title_activity_create_player">Create player</string>
-    <string name="title_activity_update_player">Update player</string>
-    <string name="title_activity_create_player_button">Continue</string>
-    <string name="title_activity_update_player_button">Update</string>
-    <string name="title_activity_update_player_cancel_button">Cancel</string>
+    <!--  Create User Activity  -->
+    <string name="activity_create_user_title">Giocatore</string>
+    <string name="activity_create_user_header_title">Informazioni del giocatore</string>
+    <string name="activity_create_user_header_description">Inserisci il nome e cognome del giocatore. Le altre informazione come il ruolo e l\'età sono opzionali.</string>
+    <string name="activity_create_user_field_name_hint">Nome e cognome</string>
+    <string name="activity_create_user_field_role_hint">Ruolo</string>
+    <string name="activity_create_user_field_age_hint">Età</string>
+    <string name="activity_create_user_button_title">continua</string>
+    <string name="activity_update_user_button_title">salva</string>
 
 
 </resources>

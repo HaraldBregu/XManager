@@ -12,7 +12,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import it.ninespartans.xmanager.bluetooth.BLEManager
 import kotlinx.android.synthetic.main.activity_permissions_manager.*
 import kotlinx.android.synthetic.main.content_permissions_manager.*
@@ -216,9 +215,14 @@ class PermissionsManagerActivity : AppCompatActivity() {
         override fun onReceive(contxt: Context?, intent: Intent?) {
             when(intent?.action) {
                 BluetoothAdapter.ACTION_STATE_CHANGED -> {
-                    var bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()?.takeIf { it != null } ?: return
+                    val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()?.takeIf { it != null } ?: return
                     when (bluetoothAdapter.state) {
+                        BluetoothAdapter.STATE_ON -> {
 
+                        }
+                        BluetoothAdapter.STATE_OFF -> {
+
+                        }
                         BluetoothAdapter.STATE_TURNING_ON -> {
                             Toast.makeText(
                                 this@PermissionsManagerActivity,

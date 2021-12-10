@@ -1,4 +1,4 @@
-#Fri Dec 10 15:06:47 CET 2021
+#Fri Dec 10 22:23:26 CET 2021
 base.1=/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/dex/debug/mergeProjectDexDebug/out/classes.dex
 path.1=classes.dex
 base.0=/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/dex/debug/mergeExtDexDebug/out/classes.dex

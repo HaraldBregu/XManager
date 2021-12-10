@@ -2544,7 +2544,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
-layout activity_create_player
+layout activity_create_account
 layout activity_create_program
 layout activity_create_user
 layout activity_debug
@@ -2553,7 +2553,7 @@ layout activity_device_pair_select
 layout activity_main
 layout activity_permissions_manager
 layout activity_program_list
-layout content_create_player
+layout content_create_account
 layout content_create_program
 layout content_create_user
 layout content_debug
@@ -2730,6 +2730,13 @@ string activity_create_program_row_add_session_title
 string activity_create_program_row_description
 string activity_create_program_row_number
 string activity_create_program_row_title
+string activity_create_user_button_title
+string activity_create_user_field_age_hint
+string activity_create_user_field_name_hint
+string activity_create_user_field_role_hint
+string activity_create_user_header_description
+string activity_create_user_header_title
+string activity_create_user_title
 string activity_device_search_header_description
 string activity_device_search_header_subtitle
 string activity_device_search_row_subtitle
@@ -2752,6 +2759,7 @@ string activity_program_list_header_title
 string activity_program_list_row_menu_delete
 string activity_program_list_row_menu_update
 string activity_program_list_title
+string activity_update_user_button_title
 string alert_dialog_
 string app_name
 string appbar_scrolling_view_behavior
@@ -2886,8 +2894,6 @@ string sheet_create_session_type_fade
 string sheet_create_session_type_static
 string status_bar_notification_info_overflow
 string summary_collapsed_preference_list
-string title_activity_create_player
-string title_activity_create_player_button
 string title_activity_create_profile
 string title_activity_create_profile_button_save
 string title_activity_create_profile_field_age
@@ -2903,9 +2909,6 @@ string title_activity_create_program_nav_title
 string title_activity_debug
 string title_activity_device_pair_search
 string title_activity_home
-string title_activity_update_player
-string title_activity_update_player_button
-string title_activity_update_player_cancel_button
 string title_activity_update_program_header_description
 string title_activity_update_program_header_title
 string upload_program_sheet_description

@@ -5,9 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.TextView
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import io.realm.RealmList
 import io.realm.RealmResults
 import it.ninespartans.xmanager.R
 import it.ninespartans.xmanager.model.Program

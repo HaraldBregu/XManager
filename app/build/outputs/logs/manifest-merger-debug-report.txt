@@ -181,14 +181,14 @@ ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/And
 		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:44:13-56
 	android:name
 		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:42:13-72
-activity#it.ninespartans.xmanager.CreateUserActivity
+activity#it.ninespartans.xmanager.CreateAccountActivity
 ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:45:9-48:59
 	android:label
 		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:47:13-66
 	android:theme
 		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:48:13-56
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:46:13-71
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:46:13-74
 activity#it.ninespartans.xmanager.CreateProgramActivity
 ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:49:9-52:59
 	android:label
@@ -197,14 +197,14 @@ ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/And
 		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:52:13-56
 	android:name
 		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:50:13-74
-activity#it.ninespartans.xmanager.CreatePlayerActivity
+activity#it.ninespartans.xmanager.CreateUserActivity
 ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:53:9-56:59
 	android:label
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:55:13-65
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:55:13-63
 	android:theme
 		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:56:13-56
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:54:13-73
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:54:13-71
 activity#it.ninespartans.xmanager.DevicePairSelectActivity
 ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:57:9-60:59
 	android:label

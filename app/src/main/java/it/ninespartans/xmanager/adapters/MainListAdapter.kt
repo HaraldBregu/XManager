@@ -16,9 +16,8 @@ import io.realm.RealmResults
 import io.realm.kotlin.where
 import it.ninespartans.xmanager.R
 import it.ninespartans.xmanager.common.Version
-import it.ninespartans.xmanager.model.Player
 import it.ninespartans.xmanager.model.PlayerDeviceData
-import it.ninespartans.xmanager.model.TrainingSessionProgram
+import it.ninespartans.xmanager.model.TrainingProgram
 import it.ninespartans.xmanager.model.User
 import kotlinx.android.synthetic.main.row_main_header.view.*
 import kotlinx.android.synthetic.main.row_main_player.view.*
@@ -30,14 +29,13 @@ import org.jetbrains.anko.runOnUiThread
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.fixedRateTimer
-import kotlin.concurrent.scheduleAtFixedRate
 
 
-class MainListAdapter(context: Context, players: RealmResults<Player>, programs: RealmResults<TrainingSessionProgram>): BaseAdapter() {
+class MainListAdapter(context: Context, players: RealmResults<User>, programs: RealmResults<TrainingProgram>): BaseAdapter() {
     private val mContext: Context
     private var inflater: LayoutInflater
-    var programs: RealmResults<TrainingSessionProgram>
-    var players: RealmResults<Player>
+    var programs: RealmResults<TrainingProgram>
+    var players: RealmResults<User>
     val realm: Realm = Realm.getDefaultInstance()
 
     enum class Action {
@@ -59,7 +57,7 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
     }
 
     var onClickAction: ((Action) -> Unit)? = null
-    var onClickActionOnItem: ((Action, Player) -> Unit)? = null
+    var onClickActionOnItem: ((Action, User) -> Unit)? = null
 
     init {
         this.players = players
@@ -80,7 +78,7 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
         return position.toLong()
     }
 
-    override fun getItem(position: Int): Player? {
+    override fun getItem(position: Int): User? {
         val header = 1
         val itemsHeader = 1
         val program = if (programs.size == 0) 1 else 0
@@ -116,7 +114,7 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
             rowHeader.user_section_header.visibility = View.GONE
             realm.where<User>().findFirst()?.let {
                 rowHeader.user_section_header.visibility = View.VISIBLE
-                rowHeader.fullname.text = it.fullName
+                rowHeader.fullname.text = it.fullname
                 if (it.headline != null && it.headline.length != 0) {
                     rowHeader.userTitle.text = it.headline
                 } else {
@@ -131,7 +129,7 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
             rowHeader.current_program_section.visibility = View.GONE
             rowHeader.programSectionActions.visibility = if (noPrograms) View.GONE else View.VISIBLE
 
-            val activeSessionProgram = realm.where<TrainingSessionProgram>()
+            val activeSessionProgram = realm.where<TrainingProgram>()
                 .equalTo("active", true)
                 .findFirst()
 
@@ -277,27 +275,27 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
         val rowPlayer = inflater.inflate(R.layout.row_main_player, viewGroup, false)
         val player = players.get(rowPlayerPosition)
 
-        val leftdevice = player?.leftDevice
-        val rightDevice = player?.rightDevice
-        val noDevices = leftdevice == null && rightDevice == null
-        val missingOneDevice = leftdevice == null || rightDevice == null
-        val missingBothDevices = leftdevice == null && rightDevice == null
-        val hasSessionProgram = player?.sessionProgram != null
-        val leftDeviceVersion =  leftdevice?.firmwareVersion ?: "0"
-        val rightDeviceVersion =  rightDevice?.firmwareVersion ?: "0"
-        val leftVersion = Version(leftDeviceVersion)
-        val rightVersion = Version(rightDeviceVersion)
-        val deviceVersionEqual = leftVersion.equals(rightVersion)
+        //val leftdevice = player?.leftDevice
+        //val rightDevice = player?.rightDevice
+        //val noDevices = leftdevice == null && rightDevice == null
+        //val missingOneDevice = leftdevice == null || rightDevice == null
+        //val missingBothDevices = leftdevice == null && rightDevice == null
+        //val hasSessionProgram = player?.sessionProgram != null
+        //val leftDeviceVersion =  leftdevice?.firmwareVersion ?: "0"
+        //val rightDeviceVersion =  rightDevice?.firmwareVersion ?: "0"
+        //val leftVersion = Version(leftDeviceVersion)
+        //val rightVersion = Version(rightDeviceVersion)
+        //val deviceVersionEqual = leftVersion.equals(rightVersion)
 
         /** Hide info section if there are no devices */
-        rowPlayer.deviceInfoSection.visibility = if (noDevices) View.GONE else View.VISIBLE
+        //rowPlayer.deviceInfoSection.visibility = if (noDevices) View.GONE else View.VISIBLE
 
         /** Player informations */
         rowPlayer.textViewPlayerName.text = player?.fullname
         rowPlayer.showOptions.setOnClickListener {
             val popupMenu = PopupMenu(mContext, it)
             popupMenu.menuInflater.inflate(R.menu.popup_menu_card, popupMenu.menu)
-            popupMenu.menu.findItem(R.id.action_complete_devices).setEnabled(missingOneDevice)
+            //popupMenu.menu.findItem(R.id.action_complete_devices).setEnabled(missingOneDevice)
             popupMenu.menu.findItem(R.id.action_complete_devices).setVisible(true)
             popupMenu.menu.findItem(R.id.action_update_devices).setVisible(true)
             popupMenu.menu.findItem(R.id.action_delete_devices).setVisible(true)
@@ -346,7 +344,7 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
 
         /** Player Devices and Programs */
         val views = mutableListOf<PlayerDeviceData>()
-
+/*
         leftdevice?.let {
             val view = inflater.inflate(R.layout.row_main_player_device_item, rowPlayer.deviceInfoSection, false)
             views.add(PlayerDeviceData(view, it))
@@ -354,14 +352,14 @@ class MainListAdapter(context: Context, players: RealmResults<Player>, programs:
 
         rightDevice?.let {
             val view = inflater.inflate(R.layout.row_main_player_device_item, rowPlayer.deviceInfoSection, false)
-        }
+        }*/
 
         views.forEach {
             rowPlayer.deviceInfoSection.addView(it.view)
             it.view.deviceName.text = it.device.name
             it.view.deviceNameVersion.text = it.device.firmwareVersion
-            it.view.programSessionSection.visibility = View.GONE//if (hasSessionProgram) View.VISIBLE else View.GONE
-            it.view.programPlayerTitle.text = player?.sessionProgram?.title
+            //it.view.programSessionSection.visibility = View.GONE//if (hasSessionProgram) View.VISIBLE else View.GONE
+            it.view.programPlayerTitle.text = "Programma test"//player?.sessionProgram?.title
             it.view.programPlayerTimer.text = "00:00:00"
             it.view.playerProgressProgram.progress = (0..100).random()
         }
