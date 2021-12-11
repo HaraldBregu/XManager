@@ -4,20 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="it.ninespartans.xmanager.PermissionsManagerActivity">
-
+    tools:context="com.ninespartans.xmanager.PermissionsManagerActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"/>
-
     </com.google.android.material.appbar.AppBarLayout>
-
     <include layout="@layout/content_permissions_manager" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

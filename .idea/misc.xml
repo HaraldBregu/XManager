@@ -12,22 +12,39 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.18229166666666666" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_create_account.xml" value="0.16614583333333333" />
+        <entry key="app/src/main/res/layout/activity_create_program.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/layout/activity_create_user.xml" value="0.16614583333333333" />
+        <entry key="app/src/main/res/layout/activity_debug.xml" value="0.16614583333333333" />
+        <entry key="app/src/main/res/layout/activity_device_pair_search.xml" value="0.16614583333333333" />
+        <entry key="app/src/main/res/layout/activity_device_pair_select.xml" value="0.16614583333333333" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.16614583333333333" />
+        <entry key="app/src/main/res/layout/activity_permissions_manager.xml" value="0.16614583333333333" />
+        <entry key="app/src/main/res/layout/activity_program_list.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/layout/content_create_player.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/layout/content_create_program.xml" value="0.25625" />
         <entry key="app/src/main/res/layout/content_create_user.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/content_debug.xml" value="0.16614583333333333" />
+        <entry key="app/src/main/res/layout/content_device_pair_bottom_sheet.xml" value="0.375" />
         <entry key="app/src/main/res/layout/content_device_pair_search.xml" value="0.375" />
         <entry key="app/src/main/res/layout/content_device_pair_select.xml" value="0.1421875" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.16614583333333333" />
+        <entry key="app/src/main/res/layout/content_permissions_manager.xml" value="0.335" />
         <entry key="app/src/main/res/layout/content_program_create_session_bottom_sheet.xml" value="0.351981351981352" />
         <entry key="app/src/main/res/layout/content_program_list.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/content_program_select_bottom_sheet.xml" value="0.20052083333333334" />
+        <entry key="app/src/main/res/layout/content_upload_program_bottom_sheet.xml" value="0.16614583333333333" />
+        <entry key="app/src/main/res/layout/dropdown_role_item.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/layout/row_create_program_step.xml" value="0.4031522577212371" />
         <entry key="app/src/main/res/layout/row_create_program_step_new.xml" value="0.271875" />
         <entry key="app/src/main/res/layout/row_device.xml" value="0.278130387548551" />
         <entry key="app/src/main/res/layout/row_main_header.xml" value="0.25625" />
         <entry key="app/src/main/res/layout/row_main_player.xml" value="0.375" />
         <entry key="app/src/main/res/layout/row_main_player_device_item.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/row_main_player_empty.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/layout/row_main_player_header.xml" value="0.271875" />
+        <entry key="app/src/main/res/layout/row_main_program_empty.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/layout/row_program_list.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/row_program_select_list.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/menu/popup_program_row_options.xml" value="0.335" />
       </map>
     </option>

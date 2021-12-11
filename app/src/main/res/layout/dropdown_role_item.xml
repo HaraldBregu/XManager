@@ -7,5 +7,4 @@
     android:maxLines="1"
     android:textSize="14dp"
     android:fontFamily="@font/montserrat">
-
 </TextView>

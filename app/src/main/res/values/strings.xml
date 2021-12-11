@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">Xmanager</string>
 
+    <!--  Main Activity Header -->
+    <string name="activity_main_title">Dashboard</string>
+    <string name="main_header_title">Pannello di controllo</string>
+    <string name="main_header_description">Qui puoi creare e gestire tutti i tuoi giocatori, i programmi di training e i dispositivi associati. Puoi caricare programmi e iniziare le sessioni di allenamento.</string>
+    <string name="main_header_user_no_title">Preparatore atletico</string>
+    <string name="main_header_action_run_program">START</string>
+    <string name="main_header_program_running">In corso</string>
+    <string name="main_header_program_finished">Terminato</string>
+    <string name="main_header_program_complation">COMPLETAMENTO</string>
+
     <!--  Utils/General tests  -->
     <string name="firstname_lastname">Firstname Lastname</string>
     <string name="device_name">Device name</string>
@@ -18,15 +28,6 @@
     <string name="title_activity_create_profile_field_age">Età</string>
     <string name="title_activity_create_profile_button_save">SALVA</string>
 
-    <!--  Main Activity Header -->
-    <string name="title_activity_home">Dashboard</string>
-    <string name="main_header_title">Pannello di controllo</string>
-    <string name="main_header_description">Qui puoi creare e gestire tutti i tuoi giocatori, i programmi di training e i dispositivi associati. Puoi caricare programmi e iniziare le sessioni di allenamento.</string>
-    <string name="main_header_user_no_title">Preparatore atletico</string>
-    <string name="main_header_action_run_program">START</string>
-    <string name="main_header_program_running">In corso</string>
-    <string name="main_header_program_finished">Terminato</string>
-    <string name="main_header_program_complation">COMPLETAMENTO</string>
 
     <!--  Select Program Bottom Sheet -->
     <string name="select_program_sheet_title">Scegli un programma</string>
@@ -112,17 +113,12 @@
     <string name="activity_program_list_row_menu_update">Modifica</string>
     <string name="activity_program_list_row_menu_delete">Elimina</string>
 
-    <!--  Program Search List Activity  -->
-    <string name="activity_device_search_header_subtitle">player name</string>
-    <string name="activity_device_search_header_description">Please, get close to the devices and start testing by selecting the items above.</string>
-    <string name="activity_device_search_row_subtitle">device name</string>
-
-
-
     <!--  Permissions Activity  -->
-    <string name="activity_permissions_nav_title">Permessi e autorizzazioni</string>
-    <string name="activity_permissions_title">Gestione permessi</string>
+    <string name="activity_permissions_nav_title">Autorizzazioni</string>
+    <string name="activity_permissions_title">Gestione dei permessi</string>
+    <string name="activity_permissions_error_device">Questo dispositivo non supporta il bluetooth</string>
     <string name="activity_permissions_description">Per poter utilizzare tutte le funzionalità previste, Xmanager necessita alcuni permessi e funzionalità. É necessario attivarle tutte!</string>
+    <string name="activity_permissions_button_close">Chiudi</string>
     <string name="activity_permissions_bluetooth_title">Bluetooth</string>
     <string name="activity_permissions_bluetooth_description">Il Bluetooth è necessario per eseguire qualsiasi comunicazione Bluetooth, come richiedere una connessione, accettare una connessione e trasferire dati.</string>
     <string name="activity_permissions_bluetooth_active_button_title">ATTIVA BLUETOOTH</string>
@@ -134,6 +130,7 @@
     <string name="activity_permissions_fine_location_status_denied_text">Disabilitato</string>
     <string name="activity_permissions_fine_location_go_to_settings_text">Vai in impostazioni</string>
 
+
     <string name="alert_dialog_">DebugActivity</string>
 
 
@@ -141,8 +138,19 @@
 
 
 
+    <!--  Search Device Activity  -->
+    <string name="activity_device_search_title">Cerca dispositivi</string>
+    <string name="activity_device_search_header_subtitle">nome giocatore</string>
+    <string name="activity_device_search_header_description">Avvicinati ai dispositivi bluetooth, seleziona uno tra quelli trovati e inizia a testarli.</string>
+    <string name="activity_device_search_row_subtitle">nome dispositivo</string>
+    <string name="activity_device_search_button_done">fatto</string>
+    <string name="activity_device_search_sheet_connecting">Connessione al dispositivo...</string>
+    <string name="activity_device_search_sheet_connected">Connesso</string>
+    <string name="activity_device_search_sheet_connecting_description">Dopo che la connessione è stata stabilita controlla se il dispositivo sta lampeggiando e seleziona il piede.</string>
+    <string name="activity_device_search_sheet_button_save">Salva</string>
+    <string name="activity_device_search_sheet_radio_left_foot">Piede sinistro</string>
+    <string name="activity_device_search_sheet_radio_right_foot">Piede destro</string>
 
-    <string name="title_activity_device_pair_search">Search devices</string>
 
     <!--  Create User Activity  -->
     <string name="activity_create_user_title">Giocatore</string>

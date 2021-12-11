@@ -1,4 +1,4 @@
-it.ninespartans.xmanager
+com.ninespartans.xmanager
 anim abc_fade_in
 anim abc_fade_out
 anim abc_grow_fade_in_from_bottom
@@ -2037,6 +2037,7 @@ id chip1
 id chip2
 id chip3
 id chip_group
+id chooseFootRadioGroup
 id chronometer
 id circle_center
 id clear_text
@@ -2130,7 +2131,6 @@ id fixed
 id flip
 id floating
 id footer
-id footer_description
 id forever
 id fullNameInputText
 id fullname
@@ -2178,6 +2178,7 @@ id ledTypeTitle
 id left
 id leftShoeImage
 id leftToRight
+id left_foot
 id lightPositionTitle
 id line1
 id line3
@@ -2306,6 +2307,7 @@ id reverseSawtooth
 id right
 id rightShoeImage
 id rightToLeft
+id right_foot
 id right_icon
 id right_side
 id roleInputText
@@ -2737,14 +2739,25 @@ string activity_create_user_field_role_hint
 string activity_create_user_header_description
 string activity_create_user_header_title
 string activity_create_user_title
+string activity_device_search_button_done
 string activity_device_search_header_description
 string activity_device_search_header_subtitle
 string activity_device_search_row_subtitle
+string activity_device_search_sheet_button_save
+string activity_device_search_sheet_connected
+string activity_device_search_sheet_connecting
+string activity_device_search_sheet_connecting_description
+string activity_device_search_sheet_radio_left_foot
+string activity_device_search_sheet_radio_right_foot
+string activity_device_search_title
+string activity_main_title
 string activity_permissions_bluetooth_active_button_title
 string activity_permissions_bluetooth_description
 string activity_permissions_bluetooth_status_active_text
 string activity_permissions_bluetooth_title
+string activity_permissions_button_close
 string activity_permissions_description
+string activity_permissions_error_device
 string activity_permissions_fine_location_active_button_title
 string activity_permissions_fine_location_description
 string activity_permissions_fine_location_go_to_settings_text
@@ -2907,8 +2920,6 @@ string title_activity_create_program_header_description
 string title_activity_create_program_header_title
 string title_activity_create_program_nav_title
 string title_activity_debug
-string title_activity_device_pair_search
-string title_activity_home
 string title_activity_update_program_header_description
 string title_activity_update_program_header_title
 string upload_program_sheet_description

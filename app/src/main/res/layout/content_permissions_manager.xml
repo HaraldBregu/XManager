@@ -5,34 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="it.ninespartans.xmanager.PermissionsManagerActivity"
-    tools:showIn="@layout/activity_permissions_manager">
-
+    tools:context="com.ninespartans.xmanager.PermissionsManagerActivity"
+    tools:showIn="@layout/activity_permissions_manager"
+    android:background="@color/colorBackground">
     <LinearLayout
         android:id="@+id/containerSection"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp"
+        android:focusableInTouchMode="true"
         android:orientation="vertical"
-        android:focusableInTouchMode="true">
+        android:padding="20dp">
         <TextView
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             android:id="@+id/header_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/activity_permissions_title"
-            android:textSize="28dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:layout_marginBottom="5dp">
-        </TextView>
+            android:layout_marginBottom="5dp"
+            android:text="@string/activity_permissions_title"/>
         <TextView
             android:id="@+id/header_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:text="@string/activity_permissions_description"
-            android:fontFamily="@font/montserrat">
-        </TextView>
-
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,18 +37,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:text="@string/activity_permissions_bluetooth_title"
-                android:textSize="20dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:layout_marginBottom="5dp">
-            </TextView>
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#000"
                 android:text="@string/activity_permissions_bluetooth_description"
-                android:textSize="12sp">
-            </TextView>
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
             <LinearLayout
                 android:id="@+id/ble_status_active_section"
                 android:layout_width="match_parent"
@@ -62,26 +54,25 @@
                 android:orientation="horizontal">
                 <ImageView
                     android:id="@+id/bleStatusImage"
+                    android:contentDescription="@string/activity_permissions_bluetooth_description"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/ic_check_circle_green_24dp"/>
+                    android:src="@drawable/ic_check_circle_green_24dp" />
                 <TextView
                     android:id="@+id/bleStatusTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="@string/activity_permissions_bluetooth_status_active_text"
-                    android:textSize="16dp"
-                    android:fontFamily="@font/roboto_medium">
-                </TextView>
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
             </LinearLayout>
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/activateBluetooth"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="55dp"
                 android:text="@string/activity_permissions_bluetooth_active_button_title"
-                app:cornerRadius="5dp">
-            </com.google.android.material.button.MaterialButton>
+                app:cornerRadius="5dp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,20 +80,16 @@
             android:layout_marginTop="10dp"
             android:orientation="vertical">
             <TextView
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/activity_permissions_fine_location_title"
-                android:textSize="20dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:layout_marginBottom="5dp">
-            </TextView>
+                android:layout_marginBottom="5dp"
+                android:text="@string/activity_permissions_fine_location_title"/>
             <TextView
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#000"
-                android:text="@string/activity_permissions_fine_location_description"
-                android:textSize="12sp">
-            </TextView>
+                android:text="@string/activity_permissions_fine_location_description"/>
             <RelativeLayout
                 android:id="@+id/fine_location_status_active_section"
                 android:layout_width="match_parent"
@@ -116,53 +103,47 @@
                     android:orientation="horizontal">
                     <ImageView
                         android:id="@+id/fineLocationStatusImage"
+                        android:contentDescription="@string/activity_permissions_fine_location_description"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/ic_check_circle_green_24dp"/>
+                        android:src="@drawable/ic_check_circle_green_24dp" />
                     <TextView
                         android:id="@+id/fineLocationStatusTextView"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="@string/activity_permissions_fine_location_status_in_use_text"
-                        android:textSize="16dp"
-                        android:fontFamily="@font/roboto_medium">
-                    </TextView>
+                        android:layout_marginStart="5dp"
+                        android:text="@string/activity_permissions_fine_location_status_in_use_text"/>
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/settingsSection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_alignParentRight="true">
+                    android:layout_alignParentEnd="true"
+                    android:orientation="horizontal">
                     <TextView
                         android:id="@+id/settingsText"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/activity_permissions_fine_location_go_to_settings_text"
-                        android:textSize="14dp"
                         android:layout_gravity="center_vertical"
-                        android:fontFamily="@font/montserrat_bold">
-                    </TextView>
+                        android:text="@string/activity_permissions_fine_location_go_to_settings_text"/>
                     <ImageView
                         android:layout_width="20dp"
+                        android:contentDescription="@string/activity_permissions_fine_location_description"
                         android:layout_height="20dp"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/ic_arrow_forward_24dp"/>
                 </LinearLayout>
-
             </RelativeLayout>
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/activateFineLocation"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="55dp"
                 android:text="@string/activity_permissions_fine_location_active_button_title"
-                app:cornerRadius="5dp">
-            </com.google.android.material.button.MaterialButton>
+                app:cornerRadius="5dp"/>
         </LinearLayout>
-
     </LinearLayout>
-
     <LinearLayout
         android:id="@+id/bottom_section"
         android:layout_width="match_parent"
@@ -174,10 +155,6 @@
             android:id="@+id/saveButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="chiudi"
-            app:cornerRadius="5dp">
-        </com.google.android.material.button.MaterialButton>
-
+            android:text="@string/activity_permissions_button_close"/>
     </LinearLayout>
-
 </RelativeLayout>
