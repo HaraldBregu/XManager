@@ -1176,7 +1176,7 @@
     <string name="activity_device_search_row_subtitle">nome dispositivo</string>
     <string name="activity_device_search_sheet_button_save">Salva</string>
     <string name="activity_device_search_sheet_connected">Connesso</string>
-    <string name="activity_device_search_sheet_connecting">Connessione al dispositivo...</string>
+    <string name="activity_device_search_sheet_connecting">Connessione al dispositivo…</string>
     <string name="activity_device_search_sheet_connecting_description">Dopo che la connessione è stata stabilita controlla se il dispositivo sta lampeggiando e seleziona il piede.</string>
     <string name="activity_device_search_sheet_radio_left_foot">Piede sinistro</string>
     <string name="activity_device_search_sheet_radio_right_foot">Piede destro</string>
@@ -1336,7 +1336,7 @@
     <string name="sheet_create_session_duration_title">Durata sessione</string>
     <string name="sheet_create_session_title">Sessione di allenamento</string>
     <string name="sheet_create_session_type_blink">Blink</string>
-    <string name="sheet_create_session_type_fade">Fade (comming soon)</string>
+    <string name="sheet_create_session_type_fade">Fade (coming soon)</string>
     <string name="sheet_create_session_type_static">Static</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="summary_collapsed_preference_list"><ns2:g id="current_items">%1$s</ns2:g>, <ns2:g id="added_items">%2$s</ns2:g></string>
@@ -1357,13 +1357,13 @@
     <string name="title_activity_update_program_header_title">Aggiorna il programma</string>
     <string name="upload_program_sheet_description">In questa fase viene caricato il programma sui dispositivi dei giocatori. Cerca di restare più vicino ai dispositivi Bluetooth in modo da caricare i programmi senza ritardi.</string>
     <string name="upload_program_sheet_state_connected_title">Connesso al dispositivo</string>
-    <string name="upload_program_sheet_state_connecting_title">In connessione...</string>
+    <string name="upload_program_sheet_state_connecting_title">In connessione…</string>
     <string name="upload_program_sheet_state_disconnected_title">Dispositivo disconnesso</string>
     <string name="upload_program_sheet_state_error_connection_title">Errore connessione dispositivo</string>
-    <string name="upload_program_sheet_state_initial_title">Cercando il dispositivo...</string>
-    <string name="upload_program_sheet_state_writing_data_title">Caricamento programma...</string>
+    <string name="upload_program_sheet_state_initial_title">Cercando il dispositivo…</string>
+    <string name="upload_program_sheet_state_writing_data_title">Caricamento programma…</string>
     <string name="upload_program_sheet_title">Caricamento programma</string>
-    <string name="upload_program_subtitle">Caricamento programma...</string>
+    <string name="upload_program_subtitle">Caricamento programma…</string>
     <string name="v7_preference_off">OFF</string>
     <string name="v7_preference_on">ON</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>

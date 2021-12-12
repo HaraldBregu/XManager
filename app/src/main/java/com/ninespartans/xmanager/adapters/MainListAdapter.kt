@@ -1,6 +1,7 @@
 package com.ninespartans.xmanager.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,11 +27,11 @@ import java.util.concurrent.TimeUnit
 import kotlin.concurrent.fixedRateTimer
 
 
-class MainListAdapter(context: Context, players: RealmResults<User>, programs: RealmResults<TrainingProgram>): BaseAdapter() {
+class MainListAdapter(context: Context): BaseAdapter() {
     private val mContext: Context
     private var inflater: LayoutInflater
     var programs: RealmResults<TrainingProgram>
-    var players: RealmResults<User>
+    private var players: RealmResults<User>
     val realm: Realm = Realm.getDefaultInstance()
 
     enum class Action {
@@ -55,7 +56,13 @@ class MainListAdapter(context: Context, players: RealmResults<User>, programs: R
     var onClickActionOnItem: ((Action, User) -> Unit)? = null
 
     init {
-        this.players = players
+        val account = realm.where<Account>().findFirst()
+        val users = realm.where<User>()
+            .notEqualTo("account._id", account?._id)
+            .findAll()
+        val programs = realm.where<TrainingProgram>().findAll()
+
+        this.players = users
         this.programs = programs
         mContext = context
         inflater = LayoutInflater.from(mContext)
@@ -105,18 +112,17 @@ class MainListAdapter(context: Context, players: RealmResults<User>, programs: R
 
             /** User section */
             rowHeader.user_section_header.visibility = View.GONE
-            realm.where<Account>().findFirst()?.let {
-                val query = realm.where<User>()
-                query.isNotNull("account")
-                query.equalTo("account._id", it._id)
-                query.findFirst()?.let {
-                    rowHeader.user_section_header.visibility = View.VISIBLE
-                    rowHeader.fullname.text = it.fullname
-                    if (it.headline != null && it.headline.length != 0) {
-                        rowHeader.userTitle.text = it.headline
-                    } else {
-                        rowHeader.userTitle.text = mContext.getString(R.string.main_header_user_no_title)
-                    }
+            val account = realm.where<Account>().findFirst()
+            val query = realm.where<User>()
+            query.isNotNull("account")
+            query.equalTo("account._id", account?._id)
+            query.findFirst()?.let {
+                rowHeader.user_section_header.visibility = View.VISIBLE
+                rowHeader.fullname.text = it.fullname
+                if (it.headline != null && it.headline.length != 0) {
+                    rowHeader.userTitle.text = it.headline
+                } else {
+                    rowHeader.userTitle.text = mContext.getString(R.string.main_header_user_no_title)
                 }
             }
 

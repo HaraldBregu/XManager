@@ -13,9 +13,11 @@ import android.widget.ArrayAdapter
 import com.ninespartans.xmanager.model.User
 import kotlinx.android.synthetic.main.activity_create_user.toolbar
 import kotlinx.android.synthetic.main.content_create_user.*
+import org.bson.types.ObjectId
 
 
 class CreateUserActivity : AppCompatActivity() {
+    val realm = Realm.getDefaultInstance()
     private var user: User? = null
     private var userId: String? = null
 
@@ -30,49 +32,46 @@ class CreateUserActivity : AppCompatActivity() {
 
         userId?.let {
             nextButton.text = getString(R.string.activity_update_user_button_title)
-            Realm.getDefaultInstance().use { realm ->
-                realm.where<User>().equalTo("id", userId).findFirst()?.let {
-                    this.user = it
-                    this.nameInputText.editText?.setText(it.fullname)
-                    this.roleInputText.editText?.setText(it.role)
-                    this.ageInputText.editText?.setText(it.age)
-                }
+            val user = realm.where<User>()
+            user.equalTo("_id", ObjectId(userId))
+            user.findFirst()?.let {
+                this.user = it
+                this.nameInputText.editText?.setText(it.fullname)
+                this.roleInputText.editText?.setText(it.role)
+                this.ageInputText.editText?.setText(it.age)
             }
         }
 
         nextButton.setOnClickListener {
-            Realm.getDefaultInstance().use { realm ->
-                userId?.let {
+            userId?.let {
 
-                    /** When user already exists update it */
-                    realm.where<User>().equalTo("id", it).findFirst()?.let { user ->
-                        realm.executeTransaction {
-                            realm.copyToRealmOrUpdate(user.apply {
-                                fullname = nameInputText.editText?.text.toString()
-                                role = roleInputText.editText?.text.toString()
-                                age = ageInputText.editText?.text.toString()
-                            })
-                        }
-                    }
-
-                    finish()
-                } ?: run {
-
-                    /** When user doesn't exists */
+                val user = realm.where<User>()
+                user.equalTo("_id", ObjectId(it))
+                user.findFirst()?.let { user ->
                     realm.executeTransaction {
-                        user = it.copyToRealmOrUpdate(User().apply {
+                        realm.copyToRealmOrUpdate(user.apply {
                             fullname = nameInputText.editText?.text.toString()
                             role = roleInputText.editText?.text.toString()
                             age = ageInputText.editText?.text.toString()
                         })
-
-                        val intent = Intent(this, DevicePairSearchActivity::class.java)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                        intent.putExtra("user_id", user?._id)
-                        intent.putExtra("user_fullname", user?.fullname)
-                        startActivity(intent)
-                        finish()
                     }
+                }
+                finish()
+            } ?: run {
+
+                realm.executeTransaction {
+                    user = it.copyToRealmOrUpdate(User().apply {
+                        fullname = nameInputText.editText?.text.toString()
+                        role = roleInputText.editText?.text.toString()
+                        age = ageInputText.editText?.text.toString()
+                    })
+
+                    val intent = Intent(this, DevicePairSearchActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    intent.putExtra("user_id", user?._id.toString())
+                    intent.putExtra("user_fullname", user?.fullname)
+                    startActivity(intent)
+                    finish()
                 }
             }
         }

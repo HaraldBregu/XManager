@@ -27,7 +27,7 @@ class ProgramListActivity : AppCompatActivity() {
         list_view.setOnItemClickListener { parent, view, position, id ->
             val selectedProgram = programs.get(position)
             val intent = Intent(this, CreateProgramActivity::class.java)
-            intent.putExtra("program_id", selectedProgram?._id)
+            intent.putExtra("program_id", selectedProgram?._id.toString())
             startActivity(intent)
         }
 
@@ -35,7 +35,7 @@ class ProgramListActivity : AppCompatActivity() {
             when (action) {
                 ProgramListAdapter.Action.UPDATE_PROGRAM -> {
                     val intent = Intent(this, CreateProgramActivity::class.java)
-                    intent.putExtra("program_id", program._id)
+                    intent.putExtra("program_id", program._id.toString())
                     startActivity(intent)
                 }
                 ProgramListAdapter.Action.DELETE_PROGRAM -> {

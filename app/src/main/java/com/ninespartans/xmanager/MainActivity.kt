@@ -24,48 +24,28 @@ import com.ninespartans.xmanager.model.User
 import com.ninespartans.xmanager.common.Common
 import kotlinx.android.synthetic.main.content_main.*
 import java.util.*
+import android.os.Bundle
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var adapter: MainListAdapter
-    private lateinit var user: User
     enum class Foot { LEFT, RIGHT }
-
     var programUploaded:Boolean = false
     lateinit var bottomSheetDialog: BottomSheetDialog
     var uploadProgressProgram: ProgressBar? = null
     var animator: ValueAnimator = ValueAnimator()
+    val realm = Realm.getDefaultInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        title = getString(R.string.activity_main_title)
 
-        /** Init adapter by passing Users and TrainingPrograms */
-        var realm = Realm.getDefaultInstance()
-        val users = realm.where<User>().findAll()
-        val programs = realm.where<TrainingProgram>().findAll()
-        adapter = MainListAdapter(this, users, programs)
+        adapter = MainListAdapter(this)
         list_view.adapter = adapter
         adapter.onClickAction = {
             when (it) {
-                MainListAdapter.Action.CREATE_USER -> {
-                    val intent = Intent(this, CreateAccountActivity::class.java)
-                    startActivity(intent)
-                }
-                MainListAdapter.Action.DELETE_PROGRAM -> {
-                    Realm.getDefaultInstance().use { realm ->
-                        realm.executeTransaction {
-                            realm.where<TrainingProgram>().findAll()?.let {
-                                it.deleteAllFromRealm()
-                                adapter.programs = realm.where(TrainingProgram::class.java).findAll()
-                                adapter.notifyDataSetChanged()
-                            }
-                        }
-                    }
-                }
-                MainListAdapter.Action.START_PROGRAM -> {
-                    Toast.makeText(this, "start all", Toast.LENGTH_SHORT).show()
-                }
                 MainListAdapter.Action.STOP_PROGRAM -> {
                     val builderInner = AlertDialog.Builder(this)
                     builderInner.setTitle("Termina programma")
@@ -74,7 +54,6 @@ class MainActivity : AppCompatActivity() {
                         dialog.dismiss()
                     }
                     builderInner.setPositiveButton("Termina") { dialog, which ->
-                        var realm = Realm.getDefaultInstance()
                         val programs = realm.where<TrainingProgram>().findAll()
                         realm.executeTransaction { realm ->
                             programs.forEach {
@@ -83,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                                 it.startDate = calendar.time
                             }
                         }
-                        updateList()
+                        adapter.notifyDataSetChanged()
                     }
                     builderInner.show()
                 }
@@ -104,11 +83,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        adapter.onClickActionOnItem = { action, player ->
+        adapter.onClickActionOnItem = { action, user ->
             when (action) {
                 MainListAdapter.Action.EDIT_PLAYER -> {
                     val intent = Intent(this, CreateUserActivity::class.java)
-                    intent.putExtra("user_id", player._id)
+                    intent.putExtra("user_id", user._id.toString())
                     startActivity(intent)
                 }
                 MainListAdapter.Action.DELETE_PLAYER -> {
@@ -119,29 +98,27 @@ class MainActivity : AppCompatActivity() {
                         dialog.dismiss()
                     }
                     builderInner.setPositiveButton("Delete") { dialog, which ->
-                        Realm.getDefaultInstance().use { realm ->
-                            realm.executeTransaction {
-                                //player.leftDevice?.deleteFromRealm()
-                                //player.rightDevice?.deleteFromRealm()
-                                player.deleteFromRealm()
-                                updateList()
-                            }
+                        realm.executeTransaction {
+                            //player.leftDevice?.deleteFromRealm()
+                            //player.rightDevice?.deleteFromRealm()
+                            user.deleteFromRealm()
+                            adapter.notifyDataSetChanged()
                         }
                     }
                     builderInner.show()
                 }
                 MainListAdapter.Action.COMPLETE_DEVICES -> {
                     val intent = Intent(this, DevicePairSearchActivity::class.java)
-                    intent.putExtra("user_id", player._id)
+                    val id = user._id.toString()
+                    Log.e("USER_ID", id)
+                    intent.putExtra("user_id",id)
                     startActivity(intent)
                 }
                 MainListAdapter.Action.DELETE_DEVICES -> {
-                    Realm.getDefaultInstance().use { realm ->
-                        realm.executeTransaction {
-                            //player.leftDevice?.deleteFromRealm()
-                            //player.rightDevice?.deleteFromRealm()
-                            updateList()
-                        }
+                    realm.executeTransaction {
+                        //player.leftDevice?.deleteFromRealm()
+                        //player.rightDevice?.deleteFromRealm()
+                        adapter.notifyDataSetChanged()
                     }
                 }
                 MainListAdapter.Action.UPLOAD_PROGRAM -> {
@@ -185,13 +162,12 @@ class MainActivity : AppCompatActivity() {
             Configuration.UI_MODE_NIGHT_YES -> {
 
             } // Night mode is active, we're using dark theme
-        }
-*/
+        }*/
     }
 
     override fun onStart() {
         super.onStart()
-        updateList()
+        adapter.notifyDataSetChanged()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -244,13 +220,12 @@ class MainActivity : AppCompatActivity() {
             }
 
             bottomSheetDialog.hide()
-            updateList()
+            adapter.notifyDataSetChanged()
 
             /**
              * Read Players that have at least 1 device connected
              * If there are no device connected to the players show an alert
              */
-            var realm = Realm.getDefaultInstance()
             var playersQuery = realm.where<User>()
             val allPlayers = playersQuery.findAll()
 
@@ -505,31 +480,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startTrainingProgram(trainingProgram: TrainingProgram) {
-        Realm.getDefaultInstance().use { realm ->
-            realm.executeTransaction { realm ->
-                realm.copyToRealmOrUpdate(trainingProgram.apply {
-                    startDate = Date()
-                    updateList()
-                })
-            }
+        realm.executeTransaction { realm ->
+            realm.copyToRealmOrUpdate(trainingProgram.apply {
+                startDate = Date()
+                adapter.notifyDataSetChanged()
+            })
         }
     }
 
-    fun updateList() {
-        Realm.getDefaultInstance().use { realm ->
-
-            // User
-            realm.where<User>().findFirst()?.let {
-                user = it
-            }
-
-            //Programs
-            adapter.programs = realm.where<TrainingProgram>().findAll()
-
-            // Players
-            adapter.players = realm.where<User>().findAll()
-
-            adapter.notifyDataSetChanged()
-        }
-    }
 }

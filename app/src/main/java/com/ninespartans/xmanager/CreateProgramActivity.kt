@@ -21,6 +21,7 @@ import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.slider.Slider
 import com.ninespartans.xmanager.common.Common
 import com.ninespartans.xmanager.model.TrainingProgram
+import org.bson.types.ObjectId
 
 
 class CreateProgramActivity : AppCompatActivity() {
@@ -57,14 +58,16 @@ class CreateProgramActivity : AppCompatActivity() {
             saveProgram.text = getString(R.string.activity_create_program_button_save)
 
             Realm.getDefaultInstance().use { realm ->
-                realm.where<TrainingProgram>().equalTo("id", it).findFirst()?.let {
-                    this.trainingSessionProgram = it
-                    this.nameInputText.editText?.setText(it.title)
+                realm.where<TrainingProgram>()
+                    .equalTo("_id", ObjectId(it))
+                    .findFirst()?.let {
+                        this.trainingSessionProgram = it
+                        this.nameInputText.editText?.setText(it.title)
 
-                    if (it.programs.size > 3) {
-                        createSession.visibility = View.VISIBLE
+                        if (it.programs.size > 3) {
+                            createSession.visibility = View.VISIBLE
+                        }
                     }
-                }
             }
         }
 

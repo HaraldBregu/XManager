@@ -24,7 +24,6 @@
         android:required="false"
         tools:node="replace" />
 
-
     <application
         android:name="com.ninespartans.xmanager.XmanagerApplication"
         android:allowBackup="true"
@@ -36,7 +35,6 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name="com.ninespartans.xmanager.MainActivity"
-            android:label="@string/activity_main_title"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

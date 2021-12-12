@@ -17,7 +17,7 @@
     <string name="program_name">Program name</string>
     <string name="program_description">Program description</string>
     <string name="device_mac_address">device mac address</string>
-    <string name="upload_program_subtitle">Caricamento programma...</string>
+    <string name="upload_program_subtitle">Caricamento programma…</string>
 
     <!--  Profile Activity  -->
     <string name="title_activity_create_profile">Profilo</string>
@@ -36,12 +36,12 @@
     <!--  Select Program Bottom Sheet -->
     <string name="upload_program_sheet_title">Caricamento programma</string>
     <string name="upload_program_sheet_description">In questa fase viene caricato il programma sui dispositivi dei giocatori. Cerca di restare più vicino ai dispositivi Bluetooth in modo da caricare i programmi senza ritardi.</string>
-    <string name="upload_program_sheet_state_initial_title">Cercando il dispositivo...</string>
-    <string name="upload_program_sheet_state_connecting_title">In connessione...</string>
+    <string name="upload_program_sheet_state_initial_title">Cercando il dispositivo…</string>
+    <string name="upload_program_sheet_state_connecting_title">In connessione…</string>
     <string name="upload_program_sheet_state_connected_title">Connesso al dispositivo</string>
     <string name="upload_program_sheet_state_disconnected_title">Dispositivo disconnesso</string>
     <string name="upload_program_sheet_state_error_connection_title">Errore connessione dispositivo</string>
-    <string name="upload_program_sheet_state_writing_data_title">Caricamento programma...</string>
+    <string name="upload_program_sheet_state_writing_data_title">Caricamento programma…</string>
 
     <!--  Cell main no player -->
     <string name="row_empty_player_title">Registra un giocatore</string>
@@ -87,7 +87,7 @@
     <string name="sheet_create_session_anim_type_title">Animazione led</string>
     <string name="sheet_create_session_type_static">Static</string>
     <string name="sheet_create_session_type_blink">Blink</string>
-    <string name="sheet_create_session_type_fade">Fade (comming soon)</string>
+    <string name="sheet_create_session_type_fade">Fade (coming soon)</string>
     <string name="sheet_create_session_dir_title">Posizione indicatore led</string>
     <string name="sheet_create_session_dir_col_title">Collo Pieno</string>
     <string name="sheet_create_session_dir_col_ext_title">Collo Esterno</string>
@@ -144,7 +144,7 @@
     <string name="activity_device_search_header_description">Avvicinati ai dispositivi bluetooth, seleziona uno tra quelli trovati e inizia a testarli.</string>
     <string name="activity_device_search_row_subtitle">nome dispositivo</string>
     <string name="activity_device_search_button_done">fatto</string>
-    <string name="activity_device_search_sheet_connecting">Connessione al dispositivo...</string>
+    <string name="activity_device_search_sheet_connecting">Connessione al dispositivo…</string>
     <string name="activity_device_search_sheet_connected">Connesso</string>
     <string name="activity_device_search_sheet_connecting_description">Dopo che la connessione è stata stabilita controlla se il dispositivo sta lampeggiando e seleziona il piede.</string>
     <string name="activity_device_search_sheet_button_save">Salva</string>

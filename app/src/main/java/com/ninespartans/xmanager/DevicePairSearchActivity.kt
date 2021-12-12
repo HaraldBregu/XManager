@@ -31,6 +31,7 @@ import com.ninespartans.xmanager.model.Device
 import com.ninespartans.xmanager.model.DeviceInfo
 import com.ninespartans.xmanager.model.User
 import kotlinx.android.synthetic.main.content_device_pair_search.closeButton
+import org.bson.types.ObjectId
 
 
 class DevicePairSearchActivity : AppCompatActivity() {
@@ -50,12 +51,13 @@ class DevicePairSearchActivity : AppCompatActivity() {
         userId = intent.getStringExtra("user_id")
 
         /** Show Player Name */
-        Realm.getDefaultInstance().use { realm ->
-            realm.where<User>().equalTo("id", userId).findFirst()?.let {
+        var realm = Realm.getDefaultInstance()
+        realm.where<User>()
+            .equalTo("_id", ObjectId(userId))
+            .findFirst()?.let {
                 this.user = it
                 deviceSearchTitle.text = it.fullname
             }
-        }
 
         adapter = DeviceAdapter(this)
         adapter.items = ArrayList()
