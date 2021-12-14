@@ -1169,6 +1169,7 @@
     <string name="activity_create_user_field_role_hint">Ruolo</string>
     <string name="activity_create_user_header_description">Inserisci il nome e cognome del giocatore. Le altre informazione come il ruolo e l\'età sono opzionali.</string>
     <string name="activity_create_user_header_title">Informazioni del giocatore</string>
+    <string name="activity_create_user_icon">Giocatore</string>
     <string name="activity_create_user_title">Giocatore</string>
     <string name="activity_device_search_button_done">fatto</string>
     <string name="activity_device_search_header_description">Avvicinati ai dispositivi bluetooth, seleziona uno tra quelli trovati e inizia a testarli.</string>
@@ -1181,6 +1182,7 @@
     <string name="activity_device_search_sheet_radio_left_foot">Piede sinistro</string>
     <string name="activity_device_search_sheet_radio_right_foot">Piede destro</string>
     <string name="activity_device_search_title">Cerca dispositivi</string>
+    <string name="activity_main_icon">Account</string>
     <string name="activity_main_row_player_header_title">Giocatori</string>
     <string name="activity_main_row_player_menu_item_delete_devices">Elimina dispositivi</string>
     <string name="activity_main_row_player_menu_item_edit">Modifica giocatore</string>

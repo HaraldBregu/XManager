@@ -3,6 +3,7 @@
 
     <!--  Main Activity Header -->
     <string name="activity_main_title">Dashboard</string>
+    <string name="activity_main_icon">Account</string>
     <string name="main_header_title">Pannello di controllo</string>
     <string name="main_header_description">Qui puoi creare e gestire tutti i tuoi giocatori, i programmi di training e i dispositivi associati. Puoi caricare programmi e iniziare le sessioni di allenamento.</string>
     <string name="main_header_user_no_title">Preparatore atletico</string>
@@ -150,6 +151,7 @@
 
     <!--  Create User Activity  -->
     <string name="activity_create_user_title">Giocatore</string>
+    <string name="activity_create_user_icon">Giocatore</string>
     <string name="activity_create_user_header_title">Informazioni del giocatore</string>
     <string name="activity_create_user_header_description">Inserisci il nome e cognome del giocatore. Le altre informazione come il ruolo e l\'età sono opzionali.</string>
     <string name="activity_create_user_field_name_hint">Nome e cognome</string>

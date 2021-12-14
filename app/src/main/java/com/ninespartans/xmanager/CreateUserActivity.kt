@@ -1,9 +1,12 @@
 package com.ninespartans.xmanager
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import io.realm.Realm
 import io.realm.kotlin.where
@@ -154,6 +157,33 @@ class CreateUserActivity : AppCompatActivity() {
                 view.hideKeyboard()
             }
         }*/
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_user, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_options -> {
+                val builderInner = AlertDialog.Builder(this)
+                builderInner.setTitle("Attention!")
+                builderInner.setMessage("Before deleting the Player be sure that you don't need it anymore. All pairing devices and data will be deleted permanently from the app.")
+                builderInner.setNegativeButton("Cancel") { dialog, which ->
+                    dialog.dismiss()
+                }
+                builderInner.setPositiveButton("Delete") { dialog, which ->
+                    realm.executeTransaction {
+                        user?.deleteFromRealm()
+                        finish()
+                    }
+                }
+                builderInner.show()
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {

@@ -1981,6 +1981,7 @@ id action_menu_presenter
 id action_mode_bar
 id action_mode_bar_stub
 id action_mode_close_button
+id action_options
 id action_profile
 id action_text
 id action_update
@@ -2684,6 +2685,7 @@ layout text_view_with_line_height_from_style
 layout text_view_with_theme_line_height
 layout text_view_without_line_height
 menu menu_main
+menu menu_user
 menu popup_fab_main
 menu popup_menu_card
 menu popup_program_row_options
@@ -2730,6 +2732,7 @@ string activity_create_user_field_name_hint
 string activity_create_user_field_role_hint
 string activity_create_user_header_description
 string activity_create_user_header_title
+string activity_create_user_icon
 string activity_create_user_title
 string activity_device_search_button_done
 string activity_device_search_header_description
@@ -2742,6 +2745,7 @@ string activity_device_search_sheet_connecting_description
 string activity_device_search_sheet_radio_left_foot
 string activity_device_search_sheet_radio_right_foot
 string activity_device_search_title
+string activity_main_icon
 string activity_main_row_player_header_title
 string activity_main_row_player_menu_item_delete_devices
 string activity_main_row_player_menu_item_edit

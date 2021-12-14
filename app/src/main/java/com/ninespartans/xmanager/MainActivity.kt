@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
         title = getString(R.string.activity_main_title)
 
         adapter = MainListAdapter(this)
@@ -96,24 +97,6 @@ class MainActivity : AppCompatActivity() {
                 MainListAdapter.Action.UPLOAD_PROGRAM -> {
 
                 }
-                /*
-                MainListAdapter.Action.DELETE_PLAYER -> {
-                    val builderInner = AlertDialog.Builder(this)
-                    builderInner.setTitle("Attention!")
-                    builderInner.setMessage("Before deleting the Player be sure that you don't need it anymore. All pairing devices and data will be deleted permanently from the app.")
-                    builderInner.setNegativeButton("Cancel") { dialog, which ->
-                        dialog.dismiss()
-                    }
-                    builderInner.setPositiveButton("Delete") { dialog, which ->
-                        realm.executeTransaction {
-                            //player.leftDevice?.deleteFromRealm()
-                            //player.rightDevice?.deleteFromRealm()
-                            user.deleteFromRealm()
-                            adapter.updateData()
-                        }
-                    }
-                    builderInner.show()
-                }*/
                 MainListAdapter.Action.REGISTER_DEVICE -> {
                     val intent = Intent(this, DeviceSearchActivity::class.java)
                     val id = user._id.toString()
