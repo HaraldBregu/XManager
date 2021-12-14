@@ -2,29 +2,40 @@ package com.ninespartans.xmanager.model;
 
 import java.lang.System;
 
-@kotlin.Metadata(mv = {1, 1, 15}, bv = {1, 0, 3}, k = 1, d1 = {"\u00000\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\u000e\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b!\b\u0016\u0018\u00002\u00020\u0001Bq\u0012\b\b\u0002\u0010\u0002\u001a\u00020\u0003\u0012\n\b\u0002\u0010\u0004\u001a\u0004\u0018\u00010\u0005\u0012\b\b\u0002\u0010\u0006\u001a\u00020\u0007\u0012\b\b\u0002\u0010\b\u001a\u00020\u0007\u0012\b\b\u0002\u0010\t\u001a\u00020\u0007\u0012\b\b\u0002\u0010\n\u001a\u00020\u0007\u0012\b\b\u0002\u0010\u000b\u001a\u00020\u0007\u0012\u000e\b\u0002\u0010\f\u001a\b\u0012\u0004\u0012\u00020\u000e0\r\u0012\b\b\u0002\u0010\u000f\u001a\u00020\u0010\u0012\b\b\u0002\u0010\u0011\u001a\u00020\u0010\u00a2\u0006\u0002\u0010\u0012R\u001e\u0010\u0002\u001a\u00020\u00038\u0006@\u0006X\u0087\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0013\u0010\u0014\"\u0004\b\u0015\u0010\u0016R\u001a\u0010\n\u001a\u00020\u0007X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0017\u0010\u0018\"\u0004\b\u0019\u0010\u001aR\u001a\u0010\u000f\u001a\u00020\u0010X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u001b\u0010\u001c\"\u0004\b\u001d\u0010\u001eR\u001a\u0010\b\u001a\u00020\u0007X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u001f\u0010\u0018\"\u0004\b \u0010\u001aR\u001a\u0010\t\u001a\u00020\u0007X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b!\u0010\u0018\"\u0004\b\"\u0010\u001aR\u001a\u0010\u0006\u001a\u00020\u0007X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b#\u0010\u0018\"\u0004\b$\u0010\u001aR \u0010\f\u001a\b\u0012\u0004\u0012\u00020\u000e0\rX\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b%\u0010&\"\u0004\b\'\u0010(R\u001a\u0010\u0011\u001a\u00020\u0010X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b)\u0010\u001c\"\u0004\b*\u0010\u001eR\u001c\u0010\u0004\u001a\u0004\u0018\u00010\u0005X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b+\u0010,\"\u0004\b-\u0010.R\u001a\u0010\u000b\u001a\u00020\u0007X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b/\u0010\u0018\"\u0004\b0\u0010\u001a\u00a8\u00061"}, d2 = {"Lcom/ninespartans/xmanager/model/Device;", "Lio/realm/RealmObject;", "_id", "Lorg/bson/types/ObjectId;", "user", "Lcom/ninespartans/xmanager/model/User;", "name", "", "firmwareVersion", "mac", "ble_mac", "wifi_mac", "programs", "Lio/realm/RealmList;", "Lcom/ninespartans/xmanager/model/Program;", "createdAt", "Ljava/util/Date;", "updatedAt", "(Lorg/bson/types/ObjectId;Lcom/ninespartans/xmanager/model/User;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/realm/RealmList;Ljava/util/Date;Ljava/util/Date;)V", "get_id", "()Lorg/bson/types/ObjectId;", "set_id", "(Lorg/bson/types/ObjectId;)V", "getBle_mac", "()Ljava/lang/String;", "setBle_mac", "(Ljava/lang/String;)V", "getCreatedAt", "()Ljava/util/Date;", "setCreatedAt", "(Ljava/util/Date;)V", "getFirmwareVersion", "setFirmwareVersion", "getMac", "setMac", "getName", "setName", "getPrograms", "()Lio/realm/RealmList;", "setPrograms", "(Lio/realm/RealmList;)V", "getUpdatedAt", "setUpdatedAt", "getUser", "()Lcom/ninespartans/xmanager/model/User;", "setUser", "(Lcom/ninespartans/xmanager/model/User;)V", "getWifi_mac", "setWifi_mac", "app_debug"})
+@kotlin.Metadata(mv = {1, 1, 15}, bv = {1, 0, 3}, k = 1, d1 = {"\u00004\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\u000e\n\u0002\b\u0006\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u000f\n\u0002\u0018\u0002\n\u0002\b\u001b\b\u0016\u0018\u00002\u00020\u0001:\u0001:Bw\u0012\b\b\u0002\u0010\u0002\u001a\u00020\u0003\u0012\b\b\u0002\u0010\u0004\u001a\u00020\u0005\u0012\b\b\u0002\u0010\u0006\u001a\u00020\u0005\u0012\b\b\u0002\u0010\u0007\u001a\u00020\u0005\u0012\b\b\u0002\u0010\b\u001a\u00020\u0005\u0012\b\b\u0002\u0010\t\u001a\u00020\u0005\u0012\b\b\u0002\u0010\n\u001a\u00020\u0005\u0012\n\b\u0002\u0010\u000b\u001a\u0004\u0018\u00010\f\u0012\n\b\u0002\u0010\r\u001a\u0004\u0018\u00010\u000e\u0012\b\b\u0002\u0010\u000f\u001a\u00020\u0010\u0012\b\b\u0002\u0010\u0011\u001a\u00020\u0010\u00a2\u0006\u0002\u0010\u0012R\u001e\u0010\u0002\u001a\u00020\u00038\u0006@\u0006X\u0087\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0013\u0010\u0014\"\u0004\b\u0015\u0010\u0016R\u001a\u0010\t\u001a\u00020\u0005X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0017\u0010\u0018\"\u0004\b\u0019\u0010\u001aR\u001a\u0010\u000f\u001a\u00020\u0010X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u001b\u0010\u001c\"\u0004\b\u001d\u0010\u001eR$\u0010!\u001a\u00020 2\u0006\u0010\u001f\u001a\u00020 8F@FX\u0086\u000e\u00a2\u0006\f\u001a\u0004\b\"\u0010#\"\u0004\b$\u0010%R\u001a\u0010\b\u001a\u00020\u0005X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b&\u0010\u0018\"\u0004\b\'\u0010\u001aR\u001a\u0010\u0004\u001a\u00020\u0005X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b(\u0010\u0018\"\u0004\b)\u0010\u001aR\u001c\u0010\u000b\u001a\u0004\u0018\u00010\fX\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b*\u0010+\"\u0004\b,\u0010-R\u001a\u0010\u0007\u001a\u00020\u0005X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b.\u0010\u0018\"\u0004\b/\u0010\u001aR\u001a\u0010\u0011\u001a\u00020\u0010X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b0\u0010\u001c\"\u0004\b1\u0010\u001eR\u001c\u0010\r\u001a\u0004\u0018\u00010\u000eX\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b2\u00103\"\u0004\b4\u00105R\u001a\u0010\u0006\u001a\u00020\u0005X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b6\u0010\u0018\"\u0004\b7\u0010\u001aR\u001a\u0010\n\u001a\u00020\u0005X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b8\u0010\u0018\"\u0004\b9\u0010\u001a\u00a8\u0006;"}, d2 = {"Lcom/ninespartans/xmanager/model/Device;", "Lio/realm/RealmObject;", "_id", "Lorg/bson/types/ObjectId;", "name", "", "version", "type", "mac", "ble_mac", "wifi_mac", "program", "Lcom/ninespartans/xmanager/model/DeviceProgram;", "user", "Lcom/ninespartans/xmanager/model/User;", "createdAt", "Ljava/util/Date;", "updatedAt", "(Lorg/bson/types/ObjectId;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/ninespartans/xmanager/model/DeviceProgram;Lcom/ninespartans/xmanager/model/User;Ljava/util/Date;Ljava/util/Date;)V", "get_id", "()Lorg/bson/types/ObjectId;", "set_id", "(Lorg/bson/types/ObjectId;)V", "getBle_mac", "()Ljava/lang/String;", "setBle_mac", "(Ljava/lang/String;)V", "getCreatedAt", "()Ljava/util/Date;", "setCreatedAt", "(Ljava/util/Date;)V", "newEnumType", "Lcom/ninespartans/xmanager/model/Device$DeviceType;", "deviceType", "getDeviceType", "()Lcom/ninespartans/xmanager/model/Device$DeviceType;", "setDeviceType", "(Lcom/ninespartans/xmanager/model/Device$DeviceType;)V", "getMac", "setMac", "getName", "setName", "getProgram", "()Lcom/ninespartans/xmanager/model/DeviceProgram;", "setProgram", "(Lcom/ninespartans/xmanager/model/DeviceProgram;)V", "getType", "setType", "getUpdatedAt", "setUpdatedAt", "getUser", "()Lcom/ninespartans/xmanager/model/User;", "setUser", "(Lcom/ninespartans/xmanager/model/User;)V", "getVersion", "setVersion", "getWifi_mac", "setWifi_mac", "DeviceType", "app_debug"})
 public class Device extends io.realm.RealmObject {
     @org.jetbrains.annotations.NotNull()
     @io.realm.annotations.PrimaryKey()
     private org.bson.types.ObjectId _id;
-    @org.jetbrains.annotations.Nullable()
-    private com.ninespartans.xmanager.model.User user;
     @org.jetbrains.annotations.NotNull()
     private java.lang.String name;
     @org.jetbrains.annotations.NotNull()
-    private java.lang.String firmwareVersion;
+    private java.lang.String version;
+    @org.jetbrains.annotations.NotNull()
+    private java.lang.String type;
     @org.jetbrains.annotations.NotNull()
     private java.lang.String mac;
     @org.jetbrains.annotations.NotNull()
     private java.lang.String ble_mac;
     @org.jetbrains.annotations.NotNull()
     private java.lang.String wifi_mac;
-    @org.jetbrains.annotations.NotNull()
-    private io.realm.RealmList<com.ninespartans.xmanager.model.Program> programs;
+    @org.jetbrains.annotations.Nullable()
+    private com.ninespartans.xmanager.model.DeviceProgram program;
+    @org.jetbrains.annotations.Nullable()
+    private com.ninespartans.xmanager.model.User user;
     @org.jetbrains.annotations.NotNull()
     private java.util.Date createdAt;
     @org.jetbrains.annotations.NotNull()
     private java.util.Date updatedAt;
+    
+    @org.jetbrains.annotations.NotNull()
+    public final com.ninespartans.xmanager.model.Device.DeviceType getDeviceType() {
+        return null;
+    }
+    
+    public final void setDeviceType(@org.jetbrains.annotations.NotNull()
+    com.ninespartans.xmanager.model.Device.DeviceType newEnumType) {
+    }
     
     @org.jetbrains.annotations.NotNull()
     public final org.bson.types.ObjectId get_id() {
@@ -33,15 +44,6 @@ public class Device extends io.realm.RealmObject {
     
     public final void set_id(@org.jetbrains.annotations.NotNull()
     org.bson.types.ObjectId p0) {
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final com.ninespartans.xmanager.model.User getUser() {
-        return null;
-    }
-    
-    public final void setUser(@org.jetbrains.annotations.Nullable()
-    com.ninespartans.xmanager.model.User p0) {
     }
     
     @org.jetbrains.annotations.NotNull()
@@ -54,11 +56,20 @@ public class Device extends io.realm.RealmObject {
     }
     
     @org.jetbrains.annotations.NotNull()
-    public final java.lang.String getFirmwareVersion() {
+    public final java.lang.String getVersion() {
         return null;
     }
     
-    public final void setFirmwareVersion(@org.jetbrains.annotations.NotNull()
+    public final void setVersion(@org.jetbrains.annotations.NotNull()
+    java.lang.String p0) {
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.lang.String getType() {
+        return null;
+    }
+    
+    public final void setType(@org.jetbrains.annotations.NotNull()
     java.lang.String p0) {
     }
     
@@ -89,13 +100,22 @@ public class Device extends io.realm.RealmObject {
     java.lang.String p0) {
     }
     
-    @org.jetbrains.annotations.NotNull()
-    public final io.realm.RealmList<com.ninespartans.xmanager.model.Program> getPrograms() {
+    @org.jetbrains.annotations.Nullable()
+    public final com.ninespartans.xmanager.model.DeviceProgram getProgram() {
         return null;
     }
     
-    public final void setPrograms(@org.jetbrains.annotations.NotNull()
-    io.realm.RealmList<com.ninespartans.xmanager.model.Program> p0) {
+    public final void setProgram(@org.jetbrains.annotations.Nullable()
+    com.ninespartans.xmanager.model.DeviceProgram p0) {
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final com.ninespartans.xmanager.model.User getUser() {
+        return null;
+    }
+    
+    public final void setUser(@org.jetbrains.annotations.Nullable()
+    com.ninespartans.xmanager.model.User p0) {
     }
     
     @org.jetbrains.annotations.NotNull()
@@ -117,14 +137,15 @@ public class Device extends io.realm.RealmObject {
     }
     
     public Device(@org.jetbrains.annotations.NotNull()
-    org.bson.types.ObjectId _id, @org.jetbrains.annotations.Nullable()
-    com.ninespartans.xmanager.model.User user, @org.jetbrains.annotations.NotNull()
+    org.bson.types.ObjectId _id, @org.jetbrains.annotations.NotNull()
     java.lang.String name, @org.jetbrains.annotations.NotNull()
-    java.lang.String firmwareVersion, @org.jetbrains.annotations.NotNull()
+    java.lang.String version, @org.jetbrains.annotations.NotNull()
+    java.lang.String type, @org.jetbrains.annotations.NotNull()
     java.lang.String mac, @org.jetbrains.annotations.NotNull()
     java.lang.String ble_mac, @org.jetbrains.annotations.NotNull()
-    java.lang.String wifi_mac, @org.jetbrains.annotations.NotNull()
-    io.realm.RealmList<com.ninespartans.xmanager.model.Program> programs, @org.jetbrains.annotations.NotNull()
+    java.lang.String wifi_mac, @org.jetbrains.annotations.Nullable()
+    com.ninespartans.xmanager.model.DeviceProgram program, @org.jetbrains.annotations.Nullable()
+    com.ninespartans.xmanager.model.User user, @org.jetbrains.annotations.NotNull()
     java.util.Date createdAt, @org.jetbrains.annotations.NotNull()
     java.util.Date updatedAt) {
         super();
@@ -132,5 +153,18 @@ public class Device extends io.realm.RealmObject {
     
     public Device() {
         super();
+    }
+    
+    /**
+     * Type of device
+     */
+    @kotlin.Metadata(mv = {1, 1, 15}, bv = {1, 0, 3}, k = 1, d1 = {"\u0000\f\n\u0002\u0018\u0002\n\u0002\u0010\u0010\n\u0002\b\u0005\b\u0086\u0001\u0018\u00002\b\u0012\u0004\u0012\u00020\u00000\u0001B\u0007\b\u0002\u00a2\u0006\u0002\u0010\u0002j\u0002\b\u0003j\u0002\b\u0004j\u0002\b\u0005\u00a8\u0006\u0006"}, d2 = {"Lcom/ninespartans/xmanager/model/Device$DeviceType;", "", "(Ljava/lang/String;I)V", "NONE", "SHOE_LEFT", "SHOE_RIGHT", "app_debug"})
+    public static enum DeviceType {
+        /*public static final*/ NONE /* = new NONE() */ /*enum*/ ,
+        /*public static final*/ SHOE_LEFT /* = new SHOE_LEFT() */ /*enum*/ ,
+        /*public static final*/ SHOE_RIGHT /* = new SHOE_RIGHT() */ /*enum*/ ;
+        
+        DeviceType() {
+        }
     }
 }

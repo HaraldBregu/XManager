@@ -48,11 +48,13 @@ class PermissionsManagerActivity : AppCompatActivity() {
         }
 
         saveButton.setOnClickListener {
+            finish()
+/*
             if (BLEManager.canStart(this)) {
                 val intent = Intent(this, DevicePairSearchActivity::class.java)
                 startActivity(intent)
                 finish()
-            }
+            }*/
         }
 
         val bluetoothIntentFilter = IntentFilter()

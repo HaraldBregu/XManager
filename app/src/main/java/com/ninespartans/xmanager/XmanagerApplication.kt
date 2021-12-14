@@ -9,6 +9,7 @@ class XmanagerApplication: Application() {
     override fun onCreate() {
         super.onCreate()
 
+
         Realm.init(this)
         val configuration = RealmConfiguration.Builder()
             .deleteRealmIfMigrationNeeded()
@@ -18,7 +19,10 @@ class XmanagerApplication: Application() {
             .schemaVersion(0)
             .build()
 
+        //Realm.deleteRealm(configuration)
+
         Realm.setDefaultConfiguration(configuration)
+
 
         //val d = configuration.realmDirectory
         //Log.i("XMANAGER_REALM_URL", d)

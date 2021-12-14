@@ -44,27 +44,29 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
 
     static final class DeviceColumnInfo extends ColumnInfo {
         long _idColKey;
-        long userColKey;
         long nameColKey;
-        long firmwareVersionColKey;
+        long versionColKey;
+        long typeColKey;
         long macColKey;
         long ble_macColKey;
         long wifi_macColKey;
-        long programsColKey;
+        long programColKey;
+        long userColKey;
         long createdAtColKey;
         long updatedAtColKey;
 
         DeviceColumnInfo(OsSchemaInfo schemaInfo) {
-            super(10);
+            super(11);
             OsObjectSchemaInfo objectSchemaInfo = schemaInfo.getObjectSchemaInfo("Device");
             this._idColKey = addColumnDetails("_id", "_id", objectSchemaInfo);
-            this.userColKey = addColumnDetails("user", "user", objectSchemaInfo);
             this.nameColKey = addColumnDetails("name", "name", objectSchemaInfo);
-            this.firmwareVersionColKey = addColumnDetails("firmwareVersion", "firmwareVersion", objectSchemaInfo);
+            this.versionColKey = addColumnDetails("version", "version", objectSchemaInfo);
+            this.typeColKey = addColumnDetails("type", "type", objectSchemaInfo);
             this.macColKey = addColumnDetails("mac", "mac", objectSchemaInfo);
             this.ble_macColKey = addColumnDetails("ble_mac", "ble_mac", objectSchemaInfo);
             this.wifi_macColKey = addColumnDetails("wifi_mac", "wifi_mac", objectSchemaInfo);
-            this.programsColKey = addColumnDetails("programs", "programs", objectSchemaInfo);
+            this.programColKey = addColumnDetails("program", "program", objectSchemaInfo);
+            this.userColKey = addColumnDetails("user", "user", objectSchemaInfo);
             this.createdAtColKey = addColumnDetails("createdAt", "createdAt", objectSchemaInfo);
             this.updatedAtColKey = addColumnDetails("updatedAt", "updatedAt", objectSchemaInfo);
         }
@@ -84,13 +86,14 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
             final DeviceColumnInfo src = (DeviceColumnInfo) rawSrc;
             final DeviceColumnInfo dst = (DeviceColumnInfo) rawDst;
             dst._idColKey = src._idColKey;
-            dst.userColKey = src.userColKey;
             dst.nameColKey = src.nameColKey;
-            dst.firmwareVersionColKey = src.firmwareVersionColKey;
+            dst.versionColKey = src.versionColKey;
+            dst.typeColKey = src.typeColKey;
             dst.macColKey = src.macColKey;
             dst.ble_macColKey = src.ble_macColKey;
             dst.wifi_macColKey = src.wifi_macColKey;
-            dst.programsColKey = src.programsColKey;
+            dst.programColKey = src.programColKey;
+            dst.userColKey = src.userColKey;
             dst.createdAtColKey = src.createdAtColKey;
             dst.updatedAtColKey = src.updatedAtColKey;
         }
@@ -101,7 +104,6 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
 
     private DeviceColumnInfo columnInfo;
     private ProxyState<com.ninespartans.xmanager.model.Device> proxyState;
-    private RealmList<com.ninespartans.xmanager.model.Program> programsRealmList;
 
     com_ninespartans_xmanager_model_DeviceRealmProxy() {
         proxyState.setConstructionFinished();
@@ -140,48 +142,6 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
     }
 
     @Override
-    public com.ninespartans.xmanager.model.User realmGet$user() {
-        proxyState.getRealm$realm().checkIfValid();
-        if (proxyState.getRow$realm().isNullLink(columnInfo.userColKey)) {
-            return null;
-        }
-        return proxyState.getRealm$realm().get(com.ninespartans.xmanager.model.User.class, proxyState.getRow$realm().getLink(columnInfo.userColKey), false, Collections.<String>emptyList());
-    }
-
-    @Override
-    public void realmSet$user(com.ninespartans.xmanager.model.User value) {
-        Realm realm = (Realm) proxyState.getRealm$realm();
-        if (proxyState.isUnderConstruction()) {
-            if (!proxyState.getAcceptDefaultValue$realm()) {
-                return;
-            }
-            if (proxyState.getExcludeFields$realm().contains("user")) {
-                return;
-            }
-            if (value != null && !RealmObject.isManaged(value)) {
-                value = realm.copyToRealmOrUpdate(value);
-            }
-            final Row row = proxyState.getRow$realm();
-            if (value == null) {
-                // Table#nullifyLink() does not support default value. Just using Row.
-                row.nullifyLink(columnInfo.userColKey);
-                return;
-            }
-            proxyState.checkValidObject(value);
-            row.getTable().setLink(columnInfo.userColKey, row.getObjectKey(), ((RealmObjectProxy) value).realmGet$proxyState().getRow$realm().getObjectKey(), true);
-            return;
-        }
-
-        proxyState.getRealm$realm().checkIfValid();
-        if (value == null) {
-            proxyState.getRow$realm().nullifyLink(columnInfo.userColKey);
-            return;
-        }
-        proxyState.checkValidObject(value);
-        proxyState.getRow$realm().setLink(columnInfo.userColKey, ((RealmObjectProxy) value).realmGet$proxyState().getRow$realm().getObjectKey());
-    }
-
-    @Override
     @SuppressWarnings("cast")
     public String realmGet$name() {
         proxyState.getRealm$realm().checkIfValid();
@@ -211,30 +171,58 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
 
     @Override
     @SuppressWarnings("cast")
-    public String realmGet$firmwareVersion() {
+    public String realmGet$version() {
         proxyState.getRealm$realm().checkIfValid();
-        return (java.lang.String) proxyState.getRow$realm().getString(columnInfo.firmwareVersionColKey);
+        return (java.lang.String) proxyState.getRow$realm().getString(columnInfo.versionColKey);
     }
 
     @Override
-    public void realmSet$firmwareVersion(String value) {
+    public void realmSet$version(String value) {
         if (proxyState.isUnderConstruction()) {
             if (!proxyState.getAcceptDefaultValue$realm()) {
                 return;
             }
             final Row row = proxyState.getRow$realm();
             if (value == null) {
-                throw new IllegalArgumentException("Trying to set non-nullable field 'firmwareVersion' to null.");
+                throw new IllegalArgumentException("Trying to set non-nullable field 'version' to null.");
             }
-            row.getTable().setString(columnInfo.firmwareVersionColKey, row.getObjectKey(), value, true);
+            row.getTable().setString(columnInfo.versionColKey, row.getObjectKey(), value, true);
             return;
         }
 
         proxyState.getRealm$realm().checkIfValid();
         if (value == null) {
-            throw new IllegalArgumentException("Trying to set non-nullable field 'firmwareVersion' to null.");
+            throw new IllegalArgumentException("Trying to set non-nullable field 'version' to null.");
         }
-        proxyState.getRow$realm().setString(columnInfo.firmwareVersionColKey, value);
+        proxyState.getRow$realm().setString(columnInfo.versionColKey, value);
+    }
+
+    @Override
+    @SuppressWarnings("cast")
+    public String realmGet$type() {
+        proxyState.getRealm$realm().checkIfValid();
+        return (java.lang.String) proxyState.getRow$realm().getString(columnInfo.typeColKey);
+    }
+
+    @Override
+    public void realmSet$type(String value) {
+        if (proxyState.isUnderConstruction()) {
+            if (!proxyState.getAcceptDefaultValue$realm()) {
+                return;
+            }
+            final Row row = proxyState.getRow$realm();
+            if (value == null) {
+                throw new IllegalArgumentException("Trying to set non-nullable field 'type' to null.");
+            }
+            row.getTable().setString(columnInfo.typeColKey, row.getObjectKey(), value, true);
+            return;
+        }
+
+        proxyState.getRealm$realm().checkIfValid();
+        if (value == null) {
+            throw new IllegalArgumentException("Trying to set non-nullable field 'type' to null.");
+        }
+        proxyState.getRow$realm().setString(columnInfo.typeColKey, value);
     }
 
     @Override
@@ -322,64 +310,87 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
     }
 
     @Override
-    public RealmList<com.ninespartans.xmanager.model.Program> realmGet$programs() {
+    public com.ninespartans.xmanager.model.DeviceProgram realmGet$program() {
         proxyState.getRealm$realm().checkIfValid();
-        // use the cached value if available
-        if (programsRealmList != null) {
-            return programsRealmList;
-        } else {
-            OsList osList = proxyState.getRow$realm().getModelList(columnInfo.programsColKey);
-            programsRealmList = new RealmList<com.ninespartans.xmanager.model.Program>(com.ninespartans.xmanager.model.Program.class, osList, proxyState.getRealm$realm());
-            return programsRealmList;
+        if (proxyState.getRow$realm().isNullLink(columnInfo.programColKey)) {
+            return null;
         }
+        return proxyState.getRealm$realm().get(com.ninespartans.xmanager.model.DeviceProgram.class, proxyState.getRow$realm().getLink(columnInfo.programColKey), false, Collections.<String>emptyList());
     }
 
     @Override
-    public void realmSet$programs(RealmList<com.ninespartans.xmanager.model.Program> value) {
+    public void realmSet$program(com.ninespartans.xmanager.model.DeviceProgram value) {
+        Realm realm = (Realm) proxyState.getRealm$realm();
         if (proxyState.isUnderConstruction()) {
             if (!proxyState.getAcceptDefaultValue$realm()) {
                 return;
             }
-            if (proxyState.getExcludeFields$realm().contains("programs")) {
+            if (proxyState.getExcludeFields$realm().contains("program")) {
                 return;
             }
-            // if the list contains unmanaged RealmObjects, convert them to managed.
-            if (value != null && !value.isManaged()) {
-                final Realm realm = (Realm) proxyState.getRealm$realm();
-                final RealmList<com.ninespartans.xmanager.model.Program> original = value;
-                value = new RealmList<com.ninespartans.xmanager.model.Program>();
-                for (com.ninespartans.xmanager.model.Program item : original) {
-                    if (item == null || RealmObject.isManaged(item)) {
-                        value.add(item);
-                    } else {
-                        value.add(realm.copyToRealm(item));
-                    }
-                }
+            if (value != null && !RealmObject.isManaged(value)) {
+                value = realm.copyToRealmOrUpdate(value);
             }
+            final Row row = proxyState.getRow$realm();
+            if (value == null) {
+                // Table#nullifyLink() does not support default value. Just using Row.
+                row.nullifyLink(columnInfo.programColKey);
+                return;
+            }
+            proxyState.checkValidObject(value);
+            row.getTable().setLink(columnInfo.programColKey, row.getObjectKey(), ((RealmObjectProxy) value).realmGet$proxyState().getRow$realm().getObjectKey(), true);
+            return;
         }
 
         proxyState.getRealm$realm().checkIfValid();
-        OsList osList = proxyState.getRow$realm().getModelList(columnInfo.programsColKey);
-        // For lists of equal lengths, we need to set each element directly as clearing the receiver list can be wrong if the input and target list are the same.
-        if (value != null && value.size() == osList.size()) {
-            int objects = value.size();
-            for (int i = 0; i < objects; i++) {
-                com.ninespartans.xmanager.model.Program linkedObject = value.get(i);
-                proxyState.checkValidObject(linkedObject);
-                osList.setRow(i, ((RealmObjectProxy) linkedObject).realmGet$proxyState().getRow$realm().getObjectKey());
-            }
-        } else {
-            osList.removeAll();
-            if (value == null) {
+        if (value == null) {
+            proxyState.getRow$realm().nullifyLink(columnInfo.programColKey);
+            return;
+        }
+        proxyState.checkValidObject(value);
+        proxyState.getRow$realm().setLink(columnInfo.programColKey, ((RealmObjectProxy) value).realmGet$proxyState().getRow$realm().getObjectKey());
+    }
+
+    @Override
+    public com.ninespartans.xmanager.model.User realmGet$user() {
+        proxyState.getRealm$realm().checkIfValid();
+        if (proxyState.getRow$realm().isNullLink(columnInfo.userColKey)) {
+            return null;
+        }
+        return proxyState.getRealm$realm().get(com.ninespartans.xmanager.model.User.class, proxyState.getRow$realm().getLink(columnInfo.userColKey), false, Collections.<String>emptyList());
+    }
+
+    @Override
+    public void realmSet$user(com.ninespartans.xmanager.model.User value) {
+        Realm realm = (Realm) proxyState.getRealm$realm();
+        if (proxyState.isUnderConstruction()) {
+            if (!proxyState.getAcceptDefaultValue$realm()) {
                 return;
             }
-            int objects = value.size();
-            for (int i = 0; i < objects; i++) {
-                com.ninespartans.xmanager.model.Program linkedObject = value.get(i);
-                proxyState.checkValidObject(linkedObject);
-                osList.addRow(((RealmObjectProxy) linkedObject).realmGet$proxyState().getRow$realm().getObjectKey());
+            if (proxyState.getExcludeFields$realm().contains("user")) {
+                return;
             }
+            if (value != null && !RealmObject.isManaged(value)) {
+                value = realm.copyToRealmOrUpdate(value);
+            }
+            final Row row = proxyState.getRow$realm();
+            if (value == null) {
+                // Table#nullifyLink() does not support default value. Just using Row.
+                row.nullifyLink(columnInfo.userColKey);
+                return;
+            }
+            proxyState.checkValidObject(value);
+            row.getTable().setLink(columnInfo.userColKey, row.getObjectKey(), ((RealmObjectProxy) value).realmGet$proxyState().getRow$realm().getObjectKey(), true);
+            return;
         }
+
+        proxyState.getRealm$realm().checkIfValid();
+        if (value == null) {
+            proxyState.getRow$realm().nullifyLink(columnInfo.userColKey);
+            return;
+        }
+        proxyState.checkValidObject(value);
+        proxyState.getRow$realm().setLink(columnInfo.userColKey, ((RealmObjectProxy) value).realmGet$proxyState().getRow$realm().getObjectKey());
     }
 
     @Override
@@ -439,15 +450,16 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
     }
 
     private static OsObjectSchemaInfo createExpectedObjectSchemaInfo() {
-        OsObjectSchemaInfo.Builder builder = new OsObjectSchemaInfo.Builder(NO_ALIAS, "Device", false, 10, 0);
+        OsObjectSchemaInfo.Builder builder = new OsObjectSchemaInfo.Builder(NO_ALIAS, "Device", false, 11, 0);
         builder.addPersistedProperty(NO_ALIAS, "_id", RealmFieldType.OBJECT_ID, Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
-        builder.addPersistedLinkProperty(NO_ALIAS, "user", RealmFieldType.OBJECT, "User");
         builder.addPersistedProperty(NO_ALIAS, "name", RealmFieldType.STRING, !Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
-        builder.addPersistedProperty(NO_ALIAS, "firmwareVersion", RealmFieldType.STRING, !Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
+        builder.addPersistedProperty(NO_ALIAS, "version", RealmFieldType.STRING, !Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
+        builder.addPersistedProperty(NO_ALIAS, "type", RealmFieldType.STRING, !Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
         builder.addPersistedProperty(NO_ALIAS, "mac", RealmFieldType.STRING, !Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
         builder.addPersistedProperty(NO_ALIAS, "ble_mac", RealmFieldType.STRING, !Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
         builder.addPersistedProperty(NO_ALIAS, "wifi_mac", RealmFieldType.STRING, !Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
-        builder.addPersistedLinkProperty(NO_ALIAS, "programs", RealmFieldType.LIST, "Program");
+        builder.addPersistedLinkProperty(NO_ALIAS, "program", RealmFieldType.OBJECT, "DeviceProgram");
+        builder.addPersistedLinkProperty(NO_ALIAS, "user", RealmFieldType.OBJECT, "User");
         builder.addPersistedProperty(NO_ALIAS, "createdAt", RealmFieldType.DATE, !Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
         builder.addPersistedProperty(NO_ALIAS, "updatedAt", RealmFieldType.DATE, !Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
         return builder.build();
@@ -493,11 +505,11 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
             }
         }
         if (obj == null) {
+            if (json.has("program")) {
+                excludeFields.add("program");
+            }
             if (json.has("user")) {
                 excludeFields.add("user");
-            }
-            if (json.has("programs")) {
-                excludeFields.add("programs");
             }
             if (json.has("_id")) {
                 if (json.isNull("_id")) {
@@ -511,14 +523,6 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
         }
 
         final com_ninespartans_xmanager_model_DeviceRealmProxyInterface objProxy = (com_ninespartans_xmanager_model_DeviceRealmProxyInterface) obj;
-        if (json.has("user")) {
-            if (json.isNull("user")) {
-                objProxy.realmSet$user(null);
-            } else {
-                com.ninespartans.xmanager.model.User userObj = com_ninespartans_xmanager_model_UserRealmProxy.createOrUpdateUsingJsonObject(realm, json.getJSONObject("user"), update);
-                objProxy.realmSet$user(userObj);
-            }
-        }
         if (json.has("name")) {
             if (json.isNull("name")) {
                 objProxy.realmSet$name(null);
@@ -526,11 +530,18 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
                 objProxy.realmSet$name((String) json.getString("name"));
             }
         }
-        if (json.has("firmwareVersion")) {
-            if (json.isNull("firmwareVersion")) {
-                objProxy.realmSet$firmwareVersion(null);
+        if (json.has("version")) {
+            if (json.isNull("version")) {
+                objProxy.realmSet$version(null);
             } else {
-                objProxy.realmSet$firmwareVersion((String) json.getString("firmwareVersion"));
+                objProxy.realmSet$version((String) json.getString("version"));
+            }
+        }
+        if (json.has("type")) {
+            if (json.isNull("type")) {
+                objProxy.realmSet$type(null);
+            } else {
+                objProxy.realmSet$type((String) json.getString("type"));
             }
         }
         if (json.has("mac")) {
@@ -554,15 +565,20 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
                 objProxy.realmSet$wifi_mac((String) json.getString("wifi_mac"));
             }
         }
-        if (json.has("programs")) {
-            if (json.isNull("programs")) {
-                objProxy.realmSet$programs(null);
+        if (json.has("program")) {
+            if (json.isNull("program")) {
+                objProxy.realmSet$program(null);
             } else {
-                objProxy.realmGet$programs().clear();
-                JSONArray array = json.getJSONArray("programs");
-                for (int i = 0; i < array.length(); i++) {
-                    com_ninespartans_xmanager_model_ProgramRealmProxy.createOrUpdateEmbeddedUsingJsonObject(realm, (RealmModel)objProxy, "programs", array.getJSONObject(i), update);
-                }
+                com.ninespartans.xmanager.model.DeviceProgram programObj = com_ninespartans_xmanager_model_DeviceProgramRealmProxy.createOrUpdateUsingJsonObject(realm, json.getJSONObject("program"), update);
+                objProxy.realmSet$program(programObj);
+            }
+        }
+        if (json.has("user")) {
+            if (json.isNull("user")) {
+                objProxy.realmSet$user(null);
+            } else {
+                com.ninespartans.xmanager.model.User userObj = com_ninespartans_xmanager_model_UserRealmProxy.createOrUpdateUsingJsonObject(realm, json.getJSONObject("user"), update);
+                objProxy.realmSet$user(userObj);
             }
         }
         if (json.has("createdAt")) {
@@ -610,14 +626,6 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
                 } else {
                     objProxy.realmSet$_id(new org.bson.types.ObjectId(reader.nextString()));
                 }
-            } else if (name.equals("user")) {
-                if (reader.peek() == JsonToken.NULL) {
-                    reader.skipValue();
-                    objProxy.realmSet$user(null);
-                } else {
-                    com.ninespartans.xmanager.model.User userObj = com_ninespartans_xmanager_model_UserRealmProxy.createUsingJsonStream(realm, reader);
-                    objProxy.realmSet$user(userObj);
-                }
             } else if (name.equals("name")) {
                 if (reader.peek() != JsonToken.NULL) {
                     objProxy.realmSet$name((String) reader.nextString());
@@ -625,12 +633,19 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
                     reader.skipValue();
                     objProxy.realmSet$name(null);
                 }
-            } else if (name.equals("firmwareVersion")) {
+            } else if (name.equals("version")) {
                 if (reader.peek() != JsonToken.NULL) {
-                    objProxy.realmSet$firmwareVersion((String) reader.nextString());
+                    objProxy.realmSet$version((String) reader.nextString());
                 } else {
                     reader.skipValue();
-                    objProxy.realmSet$firmwareVersion(null);
+                    objProxy.realmSet$version(null);
+                }
+            } else if (name.equals("type")) {
+                if (reader.peek() != JsonToken.NULL) {
+                    objProxy.realmSet$type((String) reader.nextString());
+                } else {
+                    reader.skipValue();
+                    objProxy.realmSet$type(null);
                 }
             } else if (name.equals("mac")) {
                 if (reader.peek() != JsonToken.NULL) {
@@ -653,18 +668,21 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
                     reader.skipValue();
                     objProxy.realmSet$wifi_mac(null);
                 }
-            } else if (name.equals("programs")) {
+            } else if (name.equals("program")) {
                 if (reader.peek() == JsonToken.NULL) {
                     reader.skipValue();
-                    objProxy.realmSet$programs(null);
+                    objProxy.realmSet$program(null);
                 } else {
-                    objProxy.realmSet$programs(new RealmList<com.ninespartans.xmanager.model.Program>());
-                    reader.beginArray();
-                    while (reader.hasNext()) {
-                        com.ninespartans.xmanager.model.Program item = com_ninespartans_xmanager_model_ProgramRealmProxy.createUsingJsonStream(realm, reader);
-                        objProxy.realmGet$programs().add(item);
-                    }
-                    reader.endArray();
+                    com.ninespartans.xmanager.model.DeviceProgram programObj = com_ninespartans_xmanager_model_DeviceProgramRealmProxy.createUsingJsonStream(realm, reader);
+                    objProxy.realmSet$program(programObj);
+                }
+            } else if (name.equals("user")) {
+                if (reader.peek() == JsonToken.NULL) {
+                    reader.skipValue();
+                    objProxy.realmSet$user(null);
+                } else {
+                    com.ninespartans.xmanager.model.User userObj = com_ninespartans_xmanager_model_UserRealmProxy.createUsingJsonStream(realm, reader);
+                    objProxy.realmSet$user(userObj);
                 }
             } else if (name.equals("createdAt")) {
                 if (reader.peek() == JsonToken.NULL) {
@@ -762,7 +780,8 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
         // Add all non-"object reference" fields
         builder.addObjectId(columnInfo._idColKey, unmanagedSource.realmGet$_id());
         builder.addString(columnInfo.nameColKey, unmanagedSource.realmGet$name());
-        builder.addString(columnInfo.firmwareVersionColKey, unmanagedSource.realmGet$firmwareVersion());
+        builder.addString(columnInfo.versionColKey, unmanagedSource.realmGet$version());
+        builder.addString(columnInfo.typeColKey, unmanagedSource.realmGet$type());
         builder.addString(columnInfo.macColKey, unmanagedSource.realmGet$mac());
         builder.addString(columnInfo.ble_macColKey, unmanagedSource.realmGet$ble_mac());
         builder.addString(columnInfo.wifi_macColKey, unmanagedSource.realmGet$wifi_mac());
@@ -776,6 +795,18 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
         cache.put(newObject, managedCopy);
 
         // Finally add all fields that reference other Realm Objects, either directly or through a list
+        com.ninespartans.xmanager.model.DeviceProgram programObj = unmanagedSource.realmGet$program();
+        if (programObj == null) {
+            managedCopy.realmSet$program(null);
+        } else {
+            com.ninespartans.xmanager.model.DeviceProgram cacheprogram = (com.ninespartans.xmanager.model.DeviceProgram) cache.get(programObj);
+            if (cacheprogram != null) {
+                managedCopy.realmSet$program(cacheprogram);
+            } else {
+                managedCopy.realmSet$program(com_ninespartans_xmanager_model_DeviceProgramRealmProxy.copyOrUpdate(realm, (com_ninespartans_xmanager_model_DeviceProgramRealmProxy.DeviceProgramColumnInfo) realm.getSchema().getColumnInfo(com.ninespartans.xmanager.model.DeviceProgram.class), programObj, update, cache, flags));
+            }
+        }
+
         com.ninespartans.xmanager.model.User userObj = unmanagedSource.realmGet$user();
         if (userObj == null) {
             managedCopy.realmSet$user(null);
@@ -785,25 +816,6 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
                 managedCopy.realmSet$user(cacheuser);
             } else {
                 managedCopy.realmSet$user(com_ninespartans_xmanager_model_UserRealmProxy.copyOrUpdate(realm, (com_ninespartans_xmanager_model_UserRealmProxy.UserColumnInfo) realm.getSchema().getColumnInfo(com.ninespartans.xmanager.model.User.class), userObj, update, cache, flags));
-            }
-        }
-
-        RealmList<com.ninespartans.xmanager.model.Program> programsUnmanagedList = unmanagedSource.realmGet$programs();
-        if (programsUnmanagedList != null) {
-            RealmList<com.ninespartans.xmanager.model.Program> programsManagedList = managedCopy.realmGet$programs();
-            programsManagedList.clear();
-            for (int i = 0; i < programsUnmanagedList.size(); i++) {
-                com.ninespartans.xmanager.model.Program programsUnmanagedItem = programsUnmanagedList.get(i);
-                com.ninespartans.xmanager.model.Program cacheprograms = (com.ninespartans.xmanager.model.Program) cache.get(programsUnmanagedItem);
-                if (cacheprograms != null) {
-                    throw new IllegalArgumentException("Embedded objects can only have one parent pointing to them. This object was already copied, so another object is pointing to it: cacheprograms.toString()");
-                } else {
-                    long objKey = programsManagedList.getOsList().createAndAddEmbeddedObject();
-                    Row linkedObjectRow = realm.getTable(com.ninespartans.xmanager.model.Program.class).getUncheckedRow(objKey);
-                    com.ninespartans.xmanager.model.Program linkedObject = com_ninespartans_xmanager_model_ProgramRealmProxy.newProxyInstance(realm, linkedObjectRow);
-                    cache.put(programsUnmanagedItem, (RealmObjectProxy) linkedObject);
-                    com_ninespartans_xmanager_model_ProgramRealmProxy.updateEmbeddedObject(realm, programsUnmanagedItem, linkedObject, new HashMap<RealmModel, RealmObjectProxy>(), Collections.EMPTY_SET);
-                }
             }
         }
 
@@ -829,22 +841,17 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
             Table.throwDuplicatePrimaryKeyException(primaryKeyValue);
         }
         cache.put(object, objKey);
-
-        com.ninespartans.xmanager.model.User userObj = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$user();
-        if (userObj != null) {
-            Long cacheuser = cache.get(userObj);
-            if (cacheuser == null) {
-                cacheuser = com_ninespartans_xmanager_model_UserRealmProxy.insert(realm, userObj, cache);
-            }
-            Table.nativeSetLink(tableNativePtr, columnInfo.userColKey, objKey, cacheuser, false);
-        }
         String realmGet$name = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$name();
         if (realmGet$name != null) {
             Table.nativeSetString(tableNativePtr, columnInfo.nameColKey, objKey, realmGet$name, false);
         }
-        String realmGet$firmwareVersion = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$firmwareVersion();
-        if (realmGet$firmwareVersion != null) {
-            Table.nativeSetString(tableNativePtr, columnInfo.firmwareVersionColKey, objKey, realmGet$firmwareVersion, false);
+        String realmGet$version = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$version();
+        if (realmGet$version != null) {
+            Table.nativeSetString(tableNativePtr, columnInfo.versionColKey, objKey, realmGet$version, false);
+        }
+        String realmGet$type = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$type();
+        if (realmGet$type != null) {
+            Table.nativeSetString(tableNativePtr, columnInfo.typeColKey, objKey, realmGet$type, false);
         }
         String realmGet$mac = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$mac();
         if (realmGet$mac != null) {
@@ -859,17 +866,22 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
             Table.nativeSetString(tableNativePtr, columnInfo.wifi_macColKey, objKey, realmGet$wifi_mac, false);
         }
 
-        RealmList<com.ninespartans.xmanager.model.Program> programsList = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$programs();
-        if (programsList != null) {
-            OsList programsOsList = new OsList(table.getUncheckedRow(objKey), columnInfo.programsColKey);
-            for (com.ninespartans.xmanager.model.Program programsItem : programsList) {
-                Long cacheItemIndexprograms = cache.get(programsItem);
-                if (cacheItemIndexprograms != null) {
-                    throw new IllegalArgumentException("Embedded objects can only have one parent pointing to them. This object was already copied, so another object is pointing to it: " + cacheItemIndexprograms.toString());
-                } else {
-                    cacheItemIndexprograms = com_ninespartans_xmanager_model_ProgramRealmProxy.insert(realm, table, columnInfo.programsColKey, objKey, programsItem, cache);
-                }
+        com.ninespartans.xmanager.model.DeviceProgram programObj = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$program();
+        if (programObj != null) {
+            Long cacheprogram = cache.get(programObj);
+            if (cacheprogram == null) {
+                cacheprogram = com_ninespartans_xmanager_model_DeviceProgramRealmProxy.insert(realm, programObj, cache);
             }
+            Table.nativeSetLink(tableNativePtr, columnInfo.programColKey, objKey, cacheprogram, false);
+        }
+
+        com.ninespartans.xmanager.model.User userObj = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$user();
+        if (userObj != null) {
+            Long cacheuser = cache.get(userObj);
+            if (cacheuser == null) {
+                cacheuser = com_ninespartans_xmanager_model_UserRealmProxy.insert(realm, userObj, cache);
+            }
+            Table.nativeSetLink(tableNativePtr, columnInfo.userColKey, objKey, cacheuser, false);
         }
         java.util.Date realmGet$createdAt = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$createdAt();
         if (realmGet$createdAt != null) {
@@ -908,22 +920,17 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
                 Table.throwDuplicatePrimaryKeyException(primaryKeyValue);
             }
             cache.put(object, objKey);
-
-            com.ninespartans.xmanager.model.User userObj = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$user();
-            if (userObj != null) {
-                Long cacheuser = cache.get(userObj);
-                if (cacheuser == null) {
-                    cacheuser = com_ninespartans_xmanager_model_UserRealmProxy.insert(realm, userObj, cache);
-                }
-                Table.nativeSetLink(tableNativePtr, columnInfo.userColKey, objKey, cacheuser, false);
-            }
             String realmGet$name = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$name();
             if (realmGet$name != null) {
                 Table.nativeSetString(tableNativePtr, columnInfo.nameColKey, objKey, realmGet$name, false);
             }
-            String realmGet$firmwareVersion = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$firmwareVersion();
-            if (realmGet$firmwareVersion != null) {
-                Table.nativeSetString(tableNativePtr, columnInfo.firmwareVersionColKey, objKey, realmGet$firmwareVersion, false);
+            String realmGet$version = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$version();
+            if (realmGet$version != null) {
+                Table.nativeSetString(tableNativePtr, columnInfo.versionColKey, objKey, realmGet$version, false);
+            }
+            String realmGet$type = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$type();
+            if (realmGet$type != null) {
+                Table.nativeSetString(tableNativePtr, columnInfo.typeColKey, objKey, realmGet$type, false);
             }
             String realmGet$mac = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$mac();
             if (realmGet$mac != null) {
@@ -938,17 +945,22 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
                 Table.nativeSetString(tableNativePtr, columnInfo.wifi_macColKey, objKey, realmGet$wifi_mac, false);
             }
 
-            RealmList<com.ninespartans.xmanager.model.Program> programsList = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$programs();
-            if (programsList != null) {
-                OsList programsOsList = new OsList(table.getUncheckedRow(objKey), columnInfo.programsColKey);
-                for (com.ninespartans.xmanager.model.Program programsItem : programsList) {
-                    Long cacheItemIndexprograms = cache.get(programsItem);
-                    if (cacheItemIndexprograms != null) {
-                        throw new IllegalArgumentException("Embedded objects can only have one parent pointing to them. This object was already copied, so another object is pointing to it: " + cacheItemIndexprograms.toString());
-                    } else {
-                        cacheItemIndexprograms = com_ninespartans_xmanager_model_ProgramRealmProxy.insert(realm, table, columnInfo.programsColKey, objKey, programsItem, cache);
-                    }
+            com.ninespartans.xmanager.model.DeviceProgram programObj = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$program();
+            if (programObj != null) {
+                Long cacheprogram = cache.get(programObj);
+                if (cacheprogram == null) {
+                    cacheprogram = com_ninespartans_xmanager_model_DeviceProgramRealmProxy.insert(realm, programObj, cache);
                 }
+                Table.nativeSetLink(tableNativePtr, columnInfo.programColKey, objKey, cacheprogram, false);
+            }
+
+            com.ninespartans.xmanager.model.User userObj = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$user();
+            if (userObj != null) {
+                Long cacheuser = cache.get(userObj);
+                if (cacheuser == null) {
+                    cacheuser = com_ninespartans_xmanager_model_UserRealmProxy.insert(realm, userObj, cache);
+                }
+                Table.nativeSetLink(tableNativePtr, columnInfo.userColKey, objKey, cacheuser, false);
             }
             java.util.Date realmGet$createdAt = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$createdAt();
             if (realmGet$createdAt != null) {
@@ -978,28 +990,23 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
             objKey = OsObject.createRowWithPrimaryKey(table, pkColumnKey, primaryKeyValue);
         }
         cache.put(object, objKey);
-
-        com.ninespartans.xmanager.model.User userObj = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$user();
-        if (userObj != null) {
-            Long cacheuser = cache.get(userObj);
-            if (cacheuser == null) {
-                cacheuser = com_ninespartans_xmanager_model_UserRealmProxy.insertOrUpdate(realm, userObj, cache);
-            }
-            Table.nativeSetLink(tableNativePtr, columnInfo.userColKey, objKey, cacheuser, false);
-        } else {
-            Table.nativeNullifyLink(tableNativePtr, columnInfo.userColKey, objKey);
-        }
         String realmGet$name = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$name();
         if (realmGet$name != null) {
             Table.nativeSetString(tableNativePtr, columnInfo.nameColKey, objKey, realmGet$name, false);
         } else {
             Table.nativeSetNull(tableNativePtr, columnInfo.nameColKey, objKey, false);
         }
-        String realmGet$firmwareVersion = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$firmwareVersion();
-        if (realmGet$firmwareVersion != null) {
-            Table.nativeSetString(tableNativePtr, columnInfo.firmwareVersionColKey, objKey, realmGet$firmwareVersion, false);
+        String realmGet$version = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$version();
+        if (realmGet$version != null) {
+            Table.nativeSetString(tableNativePtr, columnInfo.versionColKey, objKey, realmGet$version, false);
         } else {
-            Table.nativeSetNull(tableNativePtr, columnInfo.firmwareVersionColKey, objKey, false);
+            Table.nativeSetNull(tableNativePtr, columnInfo.versionColKey, objKey, false);
+        }
+        String realmGet$type = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$type();
+        if (realmGet$type != null) {
+            Table.nativeSetString(tableNativePtr, columnInfo.typeColKey, objKey, realmGet$type, false);
+        } else {
+            Table.nativeSetNull(tableNativePtr, columnInfo.typeColKey, objKey, false);
         }
         String realmGet$mac = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$mac();
         if (realmGet$mac != null) {
@@ -1020,20 +1027,27 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
             Table.nativeSetNull(tableNativePtr, columnInfo.wifi_macColKey, objKey, false);
         }
 
-        OsList programsOsList = new OsList(table.getUncheckedRow(objKey), columnInfo.programsColKey);
-        RealmList<com.ninespartans.xmanager.model.Program> programsList = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$programs();
-        programsOsList.removeAll();
-        if (programsList != null) {
-            for (com.ninespartans.xmanager.model.Program programsItem : programsList) {
-                Long cacheItemIndexprograms = cache.get(programsItem);
-                if (cacheItemIndexprograms != null) {
-                    throw new IllegalArgumentException("Embedded objects can only have one parent pointing to them. This object was already copied, so another object is pointing to it: " + cacheItemIndexprograms.toString());
-                } else {
-                    cacheItemIndexprograms = com_ninespartans_xmanager_model_ProgramRealmProxy.insertOrUpdate(realm, table, columnInfo.programsColKey, objKey, programsItem, cache);
-                }
+        com.ninespartans.xmanager.model.DeviceProgram programObj = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$program();
+        if (programObj != null) {
+            Long cacheprogram = cache.get(programObj);
+            if (cacheprogram == null) {
+                cacheprogram = com_ninespartans_xmanager_model_DeviceProgramRealmProxy.insertOrUpdate(realm, programObj, cache);
             }
+            Table.nativeSetLink(tableNativePtr, columnInfo.programColKey, objKey, cacheprogram, false);
+        } else {
+            Table.nativeNullifyLink(tableNativePtr, columnInfo.programColKey, objKey);
         }
 
+        com.ninespartans.xmanager.model.User userObj = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$user();
+        if (userObj != null) {
+            Long cacheuser = cache.get(userObj);
+            if (cacheuser == null) {
+                cacheuser = com_ninespartans_xmanager_model_UserRealmProxy.insertOrUpdate(realm, userObj, cache);
+            }
+            Table.nativeSetLink(tableNativePtr, columnInfo.userColKey, objKey, cacheuser, false);
+        } else {
+            Table.nativeNullifyLink(tableNativePtr, columnInfo.userColKey, objKey);
+        }
         java.util.Date realmGet$createdAt = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$createdAt();
         if (realmGet$createdAt != null) {
             Table.nativeSetTimestamp(tableNativePtr, columnInfo.createdAtColKey, objKey, realmGet$createdAt.getTime(), false);
@@ -1073,28 +1087,23 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
                 objKey = OsObject.createRowWithPrimaryKey(table, pkColumnKey, primaryKeyValue);
             }
             cache.put(object, objKey);
-
-            com.ninespartans.xmanager.model.User userObj = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$user();
-            if (userObj != null) {
-                Long cacheuser = cache.get(userObj);
-                if (cacheuser == null) {
-                    cacheuser = com_ninespartans_xmanager_model_UserRealmProxy.insertOrUpdate(realm, userObj, cache);
-                }
-                Table.nativeSetLink(tableNativePtr, columnInfo.userColKey, objKey, cacheuser, false);
-            } else {
-                Table.nativeNullifyLink(tableNativePtr, columnInfo.userColKey, objKey);
-            }
             String realmGet$name = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$name();
             if (realmGet$name != null) {
                 Table.nativeSetString(tableNativePtr, columnInfo.nameColKey, objKey, realmGet$name, false);
             } else {
                 Table.nativeSetNull(tableNativePtr, columnInfo.nameColKey, objKey, false);
             }
-            String realmGet$firmwareVersion = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$firmwareVersion();
-            if (realmGet$firmwareVersion != null) {
-                Table.nativeSetString(tableNativePtr, columnInfo.firmwareVersionColKey, objKey, realmGet$firmwareVersion, false);
+            String realmGet$version = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$version();
+            if (realmGet$version != null) {
+                Table.nativeSetString(tableNativePtr, columnInfo.versionColKey, objKey, realmGet$version, false);
             } else {
-                Table.nativeSetNull(tableNativePtr, columnInfo.firmwareVersionColKey, objKey, false);
+                Table.nativeSetNull(tableNativePtr, columnInfo.versionColKey, objKey, false);
+            }
+            String realmGet$type = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$type();
+            if (realmGet$type != null) {
+                Table.nativeSetString(tableNativePtr, columnInfo.typeColKey, objKey, realmGet$type, false);
+            } else {
+                Table.nativeSetNull(tableNativePtr, columnInfo.typeColKey, objKey, false);
             }
             String realmGet$mac = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$mac();
             if (realmGet$mac != null) {
@@ -1115,20 +1124,27 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
                 Table.nativeSetNull(tableNativePtr, columnInfo.wifi_macColKey, objKey, false);
             }
 
-            OsList programsOsList = new OsList(table.getUncheckedRow(objKey), columnInfo.programsColKey);
-            RealmList<com.ninespartans.xmanager.model.Program> programsList = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$programs();
-            programsOsList.removeAll();
-            if (programsList != null) {
-                for (com.ninespartans.xmanager.model.Program programsItem : programsList) {
-                    Long cacheItemIndexprograms = cache.get(programsItem);
-                    if (cacheItemIndexprograms != null) {
-                        throw new IllegalArgumentException("Embedded objects can only have one parent pointing to them. This object was already copied, so another object is pointing to it: " + cacheItemIndexprograms.toString());
-                    } else {
-                        cacheItemIndexprograms = com_ninespartans_xmanager_model_ProgramRealmProxy.insertOrUpdate(realm, table, columnInfo.programsColKey, objKey, programsItem, cache);
-                    }
+            com.ninespartans.xmanager.model.DeviceProgram programObj = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$program();
+            if (programObj != null) {
+                Long cacheprogram = cache.get(programObj);
+                if (cacheprogram == null) {
+                    cacheprogram = com_ninespartans_xmanager_model_DeviceProgramRealmProxy.insertOrUpdate(realm, programObj, cache);
                 }
+                Table.nativeSetLink(tableNativePtr, columnInfo.programColKey, objKey, cacheprogram, false);
+            } else {
+                Table.nativeNullifyLink(tableNativePtr, columnInfo.programColKey, objKey);
             }
 
+            com.ninespartans.xmanager.model.User userObj = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$user();
+            if (userObj != null) {
+                Long cacheuser = cache.get(userObj);
+                if (cacheuser == null) {
+                    cacheuser = com_ninespartans_xmanager_model_UserRealmProxy.insertOrUpdate(realm, userObj, cache);
+                }
+                Table.nativeSetLink(tableNativePtr, columnInfo.userColKey, objKey, cacheuser, false);
+            } else {
+                Table.nativeNullifyLink(tableNativePtr, columnInfo.userColKey, objKey);
+            }
             java.util.Date realmGet$createdAt = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$createdAt();
             if (realmGet$createdAt != null) {
                 Table.nativeSetTimestamp(tableNativePtr, columnInfo.createdAtColKey, objKey, realmGet$createdAt.getTime(), false);
@@ -1165,29 +1181,18 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
         com_ninespartans_xmanager_model_DeviceRealmProxyInterface realmSource = (com_ninespartans_xmanager_model_DeviceRealmProxyInterface) realmObject;
         Realm objectRealm = (Realm) ((RealmObjectProxy) realmObject).realmGet$proxyState().getRealm$realm();
         unmanagedCopy.realmSet$_id(realmSource.realmGet$_id());
-
-        // Deep copy of user
-        unmanagedCopy.realmSet$user(com_ninespartans_xmanager_model_UserRealmProxy.createDetachedCopy(realmSource.realmGet$user(), currentDepth + 1, maxDepth, cache));
         unmanagedCopy.realmSet$name(realmSource.realmGet$name());
-        unmanagedCopy.realmSet$firmwareVersion(realmSource.realmGet$firmwareVersion());
+        unmanagedCopy.realmSet$version(realmSource.realmGet$version());
+        unmanagedCopy.realmSet$type(realmSource.realmGet$type());
         unmanagedCopy.realmSet$mac(realmSource.realmGet$mac());
         unmanagedCopy.realmSet$ble_mac(realmSource.realmGet$ble_mac());
         unmanagedCopy.realmSet$wifi_mac(realmSource.realmGet$wifi_mac());
 
-        // Deep copy of programs
-        if (currentDepth == maxDepth) {
-            unmanagedCopy.realmSet$programs(null);
-        } else {
-            RealmList<com.ninespartans.xmanager.model.Program> managedprogramsList = realmSource.realmGet$programs();
-            RealmList<com.ninespartans.xmanager.model.Program> unmanagedprogramsList = new RealmList<com.ninespartans.xmanager.model.Program>();
-            unmanagedCopy.realmSet$programs(unmanagedprogramsList);
-            int nextDepth = currentDepth + 1;
-            int size = managedprogramsList.size();
-            for (int i = 0; i < size; i++) {
-                com.ninespartans.xmanager.model.Program item = com_ninespartans_xmanager_model_ProgramRealmProxy.createDetachedCopy(managedprogramsList.get(i), nextDepth, maxDepth, cache);
-                unmanagedprogramsList.add(item);
-            }
-        }
+        // Deep copy of program
+        unmanagedCopy.realmSet$program(com_ninespartans_xmanager_model_DeviceProgramRealmProxy.createDetachedCopy(realmSource.realmGet$program(), currentDepth + 1, maxDepth, cache));
+
+        // Deep copy of user
+        unmanagedCopy.realmSet$user(com_ninespartans_xmanager_model_UserRealmProxy.createDetachedCopy(realmSource.realmGet$user(), currentDepth + 1, maxDepth, cache));
         unmanagedCopy.realmSet$createdAt(realmSource.realmGet$createdAt());
         unmanagedCopy.realmSet$updatedAt(realmSource.realmGet$updatedAt());
 
@@ -1200,6 +1205,24 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
         Table table = realm.getTable(com.ninespartans.xmanager.model.Device.class);
         OsObjectBuilder builder = new OsObjectBuilder(table, flags);
         builder.addObjectId(columnInfo._idColKey, realmObjectSource.realmGet$_id());
+        builder.addString(columnInfo.nameColKey, realmObjectSource.realmGet$name());
+        builder.addString(columnInfo.versionColKey, realmObjectSource.realmGet$version());
+        builder.addString(columnInfo.typeColKey, realmObjectSource.realmGet$type());
+        builder.addString(columnInfo.macColKey, realmObjectSource.realmGet$mac());
+        builder.addString(columnInfo.ble_macColKey, realmObjectSource.realmGet$ble_mac());
+        builder.addString(columnInfo.wifi_macColKey, realmObjectSource.realmGet$wifi_mac());
+
+        com.ninespartans.xmanager.model.DeviceProgram programObj = realmObjectSource.realmGet$program();
+        if (programObj == null) {
+            builder.addNull(columnInfo.programColKey);
+        } else {
+            com.ninespartans.xmanager.model.DeviceProgram cacheprogram = (com.ninespartans.xmanager.model.DeviceProgram) cache.get(programObj);
+            if (cacheprogram != null) {
+                builder.addObject(columnInfo.programColKey, cacheprogram);
+            } else {
+                builder.addObject(columnInfo.programColKey, com_ninespartans_xmanager_model_DeviceProgramRealmProxy.copyOrUpdate(realm, (com_ninespartans_xmanager_model_DeviceProgramRealmProxy.DeviceProgramColumnInfo) realm.getSchema().getColumnInfo(com.ninespartans.xmanager.model.DeviceProgram.class), programObj, true, cache, flags));
+            }
+        }
 
         com.ninespartans.xmanager.model.User userObj = realmObjectSource.realmGet$user();
         if (userObj == null) {
@@ -1211,34 +1234,6 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
             } else {
                 builder.addObject(columnInfo.userColKey, com_ninespartans_xmanager_model_UserRealmProxy.copyOrUpdate(realm, (com_ninespartans_xmanager_model_UserRealmProxy.UserColumnInfo) realm.getSchema().getColumnInfo(com.ninespartans.xmanager.model.User.class), userObj, true, cache, flags));
             }
-        }
-        builder.addString(columnInfo.nameColKey, realmObjectSource.realmGet$name());
-        builder.addString(columnInfo.firmwareVersionColKey, realmObjectSource.realmGet$firmwareVersion());
-        builder.addString(columnInfo.macColKey, realmObjectSource.realmGet$mac());
-        builder.addString(columnInfo.ble_macColKey, realmObjectSource.realmGet$ble_mac());
-        builder.addString(columnInfo.wifi_macColKey, realmObjectSource.realmGet$wifi_mac());
-
-        RealmList<com.ninespartans.xmanager.model.Program> programsUnmanagedList = realmObjectSource.realmGet$programs();
-        if (programsUnmanagedList != null) {
-            RealmList<com.ninespartans.xmanager.model.Program> programsManagedCopy = new RealmList<com.ninespartans.xmanager.model.Program>();
-            OsList targetList = realmObjectTarget.realmGet$programs().getOsList();
-            targetList.deleteAll();
-            for (int i = 0; i < programsUnmanagedList.size(); i++) {
-                com.ninespartans.xmanager.model.Program programsUnmanagedItem = programsUnmanagedList.get(i);
-                com.ninespartans.xmanager.model.Program cacheprograms = (com.ninespartans.xmanager.model.Program) cache.get(programsUnmanagedItem);
-                if (cacheprograms != null) {
-                    throw new IllegalArgumentException("Embedded objects can only have one parent pointing to them. This object was already copied, so another object is pointing to it: cacheprograms.toString()");
-                } else {
-                    long objKey = targetList.createAndAddEmbeddedObject();
-                    Row row = realm.getTable(com.ninespartans.xmanager.model.Program.class).getUncheckedRow(objKey);
-                    com.ninespartans.xmanager.model.Program proxyObject = com_ninespartans_xmanager_model_ProgramRealmProxy.newProxyInstance(realm, row);
-                    cache.put(programsUnmanagedItem, (RealmObjectProxy) proxyObject);
-                    programsManagedCopy.add(proxyObject);
-                    com_ninespartans_xmanager_model_ProgramRealmProxy.updateEmbeddedObject(realm, programsUnmanagedItem, proxyObject, new HashMap<RealmModel, RealmObjectProxy>(), Collections.EMPTY_SET);
-                }
-            }
-        } else {
-            builder.addObjectList(columnInfo.programsColKey, new RealmList<com.ninespartans.xmanager.model.Program>());
         }
         builder.addDate(columnInfo.createdAtColKey, realmObjectSource.realmGet$createdAt());
         builder.addDate(columnInfo.updatedAtColKey, realmObjectSource.realmGet$updatedAt());
@@ -1258,16 +1253,16 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
         stringBuilder.append(realmGet$_id());
         stringBuilder.append("}");
         stringBuilder.append(",");
-        stringBuilder.append("{user:");
-        stringBuilder.append(realmGet$user() != null ? "User" : "null");
-        stringBuilder.append("}");
-        stringBuilder.append(",");
         stringBuilder.append("{name:");
         stringBuilder.append(realmGet$name());
         stringBuilder.append("}");
         stringBuilder.append(",");
-        stringBuilder.append("{firmwareVersion:");
-        stringBuilder.append(realmGet$firmwareVersion());
+        stringBuilder.append("{version:");
+        stringBuilder.append(realmGet$version());
+        stringBuilder.append("}");
+        stringBuilder.append(",");
+        stringBuilder.append("{type:");
+        stringBuilder.append(realmGet$type());
         stringBuilder.append("}");
         stringBuilder.append(",");
         stringBuilder.append("{mac:");
@@ -1282,8 +1277,12 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
         stringBuilder.append(realmGet$wifi_mac());
         stringBuilder.append("}");
         stringBuilder.append(",");
-        stringBuilder.append("{programs:");
-        stringBuilder.append("RealmList<Program>[").append(realmGet$programs().size()).append("]");
+        stringBuilder.append("{program:");
+        stringBuilder.append(realmGet$program() != null ? "DeviceProgram" : "null");
+        stringBuilder.append("}");
+        stringBuilder.append(",");
+        stringBuilder.append("{user:");
+        stringBuilder.append(realmGet$user() != null ? "User" : "null");
         stringBuilder.append("}");
         stringBuilder.append(",");
         stringBuilder.append("{createdAt:");

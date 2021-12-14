@@ -14,19 +14,19 @@ import kotlinx.android.synthetic.main.activity_create_program.*
 import kotlinx.android.synthetic.main.content_create_program.*
 import kotlinx.android.synthetic.main.content_create_program.list_view
 import com.google.android.material.button.MaterialButton
-import com.ninespartans.xmanager.model.Program
+import com.ninespartans.xmanager.model.ProgramData
 import kotlinx.android.synthetic.main.content_create_program.nameInputText
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.slider.Slider
 import com.ninespartans.xmanager.common.Common
-import com.ninespartans.xmanager.model.TrainingProgram
+import com.ninespartans.xmanager.model.DeviceProgram
 import org.bson.types.ObjectId
 
 
 class CreateProgramActivity : AppCompatActivity() {
     private lateinit var adapter: ProgramStepItemAdapter
-    private var trainingSessionProgram: TrainingProgram? = null
+    private var deviceProgram: DeviceProgram? = null
     private var programId: String? = null
     private var checkedRadioButtonAnimationId:Int? = null
     private var checkedButtonDirectionId:Int? = null
@@ -35,6 +35,8 @@ class CreateProgramActivity : AppCompatActivity() {
     private var currentLightDirectionResource:Int = R.drawable.shoe_pair_light_top
     private var shoePairImageView: ImageView? = null
     private var saveButton: MaterialButton? = null
+    private var realm = Realm.getDefaultInstance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,17 +59,12 @@ class CreateProgramActivity : AppCompatActivity() {
             header_description.text = getString(R.string.title_activity_update_program_header_description)
             saveProgram.text = getString(R.string.activity_create_program_button_save)
 
-            Realm.getDefaultInstance().use { realm ->
-                realm.where<TrainingProgram>()
-                    .equalTo("_id", ObjectId(it))
-                    .findFirst()?.let {
-                        this.trainingSessionProgram = it
-                        this.nameInputText.editText?.setText(it.title)
-
-                        if (it.programs.size > 3) {
-                            createSession.visibility = View.VISIBLE
-                        }
-                    }
+            val program = realm.where<DeviceProgram>()
+            program.equalTo("_id", ObjectId(it))
+            program.findFirst()?.let {
+                this.deviceProgram = it
+                this.nameInputText.editText?.setText(it.title)
+                if (it.data.size > 3) { createSession.visibility = View.VISIBLE }
             }
         }
 
@@ -76,47 +73,25 @@ class CreateProgramActivity : AppCompatActivity() {
          * Check if programId has a value
          */
         saveProgram.setOnClickListener {
-            Realm.getDefaultInstance().use { realm ->
-
-                /**
-                 * Check if trainingSessionProgram exists
-                 */
-                trainingSessionProgram?.let {
-
-                    /**
-                     * Update TrainingSessionProgram
-                     * save title from the textfield
-                     * close the page
-                     */
-                    realm.executeTransaction { realm ->
-                        realm.copyToRealmOrUpdate(it.apply {
-                            title = nameInputText.editText?.text.toString()
-                            finish()
-                        })
-                    }
-                } ?: run {
-
-                    /**
-                     * Create new TrainingSessionProgram
-                     * save title from the textfield
-                     * close the page
-                     */
-                    realm.executeTransaction {
-                        trainingSessionProgram = it.copyToRealmOrUpdate(TrainingProgram().apply {
-                            title = nameInputText.editText?.text.toString()
-                            finish()
-                        })
-                    }
+            deviceProgram?.let {
+                realm.executeTransaction { realm ->
+                    realm.copyToRealmOrUpdate(it.apply {
+                        title = nameInputText.editText?.text.toString()
+                        finish()
+                    })
+                }
+            } ?: run {
+                realm.executeTransaction {
+                    deviceProgram = it.copyToRealmOrUpdate(DeviceProgram().apply {
+                        title = nameInputText.editText?.text.toString()
+                        finish()
+                    })
                 }
             }
         }
 
-        /**
-         * Adapter program step
-         */
-        adapter = ProgramStepItemAdapter(this, trainingSessionProgram?.programs?.where()?.findAll())
+        adapter = ProgramStepItemAdapter(this, deviceProgram?.data?.where()?.findAll())
         list_view.adapter = adapter
-
 
         adapter.onAddStepItem = {
             addSessionProgram()
@@ -127,14 +102,12 @@ class CreateProgramActivity : AppCompatActivity() {
         }
 
         adapter.onDeleteStepItem = { stepNumber, item ->
-            Realm.getDefaultInstance().use { realm ->
-                trainingSessionProgram?.let {
-                    realm.executeTransaction { realm ->
-                        realm.copyToRealmOrUpdate(it.apply {
-                            this.programs.remove(item)
-                            updateList()
-                        })
-                    }
+            deviceProgram?.let {
+                realm.executeTransaction { realm ->
+                    realm.copyToRealmOrUpdate(it.apply {
+                        this.data.remove(item)
+                        updateList()
+                    })
                 }
             }
         }
@@ -215,9 +188,9 @@ class CreateProgramActivity : AppCompatActivity() {
         }
 
         /** Save Button */
-        saveButton = bottomSheetDialog.findViewById<MaterialButton>(R.id.saveButton)
+        saveButton = bottomSheetDialog.findViewById(R.id.saveButton)
         saveButton?.setOnClickListener {
-            val program = Program()
+            val program = ProgramData()
             program.setData(
                 programLedPosition(currentLightDirectionType),
                 programLedAnimation(currentLightAnimationType),
@@ -226,67 +199,64 @@ class CreateProgramActivity : AppCompatActivity() {
                 secondsBySliderValue(slider?.value))
 
             /** Save training session with programs */
-            Realm.getDefaultInstance().use { realm ->
-                trainingSessionProgram?.let { trainingSessionProgram ->
-                    realm.executeTransaction { realm ->
-                        realm.copyToRealmOrUpdate(trainingSessionProgram.apply {
-                            this.title = nameInputText.editText?.text.toString()
-                            this.programs.add(program)
-                            bottomSheetDialog.hide()
-                            updateList()
-                        })
-                    }
-                } ?: run {
-                    realm.executeTransaction {
-                        trainingSessionProgram = it.copyToRealmOrUpdate(TrainingProgram().apply {
-                            this.title = nameInputText.editText?.text.toString()
-                            this.programs.add(program)
-                        })
+            deviceProgram?.let { deviceProgram ->
+                realm.executeTransaction { realm ->
+                    realm.copyToRealmOrUpdate(deviceProgram.apply {
+                        this.title = nameInputText.editText?.text.toString()
+                        this.data.add(program)
                         bottomSheetDialog.hide()
                         updateList()
-                    }
+                    })
+                }
+            } ?: run {
+                realm.executeTransaction {
+                    deviceProgram = it.copyToRealmOrUpdate(DeviceProgram().apply {
+                        this.title = nameInputText.editText?.text.toString()
+                        this.data.add(program)
+                    })
+                    bottomSheetDialog.hide()
+                    updateList()
                 }
             }
-
         }
     }
 
-    fun programLedPosition(value: String): Program.ShoeLedPosition {
+    fun programLedPosition(value: String): ProgramData.ShoeLedPosition {
         when(value) {
             getString(R.string.sheet_create_session_dir_ext) -> {
-                return Program.ShoeLedPosition.EXT
+                return ProgramData.ShoeLedPosition.EXT
             }
             getString(R.string.sheet_create_session_dir_top_ext) -> {
-                return Program.ShoeLedPosition.TOPEXT
+                return ProgramData.ShoeLedPosition.TOPEXT
             }
             getString(R.string.sheet_create_session_dir_top) -> {
-                return Program.ShoeLedPosition.TOP
+                return ProgramData.ShoeLedPosition.TOP
             }
             getString(R.string.sheet_create_session_dir_top_int) -> {
-                return Program.ShoeLedPosition.TOPINT
+                return ProgramData.ShoeLedPosition.TOPINT
             }
             getString(R.string.sheet_create_session_dir_int) -> {
-                return Program.ShoeLedPosition.INT
+                return ProgramData.ShoeLedPosition.INT
             }
             else -> {
-                return Program.ShoeLedPosition.TOP
+                return ProgramData.ShoeLedPosition.TOP
             }
         }
     }
 
-    fun programLedAnimation(value: String): Program.ShoeLedAnimation {
+    fun programLedAnimation(value: String): ProgramData.ShoeLedAnimation {
         when (value) {
             getString(R.string.sheet_create_session_type_static) -> {
-                return Program.ShoeLedAnimation.STATIC
+                return ProgramData.ShoeLedAnimation.STATIC
             }
             getString(R.string.sheet_create_session_type_blink) -> {
-                return Program.ShoeLedAnimation.BLINK
+                return ProgramData.ShoeLedAnimation.BLINK
             }
             getString(R.string.sheet_create_session_type_fade) -> {
-                return Program.ShoeLedAnimation.FADE
+                return ProgramData.ShoeLedAnimation.FADE
             }
             else -> {
-                return Program.ShoeLedAnimation.BLINK
+                return ProgramData.ShoeLedAnimation.BLINK
             }
         }
     }
@@ -354,16 +324,15 @@ class CreateProgramActivity : AppCompatActivity() {
         }
     }
     fun updateList() {
-        trainingSessionProgram?.let {
-            adapter.programList = it.programs.where()?.findAll()
+        deviceProgram?.let {
+            adapter.programList = it.data.where()?.findAll()
             createSession.visibility = View.GONE
-            if (it.programs.size > 5) {
+            if (it.data.size > 5) {
                 createSession.visibility = View.VISIBLE
             }
             adapter.notifyDataSetChanged()
         }
     }
-
 
     fun updateTimerByValueSlider(value: Int): String {
         /*

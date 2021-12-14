@@ -9,13 +9,25 @@ import java.util.*
 open class Device(
     @PrimaryKey
     var _id: ObjectId = ObjectId(),
-    var user: User? = null,
     var name: String = "",
-    var firmwareVersion: String = "",
+    var version: String = "",
+    var type: String = DeviceType.NONE.name,
+
     var mac: String = "",
     var ble_mac: String = "",
     var wifi_mac: String = "",
-    var programs: RealmList<Program> = RealmList(),
+
+    var program: DeviceProgram? = null,
+    var user: User? = null,
+
     var createdAt: Date = Date(),
     var updatedAt: Date = Date()
-): RealmObject()
+    ): RealmObject() {
+
+    /** Type of device */
+    enum class DeviceType { NONE, SHOE_LEFT, SHOE_RIGHT }
+    var deviceType: DeviceType
+        get() { return DeviceType.valueOf(type) }
+        set(newEnumType) { type = newEnumType.name }
+
+}

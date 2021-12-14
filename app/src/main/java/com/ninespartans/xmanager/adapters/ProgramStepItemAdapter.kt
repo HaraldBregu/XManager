@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import io.realm.RealmResults
 import com.ninespartans.xmanager.R
-import com.ninespartans.xmanager.model.Program
+import com.ninespartans.xmanager.model.ProgramData
 import kotlinx.android.synthetic.main.row_create_program_step.view.*
 import kotlinx.android.synthetic.main.row_create_program_step_new.view.*
 
 
-class ProgramStepItemAdapter(context: Context, programList: RealmResults<Program>?): BaseAdapter() {
+class ProgramStepItemAdapter(context: Context, programList: RealmResults<ProgramData>?): BaseAdapter() {
     private val mContext: Context
     private var inflater: LayoutInflater
-    var programList: RealmResults<Program>? = null
+    var programList: RealmResults<ProgramData>? = null
 
-    var onDeleteStepItem: ((Int, Program) -> Unit)? = null
+    var onDeleteStepItem: ((Int, ProgramData) -> Unit)? = null
     var onAddStepItem: (() -> Unit)? = null
 
     init {
@@ -40,7 +40,7 @@ class ProgramStepItemAdapter(context: Context, programList: RealmResults<Program
         return position.toLong()
     }
 
-    override fun getItem(position: Int): Program? {
+    override fun getItem(position: Int): ProgramData? {
         this.programList?.let {
             if (position == it.size)
                 return null

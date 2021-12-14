@@ -1806,6 +1806,7 @@ drawable button_option_card
 drawable button_option_card_normal
 drawable button_option_card_selected
 drawable card_shape
+drawable coach_avatar
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -2079,7 +2080,6 @@ id design_menu_item_text
 id design_navigation_view
 id deviceInfoSection
 id deviceName
-id deviceNameVersion
 id deviceSearchTitle
 id devicesConnectionTitle
 id dialog_button
@@ -2546,22 +2546,20 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_bluetooth_debug
 layout activity_create_account
 layout activity_create_program
 layout activity_create_user
-layout activity_debug
-layout activity_device_pair_search
-layout activity_device_pair_select
+layout activity_device_search
 layout activity_main
 layout activity_permissions_manager
 layout activity_program_list
+layout content_bluetooth_debug
 layout content_create_account
 layout content_create_program
 layout content_create_user
-layout content_debug
 layout content_device_pair_bottom_sheet
-layout content_device_pair_search
-layout content_device_pair_select
+layout content_device_search
 layout content_main
 layout content_permissions_manager
 layout content_program_create_session_bottom_sheet
@@ -2786,6 +2784,7 @@ string clear_text_end_icon_content_description
 string copy
 string device_mac_address
 string device_name
+string device_name_version
 string error_icon_content_description
 string expand_button_title
 string exposed_dropdown_menu_content_description
@@ -2859,6 +2858,7 @@ string mtrl_picker_toggle_to_text_input_mode
 string mtrl_picker_toggle_to_year_selection
 string nav_app_bar_navigate_up_description
 string nav_app_bar_open_drawer_description
+string no_program_name
 string not_set
 string password_toggle_content_description
 string path_password_eye
@@ -2868,6 +2868,7 @@ string path_password_strike_through
 string preference_copied
 string program_description
 string program_name
+string program_timer
 string row_empty_player_action_title
 string row_empty_player_description
 string row_empty_player_title

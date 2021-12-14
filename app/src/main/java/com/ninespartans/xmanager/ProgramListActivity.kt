@@ -5,10 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import io.realm.Realm
-import com.ninespartans.xmanager.model.TrainingProgram
+import com.ninespartans.xmanager.model.DeviceProgram
 import kotlinx.android.synthetic.main.activity_program_list.*
 import kotlinx.android.synthetic.main.content_program_list.*
 import com.ninespartans.xmanager.adapters.ProgramListAdapter
+import io.realm.kotlin.where
 
 
 class ProgramListActivity : AppCompatActivity() {
@@ -20,7 +21,7 @@ class ProgramListActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val realm = Realm.getDefaultInstance()
-        val programs = realm.where(TrainingProgram::class.java).findAll()
+        val programs = realm.where<DeviceProgram>().findAll()
 
         adapter = ProgramListAdapter(this, programs)
         list_view.adapter = adapter
@@ -69,7 +70,7 @@ class ProgramListActivity : AppCompatActivity() {
         super.onStart()
 
         var realm = Realm.getDefaultInstance()
-        val programs = realm.where(TrainingProgram::class.java).findAll()
+        val programs = realm.where<DeviceProgram>().findAll()
         adapter.programs = programs
         adapter.notifyDataSetChanged()
 
@@ -77,7 +78,7 @@ class ProgramListActivity : AppCompatActivity() {
 
     fun updateList() {
         Realm.getDefaultInstance().use { realm ->
-            adapter.programs = realm.where(TrainingProgram::class.java).findAll()
+            adapter.programs = realm.where<DeviceProgram>().findAll()
             adapter.notifyDataSetChanged()
         }
     }

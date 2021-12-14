@@ -178,8 +178,9 @@
             android:valueTo="104"
             android:value="0"
             android:stepSize="1"
-            app:labelBehavior="gone">
-        </com.google.android.material.slider.Slider>
+            app:trackHeight="6dp"
+            app:thumbRadius="12dp"
+            app:labelBehavior="gone"/>
     </LinearLayout>
     <com.google.android.material.button.MaterialButton
         style="@style/Widget.MaterialComponents.Button"

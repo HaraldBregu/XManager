@@ -7,7 +7,6 @@ import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothProfile
 import android.content.Intent
 import android.os.*
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -18,13 +17,16 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.realm.RealmResults
 import io.realm.kotlin.where
 import com.ninespartans.xmanager.adapters.MainListAdapter
-import com.ninespartans.xmanager.model.TrainingProgram
+import com.ninespartans.xmanager.model.DeviceProgram
 import com.ninespartans.xmanager.adapters.ProgramSelectAdapter
 import com.ninespartans.xmanager.model.User
 import com.ninespartans.xmanager.common.Common
 import kotlinx.android.synthetic.main.content_main.*
 import java.util.*
 import android.os.Bundle
+import com.ninespartans.xmanager.model.Account
+import com.ninespartans.xmanager.model.Device
+import kotlinx.android.synthetic.main.row_main_header.view.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -54,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                         dialog.dismiss()
                     }
                     builderInner.setPositiveButton("Termina") { dialog, which ->
-                        val programs = realm.where<TrainingProgram>().findAll()
+                        val programs = realm.where<DeviceProgram>().findAll()
                         realm.executeTransaction { realm ->
                             programs.forEach {
                                 val calendar = Calendar.getInstance()
@@ -62,7 +64,8 @@ class MainActivity : AppCompatActivity() {
                                 it.startDate = calendar.time
                             }
                         }
-                        adapter.notifyDataSetChanged()
+
+                        adapter.updateData()
                     }
                     builderInner.show()
                 }
@@ -81,6 +84,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, CreateUserActivity::class.java)
                     startActivity(intent)
                 }
+                else ->  { }
             }
         }
         adapter.onClickActionOnItem = { action, user ->
@@ -102,29 +106,31 @@ class MainActivity : AppCompatActivity() {
                             //player.leftDevice?.deleteFromRealm()
                             //player.rightDevice?.deleteFromRealm()
                             user.deleteFromRealm()
-                            adapter.notifyDataSetChanged()
+                            adapter.updateData()
                         }
                     }
                     builderInner.show()
                 }
                 MainListAdapter.Action.COMPLETE_DEVICES -> {
-                    val intent = Intent(this, DevicePairSearchActivity::class.java)
+                    val intent = Intent(this, DeviceSearchActivity::class.java)
                     val id = user._id.toString()
-                    Log.e("USER_ID", id)
                     intent.putExtra("user_id",id)
                     startActivity(intent)
                 }
                 MainListAdapter.Action.DELETE_DEVICES -> {
+                    val devices = realm.where<Device>()
+                    devices.isNotNull("user")
+                    devices.equalTo("user._id", user._id)
                     realm.executeTransaction {
-                        //player.leftDevice?.deleteFromRealm()
-                        //player.rightDevice?.deleteFromRealm()
-                        adapter.notifyDataSetChanged()
+                        devices.findAll().deleteAllFromRealm()
+                        adapter.updateData()
                     }
                 }
                 MainListAdapter.Action.UPLOAD_PROGRAM -> {
                     val intent = Intent(this, ProgramListActivity::class.java)
                     startActivity(intent)
                 }
+                else -> {}
             }
         }
 
@@ -143,31 +149,12 @@ class MainActivity : AppCompatActivity() {
             }
             popupMenu.show()
         }
-
-        /*
-        val appSettingPrefs: SharedPreferences = getSharedPreferences("AppSettingPrefs", 0)
-        val isNightModeOn: Boolean = appSettingPrefs.getBoolean("NightMode", false)
-
-        if (isNightModeOn) {
-            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }
-
-        val currentNightMode = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        when (currentNightMode) {
-            Configuration.UI_MODE_NIGHT_NO -> {
-
-            } // Night mode is not active, we're using the light theme
-            Configuration.UI_MODE_NIGHT_YES -> {
-
-            } // Night mode is active, we're using dark theme
-        }*/
     }
 
     override fun onStart() {
         super.onStart()
-        adapter.notifyDataSetChanged()
+
+        adapter.updateData()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -177,11 +164,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_debug -> {
-                val intent = Intent(this, DebugActivity::class.java)
-                startActivity(intent)
-                return true
-            }
             R.id.action_profile -> {
                 val intent = Intent(this, CreateAccountActivity::class.java)
                 startActivity(intent)
@@ -196,49 +178,29 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * Present list of programs to select
-     */
+    /** Present list of programs to select */
     fun presentProgramBottomSheet() {
-        var bottomSheetDialog = BottomSheetDialog(this)
+        val bottomSheetDialog = BottomSheetDialog(this)
         bottomSheetDialog.setContentView(R.layout.content_program_select_bottom_sheet)
-
-        var realm = Realm.getDefaultInstance()
-        val programs = realm.where<TrainingProgram>().findAll()
-
-        var listView = bottomSheetDialog.findViewById<ListView>(R.id.list_view)
+        val listView = bottomSheetDialog.findViewById<ListView>(R.id.list_view)
         listView?.isNestedScrollingEnabled = true
 
-        var adapter = ProgramSelectAdapter(this, programs)
+        val programs = realm.where<DeviceProgram>().findAll()
+        val adapter = ProgramSelectAdapter(this, programs)
         listView?.adapter = adapter
         listView?.setOnItemClickListener { parent, view, position, id ->
             val selectedProgram = programs.get(position)
 
-            realm.executeTransaction { realm ->
-                programs.forEach { it.active = false }
-                selectedProgram?.active = true
-            }
-
             bottomSheetDialog.hide()
             adapter.notifyDataSetChanged()
 
-            /**
-             * Read Players that have at least 1 device connected
-             * If there are no device connected to the players show an alert
-             */
-            var playersQuery = realm.where<User>()
-            val allPlayers = playersQuery.findAll()
+            val account = realm.where<Account>().findFirst()
+            val tmpusers = realm.where<User>()
+            account?.let { tmpusers.notEqualTo("account._id", it._id) }
+            val users = tmpusers.findAll()
 
-            val players = playersQuery
-                .isNotNull("leftDevice")
-                .or()
-                .isNotNull("rightDevice")
-                .findAll()
-
-            /**
-             * When there are no players registered
-             */
-            if (allPlayers.isEmpty()) {
+            /** When there are no users registered */
+            if (users.isEmpty()) {
                 val builderInner = AlertDialog.Builder(this)
                 builderInner.setTitle("Attenzione!")
                 builderInner.setMessage("Non hai nessun giocatore registrato. Inizia a crearne uno e associa i device.")
@@ -253,22 +215,29 @@ class MainActivity : AppCompatActivity() {
                 return@setOnItemClickListener
             }
 
-            /**
-             * When there are no players registered with devices
-             */
-            if (players.isEmpty()) {
+            val devices = realm.where<Device>()
+                .isNotNull("user")
+                .sort("user._id")
+                .findAll()
+
+            /** When there are no devices registered */
+            if (devices.isEmpty()) {
                 val builderInner = AlertDialog.Builder(this)
                 builderInner.setTitle("Attenzione!")
-                builderInner.setMessage("Sembra che i giocatori che hai registrato non hanno nessun dispositivo Bluetooth collegato! Inizia a collegare i dispositivi bluetooth con i giocatori e poi riprova a caricare il programma di allenamento.")
-                builderInner.setPositiveButton("Riprova") { dialog, which ->
+                builderInner.setMessage("Non hai nessun dispositivo registrato. Inizia a crearne uno e associa i device.")
+                builderInner.setNegativeButton("Chiudi") { dialog, which ->
                     dialog.dismiss()
+                }
+                builderInner.setPositiveButton("Associa dispositivo") { dialog, which ->
+                    dialog.dismiss()
+                    startActivity(Intent(this, CreateUserActivity::class.java))
                 }
                 builderInner.show()
                 return@setOnItemClickListener
             }
 
             selectedProgram?.let {
-                presenBottomtSheetUploader(it, players)
+                presentBottomSheetDialogUploader(it, devices)
             }
         }
 
@@ -276,84 +245,55 @@ class MainActivity : AppCompatActivity() {
         Common.setWhiteNavigationBar(bottomSheetDialog)
     }
 
-    fun presenBottomtSheetUploader(trainingProgram: TrainingProgram, players: RealmResults<User>, playerIndex: Int = 0, foot: Foot = Foot.LEFT) {
-        if (playerIndex >= players.size) {
-            startTrainingProgram(trainingProgram)
-            return
-        }
+    /** BottomSheet Dialog Program Uploader */
+    private fun presentBottomSheetDialogUploader(deviceProgram: DeviceProgram, devices: RealmResults<Device>, deviceIndex: Int = 0) {
 
+        /** BottomSheet Dialog */
         bottomSheetDialog = BottomSheetDialog(this)
         bottomSheetDialog.setContentView(R.layout.content_upload_program_bottom_sheet)
-        bottomSheetDialog.behavior?.isDraggable = false
+        bottomSheetDialog.behavior.isDraggable = false
         bottomSheetDialog.setCancelable(false)
         Common.setWhiteNavigationBar(bottomSheetDialog)
 
-        /**
-         * Title Sheet
-         * Description Sheet
-         */
-        var title = bottomSheetDialog.findViewById<TextView>(R.id.title)
-        var description = bottomSheetDialog.findViewById<TextView>(R.id.description)
+        /** Title, Description */
+        val title = bottomSheetDialog.findViewById<TextView>(R.id.title)
         title?.text = getString(R.string.upload_program_sheet_title)
+        val description = bottomSheetDialog.findViewById<TextView>(R.id.description)
         description?.text = getString(R.string.upload_program_sheet_description)
 
-        /**
-         * ProgressBar
-         */
+        /** Progress */
         uploadProgressProgram = bottomSheetDialog.findViewById<ProgressBar>(R.id.uploadProgressProgram)
         uploadProgressProgram?.max = 100
         uploadProgressProgram?.setProgress(0)
-        bottomSheetDialog?.show()
+        bottomSheetDialog.show()
 
-        uploadProgramToPlayer(trainingProgram, players, playerIndex, foot)
+        /** Upload */
+        uploadProgramToDevice(deviceProgram, devices, deviceIndex)
     }
 
-    fun uploadProgramToPlayer(trainingProgram: TrainingProgram, users: RealmResults<User>, playerIndex: Int = 0, foot: Foot = Foot.LEFT) {
-        val user = users[playerIndex]
+    private fun uploadProgramToDevice(deviceProgram: DeviceProgram, devices: RealmResults<Device>, deviceIndex: Int = 0) {
+
+        /** When there are no more devices return */
+        if (deviceIndex >= devices.size) {
+            bottomSheetDialog.hide()
+            return
+        }
+
+        val device = devices[deviceIndex]
+
         bottomSheetDialog.setCancelable(true)
+        uploadProgressProgram?.progress = 0
 
-        uploadProgressProgram?.setProgress(0)
+        /** Get Device BLE MAC Address */
+        device?.ble_mac?.let { BLEManager.getDevice(it.toUpperCase(Locale.ROOT)) }
 
-        /** Fix */
-        /**
-         * Query for devices for this user and than upload the program
-         */
-
-        /*
-        when (foot) {
-            Foot.LEFT -> {
-
-                user?.leftDevice?.let {
-                    BLEManager.getDevice(it.ble_mac.toUpperCase())
-                }?: run {
-                    this.uploadProgramToPlayer(trainingProgram, players, playerIndex, Foot.RIGHT)
-                    return
-                }
-            }
-            Foot.RIGHT -> {
-                player?.rightDevice?.let {
-                    BLEManager.getDevice(it.ble_mac.toUpperCase())
-                }?: run {
-                    bottomSheetDialog?.hide()
-                    this.presenBottomtSheetUploader(trainingProgram, players, playerIndex + 1, Foot.LEFT)
-                    return
-                }
-            }
-        }*/
-
-        /**
-         * Player Name
-         * Progress Bar Title
-         * ProgressBar
-         * Left & Right Shoe Image
-         */
-        var playerNameTextView = bottomSheetDialog.findViewById<TextView>(R.id.playerNameTextView)
-        var descriptionProgress = bottomSheetDialog.findViewById<TextView>(R.id.progressBarTitle)
-        val leftShoeImage = bottomSheetDialog.findViewById<ImageView>(R.id.leftShoeImage)
-        val rightShoeImage = bottomSheetDialog.findViewById<ImageView>(R.id.rightShoeImage)
-        playerNameTextView?.text = user?.fullname
+        val playerNameTextView = bottomSheetDialog.findViewById<TextView>(R.id.playerNameTextView)
+        playerNameTextView?.text = device?.user?.fullname
+        val descriptionProgress = bottomSheetDialog.findViewById<TextView>(R.id.progressBarTitle)
         descriptionProgress?.text = getString(R.string.upload_program_sheet_state_initial_title)
+        val leftShoeImage = bottomSheetDialog.findViewById<ImageView>(R.id.leftShoeImage)
         leftShoeImage?.setColorFilter(R.color.colorPrimaryLight)
+        val rightShoeImage = bottomSheetDialog.findViewById<ImageView>(R.id.rightShoeImage)
         rightShoeImage?.setColorFilter(R.color.colorPrimaryLight)
 
         animator.removeAllUpdateListeners()
@@ -364,78 +304,41 @@ class MainActivity : AppCompatActivity() {
         animator.setEvaluator(ArgbEvaluator())
         animator.addUpdateListener {
             val animatedValue = animator.animatedValue as Int
-            when (foot) {
-                Foot.LEFT -> {
-                    leftShoeImage?.setColorFilter(animatedValue)
-                }
-                Foot.RIGHT -> {
-                    rightShoeImage?.setColorFilter(animatedValue)
-                }
-            }
+            leftShoeImage?.setColorFilter(animatedValue)
+            rightShoeImage?.setColorFilter(animatedValue)
         }
-        animator.setDuration(500)
+        animator.duration = 500
         animator.repeatCount = ValueAnimator.INFINITE
         animator.repeatMode = ValueAnimator.REVERSE
         animator.start()
 
-        /**
-         * Bluetooth
-         * Connect to the device
-         */
+        /** Disconnect and Connect to BLE */
         BLEManager.disconnectDevice({
             descriptionProgress?.text = getString(R.string.upload_program_sheet_state_connecting_title)
-            uploadProgressProgram?.setProgress(40)
+            uploadProgressProgram?.progress = 40
             BLEManager.connectDevice(this)
         }, 2000)
 
-
-        /**
-         * Bluetooth
-         * Listen connection changes
-         */
+        /** Listen BLE connection changes */
         BLEManager.onConnectionStateChange = { gatt, status, newState ->
             if (status != BluetoothGatt.GATT_SUCCESS) {
                 runOnUiThread {
                     descriptionProgress?.text = getString(R.string.upload_program_sheet_state_error_connection_title)
                 }
                 Handler(Looper.getMainLooper()).postDelayed({
-                    when (foot) {
-                        Foot.LEFT ->
-                            this.uploadProgramToPlayer(trainingProgram, users, playerIndex,
-                                Foot.RIGHT
-                            )
-                        Foot.RIGHT -> {
-                            bottomSheetDialog.hide()
-                            this.presenBottomtSheetUploader(trainingProgram, users, playerIndex + 1,
-                                Foot.LEFT
-                            )
-                        }
-                    }
+                    this.uploadProgramToDevice(deviceProgram, devices, deviceIndex + 1)
                 }, 2000)
             }
-
             when (newState) {
                 BluetoothProfile.STATE_DISCONNECTED -> {
                     runOnUiThread {
-                        if (programUploaded == false) {
+                        if (!programUploaded) {
                             descriptionProgress?.text = getString(R.string.upload_program_sheet_state_disconnected_title)
                         }
                     }
-
                     Handler(Looper.getMainLooper()).postDelayed({
-                        programUploaded == false
-                        when (foot) {
-                            Foot.LEFT ->
-                                this.uploadProgramToPlayer(trainingProgram, users, playerIndex,
-                                    Foot.RIGHT
-                                )
-                            Foot.RIGHT -> {
-                                bottomSheetDialog.hide()
-                                this.presenBottomtSheetUploader(trainingProgram, users, playerIndex + 1,
-                                    Foot.LEFT
-                                )
-                            }
-                        }
+                        programUploaded = false
+                        this.uploadProgramToDevice(deviceProgram, devices, deviceIndex + 1)
                     }, 2000)
 
                 }
@@ -448,43 +351,30 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
-        /**
-         * Bluetooth
-         * Listen services discovered
-         * Start uploading program
-         */
+        /** Listen BLE services discovered and Start uploading program */
         BLEManager.onServiceDiscovered = {
             runOnUiThread {
                 descriptionProgress?.text = getString(R.string.upload_program_sheet_state_writing_data_title)
-                uploadProgressProgram?.setProgress(80)
-                BLEManager.write(trainingProgram.programBytesDevice())
+                uploadProgressProgram?.progress = 80
+                BLEManager.write(deviceProgram.programBytesDevice())
+                realm.executeTransaction {
+                    deviceProgram.startDate = Date()
+                    device?.updatedAt = Date()
+                    device?.program = deviceProgram
+                    adapter.updateData()
+                }
             }
         }
 
-        /**
-         * Bluetooth
-         * When data are sent to the device
-         * Show a message "program has been uploaded"
-         * Disconnect device and
-         */
+        /** Listen Data when are writed */
         BLEManager.onCharacteristicWrite = {
-            Log.i("CHARACTERISTIC_WRITE", it?.value.toString())
             runOnUiThread {
                 descriptionProgress?.text = "Programma caricato"
-                uploadProgressProgram?.setProgress(100)
+                uploadProgressProgram?.progress = 100
                 programUploaded = true
             }
+            /** Disconnect device after writing */
             BLEManager.disconnectDevice()
-        }
-    }
-
-    fun startTrainingProgram(trainingProgram: TrainingProgram) {
-        realm.executeTransaction { realm ->
-            realm.copyToRealmOrUpdate(trainingProgram.apply {
-                startDate = Date()
-                adapter.notifyDataSetChanged()
-            })
         }
     }
 

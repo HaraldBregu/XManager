@@ -8,21 +8,21 @@ import android.widget.BaseAdapter
 import android.widget.PopupMenu
 import io.realm.RealmResults
 import com.ninespartans.xmanager.R
-import com.ninespartans.xmanager.model.TrainingProgram
+import com.ninespartans.xmanager.model.DeviceProgram
 import kotlinx.android.synthetic.main.row_program_list.view.*
 
 
-class ProgramListAdapter(context: Context, programs: RealmResults<TrainingProgram>): BaseAdapter() {
+class ProgramListAdapter(context: Context, programs: RealmResults<DeviceProgram>): BaseAdapter() {
     private val mContext: Context
     private var inflater: LayoutInflater
-    var programs: RealmResults<TrainingProgram>
+    var programs: RealmResults<DeviceProgram>
 
     enum class Action {
         UPDATE_PROGRAM,
         DELETE_PROGRAM
     }
 
-    var onClickActionOnItem: ((Action, TrainingProgram) -> Unit)? = null
+    var onClickActionOnItem: ((Action, DeviceProgram) -> Unit)? = null
 
     init {
         mContext = context
@@ -38,7 +38,7 @@ class ProgramListAdapter(context: Context, programs: RealmResults<TrainingProgra
         return position.toLong()
     }
 
-    override fun getItem(position: Int): TrainingProgram? {
+    override fun getItem(position: Int): DeviceProgram? {
         return programs.get(position)
     }
 
@@ -74,7 +74,7 @@ class ProgramListAdapter(context: Context, programs: RealmResults<TrainingProgra
         }
 
         var sessions = ""
-        program?.programs?.let {
+        program?.data?.let {
             sessions = "\nSessioni: ${it.size}"
         }
         description += sessions

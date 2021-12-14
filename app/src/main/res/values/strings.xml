@@ -11,14 +11,6 @@
     <string name="main_header_program_finished">Terminato</string>
     <string name="main_header_program_complation">COMPLETAMENTO</string>
 
-    <!--  Utils/General tests  -->
-    <string name="firstname_lastname">Firstname Lastname</string>
-    <string name="device_name">Device name</string>
-    <string name="program_name">Program name</string>
-    <string name="program_description">Program description</string>
-    <string name="device_mac_address">device mac address</string>
-    <string name="upload_program_subtitle">Caricamento programma…</string>
-
     <!--  Profile Activity  -->
     <string name="title_activity_create_profile">Profilo</string>
     <string name="title_activity_create_profile_header_title">Profilo coach</string>
@@ -162,5 +154,16 @@
     <string name="activity_create_user_button_title">continua</string>
     <string name="activity_update_user_button_title">salva</string>
 
+
+    <!--  Utils/General tests  -->
+    <string name="firstname_lastname">Firstname Lastname</string>
+    <string name="device_name">Device name</string>
+    <string name="device_name_version">Device 1.0.0</string>
+    <string name="program_name">Programma</string>
+    <string name="no_program_name">Nessun programma</string>
+    <string name="program_timer">00:00:00</string>
+    <string name="program_description">Program description</string>
+    <string name="device_mac_address">device mac address</string>
+    <string name="upload_program_subtitle">Caricamento programma…</string>
 
 </resources>

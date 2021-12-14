@@ -48,10 +48,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.ninespartans.xmanager.DebugActivity"
-            android:label="@string/title_activity_debug"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name="com.ninespartans.xmanager.ProgramListActivity"
             android:label="@string/activity_program_list_title"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -68,11 +64,11 @@
             android:label="@string/activity_create_user_title"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.ninespartans.xmanager.DevicePairSelectActivity"
+            android:name="com.ninespartans.xmanager.BluetoothDebugActivity"
             android:label="Seleziona***"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.ninespartans.xmanager.DevicePairSearchActivity"
+            android:name="com.ninespartans.xmanager.DeviceSearchActivity"
             android:label="@string/activity_device_search_title"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

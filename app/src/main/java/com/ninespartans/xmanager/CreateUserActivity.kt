@@ -66,7 +66,7 @@ class CreateUserActivity : AppCompatActivity() {
                         age = ageInputText.editText?.text.toString()
                     })
 
-                    val intent = Intent(this, DevicePairSearchActivity::class.java)
+                    val intent = Intent(this, DeviceSearchActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     intent.putExtra("user_id", user?._id.toString())
                     intent.putExtra("user_fullname", user?.fullname)

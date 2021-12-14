@@ -50,7 +50,7 @@
                         android:id="@+id/userImageView"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/ic_launcher_background"
+                        android:src="@drawable/coach_avatar"
                         android:scaleType="centerCrop">
                     </ImageView>
                 </androidx.cardview.widget.CardView>
@@ -148,7 +148,7 @@
                     android:id="@+id/selectProgram"
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
-                    android:text="@string/main_header_action_run_program"/>
+                    android:text="@string/main_header_action_run_program" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/showProgramSectionMenu"

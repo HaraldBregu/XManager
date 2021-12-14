@@ -8,13 +8,10 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.PopupMenu
 import com.ninespartans.xmanager.R
-import com.ninespartans.xmanager.model.Account
+import com.ninespartans.xmanager.model.*
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.kotlin.where
-import com.ninespartans.xmanager.model.PlayerDeviceData
-import com.ninespartans.xmanager.model.TrainingProgram
-import com.ninespartans.xmanager.model.User
 import kotlinx.android.synthetic.main.row_main_header.view.*
 import kotlinx.android.synthetic.main.row_main_player.view.*
 import kotlinx.android.synthetic.main.row_main_player_device_item.view.*
@@ -30,9 +27,12 @@ import kotlin.concurrent.fixedRateTimer
 class MainListAdapter(context: Context): BaseAdapter() {
     private val mContext: Context
     private var inflater: LayoutInflater
-    var programs: RealmResults<TrainingProgram>
-    private var players: RealmResults<User>
-    val realm: Realm = Realm.getDefaultInstance()
+    private val realm = Realm.getDefaultInstance()
+    private var account = realm.where<Account>().findFirst()
+    private var players = realm.where<User>()
+        .notEqualTo("account._id", account?._id)
+        .findAll()
+    private var programs = realm.where<DeviceProgram>().findAll()
 
     enum class Action {
         CREATE_USER, // User
@@ -56,16 +56,18 @@ class MainListAdapter(context: Context): BaseAdapter() {
     var onClickActionOnItem: ((Action, User) -> Unit)? = null
 
     init {
-        val account = realm.where<Account>().findFirst()
-        val users = realm.where<User>()
-            .notEqualTo("account._id", account?._id)
-            .findAll()
-        val programs = realm.where<TrainingProgram>().findAll()
-
-        this.players = users
-        this.programs = programs
         mContext = context
         inflater = LayoutInflater.from(mContext)
+    }
+
+    fun updateData() {
+        this.account = realm.where<Account>().findFirst()
+        val users = realm.where<User>()
+        if (account != null)
+            users.notEqualTo("account._id", account?._id)
+        this.players = users.findAll()
+        this.programs = realm.where<DeviceProgram>().findAll()
+        notifyDataSetChanged()
     }
 
     override fun getCount(): Int {
@@ -122,19 +124,16 @@ class MainListAdapter(context: Context): BaseAdapter() {
                 if (it.headline != null && it.headline.length != 0) {
                     rowHeader.userTitle.text = it.headline
                 } else {
-                    rowHeader.userTitle.text = mContext.getString(R.string.main_header_user_no_title)
+                    rowHeader.userTitle.text =
+                        mContext.getString(R.string.main_header_user_no_title)
                 }
             }
 
-
-
-            /**
-             * Training Session Section
-             */
+            /** Training Session Section */
             rowHeader.current_program_section.visibility = View.GONE
             rowHeader.programSectionActions.visibility = if (noPrograms) View.GONE else View.VISIBLE
 
-            val activeSessionProgram = realm.where<TrainingProgram>()
+            val activeSessionProgram = realm.where<DeviceProgram>()
                 .equalTo("active", true)
                 .findFirst()
 
@@ -280,18 +279,6 @@ class MainListAdapter(context: Context): BaseAdapter() {
         val rowPlayer = inflater.inflate(R.layout.row_main_player, viewGroup, false)
         val player = players.get(rowPlayerPosition)
 
-        //val leftdevice = player?.leftDevice
-        //val rightDevice = player?.rightDevice
-        //val noDevices = leftdevice == null && rightDevice == null
-        //val missingOneDevice = leftdevice == null || rightDevice == null
-        //val missingBothDevices = leftdevice == null && rightDevice == null
-        //val hasSessionProgram = player?.sessionProgram != null
-        //val leftDeviceVersion =  leftdevice?.firmwareVersion ?: "0"
-        //val rightDeviceVersion =  rightDevice?.firmwareVersion ?: "0"
-        //val leftVersion = Version(leftDeviceVersion)
-        //val rightVersion = Version(rightDeviceVersion)
-        //val deviceVersionEqual = leftVersion.equals(rightVersion)
-
         /** Hide info section if there are no devices */
         //rowPlayer.deviceInfoSection.visibility = if (noDevices) View.GONE else View.VISIBLE
 
@@ -348,25 +335,72 @@ class MainListAdapter(context: Context): BaseAdapter() {
         }
 
         /** Player Devices and Programs */
+        rowPlayer.deviceInfoSection.visibility = View.GONE
         val views = mutableListOf<PlayerDeviceData>()
-/*
-        leftdevice?.let {
+
+        val devices = realm.where<Device>()
+        devices.equalTo("user._id", player?._id)
+        devices.findAll().forEach {
+            rowPlayer.deviceInfoSection.visibility = View.VISIBLE
             val view = inflater.inflate(R.layout.row_main_player_device_item, rowPlayer.deviceInfoSection, false)
             views.add(PlayerDeviceData(view, it))
         }
 
-        rightDevice?.let {
-            val view = inflater.inflate(R.layout.row_main_player_device_item, rowPlayer.deviceInfoSection, false)
-        }*/
-
         views.forEach {
             rowPlayer.deviceInfoSection.addView(it.view)
-            it.view.deviceName.text = it.device.name
-            it.view.deviceNameVersion.text = it.device.firmwareVersion
-            //it.view.programSessionSection.visibility = View.GONE//if (hasSessionProgram) View.VISIBLE else View.GONE
-            it.view.programPlayerTitle.text = "Programma test"//player?.sessionProgram?.title
-            it.view.programPlayerTimer.text = "00:00:00"
-            it.view.playerProgressProgram.progress = (0..100).random()
+            it.view.deviceName.text = it.device.name.plus(" ").plus(it.device.version)
+            it.device.program?.let { deviceProgram ->
+                it.view.programPlayerTitle.text = deviceProgram.title
+                it.view.programPlayerTimer.text = "00:00:00"
+                it.view.playerProgressProgram.progress = 0
+
+                val startDate = it.device.updatedAt
+                val calendar = Calendar.getInstance()
+                calendar.time = startDate
+                calendar.add(Calendar.SECOND, deviceProgram.durationSeconds())
+                calendar.add(Calendar.MINUTE, deviceProgram.durationMinutes())
+                calendar.add(Calendar.HOUR, deviceProgram.durationHours())
+                val endDate = calendar.time
+
+                val duration = endDate.time - startDate.time
+                it.view.playerProgressProgram.max = duration.toInt()
+
+                fixedRateTimer("timer", true, 0L, 10) {
+                    val progress = Date().time - startDate.time
+                    if (progress >= duration) { this.cancel() }
+
+                    mContext.runOnUiThread {
+                        it.view.playerProgressProgram.progress = progress.toInt()
+
+                        val millisUntilFinished = duration - progress
+                        if (millisUntilFinished <= 0) {
+                            it.view.programPlayerTimer.text = "00:00:00"
+                            return@runOnUiThread
+                        }
+
+                        val hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished) % 60
+                        var hoursStr = hours.toString()
+                        if (hoursStr.length < 2) hoursStr = "0$hours"
+
+                        val minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) % 60
+                        var minutesStr = minutes.toString()
+                        if (minutesStr.length < 2) minutesStr = "0$minutes"
+
+                        val seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) % 60
+                        var secondsStr = seconds.toString()
+                        if (secondsStr.length < 2) secondsStr = "0$seconds"
+
+                        val millisec= TimeUnit.MILLISECONDS.toMillis(millisUntilFinished) % 60
+                        var millisecStr = millisec.toString()
+                        if (millisecStr.length < 2) millisecStr = "0$millisec"
+
+                        it.view.programPlayerTimer.text = "$hoursStr:$minutesStr:$secondsStr"
+                    }
+                }
+            }?: run {
+                it.view.programPlayerTitle.text = mContext.getString(R.string.no_program_name)
+                it.view.playerProgressProgram.progress = 0
+            }
         }
 
         rowPlayer.addPlayerDevice.setOnClickListener {
@@ -374,80 +408,6 @@ class MainListAdapter(context: Context): BaseAdapter() {
                 player?.let { it1 -> it(Action.COMPLETE_DEVICES, it1) }
             }
         }
-
-/*
-        if (noDevices) {
-            rowPlayer.deviceName.text = "" // mContext.getString(R.string.row_player_no_device_subtitle)
-            rowPlayer.deviceNameVersion.text = ""
-            rowPlayer.statusLayout.setBackgroundResource(R.color.colorPrimaryLight)
-        } else if (missingOneDevice) {
-            rowPlayer.statusLayout.setBackgroundResource(R.color.colorPrimaryVariant)
-
-            leftdevice?.let {
-                rowPlayer.deviceName.text = it.name
-                rowPlayer.deviceNameVersion.text = it.firmwareVersion
-            }
-
-            rightDevice?.let {
-                rowPlayer.deviceName.text = it.name
-                rowPlayer.deviceNameVersion.text = it.firmwareVersion
-            }
-
-
-        } else {
-            rowPlayer.statusLayout.setBackgroundResource(R.color.colorPrimaryVariant)
-
-            var deviceNames = ""
-
-            leftdevice?.let {
-                deviceNames += it.name + " " + it.firmwareVersion
-            }
-
-            rightDevice?.let {
-                deviceNames =
-                    if (deviceNames.length > 0 && deviceNames != (it.name + " " + it.firmwareVersion))
-                        "$deviceNames | ${it.name + " " + it.firmwareVersion}"
-                    else it.name + " " + it.firmwareVersion
-            }
-
-            rowPlayer.deviceName.text = deviceNames
-        }
-
-*/
-        /**
-         * Program data
-         */
-
-        /**
-         * Action section
-         */
-
-        /**
-         * Start session exercise for single player
-         */
-        /*
-        rowPlayer.playPauseButton.visibility = View.GONE //if (hasSessionProgram) View.VISIBLE else View.GONE
-        rowPlayer.playPauseButton.setOnClickListener {
-            onClickActionOnItem?.let {
-                it(Action.STOP_PROGRAM, player)
-                it(Action.STOP_PROGRAM, player)
-            }
-        }*/
-
-        /**
-         * Complete pairing with devices if not complete
-         */
-        /*rowPlayer.leftChipDevice.setOnClickListener {
-            onClickActionOnItem?.let {
-                player?.let { it1 -> it(Action.COMPLETE_DEVICES, it1) }
-            }
-        }
-        rowPlayer.rightChipDevice.setOnClickListener {
-            onClickActionOnItem?.let {
-                player?.let { it1 -> it(Action.COMPLETE_DEVICES, it1) }
-            }
-        }*/
-
 
         return rowPlayer
     }
