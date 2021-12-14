@@ -1,54 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <item
-        android:id="@+id/action_complete_devices"
-        android:title="Complete devices"
-        app:showAsAction="never"
-        android:visible="false"/>
-    <item
-        android:id="@+id/action_update_devices"
-        android:title="Update devices"
-        app:showAsAction="never"
-        android:visible="false"/>
-    <item
-        android:id="@+id/action_delete_devices"
-        android:title="Delete devices"
-        app:showAsAction="never"
-        android:visible="false"/>
-    <item
-        android:id="@+id/turn_off_devices"
-        android:title="Turn off devices"
-        app:showAsAction="never"
-        android:visible="false"/>
-
-
     <item
         android:id="@+id/action_edit_player"
-        android:title="Edit player"
-        app:showAsAction="never"
-        android:visible="false"/>
+        android:title="@string/activity_main_row_player_menu_item_edit"
+        app:showAsAction="never"/>
     <item
-        android:id="@+id/action_delete_player"
-        android:title="Delete player"
-        app:showAsAction="never"
-        android:visible="false"/>
+        android:id="@+id/action_upload_program"
+        android:title="@string/activity_main_row_player_menu_item_upload_program"
+        app:showAsAction="never"/>
     <item
-        android:id="@+id/action_disable_player"
-        android:title="Disable player"
-        app:showAsAction="never"
-        android:visible="false"/>
-
-
+        android:id="@+id/action_add_device"
+        android:title="@string/activity_main_row_player_menu_item_register_device"
+        app:showAsAction="never"/>
     <item
-        android:id="@+id/action_show_all_programs"
-        android:title="Show all programs"
-        app:showAsAction="never"
-        android:visible="false"/>
-    <item
-        android:id="@+id/action_delete_all_programs"
-        android:title="Delete all programs (test)"
-        app:showAsAction="never"
-        android:visible="false"/>
+        android:id="@+id/action_delete_devices"
+        android:title="@string/activity_main_row_player_menu_item_delete_devices"
+        app:showAsAction="never"/>
 </menu>

@@ -6,7 +6,7 @@
     <string name="main_header_title">Pannello di controllo</string>
     <string name="main_header_description">Qui puoi creare e gestire tutti i tuoi giocatori, i programmi di training e i dispositivi associati. Puoi caricare programmi e iniziare le sessioni di allenamento.</string>
     <string name="main_header_user_no_title">Preparatore atletico</string>
-    <string name="main_header_action_run_program">START</string>
+    <string name="main_header_action_run_program">avvia programma</string>
     <string name="main_header_program_running">In corso</string>
     <string name="main_header_program_finished">Terminato</string>
     <string name="main_header_program_complation">COMPLETAMENTO</string>
@@ -47,13 +47,18 @@
 
     <!--  Cell main player header -->
     <string name="row_player_header_title">Giocatori</string>
+    <string name="activity_main_row_player_header_title">Giocatori</string>
+    <string name="activity_main_row_player_menu_item_edit">Modifica giocatore</string>
+    <string name="activity_main_row_player_menu_item_upload_program">Avvia programma</string>
+    <string name="activity_main_row_player_menu_item_register_device">Registra dispositivo</string>
+    <string name="activity_main_row_player_menu_item_delete_devices">Elimina dispositivi</string>
 
     <!--  Cell main player -->
     <string name="row_player_no_device_subtitle">Nessun dispositivo connesso</string>
     <string name="row_player_device_version_title">Versione:</string>
     <string name="row_player_device_left_title">Sinistra</string>
     <string name="row_player_device_right_title">Destra</string>
-    <string name="row_player_devices_programs_title">Devices and programs</string>
+    <string name="row_player_devices_programs_title">Dispositivi</string>
     <string name="row_player_add_device_button_title">Aggiungi dispositivo</string>
 
     <!--  Program Create Activity  -->
@@ -129,7 +134,6 @@
     <string name="title_activity_debug">DebugActivity</string>
 
 
-
     <!--  Search Device Activity  -->
     <string name="activity_device_search_title">Cerca dispositivi</string>
     <string name="activity_device_search_header_subtitle">nome giocatore</string>
@@ -165,5 +169,14 @@
     <string name="program_description">Program description</string>
     <string name="device_mac_address">device mac address</string>
     <string name="upload_program_subtitle">Caricamento programma…</string>
+    <string name="title_activity_user">UserActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 </resources>

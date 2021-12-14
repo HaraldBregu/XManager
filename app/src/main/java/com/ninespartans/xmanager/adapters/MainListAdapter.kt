@@ -1,6 +1,7 @@
 package com.ninespartans.xmanager.adapters
 
 import android.content.Context
+import android.opengl.Visibility
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -40,6 +41,7 @@ class MainListAdapter(context: Context): BaseAdapter() {
         EDIT_PLAYER,
         DELETE_PLAYER,
         DISABLE_PLAYER,
+        REGISTER_DEVICE,
         COMPLETE_DEVICES, // Devices
         UPDATE_DEVICES,
         DELETE_DEVICES,
@@ -287,46 +289,24 @@ class MainListAdapter(context: Context): BaseAdapter() {
         rowPlayer.showOptions.setOnClickListener {
             val popupMenu = PopupMenu(mContext, it)
             popupMenu.menuInflater.inflate(R.menu.popup_menu_card, popupMenu.menu)
-            //popupMenu.menu.findItem(R.id.action_complete_devices).setEnabled(missingOneDevice)
-            popupMenu.menu.findItem(R.id.action_complete_devices).setVisible(true)
-            popupMenu.menu.findItem(R.id.action_update_devices).setVisible(true)
-            popupMenu.menu.findItem(R.id.action_delete_devices).setVisible(true)
-            popupMenu.menu.findItem(R.id.turn_off_devices).setVisible(true)
-            popupMenu.menu.findItem(R.id.action_edit_player).setVisible(true)
-            popupMenu.menu.findItem(R.id.action_delete_player).setVisible(true)
-            popupMenu.menu.findItem(R.id.action_disable_player).setVisible(true)
-
             popupMenu.setOnMenuItemClickListener {
                 when (it.itemId) {
-
-                    R.id.action_complete_devices ->
-                        onClickActionOnItem?.let {
-                            player?.let { it1 -> it(Action.COMPLETE_DEVICES, it1) }
-                        }
-                    R.id.action_update_devices ->
-                        onClickActionOnItem?.let {
-                            player?.let { it1 -> it(Action.UPDATE_DEVICES, it1) }
-                        }
-                    R.id.action_delete_devices ->
-                        onClickActionOnItem?.let {
-                            player?.let { it1 -> it(Action.DELETE_DEVICES, it1) }
-                        }
-                    R.id.turn_off_devices ->
-                        onClickActionOnItem?.let {
-                            player?.let { it1 -> it(Action.TURN_OFF_DEVICES, it1) }
-                        }
                     R.id.action_edit_player ->
                         onClickActionOnItem?.let {
                             player?.let { it1 -> it(Action.EDIT_PLAYER, it1) }
-
                         }
-                    R.id.action_delete_player ->
+                    R.id.action_upload_program ->
                         onClickActionOnItem?.let {
-                            player?.let { it1 -> it(Action.DELETE_PLAYER, it1) }
+                            player?.let { it1 -> it(Action.UPLOAD_PROGRAM, it1) }
                         }
-                    R.id.action_disable_player ->
+                    R.id.action_add_device -> {
                         onClickActionOnItem?.let {
-                            player?.let { it1 -> it(Action.DISABLE_PLAYER, it1) }
+                            player?.let { it1 -> it(Action.REGISTER_DEVICE, it1) }
+                        }
+                    }
+                    R.id.action_delete_devices ->
+                        onClickActionOnItem?.let {
+                            player?.let { it1 -> it(Action.DELETE_DEVICES, it1) }
                         }
                 }
                 true
@@ -349,9 +329,10 @@ class MainListAdapter(context: Context): BaseAdapter() {
         views.forEach {
             rowPlayer.deviceInfoSection.addView(it.view)
             it.view.deviceName.text = it.device.name.plus(" ").plus(it.device.version)
+            it.view.programSessionSection.visibility = if (it.device.program == null) View.GONE else View.VISIBLE
             it.device.program?.let { deviceProgram ->
                 it.view.programPlayerTitle.text = deviceProgram.title
-                it.view.programPlayerTimer.text = "00:00:00"
+                //it.view.programPlayerTimer.text = "00:00:00"
                 it.view.playerProgressProgram.progress = 0
 
                 val startDate = it.device.updatedAt
@@ -374,7 +355,7 @@ class MainListAdapter(context: Context): BaseAdapter() {
 
                         val millisUntilFinished = duration - progress
                         if (millisUntilFinished <= 0) {
-                            it.view.programPlayerTimer.text = "00:00:00"
+                            //it.view.programPlayerTimer.text = "00:00:00"
                             return@runOnUiThread
                         }
 
@@ -403,9 +384,10 @@ class MainListAdapter(context: Context): BaseAdapter() {
             }
         }
 
+        rowPlayer.addPlayerDevice.visibility = if (views.size > 0) View.GONE else View.VISIBLE
         rowPlayer.addPlayerDevice.setOnClickListener {
             onClickActionOnItem?.let {
-                player?.let { it1 -> it(Action.COMPLETE_DEVICES, it1) }
+                player?.let { it1 -> it(Action.REGISTER_DEVICE, it1) }
             }
         }
 

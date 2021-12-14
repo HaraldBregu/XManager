@@ -31,12 +31,11 @@ import kotlinx.android.synthetic.main.row_main_header.view.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var adapter: MainListAdapter
-    enum class Foot { LEFT, RIGHT }
-    var programUploaded:Boolean = false
-    lateinit var bottomSheetDialog: BottomSheetDialog
-    var uploadProgressProgram: ProgressBar? = null
-    var animator: ValueAnimator = ValueAnimator()
-    val realm = Realm.getDefaultInstance()
+    private var programUploaded:Boolean = false
+    private lateinit var bottomSheetDialog: BottomSheetDialog
+    private var uploadProgressProgram: ProgressBar? = null
+    private var animator: ValueAnimator = ValueAnimator()
+    private val realm: Realm = Realm.getDefaultInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 MainListAdapter.Action.UPLOAD_PROGRAM -> {
-                    presentProgramBottomSheet()
+                    presentProgramsListBottomSheet()
                 }
                 MainListAdapter.Action.ADD_PLAYER -> {
                     val intent = Intent(this, CreateUserActivity::class.java)
@@ -94,6 +93,10 @@ class MainActivity : AppCompatActivity() {
                     intent.putExtra("user_id", user._id.toString())
                     startActivity(intent)
                 }
+                MainListAdapter.Action.UPLOAD_PROGRAM -> {
+
+                }
+                /*
                 MainListAdapter.Action.DELETE_PLAYER -> {
                     val builderInner = AlertDialog.Builder(this)
                     builderInner.setTitle("Attention!")
@@ -110,8 +113,8 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     builderInner.show()
-                }
-                MainListAdapter.Action.COMPLETE_DEVICES -> {
+                }*/
+                MainListAdapter.Action.REGISTER_DEVICE -> {
                     val intent = Intent(this, DeviceSearchActivity::class.java)
                     val id = user._id.toString()
                     intent.putExtra("user_id",id)
@@ -125,10 +128,6 @@ class MainActivity : AppCompatActivity() {
                         devices.findAll().deleteAllFromRealm()
                         adapter.updateData()
                     }
-                }
-                MainListAdapter.Action.UPLOAD_PROGRAM -> {
-                    val intent = Intent(this, ProgramListActivity::class.java)
-                    startActivity(intent)
                 }
                 else -> {}
             }
@@ -179,69 +178,68 @@ class MainActivity : AppCompatActivity() {
     }
 
     /** Present list of programs to select */
-    fun presentProgramBottomSheet() {
-        val bottomSheetDialog = BottomSheetDialog(this)
-        bottomSheetDialog.setContentView(R.layout.content_program_select_bottom_sheet)
-        val listView = bottomSheetDialog.findViewById<ListView>(R.id.list_view)
-        listView?.isNestedScrollingEnabled = true
+    private fun presentProgramsListBottomSheet() {
 
-        val programs = realm.where<DeviceProgram>().findAll()
-        val adapter = ProgramSelectAdapter(this, programs)
-        listView?.adapter = adapter
-        listView?.setOnItemClickListener { parent, view, position, id ->
-            val selectedProgram = programs.get(position)
+        val account = realm.where<Account>().findFirst()
+        val tmpusers = realm.where<User>()
+        account?.let { tmpusers.notEqualTo("account._id", it._id) }
+        val users = tmpusers.findAll()
 
-            bottomSheetDialog.hide()
-            adapter.notifyDataSetChanged()
-
-            val account = realm.where<Account>().findFirst()
-            val tmpusers = realm.where<User>()
-            account?.let { tmpusers.notEqualTo("account._id", it._id) }
-            val users = tmpusers.findAll()
-
-            /** When there are no users registered */
-            if (users.isEmpty()) {
-                val builderInner = AlertDialog.Builder(this)
-                builderInner.setTitle("Attenzione!")
-                builderInner.setMessage("Non hai nessun giocatore registrato. Inizia a crearne uno e associa i device.")
-                builderInner.setNegativeButton("Chiudi") { dialog, which ->
-                    dialog.dismiss()
-                }
-                builderInner.setPositiveButton("Crea giocatore") { dialog, which ->
-                    dialog.dismiss()
-                    startActivity(Intent(this, CreateUserActivity::class.java))
-                }
-                builderInner.show()
-                return@setOnItemClickListener
+        /** When there are no users registered */
+        if (users.isEmpty()) {
+            val builderInner = AlertDialog.Builder(this)
+            builderInner.setTitle("Attenzione!")
+            builderInner.setMessage("Non hai nessun giocatore registrato. Inizia a crearne uno e associa i device.")
+            builderInner.setNegativeButton("Chiudi") { dialog, which ->
+                dialog.dismiss()
             }
-
-            val devices = realm.where<Device>()
-                .isNotNull("user")
-                .sort("user._id")
-                .findAll()
-
-            /** When there are no devices registered */
-            if (devices.isEmpty()) {
-                val builderInner = AlertDialog.Builder(this)
-                builderInner.setTitle("Attenzione!")
-                builderInner.setMessage("Non hai nessun dispositivo registrato. Inizia a crearne uno e associa i device.")
-                builderInner.setNegativeButton("Chiudi") { dialog, which ->
-                    dialog.dismiss()
-                }
-                builderInner.setPositiveButton("Associa dispositivo") { dialog, which ->
-                    dialog.dismiss()
-                    startActivity(Intent(this, CreateUserActivity::class.java))
-                }
-                builderInner.show()
-                return@setOnItemClickListener
+            builderInner.setPositiveButton("Crea giocatore") { dialog, which ->
+                dialog.dismiss()
+                startActivity(Intent(this, CreateUserActivity::class.java))
             }
-
-            selectedProgram?.let {
-                presentBottomSheetDialogUploader(it, devices)
-            }
+            builderInner.show()
+            return
         }
 
-        bottomSheetDialog?.show()
+        val devices = realm.where<Device>()
+            .isNotNull("user")
+            .sort("user._id")
+            .findAll()
+
+        /** When there are no devices registered */
+        if (devices.isEmpty()) {
+            val builderInner = AlertDialog.Builder(this)
+            builderInner.setTitle("Attenzione!")
+            builderInner.setMessage("Non hai nessun dispositivo registrato. Inizia a crearne uno e associa i device.")
+            builderInner.setNegativeButton("Chiudi") { dialog, which ->
+                dialog.dismiss()
+            }
+            builderInner.setPositiveButton("Associa dispositivo") { dialog, which ->
+                dialog.dismiss()
+                startActivity(Intent(this, CreateUserActivity::class.java))
+            }
+            builderInner.show()
+            return
+        }
+
+        val programs = realm.where<DeviceProgram>().findAll()
+
+
+        /** Bottom sheet dialog */
+        val bottomSheetDialog = BottomSheetDialog(this)
+        bottomSheetDialog.setContentView(R.layout.content_program_select_bottom_sheet)
+        val adapter = ProgramSelectAdapter(this, programs)
+        val listView = bottomSheetDialog.findViewById<ListView>(R.id.list_view)
+        listView?.isNestedScrollingEnabled = true
+        listView?.adapter = adapter
+        listView?.setOnItemClickListener { _, _, position, _ ->
+            val program = programs[position]
+            bottomSheetDialog.hide()
+            adapter.notifyDataSetChanged()
+            program?.let { presentBottomSheetDialogUploader(it, devices) }
+        }
+
+        bottomSheetDialog.show()
         Common.setWhiteNavigationBar(bottomSheetDialog)
     }
 

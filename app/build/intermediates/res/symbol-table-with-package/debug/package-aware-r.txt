@@ -1958,6 +1958,7 @@ id accessibility_custom_action_7
 id accessibility_custom_action_8
 id accessibility_custom_action_9
 id action0
+id action_add_device
 id action_bar
 id action_bar_activity_content
 id action_bar_container
@@ -1965,17 +1966,13 @@ id action_bar_root
 id action_bar_spinner
 id action_bar_subtitle
 id action_bar_title
-id action_complete_devices
 id action_container
 id action_context_bar
 id action_create_player
 id action_create_program
 id action_debug
 id action_delete
-id action_delete_all_programs
 id action_delete_devices
-id action_delete_player
-id action_disable_player
 id action_divider
 id action_edit_player
 id action_image
@@ -1985,10 +1982,9 @@ id action_mode_bar
 id action_mode_bar_stub
 id action_mode_close_button
 id action_profile
-id action_show_all_programs
 id action_text
 id action_update
-id action_update_devices
+id action_upload_program
 id actions
 id activateBluetooth
 id activateFineLocation
@@ -2390,7 +2386,6 @@ id startVertical
 id staticLayout
 id staticPostLayout
 id static_light
-id statusLayout
 id statusView
 id status_bar_latest_event_content
 id stepNumber
@@ -2461,7 +2456,6 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
-id turn_off_devices
 id unchecked
 id uniform
 id unlabeled
@@ -2748,6 +2742,11 @@ string activity_device_search_sheet_connecting_description
 string activity_device_search_sheet_radio_left_foot
 string activity_device_search_sheet_radio_right_foot
 string activity_device_search_title
+string activity_main_row_player_header_title
+string activity_main_row_player_menu_item_delete_devices
+string activity_main_row_player_menu_item_edit
+string activity_main_row_player_menu_item_register_device
+string activity_main_row_player_menu_item_upload_program
 string activity_main_title
 string activity_permissions_bluetooth_active_button_title
 string activity_permissions_bluetooth_description
@@ -2790,7 +2789,10 @@ string expand_button_title
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
+string first_fragment_label
 string firstname_lastname
+string hello_first_fragment
+string hello_second_fragment
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
@@ -2858,6 +2860,7 @@ string mtrl_picker_toggle_to_text_input_mode
 string mtrl_picker_toggle_to_year_selection
 string nav_app_bar_navigate_up_description
 string nav_app_bar_open_drawer_description
+string next
 string no_program_name
 string not_set
 string password_toggle_content_description
@@ -2866,6 +2869,7 @@ string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
 string preference_copied
+string previous
 string program_description
 string program_name
 string program_timer
@@ -2883,6 +2887,7 @@ string row_player_devices_programs_title
 string row_player_header_title
 string row_player_no_device_subtitle
 string search_menu_title
+string second_fragment_label
 string select_program_sheet_description
 string select_program_sheet_title
 string sheet_create_session_anim_type_title
@@ -2923,6 +2928,7 @@ string title_activity_create_program_nav_title
 string title_activity_debug
 string title_activity_update_program_header_description
 string title_activity_update_program_header_title
+string title_activity_user
 string upload_program_sheet_description
 string upload_program_sheet_state_connected_title
 string upload_program_sheet_state_connecting_title

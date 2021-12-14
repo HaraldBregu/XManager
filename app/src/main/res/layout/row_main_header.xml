@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:cardCornerRadius="3dp">
-
     <LinearLayout
         android:elevation="50dp"
         android:layout_width="match_parent"
@@ -14,7 +13,77 @@
         android:paddingHorizontal="15dp"
         android:paddingTop="17dp"
         android:paddingBottom="15dp">
+        <RelativeLayout
+            android:id="@+id/user_section_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="10dp">
+            <LinearLayout
+                android:id="@+id/userSection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:orientation="horizontal">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="18dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorBackground"
+                        android:padding="4dp">
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="14dp">
+                            <ImageView
+                                android:id="@+id/userImageView"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/coach_avatar" />
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/fullname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/firstname_lastname"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+                    <TextView
+                        android:id="@+id/userTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:text="@string/firstname_lastname"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+                </LinearLayout>
+            </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/showProgramSectionMenu"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:padding="14dp"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="12sp"
+                app:icon="@drawable/outline_list_alt_24" />
+
+        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,59 +95,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
-                android:text="@string/main_header_description"
-                android:textSize="14dp" />
+                android:text="@string/main_header_description"/>
         </LinearLayout>
-
-        <RelativeLayout
-            android:id="@+id/user_section_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp">
-            <LinearLayout
-                android:id="@+id/userSection"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:orientation="horizontal">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="6dp">
-                    <ImageView
-                        android:id="@+id/userImageView"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/coach_avatar"
-                        android:scaleType="centerCrop">
-                    </ImageView>
-                </androidx.cardview.widget.CardView>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="10dp">
-                    <TextView
-                        android:id="@+id/fullname"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:text="Harald Bregu"
-                        android:textSize="17sp" />
-                    <TextView
-                        android:id="@+id/userTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
-                        android:fontFamily="@font/roboto"
-                        android:text="UEFA Pro 4"
-                        android:textSize="12sp"
-                        android:textStyle="normal"/>
-                </LinearLayout>
-            </LinearLayout>
-        </RelativeLayout>
-
         <LinearLayout
             android:id="@+id/current_program_section"
             android:layout_width="match_parent"
@@ -146,21 +164,10 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/selectProgram"
+                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:text="@string/main_header_action_run_program" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/showProgramSectionMenu"
-                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                    android:layout_alignParentEnd="true"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:padding="14dp"
-                    android:textAlignment="center"
-                    android:text=""
-                    android:textSize="12sp"
-                    app:icon="@drawable/outline_list_alt_24"/>
             </RelativeLayout>
         </LinearLayout>
 
