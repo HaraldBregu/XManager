@@ -170,10 +170,10 @@ class CreateUserActivity : AppCompatActivity() {
                 val builderInner = AlertDialog.Builder(this)
                 builderInner.setTitle("Attention!")
                 builderInner.setMessage("Before deleting the Player be sure that you don't need it anymore. All pairing devices and data will be deleted permanently from the app.")
-                builderInner.setNegativeButton("Cancel") { dialog, which ->
+                builderInner.setNegativeButton("Cancel") { dialog, _ ->
                     dialog.dismiss()
                 }
-                builderInner.setPositiveButton("Delete") { dialog, which ->
+                builderInner.setPositiveButton("Delete") { _, _ ->
                     realm.executeTransaction {
                         user?.deleteFromRealm()
                         finish()

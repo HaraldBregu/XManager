@@ -2057,6 +2057,7 @@ id countDownTimerLabel
 id counterclockwise
 id createNewProgram
 id createSession
+id create_new_button
 id current_program_section
 id custom
 id customPanel
@@ -2113,7 +2114,6 @@ id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
 id extern
-id fab
 id fade
 id fade_light
 id fill
@@ -2745,6 +2745,8 @@ string activity_device_search_sheet_connecting_description
 string activity_device_search_sheet_radio_left_foot
 string activity_device_search_sheet_radio_right_foot
 string activity_device_search_title
+string activity_main_fab_menu_item_create_player
+string activity_main_fab_menu_item_create_program
 string activity_main_icon
 string activity_main_row_player_header_title
 string activity_main_row_player_menu_item_delete_devices
@@ -2888,7 +2890,6 @@ string row_player_device_left_title
 string row_player_device_right_title
 string row_player_device_version_title
 string row_player_devices_programs_title
-string row_player_header_title
 string row_player_no_device_subtitle
 string search_menu_title
 string second_fragment_label

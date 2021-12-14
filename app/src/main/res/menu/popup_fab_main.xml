@@ -4,13 +4,13 @@
 
     <item
         android:id="@+id/action_create_player"
-        android:title="Add player"
+        android:title="@string/activity_main_fab_menu_item_create_player"
         app:showAsAction="never"
         android:visible="true"/>
 
     <item
         android:id="@+id/action_create_program"
-        android:title="Create program"
+        android:title="@string/activity_main_fab_menu_item_create_program"
         app:showAsAction="never"
         android:visible="true"/>
 

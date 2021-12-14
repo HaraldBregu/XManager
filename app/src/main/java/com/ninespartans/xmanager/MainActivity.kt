@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         /** Option button */
-        fab.setOnClickListener {
+        create_new_button.setOnClickListener {
             val popupMenu = PopupMenu(this, it)
             popupMenu.menuInflater.inflate(R.menu.popup_fab_main, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener {

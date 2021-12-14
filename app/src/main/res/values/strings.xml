@@ -47,12 +47,13 @@
     <string name="row_empty_program_action_title">Crea</string>
 
     <!--  Cell main player header -->
-    <string name="row_player_header_title">Giocatori</string>
     <string name="activity_main_row_player_header_title">Giocatori</string>
     <string name="activity_main_row_player_menu_item_edit">Modifica giocatore</string>
     <string name="activity_main_row_player_menu_item_upload_program">Avvia programma</string>
     <string name="activity_main_row_player_menu_item_register_device">Registra dispositivo</string>
     <string name="activity_main_row_player_menu_item_delete_devices">Elimina dispositivi</string>
+    <string name="activity_main_fab_menu_item_create_player">Crea giocatore</string>
+    <string name="activity_main_fab_menu_item_create_program">Crea programma</string>
 
     <!--  Cell main player -->
     <string name="row_player_no_device_subtitle">Nessun dispositivo connesso</string>

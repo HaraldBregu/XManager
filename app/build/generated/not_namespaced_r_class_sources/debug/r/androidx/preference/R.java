@@ -802,15 +802,15 @@ public final class R {
         public static final int chronometer = 0x7f0a007f;
         public static final int content = 0x7f0a008b;
         public static final int contentPanel = 0x7f0a008c;
-        public static final int custom = 0x7f0a0095;
-        public static final int customPanel = 0x7f0a0096;
-        public static final int decor_content_parent = 0x7f0a009c;
-        public static final int default_activity_button = 0x7f0a009d;
-        public static final int dialog_button = 0x7f0a00aa;
-        public static final int edit_query = 0x7f0a00c1;
-        public static final int end = 0x7f0a00c3;
-        public static final int expand_activities_button = 0x7f0a00c9;
-        public static final int expanded_menu = 0x7f0a00ca;
+        public static final int custom = 0x7f0a0096;
+        public static final int customPanel = 0x7f0a0097;
+        public static final int decor_content_parent = 0x7f0a009d;
+        public static final int default_activity_button = 0x7f0a009e;
+        public static final int dialog_button = 0x7f0a00ab;
+        public static final int edit_query = 0x7f0a00c2;
+        public static final int end = 0x7f0a00c4;
+        public static final int expand_activities_button = 0x7f0a00ca;
+        public static final int expanded_menu = 0x7f0a00cb;
         public static final int forever = 0x7f0a00db;
         public static final int group_divider = 0x7f0a00e3;
         public static final int home = 0x7f0a00eb;
@@ -1006,15 +1006,15 @@ public final class R {
         public static final int abc_shareactionprovider_share_with = 0x7f110018;
         public static final int abc_shareactionprovider_share_with_application = 0x7f110019;
         public static final int abc_toolbar_collapse_description = 0x7f11001a;
-        public static final int copy = 0x7f11005b;
-        public static final int expand_button_title = 0x7f110060;
-        public static final int not_set = 0x7f1100ad;
-        public static final int preference_copied = 0x7f1100b3;
-        public static final int search_menu_title = 0x7f1100c5;
-        public static final int status_bar_notification_info_overflow = 0x7f1100de;
-        public static final int summary_collapsed_preference_list = 0x7f1100df;
-        public static final int v7_preference_off = 0x7f1100f9;
-        public static final int v7_preference_on = 0x7f1100fa;
+        public static final int copy = 0x7f11005d;
+        public static final int expand_button_title = 0x7f110062;
+        public static final int not_set = 0x7f1100af;
+        public static final int preference_copied = 0x7f1100b5;
+        public static final int search_menu_title = 0x7f1100c6;
+        public static final int status_bar_notification_info_overflow = 0x7f1100df;
+        public static final int summary_collapsed_preference_list = 0x7f1100e0;
+        public static final int v7_preference_off = 0x7f1100fa;
+        public static final int v7_preference_on = 0x7f1100fb;
     }
     public static final class style {
         private style() {}

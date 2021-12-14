@@ -114,7 +114,7 @@ public final class R {
         public static final int blocking = 0x7f0a006a;
         public static final int bottom = 0x7f0a006b;
         public static final int chronometer = 0x7f0a007f;
-        public static final int end = 0x7f0a00c3;
+        public static final int end = 0x7f0a00c4;
         public static final int forever = 0x7f0a00db;
         public static final int icon = 0x7f0a00ef;
         public static final int icon_group = 0x7f0a00f1;
@@ -160,7 +160,7 @@ public final class R {
     public static final class string {
         private string() {}
 
-        public static final int status_bar_notification_info_overflow = 0x7f1100de;
+        public static final int status_bar_notification_info_overflow = 0x7f1100df;
     }
     public static final class style {
         private style() {}
