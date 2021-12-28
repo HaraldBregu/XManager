@@ -1,24 +1,18 @@
 package com.ninespartans.xmanager.adapters
 
 import android.content.Context
-import android.opengl.Visibility
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.PopupMenu
+import android.widget.*
+import androidx.cardview.widget.CardView
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.ninespartans.xmanager.R
 import com.ninespartans.xmanager.model.*
 import io.realm.Realm
-import io.realm.RealmResults
 import io.realm.kotlin.where
-import kotlinx.android.synthetic.main.row_main_header.view.*
-import kotlinx.android.synthetic.main.row_main_player.view.*
-import kotlinx.android.synthetic.main.row_main_player_device_item.view.*
-import kotlinx.android.synthetic.main.row_main_player_empty.view.*
-import kotlinx.android.synthetic.main.row_main_player_header.view.*
-import kotlinx.android.synthetic.main.row_main_program_empty.view.*
 import org.jetbrains.anko.runOnUiThread
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -36,6 +30,7 @@ class MainListAdapter(context: Context): BaseAdapter() {
     private var programs = realm.where<DeviceProgram>().findAll()
 
     enum class Action {
+        SHOW_ACCOUNT,
         CREATE_USER, // User
         ADD_PLAYER, // Player
         EDIT_PLAYER,
@@ -51,11 +46,13 @@ class MainListAdapter(context: Context): BaseAdapter() {
         DELETE_PROGRAM,
         UPLOAD_PROGRAM,
         START_PROGRAM,
-        STOP_PROGRAM
+        STOP_PROGRAM,
+        SELECT_DEVICE
     }
 
     var onClickAction: ((Action) -> Unit)? = null
     var onClickActionOnItem: ((Action, User) -> Unit)? = null
+    var onClickActionOnDeviceItem: ((Action, Device) -> Unit)? = null
 
     init {
         mContext = context
@@ -115,35 +112,49 @@ class MainListAdapter(context: Context): BaseAdapter() {
         if (isHeader) {
 
             /** User section */
-            rowHeader.user_section_header.visibility = View.GONE
+            //val user_section_header = rowHeader.findViewById<RelativeLayout>(R.id.user_section_header)
+            val userSection = rowHeader.findViewById<LinearLayout>(R.id.userSection)
+            val fullname = rowHeader.findViewById<TextView>(R.id.fullname)
+            val userTitle = rowHeader.findViewById<TextView>(R.id.userTitle)
+
+            //user_section_header.visibility = View.GONE
             val account = realm.where<Account>().findFirst()
             val query = realm.where<User>()
             query.isNotNull("account")
             query.equalTo("account._id", account?._id)
             query.findFirst()?.let {
-                rowHeader.user_section_header.visibility = View.VISIBLE
-                rowHeader.fullname.text = it.fullname
-                if (it.headline != null && it.headline.length != 0) {
-                    rowHeader.userTitle.text = it.headline
-                } else {
-                    rowHeader.userTitle.text =
-                        mContext.getString(R.string.main_header_user_no_title)
+                //user_section_header.visibility = View.VISIBLE
+                fullname.text = it.fullname
+                userTitle.text = mContext.getString(R.string.activity_main_header_account_description)
+                if (it.headline.isNotEmpty()) {
+                    userTitle.text = it.headline
                 }
             }
 
+            userSection.setOnClickListener {
+                onClickAction?.let { it(Action.SHOW_ACCOUNT) }
+            }
+
             /** Training Session Section */
-            rowHeader.current_program_section.visibility = View.GONE
-            rowHeader.programSectionActions.visibility = if (noPrograms) View.GONE else View.VISIBLE
+            val current_program_section = rowHeader.findViewById<LinearLayout>(R.id.current_program_section)
+            val programSectionActions = rowHeader.findViewById<LinearLayout>(R.id.programSectionActions)
+            current_program_section.visibility = View.GONE
+            programSectionActions.visibility = if (noPrograms) View.GONE else View.VISIBLE
 
             val activeSessionProgram = realm.where<DeviceProgram>()
                 .equalTo("active", true)
                 .findFirst()
 
             activeSessionProgram?.let {
-                rowHeader.programTitle.text = it.title //mContext.getString(R.string.main_header_program_running)
+                val programTitle = rowHeader.findViewById<TextView>(R.id.programTitle)
+                val current_program_section = rowHeader.findViewById<LinearLayout>(R.id.current_program_section)
+                val programProgressBar = rowHeader.findViewById<LinearProgressIndicator>(R.id.programProgressBar)
+                val countDownTimerLabel = rowHeader.findViewById<TextView>(R.id.countDownTimerLabel)
 
-                rowHeader.current_program_section.visibility = View.VISIBLE
-                rowHeader.programProgressBar.progress = 40
+                programTitle.text = it.title //mContext.getString(R.string.main_header_program_running)
+
+                current_program_section.visibility = View.VISIBLE
+                programProgressBar.progress = 40
 
                 var startDate = Date()
                 var endDate = Date()
@@ -158,7 +169,7 @@ class MainListAdapter(context: Context): BaseAdapter() {
                 }
 
                 var duration = endDate.time - startDate.time
-                rowHeader.programProgressBar.max = duration.toInt()
+                programProgressBar.max = duration.toInt()
 
                 fixedRateTimer("timer", true, 0L, 10) {
                     val progress = Date().time - startDate.time
@@ -169,11 +180,11 @@ class MainListAdapter(context: Context): BaseAdapter() {
 
                     mContext.runOnUiThread {
 
-                        rowHeader.programProgressBar.progress = progress.toInt()
+                        programProgressBar.progress = progress.toInt()
 
                         val millisUntilFinished = duration - progress
                         if (millisUntilFinished <= 0) {
-                            rowHeader.countDownTimerLabel.text = "00:00:00"
+                            countDownTimerLabel.text = "00:00:00"
                             return@runOnUiThread
                         }
 
@@ -193,18 +204,21 @@ class MainListAdapter(context: Context): BaseAdapter() {
                         var millisecStr = millisec.toString()
                         if (millisecStr.length < 2) millisecStr = "0$millisec"
 
-                        rowHeader.countDownTimerLabel.text = "$hoursStr:$minutesStr:$secondsStr"
+                        countDownTimerLabel.text = "$hoursStr:$minutesStr:$secondsStr"
                         //rowHeader.countDownTimerLabel.text = "$hoursStr:$minutesStr:$secondsStr:$millisecStr"
                     }
                 }
             }
 
-            rowHeader.selectProgram.setOnClickListener {
+            val selectProgram = rowHeader.findViewById<MaterialButton>(R.id.selectProgram)
+            val showProgramSectionMenu = rowHeader.findViewById<MaterialButton>(R.id.showProgramSectionMenu)
+
+            selectProgram.setOnClickListener {
                 onClickAction?.let {
                     it(Action.UPLOAD_PROGRAM)
                 }
             }
-            rowHeader.showProgramSectionMenu.setOnClickListener {
+            showProgramSectionMenu.setOnClickListener {
                 onClickAction?.let {
                     it(Action.SHOW_PROGRAM)
                 }
@@ -239,11 +253,14 @@ class MainListAdapter(context: Context): BaseAdapter() {
          */
         val rowPlayerEmpty = inflater.inflate(R.layout.row_main_player_empty, viewGroup, false)
         if (isRowPlayerEmpty) {
-            rowPlayerEmpty.noPlayerCardCreateButton.setOnClickListener {
+            val cardView = rowPlayerEmpty.findViewById<MaterialCardView>(R.id.cardView)
+
+            cardView.setOnClickListener {
                 onClickAction?.let {
                     it(Action.ADD_PLAYER)
                 }
             }
+
             return rowPlayerEmpty
         }
 
@@ -253,11 +270,14 @@ class MainListAdapter(context: Context): BaseAdapter() {
          */
         val rowProgramEmpty = inflater.inflate(R.layout.row_main_program_empty, viewGroup, false)
         if (isRowProgramEmpty) {
-            rowProgramEmpty.noProgramCardCreateButton.setOnClickListener {
+            val cardView = rowProgramEmpty.findViewById<MaterialCardView>(R.id.cardView)
+
+            cardView.setOnClickListener {
                 onClickAction?.let {
                     it(Action.CREATE_PROGRAM)
                 }
             }
+
             return rowProgramEmpty
         }
 
@@ -268,7 +288,8 @@ class MainListAdapter(context: Context): BaseAdapter() {
          */
         val rowPlayerHeader = inflater.inflate(R.layout.row_main_player_header, viewGroup, false)
         if (isRowHeaderPlayer) {
-            rowPlayerHeader.textViewPlayersCount.text = players.size.toString()
+            val textViewPlayersCount = rowPlayerHeader.findViewById<TextView>(R.id.textViewPlayersCount)
+            textViewPlayersCount.text = players.size.toString()
             return rowPlayerHeader
         }
 
@@ -285,8 +306,11 @@ class MainListAdapter(context: Context): BaseAdapter() {
         //rowPlayer.deviceInfoSection.visibility = if (noDevices) View.GONE else View.VISIBLE
 
         /** Player informations */
-        rowPlayer.textViewPlayerName.text = player?.fullname
-        rowPlayer.showOptions.setOnClickListener {
+        val textViewPlayerName = rowPlayer.findViewById<TextView>(R.id.textViewPlayerName)
+        val showOptions = rowPlayer.findViewById<MaterialButton>(R.id.showOptions)
+
+        textViewPlayerName.text = player?.fullname
+        showOptions.setOnClickListener {
             val popupMenu = PopupMenu(mContext, it)
             popupMenu.menuInflater.inflate(R.menu.popup_menu_card, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener {
@@ -295,6 +319,11 @@ class MainListAdapter(context: Context): BaseAdapter() {
                         onClickActionOnItem?.let {
                             player?.let { it1 -> it(Action.EDIT_PLAYER, it1) }
                         }
+                    R.id.action_delete_player -> {
+                        onClickActionOnItem?.let {
+                            player?.let { it1 -> it(Action.DELETE_PLAYER, it1) }
+                        }
+                    }
                     R.id.action_upload_program ->
                         onClickActionOnItem?.let {
                             player?.let { it1 -> it(Action.UPLOAD_PROGRAM, it1) }
@@ -315,25 +344,67 @@ class MainListAdapter(context: Context): BaseAdapter() {
         }
 
         /** Player Devices and Programs */
-        rowPlayer.deviceInfoSection.visibility = View.GONE
+        val deviceInfoSection = rowPlayer.findViewById<LinearLayout>(R.id.deviceInfoSection)
+        deviceInfoSection.visibility = View.GONE
         val views = mutableListOf<PlayerDeviceData>()
 
         val devices = realm.where<Device>()
         devices.equalTo("user._id", player?._id)
         devices.findAll().forEach {
-            rowPlayer.deviceInfoSection.visibility = View.VISIBLE
-            val view = inflater.inflate(R.layout.row_main_player_device_item, rowPlayer.deviceInfoSection, false)
+            deviceInfoSection.visibility = View.VISIBLE
+            val view = inflater.inflate(R.layout.row_main_player_device_item, deviceInfoSection, false)
             views.add(PlayerDeviceData(view, it))
         }
 
         views.forEach {
-            rowPlayer.deviceInfoSection.addView(it.view)
-            it.view.deviceName.text = it.device.name.plus(" ").plus(it.device.version)
-            it.view.programSessionSection.visibility = if (it.device.program == null) View.GONE else View.VISIBLE
+            deviceInfoSection.addView(it.view)
+
+            val container = it.view.findViewById<CardView>(R.id.container)
+            val playerDeviceData = it
+            container.setOnClickListener {
+                onClickActionOnDeviceItem?.let {
+                    it(Action.SELECT_DEVICE, playerDeviceData.device)
+                }
+            }
+
+            val deviceName = it.view.findViewById<TextView>(R.id.deviceName)
+            val deviceVersion = it.view.findViewById<TextView>(R.id.deviceVersion)
+            val deviceState = it.view.findViewById<TextView>(R.id.deviceState)
+            val deviceType = it.view.findViewById<TextView>(R.id.deviceType)
+            val detailButton = it.view.findViewById<MaterialButton>(R.id.detailButton)
+
+            detailButton.setOnClickListener {
+                onClickActionOnDeviceItem?.let {
+                    it(Action.SELECT_DEVICE, playerDeviceData.device)
+                }
+            }
+
+            val programSessionSection = it.view.findViewById<LinearLayout>(R.id.programSessionSection)
+            val programPlayerTitle = it.view.findViewById<TextView>(R.id.programPlayerTitle)
+            val playerProgressProgram = it.view.findViewById<LinearProgressIndicator>(R.id.playerProgressProgram)
+            val programPlayerTimer = it.view.findViewById<TextView>(R.id.programPlayerTimer)
+
+
+            deviceName.text = it.device.name//.plus(" ").plus(it.device.version)
+            deviceVersion.text = it.device.version
+            deviceState.text = if (it.device.active) "ATTIVO" else "NON ATTIVO"
+            when (it.device.type) {
+                Device.DeviceType.NONE.name -> {
+                    deviceType.text = "-"
+                }
+                Device.DeviceType.SHOE_LEFT.name -> {
+                    deviceType.text = "SINISTRA"
+                }
+                Device.DeviceType.SHOE_RIGHT.name -> {
+                    deviceType.text = "DESTRA"
+                }
+            }
+
+            programSessionSection.visibility = if (it.device.program == null) View.GONE else View.VISIBLE
             it.device.program?.let { deviceProgram ->
-                it.view.programPlayerTitle.text = deviceProgram.title
+                programPlayerTitle.text = deviceProgram.title
                 //it.view.programPlayerTimer.text = "00:00:00"
-                it.view.playerProgressProgram.progress = 0
+                playerProgressProgram.progress = 0
 
                 val startDate = it.device.updatedAt
                 val calendar = Calendar.getInstance()
@@ -344,14 +415,14 @@ class MainListAdapter(context: Context): BaseAdapter() {
                 val endDate = calendar.time
 
                 val duration = endDate.time - startDate.time
-                it.view.playerProgressProgram.max = duration.toInt()
+                playerProgressProgram.max = duration.toInt()
 
                 fixedRateTimer("timer", true, 0L, 10) {
                     val progress = Date().time - startDate.time
                     if (progress >= duration) { this.cancel() }
 
                     mContext.runOnUiThread {
-                        it.view.playerProgressProgram.progress = progress.toInt()
+                        playerProgressProgram.progress = progress.toInt()
 
                         val millisUntilFinished = duration - progress
                         if (millisUntilFinished <= 0) {
@@ -375,17 +446,19 @@ class MainListAdapter(context: Context): BaseAdapter() {
                         var millisecStr = millisec.toString()
                         if (millisecStr.length < 2) millisecStr = "0$millisec"
 
-                        it.view.programPlayerTimer.text = "$hoursStr:$minutesStr:$secondsStr"
+                        programPlayerTimer.text = "$hoursStr:$minutesStr:$secondsStr"
                     }
                 }
             }?: run {
-                it.view.programPlayerTitle.text = mContext.getString(R.string.no_program_name)
-                it.view.playerProgressProgram.progress = 0
+                programPlayerTitle.text = mContext.getString(R.string.no_program_name)
+                playerProgressProgram.progress = 0
             }
         }
 
-        rowPlayer.addPlayerDevice.visibility = if (views.size > 0) View.GONE else View.VISIBLE
-        rowPlayer.addPlayerDevice.setOnClickListener {
+        val addPlayerDevice = rowPlayer.findViewById<MaterialButton>(R.id.addPlayerDevice)
+
+        addPlayerDevice.visibility = if (views.size > 0) View.GONE else View.VISIBLE
+        addPlayerDevice.setOnClickListener {
             onClickActionOnItem?.let {
                 player?.let { it1 -> it(Action.REGISTER_DEVICE, it1) }
             }

@@ -18,7 +18,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_device_search" />
+    <include android:id="@+id/content" layout="@layout/content_device_search" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

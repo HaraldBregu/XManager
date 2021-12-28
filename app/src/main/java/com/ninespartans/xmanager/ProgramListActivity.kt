@@ -6,26 +6,27 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import io.realm.Realm
 import com.ninespartans.xmanager.model.DeviceProgram
-import kotlinx.android.synthetic.main.activity_program_list.*
-import kotlinx.android.synthetic.main.content_program_list.*
 import com.ninespartans.xmanager.adapters.ProgramListAdapter
+import com.ninespartans.xmanager.databinding.ActivityProgramListBinding
 import io.realm.kotlin.where
 
 
 class ProgramListActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityProgramListBinding
     private lateinit var adapter: ProgramListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_program_list)
-        setSupportActionBar(toolbar)
+        binding = ActivityProgramListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
         val realm = Realm.getDefaultInstance()
         val programs = realm.where<DeviceProgram>().findAll()
 
         adapter = ProgramListAdapter(this, programs)
-        list_view.adapter = adapter
-        list_view.setOnItemClickListener { parent, view, position, id ->
+        binding.content.listView.adapter = adapter
+        binding.content.listView.setOnItemClickListener { parent, view, position, id ->
             val selectedProgram = programs.get(position)
             val intent = Intent(this, CreateProgramActivity::class.java)
             intent.putExtra("program_id", selectedProgram?._id.toString())
@@ -59,7 +60,7 @@ class ProgramListActivity : AppCompatActivity() {
             }
         }
 
-        createNewProgram.setOnClickListener {
+        binding.content.createNewProgram.setOnClickListener {
             val intent = Intent(this, CreateProgramActivity::class.java)
             startActivity(intent)
         }

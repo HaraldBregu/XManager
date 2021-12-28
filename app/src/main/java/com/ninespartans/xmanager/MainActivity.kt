@@ -9,7 +9,6 @@ import android.content.Intent
 import android.os.*
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
 import io.realm.Realm
 import com.ninespartans.xmanager.bluetooth.BLEManager
 import android.widget.*
@@ -21,15 +20,15 @@ import com.ninespartans.xmanager.model.DeviceProgram
 import com.ninespartans.xmanager.adapters.ProgramSelectAdapter
 import com.ninespartans.xmanager.model.User
 import com.ninespartans.xmanager.common.Common
-import kotlinx.android.synthetic.main.content_main.*
 import java.util.*
 import android.os.Bundle
+import com.ninespartans.xmanager.databinding.ActivityMainBinding
 import com.ninespartans.xmanager.model.Account
 import com.ninespartans.xmanager.model.Device
-import kotlinx.android.synthetic.main.row_main_header.view.*
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: MainListAdapter
     private var programUploaded:Boolean = false
     private lateinit var bottomSheetDialog: BottomSheetDialog
@@ -39,15 +38,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
         title = getString(R.string.activity_main_title)
 
         adapter = MainListAdapter(this)
-        list_view.adapter = adapter
+        binding.content.listView.adapter = adapter
         adapter.onClickAction = {
             when (it) {
+                MainListAdapter.Action.SHOW_ACCOUNT -> {
+                    val intent = Intent(this, CreateAccountActivity::class.java)
+                    startActivity(intent)
+                }
                 MainListAdapter.Action.STOP_PROGRAM -> {
                     val builderInner = AlertDialog.Builder(this)
                     builderInner.setTitle("Termina programma")
@@ -95,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 MainListAdapter.Action.UPLOAD_PROGRAM -> {
-
+                    presentProgramsListBottomSheet(user)
                 }
                 MainListAdapter.Action.REGISTER_DEVICE -> {
                     val intent = Intent(this, DeviceSearchActivity::class.java)
@@ -112,12 +116,30 @@ class MainActivity : AppCompatActivity() {
                         adapter.updateData()
                     }
                 }
+                MainListAdapter.Action.DELETE_PLAYER -> {
+                    realm.executeTransaction {
+                        user.deleteFromRealm()
+                        adapter.updateData()
+                    }
+                }
+
+                else -> {}
+            }
+        }
+        adapter.onClickActionOnDeviceItem = { action, device ->
+            when (action) {
+                MainListAdapter.Action.SELECT_DEVICE -> {
+                    val intent = Intent(this, DeviceActivity::class.java)
+                    val id = device._id.toString()
+                    intent.putExtra("device_id", id)
+                    startActivity(intent)
+                }
                 else -> {}
             }
         }
 
         /** Option button */
-        create_new_button.setOnClickListener {
+        binding.content.createNewButton.setOnClickListener {
             val popupMenu = PopupMenu(this, it)
             popupMenu.menuInflater.inflate(R.menu.popup_fab_main, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener {
@@ -161,11 +183,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     /** Present list of programs to select */
-    private fun presentProgramsListBottomSheet() {
+    private fun presentProgramsListBottomSheet(user: User? = null) {
 
         val account = realm.where<Account>().findFirst()
         val tmpusers = realm.where<User>()
-        account?.let { tmpusers.notEqualTo("account._id", it._id) }
+        account?.let {
+            tmpusers.notEqualTo("account._id", it._id)
+        }
+        user?.let {
+            tmpusers.equalTo("_id", user._id)
+        }
         val users = tmpusers.findAll()
 
         /** When there are no users registered */
@@ -186,6 +213,7 @@ class MainActivity : AppCompatActivity() {
 
         val devices = realm.where<Device>()
             .isNotNull("user")
+            .equalTo("active", true)
             .sort("user._id")
             .findAll()
 
@@ -193,7 +221,7 @@ class MainActivity : AppCompatActivity() {
         if (devices.isEmpty()) {
             val builderInner = AlertDialog.Builder(this)
             builderInner.setTitle("Attenzione!")
-            builderInner.setMessage("Non hai nessun dispositivo registrato. Inizia a crearne uno e associa i device.")
+            builderInner.setMessage("Non hai nessun dispositivo registrato o attivato. Inizia a crearne uno e associa i dispositivi.")
             builderInner.setNegativeButton("Chiudi") { dialog, which ->
                 dialog.dismiss()
             }
@@ -266,7 +294,7 @@ class MainActivity : AppCompatActivity() {
         uploadProgressProgram?.progress = 0
 
         /** Get Device BLE MAC Address */
-        device?.ble_mac?.let { BLEManager.getDevice(it.toUpperCase(Locale.ROOT)) }
+        device?.ble_mac?.let { BLEManager.getDevice(it.uppercase(Locale.ROOT)) }
 
         val playerNameTextView = bottomSheetDialog.findViewById<TextView>(R.id.playerNameTextView)
         playerNameTextView?.text = device?.user?.fullname

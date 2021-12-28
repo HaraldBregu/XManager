@@ -9,7 +9,7 @@
     tools:showIn="@layout/activity_main">
 
     <ListView
-        android:id="@+id/list_view"
+        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="0dp"
@@ -18,7 +18,7 @@
         android:clipToPadding="false" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/create_new_button"
+        android:id="@+id/createNewButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"

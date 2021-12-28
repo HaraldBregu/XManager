@@ -4,24 +4,7 @@
             "outputFile": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-pt/values-pt.xml",
             "map": [
                 {
-                    "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/13dbdba9daf1658637154daca3cf8628/preference-1.1.0-alpha05/res/values-pt/values-pt.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "105,175,262,340,491,660,747",
-                        "endColumns": "69,86,77,150,168,86,80",
-                        "endOffsets": "170,257,335,486,655,742,823"
-                    },
-                    "to": {
-                        "startLines": "29,30,33,34,37,38,39",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "2843,2913,3232,3310,3648,3817,3904",
-                        "endColumns": "69,86,77,150,168,86,80",
-                        "endOffsets": "2908,2995,3305,3456,3812,3899,3980"
-                    }
-                },
-                {
-                    "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/87529a29c7b4c4d291ae56af88b83a7f/jetified-navigation-ui-2.0.0/res/values-pt/values-pt.xml",
+                    "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/b93aacc87a04ac2e2b38f2ef61294940/navigation-ui-2.3.5/res/values-pt/values-pt.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -38,24 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3a27b12f805c2a262fa84a871ed49494/appcompat-1.2.0/res/values-pt/values-pt.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,225,331,438,527,628,747,832,912,1003,1096,1191,1285,1385,1478,1573,1668,1759,1850,1935,2042,2153,2255,2363,2471,2581,2743,2843",
-                        "endColumns": "119,105,106,88,100,118,84,79,90,92,94,93,99,92,94,94,90,90,84,106,110,101,107,107,109,161,99,85",
-                        "endOffsets": "220,326,433,522,623,742,827,907,998,1091,1186,1280,1380,1473,1568,1663,1754,1845,1930,2037,2148,2250,2358,2466,2576,2738,2838,2924"
-                    },
-                    "to": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,35",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,225,331,438,527,628,747,832,912,1003,1096,1191,1285,1385,1478,1573,1668,1759,1850,1935,2042,2153,2255,2363,2471,2581,2743,3461",
-                        "endColumns": "119,105,106,88,100,118,84,79,90,92,94,93,99,92,94,94,90,90,84,106,110,101,107,107,109,161,99,85",
-                        "endOffsets": "220,326,433,522,623,742,827,907,998,1091,1186,1280,1380,1473,1568,1663,1754,1845,1930,2037,2148,2250,2358,2466,2576,2738,2838,3542"
-                    }
-                },
-                {
-                    "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/a0ef44bc1aff644be6e07240d6142e07/core-1.5.0/res/values-pt/values-pt.xml",
+                    "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/27ae0894c11f8d44fbb97e733fa3582d/core-1.7.0/res/values-pt/values-pt.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -66,9 +32,43 @@
                     "to": {
                         "startLines": "36",
                         "startColumns": "4",
-                        "startOffsets": "3547",
+                        "startOffsets": "3548",
                         "endColumns": "100",
-                        "endOffsets": "3643"
+                        "endOffsets": "3644"
+                    }
+                },
+                {
+                    "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/847cf131f63700240be8442469973eb5/appcompat-1.4.0/res/values-pt/values-pt.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,225,331,438,527,628,747,832,912,1003,1096,1191,1285,1385,1478,1573,1668,1759,1850,1935,2042,2153,2255,2363,2471,2581,2743,2843",
+                        "endColumns": "119,105,106,88,100,118,84,79,90,92,94,93,99,92,94,94,90,90,84,106,110,101,107,107,109,161,99,85",
+                        "endOffsets": "220,326,433,522,623,742,827,907,998,1091,1186,1280,1380,1473,1568,1663,1754,1845,1930,2037,2148,2250,2358,2466,2576,2738,2838,2924"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,35",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,225,331,438,527,628,747,832,912,1003,1096,1191,1285,1385,1478,1573,1668,1759,1850,1935,2042,2153,2255,2363,2471,2581,2743,3462",
+                        "endColumns": "119,105,106,88,100,118,84,79,90,92,94,93,99,92,94,94,90,90,84,106,110,101,107,107,109,161,99,85",
+                        "endOffsets": "220,326,433,522,623,742,827,907,998,1091,1186,1280,1380,1473,1568,1663,1754,1845,1930,2037,2148,2250,2358,2466,2576,2738,2838,3543"
+                    }
+                },
+                {
+                    "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/27501db7dc8bfeb09bddb483864f272a/preference-1.2.0-beta01/res/values-pt/values-pt.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "105,175,262,341,492,661,748",
+                        "endColumns": "69,86,78,150,168,86,80",
+                        "endOffsets": "170,257,336,487,656,743,824"
+                    },
+                    "to": {
+                        "startLines": "29,30,33,34,37,38,39",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "2843,2913,3232,3311,3649,3818,3905",
+                        "endColumns": "69,86,78,150,168,86,80",
+                        "endOffsets": "2908,2995,3306,3457,3813,3900,3981"
                     }
                 }
             ]

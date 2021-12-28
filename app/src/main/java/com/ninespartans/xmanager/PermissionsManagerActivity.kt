@@ -13,20 +13,22 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.ninespartans.xmanager.bluetooth.BLEManager
-import kotlinx.android.synthetic.main.activity_permissions_manager.*
-import kotlinx.android.synthetic.main.content_permissions_manager.*
 import android.net.Uri
 import android.provider.Settings
+import androidx.core.content.ContextCompat
+import com.ninespartans.xmanager.databinding.ActivityPermissionsManagerBinding
 
 
 class PermissionsManagerActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityPermissionsManagerBinding
     private val REQUEST_ENABLE_BLUETOOTH = 1
     private val FINE_LOCATION = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_permissions_manager)
-        setSupportActionBar(toolbar)
+        binding = ActivityPermissionsManagerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
         if (BLEManager.adapter == null) {
             finish()
@@ -36,18 +38,22 @@ class PermissionsManagerActivity : AppCompatActivity() {
 
         //update()
 
-        activateBluetooth.setOnClickListener {
+        binding.content.activateBluetooth.setOnClickListener {
             if (!BLEManager.adapterEnabled) {
                 val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                 startActivityForResult(enableBluetoothIntent, REQUEST_ENABLE_BLUETOOTH)
             }
         }
 
-        activateFineLocation.setOnClickListener {
+        binding.content.activateGps.setOnClickListener {
+            startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+        }
+
+        binding.content.activateFineLocation.setOnClickListener {
             ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), FINE_LOCATION)
         }
 
-        saveButton.setOnClickListener {
+        binding.content.saveButton.setOnClickListener {
             finish()
 /*
             if (BLEManager.canStart(this)) {
@@ -61,7 +67,7 @@ class PermissionsManagerActivity : AppCompatActivity() {
         bluetoothIntentFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED)
         registerReceiver(onBroadcastReceiver, bluetoothIntentFilter)
 
-        settingsSection.setOnClickListener {
+        binding.content.settingsSection.setOnClickListener {
             //finish()
             val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -101,7 +107,7 @@ class PermissionsManagerActivity : AppCompatActivity() {
          */
         if (requestCode == REQUEST_ENABLE_BLUETOOTH) {
 
-            Log.d("XBLUETOOTH", requestCode.toString())
+            //Log.d("XBLUETOOTH", requestCode.toString())
 
             when (requestCode) {
                 Activity.RESULT_OK -> {
@@ -166,14 +172,28 @@ class PermissionsManagerActivity : AppCompatActivity() {
          * Bluetooth
          */
 
-        var bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()?.takeIf { it != null } ?: return
+        val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()?.takeIf { it != null } ?: return
 
-        activateBluetooth.visibility = when (bluetoothAdapter.isEnabled) {
+        binding.content.activateBluetooth.visibility = when (bluetoothAdapter.isEnabled) {
             true -> View.GONE
             false -> View.VISIBLE
         }
 
-        ble_status_active_section.visibility = when (bluetoothAdapter.isEnabled) {
+        binding.content.bleStatusActiveSection.visibility = when (bluetoothAdapter.isEnabled) {
+            true -> View.VISIBLE
+            false -> View.GONE
+        }
+
+        /**
+         * GPS
+         */
+
+        binding.content.activateGps.visibility = when (BLEManager.gpsEnabled(this)) {
+            true -> View.GONE
+            false -> View.VISIBLE
+        }
+
+        binding.content.gpsStatusActiveSection.visibility = when (BLEManager.gpsEnabled(this)) {
             true -> View.VISIBLE
             false -> View.GONE
         }
@@ -181,26 +201,28 @@ class PermissionsManagerActivity : AppCompatActivity() {
         /**
          * Fine Location
          */
-        settingsSection.visibility = View.GONE
-        settingsText.text = getString(R.string.activity_permissions_fine_location_go_to_settings_text)
-        activateFineLocation.visibility = View.VISIBLE
-        fine_location_status_active_section.visibility = View.GONE
+        binding.content.settingsSection.visibility = View.GONE
+        binding.content.settingsText.text = getString(R.string.activity_permissions_fine_location_go_to_settings_text)
+        binding.content.activateFineLocation.visibility = View.VISIBLE
+        binding.content.fineLocationStatusActiveSection.visibility = View.GONE
 
         if (BLEManager.fineLocationGranted(this)) {
-            activateFineLocation.visibility = View.GONE
-            fine_location_status_active_section.visibility = View.VISIBLE
-            fineLocationStatusImage?.setImageResource(R.drawable.ic_check_circle_green_24dp)
-            //fineLocationStatusImage?.setColorFilter(ContextCompat.getColor(this, R.color.primarySuccessColor))
-            fineLocationStatusTextView.text = getString(R.string.activity_permissions_fine_location_status_in_use_text)
-        }
-       else if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == false) {
-            activateFineLocation.visibility = View.GONE
-            fine_location_status_active_section.visibility = View.VISIBLE
-            fineLocationStatusImage?.setImageResource(R.drawable.ic_warning_24dp)
-            //fineLocationStatusImage?.setColorFilter(ContextCompat.getColor(this, R.color.primaryErrorColor))
-            fineLocationStatusTextView.text = getString(R.string.activity_permissions_fine_location_status_denied_text)
-            settingsSection.visibility = View.VISIBLE
+            binding.content.activateFineLocation.visibility = View.GONE
+            binding.content.fineLocationStatusActiveSection.visibility = View.VISIBLE
+            binding.content.fineLocationStatusImage?.setImageResource(R.drawable.ic_check_circle_green_24dp)
+            binding.content.fineLocationStatusImage?.setColorFilter(ContextCompat.getColor(this, R.color.colorSecondaryVariant))
+            binding.content.fineLocationStatusTextView.text = getString(R.string.activity_permissions_fine_location_status_in_use_text)
+        } else {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+                binding.content.activateFineLocation.visibility = View.GONE
+                binding.content.fineLocationStatusActiveSection.visibility = View.VISIBLE
+                binding.content.fineLocationStatusImage?.setImageResource(R.drawable.ic_warning_24dp)
+                binding.content.fineLocationStatusImage?.setColorFilter(ContextCompat.getColor(this, R.color.colorError))
+                binding.content.fineLocationStatusTextView.text = getString(R.string.activity_permissions_fine_location_status_denied_text)
+                binding.content.settingsSection.visibility = View.VISIBLE
+            } else {
 
+            }
         }
 
     }

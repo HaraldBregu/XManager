@@ -12,6 +12,7 @@ open class Device(
     var name: String = "",
     var version: String = "",
     var type: String = DeviceType.NONE.name,
+    var active: Boolean = true,
 
     var mac: String = "",
     var ble_mac: String = "",

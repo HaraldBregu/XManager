@@ -4,7 +4,17 @@
             "outputFile": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3a27b12f805c2a262fa84a871ed49494/appcompat-1.2.0/res/values-v16/values-v16.xml",
+                    "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/27ae0894c11f8d44fbb97e733fa3582d/core-1.7.0/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/847cf131f63700240be8442469973eb5/appcompat-1.4.0/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -20,16 +30,6 @@
                         "endLines": "6",
                         "endColumns": "12",
                         "endOffsets": "289"
-                    }
-                },
-                {
-                    "source": "/Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/a0ef44bc1aff644be6e07240d6142e07/core-1.5.0/res/values-v16/values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
                     }
                 }
             ]

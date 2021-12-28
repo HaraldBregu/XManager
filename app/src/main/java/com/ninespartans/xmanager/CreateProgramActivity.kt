@@ -10,21 +10,19 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.realm.Realm
 import io.realm.kotlin.where
 import com.ninespartans.xmanager.adapters.ProgramStepItemAdapter
-import kotlinx.android.synthetic.main.activity_create_program.*
-import kotlinx.android.synthetic.main.content_create_program.*
-import kotlinx.android.synthetic.main.content_create_program.list_view
 import com.google.android.material.button.MaterialButton
 import com.ninespartans.xmanager.model.ProgramData
-import kotlinx.android.synthetic.main.content_create_program.nameInputText
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.slider.Slider
 import com.ninespartans.xmanager.common.Common
+import com.ninespartans.xmanager.databinding.ActivityCreateProgramBinding
 import com.ninespartans.xmanager.model.DeviceProgram
 import org.bson.types.ObjectId
 
 
 class CreateProgramActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityCreateProgramBinding
     private lateinit var adapter: ProgramStepItemAdapter
     private var deviceProgram: DeviceProgram? = null
     private var programId: String? = null
@@ -40,31 +38,32 @@ class CreateProgramActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_program)
-        setSupportActionBar(toolbar)
+        binding = ActivityCreateProgramBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
         intent.getStringExtra("program_id")?.let {
             programId = it
         }
 
         title = getString(R.string.title_activity_create_program_nav_title)
-        header_title.text = getString(R.string.title_activity_create_program_header_title)
-        header_description.text = getString(R.string.title_activity_create_program_header_description)
-        saveProgram.text = getString(R.string.title_activity_create_program_button_create)
+        binding.content.headerTitle.text = getString(R.string.title_activity_create_program_header_title)
+        binding.content.headerDescription.text = getString(R.string.title_activity_create_program_header_description)
+        binding.content.saveProgram.text = getString(R.string.title_activity_create_program_button_create)
 
-        createSession.visibility = View.GONE
+        binding.content.createSession.visibility = View.GONE
 
         programId?.let {
-            header_title.text = getString(R.string.title_activity_update_program_header_title)
-            header_description.text = getString(R.string.title_activity_update_program_header_description)
-            saveProgram.text = getString(R.string.activity_create_program_button_save)
+            binding.content.headerTitle.text = getString(R.string.title_activity_update_program_header_title)
+            binding.content.headerDescription.text = getString(R.string.title_activity_update_program_header_description)
+            binding.content.saveProgram.text = getString(R.string.activity_create_program_button_save)
 
             val program = realm.where<DeviceProgram>()
             program.equalTo("_id", ObjectId(it))
             program.findFirst()?.let {
                 this.deviceProgram = it
-                this.nameInputText.editText?.setText(it.title)
-                if (it.data.size > 3) { createSession.visibility = View.VISIBLE }
+                this.binding.content.nameInputText.editText?.setText(it.title)
+                if (it.data.size > 3) { this.binding.content.createSession.visibility = View.VISIBLE }
             }
         }
 
@@ -72,18 +71,18 @@ class CreateProgramActivity : AppCompatActivity() {
          * On saving the program
          * Check if programId has a value
          */
-        saveProgram.setOnClickListener {
+        binding.content.saveProgram.setOnClickListener {
             deviceProgram?.let {
                 realm.executeTransaction { realm ->
                     realm.copyToRealmOrUpdate(it.apply {
-                        title = nameInputText.editText?.text.toString()
+                        title = binding.content.nameInputText.editText?.text.toString()
                         finish()
                     })
                 }
             } ?: run {
                 realm.executeTransaction {
                     deviceProgram = it.copyToRealmOrUpdate(DeviceProgram().apply {
-                        title = nameInputText.editText?.text.toString()
+                        title = binding.content.nameInputText.editText?.text.toString()
                         finish()
                     })
                 }
@@ -91,13 +90,13 @@ class CreateProgramActivity : AppCompatActivity() {
         }
 
         adapter = ProgramStepItemAdapter(this, deviceProgram?.data?.where()?.findAll())
-        list_view.adapter = adapter
+        binding.content.listView.adapter = adapter
 
         adapter.onAddStepItem = {
             addSessionProgram()
         }
 
-        createSession.setOnClickListener {
+        binding.content.createSession.setOnClickListener {
             addSessionProgram()
         }
 
@@ -120,7 +119,7 @@ class CreateProgramActivity : AppCompatActivity() {
         bottomSheetDialog.behavior.isDraggable = false
         bottomSheetDialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
         bottomSheetDialog.show()
-        Common.setWhiteNavigationBar(bottomSheetDialog)
+        //Common.setWhiteNavigationBar(bottomSheetDialog)
 
         /** Image View Container */
         shoePairImageView = bottomSheetDialog.findViewById(R.id.shoePairImageView)
@@ -202,7 +201,7 @@ class CreateProgramActivity : AppCompatActivity() {
             deviceProgram?.let { deviceProgram ->
                 realm.executeTransaction { realm ->
                     realm.copyToRealmOrUpdate(deviceProgram.apply {
-                        this.title = nameInputText.editText?.text.toString()
+                        this.title = binding.content.nameInputText.editText?.text.toString()
                         this.data.add(program)
                         bottomSheetDialog.hide()
                         updateList()
@@ -211,7 +210,7 @@ class CreateProgramActivity : AppCompatActivity() {
             } ?: run {
                 realm.executeTransaction {
                     deviceProgram = it.copyToRealmOrUpdate(DeviceProgram().apply {
-                        this.title = nameInputText.editText?.text.toString()
+                        this.title = binding.content.nameInputText.editText?.text.toString()
                         this.data.add(program)
                     })
                     bottomSheetDialog.hide()
@@ -326,9 +325,9 @@ class CreateProgramActivity : AppCompatActivity() {
     fun updateList() {
         deviceProgram?.let {
             adapter.programList = it.data.where()?.findAll()
-            createSession.visibility = View.GONE
+            binding.content.createSession.visibility = View.GONE
             if (it.data.size > 5) {
-                createSession.visibility = View.VISIBLE
+                binding.content.createSession.visibility = View.VISIBLE
             }
             adapter.notifyDataSetChanged()
         }

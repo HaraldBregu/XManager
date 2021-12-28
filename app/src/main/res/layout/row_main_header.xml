@@ -19,25 +19,30 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="10dp">
+
             <LinearLayout
                 android:id="@+id/userSection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:orientation="horizontal">
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="18dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/colorBackground"
                         android:padding="4dp">
+
                         <androidx.cardview.widget.CardView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:cardCornerRadius="14dp">
+
                             <ImageView
                                 android:id="@+id/userImageView"
                                 android:layout_width="70dp"
@@ -59,7 +64,7 @@
                         android:id="@+id/fullname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/firstname_lastname"
+                        android:text="@string/activity_main_header_account_username"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
 
                     <TextView
@@ -67,7 +72,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
-                        android:text="@string/firstname_lastname"
+                        android:text="@string/activity_main_header_account_description"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
                 </LinearLayout>
             </LinearLayout>

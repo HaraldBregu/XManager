@@ -1,22 +1,15 @@
 package com.ninespartans.xmanager
 
 import android.app.AlertDialog
-import android.app.Dialog
 import android.bluetooth.*
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.LayerDrawable
-import android.view.LayoutInflater
+import android.location.LocationManager
 import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.row_device.view.*
 import android.os.*
-import android.util.DisplayMetrics
+import android.util.Log
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.realm.Realm
 import io.realm.kotlin.where
@@ -24,31 +17,31 @@ import com.ninespartans.xmanager.bluetooth.BLEManager
 import kotlin.collections.ArrayList
 import com.google.android.material.button.MaterialButton
 import com.google.gson.Gson
-import io.realm.Case
 import com.ninespartans.xmanager.model.Device
 import com.ninespartans.xmanager.model.DeviceInfo
 import com.ninespartans.xmanager.model.User
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_device_search.*
 import org.bson.types.ObjectId
 import com.ninespartans.xmanager.adapters.DeviceSearchAdapter
 import com.ninespartans.xmanager.common.Common
+import com.ninespartans.xmanager.databinding.ActivityDeviceSearchBinding
 
 
 class DeviceSearchActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityDeviceSearchBinding
     private val realm = Realm.getDefaultInstance()
     private var discoveredDevices: ArrayList<BluetoothDevice> = ArrayList()
     private lateinit var adapter: DeviceSearchAdapter
     private var deviceInfo: DeviceInfo? = null
     private var user: User? = null
     var userId: String? = null
-    val debug = true
+    private val debug = false
     var bottomSheetDialog: BottomSheetDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_device_search)
-        setSupportActionBar(toolbar)
+        binding = ActivityDeviceSearchBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
         userId = intent.getStringExtra("user_id")
 
@@ -57,13 +50,13 @@ class DeviceSearchActivity : AppCompatActivity() {
         user.equalTo("_id", ObjectId(userId))
         user.findFirst()?.let {
             this.user = it
-            deviceSearchTitle.text = it.fullname
+            binding.content.deviceSearchTitle.text = it.fullname
         }
 
         adapter = DeviceSearchAdapter(this)
         adapter.items = ArrayList()
-        list_view.adapter = adapter
-        list_view.setOnItemClickListener { parent, view, position, id ->
+        binding.content.listView.adapter = adapter
+        binding.content.listView.setOnItemClickListener { parent, view, position, id ->
             if (bottomSheetDialog?.isShowing == true) {
                 return@setOnItemClickListener
             }
@@ -71,7 +64,7 @@ class DeviceSearchActivity : AppCompatActivity() {
         }
 
         updateSearchDevicesButton()
-        searchDevicesButton.setOnClickListener {
+        binding.content.searchDevicesButton.setOnClickListener {
             BLEManager.disconnectDevice({
                 if (!BLEManager.scanning) {
                     BLEManager.startScanning(3000)
@@ -79,8 +72,8 @@ class DeviceSearchActivity : AppCompatActivity() {
             }, 1000)
         }
 
-        debugButton.visibility = if (debug) View.VISIBLE else View.GONE
-        debugButton.setOnClickListener {
+        binding.content.debugButton.visibility = if (debug) View.VISIBLE else View.GONE
+        binding.content.debugButton.setOnClickListener {
             if (BLEManager.connected()) {
                 val intent = Intent(this, BluetoothDebugActivity::class.java)
                 intent.putExtra("user_id", userId)
@@ -98,16 +91,20 @@ class DeviceSearchActivity : AppCompatActivity() {
             builderInner.show()
         }
 
-        closeButton.visibility = if (debug) View.VISIBLE else View.GONE
-        closeButton.setOnClickListener {
+        binding.content.closeButton.visibility = if (debug) View.VISIBLE else View.GONE
+        binding.content.closeButton.setOnClickListener {
             finish()
         }
 
         BLEManager.startScanning(3000)
         BLEManager.didFoundDevice = {
             discoveredDevices.add(it)
-            discoveredDevices = ArrayList(discoveredDevices.distinctBy { it.address })
-            val devices = discoveredDevices.filter { it.name != null }
+            discoveredDevices = ArrayList(discoveredDevices.distinctBy {
+                it.address
+            })
+            val devices = discoveredDevices.filter {
+                it.name != null
+            }
             adapter.items = ArrayList(devices)
             adapter.notifyDataSetChanged()
         }
@@ -158,11 +155,15 @@ class DeviceSearchActivity : AppCompatActivity() {
     }
 
     fun updateSearchDevicesButton() {
-        if (BLEManager.scanning) {
-            searchDevicesButton.text = "SEARCHING..."
+        if (!BLEManager.canStart(this)) {
             return
         }
-        searchDevicesButton.text = "SEARCH DEVICES"
+
+        if (BLEManager.scanning) {
+            binding.content.searchDevicesButton.text = "SEARCHING..."
+            return
+        }
+        binding.content.searchDevicesButton.text = "SEARCH DEVICES"
     }
 
     fun presentBottomSheet(position: Int) {

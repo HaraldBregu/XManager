@@ -1,368 +1,424 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-78:12
-INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-78:12
-INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-78:12
-INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-78:12
-MERGED from [io.realm:realm-android-library:10.6.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/bda497363f8c1ee55aee6af1ed532fa1/jetified-realm-android-library-10.6.0/AndroidManifest.xml:2:1-10:12
-MERGED from [io.realm:realm-android-kotlin-extensions:10.6.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/75689a0121c3fe2aee5cfa01fe14bac9/realm-android-kotlin-extensions-10.6.0/AndroidManifest.xml:2:1-10:12
-MERGED from [androidx.navigation:navigation-ui-ktx:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/ea56335d24b202ebca88ecb47c47c34c/navigation-ui-ktx-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.navigation:navigation-ui:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/87529a29c7b4c4d291ae56af88b83a7f/jetified-navigation-ui-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.google.android.material:material:1.4.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9106a80cd21e4d2549bcadac3deff5f3/material-1.4.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.preference:preference:1.1.0-alpha05] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/13dbdba9daf1658637154daca3cf8628/preference-1.1.0-alpha05/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/359411143eba3eaa0908f1af963f333f/constraintlayout-2.0.1/AndroidManifest.xml:2:1-11:12
-MERGED from [androidx.appcompat:appcompat:1.2.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3a27b12f805c2a262fa84a871ed49494/appcompat-1.2.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.core:core-ktx:1.0.2] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/4fc3f608a18c899ce01d4903f747bb17/core-ktx-1.0.2/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/364166d38f9a5d58f6dcb31f422b8611/legacy-support-v4-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.navigation:navigation-fragment-ktx:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/583943cd88560decb3eed8cdc77938a1/navigation-fragment-ktx-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.navigation:navigation-fragment:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/88ad7b1e8be6e4d6acdbf19a8d7a91a1/navigation-fragment-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-extensions:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3a95d25c9d23816ee0cbf323ef312d5d/lifecycle-extensions-2.0.0/AndroidManifest.xml:17:1-25:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/5387ea2e11bac0550077c2248e87bba5/lifecycle-viewmodel-ktx-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [io.realm:android-adapters:2.1.1] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/cf091f63a13ae1222218c53a8595d4df/jetified-android-adapters-2.1.1/AndroidManifest.xml:2:1-10:12
-MERGED from [com.getkeepsafe.relinker:relinker:1.4.3] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/daf4ad8295b054d2c8f6181966594642/relinker-1.4.3/AndroidManifest.xml:2:1-7:12
-MERGED from [io.reactivex.rxjava2:rxandroid:2.1.1] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/110f0d797a61d835e17cf6f85bb2a385/rxandroid-2.1.1/AndroidManifest.xml:15:1-20:12
-MERGED from [androidx.navigation:navigation-runtime-ktx:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/872dc1c7f25a384cf35a9b47345da082/navigation-runtime-ktx-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.navigation:navigation-common-ktx:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/7e1156016d40cb4a62545ecd2c622634/navigation-common-ktx-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/713bb8c2f602c73737455948c8d7686b/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/27637fd6f9da7c487d8421d7b149ae17/legacy-support-core-ui-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.navigation:navigation-runtime:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/b3aacac14b0188e3f58df689b20e195d/navigation-runtime-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/f040ea50e51926b18c6a4be04683c534/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/6df77e3e48f968e7cc965cde508e8af7/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.transition:transition:1.2.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/ef4293e5b01c6f5d2d11b87407a165e0/transition-1.2.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.appcompat:appcompat-resources:1.2.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9f7f3cc500b6c362c14ce7c03deec6e9/appcompat-resources-1.2.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/b6028e0ee0c12e369b7ef88f5f530933/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/15da2ccac9bee64d8238777c386ff32c/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/24a7dfc7f794af8b8cb3b0495c82c840/viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.media:media:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/dda9a235b8763985a70c8a639ad4f875/media-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.fragment:fragment:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/5e9316f54d54ca84b1d22b4d56d38f8b/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.loader:loader:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9f6a96802ebb794f283cb283e43bd70d/loader-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/555fc0283945f4f0cb5ccf363597e45a/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/4f43e5ce6f662e09e9640388338b03a9/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/de286b2cfd47be8c865a03922be0fc44/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/2de3c05031dddf61560022300b61b2bb/slidingpanelayout-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.customview:customview:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/1d3b4db3f90ad983c0696a681ccc017e/customview-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/353f7a331a952e34cd791990da5fb51f/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/049fe1c304cdc64f29e6fb799c790852/asynclayoutinflater-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.navigation:navigation-common:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/79123b7c04db5f0b5010e69e4cecc02e/navigation-common-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.activity:activity:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/c7154ada5c127459905f8d6d760ec32c/activity-1.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.core:core:1.5.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/a0ef44bc1aff644be6e07240d6142e07/core-1.5.0/AndroidManifest.xml:17:1-26:12
-MERGED from [androidx.cardview:cardview:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/fd1670ae392706a4822179d978d1a128/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9c7fa85a9b0ee02d748d2b515afb9816/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9530953fe37b6c709a0617b00a90e576/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/db9c5d106ebb6172c64f9cbccd3d0584/core-runtime-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3496d6ebc1d28e82ca765b276e97d467/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/905c5c075a020c3eb1356f27d1d330cb/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.print:print:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/4661571774fce82972a08fb28181b7d0/print-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/31bb5e1136207670744778613d321125/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/ec0466c36e7323da4cfd6c17b89320a1/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
-MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/fd44a66278beb28096e1ec995bfc26be/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-process:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3deb0faebfa5ee3345ab9d07369ad1e6/lifecycle-process-2.0.0/AndroidManifest.xml:17:1-30:12
-MERGED from [androidx.lifecycle:lifecycle-service:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/d0b58e8ea320be189b9ddddbb909843e/lifecycle-service-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/1d23e8ab0f57d92eb45c3949853c0a93/lifecycle-runtime-2.1.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/fdfac903450cb1279a43bc09cb03f590/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/0a31e88ca8bea3ec2ff2ff9be9200b57/savedstate-1.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/6d93f9e90457289fc03bb57c62cc7c6b/annotation-experimental-1.0.0/AndroidManifest.xml:17:1-24:12
-INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-78:12
-INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-78:12
-INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-78:12
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-85:12
+INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-85:12
+INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-85:12
+INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-85:12
+MERGED from [io.realm:realm-android-library:10.6.0] /Users/haraldbregu/.gradle/caches/transforms-3/6804dec77c02ec7284f2861fdc372f83/transformed/jetified-realm-android-library-10.6.0/AndroidManifest.xml:2:1-10:12
+MERGED from [io.realm:realm-android-kotlin-extensions:10.6.0] /Users/haraldbregu/.gradle/caches/transforms-3/8b60fe5668ad6d0b8dbd866a796bcca9/transformed/jetified-realm-android-kotlin-extensions-10.6.0/AndroidManifest.xml:2:1-10:12
+MERGED from [androidx.databinding:viewbinding:7.0.3] /Users/haraldbregu/.gradle/caches/transforms-3/85b6f1256bab8994ab70948c23611f8d/transformed/jetified-viewbinding-7.0.3/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-fragment-ktx:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/f79b587df5ea62daf14ce53afebcb598/transformed/navigation-fragment-ktx-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-ui-ktx:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/7fbdde886ccc446c4cea482011db50ae/transformed/navigation-ui-ktx-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/3f2d43330f83c429484919f1c6c547f1/transformed/navigation-runtime-ktx-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.preference:preference-ktx:1.2.0-beta01] /Users/haraldbregu/.gradle/caches/transforms-3/4763c9a81f59cc7a8d80f4ad379d0abe/transformed/jetified-preference-ktx-1.2.0-beta01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.preference:preference:1.2.0-beta01] /Users/haraldbregu/.gradle/caches/transforms-3/88ac84539ba445e9c56e4ededda61a27/transformed/preference-1.2.0-beta01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment-ktx:1.3.6] /Users/haraldbregu/.gradle/caches/transforms-3/46bb11588d7c3edd95160bf1e0d7adba/transformed/jetified-fragment-ktx-1.3.6/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity-ktx:1.2.2] /Users/haraldbregu/.gradle/caches/transforms-3/e59d34c43ca9081c72f17259469b3539/transformed/jetified-activity-ktx-1.2.2/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/a998238af4b315928804699deac6a3d2/transformed/jetified-lifecycle-viewmodel-ktx-2.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/f80d9bc0593eff3d52f80e2f74bdf494/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/027bc5454b6b9ee365e9b17c6c1716eb/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0-beta01] /Users/haraldbregu/.gradle/caches/transforms-3/6ef156a3879807292726617dd8e2eec3/transformed/slidingpanelayout-1.2.0-beta01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.window:window:1.0.0-beta02] /Users/haraldbregu/.gradle/caches/transforms-3/7cb583e30c31fb1c27f8bea5c89993fe/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.3.1] /Users/haraldbregu/.gradle/caches/transforms-3/2e7f97d48ae37d83bc3abcffa7257b5b/transformed/jetified-lifecycle-runtime-ktx-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-common-ktx:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/387e7792c4726f406515baf9da03f9b7/transformed/navigation-common-ktx-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core-ktx:1.7.0] /Users/haraldbregu/.gradle/caches/transforms-3/15abcc1eba44ed92d293b72e4c7d644a/transformed/jetified-core-ktx-1.7.0/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.navigation:navigation-ui:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/b570ce9c03daeee42192c1f77a682bfb/transformed/navigation-ui-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.material:material:1.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/05d4ebcd67b9c4ce099be174b8289e75/transformed/material-1.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.2] /Users/haraldbregu/.gradle/caches/transforms-3/6b60dca2da27e0820da5c49bb43b8486/transformed/constraintlayout-2.1.2/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat:1.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/df8603fa2b3623e91cec860d9abd90f4/transformed/appcompat-1.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /Users/haraldbregu/.gradle/caches/transforms-3/04aa166d3c76d2247449aaf71d96747f/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:17:1-27:12
+MERGED from [com.getkeepsafe.relinker:relinker:1.4.3] /Users/haraldbregu/.gradle/caches/transforms-3/b7c2deee4010fb86dfb491e16851c9ba/transformed/jetified-relinker-1.4.3/AndroidManifest.xml:2:1-7:12
+MERGED from [io.reactivex.rxjava2:rxandroid:2.1.1] /Users/haraldbregu/.gradle/caches/transforms-3/6e04d141e4b33815d172be025978cc5c/transformed/jetified-rxandroid-2.1.1/AndroidManifest.xml:15:1-20:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/2edbf34446f91684c53ad9d9a710e5f1/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-fragment:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/856c4a6783b71a3d9698a0901f65c1b4/transformed/navigation-fragment-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/haraldbregu/.gradle/caches/transforms-3/53be0a28fef281b534f965d10100756b/transformed/fragment-1.3.6/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-runtime:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/e6d431d9065b00fbf631e3cb37ab86f8/transformed/navigation-runtime-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity:1.2.4] /Users/haraldbregu/.gradle/caches/transforms-3/b91f434271e6ff941613c729b034fc0d/transformed/jetified-activity-1.2.4/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/3fdcf2c784f1e8ed829d155568ad5a5b/transformed/jetified-appcompat-resources-1.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.emoji2:emoji2-views-helper:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/c0c6b5b8b12477412497e91db36967a6/transformed/jetified-emoji2-views-helper-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:17:1-37:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/aafbeef8c1ec759f07916c6acdfbeff8/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/a4d50fad970ed710d88ebc09296e388d/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/c698981290e825f4524cdfd90b18d8b7/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/15e8545fcd71bb5bae58f836c6e283bb/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media:media:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/a756f5240c8c7f5c089b2f7eb8d3abee/transformed/media-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/dd3005b4c0c304dcd6204151889ea5aa/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/6250dbbee93b40371a325ad270ff99e1/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/ff4c5b51627e61b575a249e52d6c2040/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/8045226f0f95f9edef5fbd5ad05eb6e0/transformed/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/3bff208b9fd3bf16da9f8335fea82475/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/a2a2958a3be901505265d54f53fd948e/transformed/asynclayoutinflater-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/haraldbregu/.gradle/caches/transforms-3/4a8357501cdfcc299587018a27983e06/transformed/drawerlayout-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/68db8c2e711bf6bf43016827acaf1f3f/transformed/customview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-common:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/2ad30848d119e16a879b596a28975d9b/transformed/navigation-common-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.4.1] /Users/haraldbregu/.gradle/caches/transforms-3/c52fb183ed0196d8a2794d0e30726c74/transformed/transition-1.4.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.7.0] /Users/haraldbregu/.gradle/caches/transforms-3/6c2fa0e4daa3be5706d307efa2ee8d4e/transformed/core-1.7.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/4b81ccf90c950f4a690b5db4e1107e95/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/haraldbregu/.gradle/caches/transforms-3/a04cc86c1be7893941bcd0d9fd5c6f04/transformed/jetified-lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/8429b3fc43347e7787e7e74602493f96/transformed/jetified-savedstate-ktx-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/99d29c568f7387435ab85fb9b09ad2d5/transformed/jetified-savedstate-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/de1d251a6476b7b656e50470b600311a/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.2.0] /Users/haraldbregu/.gradle/caches/transforms-3/58463583d3d41ba7e9b35c384d4fb314/transformed/lifecycle-livedata-2.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.3.1] /Users/haraldbregu/.gradle/caches/transforms-3/5779c4a5510d56569b5cc78c00b22172/transformed/jetified-lifecycle-livedata-core-ktx-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/haraldbregu/.gradle/caches/transforms-3/11dc0f19f4f16fb2b88a4d8a69f5aca3/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-service:2.2.0] /Users/haraldbregu/.gradle/caches/transforms-3/92d9073422c11daf6223b337df1127bb/transformed/jetified-lifecycle-service-2.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/e5331c4da41c13b18886cf3c573d8e5f/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:17:1-37:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/e12edc8d2411ecfa90a1d41dbe708555/transformed/lifecycle-runtime-2.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/92fd630abd3a45e15f7d22a3a3aec1d9/transformed/core-runtime-2.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/65779a237b5b2520f66dc1b482fe5e83/transformed/lifecycle-viewmodel-2.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/haraldbregu/.gradle/caches/transforms-3/28b25ebc0bcbc82b6fefad69d9589bef/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/6cef185c05f8ca2a209a93dd6f965e30/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/efb3da8887cb60fc779f218a184a9654/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/04e72cbc1638bf32eb41a02134aeef8c/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/0b7755467ae31c11c707f634d2745a19/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/6adb3ee3d04417b543fac03f976aa1ac/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/d0f998e10e6fa552f6dab0fcd6382bb9/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/aa14e8ff3fe06e658c8a34b471561e73/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:17:1-24:12
+INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-85:12
+INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-85:12
+INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-85:12
 	package
 		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:4:5-40
 		INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-78:12
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-85:12
 		INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
 	xmlns:tools
 		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-78:12
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-85:12
 		INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.BLUETOOTH_CONNECT
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:6:5-76
+	android:name
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:6:22-73
+uses-permission#android.permission.BLUETOOTH_SCAN
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:7:5-73
+	android:name
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:7:22-70
 uses-permission#android.permission.INTERNET
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:6:5-67
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:8:5-67
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:6:22-64
-uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:7:5-81
-	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:7:22-78
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:8:22-64
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:8:5-81
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:9:5-81
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:8:22-78
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:9:22-78
 uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:9:5-79
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:10:5-79
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:9:22-76
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:10:22-76
 uses-permission#android.permission.BLUETOOTH
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:10:5-68
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:11:5-68
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:10:22-65
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:11:22-65
 uses-permission#android.permission.BLUETOOTH_ADMIN
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:11:5-74
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:12:5-74
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:11:22-71
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:12:22-71
 uses-permission#android.permission.VIBRATE
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:12:5-66
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:13:5-66
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:12:22-63
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:13:22-63
 uses-feature#android.software.feature_companion_device_setup
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:14:5-17:32
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:15:5-18:32
 	tools:node
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:17:9-29
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:18:9-29
 	android:required
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:16:9-33
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:17:9-33
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:15:9-71
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:16:9-71
 uses-feature#android.hardware.bluetooth
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:18:5-21:32
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:19:5-22:32
 	tools:node
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:21:9-29
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:22:9-29
 	android:required
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:20:9-33
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:21:9-33
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:19:9-50
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:20:9-50
 uses-feature#android.hardware.bluetooth_le
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:22:5-25:32
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:23:5-26:32
 	tools:node
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:25:9-29
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:26:9-29
 	android:required
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:24:9-33
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:25:9-33
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:23:9-53
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:24:9-53
 application
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:27:5-76:19
-MERGED from [com.google.android.material:material:1.4.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9106a80cd21e4d2549bcadac3deff5f3/material-1.4.0/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.material:material:1.4.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9106a80cd21e4d2549bcadac3deff5f3/material-1.4.0/AndroidManifest.xml:22:5-20
-MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/359411143eba3eaa0908f1af963f333f/constraintlayout-2.0.1/AndroidManifest.xml:9:5-20
-MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/359411143eba3eaa0908f1af963f333f/constraintlayout-2.0.1/AndroidManifest.xml:9:5-20
-MERGED from [androidx.lifecycle:lifecycle-extensions:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3a95d25c9d23816ee0cbf323ef312d5d/lifecycle-extensions-2.0.0/AndroidManifest.xml:22:5-23:19
-MERGED from [androidx.lifecycle:lifecycle-extensions:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3a95d25c9d23816ee0cbf323ef312d5d/lifecycle-extensions-2.0.0/AndroidManifest.xml:22:5-23:19
-MERGED from [androidx.core:core:1.5.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/a0ef44bc1aff644be6e07240d6142e07/core-1.5.0/AndroidManifest.xml:24:5-89
-MERGED from [androidx.core:core:1.5.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/a0ef44bc1aff644be6e07240d6142e07/core-1.5.0/AndroidManifest.xml:24:5-89
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/ec0466c36e7323da4cfd6c17b89320a1/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/ec0466c36e7323da4cfd6c17b89320a1/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
-MERGED from [androidx.lifecycle:lifecycle-process:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3deb0faebfa5ee3345ab9d07369ad1e6/lifecycle-process-2.0.0/AndroidManifest.xml:22:5-28:19
-MERGED from [androidx.lifecycle:lifecycle-process:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3deb0faebfa5ee3345ab9d07369ad1e6/lifecycle-process-2.0.0/AndroidManifest.xml:22:5-28:19
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:28:5-83:19
+MERGED from [androidx.window:window:1.0.0-beta02] /Users/haraldbregu/.gradle/caches/transforms-3/7cb583e30c31fb1c27f8bea5c89993fe/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:24:5-31:19
+MERGED from [androidx.window:window:1.0.0-beta02] /Users/haraldbregu/.gradle/caches/transforms-3/7cb583e30c31fb1c27f8bea5c89993fe/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:24:5-31:19
+MERGED from [com.google.android.material:material:1.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/05d4ebcd67b9c4ce099be174b8289e75/transformed/material-1.4.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/05d4ebcd67b9c4ce099be174b8289e75/transformed/material-1.4.0/AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.2] /Users/haraldbregu/.gradle/caches/transforms-3/6b60dca2da27e0820da5c49bb43b8486/transformed/constraintlayout-2.1.2/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.2] /Users/haraldbregu/.gradle/caches/transforms-3/6b60dca2da27e0820da5c49bb43b8486/transformed/constraintlayout-2.1.2/AndroidManifest.xml:9:5-20
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /Users/haraldbregu/.gradle/caches/transforms-3/04aa166d3c76d2247449aaf71d96747f/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /Users/haraldbregu/.gradle/caches/transforms-3/04aa166d3c76d2247449aaf71d96747f/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:25:5-35:19
+MERGED from [androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:25:5-35:19
+MERGED from [androidx.core:core:1.7.0] /Users/haraldbregu/.gradle/caches/transforms-3/6c2fa0e4daa3be5706d307efa2ee8d4e/transformed/core-1.7.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.7.0] /Users/haraldbregu/.gradle/caches/transforms-3/6c2fa0e4daa3be5706d307efa2ee8d4e/transformed/core-1.7.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/e5331c4da41c13b18886cf3c573d8e5f/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:25:5-35:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/e5331c4da41c13b18886cf3c573d8e5f/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:25:5-35:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/haraldbregu/.gradle/caches/transforms-3/28b25ebc0bcbc82b6fefad69d9589bef/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/haraldbregu/.gradle/caches/transforms-3/28b25ebc0bcbc82b6fefad69d9589bef/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/6cef185c05f8ca2a209a93dd6f965e30/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/6cef185c05f8ca2a209a93dd6f965e30/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:25:5-31:19
 	android:appComponentFactory
-		ADDED from [androidx.core:core:1.5.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/a0ef44bc1aff644be6e07240d6142e07/core-1.5.0/AndroidManifest.xml:24:18-86
+		ADDED from [androidx.core:core:1.7.0] /Users/haraldbregu/.gradle/caches/transforms-3/6c2fa0e4daa3be5706d307efa2ee8d4e/transformed/core-1.7.0/AndroidManifest.xml:24:18-86
 	android:supportsRtl
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:33:9-35
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:34:9-35
 	android:label
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:31:9-41
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:32:9-41
 	tools:ignore
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:35:9-48
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:36:9-48
 	android:roundIcon
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:32:9-54
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:33:9-54
 	android:icon
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:30:9-43
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:31:9-43
 	android:allowBackup
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:29:9-35
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:30:9-35
 	android:theme
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:34:9-40
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:35:9-40
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:28:9-44
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:29:9-44
+activity#com.ninespartans.xmanager.DeviceActivity
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:37:9-40:59
+	android:exported
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:39:13-37
+	android:theme
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:40:13-56
+	android:name
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:38:13-43
 activity#com.ninespartans.xmanager.MainActivity
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:36:9-43:20
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:41:9-50:20
+	android:exported
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:43:13-36
 	android:theme
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:38:13-56
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:44:13-56
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:37:13-41
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:42:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:39:13-42:29
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:45:13-49:29
 action#android.intent.action.MAIN
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:40:17-69
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:46:17-69
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:40:25-66
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:46:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:41:17-77
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:48:17-77
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:41:27-74
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:48:27-74
 activity#com.ninespartans.xmanager.ProgramListActivity
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:44:9-47:59
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:51:9-54:59
 	android:label
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:46:13-64
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:53:13-64
 	android:theme
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:47:13-56
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:54:13-56
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:45:13-48
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:52:13-48
 activity#com.ninespartans.xmanager.CreateAccountActivity
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:48:9-51:59
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:55:9-58:59
 	android:label
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:50:13-66
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:57:13-66
 	android:theme
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:51:13-56
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:58:13-56
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:49:13-50
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:56:13-50
 activity#com.ninespartans.xmanager.CreateProgramActivity
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:52:9-55:59
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:59:9-62:59
 	android:label
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:54:13-76
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:61:13-76
 	android:theme
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:55:13-56
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:62:13-56
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:53:13-50
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:60:13-50
 activity#com.ninespartans.xmanager.CreateUserActivity
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:56:9-59:59
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:63:9-66:59
 	android:label
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:58:13-63
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:65:13-63
 	android:theme
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:59:13-56
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:66:13-56
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:57:13-47
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:64:13-47
 activity#com.ninespartans.xmanager.BluetoothDebugActivity
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:60:9-63:59
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:67:9-70:59
 	android:label
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:62:13-41
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:69:13-41
 	android:theme
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:63:13-56
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:70:13-56
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:61:13-51
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:68:13-51
 activity#com.ninespartans.xmanager.DeviceSearchActivity
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:64:9-67:59
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:71:9-74:59
 	android:label
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:66:13-65
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:73:13-65
 	android:theme
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:67:13-56
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:74:13-56
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:65:13-49
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:72:13-49
 activity#com.ninespartans.xmanager.PermissionsManagerActivity
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:68:9-71:59
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:75:9-78:59
 	android:label
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:70:13-67
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:77:13-67
 	android:theme
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:71:13-56
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:78:13-56
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:69:13-55
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:76:13-55
 meta-data#preloaded_fonts
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:73:9-75:57
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:80:9-82:57
 	android:resource
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:75:13-54
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:82:13-54
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:74:13-43
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:81:13-43
 uses-sdk
 INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
 INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
-MERGED from [io.realm:realm-android-library:10.6.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/bda497363f8c1ee55aee6af1ed532fa1/jetified-realm-android-library-10.6.0/AndroidManifest.xml:6:5-8:41
-MERGED from [io.realm:realm-android-library:10.6.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/bda497363f8c1ee55aee6af1ed532fa1/jetified-realm-android-library-10.6.0/AndroidManifest.xml:6:5-8:41
-MERGED from [io.realm:realm-android-kotlin-extensions:10.6.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/75689a0121c3fe2aee5cfa01fe14bac9/realm-android-kotlin-extensions-10.6.0/AndroidManifest.xml:6:5-8:41
-MERGED from [io.realm:realm-android-kotlin-extensions:10.6.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/75689a0121c3fe2aee5cfa01fe14bac9/realm-android-kotlin-extensions-10.6.0/AndroidManifest.xml:6:5-8:41
-MERGED from [androidx.navigation:navigation-ui-ktx:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/ea56335d24b202ebca88ecb47c47c34c/navigation-ui-ktx-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-ui-ktx:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/ea56335d24b202ebca88ecb47c47c34c/navigation-ui-ktx-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-ui:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/87529a29c7b4c4d291ae56af88b83a7f/jetified-navigation-ui-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-ui:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/87529a29c7b4c4d291ae56af88b83a7f/jetified-navigation-ui-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.material:material:1.4.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9106a80cd21e4d2549bcadac3deff5f3/material-1.4.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.material:material:1.4.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9106a80cd21e4d2549bcadac3deff5f3/material-1.4.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.preference:preference:1.1.0-alpha05] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/13dbdba9daf1658637154daca3cf8628/preference-1.1.0-alpha05/AndroidManifest.xml:20:5-44
-MERGED from [androidx.preference:preference:1.1.0-alpha05] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/13dbdba9daf1658637154daca3cf8628/preference-1.1.0-alpha05/AndroidManifest.xml:20:5-44
-MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/359411143eba3eaa0908f1af963f333f/constraintlayout-2.0.1/AndroidManifest.xml:5:5-7:41
-MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/359411143eba3eaa0908f1af963f333f/constraintlayout-2.0.1/AndroidManifest.xml:5:5-7:41
-MERGED from [androidx.appcompat:appcompat:1.2.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3a27b12f805c2a262fa84a871ed49494/appcompat-1.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.appcompat:appcompat:1.2.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3a27b12f805c2a262fa84a871ed49494/appcompat-1.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.core:core-ktx:1.0.2] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/4fc3f608a18c899ce01d4903f747bb17/core-ktx-1.0.2/AndroidManifest.xml:5:5-44
-MERGED from [androidx.core:core-ktx:1.0.2] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/4fc3f608a18c899ce01d4903f747bb17/core-ktx-1.0.2/AndroidManifest.xml:5:5-44
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/364166d38f9a5d58f6dcb31f422b8611/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/364166d38f9a5d58f6dcb31f422b8611/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-fragment-ktx:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/583943cd88560decb3eed8cdc77938a1/navigation-fragment-ktx-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-fragment-ktx:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/583943cd88560decb3eed8cdc77938a1/navigation-fragment-ktx-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-fragment:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/88ad7b1e8be6e4d6acdbf19a8d7a91a1/navigation-fragment-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-fragment:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/88ad7b1e8be6e4d6acdbf19a8d7a91a1/navigation-fragment-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-extensions:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3a95d25c9d23816ee0cbf323ef312d5d/lifecycle-extensions-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-extensions:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3a95d25c9d23816ee0cbf323ef312d5d/lifecycle-extensions-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/5387ea2e11bac0550077c2248e87bba5/lifecycle-viewmodel-ktx-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/5387ea2e11bac0550077c2248e87bba5/lifecycle-viewmodel-ktx-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [io.realm:android-adapters:2.1.1] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/cf091f63a13ae1222218c53a8595d4df/jetified-android-adapters-2.1.1/AndroidManifest.xml:6:5-8:41
-MERGED from [io.realm:android-adapters:2.1.1] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/cf091f63a13ae1222218c53a8595d4df/jetified-android-adapters-2.1.1/AndroidManifest.xml:6:5-8:41
-MERGED from [com.getkeepsafe.relinker:relinker:1.4.3] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/daf4ad8295b054d2c8f6181966594642/relinker-1.4.3/AndroidManifest.xml:5:5-43
-MERGED from [com.getkeepsafe.relinker:relinker:1.4.3] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/daf4ad8295b054d2c8f6181966594642/relinker-1.4.3/AndroidManifest.xml:5:5-43
-MERGED from [io.reactivex.rxjava2:rxandroid:2.1.1] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/110f0d797a61d835e17cf6f85bb2a385/rxandroid-2.1.1/AndroidManifest.xml:18:5-43
-MERGED from [io.reactivex.rxjava2:rxandroid:2.1.1] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/110f0d797a61d835e17cf6f85bb2a385/rxandroid-2.1.1/AndroidManifest.xml:18:5-43
-MERGED from [androidx.navigation:navigation-runtime-ktx:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/872dc1c7f25a384cf35a9b47345da082/navigation-runtime-ktx-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-runtime-ktx:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/872dc1c7f25a384cf35a9b47345da082/navigation-runtime-ktx-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-common-ktx:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/7e1156016d40cb4a62545ecd2c622634/navigation-common-ktx-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-common-ktx:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/7e1156016d40cb4a62545ecd2c622634/navigation-common-ktx-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/713bb8c2f602c73737455948c8d7686b/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/713bb8c2f602c73737455948c8d7686b/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/27637fd6f9da7c487d8421d7b149ae17/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/27637fd6f9da7c487d8421d7b149ae17/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-runtime:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/b3aacac14b0188e3f58df689b20e195d/navigation-runtime-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-runtime:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/b3aacac14b0188e3f58df689b20e195d/navigation-runtime-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/f040ea50e51926b18c6a4be04683c534/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/f040ea50e51926b18c6a4be04683c534/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/6df77e3e48f968e7cc965cde508e8af7/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/6df77e3e48f968e7cc965cde508e8af7/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.transition:transition:1.2.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/ef4293e5b01c6f5d2d11b87407a165e0/transition-1.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.transition:transition:1.2.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/ef4293e5b01c6f5d2d11b87407a165e0/transition-1.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.appcompat:appcompat-resources:1.2.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9f7f3cc500b6c362c14ce7c03deec6e9/appcompat-resources-1.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.appcompat:appcompat-resources:1.2.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9f7f3cc500b6c362c14ce7c03deec6e9/appcompat-resources-1.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/b6028e0ee0c12e369b7ef88f5f530933/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/b6028e0ee0c12e369b7ef88f5f530933/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/15da2ccac9bee64d8238777c386ff32c/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/15da2ccac9bee64d8238777c386ff32c/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/24a7dfc7f794af8b8cb3b0495c82c840/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/24a7dfc7f794af8b8cb3b0495c82c840/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.media:media:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/dda9a235b8763985a70c8a639ad4f875/media-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media:media:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/dda9a235b8763985a70c8a639ad4f875/media-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.fragment:fragment:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/5e9316f54d54ca84b1d22b4d56d38f8b/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.fragment:fragment:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/5e9316f54d54ca84b1d22b4d56d38f8b/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.loader:loader:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9f6a96802ebb794f283cb283e43bd70d/loader-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9f6a96802ebb794f283cb283e43bd70d/loader-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/555fc0283945f4f0cb5ccf363597e45a/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/555fc0283945f4f0cb5ccf363597e45a/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/4f43e5ce6f662e09e9640388338b03a9/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/4f43e5ce6f662e09e9640388338b03a9/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/de286b2cfd47be8c865a03922be0fc44/viewpager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/de286b2cfd47be8c865a03922be0fc44/viewpager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/2de3c05031dddf61560022300b61b2bb/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/2de3c05031dddf61560022300b61b2bb/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/1d3b4db3f90ad983c0696a681ccc017e/customview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/1d3b4db3f90ad983c0696a681ccc017e/customview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/353f7a331a952e34cd791990da5fb51f/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/353f7a331a952e34cd791990da5fb51f/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/049fe1c304cdc64f29e6fb799c790852/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/049fe1c304cdc64f29e6fb799c790852/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-common:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/79123b7c04db5f0b5010e69e4cecc02e/navigation-common-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-common:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/79123b7c04db5f0b5010e69e4cecc02e/navigation-common-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.activity:activity:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/c7154ada5c127459905f8d6d760ec32c/activity-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.activity:activity:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/c7154ada5c127459905f8d6d760ec32c/activity-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.core:core:1.5.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/a0ef44bc1aff644be6e07240d6142e07/core-1.5.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.core:core:1.5.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/a0ef44bc1aff644be6e07240d6142e07/core-1.5.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.cardview:cardview:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/fd1670ae392706a4822179d978d1a128/cardview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cardview:cardview:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/fd1670ae392706a4822179d978d1a128/cardview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9c7fa85a9b0ee02d748d2b515afb9816/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9c7fa85a9b0ee02d748d2b515afb9816/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9530953fe37b6c709a0617b00a90e576/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/9530953fe37b6c709a0617b00a90e576/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/db9c5d106ebb6172c64f9cbccd3d0584/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/db9c5d106ebb6172c64f9cbccd3d0584/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3496d6ebc1d28e82ca765b276e97d467/documentfile-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3496d6ebc1d28e82ca765b276e97d467/documentfile-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/905c5c075a020c3eb1356f27d1d330cb/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/905c5c075a020c3eb1356f27d1d330cb/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.print:print:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/4661571774fce82972a08fb28181b7d0/print-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.print:print:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/4661571774fce82972a08fb28181b7d0/print-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/31bb5e1136207670744778613d321125/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/31bb5e1136207670744778613d321125/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/ec0466c36e7323da4cfd6c17b89320a1/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/ec0466c36e7323da4cfd6c17b89320a1/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/fd44a66278beb28096e1ec995bfc26be/interpolator-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/fd44a66278beb28096e1ec995bfc26be/interpolator-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-process:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3deb0faebfa5ee3345ab9d07369ad1e6/lifecycle-process-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-process:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3deb0faebfa5ee3345ab9d07369ad1e6/lifecycle-process-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-service:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/d0b58e8ea320be189b9ddddbb909843e/lifecycle-service-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-service:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/d0b58e8ea320be189b9ddddbb909843e/lifecycle-service-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/1d23e8ab0f57d92eb45c3949853c0a93/lifecycle-runtime-2.1.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/1d23e8ab0f57d92eb45c3949853c0a93/lifecycle-runtime-2.1.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/fdfac903450cb1279a43bc09cb03f590/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/fdfac903450cb1279a43bc09cb03f590/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/0a31e88ca8bea3ec2ff2ff9be9200b57/savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/0a31e88ca8bea3ec2ff2ff9be9200b57/savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/6d93f9e90457289fc03bb57c62cc7c6b/annotation-experimental-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/6d93f9e90457289fc03bb57c62cc7c6b/annotation-experimental-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [io.realm:realm-android-library:10.6.0] /Users/haraldbregu/.gradle/caches/transforms-3/6804dec77c02ec7284f2861fdc372f83/transformed/jetified-realm-android-library-10.6.0/AndroidManifest.xml:6:5-8:41
+MERGED from [io.realm:realm-android-library:10.6.0] /Users/haraldbregu/.gradle/caches/transforms-3/6804dec77c02ec7284f2861fdc372f83/transformed/jetified-realm-android-library-10.6.0/AndroidManifest.xml:6:5-8:41
+MERGED from [io.realm:realm-android-kotlin-extensions:10.6.0] /Users/haraldbregu/.gradle/caches/transforms-3/8b60fe5668ad6d0b8dbd866a796bcca9/transformed/jetified-realm-android-kotlin-extensions-10.6.0/AndroidManifest.xml:6:5-8:41
+MERGED from [io.realm:realm-android-kotlin-extensions:10.6.0] /Users/haraldbregu/.gradle/caches/transforms-3/8b60fe5668ad6d0b8dbd866a796bcca9/transformed/jetified-realm-android-kotlin-extensions-10.6.0/AndroidManifest.xml:6:5-8:41
+MERGED from [androidx.databinding:viewbinding:7.0.3] /Users/haraldbregu/.gradle/caches/transforms-3/85b6f1256bab8994ab70948c23611f8d/transformed/jetified-viewbinding-7.0.3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.databinding:viewbinding:7.0.3] /Users/haraldbregu/.gradle/caches/transforms-3/85b6f1256bab8994ab70948c23611f8d/transformed/jetified-viewbinding-7.0.3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-fragment-ktx:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/f79b587df5ea62daf14ce53afebcb598/transformed/navigation-fragment-ktx-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-fragment-ktx:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/f79b587df5ea62daf14ce53afebcb598/transformed/navigation-fragment-ktx-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-ui-ktx:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/7fbdde886ccc446c4cea482011db50ae/transformed/navigation-ui-ktx-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-ui-ktx:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/7fbdde886ccc446c4cea482011db50ae/transformed/navigation-ui-ktx-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/3f2d43330f83c429484919f1c6c547f1/transformed/navigation-runtime-ktx-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/3f2d43330f83c429484919f1c6c547f1/transformed/navigation-runtime-ktx-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.preference:preference-ktx:1.2.0-beta01] /Users/haraldbregu/.gradle/caches/transforms-3/4763c9a81f59cc7a8d80f4ad379d0abe/transformed/jetified-preference-ktx-1.2.0-beta01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.preference:preference-ktx:1.2.0-beta01] /Users/haraldbregu/.gradle/caches/transforms-3/4763c9a81f59cc7a8d80f4ad379d0abe/transformed/jetified-preference-ktx-1.2.0-beta01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.preference:preference:1.2.0-beta01] /Users/haraldbregu/.gradle/caches/transforms-3/88ac84539ba445e9c56e4ededda61a27/transformed/preference-1.2.0-beta01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.preference:preference:1.2.0-beta01] /Users/haraldbregu/.gradle/caches/transforms-3/88ac84539ba445e9c56e4ededda61a27/transformed/preference-1.2.0-beta01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment-ktx:1.3.6] /Users/haraldbregu/.gradle/caches/transforms-3/46bb11588d7c3edd95160bf1e0d7adba/transformed/jetified-fragment-ktx-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment-ktx:1.3.6] /Users/haraldbregu/.gradle/caches/transforms-3/46bb11588d7c3edd95160bf1e0d7adba/transformed/jetified-fragment-ktx-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity-ktx:1.2.2] /Users/haraldbregu/.gradle/caches/transforms-3/e59d34c43ca9081c72f17259469b3539/transformed/jetified-activity-ktx-1.2.2/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity-ktx:1.2.2] /Users/haraldbregu/.gradle/caches/transforms-3/e59d34c43ca9081c72f17259469b3539/transformed/jetified-activity-ktx-1.2.2/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/a998238af4b315928804699deac6a3d2/transformed/jetified-lifecycle-viewmodel-ktx-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/a998238af4b315928804699deac6a3d2/transformed/jetified-lifecycle-viewmodel-ktx-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/f80d9bc0593eff3d52f80e2f74bdf494/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/f80d9bc0593eff3d52f80e2f74bdf494/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/027bc5454b6b9ee365e9b17c6c1716eb/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/027bc5454b6b9ee365e9b17c6c1716eb/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0-beta01] /Users/haraldbregu/.gradle/caches/transforms-3/6ef156a3879807292726617dd8e2eec3/transformed/slidingpanelayout-1.2.0-beta01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0-beta01] /Users/haraldbregu/.gradle/caches/transforms-3/6ef156a3879807292726617dd8e2eec3/transformed/slidingpanelayout-1.2.0-beta01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.window:window:1.0.0-beta02] /Users/haraldbregu/.gradle/caches/transforms-3/7cb583e30c31fb1c27f8bea5c89993fe/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.window:window:1.0.0-beta02] /Users/haraldbregu/.gradle/caches/transforms-3/7cb583e30c31fb1c27f8bea5c89993fe/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.3.1] /Users/haraldbregu/.gradle/caches/transforms-3/2e7f97d48ae37d83bc3abcffa7257b5b/transformed/jetified-lifecycle-runtime-ktx-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.3.1] /Users/haraldbregu/.gradle/caches/transforms-3/2e7f97d48ae37d83bc3abcffa7257b5b/transformed/jetified-lifecycle-runtime-ktx-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common-ktx:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/387e7792c4726f406515baf9da03f9b7/transformed/navigation-common-ktx-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common-ktx:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/387e7792c4726f406515baf9da03f9b7/transformed/navigation-common-ktx-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core-ktx:1.7.0] /Users/haraldbregu/.gradle/caches/transforms-3/15abcc1eba44ed92d293b72e4c7d644a/transformed/jetified-core-ktx-1.7.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.core:core-ktx:1.7.0] /Users/haraldbregu/.gradle/caches/transforms-3/15abcc1eba44ed92d293b72e4c7d644a/transformed/jetified-core-ktx-1.7.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.navigation:navigation-ui:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/b570ce9c03daeee42192c1f77a682bfb/transformed/navigation-ui-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-ui:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/b570ce9c03daeee42192c1f77a682bfb/transformed/navigation-ui-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.material:material:1.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/05d4ebcd67b9c4ce099be174b8289e75/transformed/material-1.4.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/05d4ebcd67b9c4ce099be174b8289e75/transformed/material-1.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.2] /Users/haraldbregu/.gradle/caches/transforms-3/6b60dca2da27e0820da5c49bb43b8486/transformed/constraintlayout-2.1.2/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.2] /Users/haraldbregu/.gradle/caches/transforms-3/6b60dca2da27e0820da5c49bb43b8486/transformed/constraintlayout-2.1.2/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat:1.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/df8603fa2b3623e91cec860d9abd90f4/transformed/appcompat-1.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/df8603fa2b3623e91cec860d9abd90f4/transformed/appcompat-1.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /Users/haraldbregu/.gradle/caches/transforms-3/04aa166d3c76d2247449aaf71d96747f/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /Users/haraldbregu/.gradle/caches/transforms-3/04aa166d3c76d2247449aaf71d96747f/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.getkeepsafe.relinker:relinker:1.4.3] /Users/haraldbregu/.gradle/caches/transforms-3/b7c2deee4010fb86dfb491e16851c9ba/transformed/jetified-relinker-1.4.3/AndroidManifest.xml:5:5-43
+MERGED from [com.getkeepsafe.relinker:relinker:1.4.3] /Users/haraldbregu/.gradle/caches/transforms-3/b7c2deee4010fb86dfb491e16851c9ba/transformed/jetified-relinker-1.4.3/AndroidManifest.xml:5:5-43
+MERGED from [io.reactivex.rxjava2:rxandroid:2.1.1] /Users/haraldbregu/.gradle/caches/transforms-3/6e04d141e4b33815d172be025978cc5c/transformed/jetified-rxandroid-2.1.1/AndroidManifest.xml:18:5-43
+MERGED from [io.reactivex.rxjava2:rxandroid:2.1.1] /Users/haraldbregu/.gradle/caches/transforms-3/6e04d141e4b33815d172be025978cc5c/transformed/jetified-rxandroid-2.1.1/AndroidManifest.xml:18:5-43
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/2edbf34446f91684c53ad9d9a710e5f1/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/2edbf34446f91684c53ad9d9a710e5f1/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-fragment:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/856c4a6783b71a3d9698a0901f65c1b4/transformed/navigation-fragment-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-fragment:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/856c4a6783b71a3d9698a0901f65c1b4/transformed/navigation-fragment-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/haraldbregu/.gradle/caches/transforms-3/53be0a28fef281b534f965d10100756b/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/haraldbregu/.gradle/caches/transforms-3/53be0a28fef281b534f965d10100756b/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/e6d431d9065b00fbf631e3cb37ab86f8/transformed/navigation-runtime-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/e6d431d9065b00fbf631e3cb37ab86f8/transformed/navigation-runtime-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.2.4] /Users/haraldbregu/.gradle/caches/transforms-3/b91f434271e6ff941613c729b034fc0d/transformed/jetified-activity-1.2.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.2.4] /Users/haraldbregu/.gradle/caches/transforms-3/b91f434271e6ff941613c729b034fc0d/transformed/jetified-activity-1.2.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/3fdcf2c784f1e8ed829d155568ad5a5b/transformed/jetified-appcompat-resources-1.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/3fdcf2c784f1e8ed829d155568ad5a5b/transformed/jetified-appcompat-resources-1.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.emoji2:emoji2-views-helper:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/c0c6b5b8b12477412497e91db36967a6/transformed/jetified-emoji2-views-helper-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.emoji2:emoji2-views-helper:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/c0c6b5b8b12477412497e91db36967a6/transformed/jetified-emoji2-views-helper-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/aafbeef8c1ec759f07916c6acdfbeff8/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/aafbeef8c1ec759f07916c6acdfbeff8/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/a4d50fad970ed710d88ebc09296e388d/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/a4d50fad970ed710d88ebc09296e388d/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/c698981290e825f4524cdfd90b18d8b7/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/c698981290e825f4524cdfd90b18d8b7/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/15e8545fcd71bb5bae58f836c6e283bb/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/15e8545fcd71bb5bae58f836c6e283bb/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media:media:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/a756f5240c8c7f5c089b2f7eb8d3abee/transformed/media-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/a756f5240c8c7f5c089b2f7eb8d3abee/transformed/media-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/dd3005b4c0c304dcd6204151889ea5aa/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/dd3005b4c0c304dcd6204151889ea5aa/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/6250dbbee93b40371a325ad270ff99e1/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/6250dbbee93b40371a325ad270ff99e1/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/ff4c5b51627e61b575a249e52d6c2040/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/ff4c5b51627e61b575a249e52d6c2040/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/8045226f0f95f9edef5fbd5ad05eb6e0/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/8045226f0f95f9edef5fbd5ad05eb6e0/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/3bff208b9fd3bf16da9f8335fea82475/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/3bff208b9fd3bf16da9f8335fea82475/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/a2a2958a3be901505265d54f53fd948e/transformed/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/a2a2958a3be901505265d54f53fd948e/transformed/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/haraldbregu/.gradle/caches/transforms-3/4a8357501cdfcc299587018a27983e06/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/haraldbregu/.gradle/caches/transforms-3/4a8357501cdfcc299587018a27983e06/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/68db8c2e711bf6bf43016827acaf1f3f/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/68db8c2e711bf6bf43016827acaf1f3f/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/2ad30848d119e16a879b596a28975d9b/transformed/navigation-common-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common:2.3.5] /Users/haraldbregu/.gradle/caches/transforms-3/2ad30848d119e16a879b596a28975d9b/transformed/navigation-common-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.4.1] /Users/haraldbregu/.gradle/caches/transforms-3/c52fb183ed0196d8a2794d0e30726c74/transformed/transition-1.4.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.4.1] /Users/haraldbregu/.gradle/caches/transforms-3/c52fb183ed0196d8a2794d0e30726c74/transformed/transition-1.4.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.7.0] /Users/haraldbregu/.gradle/caches/transforms-3/6c2fa0e4daa3be5706d307efa2ee8d4e/transformed/core-1.7.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.7.0] /Users/haraldbregu/.gradle/caches/transforms-3/6c2fa0e4daa3be5706d307efa2ee8d4e/transformed/core-1.7.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/4b81ccf90c950f4a690b5db4e1107e95/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/4b81ccf90c950f4a690b5db4e1107e95/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/haraldbregu/.gradle/caches/transforms-3/a04cc86c1be7893941bcd0d9fd5c6f04/transformed/jetified-lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/haraldbregu/.gradle/caches/transforms-3/a04cc86c1be7893941bcd0d9fd5c6f04/transformed/jetified-lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate-ktx:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/8429b3fc43347e7787e7e74602493f96/transformed/jetified-savedstate-ktx-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate-ktx:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/8429b3fc43347e7787e7e74602493f96/transformed/jetified-savedstate-ktx-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/99d29c568f7387435ab85fb9b09ad2d5/transformed/jetified-savedstate-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/99d29c568f7387435ab85fb9b09ad2d5/transformed/jetified-savedstate-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/de1d251a6476b7b656e50470b600311a/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/de1d251a6476b7b656e50470b600311a/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.2.0] /Users/haraldbregu/.gradle/caches/transforms-3/58463583d3d41ba7e9b35c384d4fb314/transformed/lifecycle-livedata-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.2.0] /Users/haraldbregu/.gradle/caches/transforms-3/58463583d3d41ba7e9b35c384d4fb314/transformed/lifecycle-livedata-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.3.1] /Users/haraldbregu/.gradle/caches/transforms-3/5779c4a5510d56569b5cc78c00b22172/transformed/jetified-lifecycle-livedata-core-ktx-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.3.1] /Users/haraldbregu/.gradle/caches/transforms-3/5779c4a5510d56569b5cc78c00b22172/transformed/jetified-lifecycle-livedata-core-ktx-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/haraldbregu/.gradle/caches/transforms-3/11dc0f19f4f16fb2b88a4d8a69f5aca3/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/haraldbregu/.gradle/caches/transforms-3/11dc0f19f4f16fb2b88a4d8a69f5aca3/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-service:2.2.0] /Users/haraldbregu/.gradle/caches/transforms-3/92d9073422c11daf6223b337df1127bb/transformed/jetified-lifecycle-service-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-service:2.2.0] /Users/haraldbregu/.gradle/caches/transforms-3/92d9073422c11daf6223b337df1127bb/transformed/jetified-lifecycle-service-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/e5331c4da41c13b18886cf3c573d8e5f/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/e5331c4da41c13b18886cf3c573d8e5f/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/e12edc8d2411ecfa90a1d41dbe708555/transformed/lifecycle-runtime-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/e12edc8d2411ecfa90a1d41dbe708555/transformed/lifecycle-runtime-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/92fd630abd3a45e15f7d22a3a3aec1d9/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/92fd630abd3a45e15f7d22a3a3aec1d9/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/65779a237b5b2520f66dc1b482fe5e83/transformed/lifecycle-viewmodel-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/65779a237b5b2520f66dc1b482fe5e83/transformed/lifecycle-viewmodel-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/haraldbregu/.gradle/caches/transforms-3/28b25ebc0bcbc82b6fefad69d9589bef/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/haraldbregu/.gradle/caches/transforms-3/28b25ebc0bcbc82b6fefad69d9589bef/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/6cef185c05f8ca2a209a93dd6f965e30/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/6cef185c05f8ca2a209a93dd6f965e30/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/efb3da8887cb60fc779f218a184a9654/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/efb3da8887cb60fc779f218a184a9654/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/04e72cbc1638bf32eb41a02134aeef8c/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/04e72cbc1638bf32eb41a02134aeef8c/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/0b7755467ae31c11c707f634d2745a19/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/0b7755467ae31c11c707f634d2745a19/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/6adb3ee3d04417b543fac03f976aa1ac/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/6adb3ee3d04417b543fac03f976aa1ac/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/d0f998e10e6fa552f6dab0fcd6382bb9/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/d0f998e10e6fa552f6dab0fcd6382bb9/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/aa14e8ff3fe06e658c8a34b471561e73/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/aa14e8ff3fe06e658c8a34b471561e73/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
 INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
 INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
 	android:targetSdkVersion
@@ -373,13 +429,41 @@ INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/
 		INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
 		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
-provider#androidx.lifecycle.ProcessLifecycleOwnerInitializer
-ADDED from [androidx.lifecycle:lifecycle-process:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3deb0faebfa5ee3345ab9d07369ad1e6/lifecycle-process-2.0.0/AndroidManifest.xml:23:9-27:43
-	android:authorities
-		ADDED from [androidx.lifecycle:lifecycle-process:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3deb0faebfa5ee3345ab9d07369ad1e6/lifecycle-process-2.0.0/AndroidManifest.xml:25:13-69
-	android:multiprocess
-		ADDED from [androidx.lifecycle:lifecycle-process:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3deb0faebfa5ee3345ab9d07369ad1e6/lifecycle-process-2.0.0/AndroidManifest.xml:27:13-40
-	android:exported
-		ADDED from [androidx.lifecycle:lifecycle-process:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3deb0faebfa5ee3345ab9d07369ad1e6/lifecycle-process-2.0.0/AndroidManifest.xml:26:13-37
+uses-library#androidx.window.extensions
+ADDED from [androidx.window:window:1.0.0-beta02] /Users/haraldbregu/.gradle/caches/transforms-3/7cb583e30c31fb1c27f8bea5c89993fe/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:25:9-27:40
+	android:required
+		ADDED from [androidx.window:window:1.0.0-beta02] /Users/haraldbregu/.gradle/caches/transforms-3/7cb583e30c31fb1c27f8bea5c89993fe/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:27:13-37
 	android:name
-		ADDED from [androidx.lifecycle:lifecycle-process:2.0.0] /Users/haraldbregu/.gradle/caches/transforms-2/files-2.1/3deb0faebfa5ee3345ab9d07369ad1e6/lifecycle-process-2.0.0/AndroidManifest.xml:24:13-79
+		ADDED from [androidx.window:window:1.0.0-beta02] /Users/haraldbregu/.gradle/caches/transforms-3/7cb583e30c31fb1c27f8bea5c89993fe/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:26:13-54
+uses-library#androidx.window.sidecar
+ADDED from [androidx.window:window:1.0.0-beta02] /Users/haraldbregu/.gradle/caches/transforms-3/7cb583e30c31fb1c27f8bea5c89993fe/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:28:9-30:40
+	android:required
+		ADDED from [androidx.window:window:1.0.0-beta02] /Users/haraldbregu/.gradle/caches/transforms-3/7cb583e30c31fb1c27f8bea5c89993fe/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:30:13-37
+	android:name
+		ADDED from [androidx.window:window:1.0.0-beta02] /Users/haraldbregu/.gradle/caches/transforms-3/7cb583e30c31fb1c27f8bea5c89993fe/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:29:13-51
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:26:9-34:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/e5331c4da41c13b18886cf3c573d8e5f/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:26:9-34:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/e5331c4da41c13b18886cf3c573d8e5f/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:26:9-34:20
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/6cef185c05f8ca2a209a93dd6f965e30/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/6cef185c05f8ca2a209a93dd6f965e30/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:30:13-31
+	android:authorities
+		ADDED from [androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:28:13-68
+	android:exported
+		ADDED from [androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:29:13-37
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:27:13-67
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:31:13-33:52
+	android:value
+		ADDED from [androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:33:17-49
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:32:17-75
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/e5331c4da41c13b18886cf3c573d8e5f/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:31:13-33:52
+	android:value
+		ADDED from [androidx.lifecycle:lifecycle-process:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/e5331c4da41c13b18886cf3c573d8e5f/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:33:17-49
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/e5331c4da41c13b18886cf3c573d8e5f/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:32:17-78

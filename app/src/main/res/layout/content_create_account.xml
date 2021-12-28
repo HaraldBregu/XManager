@@ -95,7 +95,7 @@
                 app:helperText="">
 
                 <AutoCompleteTextView
-                    android:id="@+id/dropdown_age_text"
+                    android:id="@+id/dropdownAgeText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:imeOptions="actionDone"

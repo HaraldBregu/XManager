@@ -12,6 +12,7 @@ import org.jetbrains.anko.uiThread
 import java.util.*
 import android.bluetooth.BluetoothDevice
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Looper
 import androidx.core.content.ContextCompat
 
@@ -299,13 +300,18 @@ object BLEManager {
         BluetoothAdapter.getDefaultAdapter()?.let { return it.isEnabled }
         return false
     }
+
+    fun gpsEnabled(context: Context): Boolean {
+        val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+    }
+
     fun canStart(context: Context): Boolean {
         return bleIsEnabled() &&
+                gpsEnabled(context) &&
                 bleGranted(context) &&
                 bleAdminGranted(context) &&
                 fineLocationGranted(context)
-                //coarseLocationGranted(context) &&
-
     }
 
 }

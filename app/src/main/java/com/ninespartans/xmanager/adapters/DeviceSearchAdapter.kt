@@ -6,20 +6,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.ninespartans.xmanager.R
 import com.ninespartans.xmanager.model.Device
-import com.ninespartans.xmanager.model.User
 import io.realm.Case
 import io.realm.Realm
 import io.realm.kotlin.where
-import kotlinx.android.synthetic.main.row_device.view.*
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
+
+
+
+
 
 class DeviceSearchAdapter(context: Context): BaseAdapter() {
     private val mContext: Context
     private var inflater: LayoutInflater
-    var items: ArrayList<BluetoothDevice> = ArrayList()
     private val realm = Realm.getDefaultInstance()
-    private var user: User? = null
+    var items: ArrayList<BluetoothDevice> = ArrayList()
 
     init {
         mContext = context
@@ -39,14 +44,15 @@ class DeviceSearchAdapter(context: Context): BaseAdapter() {
     }
 
     override fun getView(position: Int, convertView : View?, viewGroup: ViewGroup?): View {
+
         val rowDevice = inflater.inflate(R.layout.row_device, viewGroup, false)
 
         val device = items.get(position)
-        rowDevice.textViewDeviceName.text = device.name
-        rowDevice.textViewMacAddress.text = "MAC: " + device.address
-        rowDevice.textViewPlayer.visibility = View.GONE
-        rowDevice.leftShoeImage?.setImageResource(R.drawable.left_unactive)
-        rowDevice.rightShoeImage?.setImageResource(R.drawable.right_unactive)
+        rowDevice.findViewById<TextView>(R.id.textViewDeviceName).text = device.name
+        rowDevice.findViewById<TextView>(R.id.textViewMacAddress).text = "MAC: " + device.address
+        rowDevice.findViewById<TextView>(R.id.textViewPlayer).visibility = View.GONE
+        rowDevice.findViewById<ImageView>(R.id.leftShoeImage).setImageResource(R.drawable.left_unactive)
+        rowDevice.findViewById<ImageView>(R.id.rightShoeImage).setImageResource(R.drawable.right_unactive)
 
         val realmDevice = realm.where<Device>()
         realmDevice.equalTo("ble_mac", device.address, Case.INSENSITIVE)
@@ -54,17 +60,17 @@ class DeviceSearchAdapter(context: Context): BaseAdapter() {
         realmDevice.findFirst()?.let {
             when (it.deviceType) {
                 Device.DeviceType.SHOE_LEFT -> {
-                    rowDevice.textViewPlayer.visibility = View.VISIBLE
-                    rowDevice.textViewPlayer.text = it.user?.fullname
-                    rowDevice.leftShoeImage?.setImageResource(R.drawable.left)
+                    rowDevice.findViewById<TextView>(R.id.textViewPlayer).visibility = View.VISIBLE
+                    rowDevice.findViewById<TextView>(R.id.textViewPlayer).text = it.user?.fullname
+                    rowDevice.findViewById<ImageView>(R.id.leftShoeImage).setImageResource(R.drawable.left)
                 }
                 Device.DeviceType.SHOE_RIGHT -> {
-                    rowDevice.textViewPlayer.visibility = View.VISIBLE
-                    rowDevice.textViewPlayer.text =  it.user?.fullname
-                    rowDevice.rightShoeImage?.setImageResource(R.drawable.right)
+                    rowDevice.findViewById<TextView>(R.id.textViewPlayer).visibility = View.VISIBLE
+                    rowDevice.findViewById<TextView>(R.id.textViewPlayer).text =  it.user?.fullname
+                    rowDevice.findViewById<ImageView>(R.id.rightShoeImage).setImageResource(R.drawable.right)
                 }
                 else -> {
-                    rowDevice.textViewPlayer.visibility = View.GONE
+                    rowDevice.findViewById<TextView>(R.id.textViewPlayer).visibility = View.GONE
                 }
             }
         }

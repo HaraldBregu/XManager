@@ -17,4 +17,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
         android:id="@+id/action_delete_devices"
         android:title="@string/activity_main_row_player_menu_item_delete_devices"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_delete_player"
+        android:title="@string/activity_main_row_player_menu_item_delete_player"
+        app:showAsAction="never"/>
 </menu>

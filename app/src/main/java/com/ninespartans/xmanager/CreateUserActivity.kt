@@ -13,49 +13,50 @@ import io.realm.kotlin.where
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
+import com.ninespartans.xmanager.databinding.ActivityCreateUserBinding
 import com.ninespartans.xmanager.model.User
-import kotlinx.android.synthetic.main.activity_create_user.toolbar
-import kotlinx.android.synthetic.main.content_create_user.*
 import org.bson.types.ObjectId
 
 
 class CreateUserActivity : AppCompatActivity() {
-    val realm = Realm.getDefaultInstance()
+    private lateinit var binding: ActivityCreateUserBinding
+    private val realm: Realm = Realm.getDefaultInstance()
     private var user: User? = null
     private var userId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_user)
-        setSupportActionBar(toolbar)
+        binding = ActivityCreateUserBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
         intent.getStringExtra("user_id")?.let { userId = it }
 
-        nextButton.text = getString(R.string.activity_create_user_button_title)
+        binding.content.nextButton.text = getString(R.string.activity_create_user_button_title)
 
         userId?.let {
-            nextButton.text = getString(R.string.activity_update_user_button_title)
+            binding.content.nextButton.text = getString(R.string.activity_update_user_button_title)
             val user = realm.where<User>()
             user.equalTo("_id", ObjectId(userId))
             user.findFirst()?.let {
                 this.user = it
-                this.nameInputText.editText?.setText(it.fullname)
-                this.roleInputText.editText?.setText(it.role)
-                this.ageInputText.editText?.setText(it.age)
+                this.binding.content.nameInputText.editText?.setText(it.fullname)
+                this.binding.content.roleInputText.editText?.setText(it.role)
+                this.binding.content.ageInputText.editText?.setText(it.age)
             }
         }
 
-        nextButton.setOnClickListener {
+        binding.content.nextButton.setOnClickListener {
             userId?.let {
 
                 val user = realm.where<User>()
                 user.equalTo("_id", ObjectId(it))
-                user.findFirst()?.let { user ->
+                user.findFirst()?.let { _user ->
                     realm.executeTransaction {
-                        realm.copyToRealmOrUpdate(user.apply {
-                            fullname = nameInputText.editText?.text.toString()
-                            role = roleInputText.editText?.text.toString()
-                            age = ageInputText.editText?.text.toString()
+                        realm.copyToRealmOrUpdate(_user.apply {
+                            fullname = binding.content.nameInputText.editText?.text.toString()
+                            role = binding.content.roleInputText.editText?.text.toString()
+                            age = binding.content.ageInputText.editText?.text.toString()
                         })
                     }
                 }
@@ -64,9 +65,9 @@ class CreateUserActivity : AppCompatActivity() {
 
                 realm.executeTransaction {
                     user = it.copyToRealmOrUpdate(User().apply {
-                        fullname = nameInputText.editText?.text.toString()
-                        role = roleInputText.editText?.text.toString()
-                        age = ageInputText.editText?.text.toString()
+                        fullname = binding.content.nameInputText.editText?.text.toString()
+                        role = binding.content.roleInputText.editText?.text.toString()
+                        age = binding.content.ageInputText.editText?.text.toString()
                     })
 
                     val intent = Intent(this, DeviceSearchActivity::class.java)
@@ -89,7 +90,7 @@ class CreateUserActivity : AppCompatActivity() {
             //return true
         }*/
 
-        containerSection.setOnClickListener {
+        binding.content.containerSection.setOnClickListener {
             //it.clearFocus()
             it.hideKeyboard()
         }
@@ -109,7 +110,7 @@ class CreateUserActivity : AppCompatActivity() {
         /**
          * Roles list
          */
-        dropdown_role_text.setAdapter(
+        binding.content.dropdownRoleText.setAdapter(
             ArrayAdapter(this,
                 R.layout.dropdown_role_item,
                 arrayOf("Attacante", "Difensore")))
@@ -119,23 +120,23 @@ class CreateUserActivity : AppCompatActivity() {
          */
         var ages = arrayOf<String>()
         for (i in 8..20) { ages += i.toString() }
-        dropdown_age_text.setAdapter(
+        binding.content.dropdownAgeText.setAdapter(
             ArrayAdapter(this,
                 R.layout.dropdown_role_item,
                 ages))
 
-        roleInputText.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
+        binding.content.roleInputText.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
                 view.clearFocus()
                 view.hideKeyboard()
             }
         }
-        roleInputText.setOnClickListener {
+        binding.content.roleInputText.setOnClickListener {
             val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(it?.applicationWindowToken, 0)
         }
 
-        dropdown_role_text.setOnItemClickListener { adapterView, view, i, l ->
+        binding.content.dropdownRoleText.setOnItemClickListener { adapterView, view, i, l ->
             val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(view?.applicationWindowToken, 0)
         }

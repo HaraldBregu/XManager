@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.TextView
+import com.google.android.material.button.MaterialButton
 import io.realm.RealmResults
 import com.ninespartans.xmanager.R
 import com.ninespartans.xmanager.model.ProgramData
-import kotlinx.android.synthetic.main.row_create_program_step.view.*
-import kotlinx.android.synthetic.main.row_create_program_step_new.view.*
 
 
 class ProgramStepItemAdapter(context: Context, programList: RealmResults<ProgramData>?): BaseAdapter() {
@@ -55,7 +55,10 @@ class ProgramStepItemAdapter(context: Context, programList: RealmResults<Program
         this.programList?.let { programs ->
             if (position == programs.size) {
                 val viewAddNewStep = inflater.inflate(R.layout.row_create_program_step_new, viewGroup, false)
-                viewAddNewStep.addProgramStep.setOnClickListener {
+
+                val addProgramStep = viewAddNewStep.findViewById<MaterialButton>(R.id.addProgramStep)
+
+                addProgramStep.setOnClickListener {
                     onAddStepItem?.let {
                         it()
                     }
@@ -67,7 +70,9 @@ class ProgramStepItemAdapter(context: Context, programList: RealmResults<Program
             val view = inflater.inflate(R.layout.row_create_program_step, viewGroup, false)
 
             val stepNumber = position + 1
-            view.stepNumber.text = stepNumber.toString()
+
+            val _stepNumber = view.findViewById<TextView>(R.id.stepNumber)
+            _stepNumber.text = stepNumber.toString()
 
             var description = ""
 
@@ -90,9 +95,41 @@ class ProgramStepItemAdapter(context: Context, programList: RealmResults<Program
                 }
             }
             description += secondsStr
-            view.descriptionProgram.text = description
 
-            view.cancelProgramStep.setOnClickListener {
+            var animationType = ", "
+            program.animationByte?.let {
+                when (it) {
+                    0u.toByte() ->
+                        animationType = animationType.plus("STATIC")
+                    1u.toByte() ->
+                        animationType =  animationType.plus("BLINK")
+                    2u.toByte() ->
+                        animationType =  animationType.plus("FADE")
+                }
+            }
+
+            var animationPosition = ", "
+            program.deviceLedPositionByte?.let {
+                when (it) {
+                    0u.toByte()->
+                        animationPosition = animationPosition.plus("TOP")
+                    1u.toByte()->
+                        animationPosition = animationPosition.plus("TOPEXT")
+                    2u.toByte()->
+                        animationPosition = animationPosition.plus("EXT")
+                    3u.toByte()->
+                        animationPosition = animationPosition.plus("TOPINT")
+                    4u.toByte()->
+                        animationPosition = animationPosition.plus("INT")
+                }
+            }
+
+            val descriptionProgram = view.findViewById<TextView>(R.id.descriptionProgram)
+            descriptionProgram.text = description.plus(animationType).plus(animationPosition)
+
+
+            val cancelProgramStep = view.findViewById<MaterialButton>(R.id.cancelProgramStep)
+            cancelProgramStep.setOnClickListener {
                 onDeleteStepItem?.let {
                     it(stepNumber, program)
                 }
@@ -102,7 +139,8 @@ class ProgramStepItemAdapter(context: Context, programList: RealmResults<Program
 
         } ?: run {
             val viewAddNewStep = inflater.inflate(R.layout.row_create_program_step_new, viewGroup, false)
-            viewAddNewStep.addProgramStep.setOnClickListener {
+            val addProgramStep = viewAddNewStep.findViewById<MaterialButton>(R.id.addProgramStep)
+            addProgramStep.setOnClickListener {
                 onAddStepItem?.let {
                     it()
                 }

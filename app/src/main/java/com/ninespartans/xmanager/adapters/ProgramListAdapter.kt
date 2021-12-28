@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.PopupMenu
+import android.widget.TextView
+import com.google.android.material.button.MaterialButton
 import io.realm.RealmResults
 import com.ninespartans.xmanager.R
 import com.ninespartans.xmanager.model.DeviceProgram
-import kotlinx.android.synthetic.main.row_program_list.view.*
 
 
 class ProgramListAdapter(context: Context, programs: RealmResults<DeviceProgram>): BaseAdapter() {
@@ -45,8 +46,10 @@ class ProgramListAdapter(context: Context, programs: RealmResults<DeviceProgram>
     override fun getView(position: Int, convertView : View?, viewGroup: ViewGroup?): View {
         val rowProgram = inflater.inflate(R.layout.row_program_list, viewGroup, false)
 
+        val nameProgram = rowProgram.findViewById<TextView>(R.id.nameProgram)
+
         val program = programs.get(position)
-        rowProgram.nameProgram.text = program?.title
+        nameProgram.text = program?.title
 
         var totalSeconds = 0
         program?.durationHours()?.let { totalSeconds += it * 60 * 60 }
@@ -79,12 +82,12 @@ class ProgramListAdapter(context: Context, programs: RealmResults<DeviceProgram>
         }
         description += sessions
 
-        rowProgram.descriptionProgram.text = description
+        val descriptionProgram = rowProgram.findViewById<TextView>(R.id.descriptionProgram)
+        descriptionProgram.text = description
 
-        /**
-         * Options of the player
-         */
-        rowProgram.showProgramOptions.setOnClickListener {
+        /** Options of the player */
+        val showProgramOptions = rowProgram.findViewById<MaterialButton>(R.id.showProgramOptions)
+        showProgramOptions.setOnClickListener {
             val popupMenu = PopupMenu(mContext, it)
             popupMenu.menuInflater.inflate(R.menu.popup_program_row_options, popupMenu.menu)
             popupMenu.menu.findItem(R.id.action_delete).setVisible(true)

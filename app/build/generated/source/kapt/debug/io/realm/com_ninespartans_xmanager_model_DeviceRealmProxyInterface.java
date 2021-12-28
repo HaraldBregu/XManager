@@ -10,6 +10,8 @@ public interface com_ninespartans_xmanager_model_DeviceRealmProxyInterface {
     public void realmSet$version(String value);
     public String realmGet$type();
     public void realmSet$type(String value);
+    public boolean realmGet$active();
+    public void realmSet$active(boolean value);
     public String realmGet$mac();
     public void realmSet$mac(String value);
     public String realmGet$ble_mac();

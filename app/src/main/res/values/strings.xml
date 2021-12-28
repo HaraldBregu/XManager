@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Xmanager</string>
 
@@ -11,6 +12,10 @@
     <string name="main_header_program_running">In corso</string>
     <string name="main_header_program_finished">Terminato</string>
     <string name="main_header_program_complation">COMPLETAMENTO</string>
+
+    <!--  Cell main header -->
+    <string name="activity_main_header_account_username">Account allenatore</string>
+    <string name="activity_main_header_account_description">Titolo o qualifica</string>
 
     <!--  Profile Activity  -->
     <string name="title_activity_create_profile">Profilo</string>
@@ -52,6 +57,7 @@
     <string name="activity_main_row_player_menu_item_upload_program">Avvia programma</string>
     <string name="activity_main_row_player_menu_item_register_device">Registra dispositivo</string>
     <string name="activity_main_row_player_menu_item_delete_devices">Elimina dispositivi</string>
+    <string name="activity_main_row_player_menu_item_delete_player">Elimina giocatore</string>
     <string name="activity_main_fab_menu_item_create_player">Crea giocatore</string>
     <string name="activity_main_fab_menu_item_create_program">Crea programma</string>
 
@@ -122,6 +128,10 @@
     <string name="activity_permissions_bluetooth_description">Il Bluetooth è necessario per eseguire qualsiasi comunicazione Bluetooth, come richiedere una connessione, accettare una connessione e trasferire dati.</string>
     <string name="activity_permissions_bluetooth_active_button_title">ATTIVA BLUETOOTH</string>
     <string name="activity_permissions_bluetooth_status_active_text">Attivo</string>
+    <string name="activity_permissions_gps_title">Geolocalizzazione</string>
+    <string name="activity_permissions_gps_description">I dispositivi Android recenti richiedono anche l\'attivazione dei servizi di posizione/GPS affinché una scansione Bluetooth abbia esito positivo.</string>
+    <string name="activity_permissions_gps_active_button_title">ATTIVA GPS</string>
+    <string name="activity_permissions_gps_status_active_text">Attivo</string>
     <string name="activity_permissions_fine_location_title">Posizione</string>
     <string name="activity_permissions_fine_location_description">La posizione è necessario perché una scansione Bluetooth può raccogliere informazioni sulla posizione dell\'utente. Queste informazioni possono provenire dai dispositivi dell\'utente.</string>
     <string name="activity_permissions_fine_location_active_button_title">ATTIVA POSIZIONE</string>
@@ -165,6 +175,8 @@
     <!--  Utils/General tests  -->
     <string name="firstname_lastname">Firstname Lastname</string>
     <string name="device_name">Device name</string>
+    <string name="device_version">Alpha 0.0.0</string>
+    <string name="device_state">ATTIVO</string>
     <string name="device_name_version">Device 1.0.0</string>
     <string name="program_name">Programma</string>
     <string name="no_program_name">Nessun programma</string>
@@ -181,5 +193,6 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_device">DeviceActivity</string>
 
 </resources>

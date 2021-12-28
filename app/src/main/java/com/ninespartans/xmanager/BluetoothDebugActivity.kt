@@ -12,12 +12,13 @@ import com.ninespartans.xmanager.model.Device
 import io.realm.Realm
 import io.realm.kotlin.where
 import com.ninespartans.xmanager.bluetooth.BLEManager
+import com.ninespartans.xmanager.databinding.ActivityBluetoothDebugBinding
 import com.ninespartans.xmanager.model.DeviceInfo
 import com.ninespartans.xmanager.model.User
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_bluetooth_debug.*
+
 
 class BluetoothDebugActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityBluetoothDebugBinding
     lateinit var deviceInfo: DeviceInfo
     private lateinit var player: User
     var playerId: String = ""
@@ -29,15 +30,16 @@ class BluetoothDebugActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bluetooth_debug)
-        setSupportActionBar(toolbar)
+        binding = ActivityBluetoothDebugBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         intent.getStringExtra("player_id")?.let {
             playerId = it
         }
 
-        setLeftDevice.setOnClickListener {
+        binding.content.setLeftDevice.setOnClickListener {
             Realm.getDefaultInstance().use { realm ->
                 realm.where<User>().equalTo("id", playerId).findFirst()?.let {
                     this.player = it
@@ -55,7 +57,7 @@ class BluetoothDebugActivity : AppCompatActivity() {
             }
         }
 
-        setRightDevice.setOnClickListener {
+        binding.content.setRightDevice.setOnClickListener {
             Realm.getDefaultInstance().use { realm ->
                 realm.where<User>().equalTo("id", playerId).findFirst()?.let {
                     this.player = it
@@ -79,39 +81,39 @@ class BluetoothDebugActivity : AppCompatActivity() {
             deviceInfo = Gson().fromJson<DeviceInfo>(jsonString, DeviceInfo::class.java)
 
             val gson = GsonBuilder().setPrettyPrinting().create()
-            discovering_log_text.text = gson.toJson(deviceInfo)
+            binding.content.discoveringLogText.text = gson.toJson(deviceInfo)
 
             BLEManager.disableReading()
         }
 
         val scrollingMethod = ScrollingMovementMethod()
-        discovering_log_text.movementMethod = scrollingMethod
+        binding.content.discoveringLogText.movementMethod = scrollingMethod
 
-        sleep.setOnClickListener {
+        binding.content.sleep.setOnClickListener {
             var array = byteArrayOf(Byte.MAX_VALUE, 0x01)
             BLEManager.write(array)
         }
 
-        reboot.setOnClickListener {
+        binding.content.reboot.setOnClickListener {
             val array = byteArrayOf(Byte.MAX_VALUE, 0x00)
             BLEManager.write(array)
         }
 
-        setUpdateUrl.setOnClickListener {
+        binding.content.setUpdateUrl.setOnClickListener {
             var array = byteArrayOf(0x02)
             val byteInputInt = "https://gitlab.com/api/v4/projects/20772874/repository/files/dinamo_firmware_sketches%2FDinamoFirmware.ino.pico32.bin/raw?ref=master&private_token=1S_FpPnkbC5eyeWUmrYR".toByteArray()
             array = array.plus(byteInputInt)
             BLEManager.write(array)
         }
 
-        setUpdateUrlNil.setOnClickListener {
+        binding.content.setUpdateUrlNil.setOnClickListener {
             var array = byteArrayOf(0x02)
             val byteInputInt = "-".toByteArray()
             array = array.plus(byteInputInt)
             BLEManager.write(array)
         }
 
-        setUpdateMode.setOnClickListener {
+        binding.content.setUpdateMode.setOnClickListener {
             var array = byteArrayOf(0x03)
             val byteInputInt = "1".toByteArray()
             array = array.plus(byteInputInt)
@@ -123,7 +125,7 @@ class BluetoothDebugActivity : AppCompatActivity() {
             */
         }
 
-        setNoMode.setOnClickListener {
+        binding.content.setNoMode.setOnClickListener {
             var array = byteArrayOf(0x03)
             val byteInputInt = "0".toByteArray()
             array = array.plus(byteInputInt)
@@ -136,25 +138,25 @@ class BluetoothDebugActivity : AppCompatActivity() {
             */
         }
 
-        setSSID.setOnClickListener {
+        binding.content.setSSID.setOnClickListener {
             var array = byteArrayOf(0x00)
             val byteInputInt = "FASTWEB-B41373".toByteArray()
             array = array.plus(byteInputInt)
             BLEManager.write(array)
         }
 
-        setPass.setOnClickListener {
+        binding.content.setPass.setOnClickListener {
             var array = byteArrayOf(0x01)
             val byteInputInt = "4J8EEMJYJ3".toByteArray()
             array = array.plus(byteInputInt)
             BLEManager.write(array)
         }
 
-        nextButton.setOnClickListener{
+        binding.content.nextButton.setOnClickListener{
 
         }
 
-        closeButton.setOnClickListener{
+        binding.content.closeButton.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
@@ -182,7 +184,7 @@ class BluetoothDebugActivity : AppCompatActivity() {
          * 4. Time duration Minutes
          * 5. Time duration Seconds
          */
-        setProgram.setOnClickListener {
+        binding.content.setProgram.setOnClickListener {
 
             //Toast.makeText(this, hoursEditText?.text.toString(), Toast.LENGTH_SHORT).show()
 
@@ -190,9 +192,9 @@ class BluetoothDebugActivity : AppCompatActivity() {
             // Tipo di comando
             var commandByteArray = byteArrayOf(0x7E)
 
-            hours = hoursEditText.text.toString().toByte()
-            minutes = minutesEditText.text.toString().toByte()
-            seconds = secondsEditText.text.toString().toByte()
+            hours = binding.content.hoursEditText.text.toString().toByte()
+            minutes = binding.content.minutesEditText.text.toString().toByte()
+            seconds = binding.content.secondsEditText.text.toString().toByte()
 
             commandByteArray = commandByteArray.plus(
                 byteArrayOf(

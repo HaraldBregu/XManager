@@ -68,7 +68,7 @@
                 app:endIconMode="dropdown_menu"
                 android:layout_marginBottom="20dp">
                 <AutoCompleteTextView
-                    android:id="@+id/dropdown_role_text"
+                    android:id="@+id/dropdownRoleText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="none"
@@ -86,7 +86,7 @@
                 app:endIconMode="dropdown_menu"
                 android:layout_marginBottom="20dp">
                 <AutoCompleteTextView
-                    android:id="@+id/dropdown_age_text"
+                    android:id="@+id/dropdownAgeText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="none"

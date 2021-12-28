@@ -6,13 +6,6 @@
                 {
                     "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/values-w600dp/dimens.xml",
                     "from": {
-                        "startLines": "1",
-                        "startColumns": "4",
-                        "startOffsets": "16",
-                        "endColumns": "41",
-                        "endOffsets": "53"
-                    },
-                    "to": {
                         "startLines": "2",
                         "startColumns": "4",
                         "startOffsets": "55",

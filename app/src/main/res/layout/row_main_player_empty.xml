@@ -10,8 +10,11 @@
     android:paddingRight="10dp">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:cardCornerRadius="10dp"
+        android:clickable="true"
         app:cardUseCompatPadding="true">
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,12 +22,25 @@
             android:orientation="vertical"
             android:paddingVertical="20dp"
             android:paddingHorizontal="16dp">
-            <TextView
-                android:id="@+id/noPlayerCardTitle"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/row_empty_player_title"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/noPlayerCardTitle"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/row_empty_player_title"/>
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:textAlignment="center"
+                    app:icon="@drawable/ic_baseline_arrow_right_alt_24" />
+            </RelativeLayout>
             <TextView
                 android:id="@+id/noPlayerCardDescription"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
@@ -38,6 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_marginTop="14dp"
+                android:visibility="gone"
                 android:text="@string/row_empty_player_action_title"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

@@ -47,6 +47,7 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
         long nameColKey;
         long versionColKey;
         long typeColKey;
+        long activeColKey;
         long macColKey;
         long ble_macColKey;
         long wifi_macColKey;
@@ -56,12 +57,13 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
         long updatedAtColKey;
 
         DeviceColumnInfo(OsSchemaInfo schemaInfo) {
-            super(11);
+            super(12);
             OsObjectSchemaInfo objectSchemaInfo = schemaInfo.getObjectSchemaInfo("Device");
             this._idColKey = addColumnDetails("_id", "_id", objectSchemaInfo);
             this.nameColKey = addColumnDetails("name", "name", objectSchemaInfo);
             this.versionColKey = addColumnDetails("version", "version", objectSchemaInfo);
             this.typeColKey = addColumnDetails("type", "type", objectSchemaInfo);
+            this.activeColKey = addColumnDetails("active", "active", objectSchemaInfo);
             this.macColKey = addColumnDetails("mac", "mac", objectSchemaInfo);
             this.ble_macColKey = addColumnDetails("ble_mac", "ble_mac", objectSchemaInfo);
             this.wifi_macColKey = addColumnDetails("wifi_mac", "wifi_mac", objectSchemaInfo);
@@ -89,6 +91,7 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
             dst.nameColKey = src.nameColKey;
             dst.versionColKey = src.versionColKey;
             dst.typeColKey = src.typeColKey;
+            dst.activeColKey = src.activeColKey;
             dst.macColKey = src.macColKey;
             dst.ble_macColKey = src.ble_macColKey;
             dst.wifi_macColKey = src.wifi_macColKey;
@@ -223,6 +226,28 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
             throw new IllegalArgumentException("Trying to set non-nullable field 'type' to null.");
         }
         proxyState.getRow$realm().setString(columnInfo.typeColKey, value);
+    }
+
+    @Override
+    @SuppressWarnings("cast")
+    public boolean realmGet$active() {
+        proxyState.getRealm$realm().checkIfValid();
+        return (boolean) proxyState.getRow$realm().getBoolean(columnInfo.activeColKey);
+    }
+
+    @Override
+    public void realmSet$active(boolean value) {
+        if (proxyState.isUnderConstruction()) {
+            if (!proxyState.getAcceptDefaultValue$realm()) {
+                return;
+            }
+            final Row row = proxyState.getRow$realm();
+            row.getTable().setBoolean(columnInfo.activeColKey, row.getObjectKey(), value, true);
+            return;
+        }
+
+        proxyState.getRealm$realm().checkIfValid();
+        proxyState.getRow$realm().setBoolean(columnInfo.activeColKey, value);
     }
 
     @Override
@@ -450,11 +475,12 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
     }
 
     private static OsObjectSchemaInfo createExpectedObjectSchemaInfo() {
-        OsObjectSchemaInfo.Builder builder = new OsObjectSchemaInfo.Builder(NO_ALIAS, "Device", false, 11, 0);
+        OsObjectSchemaInfo.Builder builder = new OsObjectSchemaInfo.Builder(NO_ALIAS, "Device", false, 12, 0);
         builder.addPersistedProperty(NO_ALIAS, "_id", RealmFieldType.OBJECT_ID, Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
         builder.addPersistedProperty(NO_ALIAS, "name", RealmFieldType.STRING, !Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
         builder.addPersistedProperty(NO_ALIAS, "version", RealmFieldType.STRING, !Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
         builder.addPersistedProperty(NO_ALIAS, "type", RealmFieldType.STRING, !Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
+        builder.addPersistedProperty(NO_ALIAS, "active", RealmFieldType.BOOLEAN, !Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
         builder.addPersistedProperty(NO_ALIAS, "mac", RealmFieldType.STRING, !Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
         builder.addPersistedProperty(NO_ALIAS, "ble_mac", RealmFieldType.STRING, !Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
         builder.addPersistedProperty(NO_ALIAS, "wifi_mac", RealmFieldType.STRING, !Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
@@ -542,6 +568,13 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
                 objProxy.realmSet$type(null);
             } else {
                 objProxy.realmSet$type((String) json.getString("type"));
+            }
+        }
+        if (json.has("active")) {
+            if (json.isNull("active")) {
+                throw new IllegalArgumentException("Trying to set non-nullable field 'active' to null.");
+            } else {
+                objProxy.realmSet$active((boolean) json.getBoolean("active"));
             }
         }
         if (json.has("mac")) {
@@ -646,6 +679,13 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
                 } else {
                     reader.skipValue();
                     objProxy.realmSet$type(null);
+                }
+            } else if (name.equals("active")) {
+                if (reader.peek() != JsonToken.NULL) {
+                    objProxy.realmSet$active((boolean) reader.nextBoolean());
+                } else {
+                    reader.skipValue();
+                    throw new IllegalArgumentException("Trying to set non-nullable field 'active' to null.");
                 }
             } else if (name.equals("mac")) {
                 if (reader.peek() != JsonToken.NULL) {
@@ -782,6 +822,7 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
         builder.addString(columnInfo.nameColKey, unmanagedSource.realmGet$name());
         builder.addString(columnInfo.versionColKey, unmanagedSource.realmGet$version());
         builder.addString(columnInfo.typeColKey, unmanagedSource.realmGet$type());
+        builder.addBoolean(columnInfo.activeColKey, unmanagedSource.realmGet$active());
         builder.addString(columnInfo.macColKey, unmanagedSource.realmGet$mac());
         builder.addString(columnInfo.ble_macColKey, unmanagedSource.realmGet$ble_mac());
         builder.addString(columnInfo.wifi_macColKey, unmanagedSource.realmGet$wifi_mac());
@@ -853,6 +894,7 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
         if (realmGet$type != null) {
             Table.nativeSetString(tableNativePtr, columnInfo.typeColKey, objKey, realmGet$type, false);
         }
+        Table.nativeSetBoolean(tableNativePtr, columnInfo.activeColKey, objKey, ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$active(), false);
         String realmGet$mac = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$mac();
         if (realmGet$mac != null) {
             Table.nativeSetString(tableNativePtr, columnInfo.macColKey, objKey, realmGet$mac, false);
@@ -932,6 +974,7 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
             if (realmGet$type != null) {
                 Table.nativeSetString(tableNativePtr, columnInfo.typeColKey, objKey, realmGet$type, false);
             }
+            Table.nativeSetBoolean(tableNativePtr, columnInfo.activeColKey, objKey, ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$active(), false);
             String realmGet$mac = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$mac();
             if (realmGet$mac != null) {
                 Table.nativeSetString(tableNativePtr, columnInfo.macColKey, objKey, realmGet$mac, false);
@@ -1008,6 +1051,7 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
         } else {
             Table.nativeSetNull(tableNativePtr, columnInfo.typeColKey, objKey, false);
         }
+        Table.nativeSetBoolean(tableNativePtr, columnInfo.activeColKey, objKey, ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$active(), false);
         String realmGet$mac = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$mac();
         if (realmGet$mac != null) {
             Table.nativeSetString(tableNativePtr, columnInfo.macColKey, objKey, realmGet$mac, false);
@@ -1105,6 +1149,7 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
             } else {
                 Table.nativeSetNull(tableNativePtr, columnInfo.typeColKey, objKey, false);
             }
+            Table.nativeSetBoolean(tableNativePtr, columnInfo.activeColKey, objKey, ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$active(), false);
             String realmGet$mac = ((com_ninespartans_xmanager_model_DeviceRealmProxyInterface) object).realmGet$mac();
             if (realmGet$mac != null) {
                 Table.nativeSetString(tableNativePtr, columnInfo.macColKey, objKey, realmGet$mac, false);
@@ -1184,6 +1229,7 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
         unmanagedCopy.realmSet$name(realmSource.realmGet$name());
         unmanagedCopy.realmSet$version(realmSource.realmGet$version());
         unmanagedCopy.realmSet$type(realmSource.realmGet$type());
+        unmanagedCopy.realmSet$active(realmSource.realmGet$active());
         unmanagedCopy.realmSet$mac(realmSource.realmGet$mac());
         unmanagedCopy.realmSet$ble_mac(realmSource.realmGet$ble_mac());
         unmanagedCopy.realmSet$wifi_mac(realmSource.realmGet$wifi_mac());
@@ -1208,6 +1254,7 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
         builder.addString(columnInfo.nameColKey, realmObjectSource.realmGet$name());
         builder.addString(columnInfo.versionColKey, realmObjectSource.realmGet$version());
         builder.addString(columnInfo.typeColKey, realmObjectSource.realmGet$type());
+        builder.addBoolean(columnInfo.activeColKey, realmObjectSource.realmGet$active());
         builder.addString(columnInfo.macColKey, realmObjectSource.realmGet$mac());
         builder.addString(columnInfo.ble_macColKey, realmObjectSource.realmGet$ble_mac());
         builder.addString(columnInfo.wifi_macColKey, realmObjectSource.realmGet$wifi_mac());
@@ -1263,6 +1310,10 @@ public class com_ninespartans_xmanager_model_DeviceRealmProxy extends com.ninesp
         stringBuilder.append(",");
         stringBuilder.append("{type:");
         stringBuilder.append(realmGet$type());
+        stringBuilder.append("}");
+        stringBuilder.append(",");
+        stringBuilder.append("{active:");
+        stringBuilder.append(realmGet$active());
         stringBuilder.append("}");
         stringBuilder.append(",");
         stringBuilder.append("{mac:");

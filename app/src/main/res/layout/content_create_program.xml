@@ -21,7 +21,7 @@
         android:paddingRight="20dp"
         android:paddingBottom="10dp">
         <TextView
-            android:id="@+id/header_title"
+            android:id="@+id/headerTitle"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
             android:layout_marginBottom="5dp">
         </TextView>
         <TextView
-            android:id="@+id/header_description"
+            android:id="@+id/headerDescription"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
     <ListView
-        android:id="@+id/list_view"
+        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_section"

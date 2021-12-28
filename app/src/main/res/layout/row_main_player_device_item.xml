@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:paddingTop="5dp">
     <androidx.cardview.widget.CardView
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorBackground"
@@ -22,24 +23,52 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/deviceName"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="@string/device_name_version"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+                    android:layout_centerVertical="true">
+                    <TextView
+                        android:id="@+id/deviceName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/device_name"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+                    <TextView
+                        android:id="@+id/deviceVersion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/device_version"
+                        android:layout_marginStart="5dp"
+                        android:textAllCaps="true"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+
+                </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/detailButton"
                     style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                    android:layout_width="30dp"
+                    android:layout_width="35dp"
                     android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
-                    android:padding="0dp"
+                    android:layout_marginEnd="-1dp"
                     android:textAlignment="center"
-                    android:visibility="gone"
-                    app:icon="@drawable/ic_baseline_more_horiz_24" />
+                    app:icon="@drawable/ic_baseline_arrow_right_alt_24" />
             </RelativeLayout>
+            <TextView
+                android:id="@+id/deviceState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/device_state"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+            <TextView
+                android:id="@+id/deviceType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LEFT"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+
             <LinearLayout
                 android:id="@+id/programSessionSection"
                 android:layout_width="match_parent"

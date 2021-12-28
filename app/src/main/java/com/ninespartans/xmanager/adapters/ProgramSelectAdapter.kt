@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.LinearLayout
+import android.widget.TextView
 import io.realm.RealmResults
 import com.ninespartans.xmanager.R
 import com.ninespartans.xmanager.model.DeviceProgram
-import kotlinx.android.synthetic.main.row_program_list.view.descriptionProgram
-import kotlinx.android.synthetic.main.row_program_list.view.nameProgram
-import kotlinx.android.synthetic.main.row_program_select_list.view.*
+
 
 class ProgramSelectAdapter(context: Context, programs: RealmResults<DeviceProgram>): BaseAdapter() {
     private val mContext: Context
@@ -38,13 +38,16 @@ class ProgramSelectAdapter(context: Context, programs: RealmResults<DeviceProgra
     override fun getView(position: Int, convertView : View?, viewGroup: ViewGroup?): View {
         val rowProgram = inflater.inflate(R.layout.row_program_select_list, viewGroup, false)
 
+        val nameProgram = rowProgram.findViewById<TextView>(R.id.nameProgram)
+        val statusView = rowProgram.findViewById<LinearLayout>(R.id.statusView)
+
         val program = programs.get(position)
-        rowProgram.nameProgram.text = program?.title
+        nameProgram.text = program?.title
 
         if (program?.active == true) {
-            rowProgram.statusView.setBackgroundResource(R.color.colorPrimaryVariant)
+            statusView.setBackgroundResource(R.color.colorPrimaryVariant)
         } else {
-            rowProgram.statusView.setBackgroundResource(R.color.colorPrimaryLight)
+            statusView.setBackgroundResource(R.color.colorPrimaryLight)
         }
 
         var totalSeconds = 0
@@ -78,7 +81,8 @@ class ProgramSelectAdapter(context: Context, programs: RealmResults<DeviceProgra
         }
         description += sessions
 
-        rowProgram.descriptionProgram.text = description
+        val descriptionProgram = rowProgram.findViewById<TextView>(R.id.descriptionProgram)
+        descriptionProgram.text = description
 
         return rowProgram
     }
