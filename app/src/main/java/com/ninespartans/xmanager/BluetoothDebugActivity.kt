@@ -2,7 +2,10 @@ package com.ninespartans.xmanager
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.method.ScrollingMovementMethod
+import android.util.Log
 import android.view.View
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +18,9 @@ import com.ninespartans.xmanager.bluetooth.BLEManager
 import com.ninespartans.xmanager.databinding.ActivityBluetoothDebugBinding
 import com.ninespartans.xmanager.model.DeviceInfo
 import com.ninespartans.xmanager.model.User
+import okhttp3.*
+import okio.Okio
+import java.io.*
 
 
 class BluetoothDebugActivity : AppCompatActivity() {
@@ -27,6 +33,16 @@ class BluetoothDebugActivity : AppCompatActivity() {
     var hours: Byte = 0u.toByte()
     var minutes: Byte = 0u.toByte()
     var seconds: Byte = 0u.toByte()
+
+    val okClient by lazy {
+        OkHttpClient()
+    }
+    val okRequest by lazy {
+        val url = "https://gitlab.com/api/v4/projects/20772874/repository/files/bin%2Ftest-firmware.bin/raw?ref=master&private_token=1S_FpPnkbC5eyeWUmrYR"
+        Request.Builder()
+            .url(url)
+            .build()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,7 +94,7 @@ class BluetoothDebugActivity : AppCompatActivity() {
         BLEManager.onCharacteristicRead = {
 
             val jsonString = it?.getStringValue(0)
-            deviceInfo = Gson().fromJson<DeviceInfo>(jsonString, DeviceInfo::class.java)
+            deviceInfo = Gson().fromJson(jsonString, DeviceInfo::class.java)
 
             val gson = GsonBuilder().setPrettyPrinting().create()
             binding.content.discoveringLogText.text = gson.toJson(deviceInfo)
@@ -136,6 +152,37 @@ class BluetoothDebugActivity : AppCompatActivity() {
             BLEManager.write(array)
             BLEManager.enableReading()
             */
+        }
+
+        binding.content.downloadBinary.setOnClickListener {
+            okClient.newCall(okRequest).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    e.printStackTrace()
+                    Log.e("DONWLOAD_BINARY", "onFailure")
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val downloadedFile = File(cacheDir, "dinamo-alpha-0.9.0.bin")
+                    val sink = Okio.buffer(Okio.sink(downloadedFile))
+                    val source = response.body()?.source()
+                    sink.writeAll(source)
+                    sink.close()
+
+                    Log.e("DONWLOAD_BINARY", "onResponse")
+
+                    cacheDir.listFiles().forEach {
+                        Log.e("DONWLOAD_BINARY", it.absolutePath)
+                    }
+
+                    cacheDir.listFiles().filter { it.canRead() &&  it.isFile && it.name.endsWith(".bin") }.map {
+                        runOnUiThread {
+                            val bytes = it.readBytes()
+                            uploadChunk(512, 0, bytes)
+
+                        }
+                    }
+                }
+            })
         }
 
         binding.content.setSSID.setOnClickListener {
@@ -290,5 +337,43 @@ class BluetoothDebugActivity : AppCompatActivity() {
     }
 
 
+    fun uploadChunk(size: Int=512, index: Int = 0, data: ByteArray) {
+        Log.e("DONWLOAD_BINARY_firmware", data.size.toString())
+
+        val binarySize = data.size
+
+        val fromIndex = size * index
+        Log.e("DONWLOAD_BINARY_from_index", fromIndex.toString())
+       if (fromIndex >= (binarySize-1)) {
+            return
+        }
+
+        var toIndex = fromIndex + size
+
+        var isLast = false
+        if (toIndex > (binarySize-1)) {
+            isLast = true
+            toIndex = binarySize
+        }
+        Log.e("DONWLOAD_BINARY_from_index", toIndex.toString())
+
+        val chunkBytesArray = data.copyOfRange(fromIndex, toIndex)
+
+        var bytesOTAKey = byteArrayOf(0x00) // Key
+        bytesOTAKey = bytesOTAKey.plus(chunkBytesArray) // Data Byte Array
+
+        Log.e("DONWLOAD_BINARY_size", bytesOTAKey.size.toString())
+
+        BLEManager.write(bytesOTAKey)
+
+        if (isLast) {
+            return
+        }
+
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed({
+            uploadChunk(size, index+1, data)
+        }, 2000)
+    }
 
 }

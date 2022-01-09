@@ -42,14 +42,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
-        title = getString(R.string.activity_main_title)
+        title = " " + getString(R.string.activity_main_title)
+        //supportActionBar?.setIcon(R.drawable.home_nav_bar_icon)
+        //supportActionBar?.setDisplayShowHomeEnabled(true)
 
         adapter = MainListAdapter(this)
         binding.content.listView.adapter = adapter
         adapter.onClickAction = {
             when (it) {
+                MainListAdapter.Action.EDIT_ACCOUNT -> {
+                    val intent = Intent(this, EditAccountActivity::class.java)
+                    startActivity(intent)
+                }
                 MainListAdapter.Action.SHOW_ACCOUNT -> {
-                    val intent = Intent(this, CreateAccountActivity::class.java)
+                    val intent = Intent(this, AccountActivity::class.java)
                     startActivity(intent)
                 }
                 MainListAdapter.Action.STOP_PROGRAM -> {
@@ -139,8 +145,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         /** Option button */
-        binding.content.createNewButton.setOnClickListener {
-            val popupMenu = PopupMenu(this, it)
+        binding.content.uploadProgramButton.visibility = View.GONE
+        binding.content.uploadProgramButton.setOnClickListener {
+            /*val popupMenu = PopupMenu(this, it)
             popupMenu.menuInflater.inflate(R.menu.popup_fab_main, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener {
                 when (it.itemId) {
@@ -152,6 +159,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             popupMenu.show()
+            */
         }
     }
 
@@ -162,19 +170,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        //menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_profile -> {
-                val intent = Intent(this, CreateAccountActivity::class.java)
+                val intent = Intent(this, EditAccountActivity::class.java)
                 startActivity(intent)
                 return true
             }
             android.R.id.home -> {
-                val intent = Intent(this, CreateAccountActivity::class.java)
+                val intent = Intent(this, EditAccountActivity::class.java)
                 startActivity(intent)
                 return true
             }

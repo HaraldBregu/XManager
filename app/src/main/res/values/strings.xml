@@ -14,18 +14,18 @@
     <string name="main_header_program_complation">COMPLETAMENTO</string>
 
     <!--  Cell main header -->
-    <string name="activity_main_header_account_username">Account allenatore</string>
-    <string name="activity_main_header_account_description">Titolo o qualifica</string>
+    <string name="activity_main_header_account_username">Crea un account</string>
+    <string name="activity_main_header_account_description">Inserisci il nome completo, un titolo o descrizione per il tuo profilo.</string>
+    <string name="activity_main_header_account_description2">Inserisci un titolo o descrizione per il tuo profilo.</string>
 
-    <!--  Profile Activity  -->
-    <string name="title_activity_create_profile">Profilo</string>
-    <string name="title_activity_create_profile_header_title">Profilo coach</string>
-    <string name="title_activity_create_profile_header_description">Inserisci e salva i tuoi dati da coach.</string>
-    <string name="title_activity_create_profile_field_fullname">Nome e cognome</string>
-    <string name="title_activity_create_profile_field_headline">Titolo</string>
-    <string name="title_activity_create_profile_field_age">Età</string>
-    <string name="title_activity_create_profile_button_save">SALVA</string>
-
+    <!--  Edit Account Activity  -->
+    <string name="activity_update_profile">Account</string>
+    <string name="activity_update_profile_header_title">Informazioni del profilo</string>
+    <string name="activity_update_profile_header_description">Inserisci e salva i tuoi dati da coach.</string>
+    <string name="activity_update_profile_field_fullname">Nome e cognome</string>
+    <string name="activity_update_profile_field_headline">Il tuo titolo o una breve descrizione</string>
+    <string name="activity_update_profile_field_age">Età</string>
+    <string name="activity_update_profile_button_save">SALVA</string>
 
     <!--  Select Program Bottom Sheet -->
     <string name="select_program_sheet_title">Scegli un programma</string>

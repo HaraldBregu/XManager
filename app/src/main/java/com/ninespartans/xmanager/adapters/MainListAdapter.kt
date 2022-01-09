@@ -30,6 +30,7 @@ class MainListAdapter(context: Context): BaseAdapter() {
     private var programs = realm.where<DeviceProgram>().findAll()
 
     enum class Action {
+        EDIT_ACCOUNT,
         SHOW_ACCOUNT,
         CREATE_USER, // User
         ADD_PLAYER, // Player
@@ -112,27 +113,39 @@ class MainListAdapter(context: Context): BaseAdapter() {
         if (isHeader) {
 
             /** User section */
-            //val user_section_header = rowHeader.findViewById<RelativeLayout>(R.id.user_section_header)
             val userSection = rowHeader.findViewById<LinearLayout>(R.id.userSection)
             val fullname = rowHeader.findViewById<TextView>(R.id.fullname)
             val userTitle = rowHeader.findViewById<TextView>(R.id.userTitle)
+            val userEditButton = rowHeader.findViewById<MaterialButton>(R.id.editAccount)
+            userEditButton.visibility = View.GONE
 
-            //user_section_header.visibility = View.GONE
             val account = realm.where<Account>().findFirst()
             val query = realm.where<User>()
             query.isNotNull("account")
             query.equalTo("account._id", account?._id)
             query.findFirst()?.let {
-                //user_section_header.visibility = View.VISIBLE
                 fullname.text = it.fullname
-                userTitle.text = mContext.getString(R.string.activity_main_header_account_description)
+                userTitle.text = mContext.getString(R.string.activity_main_header_account_description2)
                 if (it.headline.isNotEmpty()) {
                     userTitle.text = it.headline
+                }
+                userEditButton.visibility = View.VISIBLE
+            }
+
+            userEditButton.setOnClickListener {
+                onClickAction?.let {
+                    it(Action.EDIT_ACCOUNT)
                 }
             }
 
             userSection.setOnClickListener {
-                onClickAction?.let { it(Action.SHOW_ACCOUNT) }
+                onClickAction?.let {
+                    if (userEditButton.visibility == View.GONE) {
+                        it(Action.EDIT_ACCOUNT)
+                    } else {
+                        it(Action.SHOW_ACCOUNT)
+                    }
+                }
             }
 
             /** Training Session Section */
@@ -211,37 +224,11 @@ class MainListAdapter(context: Context): BaseAdapter() {
             }
 
             val selectProgram = rowHeader.findViewById<MaterialButton>(R.id.selectProgram)
-            val showProgramSectionMenu = rowHeader.findViewById<MaterialButton>(R.id.showProgramSectionMenu)
 
             selectProgram.setOnClickListener {
                 onClickAction?.let {
                     it(Action.UPLOAD_PROGRAM)
                 }
-            }
-            showProgramSectionMenu.setOnClickListener {
-                onClickAction?.let {
-                    it(Action.SHOW_PROGRAM)
-                }
-                /*
-                val popupMenu = PopupMenu(mContext, it)
-                popupMenu.menuInflater.inflate(R.menu.popup_menu_card, popupMenu.menu)
-                popupMenu.menu.findItem(R.id.action_delete_all_programs).setVisible(true)
-                popupMenu.menu.findItem(R.id.action_show_all_programs).setVisible(true)
-                popupMenu.setOnMenuItemClickListener {
-                    when (it.itemId) {
-                        R.id.action_delete_all_programs ->
-                            onClickAction?.let {
-                                it(Action.DELETE_PROGRAM)
-                            }
-                        R.id.action_show_all_programs  ->
-                            onClickAction?.let {
-                                it(Action.SHOW_PROGRAM)
-                            }
-                    }
-                    true
-                }
-                popupMenu.show()
-                */
             }
 
             return rowHeader

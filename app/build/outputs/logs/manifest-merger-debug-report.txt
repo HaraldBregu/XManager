@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-85:12
-INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-85:12
-INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-85:12
-INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-85:12
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-107:12
+INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-107:12
+INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-107:12
+INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-107:12
 MERGED from [io.realm:realm-android-library:10.6.0] /Users/haraldbregu/.gradle/caches/transforms-3/6804dec77c02ec7284f2861fdc372f83/transformed/jetified-realm-android-library-10.6.0/AndroidManifest.xml:2:1-10:12
 MERGED from [io.realm:realm-android-kotlin-extensions:10.6.0] /Users/haraldbregu/.gradle/caches/transforms-3/8b60fe5668ad6d0b8dbd866a796bcca9/transformed/jetified-realm-android-kotlin-extensions-10.6.0/AndroidManifest.xml:2:1-10:12
 MERGED from [androidx.databinding:viewbinding:7.0.3] /Users/haraldbregu/.gradle/caches/transforms-3/85b6f1256bab8994ab70948c23611f8d/transformed/jetified-viewbinding-7.0.3/AndroidManifest.xml:17:1-22:12
@@ -74,22 +74,22 @@ MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/
 MERGED from [androidx.print:print:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/6adb3ee3d04417b543fac03f976aa1ac/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/d0f998e10e6fa552f6dab0fcd6382bb9/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/haraldbregu/.gradle/caches/transforms-3/aa14e8ff3fe06e658c8a34b471561e73/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:17:1-24:12
-INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-85:12
-INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-85:12
-INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-85:12
+INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-107:12
+INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-107:12
+INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-107:12
 	package
 		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:4:5-40
 		INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-85:12
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-107:12
 		INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
 	xmlns:tools
 		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-85:12
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:1-107:12
 		INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:2:11-69
@@ -125,32 +125,44 @@ uses-permission#android.permission.VIBRATE
 ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:13:5-66
 	android:name
 		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:13:22-63
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:14:5-81
+	android:name
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:14:22-78
+uses-permission#android.permission.REQUEST_INSTALL_PACKAGES
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:15:5-83
+	android:name
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:15:22-80
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:16:5-79
+	android:name
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:16:22-76
 uses-feature#android.software.feature_companion_device_setup
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:15:5-18:32
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:18:5-21:32
 	tools:node
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:18:9-29
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:21:9-29
 	android:required
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:17:9-33
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:20:9-33
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:16:9-71
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:19:9-71
 uses-feature#android.hardware.bluetooth
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:19:5-22:32
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:22:5-25:32
 	tools:node
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:22:9-29
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:25:9-29
 	android:required
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:21:9-33
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:24:9-33
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:20:9-50
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:23:9-50
 uses-feature#android.hardware.bluetooth_le
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:23:5-26:32
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:26:5-29:32
 	tools:node
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:26:9-29
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:29:9-29
 	android:required
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:25:9-33
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:28:9-33
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:24:9-53
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:27:9-53
 application
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:28:5-83:19
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:31:5-105:19
 MERGED from [androidx.window:window:1.0.0-beta02] /Users/haraldbregu/.gradle/caches/transforms-3/7cb583e30c31fb1c27f8bea5c89993fe/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:24:5-31:19
 MERGED from [androidx.window:window:1.0.0-beta02] /Users/haraldbregu/.gradle/caches/transforms-3/7cb583e30c31fb1c27f8bea5c89993fe/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:24:5-31:19
 MERGED from [com.google.android.material:material:1.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/05d4ebcd67b9c4ce099be174b8289e75/transformed/material-1.4.0/AndroidManifest.xml:22:5-20
@@ -172,109 +184,143 @@ MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/haraldbregu/.gradle/
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.7.0] /Users/haraldbregu/.gradle/caches/transforms-3/6c2fa0e4daa3be5706d307efa2ee8d4e/transformed/core-1.7.0/AndroidManifest.xml:24:18-86
 	android:supportsRtl
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:34:9-35
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:37:9-35
 	android:label
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:32:9-41
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:35:9-41
 	tools:ignore
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:36:9-48
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:39:9-48
 	android:roundIcon
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:33:9-54
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:36:9-54
 	android:icon
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:31:9-43
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:34:9-43
 	android:allowBackup
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:30:9-35
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:33:9-35
 	android:theme
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:35:9-40
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:38:9-40
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:29:9-44
-activity#com.ninespartans.xmanager.DeviceActivity
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:37:9-40:59
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:32:9-44
+receiver#com.ninespartans.xmanager.common.InstallReceiver
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:41:9-60
+	android:name
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:41:19-57
+meta-data#com.android.packageinstaller.notification.smallIcon
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:43:9-45:68
+	android:resource
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:45:13-65
+	android:name
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:44:13-79
+activity#com.ninespartans.xmanager.AppVersionActivity
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:47:9-50:59
 	android:exported
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:39:13-37
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:49:13-37
 	android:theme
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:40:13-56
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:50:13-56
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:38:13-43
-activity#com.ninespartans.xmanager.MainActivity
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:41:9-50:20
-	android:exported
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:43:13-36
-	android:theme
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:44:13-56
-	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:42:13-41
-intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:45:13-49:29
-action#android.intent.action.MAIN
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:46:17-69
-	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:46:25-66
-category#android.intent.category.LAUNCHER
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:48:17-77
-	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:48:27-74
-activity#com.ninespartans.xmanager.ProgramListActivity
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:48:13-47
+activity#com.ninespartans.xmanager.DinamoVersionActivity
 ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:51:9-54:59
-	android:label
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:53:13-64
+	android:exported
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:53:13-37
 	android:theme
 		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:54:13-56
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:52:13-48
-activity#com.ninespartans.xmanager.CreateAccountActivity
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:52:13-50
+activity#com.ninespartans.xmanager.AccountActivity
 ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:55:9-58:59
-	android:label
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:57:13-66
+	android:exported
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:57:13-37
 	android:theme
 		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:58:13-56
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:56:13-50
-activity#com.ninespartans.xmanager.CreateProgramActivity
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:56:13-44
+activity#com.ninespartans.xmanager.DeviceActivity
 ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:59:9-62:59
-	android:label
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:61:13-76
+	android:exported
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:61:13-37
 	android:theme
 		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:62:13-56
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:60:13-50
-activity#com.ninespartans.xmanager.CreateUserActivity
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:63:9-66:59
-	android:label
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:65:13-63
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:60:13-43
+activity#com.ninespartans.xmanager.MainActivity
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:63:9-72:20
+	android:exported
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:65:13-36
 	android:theme
 		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:66:13-56
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:64:13-47
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:64:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:67:13-71:29
+action#android.intent.action.MAIN
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:68:17-69
+	android:name
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:68:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:70:17-77
+	android:name
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:70:27-74
+activity#com.ninespartans.xmanager.ProgramListActivity
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:73:9-76:59
+	android:label
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:75:13-64
+	android:theme
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:76:13-56
+	android:name
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:74:13-48
+activity#com.ninespartans.xmanager.EditAccountActivity
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:77:9-80:59
+	android:label
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:79:13-60
+	android:theme
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:80:13-56
+	android:name
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:78:13-48
+activity#com.ninespartans.xmanager.CreateProgramActivity
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:81:9-84:59
+	android:label
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:83:13-76
+	android:theme
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:84:13-56
+	android:name
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:82:13-50
+activity#com.ninespartans.xmanager.CreateUserActivity
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:85:9-88:59
+	android:label
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:87:13-63
+	android:theme
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:88:13-56
+	android:name
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:86:13-47
 activity#com.ninespartans.xmanager.BluetoothDebugActivity
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:67:9-70:59
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:89:9-92:59
 	android:label
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:69:13-41
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:91:13-41
 	android:theme
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:70:13-56
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:92:13-56
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:68:13-51
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:90:13-51
 activity#com.ninespartans.xmanager.DeviceSearchActivity
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:71:9-74:59
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:93:9-96:59
 	android:label
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:73:13-65
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:95:13-65
 	android:theme
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:74:13-56
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:96:13-56
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:72:13-49
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:94:13-49
 activity#com.ninespartans.xmanager.PermissionsManagerActivity
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:75:9-78:59
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:97:9-100:59
 	android:label
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:77:13-67
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:99:13-67
 	android:theme
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:78:13-56
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:100:13-56
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:76:13-55
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:98:13-55
 meta-data#preloaded_fonts
-ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:80:9-82:57
+ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:102:9-104:57
 	android:resource
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:82:13-54
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:104:13-54
 	android:name
-		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:81:13-43
+		ADDED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:103:13-43
 uses-sdk
 INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml

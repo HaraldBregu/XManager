@@ -12,7 +12,7 @@ public final class DeviceSearchActivity extends androidx.appcompat.app.AppCompat
     private com.ninespartans.xmanager.model.User user;
     @org.jetbrains.annotations.Nullable()
     private java.lang.String userId;
-    private final boolean debug = false;
+    private final boolean debug = true;
     @org.jetbrains.annotations.Nullable()
     private com.google.android.material.bottomsheet.BottomSheetDialog bottomSheetDialog;
     

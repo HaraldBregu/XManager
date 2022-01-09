@@ -11,7 +11,11 @@
         <entry key="../../../../../../layout/custom_preview.xml" value="0.18125" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.18229166666666666" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/outline_manage_accounts_24.xml" value="0.18385416666666668" />
         <entry key="app/src/main/res/elevation/drawable/ic_baseline_arrow_right_alt_24.xml" value="0.28802083333333334" />
+        <entry key="app/src/main/res/elevation/drawable/ic_home_app_icon.xml" value="0.25092592592592594" />
+        <entry key="app/src/main/res/layout/activity_account.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_app_version.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/activity_bluetooth_debug.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_create_account.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/layout/activity_create_program.xml" value="0.16614583333333333" />
@@ -21,10 +25,13 @@
         <entry key="app/src/main/res/layout/activity_device_pair_search.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/layout/activity_device_pair_select.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/layout/activity_device_search.xml" value="0.17604166666666668" />
+        <entry key="app/src/main/res/layout/activity_dinamo_version.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/layout/activity_permissions_manager.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/layout/activity_program_list.xml" value="0.16614583333333333" />
-        <entry key="app/src/main/res/layout/content_bluetooth_debug.xml" value="0.17604166666666668" />
+        <entry key="app/src/main/res/layout/content_account.xml" value="0.271875" />
+        <entry key="app/src/main/res/layout/content_app_version.xml" value="0.24351851851851852" />
+        <entry key="app/src/main/res/layout/content_bluetooth_debug.xml" value="0.335" />
         <entry key="app/src/main/res/layout/content_create_account.xml" value="0.271875" />
         <entry key="app/src/main/res/layout/content_create_player.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/layout/content_create_program.xml" value="0.25625" />
@@ -35,17 +42,23 @@
         <entry key="app/src/main/res/layout/content_device_pair_search.xml" value="0.375" />
         <entry key="app/src/main/res/layout/content_device_pair_select.xml" value="0.1421875" />
         <entry key="app/src/main/res/layout/content_device_search.xml" value="0.21770833333333334" />
+        <entry key="app/src/main/res/layout/content_dinamo_version.xml" value="0.2078125" />
+        <entry key="app/src/main/res/layout/content_edit_account.xml" value="0.271875" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.27399083298000876" />
-        <entry key="app/src/main/res/layout/content_permissions_manager.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/content_permissions_manager.xml" value="0.2841068917018284" />
         <entry key="app/src/main/res/layout/content_program_create_session_bottom_sheet.xml" value="0.351981351981352" />
         <entry key="app/src/main/res/layout/content_program_list.xml" value="0.375" />
         <entry key="app/src/main/res/layout/content_program_select_bottom_sheet.xml" value="0.20052083333333334" />
         <entry key="app/src/main/res/layout/content_upload_program_bottom_sheet.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/layout/dropdown_role_item.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/layout/permissions/drawable/ic_arrow_forward_24dp.xml" value="0.28802083333333334" />
+        <entry key="app/src/main/res/layout/row_app_device_header.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/row_app_device_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/row_create_program_step.xml" value="0.4031522577212371" />
         <entry key="app/src/main/res/layout/row_create_program_step_new.xml" value="0.271875" />
         <entry key="app/src/main/res/layout/row_device.xml" value="0.278130387548551" />
+        <entry key="app/src/main/res/layout/row_dinamo_device_header.xml" value="0.271875" />
+        <entry key="app/src/main/res/layout/row_dinamo_device_item.xml" value="0.271875" />
         <entry key="app/src/main/res/layout/row_main_header.xml" value="0.375" />
         <entry key="app/src/main/res/layout/row_main_player.xml" value="0.375" />
         <entry key="app/src/main/res/layout/row_main_player_device_item.xml" value="0.375" />
@@ -59,6 +72,7 @@
         <entry key="app/src/main/res/menu/popup_fab_main.xml" value="0.17239583333333333" />
         <entry key="app/src/main/res/menu/popup_menu_card.xml" value="0.25" />
         <entry key="app/src/main/res/menu/popup_program_row_options.xml" value="0.335" />
+        <entry key="app/src/main/res/xml/provider_paths.xml" value="0.14791666666666667" />
       </map>
     </option>
   </component>

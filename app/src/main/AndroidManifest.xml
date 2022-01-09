@@ -11,6 +11,9 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-feature
         android:name="android.software.feature_companion_device_setup"
@@ -34,6 +37,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
+        <receiver android:name=".common.InstallReceiver" />
+
+        <meta-data
+            android:name="com.android.packageinstaller.notification.smallIcon"
+            android:resource="@drawable/ic_install_notification" />
+
+        <activity
+            android:name=".AppVersionActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DinamoVersionActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AccountActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".DeviceActivity"
             android:exported="false"
@@ -53,8 +75,8 @@
             android:label="@string/activity_program_list_title"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".CreateAccountActivity"
-            android:label="@string/title_activity_create_profile"
+            android:name=".EditAccountActivity"
+            android:label="@string/activity_update_profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CreateProgramActivity"

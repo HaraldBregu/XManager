@@ -2,14 +2,11 @@ package com.ninespartans.xmanager
 
 import android.app.AlertDialog
 import android.bluetooth.*
-import android.content.Context
 import android.content.Intent
-import android.location.LocationManager
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.*
-import android.util.Log
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.realm.Realm
 import io.realm.kotlin.where
@@ -34,7 +31,7 @@ class DeviceSearchActivity : AppCompatActivity() {
     private var deviceInfo: DeviceInfo? = null
     private var user: User? = null
     var userId: String? = null
-    private val debug = false
+    private val debug = true
     var bottomSheetDialog: BottomSheetDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -263,7 +260,7 @@ class DeviceSearchActivity : AppCompatActivity() {
             title?.text = getString(R.string.activity_device_search_sheet_connected)
 
             val jsonString = it?.getStringValue(0)
-            deviceInfo = Gson().fromJson<DeviceInfo>(jsonString, DeviceInfo::class.java)
+            deviceInfo = Gson().fromJson(jsonString, DeviceInfo::class.java)
 
             //val gson = GsonBuilder().setPrettyPrinting().create()
             //description?.text = gson.toJson(deviceInfo)
