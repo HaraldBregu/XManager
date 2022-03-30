@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w600dp-v13/values-w600dp-v13.xml",
+            "outputFile": "/home/harald/Documenti/9Spartans/xmanager/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w600dp-v13/values-w600dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/values-w600dp/dimens.xml",
+                    "source": "/home/harald/Documenti/9Spartans/xmanager/app/src/main/res/values-w600dp/dimens.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

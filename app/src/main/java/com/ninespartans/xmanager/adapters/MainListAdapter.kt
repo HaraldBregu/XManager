@@ -8,6 +8,8 @@ import android.widget.*
 import androidx.cardview.widget.CardView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.ninespartans.xmanager.R
 import com.ninespartans.xmanager.model.*
@@ -20,8 +22,8 @@ import kotlin.concurrent.fixedRateTimer
 
 
 class MainListAdapter(context: Context): BaseAdapter() {
-    private val mContext: Context
-    private var inflater: LayoutInflater
+    private val mContext: Context = context
+    private var inflater: LayoutInflater = LayoutInflater.from(mContext)
     private val realm = Realm.getDefaultInstance()
     private var account = realm.where<Account>().findFirst()
     private var players = realm.where<User>()
@@ -32,22 +34,14 @@ class MainListAdapter(context: Context): BaseAdapter() {
     enum class Action {
         EDIT_ACCOUNT,
         SHOW_ACCOUNT,
-        CREATE_USER, // User
-        ADD_PLAYER, // Player
+        ADD_PLAYER,
         EDIT_PLAYER,
         DELETE_PLAYER,
-        DISABLE_PLAYER,
         REGISTER_DEVICE,
-        COMPLETE_DEVICES, // Devices
-        UPDATE_DEVICES,
         DELETE_DEVICES,
-        TURN_OFF_DEVICES,
-        SHOW_PROGRAM,
         SHOW_PROGRAMS,
-        CREATE_PROGRAM, // Program
-        DELETE_PROGRAM,
+        CREATE_PROGRAM,
         UPLOAD_PROGRAM,
-        START_PROGRAM,
         STOP_PROGRAM,
         SELECT_DEVICE
     }
@@ -55,11 +49,6 @@ class MainListAdapter(context: Context): BaseAdapter() {
     var onClickAction: ((Action) -> Unit)? = null
     var onClickActionOnItem: ((Action, User) -> Unit)? = null
     var onClickActionOnDeviceItem: ((Action, Device) -> Unit)? = null
-
-    init {
-        mContext = context
-        inflater = LayoutInflater.from(mContext)
-    }
 
     fun updateData() {
         this.account = realm.where<Account>().findFirst()
@@ -74,9 +63,8 @@ class MainListAdapter(context: Context): BaseAdapter() {
     override fun getCount(): Int {
         val header = 1
         val itemsHeader = 1
-        val program = 1 // if (programs.size == 0) 1 else 0
-        val count = header + program + itemsHeader + players.size
-        return count
+        val program = 1
+        return header + program + itemsHeader + players.size
     }
 
     override fun getItemId(position: Int): Long {
@@ -86,7 +74,7 @@ class MainListAdapter(context: Context): BaseAdapter() {
     override fun getItem(position: Int): User? {
         val header = 1
         val itemsHeader = 1
-        val program = 1 // if (programs.size == 0) 1 else 0
+        val program = 1
         val offset = header + itemsHeader + program
         return players[position - offset]
     }
@@ -127,11 +115,14 @@ class MainListAdapter(context: Context): BaseAdapter() {
         if (isHeader) {
 
             /** User section */
-            val userSection = rowHeader.findViewById<LinearLayout>(R.id.userSection)
-            val fullname = rowHeader.findViewById<TextView>(R.id.fullname)
+            //val userSection = rowHeader.findViewById<LinearLayout>(R.id.userSection)
+            val fullname = rowHeader.findViewById<TextView>(R.id.dashboardDetailTitle)
             val userTitle = rowHeader.findViewById<TextView>(R.id.userTitle)
-            val userEditButton = rowHeader.findViewById<MaterialButton>(R.id.editAccount)
-            userEditButton.visibility = View.GONE
+//            val userEditButton = rowHeader.findViewById<MaterialButton>(R.id.editAccount)
+//            userEditButton.visibility = View.GONE
+            val chipGroup = rowHeader.findViewById<ChipGroup>(R.id.chipGroup)
+            chipGroup.visibility = View.VISIBLE
+            val chipCreateAccount = rowHeader.findViewById<Chip>(R.id.chipCreateAccount)
 
             val account = realm.where<Account>().findFirst()
             val query = realm.where<User>()
@@ -139,13 +130,14 @@ class MainListAdapter(context: Context): BaseAdapter() {
             query.equalTo("account._id", account?._id)
             query.findFirst()?.let {
                 fullname.text = it.fullname
-                userTitle.text = mContext.getString(R.string.activity_main_header_account_description2)
+                //userTitle.text = mContext.getString(R.string.activity_main_header_account_description2)
                 if (it.headline.isNotEmpty()) {
-                    userTitle.text = it.headline
+                    //userTitle.text = it.headline
                 }
-                userEditButton.visibility = View.VISIBLE
+//                userEditButton.visibility = View.VISIBLE
+                chipGroup.visibility = View.GONE
             }
-
+/*
             userEditButton.setOnClickListener {
                 onClickAction?.let {
                     it(Action.EDIT_ACCOUNT)
@@ -159,6 +151,12 @@ class MainListAdapter(context: Context): BaseAdapter() {
                     } else {
                         it(Action.SHOW_ACCOUNT)
                     }
+                }
+            }*/
+
+            chipCreateAccount.setOnClickListener {
+                onClickAction?.let {
+                    it(Action.EDIT_ACCOUNT)
                 }
             }
 
@@ -317,7 +315,7 @@ class MainListAdapter(context: Context): BaseAdapter() {
          * the device of the player and programs running
          */
         val rowPlayer = inflater.inflate(R.layout.row_main_player, viewGroup, false)
-        val player = players.get(rowPlayerPosition)
+        val player = players[rowPlayerPosition]
 
         /** Hide info section if there are no devices */
         //rowPlayer.deviceInfoSection.visibility = if (noDevices) View.GONE else View.VISIBLE

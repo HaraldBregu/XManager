@@ -3,7 +3,7 @@
     <string name="app_name">Xmanager</string>
 
     <!--  Main Activity Header -->
-    <string name="activity_main_title">Dashboard</string>
+    <string name="activity_main_title">Xmanager</string>
     <string name="activity_main_icon">Account</string>
     <string name="main_header_title">Pannello di controllo</string>
     <string name="main_header_description">Qui puoi creare e gestire tutti i tuoi giocatori, i programmi di training e i dispositivi associati. Puoi caricare programmi e iniziare le sessioni di allenamento.</string>
@@ -16,6 +16,9 @@
     <!--  Cell main header -->
     <string name="activity_main_header_account_username">Crea un account</string>
     <string name="activity_main_header_account_description">Inserisci il nome completo, un titolo o descrizione per il tuo profilo.</string>
+    <string name="activity_main_header_title">Dashboard</string>
+    <string name="activity_main_header_subtitle">ALLENATORE</string>
+    <string name="activity_main_header_title_description">Gestisci gli allenamenti, aggiungi dispositivi e crea programmi</string>
     <string name="activity_main_header_account_description2">Inserisci un titolo o descrizione per il tuo profilo.</string>
 
     <!--  Edit Account Activity  -->

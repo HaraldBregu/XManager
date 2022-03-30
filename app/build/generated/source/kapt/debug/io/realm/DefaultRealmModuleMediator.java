@@ -28,10 +28,10 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
     static {
         Set<Class<? extends RealmModel>> modelClasses = new HashSet<Class<? extends RealmModel>>(5);
         modelClasses.add(com.ninespartans.xmanager.model.ProgramData.class);
-        modelClasses.add(com.ninespartans.xmanager.model.DeviceProgram.class);
+        modelClasses.add(com.ninespartans.xmanager.model.Device.class);
         modelClasses.add(com.ninespartans.xmanager.model.User.class);
         modelClasses.add(com.ninespartans.xmanager.model.Account.class);
-        modelClasses.add(com.ninespartans.xmanager.model.Device.class);
+        modelClasses.add(com.ninespartans.xmanager.model.DeviceProgram.class);
         MODEL_CLASSES = Collections.unmodifiableSet(modelClasses);
     }
 
@@ -39,10 +39,10 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
     public Map<Class<? extends RealmModel>, OsObjectSchemaInfo> getExpectedObjectSchemaInfoMap() {
         Map<Class<? extends RealmModel>, OsObjectSchemaInfo> infoMap = new HashMap<Class<? extends RealmModel>, OsObjectSchemaInfo>(5);
         infoMap.put(com.ninespartans.xmanager.model.ProgramData.class, io.realm.com_ninespartans_xmanager_model_ProgramDataRealmProxy.getExpectedObjectSchemaInfo());
-        infoMap.put(com.ninespartans.xmanager.model.DeviceProgram.class, io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.getExpectedObjectSchemaInfo());
+        infoMap.put(com.ninespartans.xmanager.model.Device.class, io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.getExpectedObjectSchemaInfo());
         infoMap.put(com.ninespartans.xmanager.model.User.class, io.realm.com_ninespartans_xmanager_model_UserRealmProxy.getExpectedObjectSchemaInfo());
         infoMap.put(com.ninespartans.xmanager.model.Account.class, io.realm.com_ninespartans_xmanager_model_AccountRealmProxy.getExpectedObjectSchemaInfo());
-        infoMap.put(com.ninespartans.xmanager.model.Device.class, io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.getExpectedObjectSchemaInfo());
+        infoMap.put(com.ninespartans.xmanager.model.DeviceProgram.class, io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.getExpectedObjectSchemaInfo());
         return infoMap;
     }
 
@@ -53,8 +53,8 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         if (clazz.equals(com.ninespartans.xmanager.model.ProgramData.class)) {
             return io.realm.com_ninespartans_xmanager_model_ProgramDataRealmProxy.createColumnInfo(schemaInfo);
         }
-        if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
-            return io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.createColumnInfo(schemaInfo);
+        if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
+            return io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.createColumnInfo(schemaInfo);
         }
         if (clazz.equals(com.ninespartans.xmanager.model.User.class)) {
             return io.realm.com_ninespartans_xmanager_model_UserRealmProxy.createColumnInfo(schemaInfo);
@@ -62,8 +62,8 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         if (clazz.equals(com.ninespartans.xmanager.model.Account.class)) {
             return io.realm.com_ninespartans_xmanager_model_AccountRealmProxy.createColumnInfo(schemaInfo);
         }
-        if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
-            return io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.createColumnInfo(schemaInfo);
+        if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
+            return io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.createColumnInfo(schemaInfo);
         }
         throw getMissingProxyClassException(clazz);
     }
@@ -75,8 +75,8 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         if (clazz.equals(com.ninespartans.xmanager.model.ProgramData.class)) {
             return "ProgramData";
         }
-        if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
-            return "DeviceProgram";
+        if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
+            return "Device";
         }
         if (clazz.equals(com.ninespartans.xmanager.model.User.class)) {
             return "User";
@@ -84,8 +84,8 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         if (clazz.equals(com.ninespartans.xmanager.model.Account.class)) {
             return "Account";
         }
-        if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
-            return "Device";
+        if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
+            return "DeviceProgram";
         }
         throw getMissingProxyClassException(clazz);
     }
@@ -97,8 +97,8 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         if (className.equals("ProgramData")) {
             return com.ninespartans.xmanager.model.ProgramData.class;
         }
-        if (className.equals("DeviceProgram")) {
-            return com.ninespartans.xmanager.model.DeviceProgram.class;
+        if (className.equals("Device")) {
+            return com.ninespartans.xmanager.model.Device.class;
         }
         if (className.equals("User")) {
             return com.ninespartans.xmanager.model.User.class;
@@ -106,18 +106,18 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         if (className.equals("Account")) {
             return com.ninespartans.xmanager.model.Account.class;
         }
-        if (className.equals("Device")) {
-            return com.ninespartans.xmanager.model.Device.class;
+        if (className.equals("DeviceProgram")) {
+            return com.ninespartans.xmanager.model.DeviceProgram.class;
         }
         throw getMissingProxyClassException(className);
     }
 
     @Override
     public boolean hasPrimaryKeyImpl(Class<? extends RealmModel> clazz) {
-        return com.ninespartans.xmanager.model.DeviceProgram.class.isAssignableFrom(clazz)
+        return com.ninespartans.xmanager.model.Device.class.isAssignableFrom(clazz)
                 || com.ninespartans.xmanager.model.User.class.isAssignableFrom(clazz)
                 || com.ninespartans.xmanager.model.Account.class.isAssignableFrom(clazz)
-                || com.ninespartans.xmanager.model.Device.class.isAssignableFrom(clazz);
+                || com.ninespartans.xmanager.model.DeviceProgram.class.isAssignableFrom(clazz);
     }
 
     @Override
@@ -130,8 +130,8 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
             if (clazz.equals(com.ninespartans.xmanager.model.ProgramData.class)) {
                 return clazz.cast(new io.realm.com_ninespartans_xmanager_model_ProgramDataRealmProxy());
             }
-            if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
-                return clazz.cast(new io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy());
+            if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
+                return clazz.cast(new io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy());
             }
             if (clazz.equals(com.ninespartans.xmanager.model.User.class)) {
                 return clazz.cast(new io.realm.com_ninespartans_xmanager_model_UserRealmProxy());
@@ -139,8 +139,8 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
             if (clazz.equals(com.ninespartans.xmanager.model.Account.class)) {
                 return clazz.cast(new io.realm.com_ninespartans_xmanager_model_AccountRealmProxy());
             }
-            if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
-                return clazz.cast(new io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy());
+            if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
+                return clazz.cast(new io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy());
             }
             throw getMissingProxyClassException(clazz);
         } finally {
@@ -163,9 +163,9 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
             com_ninespartans_xmanager_model_ProgramDataRealmProxy.ProgramDataColumnInfo columnInfo = (com_ninespartans_xmanager_model_ProgramDataRealmProxy.ProgramDataColumnInfo) realm.getSchema().getColumnInfo(com.ninespartans.xmanager.model.ProgramData.class);
             return clazz.cast(io.realm.com_ninespartans_xmanager_model_ProgramDataRealmProxy.copyOrUpdate(realm, columnInfo, (com.ninespartans.xmanager.model.ProgramData) obj, update, cache, flags));
         }
-        if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
-            com_ninespartans_xmanager_model_DeviceProgramRealmProxy.DeviceProgramColumnInfo columnInfo = (com_ninespartans_xmanager_model_DeviceProgramRealmProxy.DeviceProgramColumnInfo) realm.getSchema().getColumnInfo(com.ninespartans.xmanager.model.DeviceProgram.class);
-            return clazz.cast(io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.copyOrUpdate(realm, columnInfo, (com.ninespartans.xmanager.model.DeviceProgram) obj, update, cache, flags));
+        if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
+            com_ninespartans_xmanager_model_DeviceRealmProxy.DeviceColumnInfo columnInfo = (com_ninespartans_xmanager_model_DeviceRealmProxy.DeviceColumnInfo) realm.getSchema().getColumnInfo(com.ninespartans.xmanager.model.Device.class);
+            return clazz.cast(io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.copyOrUpdate(realm, columnInfo, (com.ninespartans.xmanager.model.Device) obj, update, cache, flags));
         }
         if (clazz.equals(com.ninespartans.xmanager.model.User.class)) {
             com_ninespartans_xmanager_model_UserRealmProxy.UserColumnInfo columnInfo = (com_ninespartans_xmanager_model_UserRealmProxy.UserColumnInfo) realm.getSchema().getColumnInfo(com.ninespartans.xmanager.model.User.class);
@@ -175,9 +175,9 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
             com_ninespartans_xmanager_model_AccountRealmProxy.AccountColumnInfo columnInfo = (com_ninespartans_xmanager_model_AccountRealmProxy.AccountColumnInfo) realm.getSchema().getColumnInfo(com.ninespartans.xmanager.model.Account.class);
             return clazz.cast(io.realm.com_ninespartans_xmanager_model_AccountRealmProxy.copyOrUpdate(realm, columnInfo, (com.ninespartans.xmanager.model.Account) obj, update, cache, flags));
         }
-        if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
-            com_ninespartans_xmanager_model_DeviceRealmProxy.DeviceColumnInfo columnInfo = (com_ninespartans_xmanager_model_DeviceRealmProxy.DeviceColumnInfo) realm.getSchema().getColumnInfo(com.ninespartans.xmanager.model.Device.class);
-            return clazz.cast(io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.copyOrUpdate(realm, columnInfo, (com.ninespartans.xmanager.model.Device) obj, update, cache, flags));
+        if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
+            com_ninespartans_xmanager_model_DeviceProgramRealmProxy.DeviceProgramColumnInfo columnInfo = (com_ninespartans_xmanager_model_DeviceProgramRealmProxy.DeviceProgramColumnInfo) realm.getSchema().getColumnInfo(com.ninespartans.xmanager.model.DeviceProgram.class);
+            return clazz.cast(io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.copyOrUpdate(realm, columnInfo, (com.ninespartans.xmanager.model.DeviceProgram) obj, update, cache, flags));
         }
         throw getMissingProxyClassException(clazz);
     }
@@ -190,14 +190,14 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
 
         if (clazz.equals(com.ninespartans.xmanager.model.ProgramData.class)) {
             throw new IllegalArgumentException("Embedded objects cannot be copied into Realm by themselves. They need to be attached to a parent object");
-        } else if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
-            return io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.insert(realm, (com.ninespartans.xmanager.model.DeviceProgram) object, cache);
+        } else if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
+            return io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.insert(realm, (com.ninespartans.xmanager.model.Device) object, cache);
         } else if (clazz.equals(com.ninespartans.xmanager.model.User.class)) {
             return io.realm.com_ninespartans_xmanager_model_UserRealmProxy.insert(realm, (com.ninespartans.xmanager.model.User) object, cache);
         } else if (clazz.equals(com.ninespartans.xmanager.model.Account.class)) {
             return io.realm.com_ninespartans_xmanager_model_AccountRealmProxy.insert(realm, (com.ninespartans.xmanager.model.Account) object, cache);
-        } else if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
-            return io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.insert(realm, (com.ninespartans.xmanager.model.Device) object, cache);
+        } else if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
+            return io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.insert(realm, (com.ninespartans.xmanager.model.DeviceProgram) object, cache);
         } else {
             throw getMissingProxyClassException(clazz);
         }
@@ -217,28 +217,28 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
 
             if (clazz.equals(com.ninespartans.xmanager.model.ProgramData.class)) {
                 throw new IllegalArgumentException("Embedded objects cannot be copied into Realm by themselves. They need to be attached to a parent object");
-            } else if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
-                io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.insert(realm, (com.ninespartans.xmanager.model.DeviceProgram) object, cache);
+            } else if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
+                io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.insert(realm, (com.ninespartans.xmanager.model.Device) object, cache);
             } else if (clazz.equals(com.ninespartans.xmanager.model.User.class)) {
                 io.realm.com_ninespartans_xmanager_model_UserRealmProxy.insert(realm, (com.ninespartans.xmanager.model.User) object, cache);
             } else if (clazz.equals(com.ninespartans.xmanager.model.Account.class)) {
                 io.realm.com_ninespartans_xmanager_model_AccountRealmProxy.insert(realm, (com.ninespartans.xmanager.model.Account) object, cache);
-            } else if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
-                io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.insert(realm, (com.ninespartans.xmanager.model.Device) object, cache);
+            } else if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
+                io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.insert(realm, (com.ninespartans.xmanager.model.DeviceProgram) object, cache);
             } else {
                 throw getMissingProxyClassException(clazz);
             }
             if (iterator.hasNext()) {
                 if (clazz.equals(com.ninespartans.xmanager.model.ProgramData.class)) {
                     throw new IllegalArgumentException("Embedded objects cannot be copied into Realm by themselves. They need to be attached to a parent object");
-                } else if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
-                    io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.insert(realm, iterator, cache);
+                } else if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
+                    io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.insert(realm, iterator, cache);
                 } else if (clazz.equals(com.ninespartans.xmanager.model.User.class)) {
                     io.realm.com_ninespartans_xmanager_model_UserRealmProxy.insert(realm, iterator, cache);
                 } else if (clazz.equals(com.ninespartans.xmanager.model.Account.class)) {
                     io.realm.com_ninespartans_xmanager_model_AccountRealmProxy.insert(realm, iterator, cache);
-                } else if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
-                    io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.insert(realm, iterator, cache);
+                } else if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
+                    io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.insert(realm, iterator, cache);
                 } else {
                     throw getMissingProxyClassException(clazz);
                 }
@@ -254,14 +254,14 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
 
         if (clazz.equals(com.ninespartans.xmanager.model.ProgramData.class)) {
             throw new IllegalArgumentException("Embedded objects cannot be copied into Realm by themselves. They need to be attached to a parent object");
-        } else if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
-            return io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.insertOrUpdate(realm, (com.ninespartans.xmanager.model.DeviceProgram) obj, cache);
+        } else if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
+            return io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.insertOrUpdate(realm, (com.ninespartans.xmanager.model.Device) obj, cache);
         } else if (clazz.equals(com.ninespartans.xmanager.model.User.class)) {
             return io.realm.com_ninespartans_xmanager_model_UserRealmProxy.insertOrUpdate(realm, (com.ninespartans.xmanager.model.User) obj, cache);
         } else if (clazz.equals(com.ninespartans.xmanager.model.Account.class)) {
             return io.realm.com_ninespartans_xmanager_model_AccountRealmProxy.insertOrUpdate(realm, (com.ninespartans.xmanager.model.Account) obj, cache);
-        } else if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
-            return io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.insertOrUpdate(realm, (com.ninespartans.xmanager.model.Device) obj, cache);
+        } else if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
+            return io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.insertOrUpdate(realm, (com.ninespartans.xmanager.model.DeviceProgram) obj, cache);
         } else {
             throw getMissingProxyClassException(clazz);
         }
@@ -281,28 +281,28 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
 
             if (clazz.equals(com.ninespartans.xmanager.model.ProgramData.class)) {
                 throw new IllegalArgumentException("Embedded objects cannot be copied into Realm by themselves. They need to be attached to a parent object");
-            } else if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
-                io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.insertOrUpdate(realm, (com.ninespartans.xmanager.model.DeviceProgram) object, cache);
+            } else if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
+                io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.insertOrUpdate(realm, (com.ninespartans.xmanager.model.Device) object, cache);
             } else if (clazz.equals(com.ninespartans.xmanager.model.User.class)) {
                 io.realm.com_ninespartans_xmanager_model_UserRealmProxy.insertOrUpdate(realm, (com.ninespartans.xmanager.model.User) object, cache);
             } else if (clazz.equals(com.ninespartans.xmanager.model.Account.class)) {
                 io.realm.com_ninespartans_xmanager_model_AccountRealmProxy.insertOrUpdate(realm, (com.ninespartans.xmanager.model.Account) object, cache);
-            } else if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
-                io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.insertOrUpdate(realm, (com.ninespartans.xmanager.model.Device) object, cache);
+            } else if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
+                io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.insertOrUpdate(realm, (com.ninespartans.xmanager.model.DeviceProgram) object, cache);
             } else {
                 throw getMissingProxyClassException(clazz);
             }
             if (iterator.hasNext()) {
                 if (clazz.equals(com.ninespartans.xmanager.model.ProgramData.class)) {
                     throw new IllegalArgumentException("Embedded objects cannot be copied into Realm by themselves. They need to be attached to a parent object");
-                } else if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
-                    io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.insertOrUpdate(realm, iterator, cache);
+                } else if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
+                    io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.insertOrUpdate(realm, iterator, cache);
                 } else if (clazz.equals(com.ninespartans.xmanager.model.User.class)) {
                     io.realm.com_ninespartans_xmanager_model_UserRealmProxy.insertOrUpdate(realm, iterator, cache);
                 } else if (clazz.equals(com.ninespartans.xmanager.model.Account.class)) {
                     io.realm.com_ninespartans_xmanager_model_AccountRealmProxy.insertOrUpdate(realm, iterator, cache);
-                } else if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
-                    io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.insertOrUpdate(realm, iterator, cache);
+                } else if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
+                    io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.insertOrUpdate(realm, iterator, cache);
                 } else {
                     throw getMissingProxyClassException(clazz);
                 }
@@ -318,8 +318,8 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         if (clazz.equals(com.ninespartans.xmanager.model.ProgramData.class)) {
             throw new IllegalArgumentException("Importing embedded classes from JSON without a parent is not allowed");
         }
-        if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
-            return clazz.cast(io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.createOrUpdateUsingJsonObject(realm, json, update));
+        if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
+            return clazz.cast(io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.createOrUpdateUsingJsonObject(realm, json, update));
         }
         if (clazz.equals(com.ninespartans.xmanager.model.User.class)) {
             return clazz.cast(io.realm.com_ninespartans_xmanager_model_UserRealmProxy.createOrUpdateUsingJsonObject(realm, json, update));
@@ -327,8 +327,8 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         if (clazz.equals(com.ninespartans.xmanager.model.Account.class)) {
             return clazz.cast(io.realm.com_ninespartans_xmanager_model_AccountRealmProxy.createOrUpdateUsingJsonObject(realm, json, update));
         }
-        if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
-            return clazz.cast(io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.createOrUpdateUsingJsonObject(realm, json, update));
+        if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
+            return clazz.cast(io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.createOrUpdateUsingJsonObject(realm, json, update));
         }
         throw getMissingProxyClassException(clazz);
     }
@@ -341,8 +341,8 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         if (clazz.equals(com.ninespartans.xmanager.model.ProgramData.class)) {
             throw new IllegalArgumentException("Importing embedded classes from JSON without a parent is not allowed");
         }
-        if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
-            return clazz.cast(io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.createUsingJsonStream(realm, reader));
+        if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
+            return clazz.cast(io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.createUsingJsonStream(realm, reader));
         }
         if (clazz.equals(com.ninespartans.xmanager.model.User.class)) {
             return clazz.cast(io.realm.com_ninespartans_xmanager_model_UserRealmProxy.createUsingJsonStream(realm, reader));
@@ -350,8 +350,8 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         if (clazz.equals(com.ninespartans.xmanager.model.Account.class)) {
             return clazz.cast(io.realm.com_ninespartans_xmanager_model_AccountRealmProxy.createUsingJsonStream(realm, reader));
         }
-        if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
-            return clazz.cast(io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.createUsingJsonStream(realm, reader));
+        if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
+            return clazz.cast(io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.createUsingJsonStream(realm, reader));
         }
         throw getMissingProxyClassException(clazz);
     }
@@ -365,8 +365,8 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         if (clazz.equals(com.ninespartans.xmanager.model.ProgramData.class)) {
             return clazz.cast(io.realm.com_ninespartans_xmanager_model_ProgramDataRealmProxy.createDetachedCopy((com.ninespartans.xmanager.model.ProgramData) realmObject, 0, maxDepth, cache));
         }
-        if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
-            return clazz.cast(io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.createDetachedCopy((com.ninespartans.xmanager.model.DeviceProgram) realmObject, 0, maxDepth, cache));
+        if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
+            return clazz.cast(io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.createDetachedCopy((com.ninespartans.xmanager.model.Device) realmObject, 0, maxDepth, cache));
         }
         if (clazz.equals(com.ninespartans.xmanager.model.User.class)) {
             return clazz.cast(io.realm.com_ninespartans_xmanager_model_UserRealmProxy.createDetachedCopy((com.ninespartans.xmanager.model.User) realmObject, 0, maxDepth, cache));
@@ -374,8 +374,8 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         if (clazz.equals(com.ninespartans.xmanager.model.Account.class)) {
             return clazz.cast(io.realm.com_ninespartans_xmanager_model_AccountRealmProxy.createDetachedCopy((com.ninespartans.xmanager.model.Account) realmObject, 0, maxDepth, cache));
         }
-        if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
-            return clazz.cast(io.realm.com_ninespartans_xmanager_model_DeviceRealmProxy.createDetachedCopy((com.ninespartans.xmanager.model.Device) realmObject, 0, maxDepth, cache));
+        if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
+            return clazz.cast(io.realm.com_ninespartans_xmanager_model_DeviceProgramRealmProxy.createDetachedCopy((com.ninespartans.xmanager.model.DeviceProgram) realmObject, 0, maxDepth, cache));
         }
         throw getMissingProxyClassException(clazz);
     }
@@ -385,7 +385,7 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         if (clazz.equals(com.ninespartans.xmanager.model.ProgramData.class)) {
             return true;
         }
-        if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
+        if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
             return false;
         }
         if (clazz.equals(com.ninespartans.xmanager.model.User.class)) {
@@ -394,7 +394,7 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         if (clazz.equals(com.ninespartans.xmanager.model.Account.class)) {
             return false;
         }
-        if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
+        if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
             return false;
         }
         throw getMissingProxyClassException(clazz);
@@ -408,14 +408,14 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
 
         if (clazz.equals(com.ninespartans.xmanager.model.ProgramData.class)) {
             io.realm.com_ninespartans_xmanager_model_ProgramDataRealmProxy.updateEmbeddedObject(realm, (com.ninespartans.xmanager.model.ProgramData) unmanagedObject, (com.ninespartans.xmanager.model.ProgramData) managedObject, cache, flags);
-        } else if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
-            throw getNotEmbeddedClassException("com.ninespartans.xmanager.model.DeviceProgram");
+        } else if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
+            throw getNotEmbeddedClassException("com.ninespartans.xmanager.model.Device");
         } else if (clazz.equals(com.ninespartans.xmanager.model.User.class)) {
             throw getNotEmbeddedClassException("com.ninespartans.xmanager.model.User");
         } else if (clazz.equals(com.ninespartans.xmanager.model.Account.class)) {
             throw getNotEmbeddedClassException("com.ninespartans.xmanager.model.Account");
-        } else if (clazz.equals(com.ninespartans.xmanager.model.Device.class)) {
-            throw getNotEmbeddedClassException("com.ninespartans.xmanager.model.Device");
+        } else if (clazz.equals(com.ninespartans.xmanager.model.DeviceProgram.class)) {
+            throw getNotEmbeddedClassException("com.ninespartans.xmanager.model.DeviceProgram");
         } else {
             throw getMissingProxyClassException(clazz);
         }

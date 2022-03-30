@@ -4,13 +4,13 @@ package com.ninespartans.xmanager.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.ninespartans.xmanager.R;
 import java.lang.NullPointerException;
@@ -25,7 +25,7 @@ public final class RowMainPlayerEmptyBinding implements ViewBinding {
   public final MaterialCardView cardView;
 
   @NonNull
-  public final MaterialButton noPlayerCardCreateButton;
+  public final ImageView image;
 
   @NonNull
   public final TextView noPlayerCardDescription;
@@ -34,11 +34,11 @@ public final class RowMainPlayerEmptyBinding implements ViewBinding {
   public final TextView noPlayerCardTitle;
 
   private RowMainPlayerEmptyBinding(@NonNull ConstraintLayout rootView,
-      @NonNull MaterialCardView cardView, @NonNull MaterialButton noPlayerCardCreateButton,
+      @NonNull MaterialCardView cardView, @NonNull ImageView image,
       @NonNull TextView noPlayerCardDescription, @NonNull TextView noPlayerCardTitle) {
     this.rootView = rootView;
     this.cardView = cardView;
-    this.noPlayerCardCreateButton = noPlayerCardCreateButton;
+    this.image = image;
     this.noPlayerCardDescription = noPlayerCardDescription;
     this.noPlayerCardTitle = noPlayerCardTitle;
   }
@@ -76,9 +76,9 @@ public final class RowMainPlayerEmptyBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.noPlayerCardCreateButton;
-      MaterialButton noPlayerCardCreateButton = ViewBindings.findChildViewById(rootView, id);
-      if (noPlayerCardCreateButton == null) {
+      id = R.id.image;
+      ImageView image = ViewBindings.findChildViewById(rootView, id);
+      if (image == null) {
         break missingId;
       }
 
@@ -94,8 +94,8 @@ public final class RowMainPlayerEmptyBinding implements ViewBinding {
         break missingId;
       }
 
-      return new RowMainPlayerEmptyBinding((ConstraintLayout) rootView, cardView,
-          noPlayerCardCreateButton, noPlayerCardDescription, noPlayerCardTitle);
+      return new RowMainPlayerEmptyBinding((ConstraintLayout) rootView, cardView, image,
+          noPlayerCardDescription, noPlayerCardTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

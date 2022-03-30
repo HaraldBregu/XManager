@@ -6,14 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.ninespartans.xmanager.R;
 import java.lang.NullPointerException;
@@ -25,16 +25,25 @@ public final class RowMainHeaderBinding implements ViewBinding {
   private final MaterialCardView rootView;
 
   @NonNull
+  public final Chip chipCreateAccount;
+
+  @NonNull
+  public final ChipGroup chipGroup;
+
+  @NonNull
   public final TextView countDownTimerLabel;
 
   @NonNull
   public final LinearLayout currentProgramSection;
 
   @NonNull
-  public final MaterialButton editAccount;
+  public final TextView dashboardDetailTitle;
 
   @NonNull
-  public final TextView fullname;
+  public final TextView dashboardSubTitle;
+
+  @NonNull
+  public final TextView dashboardTitle;
 
   @NonNull
   public final TextView program;
@@ -51,30 +60,26 @@ public final class RowMainHeaderBinding implements ViewBinding {
   @NonNull
   public final LinearLayout userSection;
 
-  @NonNull
-  public final RelativeLayout userSectionHeader;
-
-  @NonNull
-  public final TextView userTitle;
-
-  private RowMainHeaderBinding(@NonNull MaterialCardView rootView,
-      @NonNull TextView countDownTimerLabel, @NonNull LinearLayout currentProgramSection,
-      @NonNull MaterialButton editAccount, @NonNull TextView fullname, @NonNull TextView program,
-      @NonNull LinearProgressIndicator programProgressBar, @NonNull TextView programTitle,
-      @NonNull ImageView userImageView, @NonNull LinearLayout userSection,
-      @NonNull RelativeLayout userSectionHeader, @NonNull TextView userTitle) {
+  private RowMainHeaderBinding(@NonNull MaterialCardView rootView, @NonNull Chip chipCreateAccount,
+      @NonNull ChipGroup chipGroup, @NonNull TextView countDownTimerLabel,
+      @NonNull LinearLayout currentProgramSection, @NonNull TextView dashboardDetailTitle,
+      @NonNull TextView dashboardSubTitle, @NonNull TextView dashboardTitle,
+      @NonNull TextView program, @NonNull LinearProgressIndicator programProgressBar,
+      @NonNull TextView programTitle, @NonNull ImageView userImageView,
+      @NonNull LinearLayout userSection) {
     this.rootView = rootView;
+    this.chipCreateAccount = chipCreateAccount;
+    this.chipGroup = chipGroup;
     this.countDownTimerLabel = countDownTimerLabel;
     this.currentProgramSection = currentProgramSection;
-    this.editAccount = editAccount;
-    this.fullname = fullname;
+    this.dashboardDetailTitle = dashboardDetailTitle;
+    this.dashboardSubTitle = dashboardSubTitle;
+    this.dashboardTitle = dashboardTitle;
     this.program = program;
     this.programProgressBar = programProgressBar;
     this.programTitle = programTitle;
     this.userImageView = userImageView;
     this.userSection = userSection;
-    this.userSectionHeader = userSectionHeader;
-    this.userTitle = userTitle;
   }
 
   @Override
@@ -104,6 +109,18 @@ public final class RowMainHeaderBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.chipCreateAccount;
+      Chip chipCreateAccount = ViewBindings.findChildViewById(rootView, id);
+      if (chipCreateAccount == null) {
+        break missingId;
+      }
+
+      id = R.id.chipGroup;
+      ChipGroup chipGroup = ViewBindings.findChildViewById(rootView, id);
+      if (chipGroup == null) {
+        break missingId;
+      }
+
       id = R.id.countDownTimerLabel;
       TextView countDownTimerLabel = ViewBindings.findChildViewById(rootView, id);
       if (countDownTimerLabel == null) {
@@ -116,15 +133,21 @@ public final class RowMainHeaderBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.editAccount;
-      MaterialButton editAccount = ViewBindings.findChildViewById(rootView, id);
-      if (editAccount == null) {
+      id = R.id.dashboardDetailTitle;
+      TextView dashboardDetailTitle = ViewBindings.findChildViewById(rootView, id);
+      if (dashboardDetailTitle == null) {
         break missingId;
       }
 
-      id = R.id.fullname;
-      TextView fullname = ViewBindings.findChildViewById(rootView, id);
-      if (fullname == null) {
+      id = R.id.dashboardSubTitle;
+      TextView dashboardSubTitle = ViewBindings.findChildViewById(rootView, id);
+      if (dashboardSubTitle == null) {
+        break missingId;
+      }
+
+      id = R.id.dashboardTitle;
+      TextView dashboardTitle = ViewBindings.findChildViewById(rootView, id);
+      if (dashboardTitle == null) {
         break missingId;
       }
 
@@ -158,21 +181,9 @@ public final class RowMainHeaderBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.user_section_header;
-      RelativeLayout userSectionHeader = ViewBindings.findChildViewById(rootView, id);
-      if (userSectionHeader == null) {
-        break missingId;
-      }
-
-      id = R.id.userTitle;
-      TextView userTitle = ViewBindings.findChildViewById(rootView, id);
-      if (userTitle == null) {
-        break missingId;
-      }
-
-      return new RowMainHeaderBinding((MaterialCardView) rootView, countDownTimerLabel,
-          currentProgramSection, editAccount, fullname, program, programProgressBar, programTitle,
-          userImageView, userSection, userSectionHeader, userTitle);
+      return new RowMainHeaderBinding((MaterialCardView) rootView, chipCreateAccount, chipGroup,
+          countDownTimerLabel, currentProgramSection, dashboardDetailTitle, dashboardSubTitle,
+          dashboardTitle, program, programProgressBar, programTitle, userImageView, userSection);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

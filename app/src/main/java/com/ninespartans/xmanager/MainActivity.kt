@@ -42,8 +42,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
-        title = " " + getString(R.string.activity_main_title)
-        //supportActionBar?.setIcon(R.drawable.home_nav_bar_icon)
+        title = getString(R.string.activity_main_title)
+        //title = " " + getString(R.string.activity_main_title)
+        //supportActionBar?.setIcon(R.drawable.ic_add_plus)
         //supportActionBar?.setDisplayShowHomeEnabled(true)
 
         adapter = MainListAdapter(this)
@@ -175,7 +176,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        //menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
     }
 

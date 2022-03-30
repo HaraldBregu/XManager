@@ -76,26 +76,18 @@ public final class MainListAdapter extends android.widget.BaseAdapter {
         return null;
     }
     
-    @kotlin.Metadata(mv = {1, 5, 1}, k = 1, d1 = {"\u0000\f\n\u0002\u0018\u0002\n\u0002\u0010\u0010\n\u0002\b\u0016\b\u0086\u0001\u0018\u00002\b\u0012\u0004\u0012\u00020\u00000\u0001B\u0007\b\u0002\u00a2\u0006\u0002\u0010\u0002j\u0002\b\u0003j\u0002\b\u0004j\u0002\b\u0005j\u0002\b\u0006j\u0002\b\u0007j\u0002\b\bj\u0002\b\tj\u0002\b\nj\u0002\b\u000bj\u0002\b\fj\u0002\b\rj\u0002\b\u000ej\u0002\b\u000fj\u0002\b\u0010j\u0002\b\u0011j\u0002\b\u0012j\u0002\b\u0013j\u0002\b\u0014j\u0002\b\u0015j\u0002\b\u0016\u00a8\u0006\u0017"}, d2 = {"Lcom/ninespartans/xmanager/adapters/MainListAdapter$Action;", "", "(Ljava/lang/String;I)V", "EDIT_ACCOUNT", "SHOW_ACCOUNT", "CREATE_USER", "ADD_PLAYER", "EDIT_PLAYER", "DELETE_PLAYER", "DISABLE_PLAYER", "REGISTER_DEVICE", "COMPLETE_DEVICES", "UPDATE_DEVICES", "DELETE_DEVICES", "TURN_OFF_DEVICES", "SHOW_PROGRAM", "SHOW_PROGRAMS", "CREATE_PROGRAM", "DELETE_PROGRAM", "UPLOAD_PROGRAM", "START_PROGRAM", "STOP_PROGRAM", "SELECT_DEVICE", "app_debug"})
+    @kotlin.Metadata(mv = {1, 5, 1}, k = 1, d1 = {"\u0000\f\n\u0002\u0018\u0002\n\u0002\u0010\u0010\n\u0002\b\u000e\b\u0086\u0001\u0018\u00002\b\u0012\u0004\u0012\u00020\u00000\u0001B\u0007\b\u0002\u00a2\u0006\u0002\u0010\u0002j\u0002\b\u0003j\u0002\b\u0004j\u0002\b\u0005j\u0002\b\u0006j\u0002\b\u0007j\u0002\b\bj\u0002\b\tj\u0002\b\nj\u0002\b\u000bj\u0002\b\fj\u0002\b\rj\u0002\b\u000e\u00a8\u0006\u000f"}, d2 = {"Lcom/ninespartans/xmanager/adapters/MainListAdapter$Action;", "", "(Ljava/lang/String;I)V", "EDIT_ACCOUNT", "SHOW_ACCOUNT", "ADD_PLAYER", "EDIT_PLAYER", "DELETE_PLAYER", "REGISTER_DEVICE", "DELETE_DEVICES", "SHOW_PROGRAMS", "CREATE_PROGRAM", "UPLOAD_PROGRAM", "STOP_PROGRAM", "SELECT_DEVICE", "app_debug"})
     public static enum Action {
         /*public static final*/ EDIT_ACCOUNT /* = new EDIT_ACCOUNT() */,
         /*public static final*/ SHOW_ACCOUNT /* = new SHOW_ACCOUNT() */,
-        /*public static final*/ CREATE_USER /* = new CREATE_USER() */,
         /*public static final*/ ADD_PLAYER /* = new ADD_PLAYER() */,
         /*public static final*/ EDIT_PLAYER /* = new EDIT_PLAYER() */,
         /*public static final*/ DELETE_PLAYER /* = new DELETE_PLAYER() */,
-        /*public static final*/ DISABLE_PLAYER /* = new DISABLE_PLAYER() */,
         /*public static final*/ REGISTER_DEVICE /* = new REGISTER_DEVICE() */,
-        /*public static final*/ COMPLETE_DEVICES /* = new COMPLETE_DEVICES() */,
-        /*public static final*/ UPDATE_DEVICES /* = new UPDATE_DEVICES() */,
         /*public static final*/ DELETE_DEVICES /* = new DELETE_DEVICES() */,
-        /*public static final*/ TURN_OFF_DEVICES /* = new TURN_OFF_DEVICES() */,
-        /*public static final*/ SHOW_PROGRAM /* = new SHOW_PROGRAM() */,
         /*public static final*/ SHOW_PROGRAMS /* = new SHOW_PROGRAMS() */,
         /*public static final*/ CREATE_PROGRAM /* = new CREATE_PROGRAM() */,
-        /*public static final*/ DELETE_PROGRAM /* = new DELETE_PROGRAM() */,
         /*public static final*/ UPLOAD_PROGRAM /* = new UPLOAD_PROGRAM() */,
-        /*public static final*/ START_PROGRAM /* = new START_PROGRAM() */,
         /*public static final*/ STOP_PROGRAM /* = new STOP_PROGRAM() */,
         /*public static final*/ SELECT_DEVICE /* = new SELECT_DEVICE() */;
         

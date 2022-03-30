@@ -9,6 +9,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../../layout/custom_preview.xml" value="0.18125" />
+        <entry key="../../../Android/Sdk/platforms/android-31/data/res/drawable/chooser_direct_share_icon_placeholder.xml" value="0.2935" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.18229166666666666" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/outline_manage_accounts_24.xml" value="0.18385416666666668" />
@@ -59,7 +60,7 @@
         <entry key="app/src/main/res/layout/row_device.xml" value="0.278130387548551" />
         <entry key="app/src/main/res/layout/row_dinamo_device_header.xml" value="0.1" />
         <entry key="app/src/main/res/layout/row_dinamo_device_item.xml" value="0.271875" />
-        <entry key="app/src/main/res/layout/row_main_header.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/row_main_header.xml" value="0.5" />
         <entry key="app/src/main/res/layout/row_main_player.xml" value="0.375" />
         <entry key="app/src/main/res/layout/row_main_player_device_item.xml" value="0.375" />
         <entry key="app/src/main/res/layout/row_main_player_empty.xml" value="0.335" />

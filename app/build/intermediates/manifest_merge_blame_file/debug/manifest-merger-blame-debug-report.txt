@@ -6,243 +6,243 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="29"
-8-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
+8-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml
 9        android:targetSdkVersion="31" />
-9-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml
+9-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-11-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:6:5-76
-11-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:6:22-73
+11-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:6:5-76
+11-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:6:22-73
 12    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
-12-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:7:5-73
-12-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:7:22-70
+12-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:7:5-73
+12-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:7:22-70
 13    <uses-permission android:name="android.permission.INTERNET" />
-13-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:8:5-67
-13-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:8:22-64
+13-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:8:5-67
+13-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:8:22-64
 14    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-14-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:9:5-81
-14-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:9:22-78
+14-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:9:5-81
+14-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:9:22-78
 15    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-15-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:10:5-79
-15-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:10:22-76
+15-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:10:5-79
+15-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:10:22-76
 16    <uses-permission android:name="android.permission.BLUETOOTH" />
-16-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:11:5-68
-16-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:11:22-65
+16-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:11:5-68
+16-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:11:22-65
 17    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-17-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:12:5-74
-17-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:12:22-71
+17-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:12:5-74
+17-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:12:22-71
 18    <uses-permission android:name="android.permission.VIBRATE" />
-18-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:13:5-66
-18-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:13:22-63
+18-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:13:5-66
+18-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:13:22-63
 19    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-19-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:14:5-81
-19-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:14:22-78
+19-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:14:5-81
+19-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:14:22-78
 20    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-20-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:15:5-83
-20-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:15:22-80
+20-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:15:5-83
+20-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:15:22-80
 21    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-21-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:16:5-79
-21-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:16:22-76
+21-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:16:5-79
+21-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:16:22-76
 22
 23    <uses-feature
-23-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:18:5-21:32
+23-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:18:5-21:32
 24        android:name="android.software.feature_companion_device_setup"
-24-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:19:9-71
+24-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:19:9-71
 25        android:required="false" />
-25-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:20:9-33
+25-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:20:9-33
 26    <uses-feature
-26-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:22:5-25:32
+26-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:22:5-25:32
 27        android:name="android.hardware.bluetooth"
-27-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:23:9-50
+27-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:23:9-50
 28        android:required="false" />
-28-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:24:9-33
+28-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:24:9-33
 29    <uses-feature
-29-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:26:5-29:32
+29-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:26:5-29:32
 30        android:name="android.hardware.bluetooth_le"
-30-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:27:9-53
+30-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:27:9-53
 31        android:required="false" />
-31-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:28:9-33
+31-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:28:9-33
 32
 33    <application
-33-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:31:5-105:19
+33-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:31:5-105:19
 34        android:name="com.ninespartans.xmanager.XmanagerApplication"
-34-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:32:9-44
+34-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:32:9-44
 35        android:allowBackup="true"
-35-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:33:9-35
+35-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:33:9-35
 36        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-36-->[androidx.core:core:1.7.0] /Users/haraldbregu/.gradle/caches/transforms-3/6c2fa0e4daa3be5706d307efa2ee8d4e/transformed/core-1.7.0/AndroidManifest.xml:24:18-86
+36-->[androidx.core:core:1.7.0] /home/harald/.gradle/caches/transforms-3/5df364ef03487f7de07cda93bb546648/transformed/core-1.7.0/AndroidManifest.xml:24:18-86
 37        android:debuggable="true"
 38        android:extractNativeLibs="false"
 39        android:icon="@mipmap/ic_launcher"
-39-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:34:9-43
+39-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:34:9-43
 40        android:label="@string/app_name"
-40-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:35:9-41
+40-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:35:9-41
 41        android:roundIcon="@mipmap/ic_launcher_round"
-41-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:36:9-54
+41-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:36:9-54
 42        android:supportsRtl="true"
-42-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:37:9-35
+42-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:37:9-35
 43        android:testOnly="true"
 44        android:theme="@style/AppTheme" >
-44-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:38:9-40
+44-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:38:9-40
 45        <receiver android:name="com.ninespartans.xmanager.common.InstallReceiver" />
-45-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:41:9-60
-45-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:41:19-57
+45-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:41:9-60
+45-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:41:19-57
 46
 47        <meta-data
-47-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:43:9-45:68
+47-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:43:9-45:68
 48            android:name="com.android.packageinstaller.notification.smallIcon"
-48-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:44:13-79
+48-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:44:13-79
 49            android:resource="@drawable/ic_install_notification" />
-49-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:45:13-65
+49-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:45:13-65
 50
 51        <activity
-51-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:47:9-50:59
+51-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:47:9-50:59
 52            android:name="com.ninespartans.xmanager.AppVersionActivity"
-52-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:48:13-47
+52-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:48:13-47
 53            android:exported="false"
-53-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:49:13-37
+53-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:49:13-37
 54            android:theme="@style/AppTheme.NoActionBar" />
-54-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:50:13-56
+54-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:50:13-56
 55        <activity
-55-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:51:9-54:59
+55-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:51:9-54:59
 56            android:name="com.ninespartans.xmanager.DinamoVersionActivity"
-56-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:52:13-50
+56-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:52:13-50
 57            android:exported="false"
-57-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:53:13-37
+57-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:53:13-37
 58            android:theme="@style/AppTheme.NoActionBar" />
-58-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:54:13-56
+58-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:54:13-56
 59        <activity
-59-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:55:9-58:59
+59-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:55:9-58:59
 60            android:name="com.ninespartans.xmanager.AccountActivity"
-60-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:56:13-44
+60-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:56:13-44
 61            android:exported="false"
-61-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:57:13-37
+61-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:57:13-37
 62            android:theme="@style/AppTheme.NoActionBar" />
-62-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:58:13-56
+62-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:58:13-56
 63        <activity
-63-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:59:9-62:59
+63-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:59:9-62:59
 64            android:name="com.ninespartans.xmanager.DeviceActivity"
-64-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:60:13-43
+64-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:60:13-43
 65            android:exported="false"
-65-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:61:13-37
+65-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:61:13-37
 66            android:theme="@style/AppTheme.NoActionBar" />
-66-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:62:13-56
+66-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:62:13-56
 67        <activity
-67-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:63:9-72:20
+67-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:63:9-72:20
 68            android:name="com.ninespartans.xmanager.MainActivity"
-68-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:64:13-41
+68-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:64:13-41
 69            android:exported="true"
-69-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:65:13-36
+69-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:65:13-36
 70            android:theme="@style/AppTheme.NoActionBar" >
-70-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:66:13-56
+70-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:66:13-56
 71            <intent-filter>
-71-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:67:13-71:29
+71-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:67:13-71:29
 72                <action android:name="android.intent.action.MAIN" />
-72-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:68:17-69
-72-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:68:25-66
+72-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:68:17-69
+72-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:68:25-66
 73
 74                <category android:name="android.intent.category.LAUNCHER" />
-74-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:70:17-77
-74-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:70:27-74
+74-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:70:17-77
+74-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:70:27-74
 75            </intent-filter>
 76        </activity>
 77        <activity
-77-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:73:9-76:59
+77-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:73:9-76:59
 78            android:name="com.ninespartans.xmanager.ProgramListActivity"
-78-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:74:13-48
+78-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:74:13-48
 79            android:label="@string/activity_program_list_title"
-79-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:75:13-64
+79-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:75:13-64
 80            android:theme="@style/AppTheme.NoActionBar" />
-80-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:76:13-56
+80-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:76:13-56
 81        <activity
-81-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:77:9-80:59
+81-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:77:9-80:59
 82            android:name="com.ninespartans.xmanager.EditAccountActivity"
-82-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:78:13-48
+82-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:78:13-48
 83            android:label="@string/activity_update_profile"
-83-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:79:13-60
+83-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:79:13-60
 84            android:theme="@style/AppTheme.NoActionBar" />
-84-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:80:13-56
+84-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:80:13-56
 85        <activity
-85-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:81:9-84:59
+85-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:81:9-84:59
 86            android:name="com.ninespartans.xmanager.CreateProgramActivity"
-86-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:82:13-50
+86-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:82:13-50
 87            android:label="@string/title_activity_create_program_nav_title"
-87-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:83:13-76
+87-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:83:13-76
 88            android:theme="@style/AppTheme.NoActionBar" />
-88-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:84:13-56
+88-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:84:13-56
 89        <activity
-89-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:85:9-88:59
+89-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:85:9-88:59
 90            android:name="com.ninespartans.xmanager.CreateUserActivity"
-90-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:86:13-47
+90-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:86:13-47
 91            android:label="@string/activity_create_user_title"
-91-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:87:13-63
+91-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:87:13-63
 92            android:theme="@style/AppTheme.NoActionBar" />
-92-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:88:13-56
+92-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:88:13-56
 93        <activity
-93-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:89:9-92:59
+93-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:89:9-92:59
 94            android:name="com.ninespartans.xmanager.BluetoothDebugActivity"
-94-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:90:13-51
+94-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:90:13-51
 95            android:label="Seleziona***"
-95-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:91:13-41
+95-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:91:13-41
 96            android:theme="@style/AppTheme.NoActionBar" />
-96-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:92:13-56
+96-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:92:13-56
 97        <activity
-97-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:93:9-96:59
+97-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:93:9-96:59
 98            android:name="com.ninespartans.xmanager.DeviceSearchActivity"
-98-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:94:13-49
+98-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:94:13-49
 99            android:label="@string/activity_device_search_title"
-99-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:95:13-65
+99-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:95:13-65
 100            android:theme="@style/AppTheme.NoActionBar" />
-100-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:96:13-56
+100-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:96:13-56
 101        <activity
-101-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:97:9-100:59
+101-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:97:9-100:59
 102            android:name="com.ninespartans.xmanager.PermissionsManagerActivity"
-102-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:98:13-55
+102-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:98:13-55
 103            android:label="@string/activity_permissions_nav_title"
-103-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:99:13-67
+103-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:99:13-67
 104            android:theme="@style/AppTheme.NoActionBar" />
-104-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:100:13-56
+104-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:100:13-56
 105
 106        <meta-data
-106-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:102:9-104:57
+106-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:102:9-104:57
 107            android:name="preloaded_fonts"
-107-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:103:13-43
+107-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:103:13-43
 108            android:resource="@array/preloaded_fonts" />
-108-->/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/AndroidManifest.xml:104:13-54
+108-->/home/harald/Documenti/9Spartans/xmanager/app/src/main/AndroidManifest.xml:104:13-54
 109
 110        <uses-library
-110-->[androidx.window:window:1.0.0-beta02] /Users/haraldbregu/.gradle/caches/transforms-3/7cb583e30c31fb1c27f8bea5c89993fe/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:25:9-27:40
+110-->[androidx.window:window:1.0.0-beta02] /home/harald/.gradle/caches/transforms-3/2ed3c3a8439dd74d7355e9dae0b13aac/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:25:9-27:40
 111            android:name="androidx.window.extensions"
-111-->[androidx.window:window:1.0.0-beta02] /Users/haraldbregu/.gradle/caches/transforms-3/7cb583e30c31fb1c27f8bea5c89993fe/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:26:13-54
+111-->[androidx.window:window:1.0.0-beta02] /home/harald/.gradle/caches/transforms-3/2ed3c3a8439dd74d7355e9dae0b13aac/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:26:13-54
 112            android:required="false" />
-112-->[androidx.window:window:1.0.0-beta02] /Users/haraldbregu/.gradle/caches/transforms-3/7cb583e30c31fb1c27f8bea5c89993fe/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:27:13-37
+112-->[androidx.window:window:1.0.0-beta02] /home/harald/.gradle/caches/transforms-3/2ed3c3a8439dd74d7355e9dae0b13aac/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:27:13-37
 113        <uses-library
-113-->[androidx.window:window:1.0.0-beta02] /Users/haraldbregu/.gradle/caches/transforms-3/7cb583e30c31fb1c27f8bea5c89993fe/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:28:9-30:40
+113-->[androidx.window:window:1.0.0-beta02] /home/harald/.gradle/caches/transforms-3/2ed3c3a8439dd74d7355e9dae0b13aac/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:28:9-30:40
 114            android:name="androidx.window.sidecar"
-114-->[androidx.window:window:1.0.0-beta02] /Users/haraldbregu/.gradle/caches/transforms-3/7cb583e30c31fb1c27f8bea5c89993fe/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:29:13-51
+114-->[androidx.window:window:1.0.0-beta02] /home/harald/.gradle/caches/transforms-3/2ed3c3a8439dd74d7355e9dae0b13aac/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:29:13-51
 115            android:required="false" />
-115-->[androidx.window:window:1.0.0-beta02] /Users/haraldbregu/.gradle/caches/transforms-3/7cb583e30c31fb1c27f8bea5c89993fe/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:30:13-37
+115-->[androidx.window:window:1.0.0-beta02] /home/harald/.gradle/caches/transforms-3/2ed3c3a8439dd74d7355e9dae0b13aac/transformed/jetified-window-1.0.0-beta02/AndroidManifest.xml:30:13-37
 116
 117        <provider
-117-->[androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:26:9-34:20
+117-->[androidx.emoji2:emoji2:1.0.0] /home/harald/.gradle/caches/transforms-3/2a330cdf218808aa2be10fa442a184ae/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:26:9-34:20
 118            android:name="androidx.startup.InitializationProvider"
-118-->[androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:27:13-67
+118-->[androidx.emoji2:emoji2:1.0.0] /home/harald/.gradle/caches/transforms-3/2a330cdf218808aa2be10fa442a184ae/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:27:13-67
 119            android:authorities="com.ninespartans.xmanager.androidx-startup"
-119-->[androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:28:13-68
+119-->[androidx.emoji2:emoji2:1.0.0] /home/harald/.gradle/caches/transforms-3/2a330cdf218808aa2be10fa442a184ae/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:28:13-68
 120            android:exported="false" >
-120-->[androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:29:13-37
+120-->[androidx.emoji2:emoji2:1.0.0] /home/harald/.gradle/caches/transforms-3/2a330cdf218808aa2be10fa442a184ae/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:29:13-37
 121            <meta-data
-121-->[androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:31:13-33:52
+121-->[androidx.emoji2:emoji2:1.0.0] /home/harald/.gradle/caches/transforms-3/2a330cdf218808aa2be10fa442a184ae/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:31:13-33:52
 122                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-122-->[androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:32:17-75
+122-->[androidx.emoji2:emoji2:1.0.0] /home/harald/.gradle/caches/transforms-3/2a330cdf218808aa2be10fa442a184ae/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:32:17-75
 123                android:value="androidx.startup" />
-123-->[androidx.emoji2:emoji2:1.0.0] /Users/haraldbregu/.gradle/caches/transforms-3/86a71a4cd4ae4a47bda42916b2059470/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:33:17-49
+123-->[androidx.emoji2:emoji2:1.0.0] /home/harald/.gradle/caches/transforms-3/2a330cdf218808aa2be10fa442a184ae/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:33:17-49
 124            <meta-data
-124-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/e5331c4da41c13b18886cf3c573d8e5f/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:31:13-33:52
+124-->[androidx.lifecycle:lifecycle-process:2.4.0] /home/harald/.gradle/caches/transforms-3/d22521f30a4f10f10772c133adaa797b/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:31:13-33:52
 125                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-125-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/e5331c4da41c13b18886cf3c573d8e5f/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:32:17-78
+125-->[androidx.lifecycle:lifecycle-process:2.4.0] /home/harald/.gradle/caches/transforms-3/d22521f30a4f10f10772c133adaa797b/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:32:17-78
 126                android:value="androidx.startup" />
-126-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/haraldbregu/.gradle/caches/transforms-3/e5331c4da41c13b18886cf3c573d8e5f/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:33:17-49
+126-->[androidx.lifecycle:lifecycle-process:2.4.0] /home/harald/.gradle/caches/transforms-3/d22521f30a4f10f10772c133adaa797b/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:33:17-49
 127        </provider>
 128    </application>
 129

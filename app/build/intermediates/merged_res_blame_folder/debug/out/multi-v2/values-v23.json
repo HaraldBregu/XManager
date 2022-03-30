@@ -1,21 +1,29 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v23/values-v23.xml",
+            "outputFile": "/home/harald/Documenti/9Spartans/xmanager/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v23/values-v23.xml",
             "map": [
                 {
-                    "source": "/Users/haraldbregu/.gradle/caches/transforms-3/df8603fa2b3623e91cec860d9abd90f4/transformed/appcompat-1.4.0/res/values-v23/values-v23.xml",
+                    "source": "/home/harald/.gradle/caches/transforms-3/23bc0fd2e9034acd25d7a7741626f067/transformed/cardview-1.0.0/res/values-v23/values-v23.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,20,34,35,36,39,43,44,45,46",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,190,325,400,487,1371,2267,2386,2513,2735,2959,3074,3181,3294",
-                        "endLines": "2,3,4,5,19,33,34,35,38,42,43,44,45,49",
-                        "endColumns": "134,134,74,86,12,12,118,126,12,12,114,106,112,12",
-                        "endOffsets": "185,320,395,482,1366,2262,2381,2508,2730,2954,3069,3176,3289,3519"
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "4",
+                        "endColumns": "12",
+                        "endOffsets": "200"
+                    },
+                    "to": {
+                        "startLines": "50",
+                        "startColumns": "4",
+                        "startOffsets": "3524",
+                        "endLines": "52",
+                        "endColumns": "12",
+                        "endOffsets": "3669"
                     }
                 },
                 {
-                    "source": "/Users/haraldbregu/.gradle/caches/transforms-3/05d4ebcd67b9c4ce099be174b8289e75/transformed/material-1.4.0/res/values-v23/values-v23.xml",
+                    "source": "/home/harald/.gradle/caches/transforms-3/00398f8facdb0bf4c3319818bd01ca72/transformed/material-1.4.0/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2,6",
                         "startColumns": "4,4",
@@ -34,22 +42,14 @@
                     }
                 },
                 {
-                    "source": "/Users/haraldbregu/.gradle/caches/transforms-3/de1d251a6476b7b656e50470b600311a/transformed/cardview-1.0.0/res/values-v23/values-v23.xml",
+                    "source": "/home/harald/.gradle/caches/transforms-3/52a1f14785931ddab731d2ef509c90a1/transformed/appcompat-1.4.0/res/values-v23/values-v23.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "4",
-                        "endColumns": "12",
-                        "endOffsets": "200"
-                    },
-                    "to": {
-                        "startLines": "50",
-                        "startColumns": "4",
-                        "startOffsets": "3524",
-                        "endLines": "52",
-                        "endColumns": "12",
-                        "endOffsets": "3669"
+                        "startLines": "2,3,4,5,6,20,34,35,36,39,43,44,45,46",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,190,325,400,487,1371,2267,2386,2513,2735,2959,3074,3181,3294",
+                        "endLines": "2,3,4,5,19,33,34,35,38,42,43,44,45,49",
+                        "endColumns": "134,134,74,86,12,12,118,126,12,12,114,106,112,12",
+                        "endOffsets": "185,320,395,482,1366,2262,2381,2508,2730,2954,3069,3176,3289,3519"
                     }
                 }
             ]

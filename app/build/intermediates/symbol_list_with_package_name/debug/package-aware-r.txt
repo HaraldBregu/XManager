@@ -1898,6 +1898,7 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable athlete
 drawable avd_hide_password
 drawable avd_show_password
 drawable btn_checkbox_checked_mtrl
@@ -1921,6 +1922,7 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable football_field
 drawable ic_account_box_black_24dp
 drawable ic_add_circle_black_24dp
 drawable ic_add_plus
@@ -2175,6 +2177,8 @@ id chip
 id chip1
 id chip2
 id chip3
+id chipCreateAccount
+id chipGroup
 id chip_group
 id chooseFootRadioGroup
 id chronometer
@@ -2207,6 +2211,9 @@ id current_program_section
 id custom
 id customPanel
 id cut
+id dashboardDetailTitle
+id dashboardSubTitle
+id dashboardTitle
 id date_picker_actions
 id debugButton
 id decelerate
@@ -2436,10 +2443,8 @@ id never
 id neverCompleteToEnd
 id neverCompleteToStart
 id nextButton
-id noPlayerCardCreateButton
 id noPlayerCardDescription
 id noPlayerCardTitle
-id noProgramCardCreateButton
 id noProgramCardDescription
 id noProgramCardTitle
 id noScroll
@@ -2982,6 +2987,9 @@ string activity_main_fab_menu_item_create_program
 string activity_main_header_account_description
 string activity_main_header_account_description2
 string activity_main_header_account_username
+string activity_main_header_subtitle
+string activity_main_header_title
+string activity_main_header_title_description
 string activity_main_icon
 string activity_main_row_player_header_title
 string activity_main_row_player_menu_item_delete_devices
