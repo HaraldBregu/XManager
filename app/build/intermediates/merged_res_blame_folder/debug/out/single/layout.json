@@ -96,6 +96,10 @@
         "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/layout/row_main_program_empty.xml"
     },
     {
+        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/row_main_program.xml",
+        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/layout/row_main_program.xml"
+    },
+    {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/row_create_program_step.xml",
         "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/layout/row_create_program_step.xml"
     },

@@ -149,25 +149,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/programSectionActions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/selectProgram"
-                    style="@style/Widget.MaterialComponents.Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:text="@string/main_header_action_run_program" />
-            </RelativeLayout>
-        </LinearLayout>
-
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

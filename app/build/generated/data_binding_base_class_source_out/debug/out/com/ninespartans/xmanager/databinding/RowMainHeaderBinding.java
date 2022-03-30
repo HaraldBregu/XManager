@@ -43,13 +43,7 @@ public final class RowMainHeaderBinding implements ViewBinding {
   public final LinearProgressIndicator programProgressBar;
 
   @NonNull
-  public final LinearLayout programSectionActions;
-
-  @NonNull
   public final TextView programTitle;
-
-  @NonNull
-  public final MaterialButton selectProgram;
 
   @NonNull
   public final ImageView userImageView;
@@ -66,11 +60,9 @@ public final class RowMainHeaderBinding implements ViewBinding {
   private RowMainHeaderBinding(@NonNull MaterialCardView rootView,
       @NonNull TextView countDownTimerLabel, @NonNull LinearLayout currentProgramSection,
       @NonNull MaterialButton editAccount, @NonNull TextView fullname, @NonNull TextView program,
-      @NonNull LinearProgressIndicator programProgressBar,
-      @NonNull LinearLayout programSectionActions, @NonNull TextView programTitle,
-      @NonNull MaterialButton selectProgram, @NonNull ImageView userImageView,
-      @NonNull LinearLayout userSection, @NonNull RelativeLayout userSectionHeader,
-      @NonNull TextView userTitle) {
+      @NonNull LinearProgressIndicator programProgressBar, @NonNull TextView programTitle,
+      @NonNull ImageView userImageView, @NonNull LinearLayout userSection,
+      @NonNull RelativeLayout userSectionHeader, @NonNull TextView userTitle) {
     this.rootView = rootView;
     this.countDownTimerLabel = countDownTimerLabel;
     this.currentProgramSection = currentProgramSection;
@@ -78,9 +70,7 @@ public final class RowMainHeaderBinding implements ViewBinding {
     this.fullname = fullname;
     this.program = program;
     this.programProgressBar = programProgressBar;
-    this.programSectionActions = programSectionActions;
     this.programTitle = programTitle;
-    this.selectProgram = selectProgram;
     this.userImageView = userImageView;
     this.userSection = userSection;
     this.userSectionHeader = userSectionHeader;
@@ -150,21 +140,9 @@ public final class RowMainHeaderBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.programSectionActions;
-      LinearLayout programSectionActions = ViewBindings.findChildViewById(rootView, id);
-      if (programSectionActions == null) {
-        break missingId;
-      }
-
       id = R.id.programTitle;
       TextView programTitle = ViewBindings.findChildViewById(rootView, id);
       if (programTitle == null) {
-        break missingId;
-      }
-
-      id = R.id.selectProgram;
-      MaterialButton selectProgram = ViewBindings.findChildViewById(rootView, id);
-      if (selectProgram == null) {
         break missingId;
       }
 
@@ -193,9 +171,8 @@ public final class RowMainHeaderBinding implements ViewBinding {
       }
 
       return new RowMainHeaderBinding((MaterialCardView) rootView, countDownTimerLabel,
-          currentProgramSection, editAccount, fullname, program, programProgressBar,
-          programSectionActions, programTitle, selectProgram, userImageView, userSection,
-          userSectionHeader, userTitle);
+          currentProgramSection, editAccount, fullname, program, programProgressBar, programTitle,
+          userImageView, userSection, userSectionHeader, userTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

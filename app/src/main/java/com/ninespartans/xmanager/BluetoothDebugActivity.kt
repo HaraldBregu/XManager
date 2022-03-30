@@ -65,7 +65,6 @@ class BluetoothDebugActivity : AppCompatActivity() {
                             version = deviceInfo.version
                             mac = deviceInfo.efuse_mac
                             ble_mac = deviceInfo.ble.mac
-                            wifi_mac = deviceInfo.wifi.mac
                         })
                         //this.player.leftDevice = device
                     }
@@ -83,7 +82,6 @@ class BluetoothDebugActivity : AppCompatActivity() {
                             version = deviceInfo.version
                             mac = deviceInfo.efuse_mac
                             ble_mac = deviceInfo.ble.mac
-                            wifi_mac = deviceInfo.wifi.mac
                         })
                         //this.player.rightDevice = device
                     }

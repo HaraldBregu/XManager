@@ -138,6 +138,8 @@ class DeviceSearchActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
 
+        bottomSheetDialog?.dismiss()
+        bottomSheetDialog = null
         BLEManager.stopScanning()
         BLEManager.close()
     }
@@ -294,7 +296,6 @@ class DeviceSearchActivity : AppCompatActivity() {
                         if (rightSelected) { deviceType = Device.DeviceType.SHOE_RIGHT }
                         mac = deviceInfo.efuse_mac
                         ble_mac = deviceInfo.ble.mac
-                        wifi_mac = deviceInfo.wifi.mac
                         user = this@DeviceSearchActivity.user
                     }
                     bottomSheetDialog?.hide()

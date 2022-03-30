@@ -38,6 +38,8 @@ class AccountActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.content.dinamoVersionTitle.text = "Dinamo"
+        binding.content.dinamoVersionDescription.text = "Scarica e installa le ultime versioni firmware"
         binding.content.dinamoVersionSection.setOnClickListener {
             val intent = Intent(this, DinamoVersionActivity::class.java)
             startActivity(intent)

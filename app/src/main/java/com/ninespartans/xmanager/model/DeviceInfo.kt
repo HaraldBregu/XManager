@@ -5,20 +5,12 @@ data class DeviceInfo(
     var version: String,
     var locked: Boolean,
     var efuse_mac: String,
-    var program_mode: String,
-    var firmware_url: String,
 
-    var ble: Ble,
-    var wifi: WiFi
+    var ble: Ble
 ) {
 
     data class Ble(
         var connected: String,
         var mac: String)
 
-    data class WiFi(
-        val ssid: String,
-        val password: String,
-        var connected: String,
-        var mac: String)
 }

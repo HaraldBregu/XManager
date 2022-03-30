@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, AccountActivity::class.java)
                     startActivity(intent)
                 }
+
                 MainListAdapter.Action.STOP_PROGRAM -> {
                     val builderInner = AlertDialog.Builder(this)
                     builderInner.setTitle("Termina programma")
@@ -79,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     builderInner.show()
                 }
-                MainListAdapter.Action.SHOW_PROGRAM -> {
+                MainListAdapter.Action.SHOW_PROGRAMS -> {
                     val intent = Intent(this, ProgramListActivity::class.java)
                     startActivity(intent)
                 }
@@ -145,21 +146,25 @@ class MainActivity : AppCompatActivity() {
         }
 
         /** Option button */
-        binding.content.uploadProgramButton.visibility = View.GONE
+        val programs = realm.where<DeviceProgram>().findAll()
+        val users = realm.where<User>().findAll()
+        binding.content.uploadProgramButton.visibility = if (programs.size > 0 && users.size > 0) View.VISIBLE else View.GONE
         binding.content.uploadProgramButton.setOnClickListener {
+            presentProgramsListBottomSheet()
+
             /*val popupMenu = PopupMenu(this, it)
-            popupMenu.menuInflater.inflate(R.menu.popup_fab_main, popupMenu.menu)
-            popupMenu.setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.action_create_program ->
-                        startActivity(Intent(this, CreateProgramActivity::class.java))
-                    R.id.action_create_player ->
-                        startActivity(Intent(this, CreateUserActivity::class.java))
+                popupMenu.menuInflater.inflate(R.menu.popup_fab_main, popupMenu.menu)
+                popupMenu.setOnMenuItemClickListener {
+                    when (it.itemId) {
+                        R.id.action_create_program ->
+                            startActivity(Intent(this, CreateProgramActivity::class.java))
+                        R.id.action_create_player ->
+                            startActivity(Intent(this, CreateUserActivity::class.java))
+                    }
+                    true
                 }
-                true
-            }
-            popupMenu.show()
-            */
+                popupMenu.show()
+                */
         }
     }
 

@@ -16,8 +16,12 @@ import android.location.LocationManager
 import android.os.Looper
 import androidx.core.content.ContextCompat
 
-
 object BLEManager {
+    private const val GENERAL_SERVICE = "a327169a-31c0-4010-aebf-3e68ee255144"
+    private const val GENERAL_CHARACTERISTIC = "e8e0d1f9-d24d-41b8-9a81-38be02772944"
+    private const val GENERAL_DESCRIPTOR = "29976087-4812-4e67-8624-67d10df59231"
+    //private const val OTA_CHARACTERISTIC = "62a5b66b-6444-4792-9e17-8f489f3afcd2"
+
     lateinit var didFoundDevice: ((BluetoothDevice) -> Unit)
     lateinit var onStartScanning: (() -> Unit)
     lateinit var onStopScanning: (() -> Unit)
@@ -38,6 +42,9 @@ object BLEManager {
 
     private var reading: Boolean = false
 
+    //val bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+    //bluetoothManager.getAdapter()
+
     var adapter: BluetoothAdapter? = null
         get() = BluetoothAdapter.getDefaultAdapter()
 
@@ -55,7 +62,7 @@ object BLEManager {
 
         doAsync {
             val scanFilter = ScanFilter.Builder()
-                .setServiceUuid(ParcelUuid(UUID.fromString("a327169a-31c0-4010-aebf-3e68ee255144")))
+                .setServiceUuid(ParcelUuid(UUID.fromString(GENERAL_SERVICE)))
                 .build()
             val scanFilters: List<ScanFilter> = listOf(scanFilter)
 
@@ -113,7 +120,6 @@ object BLEManager {
 
         override fun onScanFailed(errorCode: Int) {
             super.onScanFailed(errorCode)
-
         }
     }
 
@@ -172,10 +178,12 @@ object BLEManager {
                 Log.i("SERVICE_DISCOVERED", status.toString())
 
                 val gattObject = gatt.takeIf { it != null } ?: return
-                val service = gattObject.getService(UUID.fromString("a327169a-31c0-4010-aebf-3e68ee255144")).takeIf { it !=null } ?: return
+                val service = gattObject.getService(UUID.fromString(GENERAL_SERVICE)).takeIf { it !=null } ?: return
                 selectedService = service
-                selectedCharacteristic = selectedService.getCharacteristic(UUID.fromString("e8e0d1f9-d24d-41b8-9a81-38be02772944"))
-                selectedDescriptor = selectedCharacteristic.getDescriptor(UUID.fromString("29976087-4812-4e67-8624-67d10df59231"))
+                selectedCharacteristic = selectedService.getCharacteristic(UUID.fromString(GENERAL_CHARACTERISTIC))
+                Log.i("SELECTED_CHARACTERISTIC", selectedCharacteristic.uuid.toString())
+                selectedDescriptor = selectedCharacteristic.getDescriptor(UUID.fromString(GENERAL_DESCRIPTOR))
+                Log.i("SELECTED_DESCRIPTOR", selectedDescriptor.uuid.toString())
 
                 onServiceDiscovered?.let {
                     it(true)
@@ -250,9 +258,8 @@ object BLEManager {
     }
 
     fun write(byteArray: ByteArray) {
-        selectedCharacteristic.setValue(byteArray)
-        bluetoothGatt?.setCharacteristicNotification(
-            selectedCharacteristic, true)
+        selectedCharacteristic.value = byteArray
+        bluetoothGatt?.setCharacteristicNotification(selectedCharacteristic, true)
         bluetoothGatt?.writeCharacteristic(selectedCharacteristic)
         //selectedDescriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE)
         //bluetoothGatt?.writeDescriptor(selectedDescriptor)
@@ -260,8 +267,7 @@ object BLEManager {
 
     fun write(string: String) {
         selectedCharacteristic.setValue(string)
-        bluetoothGatt?.setCharacteristicNotification(
-            selectedCharacteristic, true)
+        bluetoothGatt?.setCharacteristicNotification(selectedCharacteristic, true)
         bluetoothGatt?.writeCharacteristic(selectedCharacteristic)
         //selectedDescriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE)
         //bluetoothGatt?.writeDescriptor(selectedDescriptor)

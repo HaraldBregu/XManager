@@ -24,12 +24,12 @@
         "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/layout/content_app_version.xml"
     },
     {
-        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/merged_res/debug/drawable-hdpi_ic_player_pair_shoes.png.flat",
-        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable-hdpi/ic_player_pair_shoes.png"
-    },
-    {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/merged_res/debug/drawable-xxhdpi_ic_debug.png.flat",
         "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable-xxhdpi/ic_debug.png"
+    },
+    {
+        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/merged_res/debug/drawable-hdpi_ic_player_pair_shoes.png.flat",
+        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable-hdpi/ic_player_pair_shoes.png"
     },
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/merged_res/debug/anim_bottom_up.xml.flat",
@@ -40,12 +40,16 @@
         "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable-v24/shoe_pair_light_top_int.png"
     },
     {
-        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/merged_res/debug/drawable-v24_shoe_pair_light_top.png.flat",
-        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable-v24/shoe_pair_light_top.png"
+        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/merged_res/debug/layout_row_main_program.xml.flat",
+        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/layout/row_main_program.xml"
     },
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/merged_res/debug/layout_content_upload_program_bottom_sheet.xml.flat",
         "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/layout/content_upload_program_bottom_sheet.xml"
+    },
+    {
+        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/merged_res/debug/drawable-v24_shoe_pair_light_top.png.flat",
+        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable-v24/shoe_pair_light_top.png"
     },
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/merged_res/debug/drawable-mdpi_ic_add_plus.png.flat",
@@ -190,6 +194,10 @@
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/merged_res/debug/layout_row_create_program_step_new.xml.flat",
         "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/layout/row_create_program_step_new.xml"
+    },
+    {
+        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/merged_res/debug/drawable-v24_ic_xmanager.png.flat",
+        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable-v24/ic_xmanager.png"
     },
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/merged_res/debug/drawable_button_link_normal.xml.flat",
@@ -622,6 +630,10 @@
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/merged_res/debug/drawable-mdpi_ic_debug.png.flat",
         "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable-mdpi/ic_debug.png"
+    },
+    {
+        "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/merged_res/debug/drawable-v24_ic_dinamo.png.flat",
+        "source": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/src/main/res/drawable-v24/ic_dinamo.png"
     },
     {
         "merged": "/Users/haraldbregu/Documents/9Spartans/apps/Xmanager/app/build/intermediates/merged_res/debug/anim_slide_out_up.xml.flat",

@@ -23,7 +23,13 @@ public final class ContentAccountBinding implements ViewBinding {
   private final RelativeLayout rootView;
 
   @NonNull
+  public final TextView dinamoVersionDescription;
+
+  @NonNull
   public final LinearLayout dinamoVersionSection;
+
+  @NonNull
+  public final TextView dinamoVersionTitle;
 
   @NonNull
   public final MaterialButton editAccount;
@@ -50,13 +56,16 @@ public final class ContentAccountBinding implements ViewBinding {
   public final LinearLayout xmanagerVersionSection;
 
   private ContentAccountBinding(@NonNull RelativeLayout rootView,
-      @NonNull LinearLayout dinamoVersionSection, @NonNull MaterialButton editAccount,
+      @NonNull TextView dinamoVersionDescription, @NonNull LinearLayout dinamoVersionSection,
+      @NonNull TextView dinamoVersionTitle, @NonNull MaterialButton editAccount,
       @NonNull TextView fullname, @NonNull ImageView userImageView,
       @NonNull LinearLayout userSection, @NonNull TextView userTitle,
       @NonNull TextView xmanagerDescription, @NonNull TextView xmanagerTitle,
       @NonNull LinearLayout xmanagerVersionSection) {
     this.rootView = rootView;
+    this.dinamoVersionDescription = dinamoVersionDescription;
     this.dinamoVersionSection = dinamoVersionSection;
+    this.dinamoVersionTitle = dinamoVersionTitle;
     this.editAccount = editAccount;
     this.fullname = fullname;
     this.userImageView = userImageView;
@@ -94,9 +103,21 @@ public final class ContentAccountBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.dinamoVersionDescription;
+      TextView dinamoVersionDescription = ViewBindings.findChildViewById(rootView, id);
+      if (dinamoVersionDescription == null) {
+        break missingId;
+      }
+
       id = R.id.dinamoVersionSection;
       LinearLayout dinamoVersionSection = ViewBindings.findChildViewById(rootView, id);
       if (dinamoVersionSection == null) {
+        break missingId;
+      }
+
+      id = R.id.dinamoVersionTitle;
+      TextView dinamoVersionTitle = ViewBindings.findChildViewById(rootView, id);
+      if (dinamoVersionTitle == null) {
         break missingId;
       }
 
@@ -148,9 +169,9 @@ public final class ContentAccountBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ContentAccountBinding((RelativeLayout) rootView, dinamoVersionSection, editAccount,
-          fullname, userImageView, userSection, userTitle, xmanagerDescription, xmanagerTitle,
-          xmanagerVersionSection);
+      return new ContentAccountBinding((RelativeLayout) rootView, dinamoVersionDescription,
+          dinamoVersionSection, dinamoVersionTitle, editAccount, fullname, userImageView,
+          userSection, userTitle, xmanagerDescription, xmanagerTitle, xmanagerVersionSection);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

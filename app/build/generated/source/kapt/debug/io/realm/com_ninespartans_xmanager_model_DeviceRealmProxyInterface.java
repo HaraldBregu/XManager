@@ -16,8 +16,6 @@ public interface com_ninespartans_xmanager_model_DeviceRealmProxyInterface {
     public void realmSet$mac(String value);
     public String realmGet$ble_mac();
     public void realmSet$ble_mac(String value);
-    public String realmGet$wifi_mac();
-    public void realmSet$wifi_mac(String value);
     public com.ninespartans.xmanager.model.DeviceProgram realmGet$program();
     public void realmSet$program(com.ninespartans.xmanager.model.DeviceProgram value);
     public com.ninespartans.xmanager.model.User realmGet$user();

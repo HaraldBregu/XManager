@@ -43,6 +43,7 @@ class MainListAdapter(context: Context): BaseAdapter() {
         DELETE_DEVICES,
         TURN_OFF_DEVICES,
         SHOW_PROGRAM,
+        SHOW_PROGRAMS,
         CREATE_PROGRAM, // Program
         DELETE_PROGRAM,
         UPLOAD_PROGRAM,
@@ -73,7 +74,7 @@ class MainListAdapter(context: Context): BaseAdapter() {
     override fun getCount(): Int {
         val header = 1
         val itemsHeader = 1
-        val program = if (programs.size == 0) 1 else 0
+        val program = 1 // if (programs.size == 0) 1 else 0
         val count = header + program + itemsHeader + players.size
         return count
     }
@@ -85,9 +86,9 @@ class MainListAdapter(context: Context): BaseAdapter() {
     override fun getItem(position: Int): User? {
         val header = 1
         val itemsHeader = 1
-        val program = if (programs.size == 0) 1 else 0
+        val program = 1 // if (programs.size == 0) 1 else 0
         val offset = header + itemsHeader + program
-        return players.get(position - offset)
+        return players[position - offset]
     }
 
     override fun getView(position: Int, convertView : View?, viewGroup: ViewGroup?): View {
@@ -97,12 +98,25 @@ class MainListAdapter(context: Context): BaseAdapter() {
         val hasPrograms = programs.size > 0
 
         val isHeader = position==0
-        val isRowPlayerEmpty = position == 1 && noPlayers
+        val isRowProgram = hasPrograms && position == 1
+
+        /**
+         * If there are no players and no programs, the position is 1
+         * or there are no players and some program the position is 2
+         */
+        val isRowPlayerEmpty = (position == 1 && noPlayers && noPrograms) || (position == 2 && noPlayers && hasPrograms)
+
+        /**
+         * If there are some player and no programs, position is 1
+         * or if there are no players and no programs, the position is 2
+         */
         val isRowProgramEmpty = (position == 1 && hasPlayers && noPrograms) || (position == 2 && noPlayers && noPrograms)
-        val isRowHeaderPlayer = (position == 1 && hasPlayers && hasPrograms) || (position == 2 && hasPlayers && noPrograms)
+
+        val isRowHeaderPlayer = (position == 2 && hasPlayers && hasPrograms) || (hasPlayers && noPrograms && position == 3)
+
         var rowPlayerPosition = 0
-        rowPlayerPosition = if (hasPlayers && hasPrograms) position - 2 else 0
-        rowPlayerPosition = if (hasPlayers && !hasPrograms) position - 3 else rowPlayerPosition
+        rowPlayerPosition = if (hasPlayers && hasPrograms) position - 3 else 0
+        rowPlayerPosition = if (hasPlayers && !hasPrograms) position - 4 else rowPlayerPosition
 
         /**
          * Header Row
@@ -150,9 +164,7 @@ class MainListAdapter(context: Context): BaseAdapter() {
 
             /** Training Session Section */
             val current_program_section = rowHeader.findViewById<LinearLayout>(R.id.current_program_section)
-            val programSectionActions = rowHeader.findViewById<LinearLayout>(R.id.programSectionActions)
             current_program_section.visibility = View.GONE
-            programSectionActions.visibility = if (noPrograms) View.GONE else View.VISIBLE
 
             val activeSessionProgram = realm.where<DeviceProgram>()
                 .equalTo("active", true)
@@ -223,15 +235,33 @@ class MainListAdapter(context: Context): BaseAdapter() {
                 }
             }
 
-            val selectProgram = rowHeader.findViewById<MaterialButton>(R.id.selectProgram)
+            return rowHeader
+        }
 
-            selectProgram.setOnClickListener {
+        /**
+         * Programs row
+         */
+        if (isRowProgram) {
+            val rowProgram = inflater.inflate(R.layout.row_main_program, viewGroup, false)
+            val cardView = rowProgram.findViewById<MaterialCardView>(R.id.cardView)
+
+            cardView.setOnClickListener {
                 onClickAction?.let {
-                    it(Action.UPLOAD_PROGRAM)
+                    it(Action.SHOW_PROGRAMS)
                 }
             }
 
-            return rowHeader
+            val programTitle = rowProgram.findViewById<TextView>(R.id.programTitle)
+            programTitle.text = "Programmi (${programs.size})"
+
+            val createProgram = rowProgram.findViewById<MaterialButton>(R.id.createProgram)
+            createProgram.setOnClickListener {
+                onClickAction?.let {
+                    it(Action.CREATE_PROGRAM)
+                }
+            }
+
+            return rowProgram
         }
 
         /**

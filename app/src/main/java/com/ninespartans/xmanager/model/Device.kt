@@ -16,7 +16,6 @@ open class Device(
 
     var mac: String = "",
     var ble_mac: String = "",
-    var wifi_mac: String = "",
 
     var program: DeviceProgram? = null,
     var user: User? = null,

@@ -92,6 +92,8 @@ io/realm/com_ninespartans_xmanager_model_DeviceRealmProxyInterface.java
  io.realm.com_ninespartans_xmanager_model_DeviceRealmProxyInterface
 com/ninespartans/xmanager/databinding/ContentUploadProgramBottomSheetBinding.java
  com.ninespartans.xmanager.databinding.ContentUploadProgramBottomSheetBinding
+com/ninespartans/xmanager/databinding/RowMainProgramBinding.java
+ com.ninespartans.xmanager.databinding.RowMainProgramBinding
 com/ninespartans/xmanager/databinding/ContentPermissionsManagerBinding.java
  com.ninespartans.xmanager.databinding.ContentPermissionsManagerBinding
 io/realm/com_ninespartans_xmanager_model_DeviceProgramRealmProxy.java

@@ -1935,6 +1935,7 @@ drawable ic_cancel_black_24dp
 drawable ic_check_circle_green_24dp
 drawable ic_clock_black_24dp
 drawable ic_debug
+drawable ic_dinamo
 drawable ic_error_black_24dp
 drawable ic_fab_add_white
 drawable ic_install_notification
@@ -1964,6 +1965,7 @@ drawable ic_player_pair_shoes_done
 drawable ic_player_pair_shoes_initial
 drawable ic_stop_white
 drawable ic_warning_24dp
+drawable ic_xmanager
 drawable left
 drawable left_unactive
 drawable material_cursor_drawable
@@ -2198,6 +2200,7 @@ id cos
 id countDownTimerLabel
 id counterclockwise
 id createNewProgram
+id createProgram
 id createSession
 id currentState
 id current_program_section
@@ -2233,7 +2236,9 @@ id deviceVersion
 id devicesConnectionTitle
 id dialog_button
 id dimensions
+id dinamoVersionDescription
 id dinamoVersionSection
+id dinamoVersionTitle
 id direct
 id disableHome
 id disableIntraAutoTransition
@@ -2474,7 +2479,6 @@ id program
 id programPlayerTimer
 id programPlayerTitle
 id programProgressBar
-id programSectionActions
 id programSessionSection
 id programTitle
 id progressBarTitle
@@ -2525,7 +2529,6 @@ id search_voice_btn
 id secondsEditText
 id seekbar
 id seekbar_value
-id selectProgram
 id select_dialog_listview
 id selected
 id selection_type
@@ -2887,6 +2890,7 @@ layout row_main_player
 layout row_main_player_device_item
 layout row_main_player_empty
 layout row_main_player_header
+layout row_main_program
 layout row_main_program_empty
 layout row_program_list
 layout row_program_select_list

@@ -17,16 +17,16 @@
         android:paddingBottom="88dp"
         android:clipToPadding="false" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/uploadProgramButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_gravity="bottom|end"
+        android:layout_gravity="bottom|center"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/ic_fab_add_white"
-        android:contentDescription="@string/activity_create_user_title" />
+        android:textAlignment="center"
+        android:text="Avvia" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

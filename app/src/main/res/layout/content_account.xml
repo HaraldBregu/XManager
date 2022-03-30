@@ -160,12 +160,14 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <TextView
+                            android:id="@+id/dinamoVersionTitle"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Dinamo">
                         </TextView>
                         <TextView
+                            android:id="@+id/dinamoVersionDescription"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

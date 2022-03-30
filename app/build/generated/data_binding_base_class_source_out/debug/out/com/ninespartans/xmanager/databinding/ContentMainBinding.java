@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.ninespartans.xmanager.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -24,10 +24,10 @@ public final class ContentMainBinding implements ViewBinding {
   public final ListView listView;
 
   @NonNull
-  public final FloatingActionButton uploadProgramButton;
+  public final ExtendedFloatingActionButton uploadProgramButton;
 
   private ContentMainBinding(@NonNull CoordinatorLayout rootView, @NonNull ListView listView,
-      @NonNull FloatingActionButton uploadProgramButton) {
+      @NonNull ExtendedFloatingActionButton uploadProgramButton) {
     this.rootView = rootView;
     this.listView = listView;
     this.uploadProgramButton = uploadProgramButton;
@@ -67,7 +67,7 @@ public final class ContentMainBinding implements ViewBinding {
       }
 
       id = R.id.uploadProgramButton;
-      FloatingActionButton uploadProgramButton = ViewBindings.findChildViewById(rootView, id);
+      ExtendedFloatingActionButton uploadProgramButton = ViewBindings.findChildViewById(rootView, id);
       if (uploadProgramButton == null) {
         break missingId;
       }

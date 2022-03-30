@@ -49,7 +49,7 @@
                                 android:layout_width="45dp"
                                 android:layout_height="45dp"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/ic_launcher_background" />
+                                android:src="@drawable/ic_xmanager" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
