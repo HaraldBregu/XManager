@@ -2156,6 +2156,7 @@ int id bounce 0x7f0a007d
 int id bounceBoth 0x7f0a007e
 int id bounceEnd 0x7f0a007f
 int id bounceStart 0x7f0a0080
+int id buttonCreateAccount 0x7f0a029b
 int id buttonPanel 0x7f0a0081
 int id cache_measures 0x7f0a0082
 int id callMeasure 0x7f0a0083
@@ -2176,8 +2177,6 @@ int id chip 0x7f0a0091
 int id chip1 0x7f0a0092
 int id chip2 0x7f0a0093
 int id chip3 0x7f0a0094
-int id chipCreateAccount 0x7f0a0095
-int id chipGroup 0x7f0a0096
 int id chip_group 0x7f0a0097
 int id chooseFootRadioGroup 0x7f0a0098
 int id chronometer 0x7f0a0099
@@ -2203,7 +2202,6 @@ int id cos 0x7f0a00ac
 int id countDownTimerLabel 0x7f0a00ad
 int id counterclockwise 0x7f0a00ae
 int id createNewProgram 0x7f0a00af
-int id createProgram 0x7f0a00b0
 int id createSession 0x7f0a00b1
 int id currentState 0x7f0a00b2
 int id current_program_section 0x7f0a00b3
@@ -2480,6 +2478,8 @@ int id preferences_detail 0x7f0a01c2
 int id preferences_header 0x7f0a01c3
 int id preferences_sliding_pane_layout 0x7f0a01c4
 int id program 0x7f0a01c5
+int id programCount 0x7f0a029a
+int id programDescription 0x7f0a0299
 int id programPlayerTimer 0x7f0a01c6
 int id programPlayerTitle 0x7f0a01c7
 int id programProgressBar 0x7f0a01c8

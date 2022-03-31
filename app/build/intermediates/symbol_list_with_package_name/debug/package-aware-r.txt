@@ -2157,6 +2157,7 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id buttonCreateAccount
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -2177,8 +2178,6 @@ id chip
 id chip1
 id chip2
 id chip3
-id chipCreateAccount
-id chipGroup
 id chip_group
 id chooseFootRadioGroup
 id chronometer
@@ -2204,7 +2203,6 @@ id cos
 id countDownTimerLabel
 id counterclockwise
 id createNewProgram
-id createProgram
 id createSession
 id currentState
 id current_program_section
@@ -2481,6 +2479,8 @@ id preferences_detail
 id preferences_header
 id preferences_sliding_pane_layout
 id program
+id programCount
+id programDescription
 id programPlayerTimer
 id programPlayerTitle
 id programProgressBar

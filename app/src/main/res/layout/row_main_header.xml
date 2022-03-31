@@ -80,19 +80,17 @@
                     android:text="@string/activity_main_header_title_description"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
-
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chipGroup"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipCreateAccount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:chipIcon="@drawable/ic_add_circle_black_24dp"
-                        android:text="Crea account"/>
-                </com.google.android.material.chip.ChipGroup>
+                <Button
+                    android:id="@+id/buttonCreateAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    app:cornerRadius="2dp"
+                    android:text="account"
+                    android:textSize="12sp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="10dp"
+                    app:icon="@drawable/ic_add_plus"
+                    style="@style/Widget.MaterialComponents.Button.Icon" />
 
             </LinearLayout>
         </LinearLayout>
