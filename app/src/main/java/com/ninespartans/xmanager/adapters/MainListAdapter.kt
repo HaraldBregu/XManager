@@ -222,18 +222,18 @@ class MainListAdapter(context: Context): BaseAdapter() {
             programTitle.text = "Programmi"
 
             val programDescr = rowProgram.findViewById<TextView>(R.id.programDescription)
-            programDescr.text = "Gestione e modifica programmi"
+            programDescr.text = "Gestione programmi"
 
             val programCount = rowProgram.findViewById<TextView>(R.id.programCount)
             programCount.text = "${programs.size}"
 
-/*
-            val createProgram = rowProgram.findViewById<MaterialButton>(R.id.createProgram)
-            createProgram.setOnClickListener {
+
+            val buttonCreateProgram = rowProgram.findViewById<MaterialButton>(R.id.buttonCreateProgram)
+            buttonCreateProgram.setOnClickListener {
                 onClickAction?.let {
                     it(Action.CREATE_PROGRAM)
                 }
-            }*/
+            }
 
             return rowProgram
         }
@@ -282,6 +282,14 @@ class MainListAdapter(context: Context): BaseAdapter() {
         if (isRowHeaderPlayer) {
             val textViewPlayersCount = rowPlayerHeader.findViewById<TextView>(R.id.textViewPlayersCount)
             textViewPlayersCount.text = players.size.toString()
+
+            val buttonCreateProgram = rowPlayerHeader.findViewById<MaterialButton>(R.id.buttonCreateProgram)
+            buttonCreateProgram.setOnClickListener {
+                onClickAction?.let {
+                    it(Action.ADD_PLAYER)
+                }
+            }
+
             return rowPlayerHeader
         }
 

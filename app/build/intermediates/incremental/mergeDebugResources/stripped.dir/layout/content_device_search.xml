@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.ninespartans.xmanager.DeviceSearchActivity"
+    tools:showIn="@layout/activity_device_search"
+    android:background="@color/colorBackground">
+
+    <LinearLayout
+        android:id="@+id/top_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:orientation="vertical"
+        android:background="@color/colorBackground">
+        <TextView
+            android:id="@+id/textViewPlayerNameDetailTop"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_device_search_header_subtitle"
+            android:textAllCaps="true"/>
+        <TextView
+            android:id="@+id/deviceSearchTitle"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/firstname_lastname"
+            android:layout_marginBottom="5dp">
+        </TextView>
+        <TextView
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_device_search_header_description">
+        </TextView>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:listSelector="@android:color/transparent"
+        android:layout_below="@+id/top_section"
+        android:layout_above="@+id/bottom_section">
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/bottom_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="20dp"
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/searchDevicesButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Search Devices"
+            app:cornerRadius="5dp">
+        </com.google.android.material.button.MaterialButton>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/debugButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Debug"
+            app:cornerRadius="5dp">
+        </com.google.android.material.button.MaterialButton>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/closeButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/activity_device_search_button_done">
+        </com.google.android.material.button.MaterialButton>
+
+    </LinearLayout>
+
+</RelativeLayout>
