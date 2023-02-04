@@ -1,28 +1,56 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(App());
+void main() => runApp(const MyApp());
 
-void didPressButton() {
-  print("did pressed");
-}
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.amber,
-          title: Text(
-            "Example",
-            textAlign: TextAlign.left,
-            style: TextStyle(
-                color: Colors.red, fontSize: 40, fontWeight: FontWeight.bold),
-          )),
-      floatingActionButton: FloatingActionButton(
-        child: Text("exam"),
-        onPressed: didPressButton,
+      title: 'Xmanager',
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Flutter layout demo'),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            CircleAvatar(
+
+              backgroundImage: AssetImage("assets/header.jpg"),
+              radius: 40,
+            ),
+            Image.asset("assets/header.jpg"),
+           Expanded(
+             flex: 3,
+             child:  Container(
+               padding: const EdgeInsets.all(20.0),
+               color: Colors.amberAccent,
+               child: const Text("one"),
+             ),
+           ),
+            const SizedBox(height: 20),
+            Expanded(
+              flex: 3,
+              child:  Container(
+                padding: const EdgeInsets.all(20.0),
+                color: Colors.blue,
+                child: const Text("one"),
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child:  Container(
+                padding: const EdgeInsets.all(20.0),
+                color: Colors.green,
+                child: const Text("one"),
+              ),
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }
