@@ -1,56 +1,18 @@
 import 'package:flutter/material.dart';
+import 'screens/home/home.dart';
+import 'screens/auth/login.dart';
 
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Xmanager',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Flutter layout demo'),
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            CircleAvatar(
-
-              backgroundImage: AssetImage("assets/header.jpg"),
-              radius: 40,
-            ),
-            Image.asset("assets/header.jpg"),
-           Expanded(
-             flex: 3,
-             child:  Container(
-               padding: const EdgeInsets.all(20.0),
-               color: Colors.amberAccent,
-               child: const Text("one"),
-             ),
-           ),
-            const SizedBox(height: 20),
-            Expanded(
-              flex: 3,
-              child:  Container(
-                padding: const EdgeInsets.all(20.0),
-                color: Colors.blue,
-                child: const Text("one"),
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child:  Container(
-                padding: const EdgeInsets.all(20.0),
-                color: Colors.green,
-                child: const Text("one"),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+void main() => runApp(MaterialApp(
+  debugShowCheckedModeBanner: false,
+  theme: ThemeData(
+    brightness: Brightness.light
+  ),
+  darkTheme: ThemeData(
+      brightness: Brightness.dark
+  ),
+  initialRoute: '/home',
+  routes: {
+    '/home': (context) => Home(),
+    '/login': (context) => Login(value: ""),
+  },
+));
