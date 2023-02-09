@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:xmanager/screens/home/widgets/home_card.dart';
+import 'package:vibration/vibration.dart';
+import 'package:xmanager/screens/widget/base_card.dart';
 
 class WeatherCard extends StatefulWidget {
   const WeatherCard({Key? key}) : super(key: key);
@@ -9,123 +10,200 @@ class WeatherCard extends StatefulWidget {
 }
 
 class _WeatherCardState extends State<WeatherCard> {
+
   @override
   Widget build(BuildContext context) {
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: HomeCard(
-            padding: EdgeInsets.only(left: 15),
-              child: Stack(
+          child: BaseCard(
+              margin: const EdgeInsets.only(left: 15),
+              padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 15),
+              header: Container(
+                alignment: Alignment.centerLeft,
+                height: 30,
+                child: const Text(
+                  'METEO',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12
+                  ),
+                ),
+              ),
+              body: Row(
                 children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Wrap(
-                      direction: Axis.vertical,
-                      children: const [
-                        Padding(
-                          padding: EdgeInsets.only(left: 10, top: 10),
-                          child: Text(
-                            "COACH",
+                  Expanded(
+                    child: Stack(
+                      children: [
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          height: 40,
+                          child: const Text(
+                            '23 °C',
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 12
+                                fontSize: 27
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 10, top: 10, bottom: 20),
-                          child: Text(
-                            "Dorian Joe",
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              footer: const SizedBox(height: 0),
+          ),
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: BaseCard(
+              margin: const EdgeInsets.only(right: 15),
+              padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 15),
+              header: Container(
+                height: 80,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  border: Border.all(),
+                  borderRadius: const BorderRadius.all(Radius.circular(9)),
+                ),
+              ),
+              body: Container(
+                alignment: Alignment.centerLeft,
+                height: 30,
+                child: const Text(
+                  'Posizione',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12
+                  ),
+                ),
+              ),
+              footer: Row(
+                children: [
+                  Expanded(
+                    child: Stack(
+                      children: [
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          height: 40,
+                          child: const Text(
+                            '23 C',
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 22
+                                fontSize: 27
                             ),
                           ),
-                        )
+                        ),
                       ],
+                    ),
+                  )
+                ],
+              ),
+          ),
+        )
+      ],
+    );
+
+
+    /*
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: BaseCard(
+            padding: const EdgeInsets.only(left: 15),
+              cardPadding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 15),
+              child: Column(
+                children: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    height: 30,
+                    child: const Text(
+                      'METEO',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12
+                      ),
                     ),
                   ),
-                  Align(
-                    alignment: const Alignment(1, 0),
-                    child: Wrap(
-                      direction: Axis.horizontal,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            print("object 1");
-                          },
-                          child: const Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child:  Icon(
-                              Icons.more_vert,
-                              color: Colors.white70,
-                              size: 22.0,
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Stack(
+                          children: [
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              height: 40,
+                              child: const Text(
+                                '23 °C',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 27
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
+                      )
+                    ],
                   ),
                 ],
               )
           ),
         ),
-        SizedBox(width: 15),
+        const SizedBox(width: 8),
         Expanded(
-          child: HomeCard(
-              padding: EdgeInsets.only(right: 15),
-              child: Stack(
+          child: BaseCard(
+              padding: const EdgeInsets.only(right: 15),
+              cardPadding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 15),
+              child: Column(
                 children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Wrap(
-                      direction: Axis.vertical,
-                      children: const [
-                        Padding(
-                          padding: EdgeInsets.only(left: 10, top: 20),
-                          child: Text(
-                            "COACH",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 10, top: 10, bottom: 20),
-                          child: Text(
-                            "Dorian Joe",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 22
-                            ),
-                          ),
-                        )
-                      ],
+                  Container(
+                    height: 80,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      border: Border.all(),
+                      borderRadius: const BorderRadius.all(Radius.circular(9)),
                     ),
                   ),
-                  Align(
-                    alignment: const Alignment(1, 0),
-                    child: Wrap(
-                      direction: Axis.horizontal,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            print("object 1");
-                          },
-                          child: const Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child:  Icon(
-                              Icons.more_vert,
-                              color: Colors.white70,
-                              size: 22.0,
-                            ),
-                          ),
-                        ),
-                      ],
+                  const SizedBox(height: 10),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    height: 30,
+                    child: const Text(
+                      'Posizione',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12
+                      ),
                     ),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Stack(
+                          children: [
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              height: 40,
+                              child: const Text(
+                                '23 C',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 27
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ],
               )
@@ -133,5 +211,7 @@ class _WeatherCardState extends State<WeatherCard> {
         )
       ],
     );
+
+    */
   }
 }

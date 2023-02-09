@@ -12,7 +12,7 @@ void main() => runApp(MaterialApp(
   ),
   initialRoute: '/home',
   routes: {
-    '/home': (context) => Home(),
-    '/login': (context) => Login(value: ""),
+    '/home': (context) => const Home(),
+    '/login': (context) => const Login(value: ""),
   },
 ));

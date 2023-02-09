@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xmanager/screens/home/widgets/home_card.dart';
+import 'package:xmanager/screens/widget/base_card.dart';
 
 class CoachCard extends StatefulWidget {
   const CoachCard({Key? key}) : super(key: key);
@@ -11,60 +11,84 @@ class CoachCard extends StatefulWidget {
 class _CoachCardState extends State<CoachCard> {
   @override
   Widget build(BuildContext context) {
-    return HomeCard(
-        child: Stack(
+
+    return Container();
+    /*return BaseCard(
+      cardPadding: const EdgeInsets.only(left: 15, right: 10, top: 10, bottom: 15),
+        child: Column(
           children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Wrap(
-                direction: Axis.vertical,
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.only(left: 10, top: 20),
-                    child: Text(
-                      "COACH",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12
+            Row(
+              children: [
+                Expanded(
+                  child: Stack(
+                    children: [
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        height: 30,
+                        child: const Text(
+                          'COACH',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12
+                          ),
+                        ),
                       ),
+                      Container(
+                        alignment: Alignment.centerRight,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                              },
+                              child: const SizedBox(
+                                height: 30,
+                                width: 30,
+                                child: Icon(
+                                  Icons.bar_chart,
+                                  color: Colors.white70,
+                                  size: 22.0,
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                              },
+                              child: const SizedBox(
+                                height: 30,
+                                width: 30,
+                                child: Icon(
+                                  Icons.data_usage,
+                                  color: Colors.white70,
+                                  size: 22.0,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: const Text(
+                    'Maldonado Cristian',
+                    style: TextStyle(
+                        color: Colors.white54,
+                        fontSize: 20
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 10, top: 10, bottom: 20),
-                    child: Text(
-                      "Dorian Joe",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Align(
-              alignment: const Alignment(1, 0),
-              child: Wrap(
-                direction: Axis.horizontal,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      print("object 1");
-                    },
-                    child: const Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child:  Icon(
-                        Icons.more_vert,
-                        color: Colors.white70,
-                        size: 22.0,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                ),
+              ],
+            )
           ],
         )
-    );
+    );*/
   }
 }
