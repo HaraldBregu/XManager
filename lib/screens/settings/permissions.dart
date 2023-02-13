@@ -55,9 +55,7 @@ class _PermissionsState extends State<Permissions> {
                   permission != Permission.appTrackingTransparency &&
                   permission != Permission.criticalAlerts;
             }
-          })
-              .map((permission) => PermissionWidget(permission))
-              .toList()),
+          }).map((permission) => PermissionWidget(permission)).toList()),
 
     );
   }

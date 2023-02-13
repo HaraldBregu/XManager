@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:xmanager/screens/widget/base_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PlayerCard extends StatefulWidget {
-  const PlayerCard({Key? key}) : super(key: key);
+  final String title, name;
+
+  const PlayerCard({
+    Key? key,
+    this.title = "",
+    this.name = ""}) : super(key: key);
 
   @override
   State<PlayerCard> createState() => _PlayerCardState();
@@ -11,7 +17,6 @@ class PlayerCard extends StatefulWidget {
 class _PlayerCardState extends State<PlayerCard> {
   @override
   Widget build(BuildContext context) {
-
     return BaseCard(
       padding: const EdgeInsets.only(left: 15, right: 10, top: 10, bottom: 15),
       header: Row(
@@ -22,9 +27,9 @@ class _PlayerCardState extends State<PlayerCard> {
                 Container(
                   alignment: Alignment.centerLeft,
                   height: 30,
-                  child: const Text(
-                    'DEFENDER',
-                    style: TextStyle(
+                  child: Text(
+                    widget.title,
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 12
                     ),
@@ -73,9 +78,9 @@ class _PlayerCardState extends State<PlayerCard> {
         children: [
           Container(
             alignment: Alignment.centerLeft,
-            child: const Text(
-              'Mario Goetze',
-              style: TextStyle(
+            child: Text(
+              widget.name,
+              style: const TextStyle(
                   color: Colors.white,
                   fontSize: 24
               ),

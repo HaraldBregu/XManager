@@ -40,9 +40,17 @@ dependencies:
   #google_maps_flutter: ^2.2.3
   #geolocator: ^9.0.2
   #geocoding: ^2.0.5
-  flutter_blue: ^0.8.0
+  #flutter_blue: ^0.8.0
   permission_handler: ^10.2.0
-
+  flutter_blue_plus: ^1.4.0
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  objectbox: ^1.7.2
+  objectbox_flutter_libs: any
+  #objectbox_sync_flutter_libs: any
+  #flutter_reactive_ble to test
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -53,6 +61,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  build_runner: ^2.3.3
+  objectbox_generator: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -64,6 +74,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
   assets:
