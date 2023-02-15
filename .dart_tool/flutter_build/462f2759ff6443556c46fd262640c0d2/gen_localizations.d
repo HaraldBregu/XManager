@@ -1,1 +1,0 @@
- /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/.dart_tool/flutter_gen/gen_l10n/app_localizations_en.dart /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/.dart_tool/flutter_gen/gen_l10n/app_localizations.dart:  /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/l10n.yaml /Users/haraldbregu/Documents/9Spartans/apps/Xmanager/lib/l10n/intl_en.arb

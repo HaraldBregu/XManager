@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vibration/vibration.dart';
-import 'package:xmanager/screens/widget/base_card.dart';
+import 'package:xmanager/screens/shared/base_card.dart';
 
 class WeatherCard extends StatefulWidget {
   const WeatherCard({Key? key}) : super(key: key);

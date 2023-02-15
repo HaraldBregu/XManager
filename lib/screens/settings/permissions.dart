@@ -64,7 +64,7 @@ class _PermissionsState extends State<Permissions> {
 
 
 
-/// Permission widget containing information about the passed [Permission]
+/// Permission shared containing information about the passed [Permission]
 class PermissionWidget extends StatefulWidget {
   /// Constructs a [PermissionWidget] for the supplied [Permission]
   const PermissionWidget(this._permission);

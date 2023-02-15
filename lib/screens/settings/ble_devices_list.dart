@@ -1,14 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 
 class BleDevicesList extends StatefulWidget {
-
   const BleDevicesList({Key? key}) : super(key: key);
-
 
   @override
   State<BleDevicesList> createState() => _BleDevicesListState();

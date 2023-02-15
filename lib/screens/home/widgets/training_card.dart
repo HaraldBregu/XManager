@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xmanager/screens/widget/base_card.dart';
+import 'package:xmanager/screens/shared/base_card.dart';
 import 'package:vibration/vibration.dart';
 
 class TrainingCard extends StatefulWidget {

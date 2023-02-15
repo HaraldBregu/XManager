@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:xmanager/main.dart';
 import 'package:xmanager/screens/home/widgets/header_actions.dart';
-import 'package:xmanager/screens/home/widgets/coach_card.dart';
-import 'package:xmanager/screens/home/widgets/player_card.dart';
+import 'package:xmanager/screens/home/widgets/player_card_section.dart';
 import 'package:xmanager/screens/home/widgets/training_card.dart';
 import 'package:xmanager/screens/home/widgets/weather_card.dart';
 import 'package:xmanager/screens/home/widgets/widget_dialog.dart';
 import 'package:xmanager/services/http_client.dart';
 import 'package:xmanager/common.dart';
+import '../../models/models.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   var stringData = 'Login';
   List users = [];
-
+  int playersCount = 0;
 
   fetchData() async {
     var url = 'https://jsonplaceholder.typicode.com/todos';
@@ -38,25 +38,10 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    fetchData();
   }
 
   @override
   Widget build(BuildContext context) {
-
-
-    SliverList players() {
-      return SliverList(
-        delegate: SliverChildBuilderDelegate(
-            ((BuildContext context, int index) {
-              return PlayerCard(
-                title: AppLocalizations.of(context)!.player.toUpperCase(),
-                name: "Materazzi Paolo"
-              );
-            }),
-            childCount: 14),
-      );
-    }
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -98,7 +83,7 @@ class _HomeState extends State<Home> {
               padding: const EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/account');
+                  Navigator.pushNamed(context, 'account');
                 },
                 child: const Icon(
                     Icons.account_circle
@@ -107,72 +92,72 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-                ((BuildContext context, int index) {
-                  switch (index) {
-                    case 0:
-                      {
-                        return HeaderActions(
-                          optionsPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) => _buildPopupDialog(context),
-                            );
-                          },
+      body: Container(
+        padding: const EdgeInsets.only(bottom: 70),
+        child: CustomScrollView(
+          slivers: [
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                  ((BuildContext context, int index) {
+                    switch (index) {
+                      case 0:
+                        {
+                          return HeaderActions(
+                            optionsPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) => _buildPopupDialog(context),
+                              );
+                            },
 
-                        );
-                      }
-                    case 1:
-                      {
-                        return const TrainingCard();
-                      }
-                    case 2:
-                      {
-                        return const WeatherCard();
-                      }
-                  }
-                }),
-                childCount: 2),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-                ((BuildContext context, int index) {
-                  return Column(
-                    children: const [
-                      SizedBox(height: 20),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Players',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
+                          );
+                        }
+                      case 1:
+                        {
+                          return const TrainingCard();
+                        }
+                      case 2:
+                        {
+                          return const WeatherCard();
+                        }
+                    }
+                  }),
+                  childCount: 2),
+            ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                  ((BuildContext context, int index) {
+                    return Column(
+                      children: const [
+                        SizedBox(height: 20),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Players',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 20),
-                    ],
-                  );
-                }),
-                childCount: 1),
-          ),
-          players(),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-                ((BuildContext context, int index) {
-                  return const SizedBox(
-                    height: 70,
-                  );
-                }),
-                childCount: 1),
-          ),
-        ],
+                        SizedBox(height: 20),
+                      ],
+                    );
+                  }),
+                  childCount: 1),
+            ),
+            const PlayerCardSection(),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
+
+          Navigator.pushNamed(
+              context,
+              'player_edit');
+
+          return;
           Navigator.pushNamed(context, 'player_edit');
           return;
           showDialog(
