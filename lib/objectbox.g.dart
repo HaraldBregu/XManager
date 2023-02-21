@@ -14,7 +14,7 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import 'models/models.dart';
+import 'model/player_model.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -22,7 +22,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(2, 3225004814405648421),
       name: 'Player',
-      lastPropertyId: const IdUid(7, 4315454425118091218),
+      lastPropertyId: const IdUid(11, 1941030560164370764),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -36,16 +36,6 @@ final _entities = <ModelEntity>[
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(3, 3820171138096343296),
-            name: 'name',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(5, 4237932649912434568),
-            name: 'age',
-            type: 6,
-            flags: 0),
-        ModelProperty(
             id: const IdUid(6, 1269412459972584565),
             name: 'weight',
             type: 8,
@@ -54,6 +44,21 @@ final _entities = <ModelEntity>[
             id: const IdUid(7, 4315454425118091218),
             name: 'height',
             type: 8,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(8, 4112552099121775271),
+            name: 'fullname',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(10, 4836018249428677867),
+            name: 'birthdate',
+            type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(11, 1941030560164370764),
+            name: 'nationality',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -90,7 +95,10 @@ ModelDefinition getObjectBoxModel() {
         8417382096306948866,
         4981195636571552789,
         8396051598652696070,
-        5960381172322319033
+        5960381172322319033,
+        3820171138096343296,
+        4237932649912434568,
+        6380926248530783123
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -109,33 +117,41 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (Player object, fb.Builder fbb) {
           final roleOffset =
               object.role == null ? null : fbb.writeString(object.role!);
-          final nameOffset = fbb.writeString(object.name);
-          fbb.startTable(8);
+          final fullnameOffset = fbb.writeString(object.fullname);
+          final nationalityOffset = object.nationality == null
+              ? null
+              : fbb.writeString(object.nationality!);
+          fbb.startTable(12);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, roleOffset);
-          fbb.addOffset(2, nameOffset);
-          fbb.addInt64(4, object.age);
           fbb.addFloat64(5, object.weight);
           fbb.addFloat64(6, object.height);
+          fbb.addOffset(7, fullnameOffset);
+          fbb.addInt64(9, object.birthdate?.millisecondsSinceEpoch);
+          fbb.addOffset(10, nationalityOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-
+          final birthdateValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 22);
           final object = Player()
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
             ..role = const fb.StringReader(asciiOptimization: true)
                 .vTableGetNullable(buffer, rootOffset, 6)
-            ..name = const fb.StringReader(asciiOptimization: true)
-                .vTableGet(buffer, rootOffset, 8, '')
-            ..age =
-                const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 12)
             ..weight = const fb.Float64Reader()
                 .vTableGetNullable(buffer, rootOffset, 14)
             ..height = const fb.Float64Reader()
-                .vTableGetNullable(buffer, rootOffset, 16);
+                .vTableGetNullable(buffer, rootOffset, 16)
+            ..fullname = const fb.StringReader(asciiOptimization: true)
+                .vTableGet(buffer, rootOffset, 18, '')
+            ..birthdate = birthdateValue == null
+                ? null
+                : DateTime.fromMillisecondsSinceEpoch(birthdateValue)
+            ..nationality = const fb.StringReader(asciiOptimization: true)
+                .vTableGetNullable(buffer, rootOffset, 24);
 
           return object;
         })
@@ -152,15 +168,21 @@ class Player_ {
   /// see [Player.role]
   static final role = QueryStringProperty<Player>(_entities[0].properties[1]);
 
-  /// see [Player.name]
-  static final name = QueryStringProperty<Player>(_entities[0].properties[2]);
-
-  /// see [Player.age]
-  static final age = QueryIntegerProperty<Player>(_entities[0].properties[3]);
-
   /// see [Player.weight]
-  static final weight = QueryDoubleProperty<Player>(_entities[0].properties[4]);
+  static final weight = QueryDoubleProperty<Player>(_entities[0].properties[2]);
 
   /// see [Player.height]
-  static final height = QueryDoubleProperty<Player>(_entities[0].properties[5]);
+  static final height = QueryDoubleProperty<Player>(_entities[0].properties[3]);
+
+  /// see [Player.fullname]
+  static final fullname =
+      QueryStringProperty<Player>(_entities[0].properties[4]);
+
+  /// see [Player.birthdate]
+  static final birthdate =
+      QueryIntegerProperty<Player>(_entities[0].properties[5]);
+
+  /// see [Player.nationality]
+  static final nationality =
+      QueryStringProperty<Player>(_entities[0].properties[6]);
 }

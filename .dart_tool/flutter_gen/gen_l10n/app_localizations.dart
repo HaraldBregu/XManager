@@ -102,6 +102,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'player'**
   String get player;
+
+  /// No description provided for @create_player.
+  ///
+  /// In en, this message translates to:
+  /// **'create player'**
+  String get create_player;
+
+  /// No description provided for @update_player.
+  ///
+  /// In en, this message translates to:
+  /// **'update player'**
+  String get update_player;
+
+  /// No description provided for @fullname.
+  ///
+  /// In en, this message translates to:
+  /// **'fullname'**
+  String get fullname;
+
+  /// No description provided for @enter_player_fullname.
+  ///
+  /// In en, this message translates to:
+  /// **'enter fullname'**
+  String get enter_player_fullname;
+
+  /// No description provided for @enter_player_fullname_error.
+  ///
+  /// In en, this message translates to:
+  /// **'please enter fullname'**
+  String get enter_player_fullname_error;
+
+  /// No description provided for @role.
+  ///
+  /// In en, this message translates to:
+  /// **'role'**
+  String get role;
+
+  /// No description provided for @enter_player_role.
+  ///
+  /// In en, this message translates to:
+  /// **'enter player role'**
+  String get enter_player_role;
+
+  /// No description provided for @enter_player_role_error.
+  ///
+  /// In en, this message translates to:
+  /// **'please enter player role'**
+  String get enter_player_role_error;
+
+  /// No description provided for @nationality.
+  ///
+  /// In en, this message translates to:
+  /// **'nationality'**
+  String get nationality;
+
+  /// No description provided for @enter_player_nationality.
+  ///
+  /// In en, this message translates to:
+  /// **'enter player nationality'**
+  String get enter_player_nationality;
+
+  /// No description provided for @birthdate_player.
+  ///
+  /// In en, this message translates to:
+  /// **'enter player birthdate'**
+  String get birthdate_player;
+
+  /// No description provided for @weight.
+  ///
+  /// In en, this message translates to:
+  /// **'weight'**
+  String get weight;
+
+  /// No description provided for @enter_weight.
+  ///
+  /// In en, this message translates to:
+  /// **'enter weight'**
+  String get enter_weight;
+
+  /// No description provided for @height.
+  ///
+  /// In en, this message translates to:
+  /// **'height'**
+  String get height;
+
+  /// No description provided for @enter_height.
+  ///
+  /// In en, this message translates to:
+  /// **'enter height'**
+  String get enter_height;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'save'**
+  String get save;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

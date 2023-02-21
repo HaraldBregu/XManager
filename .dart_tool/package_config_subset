@@ -110,6 +110,14 @@ flat_buffers
 2.12
 file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/flat_buffers-2.0.5/
 file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/flat_buffers-2.0.5/lib/
+flex_color_scheme
+2.18
+file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/flex_color_scheme-6.1.2/
+file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/flex_color_scheme-6.1.2/lib/
+flex_seed_scheme
+2.18
+file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/flex_seed_scheme-1.2.2/
+file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/flex_seed_scheme-1.2.2/lib/
 flutter_blue_plus
 2.15
 file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/flutter_blue_plus-1.4.0/
@@ -126,6 +134,10 @@ glob
 2.15
 file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/glob-2.1.1/
 file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/glob-2.1.1/lib/
+google_fonts
+2.12
+file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/google_fonts-4.0.3/
+file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/google_fonts-4.0.3/lib/
 graphs
 2.12
 file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/graphs-2.2.0/
@@ -182,6 +194,10 @@ mime
 2.18
 file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/mime-1.0.4/
 file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/mime-1.0.4/lib/
+nested
+2.12
+file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/nested-1.0.0/
+file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/nested-1.0.0/lib/
 objectbox
 2.14
 file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/objectbox-1.7.2/
@@ -266,6 +282,10 @@ protobuf
 2.12
 file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/protobuf-2.1.0/
 file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/protobuf-2.1.0/lib/
+provider
+2.12
+file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/provider-6.0.5/
+file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/provider-6.0.5/lib/
 pub_semver
 2.17
 file:///Users/haraldbregu/.pub-cache/hosted/pub.dev/pub_semver-2.1.3/
