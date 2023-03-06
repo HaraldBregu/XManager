@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="0dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="5dp"
+        android:clickable="true"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="60dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/football_field"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/image">
+                <TextView
+                    android:id="@+id/noProgramCardTitle"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/row_empty_program_title"/>
+
+                <TextView
+                    android:id="@+id/noProgramCardDescription"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/row_empty_program_description"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

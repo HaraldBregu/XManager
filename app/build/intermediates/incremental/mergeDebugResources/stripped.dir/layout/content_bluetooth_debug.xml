@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.ninespartans.xmanager.BluetoothDebugActivity"
+    tools:showIn="@layout/activity_bluetooth_debug">
+
+    <TextView
+        android:id="@+id/discovering_log_text"
+        android:layout_width="fill_parent"
+        android:layout_height="140dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="3dp"
+        android:background="#000"
+        android:padding="10dp"
+        android:text=""
+        android:textColor="#a9a9a9"
+        android:textSize="14sp"
+        android:textStyle="normal" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/discovering_log_text">
+
+        <LinearLayout
+            android:id="@+id/bottom_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="0dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:text="Time, Led, Animation"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/hoursEditText"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:inputType="number"
+                        android:text="0"
+                        android:textAlignment="center"/>
+
+                    <EditText
+                        android:id="@+id/minutesEditText"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:inputType="number"
+                        android:text="0"
+                        android:textAlignment="center"/>
+
+                    <EditText
+                        android:id="@+id/secondsEditText"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:inputType="number"
+                        android:text="0"
+                        android:textAlignment="center"/>
+                </LinearLayout>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/ledPosition0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:onClick="onRadioLedClicked"
+                        android:text="Pos 0" />
+
+                    <RadioButton
+                        android:id="@+id/ledPosition1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onRadioLedClicked"
+                        android:text="Pos 1" />
+
+                    <RadioButton
+                        android:id="@+id/ledPosition2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onRadioLedClicked"
+                        android:text="Pos 2" />
+
+                    <RadioButton
+                        android:id="@+id/ledPosition3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onRadioLedClicked"
+                        android:text="Pos 3" />
+
+                    <RadioButton
+                        android:id="@+id/ledPosition4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onRadioLedClicked"
+                        android:text="Pos 4" />
+                </RadioGroup>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioStatic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:onClick="onRadioButtonClicked"
+                        android:text="Static" />
+
+                    <RadioButton
+                        android:id="@+id/radioBlink"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onRadioButtonClicked"
+                        android:text="Blink" />
+
+                    <RadioButton
+                        android:id="@+id/radioFade"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onRadioButtonClicked"
+                        android:text="Fade" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/setProgram"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Start" />
+
+                    <Button
+                        android:id="@+id/setAllProgram"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Start all" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/downloadBinary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Download binary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="0dp">
+
+                <Button
+                    android:id="@+id/turnoff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Turn off" />
+
+                <Button
+                    android:id="@+id/reboot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reboot" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="0dp">
+
+                <Button
+                    android:id="@+id/lightSleep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="light sleep" />
+
+                <Button
+                    android:id="@+id/resetReboot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="reset Reboot" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/closeButton"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Close"
+                app:cornerRadius="5dp"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

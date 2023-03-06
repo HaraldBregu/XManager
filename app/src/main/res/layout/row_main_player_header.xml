@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="18dp"
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerVertical="true">
+        <TextView
+            android:id="@+id/title"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_main_row_player_header_title"
+            android:textAllCaps="true"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/textViewPlayersCount"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:layout_toEndOf="@id/title"
+            android:layout_marginStart="20dp"
+            android:text="0"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonCreateProgram"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:text="nuovo"
+        android:textSize="12sp"
+        app:cornerRadius="2dp"
+        app:icon="@drawable/ic_add_plus" />
+
+</RelativeLayout>
