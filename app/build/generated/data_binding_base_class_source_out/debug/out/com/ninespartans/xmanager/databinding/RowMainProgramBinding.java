@@ -4,6 +4,8 @@ package com.ninespartans.xmanager.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -12,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.ninespartans.xmanager.R;
 import java.lang.NullPointerException;
@@ -27,30 +28,39 @@ public final class RowMainProgramBinding implements ViewBinding {
   public final LinearLayout actions;
 
   @NonNull
+  public final Button buttonCreateProgram;
+
+  @NonNull
   public final MaterialCardView cardView;
 
   @NonNull
   public final RelativeLayout containerView;
 
   @NonNull
-  public final MaterialButton createProgram;
+  public final ImageView image;
 
   @NonNull
-  public final RelativeLayout headerView;
+  public final TextView programCount;
+
+  @NonNull
+  public final TextView programDescription;
 
   @NonNull
   public final TextView programTitle;
 
   private RowMainProgramBinding(@NonNull ConstraintLayout rootView, @NonNull LinearLayout actions,
-      @NonNull MaterialCardView cardView, @NonNull RelativeLayout containerView,
-      @NonNull MaterialButton createProgram, @NonNull RelativeLayout headerView,
+      @NonNull Button buttonCreateProgram, @NonNull MaterialCardView cardView,
+      @NonNull RelativeLayout containerView, @NonNull ImageView image,
+      @NonNull TextView programCount, @NonNull TextView programDescription,
       @NonNull TextView programTitle) {
     this.rootView = rootView;
     this.actions = actions;
+    this.buttonCreateProgram = buttonCreateProgram;
     this.cardView = cardView;
     this.containerView = containerView;
-    this.createProgram = createProgram;
-    this.headerView = headerView;
+    this.image = image;
+    this.programCount = programCount;
+    this.programDescription = programDescription;
     this.programTitle = programTitle;
   }
 
@@ -87,6 +97,12 @@ public final class RowMainProgramBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.buttonCreateProgram;
+      Button buttonCreateProgram = ViewBindings.findChildViewById(rootView, id);
+      if (buttonCreateProgram == null) {
+        break missingId;
+      }
+
       id = R.id.cardView;
       MaterialCardView cardView = ViewBindings.findChildViewById(rootView, id);
       if (cardView == null) {
@@ -99,15 +115,21 @@ public final class RowMainProgramBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.createProgram;
-      MaterialButton createProgram = ViewBindings.findChildViewById(rootView, id);
-      if (createProgram == null) {
+      id = R.id.image;
+      ImageView image = ViewBindings.findChildViewById(rootView, id);
+      if (image == null) {
         break missingId;
       }
 
-      id = R.id.header_view;
-      RelativeLayout headerView = ViewBindings.findChildViewById(rootView, id);
-      if (headerView == null) {
+      id = R.id.programCount;
+      TextView programCount = ViewBindings.findChildViewById(rootView, id);
+      if (programCount == null) {
+        break missingId;
+      }
+
+      id = R.id.programDescription;
+      TextView programDescription = ViewBindings.findChildViewById(rootView, id);
+      if (programDescription == null) {
         break missingId;
       }
 
@@ -117,8 +139,8 @@ public final class RowMainProgramBinding implements ViewBinding {
         break missingId;
       }
 
-      return new RowMainProgramBinding((ConstraintLayout) rootView, actions, cardView,
-          containerView, createProgram, headerView, programTitle);
+      return new RowMainProgramBinding((ConstraintLayout) rootView, actions, buttonCreateProgram,
+          cardView, containerView, image, programCount, programDescription, programTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

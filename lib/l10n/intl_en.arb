@@ -1,0 +1,20 @@
+{
+  "dashboard": "Dashboard",
+  "player": "player",
+  "create_player": "create player",
+  "update_player": "update player",
+  "fullname": "fullname",
+  "enter_player_fullname": "enter fullname",
+  "enter_player_fullname_error": "please enter fullname",
+  "role": "role",
+  "enter_player_role": "enter player role",
+  "enter_player_role_error": "please enter player role",
+  "nationality": "nationality",
+  "enter_player_nationality": "enter player nationality",
+  "birthdate_player": "enter player birthdate",
+  "weight": "weight",
+  "enter_weight": "enter weight",
+  "height": "height",
+  "enter_height": "enter height",
+  "save": "save"
+}

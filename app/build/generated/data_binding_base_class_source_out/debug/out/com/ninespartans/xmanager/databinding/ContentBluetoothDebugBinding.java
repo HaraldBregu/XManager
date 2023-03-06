@@ -37,9 +37,6 @@ public final class ContentBluetoothDebugBinding implements ViewBinding {
   public final Button downloadBinary;
 
   @NonNull
-  public final LinearLayout footer;
-
-  @NonNull
   public final EditText hoursEditText;
 
   @NonNull
@@ -58,10 +55,10 @@ public final class ContentBluetoothDebugBinding implements ViewBinding {
   public final RadioButton ledPosition4;
 
   @NonNull
-  public final EditText minutesEditText;
+  public final Button lightSleep;
 
   @NonNull
-  public final MaterialButton nextButton;
+  public final EditText minutesEditText;
 
   @NonNull
   public final RadioButton radioBlink;
@@ -76,80 +73,53 @@ public final class ContentBluetoothDebugBinding implements ViewBinding {
   public final Button reboot;
 
   @NonNull
+  public final Button resetReboot;
+
+  @NonNull
   public final EditText secondsEditText;
 
   @NonNull
-  public final Button setLeftDevice;
-
-  @NonNull
-  public final Button setNoMode;
-
-  @NonNull
-  public final Button setPass;
+  public final Button setAllProgram;
 
   @NonNull
   public final Button setProgram;
 
   @NonNull
-  public final Button setRightDevice;
-
-  @NonNull
-  public final Button setSSID;
-
-  @NonNull
-  public final Button setUpdateMode;
-
-  @NonNull
-  public final Button setUpdateUrl;
-
-  @NonNull
-  public final Button setUpdateUrlNil;
-
-  @NonNull
-  public final Button sleep;
+  public final Button turnoff;
 
   private ContentBluetoothDebugBinding(@NonNull RelativeLayout rootView,
       @NonNull LinearLayout bottomSection, @NonNull MaterialButton closeButton,
       @NonNull TextView discoveringLogText, @NonNull Button downloadBinary,
-      @NonNull LinearLayout footer, @NonNull EditText hoursEditText,
-      @NonNull RadioButton ledPosition0, @NonNull RadioButton ledPosition1,
-      @NonNull RadioButton ledPosition2, @NonNull RadioButton ledPosition3,
-      @NonNull RadioButton ledPosition4, @NonNull EditText minutesEditText,
-      @NonNull MaterialButton nextButton, @NonNull RadioButton radioBlink,
-      @NonNull RadioButton radioFade, @NonNull RadioButton radioStatic, @NonNull Button reboot,
-      @NonNull EditText secondsEditText, @NonNull Button setLeftDevice, @NonNull Button setNoMode,
-      @NonNull Button setPass, @NonNull Button setProgram, @NonNull Button setRightDevice,
-      @NonNull Button setSSID, @NonNull Button setUpdateMode, @NonNull Button setUpdateUrl,
-      @NonNull Button setUpdateUrlNil, @NonNull Button sleep) {
+      @NonNull EditText hoursEditText, @NonNull RadioButton ledPosition0,
+      @NonNull RadioButton ledPosition1, @NonNull RadioButton ledPosition2,
+      @NonNull RadioButton ledPosition3, @NonNull RadioButton ledPosition4,
+      @NonNull Button lightSleep, @NonNull EditText minutesEditText,
+      @NonNull RadioButton radioBlink, @NonNull RadioButton radioFade,
+      @NonNull RadioButton radioStatic, @NonNull Button reboot, @NonNull Button resetReboot,
+      @NonNull EditText secondsEditText, @NonNull Button setAllProgram, @NonNull Button setProgram,
+      @NonNull Button turnoff) {
     this.rootView = rootView;
     this.bottomSection = bottomSection;
     this.closeButton = closeButton;
     this.discoveringLogText = discoveringLogText;
     this.downloadBinary = downloadBinary;
-    this.footer = footer;
     this.hoursEditText = hoursEditText;
     this.ledPosition0 = ledPosition0;
     this.ledPosition1 = ledPosition1;
     this.ledPosition2 = ledPosition2;
     this.ledPosition3 = ledPosition3;
     this.ledPosition4 = ledPosition4;
+    this.lightSleep = lightSleep;
     this.minutesEditText = minutesEditText;
-    this.nextButton = nextButton;
     this.radioBlink = radioBlink;
     this.radioFade = radioFade;
     this.radioStatic = radioStatic;
     this.reboot = reboot;
+    this.resetReboot = resetReboot;
     this.secondsEditText = secondsEditText;
-    this.setLeftDevice = setLeftDevice;
-    this.setNoMode = setNoMode;
-    this.setPass = setPass;
+    this.setAllProgram = setAllProgram;
     this.setProgram = setProgram;
-    this.setRightDevice = setRightDevice;
-    this.setSSID = setSSID;
-    this.setUpdateMode = setUpdateMode;
-    this.setUpdateUrl = setUpdateUrl;
-    this.setUpdateUrlNil = setUpdateUrlNil;
-    this.sleep = sleep;
+    this.turnoff = turnoff;
   }
 
   @Override
@@ -203,12 +173,6 @@ public final class ContentBluetoothDebugBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.footer;
-      LinearLayout footer = ViewBindings.findChildViewById(rootView, id);
-      if (footer == null) {
-        break missingId;
-      }
-
       id = R.id.hoursEditText;
       EditText hoursEditText = ViewBindings.findChildViewById(rootView, id);
       if (hoursEditText == null) {
@@ -245,15 +209,15 @@ public final class ContentBluetoothDebugBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.minutesEditText;
-      EditText minutesEditText = ViewBindings.findChildViewById(rootView, id);
-      if (minutesEditText == null) {
+      id = R.id.lightSleep;
+      Button lightSleep = ViewBindings.findChildViewById(rootView, id);
+      if (lightSleep == null) {
         break missingId;
       }
 
-      id = R.id.nextButton;
-      MaterialButton nextButton = ViewBindings.findChildViewById(rootView, id);
-      if (nextButton == null) {
+      id = R.id.minutesEditText;
+      EditText minutesEditText = ViewBindings.findChildViewById(rootView, id);
+      if (minutesEditText == null) {
         break missingId;
       }
 
@@ -281,27 +245,21 @@ public final class ContentBluetoothDebugBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.resetReboot;
+      Button resetReboot = ViewBindings.findChildViewById(rootView, id);
+      if (resetReboot == null) {
+        break missingId;
+      }
+
       id = R.id.secondsEditText;
       EditText secondsEditText = ViewBindings.findChildViewById(rootView, id);
       if (secondsEditText == null) {
         break missingId;
       }
 
-      id = R.id.setLeftDevice;
-      Button setLeftDevice = ViewBindings.findChildViewById(rootView, id);
-      if (setLeftDevice == null) {
-        break missingId;
-      }
-
-      id = R.id.setNoMode;
-      Button setNoMode = ViewBindings.findChildViewById(rootView, id);
-      if (setNoMode == null) {
-        break missingId;
-      }
-
-      id = R.id.setPass;
-      Button setPass = ViewBindings.findChildViewById(rootView, id);
-      if (setPass == null) {
+      id = R.id.setAllProgram;
+      Button setAllProgram = ViewBindings.findChildViewById(rootView, id);
+      if (setAllProgram == null) {
         break missingId;
       }
 
@@ -311,47 +269,17 @@ public final class ContentBluetoothDebugBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.setRightDevice;
-      Button setRightDevice = ViewBindings.findChildViewById(rootView, id);
-      if (setRightDevice == null) {
-        break missingId;
-      }
-
-      id = R.id.setSSID;
-      Button setSSID = ViewBindings.findChildViewById(rootView, id);
-      if (setSSID == null) {
-        break missingId;
-      }
-
-      id = R.id.setUpdateMode;
-      Button setUpdateMode = ViewBindings.findChildViewById(rootView, id);
-      if (setUpdateMode == null) {
-        break missingId;
-      }
-
-      id = R.id.setUpdateUrl;
-      Button setUpdateUrl = ViewBindings.findChildViewById(rootView, id);
-      if (setUpdateUrl == null) {
-        break missingId;
-      }
-
-      id = R.id.setUpdateUrlNil;
-      Button setUpdateUrlNil = ViewBindings.findChildViewById(rootView, id);
-      if (setUpdateUrlNil == null) {
-        break missingId;
-      }
-
-      id = R.id.sleep;
-      Button sleep = ViewBindings.findChildViewById(rootView, id);
-      if (sleep == null) {
+      id = R.id.turnoff;
+      Button turnoff = ViewBindings.findChildViewById(rootView, id);
+      if (turnoff == null) {
         break missingId;
       }
 
       return new ContentBluetoothDebugBinding((RelativeLayout) rootView, bottomSection, closeButton,
-          discoveringLogText, downloadBinary, footer, hoursEditText, ledPosition0, ledPosition1,
-          ledPosition2, ledPosition3, ledPosition4, minutesEditText, nextButton, radioBlink,
-          radioFade, radioStatic, reboot, secondsEditText, setLeftDevice, setNoMode, setPass,
-          setProgram, setRightDevice, setSSID, setUpdateMode, setUpdateUrl, setUpdateUrlNil, sleep);
+          discoveringLogText, downloadBinary, hoursEditText, ledPosition0, ledPosition1,
+          ledPosition2, ledPosition3, ledPosition4, lightSleep, minutesEditText, radioBlink,
+          radioFade, radioStatic, reboot, resetReboot, secondsEditText, setAllProgram, setProgram,
+          turnoff);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

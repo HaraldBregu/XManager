@@ -34,11 +34,11 @@ class BluetoothDebugActivity : AppCompatActivity() {
     var minutes: Byte = 0u.toByte()
     var seconds: Byte = 0u.toByte()
 
-    val okClient by lazy {
+    private val okClient by lazy {
         OkHttpClient()
     }
-    val okRequest by lazy {
-        val url = "https://gitlab.com/api/v4/projects/20772874/repository/files/bin%2Ftest-firmware.bin/raw?ref=master&private_token=1S_FpPnkbC5eyeWUmrYR"
+    private val okRequest by lazy {
+        val url = "https://gitlab.com/api/v4/projects/20772874/repository/files/bin%2Fdinamo-alpha-0.9.1.bin/raw?ref=master&private_token=1S_FpPnkbC5eyeWUmrYR"
         Request.Builder()
             .url(url)
             .build()
@@ -55,39 +55,39 @@ class BluetoothDebugActivity : AppCompatActivity() {
             playerId = it
         }
 
-        binding.content.setLeftDevice.setOnClickListener {
-            Realm.getDefaultInstance().use { realm ->
-                realm.where<User>().equalTo("id", playerId).findFirst()?.let {
-                    this.player = it
-                    realm.executeTransaction {
-                        var device = realm.copyToRealmOrUpdate(Device().apply {
-                            name = deviceInfo.name
-                            version = deviceInfo.version
-                            mac = deviceInfo.efuse_mac
-                            ble_mac = deviceInfo.ble.mac
-                        })
-                        //this.player.leftDevice = device
-                    }
-                }
-            }
-        }
+//        binding.content.setLeftDevice.setOnClickListener {
+//            Realm.getDefaultInstance().use { realm ->
+//                realm.where<User>().equalTo("id", playerId).findFirst()?.let {
+//                    this.player = it
+//                    realm.executeTransaction {
+//                        var device = realm.copyToRealmOrUpdate(Device().apply {
+//                            name = deviceInfo.name
+//                            version = deviceInfo.version
+//                            mac = deviceInfo.efuse_mac
+//                            ble_mac = deviceInfo.ble.mac
+//                        })
+//                        //this.player.leftDevice = device
+//                    }
+//                }
+//            }
+//        }
 
-        binding.content.setRightDevice.setOnClickListener {
-            Realm.getDefaultInstance().use { realm ->
-                realm.where<User>().equalTo("id", playerId).findFirst()?.let {
-                    this.player = it
-                    realm.executeTransaction {
-                        var device = realm.copyToRealmOrUpdate(Device().apply {
-                            name = deviceInfo.name
-                            version = deviceInfo.version
-                            mac = deviceInfo.efuse_mac
-                            ble_mac = deviceInfo.ble.mac
-                        })
-                        //this.player.rightDevice = device
-                    }
-                }
-            }
-        }
+//        binding.content.setRightDevice.setOnClickListener {
+//            Realm.getDefaultInstance().use { realm ->
+//                realm.where<User>().equalTo("id", playerId).findFirst()?.let {
+//                    this.player = it
+//                    realm.executeTransaction {
+//                        var device = realm.copyToRealmOrUpdate(Device().apply {
+//                            name = deviceInfo.name
+//                            version = deviceInfo.version
+//                            mac = deviceInfo.efuse_mac
+//                            ble_mac = deviceInfo.ble.mac
+//                        })
+//                        //this.player.rightDevice = device
+//                    }
+//                }
+//            }
+//        }
 
         BLEManager.onCharacteristicRead = {
 
@@ -100,56 +100,32 @@ class BluetoothDebugActivity : AppCompatActivity() {
             BLEManager.disableReading()
         }
 
+        BLEManager.onCharacteristicWrite = {
+            Log.e("CHUNK BYTES SENT", "")
+            uploadChunk(currentSize, currentIndex, currentData!!)
+        }
+
         val scrollingMethod = ScrollingMovementMethod()
         binding.content.discoveringLogText.movementMethod = scrollingMethod
-
-        binding.content.sleep.setOnClickListener {
-            var array = byteArrayOf(Byte.MAX_VALUE, 0x01)
-            BLEManager.write(array)
-        }
 
         binding.content.reboot.setOnClickListener {
             val array = byteArrayOf(Byte.MAX_VALUE, 0x00)
             BLEManager.write(array)
         }
 
-        binding.content.setUpdateUrl.setOnClickListener {
-            var array = byteArrayOf(0x02)
-            val byteInputInt = "https://gitlab.com/api/v4/projects/20772874/repository/files/dinamo_firmware_sketches%2FDinamoFirmware.ino.pico32.bin/raw?ref=master&private_token=1S_FpPnkbC5eyeWUmrYR".toByteArray()
-            array = array.plus(byteInputInt)
+        binding.content.turnoff.setOnClickListener {
+            var array = byteArrayOf(Byte.MAX_VALUE, 0x01)
             BLEManager.write(array)
         }
 
-        binding.content.setUpdateUrlNil.setOnClickListener {
-            var array = byteArrayOf(0x02)
-            val byteInputInt = "-".toByteArray()
-            array = array.plus(byteInputInt)
+        binding.content.lightSleep.setOnClickListener {
+            var array = byteArrayOf(Byte.MAX_VALUE, 0x02)
             BLEManager.write(array)
         }
 
-        binding.content.setUpdateMode.setOnClickListener {
-            var array = byteArrayOf(0x03)
-            val byteInputInt = "1".toByteArray()
-            array = array.plus(byteInputInt)
+        binding.content.resetReboot.setOnClickListener {
+            var array = byteArrayOf(Byte.MAX_VALUE, 0x03)
             BLEManager.write(array)
-            /*
-            val array = byteArrayOf(Byte.MAX_VALUE, 0x01, 0x01)
-            BLEManager.write(array)
-            BLEManager.enableReading()
-            */
-        }
-
-        binding.content.setNoMode.setOnClickListener {
-            var array = byteArrayOf(0x03)
-            val byteInputInt = "0".toByteArray()
-            array = array.plus(byteInputInt)
-            BLEManager.write(array)
-
-            /*
-            val array = byteArrayOf(Byte.MAX_VALUE, 0x01, 0x00)
-            BLEManager.write(array)
-            BLEManager.enableReading()
-            */
         }
 
         binding.content.downloadBinary.setOnClickListener {
@@ -175,30 +151,13 @@ class BluetoothDebugActivity : AppCompatActivity() {
                     cacheDir.listFiles().filter { it.canRead() &&  it.isFile && it.name.endsWith(".bin") }.map {
                         runOnUiThread {
                             val bytes = it.readBytes()
+                            Log.e("TOTAL BYTES COUNT", bytes.size.toString())
+                            Log.e("TOTAL BYTES", bytes.contentToString())
                             uploadChunk(512, 0, bytes)
-
                         }
                     }
                 }
             })
-        }
-
-        binding.content.setSSID.setOnClickListener {
-            var array = byteArrayOf(0x00)
-            val byteInputInt = "FASTWEB-B41373".toByteArray()
-            array = array.plus(byteInputInt)
-            BLEManager.write(array)
-        }
-
-        binding.content.setPass.setOnClickListener {
-            var array = byteArrayOf(0x01)
-            val byteInputInt = "4J8EEMJYJ3".toByteArray()
-            array = array.plus(byteInputInt)
-            BLEManager.write(array)
-        }
-
-        binding.content.nextButton.setOnClickListener{
-
         }
 
         binding.content.closeButton.setOnClickListener{
@@ -230,10 +189,7 @@ class BluetoothDebugActivity : AppCompatActivity() {
          * 5. Time duration Seconds
          */
         binding.content.setProgram.setOnClickListener {
-
             //Toast.makeText(this, hoursEditText?.text.toString(), Toast.LENGTH_SHORT).show()
-
-
             // Tipo di comando
             var commandByteArray = byteArrayOf(0x7E)
 
@@ -252,16 +208,24 @@ class BluetoothDebugActivity : AppCompatActivity() {
             BLEManager.write(commandByteArray)
         }
 
+        binding.content.setAllProgram.setOnClickListener {
+
+            var commandByteArray = byteArrayOf(0x7E,
+                0x01, 0x01, 0x00, 0x00, 0x04,
+                0x02, 0x01, 0x00, 0x00, 0x04,
+                0x03, 0x01, 0x00, 0x00, 0x04,
+                0x04, 0x01, 0x00, 0x00, 0x04,
+                0x05, 0x01, 0x00, 0x00, 0x04)
+
+            BLEManager.write(commandByteArray)
+        }
+
     }
 
     override fun onStart() {
         super.onStart()
 
         BLEManager.enableReading()
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     override fun onDestroy() {
@@ -334,18 +298,16 @@ class BluetoothDebugActivity : AppCompatActivity() {
         }
     }
 
+    var currentSize = 0
+    var currentIndex = 0
+    var currentData: ByteArray? = null
 
     fun uploadChunk(size: Int=512, index: Int = 0, data: ByteArray) {
         Log.e("DONWLOAD_BINARY_firmware", data.size.toString())
 
         val binarySize = data.size
-
         val fromIndex = size * index
-        Log.e("DONWLOAD_BINARY_from_index", fromIndex.toString())
-       if (fromIndex >= (binarySize-1)) {
-            return
-        }
-
+        if (fromIndex >= (binarySize-1)) { return }
         var toIndex = fromIndex + size
 
         var isLast = false
@@ -353,25 +315,30 @@ class BluetoothDebugActivity : AppCompatActivity() {
             isLast = true
             toIndex = binarySize
         }
+
         Log.e("DONWLOAD_BINARY_from_index", toIndex.toString())
+
+        var percent = (toIndex).toFloat()/(binarySize) * 100.00
+        Log.e("PERCENT", percent.toString())
 
         val chunkBytesArray = data.copyOfRange(fromIndex, toIndex)
 
-        var bytesOTAKey = byteArrayOf(0x00) // Key
-        bytesOTAKey = bytesOTAKey.plus(chunkBytesArray) // Data Byte Array
+//        var bytesOTAKey = byteArrayOf(0x00) // Key
+//        bytesOTAKey = bytesOTAKey.plus(chunkBytesArray) // Data Byte Array
+//        Log.e("DONWLOAD_BINARY_size", bytesOTAKey.size.toString())
 
-        Log.e("DONWLOAD_BINARY_size", bytesOTAKey.size.toString())
+        Log.e("CHUNK BYTES COUNT", chunkBytesArray.size.toString())
+        Log.e("CHUNK BYTES", chunkBytesArray.contentToString())
 
-        BLEManager.write(bytesOTAKey)
+        BLEManager.write(chunkBytesArray)
 
-        if (isLast) {
-            return
-        }
+        if (isLast) { return }
 
-        val handler = Handler(Looper.getMainLooper())
-        handler.postDelayed({
-            uploadChunk(size, index+1, data)
-        }, 2000)
+        currentSize = size
+        currentIndex = index+1
+        currentData = data
+
+        Log.e("CHUNK BYTES written", chunkBytesArray.contentToString())
     }
 
 }

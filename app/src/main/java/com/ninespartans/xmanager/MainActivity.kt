@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, EditAccountActivity::class.java)
                     startActivity(intent)
                 }
+
                 MainListAdapter.Action.SHOW_ACCOUNT -> {
                     val intent = Intent(this, AccountActivity::class.java)
                     startActivity(intent)
@@ -183,8 +184,10 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_profile -> {
-                val intent = Intent(this, EditAccountActivity::class.java)
+
+                val intent = Intent(this, AccountActivity::class.java)
                 startActivity(intent)
+
                 return true
             }
             android.R.id.home -> {

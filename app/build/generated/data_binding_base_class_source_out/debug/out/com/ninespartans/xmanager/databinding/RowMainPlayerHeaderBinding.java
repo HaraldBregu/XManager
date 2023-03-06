@@ -4,6 +4,7 @@ package com.ninespartans.xmanager.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -20,12 +21,21 @@ public final class RowMainPlayerHeaderBinding implements ViewBinding {
   private final RelativeLayout rootView;
 
   @NonNull
+  public final Button buttonCreateProgram;
+
+  @NonNull
   public final TextView textViewPlayersCount;
 
+  @NonNull
+  public final TextView title;
+
   private RowMainPlayerHeaderBinding(@NonNull RelativeLayout rootView,
-      @NonNull TextView textViewPlayersCount) {
+      @NonNull Button buttonCreateProgram, @NonNull TextView textViewPlayersCount,
+      @NonNull TextView title) {
     this.rootView = rootView;
+    this.buttonCreateProgram = buttonCreateProgram;
     this.textViewPlayersCount = textViewPlayersCount;
+    this.title = title;
   }
 
   @Override
@@ -55,13 +65,26 @@ public final class RowMainPlayerHeaderBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.buttonCreateProgram;
+      Button buttonCreateProgram = ViewBindings.findChildViewById(rootView, id);
+      if (buttonCreateProgram == null) {
+        break missingId;
+      }
+
       id = R.id.textViewPlayersCount;
       TextView textViewPlayersCount = ViewBindings.findChildViewById(rootView, id);
       if (textViewPlayersCount == null) {
         break missingId;
       }
 
-      return new RowMainPlayerHeaderBinding((RelativeLayout) rootView, textViewPlayersCount);
+      id = R.id.title;
+      TextView title = ViewBindings.findChildViewById(rootView, id);
+      if (title == null) {
+        break missingId;
+      }
+
+      return new RowMainPlayerHeaderBinding((RelativeLayout) rootView, buttonCreateProgram,
+          textViewPlayersCount, title);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

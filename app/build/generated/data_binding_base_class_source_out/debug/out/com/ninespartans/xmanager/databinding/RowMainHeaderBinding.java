@@ -4,6 +4,7 @@ package com.ninespartans.xmanager.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -12,8 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.ninespartans.xmanager.R;
 import java.lang.NullPointerException;
@@ -25,10 +24,7 @@ public final class RowMainHeaderBinding implements ViewBinding {
   private final MaterialCardView rootView;
 
   @NonNull
-  public final Chip chipCreateAccount;
-
-  @NonNull
-  public final ChipGroup chipGroup;
+  public final Button buttonCreateAccount;
 
   @NonNull
   public final TextView countDownTimerLabel;
@@ -60,16 +56,15 @@ public final class RowMainHeaderBinding implements ViewBinding {
   @NonNull
   public final LinearLayout userSection;
 
-  private RowMainHeaderBinding(@NonNull MaterialCardView rootView, @NonNull Chip chipCreateAccount,
-      @NonNull ChipGroup chipGroup, @NonNull TextView countDownTimerLabel,
+  private RowMainHeaderBinding(@NonNull MaterialCardView rootView,
+      @NonNull Button buttonCreateAccount, @NonNull TextView countDownTimerLabel,
       @NonNull LinearLayout currentProgramSection, @NonNull TextView dashboardDetailTitle,
       @NonNull TextView dashboardSubTitle, @NonNull TextView dashboardTitle,
       @NonNull TextView program, @NonNull LinearProgressIndicator programProgressBar,
       @NonNull TextView programTitle, @NonNull ImageView userImageView,
       @NonNull LinearLayout userSection) {
     this.rootView = rootView;
-    this.chipCreateAccount = chipCreateAccount;
-    this.chipGroup = chipGroup;
+    this.buttonCreateAccount = buttonCreateAccount;
     this.countDownTimerLabel = countDownTimerLabel;
     this.currentProgramSection = currentProgramSection;
     this.dashboardDetailTitle = dashboardDetailTitle;
@@ -109,15 +104,9 @@ public final class RowMainHeaderBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.chipCreateAccount;
-      Chip chipCreateAccount = ViewBindings.findChildViewById(rootView, id);
-      if (chipCreateAccount == null) {
-        break missingId;
-      }
-
-      id = R.id.chipGroup;
-      ChipGroup chipGroup = ViewBindings.findChildViewById(rootView, id);
-      if (chipGroup == null) {
+      id = R.id.buttonCreateAccount;
+      Button buttonCreateAccount = ViewBindings.findChildViewById(rootView, id);
+      if (buttonCreateAccount == null) {
         break missingId;
       }
 
@@ -181,7 +170,7 @@ public final class RowMainHeaderBinding implements ViewBinding {
         break missingId;
       }
 
-      return new RowMainHeaderBinding((MaterialCardView) rootView, chipCreateAccount, chipGroup,
+      return new RowMainHeaderBinding((MaterialCardView) rootView, buttonCreateAccount,
           countDownTimerLabel, currentProgramSection, dashboardDetailTitle, dashboardSubTitle,
           dashboardTitle, program, programProgressBar, programTitle, userImageView, userSection);
     }

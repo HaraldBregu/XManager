@@ -2157,6 +2157,8 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id buttonCreateAccount
+id buttonCreateProgram
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -2177,8 +2179,6 @@ id chip
 id chip1
 id chip2
 id chip3
-id chipCreateAccount
-id chipGroup
 id chip_group
 id chooseFootRadioGroup
 id chronometer
@@ -2204,7 +2204,6 @@ id cos
 id countDownTimerLabel
 id counterclockwise
 id createNewProgram
-id createProgram
 id createSession
 id currentState
 id current_program_section
@@ -2298,7 +2297,6 @@ id fitToContents
 id fixed
 id flip
 id floating
-id footer
 id forever
 id fragment_container_view_tag
 id frost
@@ -2364,6 +2362,7 @@ id leftToRight
 id left_foot
 id legacy
 id lightPositionTitle
+id lightSleep
 id line1
 id line3
 id linear
@@ -2481,6 +2480,8 @@ id preferences_detail
 id preferences_header
 id preferences_sliding_pane_layout
 id program
+id programCount
+id programDescription
 id programPlayerTimer
 id programPlayerTitle
 id programProgressBar
@@ -2498,6 +2499,7 @@ id ratio
 id reboot
 id rectangles
 id recycler_view
+id resetReboot
 id reverseSawtooth
 id right
 id rightShoeImage
@@ -2537,15 +2539,8 @@ id seekbar_value
 id select_dialog_listview
 id selected
 id selection_type
-id setLeftDevice
-id setNoMode
-id setPass
+id setAllProgram
 id setProgram
-id setRightDevice
-id setSSID
-id setUpdateMode
-id setUpdateUrl
-id setUpdateUrlNil
 id settingsSection
 id settingsText
 id sharedValueSet
@@ -2562,7 +2557,6 @@ id showTitle
 id sin
 id skipCollapsed
 id skipped
-id sleep
 id slide
 id snackbar_action
 id snackbar_text
@@ -2661,6 +2655,7 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id turnOffButton
+id turnoff
 id unchecked
 id uniform
 id unlabeled

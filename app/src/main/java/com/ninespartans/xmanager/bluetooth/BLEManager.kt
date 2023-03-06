@@ -20,7 +20,18 @@ object BLEManager {
     private const val GENERAL_SERVICE = "a327169a-31c0-4010-aebf-3e68ee255144"
     private const val GENERAL_CHARACTERISTIC = "e8e0d1f9-d24d-41b8-9a81-38be02772944"
     private const val GENERAL_DESCRIPTOR = "29976087-4812-4e67-8624-67d10df59231"
-    //private const val OTA_CHARACTERISTIC = "62a5b66b-6444-4792-9e17-8f489f3afcd2"
+
+    //private const val GENERAL_SERVICE = "00001542-1212-efde-1523-785feabcd121"
+    //private const val GENERAL_CHARACTERISTIC = "00001524-1212-efde-1523-785feabcd121"
+    //private const val GENERAL_DESCRIPTOR = "29976087-4812-4e67-8624-67d10df59231"
+
+    //00001542-1212-efde-1523-785feabcd121 Service
+    //00001524-1212-efde-1523-785feabcd121
+    //00009987-1212-efde-1523-785feabcd121
+    //00009999-1212-efde-1523-785feabcd121
+
+    private const val GENERAL_SERVICE_NRF = "00001542-1212-efde-1523-785feabcd121"
+    private const val GENERAL_CHARACTERISTIC_NRF = "00001542-1212-efde-1523-785feabcd121"
 
     lateinit var didFoundDevice: ((BluetoothDevice) -> Unit)
     lateinit var onStartScanning: (() -> Unit)
@@ -64,6 +75,7 @@ object BLEManager {
             val scanFilter = ScanFilter.Builder()
                 .setServiceUuid(ParcelUuid(UUID.fromString(GENERAL_SERVICE)))
                 .build()
+
             val scanFilters: List<ScanFilter> = listOf(scanFilter)
 
             val settings = ScanSettings.Builder()
@@ -96,6 +108,7 @@ object BLEManager {
         if (!scanning) return
 
         doAsync {
+
             scanner.stopScan(scanCallBack)
 
             uiThread {
@@ -178,12 +191,20 @@ object BLEManager {
                 Log.i("SERVICE_DISCOVERED", status.toString())
 
                 val gattObject = gatt.takeIf { it != null } ?: return
+
                 val service = gattObject.getService(UUID.fromString(GENERAL_SERVICE)).takeIf { it !=null } ?: return
                 selectedService = service
+                selectedService.characteristics.forEach {
+                    val uuid =   it.uuid.toString()
+                    Log.i("SELECTED_CHARACTERISTIC", uuid)
+                }
+
                 selectedCharacteristic = selectedService.getCharacteristic(UUID.fromString(GENERAL_CHARACTERISTIC))
+
                 Log.i("SELECTED_CHARACTERISTIC", selectedCharacteristic.uuid.toString())
-                selectedDescriptor = selectedCharacteristic.getDescriptor(UUID.fromString(GENERAL_DESCRIPTOR))
-                Log.i("SELECTED_DESCRIPTOR", selectedDescriptor.uuid.toString())
+
+                //selectedDescriptor = selectedCharacteristic.getDescriptor(UUID.fromString(GENERAL_DESCRIPTOR))
+                //Log.i("SELECTED_DESCRIPTOR", selectedDescriptor.uuid.toString())
 
                 onServiceDiscovered?.let {
                     it(true)
@@ -282,6 +303,12 @@ object BLEManager {
      * Function to check if some permission is granted
      */
     fun isPermissionGranted(permission:String, context: Context):Boolean = ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
+
+    fun isBleScanGranted(context: Context): Boolean =
+        isPermissionGranted(
+            Manifest.permission.BLUETOOTH_SCAN,
+            context)
+
     fun bleGranted(context: Context): Boolean =
         isPermissionGranted(
             Manifest.permission.BLUETOOTH,
@@ -302,6 +329,7 @@ object BLEManager {
             Manifest.permission.ACCESS_FINE_LOCATION,
             context
         )
+
     fun bleIsEnabled(): Boolean {
         BluetoothAdapter.getDefaultAdapter()?.let { return it.isEnabled }
         return false

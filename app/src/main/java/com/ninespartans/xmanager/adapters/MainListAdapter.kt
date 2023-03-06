@@ -62,9 +62,9 @@ class MainListAdapter(context: Context): BaseAdapter() {
 
     override fun getCount(): Int {
         val header = 1
-        val itemsHeader = 1
         val program = 1
-        return header + program + itemsHeader + players.size
+        val playersHeader = 1
+        return header + program + playersHeader + players.size
     }
 
     override fun getItemId(position: Int): Long {
@@ -73,9 +73,9 @@ class MainListAdapter(context: Context): BaseAdapter() {
 
     override fun getItem(position: Int): User? {
         val header = 1
-        val itemsHeader = 1
         val program = 1
-        val offset = header + itemsHeader + program
+        val playersHeader = 1
+        val offset = header + playersHeader + program
         return players[position - offset]
     }
 
@@ -100,12 +100,6 @@ class MainListAdapter(context: Context): BaseAdapter() {
          */
         val isRowProgramEmpty = (position == 1 && hasPlayers && noPrograms) || (position == 2 && noPlayers && noPrograms)
 
-        val isRowHeaderPlayer = (position == 2 && hasPlayers && hasPrograms) || (hasPlayers && noPrograms && position == 3)
-
-        var rowPlayerPosition = 0
-        rowPlayerPosition = if (hasPlayers && hasPrograms) position - 3 else 0
-        rowPlayerPosition = if (hasPlayers && !hasPrograms) position - 4 else rowPlayerPosition
-
         /**
          * Header Row
          * This Row is for the manager
@@ -117,12 +111,8 @@ class MainListAdapter(context: Context): BaseAdapter() {
             /** User section */
             //val userSection = rowHeader.findViewById<LinearLayout>(R.id.userSection)
             val fullname = rowHeader.findViewById<TextView>(R.id.dashboardDetailTitle)
-            val userTitle = rowHeader.findViewById<TextView>(R.id.userTitle)
-//            val userEditButton = rowHeader.findViewById<MaterialButton>(R.id.editAccount)
-//            userEditButton.visibility = View.GONE
-            val chipGroup = rowHeader.findViewById<ChipGroup>(R.id.chipGroup)
-            chipGroup.visibility = View.VISIBLE
-            val chipCreateAccount = rowHeader.findViewById<Chip>(R.id.chipCreateAccount)
+            val buttonCreateAccount = rowHeader.findViewById<Button>(R.id.buttonCreateAccount)
+            buttonCreateAccount.visibility = View.VISIBLE
 
             val account = realm.where<Account>().findFirst()
             val query = realm.where<User>()
@@ -130,31 +120,10 @@ class MainListAdapter(context: Context): BaseAdapter() {
             query.equalTo("account._id", account?._id)
             query.findFirst()?.let {
                 fullname.text = it.fullname
-                //userTitle.text = mContext.getString(R.string.activity_main_header_account_description2)
-                if (it.headline.isNotEmpty()) {
-                    //userTitle.text = it.headline
-                }
-//                userEditButton.visibility = View.VISIBLE
-                chipGroup.visibility = View.GONE
-            }
-/*
-            userEditButton.setOnClickListener {
-                onClickAction?.let {
-                    it(Action.EDIT_ACCOUNT)
-                }
+                buttonCreateAccount.visibility = View.GONE
             }
 
-            userSection.setOnClickListener {
-                onClickAction?.let {
-                    if (userEditButton.visibility == View.GONE) {
-                        it(Action.EDIT_ACCOUNT)
-                    } else {
-                        it(Action.SHOW_ACCOUNT)
-                    }
-                }
-            }*/
-
-            chipCreateAccount.setOnClickListener {
+            buttonCreateAccount.setOnClickListener {
                 onClickAction?.let {
                     it(Action.EDIT_ACCOUNT)
                 }
@@ -250,10 +219,17 @@ class MainListAdapter(context: Context): BaseAdapter() {
             }
 
             val programTitle = rowProgram.findViewById<TextView>(R.id.programTitle)
-            programTitle.text = "Programmi (${programs.size})"
+            programTitle.text = "Programmi"
 
-            val createProgram = rowProgram.findViewById<MaterialButton>(R.id.createProgram)
-            createProgram.setOnClickListener {
+            val programDescr = rowProgram.findViewById<TextView>(R.id.programDescription)
+            programDescr.text = "Gestione programmi"
+
+            val programCount = rowProgram.findViewById<TextView>(R.id.programCount)
+            programCount.text = "${programs.size}"
+
+
+            val buttonCreateProgram = rowProgram.findViewById<MaterialButton>(R.id.buttonCreateProgram)
+            buttonCreateProgram.setOnClickListener {
                 onClickAction?.let {
                     it(Action.CREATE_PROGRAM)
                 }
@@ -301,10 +277,19 @@ class MainListAdapter(context: Context): BaseAdapter() {
          * This Row is visible when there are players
          * Yuo can show info about the number of players or other info
          */
+        val isRowHeaderPlayer = position == 2 && hasPlayers
         val rowPlayerHeader = inflater.inflate(R.layout.row_main_player_header, viewGroup, false)
         if (isRowHeaderPlayer) {
             val textViewPlayersCount = rowPlayerHeader.findViewById<TextView>(R.id.textViewPlayersCount)
             textViewPlayersCount.text = players.size.toString()
+
+            val buttonCreateProgram = rowPlayerHeader.findViewById<MaterialButton>(R.id.buttonCreateProgram)
+            buttonCreateProgram.setOnClickListener {
+                onClickAction?.let {
+                    it(Action.ADD_PLAYER)
+                }
+            }
+
             return rowPlayerHeader
         }
 
@@ -314,6 +299,7 @@ class MainListAdapter(context: Context): BaseAdapter() {
          * You can show infor about the player,
          * the device of the player and programs running
          */
+        var rowPlayerPosition = position - 3
         val rowPlayer = inflater.inflate(R.layout.row_main_player, viewGroup, false)
         val player = players[rowPlayerPosition]
 
