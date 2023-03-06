@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:xmanager/views/device_search.dart';
+import 'package:xmanager/views/device/device_search.dart';
 import 'package:xmanager/views/player_detail.dart';
 import 'package:xmanager/views/player_edit.dart';
 import 'package:xmanager/views/account.dart';
@@ -22,9 +22,9 @@ class RouteNames {
   static const String account = '/account';
   static const String playerEdit = '/player_edit';
   static const String playerDetail = '/player_detail';
-  static const String deviceSearch = '/device_search';
   static const String appPermissions = '/app_permissions';
   static const String programCreate = '/program__create';
+  static const String deviceSearch = '/device_search';
 }
 
 Future <void> main() async {
@@ -104,9 +104,9 @@ class MainApp extends StatelessWidget {
           RouteNames.account: (context) => const Account(),
           RouteNames.playerEdit: (context) => const PlayerEdit(),
           RouteNames.playerDetail: (context) => const PlayerDetail(),
-          RouteNames.deviceSearch: (context) => const DeviceSearch(),
           RouteNames.appPermissions: (context) => const Permissions(),
-          RouteNames.programCreate: (context) => const ProgramCreate()
+          RouteNames.programCreate: (context) => const ProgramCreate(),
+          RouteNames.deviceSearch: (context) => const DeviceSearch(),
         },
       );
     });

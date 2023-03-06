@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:xmanager/common.dart';
+import 'package:xmanager/main.dart';
 import 'package:xmanager/services/app_state_notifier.dart';
 import 'package:xmanager/shared/widget/theme_mode_switch.dart';
 
@@ -82,12 +83,7 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
             onTap: () => {},
           ),
           ListTile(
-            title: Text('Bluetooth search'),
-            trailing: Icon(Icons.search),
-            onTap: () => Navigator.pushNamed(context, "device_search"),
-          ),
-          ListTile(
-            title: Text('Theme Mode'),
+            title: const Text('Theme Mode'),
             trailing: ThemeModeSwitch(
               themeMode: context.watch<AppStateNotifier>().themeMode,
               onChanged: (ThemeMode mode) {
@@ -99,7 +95,21 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
           ),
           ListTile(
             title: Text('App Permissions', style: textTheme.titleMedium),
-            onTap: () => Navigator.pushNamed(context, "app_permissions"),
+            onTap: () => Navigator.pushNamed(context, RouteNames.appPermissions),
+          ),
+          SwitchListTile(
+              title: Text('Switch tile', style: textTheme.titleMedium),
+              value: context.watch<AppStateNotifier>().darkMode,
+              onChanged: (bool value) {
+                setState(() {
+                  context.watch<AppStateNotifier>().setDarkMode(value);
+                });
+              }
+          ),
+          ListTile(
+            title: const Text('Bluetooth search'),
+            trailing: const Icon(Icons.search),
+            onTap: () => Navigator.pushNamed(context, RouteNames.deviceSearch),
           ),
         ],
       )

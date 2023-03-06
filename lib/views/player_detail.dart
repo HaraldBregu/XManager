@@ -26,23 +26,6 @@ class _PlayerDetailState extends State<PlayerDetail> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Player data"),
-        actions: <Widget>[
-          Padding(
-              padding: const EdgeInsets.only(right: 20.0),
-              child: IconButton(
-                icon: const Icon(Icons.edit),
-                onPressed: () {
-                  Navigator.pushNamed(context, RouteNames.playerEdit, arguments: player).then((updatedPlayer) => {
-                    setState(() {
-                      if (updatedPlayer != null) {
-                        player = updatedPlayer as Player;
-                      }
-                    })
-                  });
-                },
-              )
-          ),
-        ],
       ),
       body: ListView(
           children: <Widget>[
@@ -51,120 +34,165 @@ class _PlayerDetailState extends State<PlayerDetail> {
               elevation: 1,
               surfaceTintColor: colorScheme.surfaceTint,
               shadowColor: colorScheme.shadow,
-              child: Container(
-                padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(player?.fullname ?? "-", style: textTheme.headlineLarge)
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: Text(
+                          player.fullname ?? "-",
+                          style: textTheme.titleLarge?.copyWith(
+                              fontWeight: FontWeight.w900)),
+                      //subtitle: Text("Lorem Ipsum is simply dummy text of the.", style: textTheme.bodyMedium),
+                      selected: true,
+                      trailing: IconButton(
+                        icon: const Icon(Icons.edit),
+                        onPressed: () {
+                          Navigator.pushNamed(context, RouteNames.playerEdit, arguments: player).then((updatedPlayer) => {
+                            setState(() {
+                              if (updatedPlayer != null) {
+                                player = updatedPlayer as Player;
+                              }
+                            })
+                          });
+                        },
+                      ),
                     ),
-                    const SizedBox(height: 10),
-                    Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text("ITA - CENTROCAMPISTA", style: textTheme.titleMedium)
-                    ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 8),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children:  [
-                        Text("ETA: 34 Anni", style: textTheme.bodyMedium),
-                        Text((player?.birthdate.toString() ?? ""), style: textTheme.bodyMedium),
+                      children: [
+                        SizedBox(
+                            height: 25,
+                            child: Row(
+                              children: [
+                                const Icon(Icons.sports_soccer, size: 20),
+                                const SizedBox(width: 5),
+                                Text(player?.role ?? "-", style: textTheme.bodyLarge)
+                              ],
+                            )
+                        ),
+                        const SizedBox(width: 15),
+                        SizedBox(
+                            height: 25,
+                            child: Row(
+                              children: [
+                                const Icon(Icons.flag_outlined, size: 20),
+                                const SizedBox(width: 5),
+                                Text(player?.nationality ?? "-", style: textTheme.bodyLarge)
+                              ],
+                            )
+                        ),
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 8),
                     Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("PESO: ${(player?.weight ?? "")}", style: textTheme.bodyMedium),
-                          Text("Altezza: ${(player?.height ?? "")}", style: textTheme.bodyMedium)
-                        ]
+                      children: [
+                        SizedBox(
+                            height: 25,
+                            child: Row(
+                              children: [
+                                const Icon(Icons.monitor_weight_outlined, size: 20),
+                                const SizedBox(width: 5),
+                                Text(player?.weight.toString() ?? "-", style: textTheme.bodyLarge)
+                              ],
+                            )
+                        ),
+                        const SizedBox(width: 15),
+                        SizedBox(
+                            height: 25,
+                            child: Row(
+                              children: [
+                                const Icon(Icons.height_outlined, size: 20),
+                                const SizedBox(width: 5),
+                                Text(player?.height.toString() ?? "-", style: textTheme.bodyLarge)
+                              ],
+                            )
+                        ),
+                      ],
                     ),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
             ),
-            const SizedBox(height: 10),
-            Card(
-              elevation: 2,
-              child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Column(
-                  children: [
-                    Row(
-                        children: [
-                          const CircleAvatar(child: const Icon(Icons.train)),
-                          const SizedBox(width: 10),
-                          Text("Ore totali di training", style: textTheme.bodyLarge)
-                        ]
-                    )
-                  ],
+            const SizedBox(height: 8),
+            Material(
+              type: MaterialType.canvas,
+              elevation: 1,
+              surfaceTintColor: colorScheme.surfaceTint,
+              shadowColor: colorScheme.shadow,
+              child: ListTile(
+                contentPadding: EdgeInsets.symmetric(horizontal: 15),
+                leading: ClipRRect(
+                  borderRadius: BorderRadius.circular(5.0),//or 15.0
+                  child: Container(
+                    height: 35.0,
+                    width: 35.0,
+                    color: colorScheme.tertiaryContainer,
+                    child: Icon(Icons.developer_board_outlined, color:colorScheme.onTertiaryContainer , size: 20.0),
+                  ),
                 ),
+                title: Text('Programmi di allenamento', style: textTheme.titleMedium),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16,),
+                selected: true,
+                onTap: () => Navigator.pushNamed(context, RouteNames.programCreate),
               ),
             ),
-            const SizedBox(height: 10),
-            Card(
-              margin: EdgeInsets.zero,
-              child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Column(
-                  children: [
-                    Row(
-                        children: [
-                          const CircleAvatar(child: const Icon(Icons.train)),
-                          const SizedBox(width: 10),
-                          Text("Ore totali di training", style: textTheme.bodyLarge)
-                        ]
-                    )
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 8),
             Row(
               children: [
                 Expanded(
-                    child: Card(
-                      elevation: 6,
-                      margin: EdgeInsets.zero,
-                      child: Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: Column(
-                          children: [
-                            Row(
-                                children: [
-                                  const CircleAvatar(child: const Icon(Icons.train)),
-                                  const SizedBox(width: 10),
-                                  Text("Ore", style: textTheme.bodyLarge)
-                                ]
-                            )
-                          ],
+                    child: Material(
+                      type: MaterialType.canvas,
+                      elevation: 1,
+                      surfaceTintColor: colorScheme.surfaceTint,
+                      shadowColor: colorScheme.shadow,
+                      child: ListTile(
+                        contentPadding: EdgeInsets.symmetric(horizontal: 15),
+                        leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(5.0),//or 15.0
+                          child: Container(
+                            height: 35.0,
+                            width: 35.0,
+                            color: colorScheme.tertiaryContainer,
+                            child: Icon(Icons.developer_board_outlined, color:colorScheme.onTertiaryContainer , size: 20.0),
+                          ),
                         ),
+                        title: Text('Hour', style: textTheme.titleMedium),
+                        //trailing: const Icon(Icons.arrow_forward_ios, size: 16,),
+                        selected: true,
+                        //onTap: () => Navigator.pushNamed(context, RouteNames.programCreate),
                       ),
-                    )),
+                    )
+                ),
                 const SizedBox(width: 10),
                 Expanded(
-                    child: Card(
-                      elevation: 6,
-                      margin: EdgeInsets.zero,
-                      child: Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: Column(
-                          children: [
-                            Row(
-                                children: [
-                                  const CircleAvatar(child: const Icon(Icons.train)),
-                                  const SizedBox(width: 10),
-                                  Text("Ore totali", style: textTheme.bodyLarge)
-                                ]
-                            )
-                          ],
+                    child: Material(
+                      type: MaterialType.canvas,
+                      elevation: 1,
+                      surfaceTintColor: colorScheme.surfaceTint,
+                      shadowColor: colorScheme.shadow,
+                      child: ListTile(
+                        contentPadding: EdgeInsets.symmetric(horizontal: 15),
+                        leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(5.0),//or 15.0
+                          child: Container(
+                            height: 35.0,
+                            width: 35.0,
+                            color: colorScheme.tertiaryContainer,
+                            child: Icon(Icons.developer_board_outlined, color:colorScheme.onTertiaryContainer , size: 20.0),
+                          ),
                         ),
+                        title: Text('Month', style: textTheme.titleMedium),
+                        //trailing: const Icon(Icons.arrow_forward_ios, size: 16,),
+                        selected: true,
+                        //onTap: () => Navigator.pushNamed(context, RouteNames.programCreate),
                       ),
                     )),
               ],
-            )
+            ),
+            const SizedBox(height: 10),
           ]),
     );
   }

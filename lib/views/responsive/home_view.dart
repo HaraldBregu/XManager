@@ -39,24 +39,6 @@ class _HomeViewState extends State<HomeView> {
       elevation: 1,
       surfaceTintColor: colorScheme.surfaceTint,
       shadowColor: colorScheme.shadow,
-      child: ListTile(
-        contentPadding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
-        title: Text("Cristian Maldonado", style: textTheme.titleLarge),
-        subtitle: Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", style: textTheme.bodySmall),
-        selected: true,
-        trailing: IconButton(
-          icon: const Icon(Icons.bar_chart),
-          onPressed: () {},
-        ),
-      ),
-    );
-
-    /// Card of training session program
-    Widget trainingCard() => Material(
-      type: MaterialType.canvas,
-      elevation: 1,
-      surfaceTintColor: colorScheme.surfaceTint,
-      shadowColor: colorScheme.shadow,
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
@@ -64,113 +46,159 @@ class _HomeViewState extends State<HomeView> {
             ListTile(
               contentPadding: EdgeInsets.zero,
               //contentPadding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
-              title: Text("Cristian Maldonado", style: textTheme.titleLarge),
-              subtitle: Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", style: textTheme.bodySmall),
+              title: Text(
+                  "Cristian Maldonado",
+                  style: textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.w900)),
+              subtitle: Text("Lorem Ipsum is simply dummy text of the.", style: textTheme.bodyMedium),
               selected: true,
-              trailing: IconButton(
-                icon: const Icon(Icons.bar_chart),
-                onPressed: () => {},
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Divider(),
-            const SizedBox(height: 20),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: Text('PROGRAMMA DI ALLENAMENTO', style: textTheme.titleMedium),
-              subtitle: Text("Crea e gestisci il tuo programma di allenamento", style: textTheme.bodySmall),
-              trailing: OutlinedButton.icon(
-                  onPressed: () async {
-                    Navigator.of(context).pushNamed(RouteNames.programCreate);
 
-                    final hasVibrator = await Vibration
-                        .hasVibrator() ?? false;
-                    if (hasVibrator) {
-                      Vibration.vibrate();
-                    }
-                  },
-                  icon: Icon(Icons.add),
-                  label: Text("CREA")),
-              selected: true,
             ),
-            const SizedBox(height: 25),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text("PROGRAMMA", style: textTheme.labelSmall),
-            ),
-            Column(
-              children: [
-                Container(
-                  alignment: Alignment.centerLeft,
-                  height: 30,
-                  child: Text(
-                      "Allenamento con l'esterno sinistro",
-                      style: textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w600)
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: SizedBox(
-                        height: 10,
-                        child: ClipRRect(
-                          borderRadius: const BorderRadius.all(Radius.circular(10)),
-                          child: TweenAnimationBuilder(
-                            tween: Tween(begin: 0.0, end: 1.0),
-                            duration: const Duration(seconds: 10),
-                            builder: (context, value, _) {
-
-                              return LinearProgressIndicator(value: value);
-                            },
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 8),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    //IconButton(icon: const Icon(Icons.bar_chart), onPressed: () {}),
-                    //Text("STATISTICHE", style: textTheme.bodyLarge),
-                    ElevatedButton.icon(
-                        onPressed: (){},
-                        icon: Icon(Icons.bar_chart),
-                        label: Text("")),
-                    /*OutlinedButton.icon(
-                        onPressed: () async {
-                          final hasVibrator = await Vibration
-                              .hasVibrator() ?? false;
-                          if (hasVibrator) {
-                            Vibration.vibrate();
-                          }
-                        },
-                        icon: Icon(Icons.bar_chart),
-                        label: Text("STATISTICHE")),*/
-                  ],
+                SizedBox(
+                    height: 25,
+                    child: Row(
+                      children: [
+                        const Icon(Icons.domain, size: 20),
+                        const SizedBox(width: 5),
+                        Text("www.sports.com", style: textTheme.bodyLarge)
+                      ],
+                    )
                 ),
-                Container(
-                  alignment: Alignment.centerRight,
-                  height: 40,
-                  child: Text(
-                      '$hours:$minutes:$seconds',
-                      style: textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w600)
-                  ),
+                const SizedBox(width: 15),
+                SizedBox(
+                    height: 25,
+                    child: Row(
+                      children: [
+                        const Icon(Icons.location_on_outlined, size: 20),
+                        const SizedBox(width: 5),
+                        Text("Milano, Italy", style: textTheme.bodyLarge)
+                      ],
+                    )
                 ),
               ],
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 8),
+            SizedBox(
+                height: 25,
+                child: Row(
+                  children: [
+                    const Icon(Icons.email_outlined, size: 20,),
+                    const SizedBox(width: 5),
+                    Text("harald.bregu@gmail.com", style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w900))
+                  ],
+                )
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                SizedBox(
+                    height: 25,
+                    child: Row(
+                      children: [
+                        const Icon(Icons.workspace_premium, size: 20),
+                        const SizedBox(width: 5),
+                        Text("ProUEFA", style: textTheme.bodyLarge)
+                      ],
+                    )
+                ),
+                const SizedBox(width: 15),
+                SizedBox(
+                    height: 25,
+                    child: Row(
+                      children: [
+                        const Icon(Icons.star_border_outlined, size: 20),
+                        const SizedBox(width: 5),
+                        Text("24 Stars", style: textTheme.bodyLarge)
+                      ],
+                    )
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
           ],
         ),
+      ),
+    );
+
+    Widget trainingSectionCard() => Material(
+        type: MaterialType.canvas,
+        elevation: 1,
+        surfaceTintColor: colorScheme.surfaceTint,
+        shadowColor: colorScheme.shadow,
+        child: Column(
+          children: [
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 15),
+              leading: ClipRRect(
+                borderRadius: BorderRadius.circular(5.0),//or 15.0
+                child: Container(
+                  height: 35.0,
+                  width: 35.0,
+                  color: colorScheme.tertiaryContainer,
+                  child: Icon(Icons.developer_board_outlined, color:colorScheme.onTertiaryContainer , size: 20.0),
+                ),
+              ),
+              title: Text('Programmi di allenamento', style: textTheme.titleMedium),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16,),
+              selected: true,
+              onTap: () => Navigator.pushNamed(context, RouteNames.programCreate),
+            )
+          ],
+        )
+    );
+
+      /// Card of training session program
+    Widget trainingCard() => Material(
+      type: MaterialType.canvas,
+      elevation: 1,
+      surfaceTintColor: colorScheme.surfaceTint,
+      shadowColor: colorScheme.shadow,
+      child: Column(
+        children: [
+          ListTile(
+            contentPadding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+            title: Text('PROGRAMMA', style: textTheme.labelSmall),
+            subtitle: Text(
+                "Allenamento da brividi",
+                style: textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w700)
+            ),
+            selected: true
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                SizedBox(
+                  height: 10,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    child: TweenAnimationBuilder(
+                      tween: Tween(begin: 0.0, end: 1.0),
+                      duration: const Duration(seconds: 10),
+                      builder: (context, value, _) {
+                        return LinearProgressIndicator(value: value);
+                      },
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("IN ESECUZIONE", style: textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w400)),
+                    const SizedBox(width: 20),
+                    Text('$hours:$minutes:$seconds', style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
 
@@ -187,16 +215,19 @@ class _HomeViewState extends State<HomeView> {
             Player player = snapshot.data![index];
 
             var playerFullname = player.fullname;
-            var fullnameStyle = textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w500);
+            var fullnameStyle = textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700);
             var playerRole = player.role?.toUpperCase() ?? "-";
             var roleStyle = textTheme.labelMedium;
 
-            return Card(
-              elevation: 4,
+            return Material(
+              type: MaterialType.canvas,
+              elevation: 1,
+              surfaceTintColor: colorScheme.surfaceTint,
+              shadowColor: colorScheme.shadow,
               child: ListTile(
                 title: Text(playerFullname, style: fullnameStyle),
                 subtitle: Text(playerRole, style: roleStyle),
-                trailing: SizedBox(
+                /*trailing: SizedBox(
                   height: 30,
                   width: 30,
                   child: PopupMenuButton(
@@ -211,7 +242,7 @@ class _HomeViewState extends State<HomeView> {
                         case PlayerCardOptionMenu.Edit:
                           Navigator.pushNamed(
                               context,
-                              'player_edit',
+                              RouteNames.playerEdit,
                               arguments: player);
                           break;
                         case PlayerCardOptionMenu.Detail:
@@ -237,7 +268,7 @@ class _HomeViewState extends State<HomeView> {
                       ),
                     ],
                   ),
-                ),
+                ),*/
                 onTap: () => Navigator.pushNamed(context, RouteNames.playerDetail, arguments: player),
               ),
             );
@@ -468,8 +499,10 @@ class _HomeViewState extends State<HomeView> {
 
     return CustomScrollView(
       slivers: [
-        //SliverToBoxAdapter(child: coachHeader()),
-        //SliverToBoxAdapter(child: SizedBox(height: 20)),
+        SliverToBoxAdapter(child: coachHeader()),
+        const SliverToBoxAdapter(child: SizedBox(height: 10)),
+        SliverToBoxAdapter(child: trainingSectionCard()),
+        const SliverToBoxAdapter(child: SizedBox(height: 10)),
 
         SliverToBoxAdapter(child: trainingCard()),
         //SliverToBoxAdapter(child: WeatherCard()),
@@ -488,6 +521,8 @@ class _HomeViewState extends State<HomeView> {
           ],
         )),
         playersCard(),
+        const SliverToBoxAdapter(child: SizedBox(height: 90)),
+
       ],
     );
   }
