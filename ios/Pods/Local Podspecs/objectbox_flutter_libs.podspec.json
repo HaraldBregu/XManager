@@ -1,0 +1,32 @@
+{
+  "name": "objectbox_flutter_libs",
+  "version": "0.0.1",
+  "summary": "ObjectBox is a super-fast NoSQL ACID compliant object database.",
+  "homepage": "https://objectbox.io",
+  "license": "Apache 2.0, ObjectBox Binary License",
+  "authors": "ObjectBox",
+  "platforms": {
+    "ios": "11.0"
+  },
+  "source": {
+    "path": "."
+  },
+  "source_files": "Classes/**/*",
+  "dependencies": {
+    "Flutter": [
+
+    ],
+    "ObjectBox": [
+      "1.8.1"
+    ]
+  },
+  "pod_target_xcconfig": {
+    "DEFINES_MODULE": "YES",
+    "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "i386"
+  },
+  "swift_versions": "5.3",
+  "xcconfig": {
+    "OTHER_LDFLAGS": "-framework ObjectBox"
+  },
+  "swift_version": "5.3"
+}
