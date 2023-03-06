@@ -57,4 +57,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get save => 'save';
+
+  @override
+  String get create_program => 'create program';
 }

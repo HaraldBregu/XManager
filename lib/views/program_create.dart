@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:xmanager/common.dart';
+import 'package:xmanager/shared/string_extension.dart';
+
 
 class ProgramCreate extends StatefulWidget {
   const ProgramCreate({Key? key}) : super(key: key);
@@ -14,9 +17,11 @@ class _ProgramCreateState extends State<ProgramCreate> {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations? localize = AppLocalizations.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Crea programma"),
+        title: Text(localize?.create_program.capitalize() ?? "-"),
       ),
       body: Container(
         padding: const EdgeInsets.only(top: 15, left: 20, right: 20, bottom: 80),

@@ -198,6 +198,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'save'**
   String get save;
+
+  /// No description provided for @create_program.
+  ///
+  /// In en, this message translates to:
+  /// **'create program'**
+  String get create_program;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

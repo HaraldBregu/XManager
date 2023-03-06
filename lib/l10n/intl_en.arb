@@ -16,5 +16,7 @@
   "enter_weight": "enter weight",
   "height": "height",
   "enter_height": "enter height",
-  "save": "save"
+  "save": "save",
+
+  "create_program": "create program"
 }
