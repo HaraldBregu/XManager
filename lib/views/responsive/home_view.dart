@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:vibration/vibration.dart';
 import 'package:xmanager/common.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/model/player_model.dart';
+import 'package:xmanager/model/data_model.dart';
+
 
 enum PlayerCardOptionMenu { Delete, Edit, Detail }
 

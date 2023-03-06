@@ -14,7 +14,7 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import 'model/player_model.dart';
+import 'model/data_model.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -97,7 +97,8 @@ final _entities = <ModelEntity>[
             id: const IdUid(2, 1959944578448247002),
             name: 'title',
             type: 9,
-            flags: 0),
+            flags: 2080,
+            indexId: const IdUid(2, 7710838840937673166)),
         ModelProperty(
             id: const IdUid(3, 9109228393002401543),
             name: 'description',
@@ -144,11 +145,11 @@ ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
       lastEntityId: const IdUid(4, 3656018098347934602),
-      lastIndexId: const IdUid(0, 0),
+      lastIndexId: const IdUid(2, 7710838840937673166),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [813253216084854960],
-      retiredIndexUids: const [],
+      retiredIndexUids: const [7312765478902494176],
       retiredPropertyUids: const [
         8417382096306948866,
         4981195636571552789,

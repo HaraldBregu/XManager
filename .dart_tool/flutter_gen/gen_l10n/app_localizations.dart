@@ -199,11 +199,47 @@ abstract class AppLocalizations {
   /// **'save'**
   String get save;
 
+  /// No description provided for @program_list_title.
+  ///
+  /// In en, this message translates to:
+  /// **'All programs'**
+  String get program_list_title;
+
+  /// No description provided for @program_list_alert_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get program_list_alert_title;
+
+  /// No description provided for @program_list_alert_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this session program?'**
+  String get program_list_alert_description;
+
+  /// No description provided for @program_list_alert_cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get program_list_alert_cancel;
+
+  /// No description provided for @program_list_alert_delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get program_list_alert_delete;
+
   /// No description provided for @create_program_title.
   ///
   /// In en, this message translates to:
   /// **'Create program'**
   String get create_program_title;
+
+  /// No description provided for @save_program_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Save program'**
+  String get save_program_title;
 
   /// No description provided for @create_program_description.
   ///

@@ -59,7 +59,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get save => 'save';
 
   @override
+  String get program_list_title => 'All programs';
+
+  @override
+  String get program_list_alert_title => 'Delete';
+
+  @override
+  String get program_list_alert_description => 'Are you sure you want to delete this session program?';
+
+  @override
+  String get program_list_alert_cancel => 'Cancel';
+
+  @override
+  String get program_list_alert_delete => 'Delete';
+
+  @override
   String get create_program_title => 'Create program';
+
+  @override
+  String get save_program_title => 'Save program';
 
   @override
   String get create_program_description => 'You can create a new workout program by choosing a name, adding sessions and specifying the duration, then you can start using it.';

@@ -1,5 +1,4 @@
-import 'package:xmanager/model/player_model.dart';
-import 'model/player_model.dart';
+import 'package:xmanager/model/data_model.dart';
 import 'objectbox.g.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;

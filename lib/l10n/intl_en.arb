@@ -18,7 +18,14 @@
   "enter_height": "enter height",
   "save": "save",
 
+  "program_list_title": "All programs",
+  "program_list_alert_title": "Delete",
+  "program_list_alert_description": "Are you sure you want to delete this session program?",
+  "program_list_alert_cancel": "Cancel",
+  "program_list_alert_delete": "Delete",
+
   "create_program_title": "Create program",
+  "save_program_title": "Save program",
   "create_program_description": "You can create a new workout program by choosing a name, adding sessions and specifying the duration, then you can start using it.",
   "create_program_field_name": "Enter a name for this program",
   "create_program_field_name_error": "Please enter program name",

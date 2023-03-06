@@ -5,6 +5,8 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:xmanager/common.dart';
 import 'package:xmanager/main.dart';
+import 'package:xmanager/model/data_model.dart';
+import 'package:xmanager/objectbox.g.dart';
 import 'package:xmanager/services/app_state_notifier.dart';
 import 'package:xmanager/shared/widget/theme_mode_switch.dart';
 
@@ -110,6 +112,37 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
             title: const Text('Bluetooth search'),
             trailing: const Icon(Icons.search),
             onTap: () => Navigator.pushNamed(context, RouteNames.deviceSearch),
+          ),
+          ListTile(
+            title: const Text('Add test data'),
+            onLongPress: () {
+
+              try {
+                SessionProgram sp1 = SessionProgram();
+                sp1.title = "Simple program";
+                sp1.programs = [
+                  DeviceProgram(),
+                  DeviceProgram(),
+                ];
+                throw objectBox.sessionProgramBox.put(sp1);
+              } catch (error) {
+                print("error saving");
+              }
+
+              try {
+                SessionProgram sp1 = SessionProgram();
+                sp1.title = "Default program";
+                sp1.programs = [
+                  DeviceProgram(),
+                  DeviceProgram(),
+                ];
+                throw objectBox.sessionProgramBox.put(sp1);
+              } catch (error) {
+                print("error saving");
+              }
+
+
+            },
           ),
         ],
       )
