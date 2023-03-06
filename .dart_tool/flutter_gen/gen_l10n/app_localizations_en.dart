@@ -59,5 +59,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get save => 'save';
 
   @override
-  String get create_program => 'create program';
+  String get create_program_title => 'Create program';
+
+  @override
+  String get create_program_description => 'You can create a new workout program by choosing a name, adding sessions and specifying the duration, then you can start using it.';
+
+  @override
+  String get create_program_field_name => 'Enter a name for this program';
+
+  @override
+  String get create_program_field_name_error => 'Please enter program name';
+
+  @override
+  String get save_program => 'Save program';
 }

@@ -8,7 +8,8 @@ import 'package:xmanager/views/player_detail.dart';
 import 'package:xmanager/views/player_edit.dart';
 import 'package:xmanager/views/account.dart';
 import 'package:xmanager/views/permissions.dart';
-import 'package:xmanager/views/program_create.dart';
+import 'package:xmanager/views/program/program_create.dart';
+import 'package:xmanager/views/program/program_list.dart';
 import 'package:xmanager/views/responsive/responsive_layout.dart';
 import 'package:xmanager/services/app_state_notifier.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -23,7 +24,8 @@ class RouteNames {
   static const String playerEdit = '/player_edit';
   static const String playerDetail = '/player_detail';
   static const String appPermissions = '/app_permissions';
-  static const String programCreate = '/program__create';
+  static const String programCreate = '/program_create';
+  static const String programList = '/program_list';
   static const String deviceSearch = '/device_search';
 }
 
@@ -105,7 +107,8 @@ class MainApp extends StatelessWidget {
           RouteNames.playerEdit: (context) => const PlayerEdit(),
           RouteNames.playerDetail: (context) => const PlayerDetail(),
           RouteNames.appPermissions: (context) => const Permissions(),
-          RouteNames.programCreate: (context) => const ProgramCreate(),
+          RouteNames.programCreate: (context) => const ProgramCreate(program: null),
+          RouteNames.programList: (context) => const ProgramList(),
           RouteNames.deviceSearch: (context) => const DeviceSearch(),
         },
       );

@@ -46,9 +46,67 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "3:8116831420168438470",
+      "lastPropertyId": "2:688095002173714801",
+      "name": "DeviceProgram",
+      "properties": [
+        {
+          "id": "1:5068653949683785411",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:688095002173714801",
+          "name": "title",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:3656018098347934602",
+      "lastPropertyId": "6:3406376473234597456",
+      "name": "SessionProgram",
+      "properties": [
+        {
+          "id": "1:7444579579755250816",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1959944578448247002",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "3:9109228393002401543",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "4:5281269997235546803",
+          "name": "startDate",
+          "type": 10
+        },
+        {
+          "id": "5:4152780086259794751",
+          "name": "createdAt",
+          "type": 10
+        },
+        {
+          "id": "6:3406376473234597456",
+          "name": "updatedAt",
+          "type": 10
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "2:3225004814405648421",
+  "lastEntityId": "4:3656018098347934602",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

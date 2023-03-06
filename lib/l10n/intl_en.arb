@@ -18,5 +18,9 @@
   "enter_height": "enter height",
   "save": "save",
 
-  "create_program": "create program"
+  "create_program_title": "Create program",
+  "create_program_description": "You can create a new workout program by choosing a name, adding sessions and specifying the duration, then you can start using it.",
+  "create_program_field_name": "Enter a name for this program",
+  "create_program_field_name_error": "Please enter program name",
+  "save_program": "Save program"
 }

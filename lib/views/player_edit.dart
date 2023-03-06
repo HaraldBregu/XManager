@@ -148,9 +148,7 @@ class _PlayerEditState extends State<PlayerEdit> {
         player.fullname = _fullname.text;
         player.role = _role.text;
         player.nationality = _nationality.text;
-        if (_birthdate != null) {
-          player.birthdate = DateFormat.yMMMd().parse(_birthdate.text);
-        }
+        player.birthdate = DateFormat.yMMMd().parse(_birthdate.text);
         player.weight = double.tryParse(_weight.text);
         player.height = double.tryParse(_height.text);
 

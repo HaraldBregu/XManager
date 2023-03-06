@@ -144,13 +144,13 @@ class _HomeViewState extends State<HomeView> {
               title: Text('Programmi di allenamento', style: textTheme.titleMedium),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16,),
               selected: true,
-              onTap: () => Navigator.pushNamed(context, RouteNames.programCreate),
+              onTap: () => Navigator.pushNamed(context, RouteNames.programList),
             )
           ],
         )
     );
 
-      /// Card of training session program
+    /// Card of training session program
     Widget trainingCard() => Material(
       type: MaterialType.canvas,
       elevation: 1,
@@ -495,7 +495,6 @@ class _HomeViewState extends State<HomeView> {
               childCount: snapshot.hasData ? snapshot.data!.length : 0),
           );
         });
-
 
     return CustomScrollView(
       slivers: [

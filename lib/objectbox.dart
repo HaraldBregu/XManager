@@ -10,12 +10,17 @@ class ObjectBox {
   late final Admin _admin;
 
   late final Box<Player>playerBox;
+  late final Box<SessionProgram>sessionProgramBox;
+  late final Box<DeviceProgram>deviceProgramBox;
+
   ObjectBox._create(this.store) {
     if (Admin.isAvailable()) {
       _admin = Admin(store);
     }
 
     playerBox = Box<Player>(store);
+    sessionProgramBox = Box<SessionProgram>(store);
+    //deviceProgramBox = Box<DeviceProgram>(store);
   }
 
 
@@ -31,6 +36,11 @@ class ObjectBox {
     // Query for all events ordered by date.
     // https://docs.objectbox.io/queries
     final builder = playerBox.query()..order(Player_.id);
+    return builder.watch(triggerImmediately: true).map((query) => query.find());
+  }
+
+  Stream<List<SessionProgram>> getSessionPrograms() {
+    final builder = sessionProgramBox.query()..order(SessionProgram_.id);
     return builder.watch(triggerImmediately: true).map((query) => query.find());
   }
 

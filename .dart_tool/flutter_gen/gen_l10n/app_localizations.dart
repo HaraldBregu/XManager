@@ -199,11 +199,35 @@ abstract class AppLocalizations {
   /// **'save'**
   String get save;
 
-  /// No description provided for @create_program.
+  /// No description provided for @create_program_title.
   ///
   /// In en, this message translates to:
-  /// **'create program'**
-  String get create_program;
+  /// **'Create program'**
+  String get create_program_title;
+
+  /// No description provided for @create_program_description.
+  ///
+  /// In en, this message translates to:
+  /// **'You can create a new workout program by choosing a name, adding sessions and specifying the duration, then you can start using it.'**
+  String get create_program_description;
+
+  /// No description provided for @create_program_field_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a name for this program'**
+  String get create_program_field_name;
+
+  /// No description provided for @create_program_field_name_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter program name'**
+  String get create_program_field_name_error;
+
+  /// No description provided for @save_program.
+  ///
+  /// In en, this message translates to:
+  /// **'Save program'**
+  String get save_program;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

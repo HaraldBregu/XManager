@@ -62,6 +62,64 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(3, 8116831420168438470),
+      name: 'DeviceProgram',
+      lastPropertyId: const IdUid(2, 688095002173714801),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 5068653949683785411),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 688095002173714801),
+            name: 'title',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(4, 3656018098347934602),
+      name: 'SessionProgram',
+      lastPropertyId: const IdUid(6, 3406376473234597456),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 7444579579755250816),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 1959944578448247002),
+            name: 'title',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 9109228393002401543),
+            name: 'description',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 5281269997235546803),
+            name: 'startDate',
+            type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 4152780086259794751),
+            name: 'createdAt',
+            type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 3406376473234597456),
+            name: 'updatedAt',
+            type: 10,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -85,7 +143,7 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(2, 3225004814405648421),
+      lastEntityId: const IdUid(4, 3656018098347934602),
       lastIndexId: const IdUid(0, 0),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
@@ -154,6 +212,81 @@ ModelDefinition getObjectBoxModel() {
                 .vTableGetNullable(buffer, rootOffset, 24);
 
           return object;
+        }),
+    DeviceProgram: EntityDefinition<DeviceProgram>(
+        model: _entities[1],
+        toOneRelations: (DeviceProgram object) => [],
+        toManyRelations: (DeviceProgram object) => {},
+        getId: (DeviceProgram object) => object.id,
+        setId: (DeviceProgram object, int id) {
+          object.id = id;
+        },
+        objectToFB: (DeviceProgram object, fb.Builder fbb) {
+          final titleOffset = fbb.writeString(object.title);
+          fbb.startTable(3);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, titleOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = DeviceProgram()
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
+            ..title = const fb.StringReader(asciiOptimization: true)
+                .vTableGet(buffer, rootOffset, 6, '');
+
+          return object;
+        }),
+    SessionProgram: EntityDefinition<SessionProgram>(
+        model: _entities[2],
+        toOneRelations: (SessionProgram object) => [],
+        toManyRelations: (SessionProgram object) => {},
+        getId: (SessionProgram object) => object.id,
+        setId: (SessionProgram object, int id) {
+          object.id = id;
+        },
+        objectToFB: (SessionProgram object, fb.Builder fbb) {
+          final titleOffset = fbb.writeString(object.title);
+          final descriptionOffset = fbb.writeString(object.description);
+          fbb.startTable(7);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, titleOffset);
+          fbb.addOffset(2, descriptionOffset);
+          fbb.addInt64(3, object.startDate?.millisecondsSinceEpoch);
+          fbb.addInt64(4, object.createdAt?.millisecondsSinceEpoch);
+          fbb.addInt64(5, object.updatedAt?.millisecondsSinceEpoch);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final startDateValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 10);
+          final createdAtValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 12);
+          final updatedAtValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 14);
+          final object = SessionProgram()
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
+            ..title = const fb.StringReader(asciiOptimization: true)
+                .vTableGet(buffer, rootOffset, 6, '')
+            ..description = const fb.StringReader(asciiOptimization: true)
+                .vTableGet(buffer, rootOffset, 8, '')
+            ..startDate = startDateValue == null
+                ? null
+                : DateTime.fromMillisecondsSinceEpoch(startDateValue)
+            ..createdAt = createdAtValue == null
+                ? null
+                : DateTime.fromMillisecondsSinceEpoch(createdAtValue)
+            ..updatedAt = updatedAtValue == null
+                ? null
+                : DateTime.fromMillisecondsSinceEpoch(updatedAtValue);
+
+          return object;
         })
   };
 
@@ -185,4 +318,42 @@ class Player_ {
   /// see [Player.nationality]
   static final nationality =
       QueryStringProperty<Player>(_entities[0].properties[6]);
+}
+
+/// [DeviceProgram] entity fields to define ObjectBox queries.
+class DeviceProgram_ {
+  /// see [DeviceProgram.id]
+  static final id =
+      QueryIntegerProperty<DeviceProgram>(_entities[1].properties[0]);
+
+  /// see [DeviceProgram.title]
+  static final title =
+      QueryStringProperty<DeviceProgram>(_entities[1].properties[1]);
+}
+
+/// [SessionProgram] entity fields to define ObjectBox queries.
+class SessionProgram_ {
+  /// see [SessionProgram.id]
+  static final id =
+      QueryIntegerProperty<SessionProgram>(_entities[2].properties[0]);
+
+  /// see [SessionProgram.title]
+  static final title =
+      QueryStringProperty<SessionProgram>(_entities[2].properties[1]);
+
+  /// see [SessionProgram.description]
+  static final description =
+      QueryStringProperty<SessionProgram>(_entities[2].properties[2]);
+
+  /// see [SessionProgram.startDate]
+  static final startDate =
+      QueryIntegerProperty<SessionProgram>(_entities[2].properties[3]);
+
+  /// see [SessionProgram.createdAt]
+  static final createdAt =
+      QueryIntegerProperty<SessionProgram>(_entities[2].properties[4]);
+
+  /// see [SessionProgram.updatedAt]
+  static final updatedAt =
+      QueryIntegerProperty<SessionProgram>(_entities[2].properties[5]);
 }

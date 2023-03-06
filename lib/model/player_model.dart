@@ -29,3 +29,31 @@ class Player {
   Player();
 }
 
+@Entity()
+class SessionProgram {
+  @Id()
+  int id = 0;
+  String title = "";
+  String description = "";
+
+  @Property(type: PropertyType.date)
+  DateTime? startDate;
+
+  @Property(type: PropertyType.date)
+  DateTime? createdAt;
+
+  @Property(type: PropertyType.date)
+  DateTime? updatedAt;
+
+  List<DeviceProgram> programs = [];
+
+  SessionProgram();
+}
+
+@Entity()
+class DeviceProgram {
+  @Id()
+  int id = 0;
+
+  String title = "";
+}

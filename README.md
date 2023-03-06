@@ -26,7 +26,7 @@ flutter run --release
 # Objectbox
 When changing the models run this command
     flutter pub run build_runner build
-if it doesnt work use thie:
+if it doesnt work use this:
     flutter pub run build_runner build --delete-conflicting-outputs
 
 
