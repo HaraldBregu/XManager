@@ -199,6 +199,12 @@ abstract class AppLocalizations {
   /// **'save'**
   String get save;
 
+  /// No description provided for @player_detail_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Player profile'**
+  String get player_detail_title;
+
   /// No description provided for @program_list_title.
   ///
   /// In en, this message translates to:

@@ -59,6 +59,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get save => 'save';
 
   @override
+  String get player_detail_title => 'Player profile';
+
+  @override
   String get program_list_title => 'All programs';
 
   @override

@@ -18,6 +18,8 @@
   "enter_height": "enter height",
   "save": "save",
 
+  "player_detail_title": "Player profile",
+
   "program_list_title": "All programs",
   "program_list_alert_title": "Delete",
   "program_list_alert_description": "Are you sure you want to delete this session program?",

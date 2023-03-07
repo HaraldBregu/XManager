@@ -4,6 +4,8 @@ import 'package:xmanager/main.dart';
 import 'package:xmanager/model/data_model.dart';
 import 'package:xmanager/model/menu_item.dart';
 
+enum PlayerDetailMenuItem { delete, edit }
+
 class PlayerDetail extends StatefulWidget {
   const PlayerDetail({Key? key}) : super(key: key);
 
@@ -12,6 +14,7 @@ class PlayerDetail extends StatefulWidget {
 }
 
 class _PlayerDetailState extends State<PlayerDetail> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,18 +29,28 @@ class _PlayerDetailState extends State<PlayerDetail> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Player data"),
+        title: Text(localize?.player_detail_title ?? "-"),
         actions: [
           PopupMenuButton(
-            onSelected: (value) {
+              onSelected: (value) {
+                  switch (value) {
+                    case PlayerDetailMenuItem.edit:
+                      break;
+                    case PlayerDetailMenuItem.delete:
 
-            },
+                      var idToDelete = player?.id ?? 0;
+                      objectBox.playerBox.remove(idToDelete);
+                      Navigator.pop(context);
+                      break;
+                  }
+              },
               itemBuilder: (context) => [
                 PopupMenuItem(
+                    value: PlayerDetailMenuItem.edit,
                     child: Text("Edit")),
                 PopupMenuItem(
+                    value: PlayerDetailMenuItem.delete,
                     child: Text("Delete")),
-
               ])
         ],
       ),
