@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:xmanager/common.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/model/player_model.dart';
+import 'package:xmanager/model/data_model.dart';
 
 class PlayerDetail extends StatefulWidget {
   const PlayerDetail({Key? key}) : super(key: key);

@@ -87,13 +87,13 @@ dependencies {
     // e.g. check https://github.com/objectbox/objectbox-dart/releases
     // Warning: when ObjectBox for Dart updates check if <version>
     // needs to be updated.
-    debugImplementation("io.objectbox:objectbox-android-objectbrowser:<version>")
+    //debugImplementation("io.objectbox:objectbox-android-objectbrowser:1.7.2")
 }
 
 // Tell Gradle to exclude the objectbox-android dependency
 // that is added by objectbox_flutter_libs for debug builds.
 configurations {
-    debugImplementation {
+    /*debugImplementation {
         exclude group: 'io.objectbox', module: 'objectbox-android'
-    }
+    }*/
 }

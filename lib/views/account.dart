@@ -118,15 +118,59 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
             onLongPress: () {
 
               try {
-                SessionProgram sp1 = SessionProgram();
-                sp1.title = "Simple program";
-                sp1.programs = [
-                  DeviceProgram(),
-                  DeviceProgram(),
-                ];
-                throw objectBox.sessionProgramBox.put(sp1);
+                Player pl = Player();
+                pl.fullname = "Ezequiel Lavezzi";
+                throw objectBox.playerBox.put(pl);
               } catch (error) {
-                print("error saving");
+                print(error);
+              }
+
+              try {
+                Player pl = Player();
+                pl.fullname = "Iker Casillas";
+                throw objectBox.playerBox.put(pl);
+              } catch (error) {
+                print(error);
+              }
+
+              try {
+                Player pl = Player();
+                pl.fullname = "Zlatan Ibrahimovic";
+                throw objectBox.playerBox.put(pl);
+              } catch (error) {
+                print(error);
+              }
+
+              try {
+                Player pl = Player();
+                pl.fullname = "Zlatan Ibrahimovic";
+                throw objectBox.playerBox.put(pl);
+              } catch (error) {
+                print(error);
+              }
+
+              try {
+                Player pl = Player();
+                pl.fullname = "David Beckham";
+                throw objectBox.playerBox.put(pl);
+              } catch (error) {
+                print(error);
+              }
+
+              try {
+                Player pl = Player();
+                pl.fullname = "Cristiano Ronaldo";
+                throw objectBox.playerBox.put(pl);
+              } catch (error) {
+                print(error);
+              }
+
+              try {
+                Player pl = Player();
+                pl.fullname = "Lionel Messi";
+                throw objectBox.playerBox.put(pl);
+              } catch (error) {
+                print(error);
               }
 
               try {
@@ -138,9 +182,32 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
                 ];
                 throw objectBox.sessionProgramBox.put(sp1);
               } catch (error) {
-                print("error saving");
+                print(error);
               }
 
+              try {
+                SessionProgram sp1 = SessionProgram();
+                sp1.title = "Demo program";
+                sp1.programs = [
+                  DeviceProgram(),
+                  DeviceProgram(),
+                ];
+                throw objectBox.sessionProgramBox.put(sp1);
+              } catch (error) {
+                print(error);
+              }
+
+              try {
+                SessionProgram sp1 = SessionProgram();
+                sp1.title = "Self-training session";
+                sp1.programs = [
+                  DeviceProgram(),
+                  DeviceProgram(),
+                ];
+                throw objectBox.sessionProgramBox.put(sp1);
+              } catch (error) {
+                print(error);
+              }
 
             },
           ),

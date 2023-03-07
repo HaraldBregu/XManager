@@ -15,6 +15,8 @@ Altro
 class Player {
   @Id()
   int id = 0;
+
+  @Unique()
   String fullname = "";
 
   @Property(type: PropertyType.date)
