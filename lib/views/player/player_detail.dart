@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:xmanager/common.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/model/data_model.dart';
+import 'package:xmanager/model/menu_item.dart';
 
 class PlayerDetail extends StatefulWidget {
   const PlayerDetail({Key? key}) : super(key: key);
@@ -26,6 +27,19 @@ class _PlayerDetailState extends State<PlayerDetail> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Player data"),
+        actions: [
+          PopupMenuButton(
+            onSelected: (value) {
+
+            },
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                    child: Text("Edit")),
+                PopupMenuItem(
+                    child: Text("Delete")),
+
+              ])
+        ],
       ),
       body: ListView(
           children: <Widget>[
