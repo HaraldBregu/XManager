@@ -3,11 +3,14 @@ import 'package:xmanager/common.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/model/data_model.dart';
 import 'package:xmanager/model/menu_item.dart';
+import 'package:xmanager/views/player/player_edit.dart';
 
 enum PlayerDetailMenuItem { delete, edit }
 
 class PlayerDetail extends StatefulWidget {
-  const PlayerDetail({Key? key}) : super(key: key);
+  const PlayerDetail({Key? key, required this.player}) : super(key: key);
+
+  final Player? player;
 
   @override
   State<PlayerDetail> createState() => _PlayerDetailState();
@@ -15,17 +18,13 @@ class PlayerDetail extends StatefulWidget {
 
 class _PlayerDetailState extends State<PlayerDetail> {
 
-
   @override
   Widget build(BuildContext context) {
     AppLocalizations? localize = AppLocalizations.of(context);
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
     final ColorScheme colorScheme = theme.colorScheme;
-
-    Object? object = ModalRoute.of(context)?.settings.arguments;
-    Player? player = object as Player?;
-    player ??= Player();
+    Player player = widget.player ?? Player();
 
     return Scaffold(
       appBar: AppBar(
@@ -38,7 +37,7 @@ class _PlayerDetailState extends State<PlayerDetail> {
                       break;
                     case PlayerDetailMenuItem.delete:
 
-                      var idToDelete = player?.id ?? 0;
+                      var idToDelete = player.id ?? 0;
                       objectBox.playerBox.remove(idToDelete);
                       Navigator.pop(context);
                       break;
@@ -68,21 +67,19 @@ class _PlayerDetailState extends State<PlayerDetail> {
                     ListTile(
                       contentPadding: EdgeInsets.zero,
                       title: Text(
-                          player.fullname ?? "-",
+                          player.fullname,
                           style: textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.w900)),
-                      //subtitle: Text("Lorem Ipsum is simply dummy text of the.", style: textTheme.bodyMedium),
                       selected: true,
                       trailing: IconButton(
                         icon: const Icon(Icons.edit),
                         onPressed: () {
-                          Navigator.pushNamed(context, RouteNames.playerEdit, arguments: player).then((updatedPlayer) => {
-                            setState(() {
-                              if (updatedPlayer != null) {
-                                player = updatedPlayer as Player;
-                              }
-                            })
-                          });
+
+                          didUpdatePlayer(value) { setState(() { player = value; }); }
+
+                          var editPlayer = PlayerEdit(player: player, updated: didUpdatePlayer);
+                          var materialRoute = MaterialPageRoute(builder: (context) => editPlayer);
+                          Navigator.push(context, materialRoute);
                         },
                       ),
                     ),
@@ -95,7 +92,7 @@ class _PlayerDetailState extends State<PlayerDetail> {
                               children: [
                                 const Icon(Icons.sports_soccer, size: 20),
                                 const SizedBox(width: 5),
-                                Text(player?.role ?? "-", style: textTheme.bodyLarge)
+                                Text(player.role ?? "-", style: textTheme.bodyLarge)
                               ],
                             )
                         ),
@@ -106,7 +103,7 @@ class _PlayerDetailState extends State<PlayerDetail> {
                               children: [
                                 const Icon(Icons.flag_outlined, size: 20),
                                 const SizedBox(width: 5),
-                                Text(player?.nationality ?? "-", style: textTheme.bodyLarge)
+                                Text(player.nationality ?? "-", style: textTheme.bodyLarge)
                               ],
                             )
                         ),
@@ -121,7 +118,7 @@ class _PlayerDetailState extends State<PlayerDetail> {
                               children: [
                                 const Icon(Icons.monitor_weight_outlined, size: 20),
                                 const SizedBox(width: 5),
-                                Text(player?.weight.toString() ?? "-", style: textTheme.bodyLarge)
+                                Text(player.weight.toString(), style: textTheme.bodyLarge)
                               ],
                             )
                         ),
@@ -132,7 +129,7 @@ class _PlayerDetailState extends State<PlayerDetail> {
                               children: [
                                 const Icon(Icons.height_outlined, size: 20),
                                 const SizedBox(width: 5),
-                                Text(player?.height.toString() ?? "-", style: textTheme.bodyLarge)
+                                Text(player.height.toString(), style: textTheme.bodyLarge)
                               ],
                             )
                         ),

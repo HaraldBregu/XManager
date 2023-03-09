@@ -3,6 +3,7 @@ import 'package:vibration/vibration.dart';
 import 'package:xmanager/common.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/model/data_model.dart';
+import 'package:xmanager/views/player/player_detail.dart';
 
 
 enum PlayerCardOptionMenu { Delete, Edit, Detail }
@@ -270,7 +271,12 @@ class _HomeViewState extends State<HomeView> {
                     ],
                   ),
                 ),*/
-                onTap: () => Navigator.pushNamed(context, RouteNames.playerDetail, arguments: player),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PlayerDetail(player: player)),
+                  );
+                },
               ),
             );
 

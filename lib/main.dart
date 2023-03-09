@@ -105,8 +105,8 @@ class MainApp extends StatelessWidget {
         home: const ResponsiveLayout(),
         routes: {
           RouteNames.account: (context) => const Account(),
-          RouteNames.playerEdit: (context) => const PlayerEdit(),
-          RouteNames.playerDetail: (context) => const PlayerDetail(),
+          RouteNames.playerEdit: (context) => const PlayerEdit(player: null),
+          RouteNames.playerDetail: (context) => const PlayerDetail(player: null),
           RouteNames.appPermissions: (context) => const Permissions(),
           RouteNames.programCreate: (context) => const ProgramCreate(program: null),
           RouteNames.programList: (context) => const ProgramList(),

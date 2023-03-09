@@ -5,8 +5,14 @@ import 'package:xmanager/model/data_model.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/extensions.dart';
 
+typedef UpdatePlayerFunction = Function(Player);
+
 class PlayerEdit extends StatefulWidget {
-  const PlayerEdit({Key? key}) : super(key: key);
+  const PlayerEdit({Key? key, required this.player, this.updated}) : super(key: key);
+
+
+  final Player? player;
+  final UpdatePlayerFunction? updated;
 
   @override
   State<PlayerEdit> createState() => _PlayerEditState();
@@ -14,7 +20,6 @@ class PlayerEdit extends StatefulWidget {
 
 class _PlayerEditState extends State<PlayerEdit> {
   final _formKey = GlobalKey<FormState>();
-
   final _fullname = TextEditingController();
   final _role = TextEditingController();
   final _nationality = TextEditingController();
@@ -25,10 +30,7 @@ class _PlayerEditState extends State<PlayerEdit> {
   @override
   Widget build(BuildContext context) {
     AppLocalizations? localize = AppLocalizations.of(context);
-
-    Object? object = ModalRoute.of(context)?.settings.arguments;
-    Player? player = object as Player?;
-    player ??= Player();
+    Player player = widget.player ?? Player();
 
     _fullname.text = player.fullname;
     _role.text = player.role ?? "";
@@ -42,7 +44,7 @@ class _PlayerEditState extends State<PlayerEdit> {
 
     /// Title of navbar
     String titleAppBar() {
-      if (object != null) {
+      if (widget.player != null) {
         return localize?.update_player.capitalize() ?? "";
       }
       return localize?.create_player.capitalize() ?? "";
@@ -143,7 +145,7 @@ class _PlayerEditState extends State<PlayerEdit> {
     /// Save data and pop back
     void savePlayer() {
 
-      if (_formKey.currentState!.validate() && player != null) {
+      if (_formKey.currentState!.validate()) {
 
         player.fullname = _fullname.text;
         player.role = _role.text;
@@ -153,6 +155,9 @@ class _PlayerEditState extends State<PlayerEdit> {
         player.height = double.tryParse(_height.text);
 
         objectBox.playerBox.put(player);
+        if (widget.updated != null) {
+          widget.updated!(player);
+        }
         Navigator.pop(context, player);
       }
     }
