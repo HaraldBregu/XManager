@@ -7,8 +7,7 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
-/.dart_tool
-.dart_tool
+.dart_tool/
 .DS_Store
 /build
 /captures
