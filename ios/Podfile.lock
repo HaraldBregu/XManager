@@ -6,6 +6,8 @@ PODS:
   - flutter_blue_plus/Protos (0.0.1):
     - Flutter
     - Protobuf (~> 3.11)
+  - integration_test (0.0.1):
+    - Flutter
   - ObjectBox (1.8.1)
   - objectbox_flutter_libs (0.0.1):
     - Flutter
@@ -22,6 +24,7 @@ PODS:
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_blue_plus (from `.symlinks/plugins/flutter_blue_plus/ios`)
+  - integration_test (from `.symlinks/plugins/integration_test/ios`)
   - objectbox_flutter_libs (from `.symlinks/plugins/objectbox_flutter_libs/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
@@ -37,6 +40,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_blue_plus:
     :path: ".symlinks/plugins/flutter_blue_plus/ios"
+  integration_test:
+    :path: ".symlinks/plugins/integration_test/ios"
   objectbox_flutter_libs:
     :path: ".symlinks/plugins/objectbox_flutter_libs/ios"
   path_provider_foundation:
@@ -49,6 +54,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_blue_plus: 6787777145d615de01828f3a9fa423c3c702f0b3
+  integration_test: a1e7d09bd98eca2fc37aefd79d4f41ad37bdbbe5
   ObjectBox: a7900d5335218cd437cbc080b7ccc38a5211f7b4
   objectbox_flutter_libs: 61d74196d924fbc773da5f5757d1e9fab7b3cc78
   path_provider_foundation: 37748e03f12783f9de2cb2c4eadfaa25fe6d4852

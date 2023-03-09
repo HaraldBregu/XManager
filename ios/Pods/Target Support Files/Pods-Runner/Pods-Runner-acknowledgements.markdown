@@ -287,6 +287,11 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+## integration_test
+
+Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
+
+
 ## path_provider_foundation
 
 Copyright 2013 The Flutter Authors. All rights reserved.

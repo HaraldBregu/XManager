@@ -53,10 +53,7 @@ final ThemeData _lightThemeData = FlexThemeData.light(
       blendOnLevel: 10,
       blendOnColors: false,
       inputDecoratorBorderType: FlexInputBorderType.underline,
-      //appBarBackgroundSchemeColor: SchemeColor.onPrimary,
-      //radioSchemeColor: SchemeColor.onSecondaryContainer,
       sliderBaseSchemeColor: SchemeColor.onSecondaryContainer,
-      //cardRadius: 30
     ),
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
     useMaterial3: true,
@@ -80,7 +77,6 @@ final ThemeData _darkThemeData = FlexThemeData.dark(
     swapLegacyOnMaterial3: true,
     fontFamily: GoogleFonts.notoSans().fontFamily
 );
-
 
 class MainApp extends StatelessWidget {
   const MainApp({Key? key}) : super(key: key);

@@ -1,17 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.xmanager">
+    package="com.ninespartans.xmanager">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
-    <!-- Required to provide the web interface -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- Required to run keep-alive service when targeting API 28 or higher -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
-        android:label="xmanager"
+        android:label="Xmanager"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

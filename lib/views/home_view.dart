@@ -4,6 +4,7 @@ import 'package:xmanager/common.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/model/data_model.dart';
 import 'package:xmanager/views/player/player_detail.dart';
+import 'package:xmanager/views/responsive/drawer_layout.dart';
 
 
 enum PlayerCardOptionMenu { Delete, Edit, Detail }
@@ -25,6 +26,9 @@ class _HomeViewState extends State<HomeView> {
     final TextTheme textTheme = theme.textTheme;
     final TextTheme primaryTextTheme = theme.primaryTextTheme;
 
+    final GlobalKey _scaffoldKey = GlobalKey();
+
+
     Duration myDuration = const Duration(days: 5);
     String strDigits(int n) => n.toString().padLeft(2, '0');
     final days = strDigits(myDuration.inDays);
@@ -32,15 +36,12 @@ class _HomeViewState extends State<HomeView> {
     final hours = strDigits(myDuration.inHours.remainder(24));
     final minutes = strDigits(myDuration.inMinutes.remainder(60));
     final seconds = strDigits(myDuration.inSeconds.remainder(60));
-
     final seconds2 = strDigits(myDuration.inSeconds.remainder(60));
 
-    /// Card of coach
     Widget coachHeader() => Material(
       type: MaterialType.canvas,
-      elevation: 1,
-      surfaceTintColor: colorScheme.surfaceTint,
-      shadowColor: colorScheme.shadow,
+      elevation: 2,
+      surfaceTintColor: colorScheme.background,
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
@@ -127,9 +128,8 @@ class _HomeViewState extends State<HomeView> {
 
     Widget trainingSectionCard() => Material(
         type: MaterialType.canvas,
-        elevation: 1,
-        surfaceTintColor: colorScheme.surfaceTint,
-        shadowColor: colorScheme.shadow,
+        elevation: 2,
+        surfaceTintColor: colorScheme.background,
         child: Column(
           children: [
             ListTile(
@@ -152,12 +152,10 @@ class _HomeViewState extends State<HomeView> {
         )
     );
 
-    /// Card of training session program
     Widget trainingCard() => Material(
       type: MaterialType.canvas,
-      elevation: 1,
-      surfaceTintColor: colorScheme.surfaceTint,
-      shadowColor: colorScheme.shadow,
+      elevation: 2,
+      surfaceTintColor: colorScheme.background,
       child: Column(
         children: [
           ListTile(
@@ -204,7 +202,6 @@ class _HomeViewState extends State<HomeView> {
       ),
     );
 
-    /// Cards of players
     Widget playersCard() => StreamBuilder<List<Player>>(
         key: UniqueKey(),
         stream: objectBox.getPlayers(),
@@ -502,16 +499,14 @@ class _HomeViewState extends State<HomeView> {
               childCount: snapshot.hasData ? snapshot.data!.length : 0),
           );
         });
-
+/*
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(child: coachHeader()),
-        const SliverToBoxAdapter(child: SizedBox(height: 10)),
+        const SliverToBoxAdapter(child: SizedBox(height: 20)),
         SliverToBoxAdapter(child: trainingSectionCard()),
-        const SliverToBoxAdapter(child: SizedBox(height: 10)),
-
+        const SliverToBoxAdapter(child: SizedBox(height: 20)),
         SliverToBoxAdapter(child: trainingCard()),
-        //SliverToBoxAdapter(child: WeatherCard()),
         SliverToBoxAdapter(child: Column(
           children: [
             const SizedBox(height: 20),
@@ -528,8 +523,65 @@ class _HomeViewState extends State<HomeView> {
         )),
         playersCard(),
         const SliverToBoxAdapter(child: SizedBox(height: 90)),
-
       ],
+    );*/
+
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: AppBar(
+        backgroundColor: colorScheme.surface,
+        title: Text(localize?.dashboard ?? ""),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.account_circle),
+            onPressed: () => Navigator.pushNamed(context, RouteNames.account),
+          ),
+          IconButton(
+            icon: Icon(Icons.widgets),
+            onPressed: () => Navigator.pushNamed(context, RouteNames.account),
+          ),
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () => Navigator.pushNamed(context, RouteNames.account),
+          ),
+        ],
+      ),
+      //drawer: const DrawerLayout(),
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(child: coachHeader()),
+            const SliverToBoxAdapter(child: SizedBox(height: 20)),
+            SliverToBoxAdapter(child: trainingSectionCard()),
+            const SliverToBoxAdapter(child: SizedBox(height: 20)),
+            SliverToBoxAdapter(child: trainingCard()),
+            SliverToBoxAdapter(child: Column(
+              children: [
+                const SizedBox(height: 20),
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Players',
+                    style: textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+                const SizedBox(height: 20),
+              ],
+            )),
+            playersCard(),
+            const SliverToBoxAdapter(child: SizedBox(height: 90)),
+          ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        backgroundColor: Colors.green,
+        icon: const Icon(Icons.play_circle),
+        label: const Text('AVVIA PROGRAMMA'),
+      ),
+
     );
   }
 }

@@ -12,7 +12,6 @@ class DrawerLayout extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
 
-
     final items = <MenuItem>[
       MenuItem(
         menuType: MenuType.header,
@@ -44,7 +43,6 @@ class DrawerLayout extends StatelessWidget {
           icon: const Icon(Icons.search)
       ),
     ];
-
 
     return Drawer(
       child: Row(
