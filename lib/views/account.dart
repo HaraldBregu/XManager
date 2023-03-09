@@ -211,8 +211,50 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
 
             },
           ),
+
+          ListTile(
+            title: const Text('Test Sliver'),
+            trailing: const Icon(Icons.search),
+            onTap: () {
+              var testSliver = const TestSliver();
+              var materialRoute = MaterialPageRoute(builder: (context) => testSliver);
+              Navigator.push(context, materialRoute);
+            },
+          ),
         ],
       )
+    );
+  }
+}
+
+class TestSliver extends StatelessWidget {
+  const TestSliver({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: NestedScrollView(
+          floatHeaderSlivers: true,
+          headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          SliverAppBar(
+            title: const Text('App Bar'),
+            expandedHeight: 140,
+            forceElevated: innerBoxIsScrolled,
+            floating: true,
+            snap: true,
+            pinned: true,
+            //flexibleSpace: ,
+            actions: [
+              
+            ],
+          ),
+        ],
+        body: ListView.separated(
+            itemBuilder: (context, index) => ListTile(
+              title: const Text("Titolo"),
+            ),
+            separatorBuilder: (context, index) => const SizedBox(height: 1),
+            itemCount: 30)),
     );
   }
 }

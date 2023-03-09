@@ -42,7 +42,7 @@ Future <void> main() async {
   );
 }
 
-const FlexScheme scheme = FlexScheme.shark;
+const FlexScheme scheme = FlexScheme.bigStone;
 
 final ThemeData _lightThemeData = FlexThemeData.light(
     scheme: scheme,
