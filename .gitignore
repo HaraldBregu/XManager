@@ -8,6 +8,9 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .dart_tool/
+.idea/
+.vscode/
+.gradle/
 .DS_Store
 /build
 /captures
