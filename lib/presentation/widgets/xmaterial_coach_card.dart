@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:xmanager/shared/widget/xmaterial_column.dart';
-import 'package:xmanager/shared/widget/xmaterial_row.dart';
-import 'package:xmanager/shared/widget/xmaterial_user_card.dart';
+import 'package:xmanager/presentation/widgets/xmaterial_column.dart';
+import 'package:xmanager/presentation/widgets/xmaterial_row.dart';
+import 'package:xmanager/presentation/widgets/xmaterial_user_card.dart';
+
 
 class XMaterialCoachCard extends StatelessWidget {
   final String fullName;

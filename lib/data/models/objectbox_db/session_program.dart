@@ -1,35 +1,6 @@
 import 'package:objectbox/objectbox.dart';
+import 'package:xmanager/data/models/objectbox_db/device_program.dart';
 
-
-/*
-* Ruolo*
-Allenatore
-Direttore Sportivo
-Presidente
-Osservatore
-Calciatore
-Altro
-* */
-
-@Entity()
-class Player {
-  @Id()
-  int id = 0;
-
-  @Unique()
-  String fullname = "";
-
-  @Property(type: PropertyType.date)
-  DateTime? birthdate;
-
-  double? weight;
-  double? height;
-
-  String? role;
-  String? nationality;
-
-  Player();
-}
 
 @Entity()
 class SessionProgram {
@@ -53,12 +24,4 @@ class SessionProgram {
   List<DeviceProgram> programs = [];
 
   SessionProgram();
-}
-
-@Entity()
-class DeviceProgram {
-  @Id()
-  int id = 0;
-
-  String title = "";
 }

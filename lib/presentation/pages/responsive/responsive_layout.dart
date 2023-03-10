@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xmanager/pages/responsive/mobile_layout.dart';
+import 'package:xmanager/presentation/pages/responsive/mobile_layout.dart';
 
 
 class ResponsiveLayout extends StatelessWidget {
@@ -9,9 +9,7 @@ class ResponsiveLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
         builder: (context, constraints) {
-          if (constraints.maxWidth < 500) {
-            return const MobileLayout();
-          }
+          //if (constraints.maxWidth < 500) { return const MobileLayout(); }
           return const MobileLayout();
         });
   }

@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:xmanager/shared/widget/xmaterial_card.dart';
+import 'package:xmanager/presentation/widgets/xmaterial_card.dart';
+
 
 class XMaterialUserCard extends StatelessWidget {
   final String fullName;

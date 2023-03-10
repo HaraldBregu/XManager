@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:xmanager/app.dart';
 import 'package:xmanager/common.dart';
+import 'package:xmanager/data/models/models.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/models/data_model.dart';
-import 'package:xmanager/shared/widget/xmaterial_card.dart';
-import 'package:xmanager/shared/widget/xmaterial_item_card.dart';
-import 'package:xmanager/pages/player/player_edit.dart';
+import 'package:xmanager/presentation/pages/player/player_edit.dart';
+import 'package:xmanager/presentation/widgets/xmaterial_card.dart';
+import 'package:xmanager/presentation/widgets/xmaterial_item_card.dart';
+
 
 enum PlayerDetailMenuItem { delete, edit }
 
@@ -27,7 +28,6 @@ class _PlayerDetailState extends State<PlayerDetail> {
     final TextTheme textTheme = theme.textTheme;
     final ColorScheme colorScheme = theme.colorScheme;
     Player player = widget.player ?? Player();
-
 
     Widget trainingSectionCard() => XMaterialItemCard(
       title: 'Programmi di allenamento',

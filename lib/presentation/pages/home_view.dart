@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:vibration/vibration.dart';
 import 'package:xmanager/app.dart';
 import 'package:xmanager/common.dart';
+import 'package:xmanager/data/models/models.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/models/data_model.dart';
-import 'package:xmanager/shared/widget/xmaterial_card.dart';
-import 'package:xmanager/shared/widget/xmaterial_coach_card.dart';
-import 'package:xmanager/shared/widget/xmaterial_item_card.dart';
-import 'package:xmanager/pages/player/player_detail.dart';
+import 'package:xmanager/presentation/pages/player/player_detail.dart';
+import 'package:xmanager/presentation/widgets/xmaterial_card.dart';
+import 'package:xmanager/presentation/widgets/xmaterial_coach_card.dart';
+import 'package:xmanager/presentation/widgets/xmaterial_item_card.dart';
 
 
 enum PlayerCardOptionMenu { Delete, Edit, Detail }

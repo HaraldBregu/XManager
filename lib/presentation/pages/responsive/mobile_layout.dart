@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xmanager/pages/home_view.dart';
+import 'package:xmanager/presentation/pages/home_view.dart';
 
 class MobileLayout extends StatelessWidget {
   const MobileLayout({Key? key}) : super(key: key);

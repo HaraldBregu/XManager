@@ -14,50 +14,71 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import 'models/data_model.dart';
+import 'data/models/objectbox_db/device_program.dart';
+import 'data/models/objectbox_db/player.dart';
+import 'data/models/objectbox_db/session_program.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
 final _entities = <ModelEntity>[
   ModelEntity(
-      id: const IdUid(2, 3225004814405648421),
-      name: 'Player',
-      lastPropertyId: const IdUid(11, 1941030560164370764),
+      id: const IdUid(1, 246629014471354244),
+      name: 'DeviceProgram',
+      lastPropertyId: const IdUid(2, 8703970767790801843),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
-            id: const IdUid(1, 5238429446566774022),
+            id: const IdUid(1, 951739777353951645),
             name: 'id',
             type: 6,
             flags: 1),
         ModelProperty(
-            id: const IdUid(2, 1771857347335397486),
-            name: 'role',
+            id: const IdUid(2, 8703970767790801843),
+            name: 'title',
             type: 9,
-            flags: 0),
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(2, 8182749720145618113),
+      name: 'Player',
+      lastPropertyId: const IdUid(7, 3037946619526109206),
+      flags: 0,
+      properties: <ModelProperty>[
         ModelProperty(
-            id: const IdUid(6, 1269412459972584565),
-            name: 'weight',
-            type: 8,
-            flags: 0),
+            id: const IdUid(1, 5375805330183064794),
+            name: 'id',
+            type: 6,
+            flags: 1),
         ModelProperty(
-            id: const IdUid(7, 4315454425118091218),
-            name: 'height',
-            type: 8,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(8, 4112552099121775271),
+            id: const IdUid(2, 8510769405084466088),
             name: 'fullname',
             type: 9,
             flags: 2080,
-            indexId: const IdUid(3, 1478869939724484590)),
+            indexId: const IdUid(1, 6554070227697328748)),
         ModelProperty(
-            id: const IdUid(10, 4836018249428677867),
+            id: const IdUid(3, 4688506391616492731),
             name: 'birthdate',
             type: 10,
             flags: 0),
         ModelProperty(
-            id: const IdUid(11, 1941030560164370764),
+            id: const IdUid(4, 2797727663509172734),
+            name: 'weight',
+            type: 8,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 1228642779692018735),
+            name: 'height',
+            type: 8,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 7141666255126808681),
+            name: 'role',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 3037946619526109206),
             name: 'nationality',
             type: 9,
             flags: 0)
@@ -65,58 +86,39 @@ final _entities = <ModelEntity>[
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
   ModelEntity(
-      id: const IdUid(3, 8116831420168438470),
-      name: 'DeviceProgram',
-      lastPropertyId: const IdUid(2, 688095002173714801),
-      flags: 0,
-      properties: <ModelProperty>[
-        ModelProperty(
-            id: const IdUid(1, 5068653949683785411),
-            name: 'id',
-            type: 6,
-            flags: 1),
-        ModelProperty(
-            id: const IdUid(2, 688095002173714801),
-            name: 'title',
-            type: 9,
-            flags: 0)
-      ],
-      relations: <ModelRelation>[],
-      backlinks: <ModelBacklink>[]),
-  ModelEntity(
-      id: const IdUid(4, 3656018098347934602),
+      id: const IdUid(3, 2148439574450266516),
       name: 'SessionProgram',
-      lastPropertyId: const IdUid(6, 3406376473234597456),
+      lastPropertyId: const IdUid(6, 1045305249820061220),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
-            id: const IdUid(1, 7444579579755250816),
+            id: const IdUid(1, 3837936932830499546),
             name: 'id',
             type: 6,
             flags: 1),
         ModelProperty(
-            id: const IdUid(2, 1959944578448247002),
+            id: const IdUid(2, 286050140342244623),
             name: 'title',
             type: 9,
             flags: 2080,
-            indexId: const IdUid(2, 7710838840937673166)),
+            indexId: const IdUid(2, 9146005376757552763)),
         ModelProperty(
-            id: const IdUid(3, 9109228393002401543),
+            id: const IdUid(3, 2118363622719965609),
             name: 'description',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(4, 5281269997235546803),
+            id: const IdUid(4, 3915211346765430906),
             name: 'startDate',
             type: 10,
             flags: 0),
         ModelProperty(
-            id: const IdUid(5, 4152780086259794751),
+            id: const IdUid(5, 3909398794037268662),
             name: 'createdAt',
             type: 10,
             flags: 0),
         ModelProperty(
-            id: const IdUid(6, 3406376473234597456),
+            id: const IdUid(6, 1045305249820061220),
             name: 'updatedAt',
             type: 10,
             flags: 0)
@@ -125,7 +127,7 @@ final _entities = <ModelEntity>[
       backlinks: <ModelBacklink>[])
 ];
 
-/// Open an ObjectBox store with the models declared in this file.
+/// Open an ObjectBox store with the model declared in this file.
 Future<Store> openStore(
         {String? directory,
         int? maxDBSizeInKB,
@@ -141,82 +143,25 @@ Future<Store> openStore(
         queriesCaseSensitiveDefault: queriesCaseSensitiveDefault,
         macosApplicationGroup: macosApplicationGroup);
 
-/// ObjectBox models definition, pass it to [Store] - Store(getObjectBoxModel())
+/// ObjectBox model definition, pass it to [Store] - Store(getObjectBoxModel())
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(4, 3656018098347934602),
-      lastIndexId: const IdUid(3, 1478869939724484590),
+      lastEntityId: const IdUid(3, 2148439574450266516),
+      lastIndexId: const IdUid(2, 9146005376757552763),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
-      retiredEntityUids: const [813253216084854960],
-      retiredIndexUids: const [7312765478902494176],
-      retiredPropertyUids: const [
-        8417382096306948866,
-        4981195636571552789,
-        8396051598652696070,
-        5960381172322319033,
-        3820171138096343296,
-        4237932649912434568,
-        6380926248530783123
-      ],
+      retiredEntityUids: const [],
+      retiredIndexUids: const [],
+      retiredPropertyUids: const [],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
       version: 1);
 
   final bindings = <Type, EntityDefinition>{
-    Player: EntityDefinition<Player>(
-        model: _entities[0],
-        toOneRelations: (Player object) => [],
-        toManyRelations: (Player object) => {},
-        getId: (Player object) => object.id,
-        setId: (Player object, int id) {
-          object.id = id;
-        },
-        objectToFB: (Player object, fb.Builder fbb) {
-          final roleOffset =
-              object.role == null ? null : fbb.writeString(object.role!);
-          final fullnameOffset = fbb.writeString(object.fullname);
-          final nationalityOffset = object.nationality == null
-              ? null
-              : fbb.writeString(object.nationality!);
-          fbb.startTable(12);
-          fbb.addInt64(0, object.id);
-          fbb.addOffset(1, roleOffset);
-          fbb.addFloat64(5, object.weight);
-          fbb.addFloat64(6, object.height);
-          fbb.addOffset(7, fullnameOffset);
-          fbb.addInt64(9, object.birthdate?.millisecondsSinceEpoch);
-          fbb.addOffset(10, nationalityOffset);
-          fbb.finish(fbb.endTable());
-          return object.id;
-        },
-        objectFromFB: (Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-          final birthdateValue =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 22);
-          final object = Player()
-            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
-            ..role = const fb.StringReader(asciiOptimization: true)
-                .vTableGetNullable(buffer, rootOffset, 6)
-            ..weight = const fb.Float64Reader()
-                .vTableGetNullable(buffer, rootOffset, 14)
-            ..height = const fb.Float64Reader()
-                .vTableGetNullable(buffer, rootOffset, 16)
-            ..fullname = const fb.StringReader(asciiOptimization: true)
-                .vTableGet(buffer, rootOffset, 18, '')
-            ..birthdate = birthdateValue == null
-                ? null
-                : DateTime.fromMillisecondsSinceEpoch(birthdateValue)
-            ..nationality = const fb.StringReader(asciiOptimization: true)
-                .vTableGetNullable(buffer, rootOffset, 24);
-
-          return object;
-        }),
     DeviceProgram: EntityDefinition<DeviceProgram>(
-        model: _entities[1],
+        model: _entities[0],
         toOneRelations: (DeviceProgram object) => [],
         toManyRelations: (DeviceProgram object) => {},
         getId: (DeviceProgram object) => object.id,
@@ -239,6 +184,55 @@ ModelDefinition getObjectBoxModel() {
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
             ..title = const fb.StringReader(asciiOptimization: true)
                 .vTableGet(buffer, rootOffset, 6, '');
+
+          return object;
+        }),
+    Player: EntityDefinition<Player>(
+        model: _entities[1],
+        toOneRelations: (Player object) => [],
+        toManyRelations: (Player object) => {},
+        getId: (Player object) => object.id,
+        setId: (Player object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Player object, fb.Builder fbb) {
+          final fullnameOffset = fbb.writeString(object.fullname);
+          final roleOffset =
+              object.role == null ? null : fbb.writeString(object.role!);
+          final nationalityOffset = object.nationality == null
+              ? null
+              : fbb.writeString(object.nationality!);
+          fbb.startTable(8);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, fullnameOffset);
+          fbb.addInt64(2, object.birthdate?.millisecondsSinceEpoch);
+          fbb.addFloat64(3, object.weight);
+          fbb.addFloat64(4, object.height);
+          fbb.addOffset(5, roleOffset);
+          fbb.addOffset(6, nationalityOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final birthdateValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 8);
+          final object = Player()
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
+            ..fullname = const fb.StringReader(asciiOptimization: true)
+                .vTableGet(buffer, rootOffset, 6, '')
+            ..birthdate = birthdateValue == null
+                ? null
+                : DateTime.fromMillisecondsSinceEpoch(birthdateValue)
+            ..weight = const fb.Float64Reader()
+                .vTableGetNullable(buffer, rootOffset, 10)
+            ..height = const fb.Float64Reader()
+                .vTableGetNullable(buffer, rootOffset, 12)
+            ..role = const fb.StringReader(asciiOptimization: true)
+                .vTableGetNullable(buffer, rootOffset, 14)
+            ..nationality = const fb.StringReader(asciiOptimization: true)
+                .vTableGetNullable(buffer, rootOffset, 16);
 
           return object;
         }),
@@ -295,42 +289,42 @@ ModelDefinition getObjectBoxModel() {
   return ModelDefinition(model, bindings);
 }
 
-/// [Player] entity fields to define ObjectBox queries.
-class Player_ {
-  /// see [Player.id]
-  static final id = QueryIntegerProperty<Player>(_entities[0].properties[0]);
-
-  /// see [Player.role]
-  static final role = QueryStringProperty<Player>(_entities[0].properties[1]);
-
-  /// see [Player.weight]
-  static final weight = QueryDoubleProperty<Player>(_entities[0].properties[2]);
-
-  /// see [Player.height]
-  static final height = QueryDoubleProperty<Player>(_entities[0].properties[3]);
-
-  /// see [Player.fullname]
-  static final fullname =
-      QueryStringProperty<Player>(_entities[0].properties[4]);
-
-  /// see [Player.birthdate]
-  static final birthdate =
-      QueryIntegerProperty<Player>(_entities[0].properties[5]);
-
-  /// see [Player.nationality]
-  static final nationality =
-      QueryStringProperty<Player>(_entities[0].properties[6]);
-}
-
 /// [DeviceProgram] entity fields to define ObjectBox queries.
 class DeviceProgram_ {
   /// see [DeviceProgram.id]
   static final id =
-      QueryIntegerProperty<DeviceProgram>(_entities[1].properties[0]);
+      QueryIntegerProperty<DeviceProgram>(_entities[0].properties[0]);
 
   /// see [DeviceProgram.title]
   static final title =
-      QueryStringProperty<DeviceProgram>(_entities[1].properties[1]);
+      QueryStringProperty<DeviceProgram>(_entities[0].properties[1]);
+}
+
+/// [Player] entity fields to define ObjectBox queries.
+class Player_ {
+  /// see [Player.id]
+  static final id = QueryIntegerProperty<Player>(_entities[1].properties[0]);
+
+  /// see [Player.fullname]
+  static final fullname =
+      QueryStringProperty<Player>(_entities[1].properties[1]);
+
+  /// see [Player.birthdate]
+  static final birthdate =
+      QueryIntegerProperty<Player>(_entities[1].properties[2]);
+
+  /// see [Player.weight]
+  static final weight = QueryDoubleProperty<Player>(_entities[1].properties[3]);
+
+  /// see [Player.height]
+  static final height = QueryDoubleProperty<Player>(_entities[1].properties[4]);
+
+  /// see [Player.role]
+  static final role = QueryStringProperty<Player>(_entities[1].properties[5]);
+
+  /// see [Player.nationality]
+  static final nationality =
+      QueryStringProperty<Player>(_entities[1].properties[6]);
 }
 
 /// [SessionProgram] entity fields to define ObjectBox queries.

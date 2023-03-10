@@ -1,7 +1,8 @@
-import 'package:xmanager/models/data_model.dart';
-import 'objectbox.g.dart';
+import 'package:objectbox/objectbox.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
+import 'package:xmanager/data/models/models.dart';
+import 'package:xmanager/objectbox.g.dart';
 
 
 class ObjectBox {
@@ -19,7 +20,6 @@ class ObjectBox {
 
     playerBox = Box<Player>(store);
     sessionProgramBox = Box<SessionProgram>(store);
-    //deviceProgramBox = Box<DeviceProgram>(store);
   }
 
 
@@ -32,8 +32,6 @@ class ObjectBox {
   }
 
   Stream<List<Player>> getPlayers() {
-    // Query for all events ordered by date.
-    // https://docs.objectbox.io/queries
     final builder = playerBox.query()..order(Player_.id);
     return builder.watch(triggerImmediately: true).map((query) => query.find());
   }

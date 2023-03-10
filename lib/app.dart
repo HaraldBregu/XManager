@@ -4,14 +4,14 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:xmanager/common.dart';
-import 'package:xmanager/pages/account.dart';
-import 'package:xmanager/pages/device/device_search.dart';
-import 'package:xmanager/pages/permissions.dart';
-import 'package:xmanager/pages/player/player_detail.dart';
-import 'package:xmanager/pages/player/player_edit.dart';
-import 'package:xmanager/pages/program/program_create.dart';
-import 'package:xmanager/pages/program/program_list.dart';
-import 'package:xmanager/pages/responsive/responsive_layout.dart';
+import 'package:xmanager/presentation/pages/account.dart';
+import 'package:xmanager/presentation/pages/device/device_search.dart';
+import 'package:xmanager/presentation/pages/permissions.dart';
+import 'package:xmanager/presentation/pages/player/player_detail.dart';
+import 'package:xmanager/presentation/pages/player/player_edit.dart';
+import 'package:xmanager/presentation/pages/program/program_create.dart';
+import 'package:xmanager/presentation/pages/program/program_list.dart';
+import 'package:xmanager/presentation/pages/responsive/responsive_layout.dart';
 import 'package:xmanager/providers/app_state_notifier.dart';
 
 class RouteNames {

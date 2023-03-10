@@ -4,45 +4,64 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "2:3225004814405648421",
-      "lastPropertyId": "11:1941030560164370764",
-      "name": "Player",
+      "id": "1:246629014471354244",
+      "lastPropertyId": "2:8703970767790801843",
+      "name": "DeviceProgram",
       "properties": [
         {
-          "id": "1:5238429446566774022",
+          "id": "1:951739777353951645",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:1771857347335397486",
-          "name": "role",
+          "id": "2:8703970767790801843",
+          "name": "title",
           "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:8182749720145618113",
+      "lastPropertyId": "7:3037946619526109206",
+      "name": "Player",
+      "properties": [
+        {
+          "id": "1:5375805330183064794",
+          "name": "id",
+          "type": 6,
+          "flags": 1
         },
         {
-          "id": "6:1269412459972584565",
-          "name": "weight",
-          "type": 8
-        },
-        {
-          "id": "7:4315454425118091218",
-          "name": "height",
-          "type": 8
-        },
-        {
-          "id": "8:4112552099121775271",
+          "id": "2:8510769405084466088",
           "name": "fullname",
           "type": 9,
           "flags": 2080,
-          "indexId": "3:1478869939724484590"
+          "indexId": "1:6554070227697328748"
         },
         {
-          "id": "10:4836018249428677867",
+          "id": "3:4688506391616492731",
           "name": "birthdate",
           "type": 10
         },
         {
-          "id": "11:1941030560164370764",
+          "id": "4:2797727663509172734",
+          "name": "weight",
+          "type": 8
+        },
+        {
+          "id": "5:1228642779692018735",
+          "name": "height",
+          "type": 8
+        },
+        {
+          "id": "6:7141666255126808681",
+          "name": "role",
+          "type": 9
+        },
+        {
+          "id": "7:3037946619526109206",
           "name": "nationality",
           "type": 9
         }
@@ -50,59 +69,40 @@
       "relations": []
     },
     {
-      "id": "3:8116831420168438470",
-      "lastPropertyId": "2:688095002173714801",
-      "name": "DeviceProgram",
-      "properties": [
-        {
-          "id": "1:5068653949683785411",
-          "name": "id",
-          "type": 6,
-          "flags": 1
-        },
-        {
-          "id": "2:688095002173714801",
-          "name": "title",
-          "type": 9
-        }
-      ],
-      "relations": []
-    },
-    {
-      "id": "4:3656018098347934602",
-      "lastPropertyId": "6:3406376473234597456",
+      "id": "3:2148439574450266516",
+      "lastPropertyId": "6:1045305249820061220",
       "name": "SessionProgram",
       "properties": [
         {
-          "id": "1:7444579579755250816",
+          "id": "1:3837936932830499546",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:1959944578448247002",
+          "id": "2:286050140342244623",
           "name": "title",
           "type": 9,
           "flags": 2080,
-          "indexId": "2:7710838840937673166"
+          "indexId": "2:9146005376757552763"
         },
         {
-          "id": "3:9109228393002401543",
+          "id": "3:2118363622719965609",
           "name": "description",
           "type": 9
         },
         {
-          "id": "4:5281269997235546803",
+          "id": "4:3915211346765430906",
           "name": "startDate",
           "type": 10
         },
         {
-          "id": "5:4152780086259794751",
+          "id": "5:3909398794037268662",
           "name": "createdAt",
           "type": 10
         },
         {
-          "id": "6:3406376473234597456",
+          "id": "6:1045305249820061220",
           "name": "updatedAt",
           "type": 10
         }
@@ -110,27 +110,15 @@
       "relations": []
     }
   ],
-  "lastEntityId": "4:3656018098347934602",
-  "lastIndexId": "3:1478869939724484590",
+  "lastEntityId": "3:2148439574450266516",
+  "lastIndexId": "2:9146005376757552763",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
-  "retiredEntityUids": [
-    813253216084854960
-  ],
-  "retiredIndexUids": [
-    7312765478902494176
-  ],
-  "retiredPropertyUids": [
-    8417382096306948866,
-    4981195636571552789,
-    8396051598652696070,
-    5960381172322319033,
-    3820171138096343296,
-    4237932649912434568,
-    6380926248530783123
-  ],
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
   "retiredRelationUids": [],
   "version": 1
 }

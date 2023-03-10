@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:xmanager/common.dart';
+import 'package:xmanager/data/models/models.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/models/data_model.dart';
 
 
 class ProgramCreate extends StatefulWidget {
-  const ProgramCreate({Key? key, required this.program}) : super(key: key);
-
   final SessionProgram? program;
+  const ProgramCreate({Key? key, required this.program}) : super(key: key);
 
   @override
   State<ProgramCreate> createState() => _ProgramCreateState();
