@@ -1,18 +1,18 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:xmanager/core/utils/constants/common.dart';
-import 'package:xmanager/presentation/pages/account.dart';
-import 'package:xmanager/presentation/pages/device/device_search.dart';
+import 'presentation/pages/account.dart';
+import 'presentation/pages/device/device_search.dart';
 import 'package:xmanager/presentation/pages/permissions.dart';
-import 'package:xmanager/presentation/pages/player/player_detail.dart';
+import 'presentation/pages/player/player_detail.dart';
 import 'package:xmanager/presentation/pages/player/player_edit.dart';
 import 'package:xmanager/presentation/pages/program/program_create.dart';
 import 'package:xmanager/presentation/pages/program/program_list.dart';
 import 'package:xmanager/presentation/pages/responsive/responsive_layout.dart';
 import 'package:xmanager/app_state_notifier.dart';
+
+import 'config/theme/app_theme.dart';
+import 'utils/constants/common.dart';
 
 class RouteNames {
   static const String root = '/';
@@ -25,42 +25,6 @@ class RouteNames {
   static const String deviceSearch = '/device_search';
 }
 
-const FlexScheme scheme = FlexScheme.bigStone;
-
-final ThemeData _lightThemeData = FlexThemeData.light(
-    scheme: scheme,
-    surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
-    blendLevel: 9,
-    appBarElevation: 2,
-    subThemesData: const FlexSubThemesData(
-      blendOnLevel: 10,
-      blendOnColors: false,
-      inputDecoratorBorderType: FlexInputBorderType.underline,
-      sliderBaseSchemeColor: SchemeColor.onSecondaryContainer,
-    ),
-    visualDensity: FlexColorScheme.comfortablePlatformDensity,
-    useMaterial3: true,
-    swapLegacyOnMaterial3: true,
-    fontFamily: GoogleFonts.notoSans().fontFamily
-);
-
-final ThemeData _darkThemeData = FlexThemeData.dark(
-    scheme: scheme,
-    surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
-    blendLevel: 15,
-    appBarElevation: 4.0,
-    subThemesData: const FlexSubThemesData(
-      blendOnLevel: 20,
-      inputDecoratorBorderType: FlexInputBorderType.underline,
-      radioSchemeColor: SchemeColor.onSecondaryContainer,
-      sliderBaseSchemeColor: SchemeColor.onSecondaryContainer,
-    ),
-    visualDensity: FlexColorScheme.comfortablePlatformDensity,
-    useMaterial3: true,
-    swapLegacyOnMaterial3: true,
-    fontFamily: GoogleFonts.notoSans().fontFamily
-);
-
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
@@ -69,8 +33,8 @@ class App extends StatelessWidget {
     return Consumer<AppStateNotifier>(builder: (context, appState, child) {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: _lightThemeData,
-        darkTheme: _darkThemeData,
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
         themeMode: appState.themeMode,
         localizationsDelegates: const [
           AppLocalizations.delegate, // Add this line

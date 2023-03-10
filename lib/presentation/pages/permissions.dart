@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:xmanager/core/utils/constants/common.dart';
+import 'package:xmanager/utils/constants/common.dart';
 
 
 class Permissions extends StatefulWidget {

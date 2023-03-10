@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:xmanager/app.dart';
-import 'package:xmanager/core/utils/constants/common.dart';
+import 'package:xmanager/utils/constants/common.dart';
 import 'package:xmanager/data/models/models.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/presentation/widgets/theme_mode_switch.dart';

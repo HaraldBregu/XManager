@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class WidgetDialog extends StatefulWidget {
-  final String title, descriptions, text;
+  final String title;
+  final String descriptions;
+  final String text;
   final Image? img;
 
-  const WidgetDialog({Key? key, required this.title, required this.descriptions, required this.text, this.img}) : super(key: key);
+  const WidgetDialog({super.key, required this.title, required this.descriptions, required this.text, this.img});
 
   @override
   State<WidgetDialog> createState() => _WidgetDialogState();
@@ -25,7 +27,7 @@ class _WidgetDialogState extends State<WidgetDialog> {
                 shape: BoxShape.rectangle,
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(color: Colors.black,
                       offset: Offset(0,10),
                       blurRadius: 10

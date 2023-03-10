@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:xmanager/core/utils/constants/common.dart';
 import 'package:xmanager/data/models/models.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/core/utils/extensions/string_extension.dart';
+import 'package:xmanager/utils/constants/common.dart';
+import 'package:xmanager/utils/extensions/string_extension.dart';
 
 typedef UpdatePlayerFunction = Function(Player);
 
