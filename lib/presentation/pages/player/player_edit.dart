@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:xmanager/common.dart';
-import 'package:xmanager/main.dart';
-import 'package:xmanager/utilities/extensions.dart';
+import 'package:xmanager/core/utils/constants/common.dart';
 import 'package:xmanager/data/models/models.dart';
+import 'package:xmanager/main.dart';
+import 'package:xmanager/core/utils/extensions/string_extension.dart';
 
 typedef UpdatePlayerFunction = Function(Player);
 
@@ -35,7 +35,7 @@ class _PlayerEditState extends State<PlayerEdit> {
     _role.text = player.role ?? "";
     _nationality.text = player.nationality ?? "";
     if (player.birthdate != null) {
-      var date = player.birthdate ?? DateTime.now();
+      final date = player.birthdate ?? DateTime.now();
       _birthdate.text = DateFormat.yMMMd().format(date);
     }
     _weight.text = player.weight?.toString() ?? "";

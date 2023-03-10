@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xmanager/app.dart';
-import 'package:xmanager/common.dart';
+import 'package:xmanager/core/utils/constants/common.dart';
 import 'package:xmanager/data/models/models.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/presentation/pages/player/player_edit.dart';
@@ -8,7 +8,10 @@ import 'package:xmanager/presentation/widgets/xmaterial_card.dart';
 import 'package:xmanager/presentation/widgets/xmaterial_item_card.dart';
 
 
-enum PlayerDetailMenuItem { delete, edit }
+enum PlayerDetailMenuItem {
+  delete,
+  edit
+}
 
 class PlayerDetail extends StatefulWidget {
   const PlayerDetail({Key? key, required this.player}) : super(key: key);
@@ -81,10 +84,14 @@ class _PlayerDetailState extends State<PlayerDetail> {
                         icon: const Icon(Icons.edit),
                         onPressed: () {
 
-                          didUpdatePlayer(value) { setState(() { player = value; }); }
+                          final editPlayer = PlayerEdit(player: player, updated: (value) {
+                            setState(() {
+                              player = value;
+                            });
+                          },);
 
-                          var editPlayer = PlayerEdit(player: player, updated: didUpdatePlayer);
-                          var materialRoute = MaterialPageRoute(builder: (context) => editPlayer);
+                          final materialRoute = MaterialPageRoute(builder: (context) => editPlayer);
+
                           Navigator.push(context, materialRoute);
                         },
                       ),

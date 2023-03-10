@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:xmanager/app.dart';
 import 'package:xmanager/object_box.dart';
-import 'package:xmanager/providers/app_state_notifier.dart';
+import 'package:xmanager/app_state_notifier.dart';
 
 late ObjectBox objectBox;
 

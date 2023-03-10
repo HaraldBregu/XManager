@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 class XMaterialCard extends StatelessWidget {
   final Widget child;
-
   const XMaterialCard({Key? key, required this.child}) : super(key: key);
 
   @override

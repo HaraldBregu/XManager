@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:xmanager/common.dart';
+import 'package:xmanager/core/utils/constants/common.dart';
 import 'package:xmanager/presentation/pages/account.dart';
 import 'package:xmanager/presentation/pages/device/device_search.dart';
 import 'package:xmanager/presentation/pages/permissions.dart';
@@ -12,7 +12,7 @@ import 'package:xmanager/presentation/pages/player/player_edit.dart';
 import 'package:xmanager/presentation/pages/program/program_create.dart';
 import 'package:xmanager/presentation/pages/program/program_list.dart';
 import 'package:xmanager/presentation/pages/responsive/responsive_layout.dart';
-import 'package:xmanager/providers/app_state_notifier.dart';
+import 'package:xmanager/app_state_notifier.dart';
 
 class RouteNames {
   static const String root = '/';
