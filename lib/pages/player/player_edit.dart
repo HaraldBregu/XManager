@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:xmanager/common.dart';
-import 'package:xmanager/model/data_model.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/extensions.dart';
+import 'package:xmanager/models/data_model.dart';
 
 typedef UpdatePlayerFunction = Function(Player);
 
 class PlayerEdit extends StatefulWidget {
-  const PlayerEdit({Key? key, required this.player, this.updated}) : super(key: key);
-
-
   final Player? player;
   final UpdatePlayerFunction? updated;
+
+  const PlayerEdit({Key? key, required this.player, this.updated}) : super(key: key);
 
   @override
   State<PlayerEdit> createState() => _PlayerEditState();

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:xmanager/app.dart';
 import 'package:xmanager/common.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/model/data_model.dart';
-import 'package:xmanager/model/menu_item.dart';
-import 'package:xmanager/views/player/player_edit.dart';
+import 'package:xmanager/models/data_model.dart';
+import 'package:xmanager/shared/widget/xmaterial_card.dart';
+import 'package:xmanager/shared/widget/xmaterial_item_card.dart';
+import 'package:xmanager/pages/player/player_edit.dart';
 
 enum PlayerDetailMenuItem { delete, edit }
 
@@ -26,7 +28,15 @@ class _PlayerDetailState extends State<PlayerDetail> {
     final ColorScheme colorScheme = theme.colorScheme;
     Player player = widget.player ?? Player();
 
+
+    Widget trainingSectionCard() => XMaterialItemCard(
+      title: 'Programmi di allenamento',
+      icon: Icons.developer_board_outlined,
+      onTap: () => Navigator.pushNamed(context, RouteNames.programCreate),
+    );
+
     return Scaffold(
+      backgroundColor: colorScheme.surfaceVariant,
       appBar: AppBar(
         title: Text(localize?.player_detail_title ?? "-"),
         actions: [
@@ -55,11 +65,7 @@ class _PlayerDetailState extends State<PlayerDetail> {
       ),
       body: ListView(
           children: <Widget>[
-            Material(
-              type: MaterialType.canvas,
-              elevation: 1,
-              surfaceTintColor: colorScheme.surfaceTint,
-              shadowColor: colorScheme.shadow,
+            XMaterialCard(
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
@@ -141,37 +147,13 @@ class _PlayerDetailState extends State<PlayerDetail> {
               ),
             ),
             const SizedBox(height: 8),
-            Material(
-              type: MaterialType.canvas,
-              elevation: 1,
-              surfaceTintColor: colorScheme.surfaceTint,
-              shadowColor: colorScheme.shadow,
-              child: ListTile(
-                contentPadding: EdgeInsets.symmetric(horizontal: 15),
-                leading: ClipRRect(
-                  borderRadius: BorderRadius.circular(5.0),//or 15.0
-                  child: Container(
-                    height: 35.0,
-                    width: 35.0,
-                    color: colorScheme.tertiaryContainer,
-                    child: Icon(Icons.developer_board_outlined, color:colorScheme.onTertiaryContainer , size: 20.0),
-                  ),
-                ),
-                title: Text('Programmi di allenamento', style: textTheme.titleMedium),
-                trailing: const Icon(Icons.arrow_forward_ios, size: 16,),
-                selected: true,
-                onTap: () => Navigator.pushNamed(context, RouteNames.programCreate),
-              ),
-            ),
+            trainingSectionCard(),
+
             const SizedBox(height: 8),
             Row(
               children: [
                 Expanded(
-                    child: Material(
-                      type: MaterialType.canvas,
-                      elevation: 1,
-                      surfaceTintColor: colorScheme.surfaceTint,
-                      shadowColor: colorScheme.shadow,
+                    child: XMaterialCard(
                       child: ListTile(
                         contentPadding: EdgeInsets.symmetric(horizontal: 15),
                         leading: ClipRRect(
@@ -192,11 +174,7 @@ class _PlayerDetailState extends State<PlayerDetail> {
                 ),
                 const SizedBox(width: 10),
                 Expanded(
-                    child: Material(
-                      type: MaterialType.canvas,
-                      elevation: 1,
-                      surfaceTintColor: colorScheme.surfaceTint,
-                      shadowColor: colorScheme.shadow,
+                    child: XMaterialCard(
                       child: ListTile(
                         contentPadding: EdgeInsets.symmetric(horizontal: 15),
                         leading: ClipRRect(

@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:xmanager/app.dart';
 import 'package:xmanager/common.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/model/data_model.dart';
-import 'package:xmanager/views/program/program_create.dart';
+import 'package:xmanager/models/data_model.dart';
+import 'package:xmanager/pages/program/program_create.dart';
 
 class ProgramList extends StatefulWidget {
   const ProgramList({Key? key}) : super(key: key);

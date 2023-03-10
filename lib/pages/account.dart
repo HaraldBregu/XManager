@@ -1,17 +1,13 @@
-import 'dart:ffi';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:provider/provider.dart';
+import 'package:xmanager/app.dart';
 import 'package:xmanager/common.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/model/data_model.dart';
-import 'package:xmanager/objectbox.g.dart';
-import 'package:xmanager/services/app_state_notifier.dart';
+import 'package:xmanager/models/data_model.dart';
+import 'package:xmanager/providers/app_state_notifier.dart';
 import 'package:xmanager/shared/widget/theme_mode_switch.dart';
-
-
 
 
 class Account extends StatefulWidget {

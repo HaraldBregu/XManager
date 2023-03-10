@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:xmanager/app.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/model/menu_item.dart';
+import 'package:xmanager/models/menu_item.dart';
 import 'package:xmanager/shared/widget/theme_mode_switch.dart';
 
 class DrawerLayout extends StatelessWidget {

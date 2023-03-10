@@ -14,7 +14,7 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import 'model/data_model.dart';
+import 'models/data_model.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -125,7 +125,7 @@ final _entities = <ModelEntity>[
       backlinks: <ModelBacklink>[])
 ];
 
-/// Open an ObjectBox store with the model declared in this file.
+/// Open an ObjectBox store with the models declared in this file.
 Future<Store> openStore(
         {String? directory,
         int? maxDBSizeInKB,
@@ -141,7 +141,7 @@ Future<Store> openStore(
         queriesCaseSensitiveDefault: queriesCaseSensitiveDefault,
         macosApplicationGroup: macosApplicationGroup);
 
-/// ObjectBox model definition, pass it to [Store] - Store(getObjectBoxModel())
+/// ObjectBox models definition, pass it to [Store] - Store(getObjectBoxModel())
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
