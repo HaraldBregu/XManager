@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:xmanager/data/models/models.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/utils/constants/common.dart';
-import 'package:xmanager/utils/extensions/string_extension.dart';
+
+import '../../../core/constants/common.dart';
+import '../../../core/extensions/string_extension.dart';
 
 typedef UpdatePlayerFunction = Function(Player);
 
@@ -28,8 +29,8 @@ class _PlayerEditState extends State<PlayerEdit> {
 
   @override
   Widget build(BuildContext context) {
-    AppLocalizations? localize = AppLocalizations.of(context);
-    Player player = widget.player ?? Player();
+    final AppLocalizations? localize = AppLocalizations.of(context);
+    final Player player = widget.player ?? Player();
 
     _fullname.text = player.fullname;
     _role.text = player.role ?? "";

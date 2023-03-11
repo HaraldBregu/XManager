@@ -177,28 +177,37 @@ code_sign_if_enabled() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/connectivity/connectivity.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/flutter_blue_plus/flutter_blue_plus.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/integration_test/integration_test.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/objectbox_flutter_libs/objectbox_flutter_libs.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/path_provider_foundation/path_provider_foundation.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/shared_preferences_foundation/shared_preferences_foundation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/vibration/vibration.framework"
   install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/ObjectBox/ObjectBox.framework"
 fi
 if [[ "$CONFIGURATION" == "Profile" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/connectivity/connectivity.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/flutter_blue_plus/flutter_blue_plus.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/integration_test/integration_test.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/objectbox_flutter_libs/objectbox_flutter_libs.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/path_provider_foundation/path_provider_foundation.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/shared_preferences_foundation/shared_preferences_foundation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/vibration/vibration.framework"
   install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/ObjectBox/ObjectBox.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/connectivity/connectivity.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/flutter_blue_plus/flutter_blue_plus.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/integration_test/integration_test.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/objectbox_flutter_libs/objectbox_flutter_libs.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/path_provider_foundation/path_provider_foundation.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/shared_preferences_foundation/shared_preferences_foundation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/vibration/vibration.framework"
   install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/ObjectBox/ObjectBox.framework"
 fi

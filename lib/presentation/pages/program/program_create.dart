@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:xmanager/data/models/models.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/utils/constants/common.dart';
+
+import '../../../core/constants/common.dart';
 
 
 class ProgramCreate extends StatefulWidget {

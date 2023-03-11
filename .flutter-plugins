@@ -1,4 +1,7 @@
 # This is a generated file; do not edit or check into version control.
+connectivity=/Users/haraldbregu/.pub-cache/hosted/pub.dev/connectivity-3.0.6/
+connectivity_for_web=/Users/haraldbregu/.pub-cache/hosted/pub.dev/connectivity_for_web-0.4.0+1/
+connectivity_macos=/Users/haraldbregu/.pub-cache/hosted/pub.dev/connectivity_macos-0.2.1+2/
 flutter_blue_plus=/Users/haraldbregu/.pub-cache/hosted/pub.dev/flutter_blue_plus-1.4.0/
 integration_test=/Users/haraldbregu/flutter/packages/integration_test/
 objectbox_flutter_libs=/Users/haraldbregu/.pub-cache/hosted/pub.dev/objectbox_flutter_libs-1.7.2/
@@ -11,4 +14,10 @@ permission_handler=/Users/haraldbregu/.pub-cache/hosted/pub.dev/permission_handl
 permission_handler_android=/Users/haraldbregu/.pub-cache/hosted/pub.dev/permission_handler_android-10.2.0/
 permission_handler_apple=/Users/haraldbregu/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.7/
 permission_handler_windows=/Users/haraldbregu/.pub-cache/hosted/pub.dev/permission_handler_windows-0.1.2/
+shared_preferences=/Users/haraldbregu/.pub-cache/hosted/pub.dev/shared_preferences-2.0.18/
+shared_preferences_android=/Users/haraldbregu/.pub-cache/hosted/pub.dev/shared_preferences_android-2.0.17/
+shared_preferences_foundation=/Users/haraldbregu/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.1.5/
+shared_preferences_linux=/Users/haraldbregu/.pub-cache/hosted/pub.dev/shared_preferences_linux-2.1.5/
+shared_preferences_web=/Users/haraldbregu/.pub-cache/hosted/pub.dev/shared_preferences_web-2.0.6/
+shared_preferences_windows=/Users/haraldbregu/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.1.5/
 vibration=/Users/haraldbregu/.pub-cache/hosted/pub.dev/vibration-1.7.6/

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'core/constants/common.dart';
+import 'core/theme/app_theme.dart';
 import 'presentation/pages/account.dart';
 import 'presentation/pages/device/device_search.dart';
 import 'package:xmanager/presentation/pages/permissions.dart';
@@ -10,9 +12,6 @@ import 'package:xmanager/presentation/pages/program/program_create.dart';
 import 'package:xmanager/presentation/pages/program/program_list.dart';
 import 'package:xmanager/presentation/pages/responsive/responsive_layout.dart';
 import 'package:xmanager/app_state_notifier.dart';
-
-import 'config/theme/app_theme.dart';
-import 'utils/constants/common.dart';
 
 class RouteNames {
   static const String root = '/';

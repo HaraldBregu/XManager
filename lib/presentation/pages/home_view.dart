@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:xmanager/app.dart';
-import 'package:xmanager/utils/constants/common.dart';
 import 'package:xmanager/data/models/models.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/presentation/pages/player/player_detail.dart';
 import 'package:xmanager/presentation/widgets/xmaterial_card.dart';
 import 'package:xmanager/presentation/widgets/xmaterial_coach_card.dart';
 import 'package:xmanager/presentation/widgets/xmaterial_item_card.dart';
+
+import '../../core/constants/common.dart';
 
 
 enum PlayerCardOptionMenu { Delete, Edit, Detail }

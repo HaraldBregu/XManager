@@ -6,7 +6,7 @@ import 'package:xmanager/presentation/pages/player/player_edit.dart';
 import 'package:xmanager/presentation/widgets/xmaterial_card.dart';
 import 'package:xmanager/presentation/widgets/xmaterial_item_card.dart';
 
-import '../../../utils/constants/common.dart';
+import '../../../core/constants/common.dart';
 
 
 enum PlayerDetailMenuItem {
