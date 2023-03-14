@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'core/constants/common.dart';
-import 'core/theme/app_theme.dart';
-import 'presentation/pages/account.dart';
-import 'presentation/pages/device/device_search.dart';
+import '../core/constants/common.dart';
+import '../core/theme/app_theme.dart';
+import '../presentation/pages/account.dart';
+import '../presentation/pages/device/device_search.dart';
 import 'package:xmanager/presentation/pages/permissions.dart';
-import 'presentation/pages/player/player_detail.dart';
+import '../presentation/pages/player/player_detail.dart';
 import 'package:xmanager/presentation/pages/player/player_edit.dart';
 import 'package:xmanager/presentation/pages/program/program_create.dart';
 import 'package:xmanager/presentation/pages/program/program_list.dart';
 import 'package:xmanager/presentation/pages/responsive/responsive_layout.dart';
-import 'package:xmanager/app_state_notifier.dart';
+import 'package:xmanager/core/app_state_notifier.dart';
+
+import 'cubit/counter_cubit.dart';
 
 class RouteNames {
   static const String root = '/';
@@ -30,7 +33,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<AppStateNotifier>(builder: (context, appState, child) {
-      return MaterialApp(
+      return BlocProvider<CounterCubit>(
+        create: (context) => CounterCubit(),
+        child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,
@@ -54,6 +59,7 @@ class App extends StatelessWidget {
           RouteNames.programList: (context) => const ProgramList(),
           RouteNames.deviceSearch: (context) => const DeviceSearch(),
         },
+      ),
       );
     });
   }

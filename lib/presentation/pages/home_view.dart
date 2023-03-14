@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xmanager/app.dart';
+import 'package:xmanager/src/app.dart';
 import 'package:xmanager/data/models/models.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/presentation/pages/player/player_detail.dart';
@@ -8,6 +8,7 @@ import 'package:xmanager/presentation/widgets/xmaterial_coach_card.dart';
 import 'package:xmanager/presentation/widgets/xmaterial_item_card.dart';
 
 import '../../core/constants/common.dart';
+import '../../src/cubit/example_page.dart';
 
 
 enum PlayerCardOptionMenu { Delete, Edit, Detail }
@@ -20,6 +21,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final text = ValueNotifier("Title State");
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class _HomeViewState extends State<HomeView> {
     final TextTheme textTheme = theme.textTheme;
 
     final GlobalKey _scaffoldKey = GlobalKey();
-    
+
     Duration myDuration = const Duration(days: 5);
     String strDigits(int n) => n.toString().padLeft(2, '0');
     final days = strDigits(myDuration.inDays);
@@ -141,7 +143,12 @@ class _HomeViewState extends State<HomeView> {
           ),
           IconButton(
             icon: Icon(Icons.widgets),
-            onPressed: () => Navigator.pushNamed(context, RouteNames.account),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ExamplePage()),
+              );
+            },
           ),
           IconButton(
             icon: Icon(Icons.settings),
@@ -179,7 +186,9 @@ class _HomeViewState extends State<HomeView> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+
+        },
         backgroundColor: Colors.green,
         icon: const Icon(Icons.play_circle),
         label: const Text('AVVIA PROGRAMMA'),

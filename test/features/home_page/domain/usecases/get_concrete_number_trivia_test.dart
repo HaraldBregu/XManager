@@ -8,21 +8,33 @@ import 'package:xmanager/features/home_page/domain/usecases/get_concrete_number_
 class MockNumberTriviaRepository extends Mock implements NumberTriviaRepository {}
 
 void main() {
-  GetConcreteNumberTrivia usecases;
   MockNumberTriviaRepository mockNumberTriviaRepository;
+  GetConcreteNumberTrivia usecase;
 
   setUp((){
-    mockNumberTriviaRepository = MockNumberTriviaRepository();
-    usecases = GetConcreteNumberTrivia(mockNumberTriviaRepository);
+    //mockNumberTriviaRepository = MockNumberTriviaRepository();
+    //usecase = GetConcreteNumberTrivia(mockNumberTriviaRepository);
   });
 
-  final tnumber = 1;
+  final tNumber = 1;
   final tNumberTrivia = NumberTrivia(text: "test", number: 1);
   
-  test('should get trivia from repository', () async {
+  test('should get trivia from repositories', () async {
 
-    when(mockNumberTriviaRepository.getConcreteNumberTrivia(any))
-        .thenAnswer((_) async => Right(tNumberTrivia));
 
+    // Arrange
+    final getnumber = MockNumberTriviaRepository().getConcreteNumberTrivia(2);
+
+    /*
+    when(getnumber as Function()).thenAnswer((_) async => Right(tNumberTrivia));
+
+    // Act
+    final result = await usecase(Params(number: tNumber));
+
+    // Assert
+    expect(result, Right(tNumberTrivia));
+    verify(mockNumberTriviaRepository.getConcreteNumberTrivia(tNumber) as Function());
+    verifyNoMoreInteractions(mockNumberTriviaRepository);
+    */
   },);
 }

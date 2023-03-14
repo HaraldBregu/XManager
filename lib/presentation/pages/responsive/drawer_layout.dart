@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:xmanager/app.dart';
+import 'package:xmanager/src/app.dart';
 import 'package:xmanager/data/models/menu_item.dart';
 
 /*

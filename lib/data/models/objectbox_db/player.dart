@@ -1,9 +1,7 @@
 import 'package:objectbox/objectbox.dart';
-import 'package:xmanager/domain/repositories/player_repository.dart';
-
 
 @Entity()
-class Player implements PlayerRepository {
+class Player {
   @Id()
   int id = 0;
 
@@ -20,12 +18,4 @@ class Player implements PlayerRepository {
   String? nationality;
 
   Player();
-
-  @override
-  Stream<List<Player>> getAll() {
-    //final builder = playerBox.query()..order(Player_.id);
-    //return builder.watch(triggerImmediately: true).map((query) => query.find());
-    throw UnimplementedError();
-  }
-
 }

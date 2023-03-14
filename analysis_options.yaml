@@ -24,3 +24,6 @@ linter:
     depend_on_referenced_packages: true
     library_private_types_in_public_api: true
     use_build_context_synchronously: true
+    # Back to the 80s
+    lines_longer_than_80_chars: true
+

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xmanager/app.dart';
+import 'package:xmanager/src/app.dart';
 import 'package:xmanager/data/models/models.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/presentation/pages/program/program_create.dart';

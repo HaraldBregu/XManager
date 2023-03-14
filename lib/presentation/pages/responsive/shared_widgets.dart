@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xmanager/app.dart';
+import 'package:xmanager/src/app.dart';
 
 List<Widget> homeBarActions(BuildContext context) {
   return [
