@@ -18,6 +18,6 @@ Future <void> main() async {
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => AppStateNotifier()),
     ],
-    child: const App())
+    child: const App()),
   );
 }

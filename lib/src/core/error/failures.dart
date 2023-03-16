@@ -14,3 +14,8 @@ class CacheFailure extends Failure {
   @override
   List<Object?> get props => throw UnimplementedError();
 }
+
+class DatabaseFailure extends Failure {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}

@@ -4,20 +4,14 @@ import 'package:meta/meta.dart';
 
 class PlayerModel extends PlayerEntity {
 
-  PlayerModel({
-    required String fullname,
-    required String role,
-    required String nationality,
-    required String birthdate,
-    required String weight,
-    required String height
-  }) : super(
-      fullname: fullname,
-      role: role,
-      nationality: nationality,
-      birthdate: birthdate,
-      weight: weight,
-      height: height);
+  const PlayerModel({
+    required super.fullname,
+    required super.role,
+    required super.nationality,
+    required super.birthdate,
+    required super.weight,
+    required super.height,
+  });
 
   factory PlayerModel.fromPlayer(Player player) => PlayerModel(
       fullname: player.fullname,

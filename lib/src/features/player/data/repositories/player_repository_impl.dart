@@ -18,14 +18,7 @@ class PlayerRepositoryImpl implements PlayerRepository {
       final res = await playerDataSource.getPlayerModel(player);
       return Right(res);
     } on ServerExeption {
-      return Left(ServerFailure());
+      return Left(DatabaseFailure());
     }
   }
-
-  @override
-  Future<Either<Failure, PlayerEntity>> savePlayer() {
-    // TODO: implement savePlayer
-    throw UnimplementedError();
-  }
-
 }

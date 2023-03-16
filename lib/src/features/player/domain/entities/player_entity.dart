@@ -8,13 +8,13 @@ class PlayerEntity extends Equatable {
   final String weight;
   final String height;
 
-  PlayerEntity({
+  const PlayerEntity({
     required this.fullname,
     required this.role,
     required this.nationality,
     required this.birthdate,
     required this.weight,
-    required this.height
+    required this.height,
   });
 
   @override

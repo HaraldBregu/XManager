@@ -7,15 +7,12 @@ import '../../../../core/usecases/usecase.dart';
 import '../entities/player_entity.dart';
 import '../repositories/player_repository.dart';
 
-class GetPlayerUseCase implements UseCase<PlayerEntity, NoParams> {
+class GetPlayerUseCase implements UseCase<PlayerEntity, Player> {
   final PlayerRepository repository;
 
   GetPlayerUseCase(this.repository);
 
   @override
-  Future<Either<dynamic, PlayerEntity>> call(NoParams params) async => repository.getPlayer();
-
-  //@override
-  //Future<Either<Failure, PlayerEntity>> call() async => await repository.getPlayer();
-
+  Future<Either<Failure, PlayerEntity>> call(Player player) async =>
+      repository.getPlayer(player);
 }
