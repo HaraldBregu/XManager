@@ -1,9 +1,11 @@
-import 'package:objectbox/objectbox.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
-import 'package:xmanager/data/models/models.dart';
-import 'package:xmanager/objectbox.g.dart';
+import 'package:path_provider/path_provider.dart';
 
+import 'src/data/models/device_program.dart';
+import 'src/data/models/player.dart';
+import 'src/data/models/session_program.dart';
+
+import 'objectbox.g.dart';
 
 class ObjectBox {
   late final Store store;
@@ -21,6 +23,7 @@ class ObjectBox {
     playerBox = Box<Player>(store);
     sessionProgramBox = Box<SessionProgram>(store);
   }
+
 
   static Future<ObjectBox> create() async {
     final docsDir = await getApplicationDocumentsDirectory();

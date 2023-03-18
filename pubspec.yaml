@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
+  #cupertino_icons: ^1.0.2
   #https://pub.dev/packages/http
   http: ^0.13.5
   vibration: ^1.7.5
@@ -54,9 +54,9 @@ dependencies:
   # https://pub.dev/packages/flutter_bloc
   flutter_bloc: ^8.1.2
   #https://pub.dev/packages/get_it/install
-  get_it: ^7.2.0
+  #get_it: ^7.2.0
   #https://pub.dev/packages/go_router
-  go_router: ^6.2.0
+  #go_router: ^6.2.0
   freezed_annotation: ^2.2.0
   json_annotation: ^4.8.0
   equatable: ^2.0.5
@@ -66,6 +66,7 @@ dependencies:
   dartz: ^0.10.1
   connectivity: ^3.0.6
   shared_preferences: ^2.0.18
+  meta: ^1.8.0
 
 dev_dependencies:
   flutter_test:
