@@ -33,3 +33,9 @@ if it doesnt work use this:
 # localization
  flutter gen-l10n
 flutter clean
+
+# cache
+Open android studio Tools->Flutter->Clean.
+Go to File -> Invalidate Caches / Restart.
+Or open terminal run "flutter clean"
+Remove pubspec.lock.

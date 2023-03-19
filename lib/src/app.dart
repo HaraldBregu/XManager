@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:xmanager/src/core/app_state_notifier.dart';
 import 'package:xmanager/src/core/common.dart';
-import 'package:xmanager/src/presentation/pages/account.dart';
-import 'package:xmanager/src/presentation/pages/device/device_search.dart';
-import 'package:xmanager/src/presentation/pages/permissions.dart';
-import 'package:xmanager/src/presentation/pages/player/player_detail.dart';
-import 'package:xmanager/src/presentation/pages/player/player_edit.dart';
-import 'package:xmanager/src/presentation/pages/program/program_create.dart';
-import 'package:xmanager/src/presentation/pages/program/program_list.dart';
-import 'package:xmanager/src/presentation/pages/responsive/responsive_layout.dart';
-
-import 'core/app_state_notifier.dart';
-import 'core/theme/app_theme.dart';
-
+import 'package:xmanager/src/core/theme/app_theme.dart';
+import 'package:xmanager/src/features/dashboard/presentation/pages/account.dart';
+import 'package:xmanager/src/features/dashboard/presentation/pages/device/device_search.dart';
+import 'package:xmanager/src/features/dashboard/presentation/pages/home_view.dart';
+import 'package:xmanager/src/features/dashboard/presentation/pages/permissions.dart';
+import 'package:xmanager/src/features/dashboard/presentation/pages/player/player_detail.dart';
+import 'package:xmanager/src/features/dashboard/presentation/pages/player/player_edit.dart';
+import 'package:xmanager/src/features/dashboard/presentation/pages/program/program_create.dart';
+import 'package:xmanager/src/features/dashboard/presentation/pages/program/program_list.dart';
 
 class RouteNames {
   static const String root = '/';
@@ -46,18 +44,23 @@ class App extends StatelessWidget {
         supportedLocales: const [
           Locale("en"),
         ],
-        home: const ResponsiveLayout(),
+        home: const HomeView(),
         routes: {
           RouteNames.account: (context) => const Account(),
-          RouteNames.playerEdit: (context) => const PlayerEdit(player: null),
-          RouteNames.playerDetail: (context) => const PlayerDetail(player: null),
+          RouteNames.playerEdit: (context) =>
+          const PlayerEdit(
+            player: null,),
+          RouteNames.playerDetail: (context) =>
+          const PlayerDetail(
+            player: null,),
           RouteNames.appPermissions: (context) => const Permissions(),
-          RouteNames.programCreate: (context) => const ProgramCreate(program: null),
+          RouteNames.programCreate: (context) =>
+          const ProgramCreate(
+            program: null,),
           RouteNames.programList: (context) => const ProgramList(),
           RouteNames.deviceSearch: (context) => const DeviceSearch(),
         },
       );
-    },
-    );
+    },);
   }
 }

@@ -30,26 +30,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  #cupertino_icons: ^1.0.2
-  #https://pub.dev/packages/http
   http: ^0.13.5
   vibration: ^1.7.5
-  #google_maps_flutter: ^2.2.3
-  #geolocator: ^9.0.2
-  #geocoding: ^2.0.5
-  #flutter_blue: ^0.8.0
   permission_handler: ^10.2.0
   flutter_blue_plus: ^1.4.0
   flutter_localizations:
     sdk: flutter
   intl: any
-  objectbox: ^1.7.2
+  objectbox: any
   objectbox_flutter_libs: any
   path_provider: ^2.0.12
-  #https://rydmike.com/flexcolorscheme/themesplayground-v6/#/
   flex_color_scheme: ^6.1.2
   #flex_color_picker: ^3.1.0
   google_fonts: ^4.0.3
+  path: any
   provider: ^6.0.5
   # https://pub.dev/packages/flutter_bloc
   flutter_bloc: ^8.1.2
@@ -69,19 +63,19 @@ dependencies:
   meta: ^1.8.0
 
 dev_dependencies:
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
   integration_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
   mocktail: ^0.2.0
   build_runner: ^2.3.3
   objectbox_generator: any
-  #https://pub.dev/packages/freezed
-  freezed: ^2.3.2
-  #https://pub.dev/packages/json_serializable
   json_serializable: ^6.6.1
   lint: ^2.0.1
+
+objectbox:
+  output_dir: src/core/databases
 
 flutter:
   uses-material-design: true
