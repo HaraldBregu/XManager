@@ -14,5 +14,5 @@ class DashboardEventTest extends DashboardEvent {
   DashboardEventTest(this.name);
 
   @override
-  List<Object?> get props => [name];
+  List<Object?> get props => [ name ];
 }
