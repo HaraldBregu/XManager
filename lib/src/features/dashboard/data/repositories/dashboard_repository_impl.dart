@@ -1,42 +1,29 @@
-import 'package:xmanager/src/features/dashboard/data/datasources/dashboard_datasource.dart';
-import 'package:xmanager/src/features/dashboard/domain/entities/dashboard_entity.dart';
+import 'package:xmanager/src/features/dashboard/data/datasources/dashboard_local_data_source.dart';
 import 'package:xmanager/src/features/dashboard/domain/entities/dashboard_player_entity.dart';
+import 'package:xmanager/src/features/dashboard/domain/entities/dashboard_profile_entity.dart';
+import 'package:xmanager/src/features/dashboard/domain/entities/dashboard_training_entity.dart';
 import 'package:xmanager/src/features/dashboard/domain/repositories/dashboard_repository.dart';
 
 class DashboardRepositoryImpl implements DashboardRepository {
-  DashboardRepositoryImpl(this.dashboardDatasource);
+  final DashboardLocalDataSource localDataSource;
 
-  final DashboardDatasource dashboardDatasource;
+  DashboardRepositoryImpl({
+    required this.localDataSource,
+  });
 
   @override
-  DashboardEntity getDashboard() {
-    return const DashboardEntity(
-      title: "titolo",
-    );
+  Future<DashboardProfileEntity> getProfile() {
+    return localDataSource.getProfile();
   }
 
   @override
-  List<DashboardPlayerEntity> getPlayers() {
-    return [
-      DashboardPlayerEntity(
-        id: 23,
-        fullname: "Nome uno",
-        birthdate: DateTime.now(),
-        weight: 34,
-        height: 345,
-        role: "",
-        nationality: "",
-      ),
-      DashboardPlayerEntity(
-        id: 23,
-        fullname: "Nome due",
-        birthdate: DateTime.now(),
-        weight: 34,
-        height: 345,
-        role: "",
-        nationality: "",
-      )
-    ];
+  Future<List<DashboardPlayerEntity>> getPlayers() {
+    return localDataSource.getPlayers();
+  }
+
+  @override
+  Future<DashboardTrainingEntity> getTraining() {
+    return localDataSource.getTraining();
   }
 
 }

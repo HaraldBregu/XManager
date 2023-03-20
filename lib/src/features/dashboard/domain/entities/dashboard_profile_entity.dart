@@ -1,17 +1,14 @@
 import 'package:equatable/equatable.dart';
 
-class DashboardPlayerEntity extends Equatable {
-  final int id;
+class DashboardProfileEntity extends Equatable {
   final String fullname;
 
-  const DashboardPlayerEntity({
-    required this.id,
+  const DashboardProfileEntity({
     required this.fullname,
   });
 
   @override
   List<Object?> get props => [
-    id,
     fullname,
   ];
 

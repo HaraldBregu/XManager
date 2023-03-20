@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/src/app.dart';
 import 'package:xmanager/src/core/common.dart';
+import 'package:xmanager/src/core/datamodel/datamodels.dart';
 import 'package:xmanager/src/core/widgets/xmaterial_card.dart';
 import 'package:xmanager/src/core/widgets/xmaterial_coach_card.dart';
 import 'package:xmanager/src/core/widgets/xmaterial_item_card.dart';
 
-import '../../../../data/models/objectbox_models.dart';
-
-enum PlayerCardOptionMenu { Delete, Edit, Detail }
+enum PlayerCardOptionMenu { delete, edit, detail }
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});

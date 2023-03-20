@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/src/core/common.dart';
+import 'package:xmanager/src/core/datamodel/datamodels.dart';
 import 'package:xmanager/src/core/utils/string_extension.dart';
-import '../../../../../data/models/objectbox_models.dart';
 
 typedef UpdatePlayerFunction = Function(Player);
 

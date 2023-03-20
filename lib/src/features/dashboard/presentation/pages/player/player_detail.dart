@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/src/app.dart';
 import 'package:xmanager/src/core/common.dart';
+import 'package:xmanager/src/core/datamodel/datamodels.dart';
 import 'package:xmanager/src/core/widgets/xmaterial_card.dart';
 import 'package:xmanager/src/core/widgets/xmaterial_item_card.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/player/player_edit.dart';
-
-import '../../../../../data/models/objectbox_models.dart';
 
 enum PlayerDetailMenuItem {
   delete,

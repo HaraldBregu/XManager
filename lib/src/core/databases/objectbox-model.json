@@ -108,9 +108,28 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "4:5790660189180963841",
+      "lastPropertyId": "2:8126492403450893890",
+      "name": "Profile",
+      "properties": [
+        {
+          "id": "1:767879421192578772",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8126492403450893890",
+          "name": "fullname",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "3:8047256837186541153",
+  "lastEntityId": "4:5790660189180963841",
   "lastIndexId": "2:494764993099841677",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

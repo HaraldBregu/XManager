@@ -1,16 +1,17 @@
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
-import 'package:xmanager/src/data/models/objectbox_models.dart';
-
-import 'objectbox.g.dart';
+import 'package:xmanager/src/core/databases/objectbox.g.dart';
+import 'package:xmanager/src/core/datamodel/datamodels.dart';
 
 class ObjectBox {
   late final Store store;
+  late final Box<Profile>profileBox;
   late final Box<Player>playerBox;
   late final Box<SessionProgram>sessionProgramBox;
   late final Box<DeviceProgram>deviceProgramBox;
 
   ObjectBox._create(this.store) {
+    profileBox = Box<Profile>(store);
     playerBox = Box<Player>(store);
     sessionProgramBox = Box<SessionProgram>(store);
   }
@@ -19,6 +20,15 @@ class ObjectBox {
     final docsDir = await getApplicationDocumentsDirectory();
     final store = await openStore(directory: p.join(docsDir.path, "obx-data"));
     return ObjectBox._create(store);
+  }
+
+
+  Future<Profile?> getProfile() async {
+    final builder = profileBox.query();
+    final query = builder.build();
+    //final allProfiles = query.find();
+    final firstProfiles = query.findFirst();
+    return firstProfiles;
   }
 
   Stream<List<Player>> getPlayers() {

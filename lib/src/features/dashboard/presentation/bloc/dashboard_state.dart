@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:xmanager/src/features/dashboard/domain/entities/dashboard_entity.dart';
 import 'package:xmanager/src/features/dashboard/domain/entities/dashboard_player_entity.dart';
+import 'package:xmanager/src/features/dashboard/domain/entities/dashboard_profile_entity.dart';
 
 @immutable
 abstract class DashboardState extends Equatable {
@@ -14,7 +14,7 @@ class DashboardStateEmpty extends DashboardState {
 }
 
 class DashboardStateData extends DashboardState {
-  final DashboardEntity data;
+  final DashboardProfileEntity data;
   const DashboardStateData(this.data);
 
   @override
