@@ -5,6 +5,7 @@ import 'package:xmanager/src/core/app_state_notifier.dart';
 import 'package:xmanager/src/core/common.dart';
 import 'package:xmanager/src/core/theme/app_theme.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/account.dart';
+import 'package:xmanager/src/features/dashboard/presentation/pages/dashboard_view.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/device/device_search.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/home_view.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/permissions.dart';
@@ -29,6 +30,38 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeMode.light,
+      localizationsDelegates: const [
+        AppLocalizations.delegate, // Add this line
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale("en"),
+      ],
+      home: const DashboardView(),
+      routes: {
+        RouteNames.account: (context) => const Account(),
+        RouteNames.playerEdit: (context) =>
+        const PlayerEdit(
+          player: null,),
+        RouteNames.playerDetail: (context) =>
+        const PlayerDetail(
+          player: null,),
+        RouteNames.appPermissions: (context) => const Permissions(),
+        RouteNames.programCreate: (context) =>
+        const ProgramCreate(
+          program: null,),
+        RouteNames.programList: (context) => const ProgramList(),
+        RouteNames.deviceSearch: (context) => const DeviceSearch(),
+      },
+    );
+    /*
     return Consumer<AppStateNotifier>(builder: (context, appState, child) {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -44,7 +77,7 @@ class App extends StatelessWidget {
         supportedLocales: const [
           Locale("en"),
         ],
-        home: const HomeView(),
+        home: const DashboardView(),
         routes: {
           RouteNames.account: (context) => const Account(),
           RouteNames.playerEdit: (context) =>
@@ -61,6 +94,6 @@ class App extends StatelessWidget {
           RouteNames.deviceSearch: (context) => const DeviceSearch(),
         },
       );
-    },);
+    },);*/
   }
 }

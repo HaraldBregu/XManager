@@ -11,8 +11,7 @@ class DashboardPlayerEntity extends Equatable {
 
   @override
   List<Object?> get props => [
-    id,
-    fullname,
-  ];
-
+        id,
+        fullname,
+      ];
 }

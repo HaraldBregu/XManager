@@ -7,5 +7,4 @@ class DashboardProfileModel extends DashboardProfileEntity {
   factory DashboardProfileModel.fromProfile(Profile profile) {
     return DashboardProfileModel(fullname: profile.fullname);
   }
-
 }

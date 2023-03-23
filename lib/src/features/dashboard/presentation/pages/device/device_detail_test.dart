@@ -1,11 +1,9 @@
-
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 class DeviceDetailTest extends StatelessWidget {
-  const DeviceDetailTest({Key? key, required this.device}) : super(key: key);
+  const DeviceDetailTest({super.key, required this.device});
 
   final BluetoothDevice device;
 

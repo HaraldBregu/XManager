@@ -76,7 +76,7 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
       title: Text('Bluetooth state', style: textTheme.titleMedium),
       onTap: () => {},
     ));
-
+/*
     widgets.add(ListTile(
         title: const Text('Theme Mode'),
         trailing: ThemeModeSwitch(
@@ -87,7 +87,7 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
             });
           },
         )
-    ));
+    ));*/
 
     widgets.add(ListTile(
       title: Text('App Permissions', style: textTheme.titleMedium),
@@ -101,6 +101,7 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
     ));
 
     if (kDebugMode) {
+      /*
       widgets.add(SwitchListTile(
           title: Text('Switch tile', style: textTheme.titleMedium),
           value: context.watch<AppStateNotifier>().darkMode,
@@ -110,6 +111,7 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
             });
           },
       ),);
+      */
       widgets.add(ListTile(
         title: const Text('Add test data'),
         onLongPress: () {

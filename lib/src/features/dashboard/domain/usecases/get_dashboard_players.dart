@@ -1,10 +1,22 @@
+import 'package:dartz/dartz.dart';
+import 'package:xmanager/src/core/error/failures.dart';
+import 'package:xmanager/src/core/usecases/usecase.dart';
 import 'package:xmanager/src/features/dashboard/domain/entities/dashboard_player_entity.dart';
-import 'package:xmanager/src/features/dashboard/domain/repositories/dashboard_repository.dart';
 
-class GetDashboardPlayers {
-  final DashboardRepository _dashboardRepository;
-  GetDashboardPlayers(this._dashboardRepository);
+import '../repositories/dashboard_repository.dart';
 
-  Future<List<DashboardPlayerEntity>> call() async =>
-      _dashboardRepository.getPlayers();
+abstract class GetDashboardPlayers {
+  Future<Either<Failure, List<DashboardPlayerEntity>>> execute();
+}
+
+class GetDashboardPlayersImpl implements GetDashboardPlayers {
+  final DashboardRepository dashboardRepository;
+
+  GetDashboardPlayersImpl(this.dashboardRepository);
+
+  @override
+  Future<Either<Failure, List<DashboardPlayerEntity>>> execute() async {
+    return dashboardRepository.getPlayers();
+  }
+
 }

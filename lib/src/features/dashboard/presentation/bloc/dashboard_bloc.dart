@@ -1,40 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/features/dashboard/domain/usecases/get_dashboard_players.dart';
-import 'package:xmanager/src/features/dashboard/domain/usecases/get_dashboard_profile.dart';
-import 'package:xmanager/src/features/dashboard/domain/usecases/get_dashboard_training.dart';
 import 'package:xmanager/src/features/dashboard/presentation/bloc/dashboard_event.dart';
 import 'package:xmanager/src/features/dashboard/presentation/bloc/dashboard_state.dart';
 
+
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
-  final GetDashboardProfile getDashboardProfile;
-  final GetDashboardTraining getDashboardTraining;
-  final GetDashboardPlayers getDashboardPlayers;
+  DashboardBloc() : super(DashboardStateInitial()) {
+    on<DashboardEvent>((event, emit) {
+      // TODO: implement event handler
+    });
+    on((event, emit) => {
 
-  DashboardBloc({
-    required this.getDashboardProfile,
-    required this.getDashboardTraining,
-    required this.getDashboardPlayers,
-  }) : super(DashboardStateEmpty()) {
-/*
-    on<DashboardEventFetched>(_onPostFetched);
-
-    on<DashboardEventTest>((event, emit) => {
-
-    });*/
-  }
-
-
-  Future<void> _onPostFetched(DashboardEventFetched event, Emitter<DashboardEvent> emit) async {
-   //emit(getDashboardData.call());
-  }
-/*
-  DashboardBloc(this._dashboardRepository): super(DashboardStateInitial()) {
-    on<DashboardEvent>((event, emit) async {
-      emit(DashboardStateData());
-      emit(DashboardStatePlayers());
     });
   }
-  */
-
-
 }

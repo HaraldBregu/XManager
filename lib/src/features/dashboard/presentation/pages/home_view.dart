@@ -17,7 +17,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final text = ValueNotifier("Title State");
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +151,6 @@ class _HomeViewState extends State<HomeView> {
           ),
         ],
       ),
-      //drawer: const DrawerLayout(),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
