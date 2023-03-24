@@ -10,13 +10,13 @@ abstract class GetDashboardPlayers {
 }
 
 class GetDashboardPlayersImpl implements GetDashboardPlayers {
-  final DashboardRepository dashboardRepository;
+  final DashboardRepository _dashboardRepository;
 
-  GetDashboardPlayersImpl(this.dashboardRepository);
+  GetDashboardPlayersImpl(this._dashboardRepository);
 
   @override
   Future<Either<Failure, List<DashboardPlayerEntity>>> execute() async {
-    return dashboardRepository.getPlayers();
+    return _dashboardRepository.getPlayers();
   }
 
 }

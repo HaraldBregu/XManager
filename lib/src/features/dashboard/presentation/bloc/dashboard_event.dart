@@ -5,8 +5,21 @@ abstract class DashboardEvent extends Equatable {
 }
 
 class DashboardEventStart extends DashboardEvent {
-
   @override
   List<Object?> get props => [];
+}
 
+class DashboardProfileEvent extends DashboardEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class DashboardProgramsEvent extends DashboardEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class DashboardPlayerEvent extends DashboardEvent {
+  @override
+  List<Object?> get props => [];
 }

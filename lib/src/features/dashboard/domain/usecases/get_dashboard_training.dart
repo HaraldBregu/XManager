@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:xmanager/src/core/error/failures.dart';
+import 'package:xmanager/src/features/dashboard/data/repositories/dashboard_repository_impl.dart';
 import 'package:xmanager/src/features/dashboard/domain/entities/dashboard_training_entity.dart';
-
 import 'package:xmanager/src/features/dashboard/domain/repositories/dashboard_repository.dart';
 
 abstract class GetDashboardTraining {
@@ -9,13 +9,13 @@ abstract class GetDashboardTraining {
 }
 
 class GetDashboardTrainingImpl implements GetDashboardTraining {
-  final DashboardRepository dashboardRepository;
+  final DashboardRepository _dashboardRepository;
 
-  GetDashboardTrainingImpl(this.dashboardRepository);
+  GetDashboardTrainingImpl(this._dashboardRepository);
 
   @override
   Future<Either<Failure, DashboardTrainingEntity>> execute() {
-    return dashboardRepository.getTraining();
+    return _dashboardRepository.getTraining();
   }
 
 }

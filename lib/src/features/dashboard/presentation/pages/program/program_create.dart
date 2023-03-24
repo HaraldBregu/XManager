@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/src/core/common.dart';
-import 'package:xmanager/src/core/datamodel/datamodels.dart';
+import 'package:xmanager/src/core/models/models.dart';
 
 class ProgramCreate extends StatefulWidget {
   final SessionProgram? program;

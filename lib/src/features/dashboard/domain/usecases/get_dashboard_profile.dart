@@ -8,12 +8,12 @@ abstract class GetDashboardProfile {
 }
 
 class GetDashboardProfileImpl implements GetDashboardProfile {
-  final DashboardRepository dashboardRepository;
+  final DashboardRepository _dashboardRepository;
 
-  GetDashboardProfileImpl(this.dashboardRepository);
+  GetDashboardProfileImpl(this._dashboardRepository);
 
   @override
   Future<Either<Failure, DashboardProfileEntity>> execute() async {
-    return dashboardRepository.getProfile();
+    return _dashboardRepository.getProfile();
   }
 }

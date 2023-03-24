@@ -10,6 +10,8 @@ abstract class DashboardDataSource {
 }
 
 class DashboardDataSourceImpl implements DashboardDataSource {
+  const DashboardDataSourceImpl();
+
   @override
   Future<List<DashboardPlayerModel>> getPlayers() async {
     return objectBox.playerBox
@@ -22,7 +24,7 @@ class DashboardDataSourceImpl implements DashboardDataSource {
   Future<DashboardProfileModel> getProfile() async {
     return objectBox.profileBox
         .getAll()
-        .map((e) => DashboardProfileModel(fullname: e.fullname))
+        .map((e) => DashboardProfileModel.fromJson(e.toJson()))
         .toList()
         .first;
   }
@@ -31,7 +33,7 @@ class DashboardDataSourceImpl implements DashboardDataSource {
   Future<DashboardTrainingModel> getTraining() async {
     return objectBox.sessionProgramBox
         .getAll()
-        .map((e) => DashboardTrainingModel(name: e.title))
+        .map((e) => DashboardTrainingModel.fromJson(e.toJson()))
         .toList()
         .first;
   }

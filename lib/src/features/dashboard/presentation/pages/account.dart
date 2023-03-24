@@ -1,13 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-import 'package:provider/provider.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/src/app.dart';
-import 'package:xmanager/src/core/app_state_notifier.dart';
 import 'package:xmanager/src/core/common.dart';
-import 'package:xmanager/src/core/datamodel/datamodels.dart';
-import 'package:xmanager/src/core/widgets/theme_mode_switch.dart';
+
+import '../../../../core/models/models.dart';
 
 class Account extends StatefulWidget {
   const Account({super.key});
