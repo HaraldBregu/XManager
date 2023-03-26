@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:provider/provider.dart';
-import 'package:xmanager/src/core/app_state_notifier.dart';
-import 'package:xmanager/src/core/common.dart';
 import 'package:xmanager/src/core/theme/app_theme.dart';
+import 'package:xmanager/src/core/utils/common.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/account.dart';
-import 'package:xmanager/src/features/dashboard/presentation/pages/dashboard_view.dart';
+import 'package:xmanager/src/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/device/device_search.dart';
-import 'package:xmanager/src/features/dashboard/presentation/pages/home_view.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/permissions.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/player/player_detail.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/player/player_edit.dart';
@@ -44,7 +41,7 @@ class App extends StatelessWidget {
       supportedLocales: const [
         Locale("en"),
       ],
-      home: const DashboardView(),
+      home: const DashboardPage(),
       routes: {
         RouteNames.account: (context) => const Account(),
         RouteNames.playerEdit: (context) =>

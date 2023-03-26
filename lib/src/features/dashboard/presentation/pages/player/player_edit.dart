@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/src/core/common.dart';
+import 'package:xmanager/src/core/utils/common.dart';
 import 'package:xmanager/src/core/models/models.dart';
 import 'package:xmanager/src/core/utils/string_extension.dart';
 

@@ -1,34 +1,48 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/features/dashboard/data/datasources/local/dashboard_datasource.dart';
-import 'package:xmanager/src/features/dashboard/data/repositories/dashboard_repository_impl.dart';
+import 'package:xmanager/src/features/dashboard/domain/usecases/get_dashboard_players.dart';
 import 'package:xmanager/src/features/dashboard/domain/usecases/get_dashboard_profile.dart';
 import 'package:xmanager/src/features/dashboard/domain/usecases/get_dashboard_training.dart';
 import 'package:xmanager/src/features/dashboard/presentation/bloc/dashboard_event.dart';
 import 'package:xmanager/src/features/dashboard/presentation/bloc/dashboard_state.dart';
 
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
-  //final GetDashboardProfile _getDashboardProfile;
+  final GetDashboardProfile _getDashboardProfile;
+  final GetDashboardTraining _getDashboardTraining;
+  final GetDashboardPlayers _getDashboardPlayers;
 
-  DashboardBloc() : super(DashboardStateInitial()) {
-   /* on<DashboardEventStart>((event, emit) async {
+  DashboardBloc(this._getDashboardProfile, this._getDashboardTraining,
+      this._getDashboardPlayers)
+      : super(DashboardStateInitial()) {
+    on<DashboardEventStart>((event, emit) async {
       final result = await _getDashboardProfile.execute();
-
       result.fold(
         (failure) {
-          emit(const DashboardProfileStateError(""));
+          emit(DashboardProfileStateError());
         },
         (data) {
-          emit(const DashboardProfileStateSuccess(""));
+          emit(DashboardProfileStateSuccess(data));
         },
       );
-    });
+/*
+      final resultTraining = await _getDashboardTraining.execute();
+      resultTraining.fold(
+        (failure) {
+          emit(DashboardTrainingStateError());
+        },
+        (data) {
+          emit(DashboardTrainingStateSuccess(data));
+        },
+      );*/
 
-    on<DashboardProfileEvent>((event, emit) => {});
-    on<DashboardProgramsEvent>((event, emit) => {});
-    */
-
-    on<DashboardPlayerEvent>((event, emit) => {
-      emit(const DashboardTestState("this is a message"))
+      final resultPlayers = await _getDashboardPlayers.execute();
+      resultPlayers.fold(
+        (failure) {
+          emit(DashboardPlayersStateError());
+        },
+        (data) {
+          emit(DashboardPlayersStateSuccess(data));
+        },
+      );
     });
   }
 }

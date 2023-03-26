@@ -5,13 +5,11 @@ import 'package:xmanager/src/core/models/models.dart';
 
 class ObjectBox {
   late final Store store;
-  late final Box<Profile>profileBox;
-  late final Box<Player>playerBox;
-  late final Box<SessionProgram>sessionProgramBox;
-  late final Box<DeviceProgram>deviceProgramBox;
+  late final Box<Player> playerBox;
+  late final Box<SessionProgram> sessionProgramBox;
+  late final Box<DeviceProgram> deviceProgramBox;
 
   ObjectBox._create(this.store) {
-    profileBox = Box<Profile>(store);
     playerBox = Box<Player>(store);
     sessionProgramBox = Box<SessionProgram>(store);
   }
@@ -22,23 +20,31 @@ class ObjectBox {
     return ObjectBox._create(store);
   }
 
-
-  Future<Profile?> getProfile() async {
-    final builder = profileBox.query();
-    final query = builder.build();
-    //final allProfiles = query.find();
-    final firstProfiles = query.findFirst();
-    return firstProfiles;
+  /// SessionProgram
+  Query<SessionProgram> sessionProgramQuery() {
+    return sessionProgramBox.query().build();
   }
 
-  Stream<List<Player>> getPlayers() {
-    final builder = playerBox.query()..order(Player_.id);
-    return builder.watch(triggerImmediately: true).map((query) => query.find());
+  Future<List<SessionProgram>> getSessionPrograms() async {
+    return sessionProgramQuery().find();
   }
 
-  Stream<List<SessionProgram>> getSessionPrograms() {
+  Stream<List<SessionProgram>> getStreamSessionPrograms() {
     final builder = sessionProgramBox.query()..order(SessionProgram_.id);
     return builder.watch(triggerImmediately: true).map((query) => query.find());
   }
 
+  /// Player
+  Query<Player> playerQuery() {
+    return playerBox.query().build();
+  }
+
+  Future<List<Player>> getPlayers() async {
+    return playerQuery().find();
+  }
+
+  Stream<List<Player>> getStreamPlayers() {
+    final builder = playerBox.query()..order(Player_.id);
+    return builder.watch(triggerImmediately: true).map((query) => query.find());
+  }
 }

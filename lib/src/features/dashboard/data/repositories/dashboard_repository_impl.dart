@@ -28,7 +28,7 @@ class DashboardRepositoryImpl implements DashboardRepository {
     try {
       return Right(await _localDataSource.getProfile());
     } on DatabaseExeption {
-      return Left(DatabaseFailure as Failure);
+      return Left(DatabaseFailure());
     }
   }
 

@@ -16,7 +16,6 @@ import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import '../../../src/core/models/device_program.dart';
 import '../../../src/core/models/player.dart';
-import '../../../src/core/models/profile.dart';
 import '../../../src/core/models/session_program.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
@@ -125,25 +124,6 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
-      backlinks: <ModelBacklink>[]),
-  ModelEntity(
-      id: const IdUid(4, 5790660189180963841),
-      name: 'Profile',
-      lastPropertyId: const IdUid(2, 8126492403450893890),
-      flags: 0,
-      properties: <ModelProperty>[
-        ModelProperty(
-            id: const IdUid(1, 767879421192578772),
-            name: 'id',
-            type: 6,
-            flags: 1),
-        ModelProperty(
-            id: const IdUid(2, 8126492403450893890),
-            name: 'fullname',
-            type: 9,
-            flags: 0)
-      ],
-      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -171,9 +151,9 @@ ModelDefinition getObjectBoxModel() {
       lastIndexId: const IdUid(2, 494764993099841677),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
-      retiredEntityUids: const [],
+      retiredEntityUids: const [5790660189180963841],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [767879421192578772, 8126492403450893890],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -303,33 +283,6 @@ ModelDefinition getObjectBoxModel() {
                 : DateTime.fromMillisecondsSinceEpoch(updatedAtValue);
 
           return object;
-        }),
-    Profile: EntityDefinition<Profile>(
-        model: _entities[3],
-        toOneRelations: (Profile object) => [],
-        toManyRelations: (Profile object) => {},
-        getId: (Profile object) => object.id,
-        setId: (Profile object, int id) {
-          object.id = id;
-        },
-        objectToFB: (Profile object, fb.Builder fbb) {
-          final fullnameOffset = fbb.writeString(object.fullname);
-          fbb.startTable(3);
-          fbb.addInt64(0, object.id);
-          fbb.addOffset(1, fullnameOffset);
-          fbb.finish(fbb.endTable());
-          return object.id;
-        },
-        objectFromFB: (Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-
-          final object = Profile()
-            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
-            ..fullname = const fb.StringReader(asciiOptimization: true)
-                .vTableGet(buffer, rootOffset, 6, '');
-
-          return object;
         })
   };
 
@@ -399,14 +352,4 @@ class SessionProgram_ {
   /// see [SessionProgram.updatedAt]
   static final updatedAt =
       QueryIntegerProperty<SessionProgram>(_entities[2].properties[5]);
-}
-
-/// [Profile] entity fields to define ObjectBox queries.
-class Profile_ {
-  /// see [Profile.id]
-  static final id = QueryIntegerProperty<Profile>(_entities[3].properties[0]);
-
-  /// see [Profile.fullname]
-  static final fullname =
-      QueryStringProperty<Profile>(_entities[3].properties[1]);
 }

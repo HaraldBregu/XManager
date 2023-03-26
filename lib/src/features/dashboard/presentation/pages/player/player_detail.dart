@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/src/app.dart';
-import 'package:xmanager/src/core/common.dart';
+import 'package:xmanager/src/core/utils/common.dart';
 import 'package:xmanager/src/core/models/models.dart';
 import 'package:xmanager/src/core/widgets/xmaterial_card.dart';
 import 'package:xmanager/src/core/widgets/xmaterial_item_card.dart';

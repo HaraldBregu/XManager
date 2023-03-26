@@ -1,4 +1,9 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xmanager/main.dart';
+import 'package:xmanager/src/core/databases/preferences.dart';
+import 'package:xmanager/src/core/error/exeptions.dart';
+import 'package:xmanager/src/core/error/failures.dart';
+import 'package:xmanager/src/core/models/account.dart';
 import 'package:xmanager/src/features/dashboard/data/models/dashboard_player_model.dart';
 import 'package:xmanager/src/features/dashboard/data/models/dashboard_profile_model.dart';
 import 'package:xmanager/src/features/dashboard/data/models/dashboard_training_model.dart';
@@ -19,22 +24,45 @@ class DashboardDataSourceImpl implements DashboardDataSource {
         .map((e) => DashboardPlayerModel.fromJson(e.toJson()))
         .toList();
   }
-
+/*
   @override
   Future<DashboardProfileModel> getProfile() async {
-    return objectBox.profileBox
-        .getAll()
-        .map((e) => DashboardProfileModel.fromJson(e.toJson()))
-        .toList()
-        .first;
-  }
+
+    //Account account = Account(fullname: "Harald Bregu");
+    //Account.fromMap(map)
+    //final newAccount = prefs.get(DashboardProfileModel.fromJson());
+
+
+    try {
+
+      final profiles = await objectBox.getProfiles();
+      final mProfiles =
+          profiles.map((e) => DashboardProfileModel.fromJson(e.toJson()));
+      if (mProfiles.isEmpty) {
+        throw DatabaseFailure();
+      }
+      return mProfiles.first;
+    } on DatabaseFailure {
+      throw DatabaseExeption();
+    }
+  }*/
 
   @override
   Future<DashboardTrainingModel> getTraining() async {
-    return objectBox.sessionProgramBox
-        .getAll()
-        .map((e) => DashboardTrainingModel.fromJson(e.toJson()))
-        .toList()
-        .first;
+    try {
+      return objectBox.sessionProgramBox
+          .getAll()
+          .map((e) => DashboardTrainingModel.fromJson(e.toJson()))
+          .toList()
+          .first;
+    } on DatabaseFailure {
+      throw DatabaseExeption();
+    }
+  }
+
+  @override
+  Future<DashboardProfileModel> getProfile() async {
+    final currentAccount = await Preferences.currentAccount();
+    return DashboardProfileModel.fromJson(currentAccount.toMap());
   }
 }

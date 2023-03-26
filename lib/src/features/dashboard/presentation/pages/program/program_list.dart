@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/src/app.dart';
-import 'package:xmanager/src/core/common.dart';
+import 'package:xmanager/src/core/utils/common.dart';
 import 'package:xmanager/src/core/models/models.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/program/program_create.dart';
 
@@ -19,7 +19,7 @@ class _ProgramListState extends State<ProgramList> {
     final AppLocalizations? localize = AppLocalizations.of(context);
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
-
+/*
     Widget sessionProgramList() => StreamBuilder<List<SessionProgram>>(
         key: UniqueKey(),
         stream: objectBox.getSessionPrograms(),
@@ -67,14 +67,14 @@ class _ProgramListState extends State<ProgramList> {
           }, childCount: snapshot.hasData ? snapshot.data!.length : 0),
           );
         });
-
+*/
     return Scaffold(
         appBar: AppBar(
           title: Text(localize?.program_list_title ?? "-"),
         ),
         body: CustomScrollView(
           slivers: [
-            sessionProgramList()
+            //sessionProgramList()
           ],
         ),
         floatingActionButton: FloatingActionButton(

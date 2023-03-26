@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/src/app.dart';
-import 'package:xmanager/src/core/common.dart';
+import 'package:xmanager/src/core/utils/common.dart';
 
 import '../../../../core/models/models.dart';
 
