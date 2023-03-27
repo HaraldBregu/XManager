@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/src/core/databases/preferences.dart';
+import 'package:xmanager/src/core/storage/preferences.dart';
 import 'package:xmanager/src/core/error/exeptions.dart';
 import 'package:xmanager/src/core/error/failures.dart';
 import 'package:xmanager/src/core/models/account.dart';
@@ -63,6 +63,15 @@ class DashboardDataSourceImpl implements DashboardDataSource {
   @override
   Future<DashboardProfileModel> getProfile() async {
     final currentAccount = await Preferences.currentAccount();
-    return DashboardProfileModel.fromJson(currentAccount.toMap());
+    if (currentAccount != null) {
+      final map = currentAccount.toMap();
+      try {
+        return DashboardProfileModel.fromJson(map);
+      } catch (err) {
+        throw DatabaseFailure();
+      }
+    } else {
+      throw DatabaseFailure();
+    }
   }
 }

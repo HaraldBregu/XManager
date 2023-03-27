@@ -5,7 +5,7 @@ import 'package:xmanager/src/core/utils/common.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/account.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/device/device_search.dart';
-import 'package:xmanager/src/features/dashboard/presentation/pages/permissions.dart';
+import 'package:xmanager/src/features/settings/presentation/pages/permissions.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/player/player_detail.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/player/player_edit.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/program/program_create.dart';

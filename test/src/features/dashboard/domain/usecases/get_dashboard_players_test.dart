@@ -19,7 +19,7 @@ void main() {
     getDashboardPlayersUseCase = GetDashboardPlayersImpl(mockDashboardRepository);
   });
 
-  test("should get the players from dashboard repository", () async {
+  test("should get the players from dashboard usecases", () async {
     const Either<Failure, List<DashboardPlayerEntity>> repoResult =
     Right<Failure, List<DashboardPlayerEntity>>(
       [

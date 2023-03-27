@@ -19,7 +19,7 @@ void main() {
     getDashboardTrainingUseCase = GetDashboardTrainingImpl(mockDashboardRepository);
   });
 
-  test("should get the training from dashboard repository", () async {
+  test("should get the training from dashboard usecases", () async {
     const Either<Failure, DashboardTrainingEntity> repoResult =
     Right<Failure, DashboardTrainingEntity>(
       DashboardTrainingEntity(name: "training name"),

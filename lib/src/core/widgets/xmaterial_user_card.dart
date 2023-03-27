@@ -6,7 +6,12 @@ class XMaterialUserCard extends StatelessWidget {
   final String? description;
   final Widget? container;
 
-  const XMaterialUserCard(this.fullName, {Key? key, this.description, this.container}) : super(key: key);
+  const XMaterialUserCard(
+    this.fullName, {
+    super.key,
+    this.description,
+    this.container,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,8 @@ class XMaterialUserCard extends StatelessWidget {
     final style = textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900);
     Text? descriptionText;
     if (description != null) {
-      descriptionText = Text(description as String, style: textTheme.bodyMedium);
+      descriptionText =
+          Text(description as String, style: textTheme.bodyMedium);
     }
 
     items.add(ListTile(

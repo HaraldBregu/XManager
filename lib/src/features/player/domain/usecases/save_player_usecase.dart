@@ -7,12 +7,12 @@ import '../repositories/player_repository.dart';
 
 /*
 class SavePlayerUseCase implements UseCase<PlayerEntity, Void> {
-  final PlayerRepository repository;
+  final PlayerRepository repositories;
 
-  SavePlayerUseCase(this.repository);
+  SavePlayerUseCase(this.repositories);
 
   @override
   Future<Either<Failure, PlayerEntity>>? call(Void ) {
-    return repository.savePlayer();
+    return repositories.savePlayer();
   }
 }*/

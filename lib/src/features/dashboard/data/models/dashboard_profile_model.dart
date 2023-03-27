@@ -5,7 +5,10 @@ part 'dashboard_profile_model.g.dart';
 
 @JsonSerializable()
 class DashboardProfileModel extends DashboardProfileEntity {
-  const DashboardProfileModel({required super.fullname});
+  const DashboardProfileModel({
+    required super.fullname,
+    super.description,
+  });
 
   /// A necessary factory constructor for creating a new User instance
   /// from a map. Pass the map to the generated `_$UserFromJson()` constructor.

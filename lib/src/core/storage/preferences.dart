@@ -19,7 +19,7 @@ class Preferences {
     sharedPreferences.setString(accountPreferences, accountString);
   }
 
-  static Future<Account> currentAccount() async {
+  static Future<Account?> currentAccount() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     final String accountString =

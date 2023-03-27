@@ -6,10 +6,10 @@ import '../entities/player_entity.dart';
 import '../repositories/player_repository.dart';
 /*
 class GetPlayerUseCase implements UseCase<PlayerEntity, Player> {
-  GetPlayerUseCase(this.repository);
+  GetPlayerUseCase(this.repositories);
 
-  final PlayerRepository repository;
+  final PlayerRepository repositories;
 
   //@override
-  //Future<Either<Failure, PlayerEntity>> call(Player player) async => repository.getPlayer(player);
+  //Future<Either<Failure, PlayerEntity>> call(Player player) async => repositories.getPlayer(player);
 }*/

@@ -10,10 +10,12 @@ DashboardProfileModel _$DashboardProfileModelFromJson(
         Map<String, dynamic> json) =>
     DashboardProfileModel(
       fullname: json['fullname'] as String,
+      description: json['description'] as String?,
     );
 
 Map<String, dynamic> _$DashboardProfileModelToJson(
         DashboardProfileModel instance) =>
     <String, dynamic>{
       'fullname': instance.fullname,
+      'description': instance.description,
     };

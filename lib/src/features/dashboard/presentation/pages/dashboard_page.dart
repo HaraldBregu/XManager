@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/main.dart';
 import 'package:xmanager/src/app.dart';
-import 'package:xmanager/src/core/databases/preferences.dart';
-import 'package:xmanager/src/core/models/models.dart';
+import 'package:xmanager/src/core/models/account.dart';
+import 'package:xmanager/src/core/storage/preferences.dart';
 import 'package:xmanager/src/core/utils/localizations_extension.dart';
 import 'package:xmanager/src/core/utils/theme_extension.dart';
 import 'package:xmanager/src/core/widgets/widget.dart';
 import 'package:xmanager/src/features/dashboard/data/datasources/local/dashboard_datasource.dart';
-import 'package:xmanager/src/features/dashboard/data/models/dashboard_player_model.dart';
 import 'package:xmanager/src/features/dashboard/data/repositories/dashboard_repository_impl.dart';
 import 'package:xmanager/src/features/dashboard/domain/entities/dashboard_player_entity.dart';
 import 'package:xmanager/src/features/dashboard/domain/usecases/get_dashboard_players.dart';
@@ -71,13 +69,10 @@ class DashboardPage extends StatelessWidget {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () async {
-            //context.read<DashboardBloc>().add(DashboardEventTest());
 
-            Preferences.saveAccount(
-              const Account(
-                fullname: "Harald Bregu",
-              ),
-            );
+            //const account = Account(fullname: 'Joakim Low Coach');
+            //Preferences.saveAccount(account);
+            //context.read<DashboardBloc>().add(DashboardEventStart());
 
             //final currentAccount = await Preferences.currentAccount();
             //print(currentAccount.fullname);
@@ -122,16 +117,30 @@ class _DashboardPageProfileSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Column(
-        children: const [
-          XMaterialCoachCard(
-            "Cristiano Ronaldo 2",
-            description: "Programmi di allenamento, Programmi di allenamento",
+    return BlocBuilder<DashboardBloc, DashboardState>(
+      buildWhen: (_, state) => state is DashboardProfileStateSuccess,
+      builder: (_, state) {
+        if (state is DashboardProfileStateSuccess) {
+          return SliverToBoxAdapter(
+            child: Column(
+              children: [
+                XMaterialCoachCard(
+                  state.profile.fullname,
+                  description: state.profile.description,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
+          );
+        }
+        return const SliverToBoxAdapter(
+          child: SizedBox(
+            height: 0,
           ),
-          SizedBox(height: 20),
-        ],
-      ),
+        );
+      },
     );
   }
 }

@@ -19,7 +19,7 @@ void main() {
     getDashboardProfileUseCase = GetDashboardProfileImpl(mockDashboardRepository);
   });
 
-  test("should get the profile from dashboard repository", () async {
+  test("should get the profile from dashboard usecases", () async {
     const Either<Failure, DashboardProfileEntity> repoResult =
     Right<Failure, DashboardProfileEntity>(
         DashboardProfileEntity(fullname: "example"),

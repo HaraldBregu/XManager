@@ -1,4 +1,4 @@
-part of 'settings_bloc.dart';
+import 'package:equatable/equatable.dart';
 
 abstract class SettingsState extends Equatable {
   const SettingsState();
