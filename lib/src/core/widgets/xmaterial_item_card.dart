@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xmanager/src/core/widgets/xmaterial_card.dart';
+import 'package:xmanager/src/core/widgets/widget.dart';
 
 class XMaterialItemCard extends StatelessWidget {
   const XMaterialItemCard({

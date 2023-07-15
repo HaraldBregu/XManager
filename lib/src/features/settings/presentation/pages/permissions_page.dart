@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:xmanager/src/core/utils/common.dart';
 
-class Permissions extends StatefulWidget {
-  const Permissions({super.key});
+class PermissionsPage extends StatefulWidget {
+  const PermissionsPage({super.key});
   @override
-  State<Permissions> createState() => _PermissionsState();
+  State<PermissionsPage> createState() => _PermissionsState();
 }
 
-class _PermissionsState extends State<Permissions> {
+class _PermissionsState extends State<PermissionsPage> {
 
   @override
   void initState() {

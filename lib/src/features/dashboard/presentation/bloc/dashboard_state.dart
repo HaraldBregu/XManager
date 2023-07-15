@@ -12,7 +12,8 @@ extension CategoryStatusX on DashboardStatus {
   bool get isError => this == DashboardStatus.error;
   bool get isLoading => this == DashboardStatus.loading;
   bool get isSelected => this == DashboardStatus.selected;
-}*/
+}
+*/
 
 abstract class DashboardState extends Equatable {
   const DashboardState();

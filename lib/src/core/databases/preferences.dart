@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:xmanager/src/core/models/account.dart';
+import 'package:xmanager/src/core/data/models/account.dart';
 
 class Preferences {
   static String accountPreferences = "PROFILE_SHARED_PREFERENCES";
@@ -28,4 +28,5 @@ class Preferences {
     final Account account = Account.fromMap(data);
     return account;
   }
+  
 }

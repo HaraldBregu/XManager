@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:objectbox/objectbox.dart';
-import 'package:xmanager/src/core/models/device_program.dart';
+import 'package:xmanager/src/core/data/models/device_program.dart';
 
 part 'session_program.g.dart';
 

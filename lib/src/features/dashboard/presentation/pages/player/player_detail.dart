@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/src/app.dart';
+import 'package:xmanager/src/config/routes/router.dart';
+import 'package:xmanager/src/core/data/models/models.dart';
 import 'package:xmanager/src/core/utils/common.dart';
-import 'package:xmanager/src/core/models/models.dart';
 import 'package:xmanager/src/core/widgets/xmaterial_card.dart';
 import 'package:xmanager/src/core/widgets/xmaterial_item_card.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/player/player_edit.dart';
@@ -56,10 +56,10 @@ class _PlayerDetailState extends State<PlayerDetail> {
                   }
               },
               itemBuilder: (context) => [
-                PopupMenuItem(
+                    const PopupMenuItem(
                     value: PlayerDetailMenuItem.edit,
                     child: Text("Edit")),
-                PopupMenuItem(
+                    const PopupMenuItem(
                     value: PlayerDetailMenuItem.delete,
                     child: Text("Delete")),
               ])

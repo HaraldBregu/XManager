@@ -14,9 +14,9 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import '../../../src/core/models/device_program.dart';
-import '../../../src/core/models/player.dart';
-import '../../../src/core/models/session_program.dart';
+import '../../../src/core/data/models/device_program.dart';
+import '../../../src/core/data/models/player.dart';
+import '../../../src/core/data/models/session_program.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 

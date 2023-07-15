@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:xmanager/src/core/widgets/xcard.dart';
 import 'package:xmanager/src/core/widgets/xmaterial_column.dart';
 import 'package:xmanager/src/core/widgets/xmaterial_info_item.dart';
 import 'package:xmanager/src/core/widgets/xmaterial_row.dart';
-import 'package:xmanager/src/core/widgets/xmaterial_user_card.dart';
 
 class XMaterialCoachCard extends StatelessWidget {
   const XMaterialCoachCard(
@@ -18,11 +18,17 @@ class XMaterialCoachCard extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
 
-    return XMaterialUserCard(
-      fullName,
-      description: description,
-      container: XMaterialColumn(
+    return XCard(
+      child: XMaterialColumn(
         children: [
+          const XMaterialRow(children: [
+            XMaterialInfoItem("test", icon: Icons.domain),
+            SizedBox(width: 15),
+            XMaterialInfoItem("description", icon: Icons.location_on_outlined),
+          ]),
+          const SizedBox(height: 8),
+
+
           const XMaterialRow(children: [
             XMaterialInfoItem("www.sports.com", icon: Icons.domain),
             SizedBox(width: 15),
@@ -48,5 +54,8 @@ class XMaterialCoachCard extends StatelessWidget {
         ],
       ),
     );
+    
   }
 }
+
+class XMaterialUserCard {}

@@ -2,10 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/src/app.dart';
+import 'package:xmanager/src/config/routes/router.dart';
+import 'package:xmanager/src/core/data/models/models.dart';
 import 'package:xmanager/src/core/utils/common.dart';
-
-import '../../../../core/models/models.dart';
 
 class Account extends StatefulWidget {
   const Account({super.key});
@@ -70,7 +69,7 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
     final List<Widget> widgets = [];
 
     widgets.add(ListTile(
-      trailing: Icon(Icons.bluetooth),
+      trailing: const Icon(Icons.bluetooth),
       title: Text('Bluetooth state', style: textTheme.titleMedium),
       onTap: () => {},
     ));
@@ -229,7 +228,7 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
 }
 
 class TestSliver extends StatelessWidget {
-  const TestSliver({Key? key}) : super(key: key);
+  const TestSliver({super.key});
 
   @override
   Widget build(BuildContext context) {

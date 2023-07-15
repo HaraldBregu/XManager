@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/src/app.dart';
 import 'package:xmanager/src/core/utils/common.dart';
-import 'package:xmanager/src/core/models/models.dart';
+import 'package:xmanager/src/core/data/models/models.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/program/program_create.dart';
+
+import '../../../../../config/routes/router.dart';
 
 class ProgramList extends StatefulWidget {
   const ProgramList({super.key});
