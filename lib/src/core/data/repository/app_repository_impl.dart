@@ -31,4 +31,10 @@ class AppRepositoryImpl implements AppRepository {
     final user = await _sharedPreferencesDataSource.getUser();
     return DataSuccess(user.fullname.isNotEmpty);
   }
+  
+  @override
+  Future<DataState<bool>> exitUser() async {
+    final user = await _sharedPreferencesDataSource.clearUserFullName();
+    return DataSuccess(user);
+  }
 }

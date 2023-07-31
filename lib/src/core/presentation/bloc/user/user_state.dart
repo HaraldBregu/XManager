@@ -1,9 +1,17 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 abstract class UserState extends Equatable {
-  const UserState();
+  final bool loggedIn;
+  final bool loading;
+
+  const UserState({
+    this.loggedIn = false,
+    this.loading = false,
+  });
+  
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [loggedIn];
 }
 
 class UserStateInitial extends UserState {

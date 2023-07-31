@@ -6,4 +6,5 @@ abstract class AppRepository {
   Future<DataState<bool>> userAuthorised();
   Future<DataState<bool>> saveFullName(String fullname);
   Future<DataState<AppEntity>> getApp();
+  Future<DataState<bool>> exitUser();
 }

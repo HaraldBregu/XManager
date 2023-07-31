@@ -4,16 +4,15 @@ abstract class UserEvent {
   const UserEvent();
 }
 
-class StartUserEvent extends UserEvent {
-  const StartUserEvent();
+class InitialUserEvent extends UserEvent {
+  const InitialUserEvent();
 }
 
-class SaveUserEvent extends UserEvent {
-  final UserEntity user;
-  const SaveUserEvent(this.user);
-}
-
-class AccessUserEvent extends UserEvent {
+class EnterUserEvent extends UserEvent {
   final String fullName;
-  const AccessUserEvent(this.fullName);
+  const EnterUserEvent(this.fullName);
+}
+
+class ExitUserEvent extends UserEvent {
+  const ExitUserEvent();
 }

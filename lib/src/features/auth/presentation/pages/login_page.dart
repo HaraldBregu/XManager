@@ -11,9 +11,7 @@ class LoginPage extends StatelessWidget {
     final TextTheme textTheme = theme.textTheme;
     final ColorScheme colorScheme = theme.colorScheme;
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    final _fullname = TextEditingController();
-
-    _fullname.text = "";
+    final fullnameController = TextEditingController();
 
     String inputLogin;
     String inputPassword;
@@ -67,7 +65,7 @@ class LoginPage extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       TextFormField(
-                        controller: _fullname,
+                        controller: fullnameController,
                         keyboardType: TextInputType.text,
                         decoration: const InputDecoration(
                           hintText: 'Enter full name',
@@ -101,11 +99,10 @@ class LoginPage extends StatelessWidget {
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            final fullname = _fullname.text;
+                            final fullname = fullnameController.text;
                             BlocProvider.of<UserBloc>(context)
-                                .add(AccessUserEvent(fullname));
+                                .add(EnterUserEvent(fullname));
                           }
-                          //context.read<UserDataBloc>().add(UserDataGetNextEvent());
                         },
                         child: Text(
                           context.read<UserBloc>().state is UserStateLoading

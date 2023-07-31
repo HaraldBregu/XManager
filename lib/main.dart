@@ -10,6 +10,7 @@ import 'package:xmanager/src/core/data/repository/app_repository_impl.dart';
 import 'package:xmanager/src/core/databases/objectbox_db.dart';
 import 'package:xmanager/src/core/domain/repository/app_repository.dart';
 import 'package:xmanager/src/core/domain/usecases/authorised_user.dart';
+import 'package:xmanager/src/core/domain/usecases/exit_user.dart';
 import 'package:xmanager/src/core/domain/usecases/unlock_user.dart';
 import 'package:xmanager/src/core/presentation/bloc/user/bloc.dart';
 import 'package:xmanager/src/core/utils/common.dart';
@@ -32,14 +33,15 @@ Future<void> main() async {
   // Bloc
   sl.registerFactory(
     () => UserBloc(
-      authorisedUserUseCase: sl(),
-      unlockUserUseCase: sl(),
-    ),
+        authorisedUserUseCase: sl(),
+        unlockUserUseCase: sl(),
+        exitUserUseCase: sl()),
   );
 
   // UseCases
   sl.registerLazySingleton(() => AuthorizedUserUseCase(sl()));
   sl.registerLazySingleton(() => UnlockUserUseCase(sl()));
+  sl.registerLazySingleton(() => ExitUserUseCase(sl()));
 
   // Repository
   sl.registerLazySingleton<AppRepository>(
@@ -89,8 +91,7 @@ Future<void> main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider<UserBloc>(
-          create: (_) =>
-              sl()..add(const StartUserEvent()), //..add(const UserGetEvent()),
+          create: (_) => sl()..add(const InitialUserEvent()),
         ),
         /*BlocProvider<AppBloc>(
           create: (_) => sl()..add(const UserDataGetEvent()),
@@ -176,11 +177,11 @@ class App extends StatelessWidget {
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       routerConfig: GoRouter(
-        initialLocation: '/auth',
-        /* context.watch<UserBloc>().state is UserStateAuthorized
+        initialLocation: //'/auth',
+            context.watch<UserBloc>().state is UserStateAuthorized
                 ? '/'
                 : '/auth',
-                */
+
         // navigatorKey: _rootNavigatorKey,
         routes: [
           /*

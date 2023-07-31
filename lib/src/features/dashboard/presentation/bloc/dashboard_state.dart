@@ -16,6 +16,8 @@ extension CategoryStatusX on DashboardStatus {
 */
 
 abstract class DashboardState extends Equatable {
+  //final DashboardProfileEntity profile;
+
   const DashboardState();
 }
 

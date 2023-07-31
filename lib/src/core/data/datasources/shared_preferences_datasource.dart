@@ -8,6 +8,7 @@ abstract class SharedPreferencesDataSource {
   Future<bool> setApp(AppModel app);
   Future<UserModel> getUser();
   Future<bool> setUserFullName(String fullname);
+  Future<bool> clearUserFullName();
 }
 
 class SharedPreferencesDataSourceImpl implements SharedPreferencesDataSource {
@@ -38,12 +39,14 @@ class SharedPreferencesDataSourceImpl implements SharedPreferencesDataSource {
 
     if (string != null) {
       final map = json.decode(string) as Map<String, dynamic>;
-      return UserModel.fromMap(map);
+      final user = UserModel.fromMap(map);
+      return user;
     }
 
     return const UserModel(
       authenticated: false,
       fullname: "",
+      description: "",
       firstName: "",
       lastName: "",
     );
@@ -56,7 +59,7 @@ class SharedPreferencesDataSourceImpl implements SharedPreferencesDataSource {
     if (string != null) {
       final map = json.decode(string) as Map<String, dynamic>;
       final user = UserModel.fromMap(map);
-      final newUser = user.copyWith(fullname: fullname);
+      final newUser = user.copyWith(fullname: fullname, authenticated: true);
       final appString = json.encode(newUser.toMap());
       return sharedPreferences.setString(kUserSharedPrefs, appString);
     }
@@ -64,11 +67,27 @@ class SharedPreferencesDataSourceImpl implements SharedPreferencesDataSource {
     final newUser = UserModel(
       authenticated: true,
       fullname: fullname,
+      description: "",
       firstName: "",
       lastName: "",
     );
 
     final appString = json.encode(newUser.toMap());
     return sharedPreferences.setString(kUserSharedPrefs, appString);
+  }
+
+  @override
+  Future<bool> clearUserFullName() async {
+    final string = sharedPreferences.getString(kUserSharedPrefs);
+
+    if (string != null) {
+      final map = json.decode(string) as Map<String, dynamic>;
+      final user = UserModel.fromMap(map);
+      final newUser = user.copyWith(fullname: "", authenticated: true);
+      final appString = json.encode(newUser.toMap());
+      return sharedPreferences.setString(kUserSharedPrefs, appString);
+    }
+
+    return true;
   }
 }

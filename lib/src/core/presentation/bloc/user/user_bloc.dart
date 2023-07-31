@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xmanager/src/core/domain/usecases/authorised_user.dart';
+import 'package:xmanager/src/core/domain/usecases/exit_user.dart';
 import 'package:xmanager/src/core/domain/usecases/unlock_user.dart';
 import 'package:xmanager/src/core/presentation/bloc/user/bloc.dart';
 import 'package:xmanager/src/core/resources/data_state.dart';
@@ -7,67 +8,25 @@ import 'package:xmanager/src/core/resources/data_state.dart';
 class UserBloc extends Bloc<UserEvent, UserState> {
   final AuthorizedUserUseCase authorisedUserUseCase;
   final UnlockUserUseCase unlockUserUseCase;
+  final ExitUserUseCase exitUserUseCase;
 
   UserBloc({
     required this.authorisedUserUseCase,
     required this.unlockUserUseCase,
+    required this.exitUserUseCase,
   }) : super(const UserStateInitial()) {
-    on<StartUserEvent>(onStartUserEvent);
-    on<AccessUserEvent>(onAccessUserEvent);
+    on<InitialUserEvent>(onInitialUserEvent);
 
-    /*
-    on<GetUserEvent>((event, emit) async {
-      final dataState = await getUserUseCase.call();
+    on<EnterUserEvent>(onEnterUserEvent);
+    on<ExitUserEvent>(onExitUserEvent);
 
-      log('data example log');
-
-      if (dataState is DataSuccess) {
-        log('success:');
-        if (dataState.data?.firstName != null) {
-          log('has first name:');
-          emit(UserAuthenticatedState(dataState.data!));
-        } else {
-          log('no first name');
-          emit(UserUnAuthenticatedState());
-        }
-      } else {
-        log('failure');
-      }
-    });
-
-    on<SaveUserEvent>((event, emit) async {
-      log('data example log');
-      final dataState = await getUserUseCase.call();
-    });
-    */
-
-/*
-    on<SaveUserEvent>((userData, emit) async {
-      final dataState = await getUserUseCase.call();
-
-      log('data example log');
-
-      if (dataState is DataSuccess) {
-        log('success:');
-        if (dataState.data?.firstName != null) {
-          log('has first name:');
-          emit(UserDataStateAuthenticated(dataState.data!));
-        } else {
-          log('no first name');
-          emit(UserDataStateUnAuthenticated());
-        }
-      } else {
-        log('failure');
-      }
-    });*/
-
-    //on<UserDataGetNextEvent>(onGetUserDatanext);
   }
 
-  Future<void> onStartUserEvent(
-    StartUserEvent event,
+  Future<void> onInitialUserEvent(
+    InitialUserEvent event,
     Emitter<UserState> emit,
   ) async {
+
     final dataState = await authorisedUserUseCase.call({});
 
     if (dataState is DataSuccess) {
@@ -79,8 +38,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     }
   }
 
-  Future<void> onAccessUserEvent(
-    AccessUserEvent event,
+  Future<void> onEnterUserEvent(
+    EnterUserEvent event,
     Emitter<UserState> emit,
   ) async {
     emit(const UserStateLoading());
@@ -98,18 +57,20 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     }
   }
 
-  // void onGetUserDatanext(
-  //   UserDataGetNextEvent userData,
-  //   Emitter<UserState> emit,
-  // ) async {
-  //   final dataState = await getUserUseCase.call();
+  Future<void> onExitUserEvent(
+    ExitUserEvent event,
+    Emitter<UserState> emit,
+  ) async {
+    //emit(const UserStateLoading());
 
-  //   if (dataState is DataSuccess && dataState.data != null) {
-  //     log('success:');
-  //     emit(UserDataStateNext("jim morrison"));
-  //   } else {
-  //     log('failure');
-  //     emit(UserDataStateError());
-  //   }
-  // }
+    final dataState = await exitUserUseCase.call({});
+    if (dataState is DataSuccess) {
+      if (dataState.data == true) {
+        emit(const UserStateUnAuthorized());
+      } else {
+        emit(const UserStateAuthorized());
+      }
+    }
+  }
+
 }
