@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:xmanager/main.dart';
-import 'package:xmanager/src/core/utils/common.dart';
-import 'package:xmanager/src/core/data/models/models.dart';
-import 'package:xmanager/src/core/utils/string_extension.dart';
 
+class PlayerUpdate extends StatelessWidget {
+  const PlayerUpdate({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
+/*
 typedef UpdatePlayerFunction = Function(Player);
 
 class PlayerEdit extends StatefulWidget {
@@ -204,3 +209,5 @@ class _PlayerEditState extends State<PlayerEdit> {
     );
   }
 }
+
+*/

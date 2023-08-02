@@ -18,34 +18,38 @@ class DeviceDetailTest extends StatelessWidget {
   }
 
   List<Widget> _buildServiceTiles(List<BluetoothService> services) {
-    return services.map((s) => ServiceTile(
-      service: s,
-      characteristicTiles: s.characteristics.map(
-            (c) => CharacteristicTile(
-          characteristic: c,
-          onReadPressed: () => c.read(),
-          onWritePressed: () async {
-            await c.write(_getRandomBytes(), withoutResponse: true);
-            await c.read();
-          },
-          onNotificationPressed: () async {
-            await c.setNotifyValue(!c.isNotifying);
-            await c.read();
-          },
-          descriptorTiles: c.descriptors
-              .map(
-                (d) => DescriptorTile(
-              descriptor: d,
-              onReadPressed: () => d.read(),
-              onWritePressed: () => d.write(_getRandomBytes()),
-            ),
-          )
-              .toList(),
-        ),
-      )
-          .toList(),
-    ),
-    ).toList();
+    return services
+        .map(
+          (s) => ServiceTile(
+            service: s,
+            characteristicTiles: s.characteristics
+                .map(
+                  (c) => CharacteristicTile(
+                    characteristic: c,
+                    onReadPressed: () => c.read(),
+                    onWritePressed: () async {
+                      await c.write(_getRandomBytes(), withoutResponse: true);
+                      await c.read();
+                    },
+                    onNotificationPressed: () async {
+                      await c.setNotifyValue(!c.isNotifying);
+                      await c.read();
+                    },
+                    descriptorTiles: c.descriptors
+                        .map(
+                          (d) => DescriptorTile(
+                            descriptor: d,
+                            onReadPressed: () => d.read(),
+                            onWritePressed: () => d.write(_getRandomBytes()),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                )
+                .toList(),
+          ),
+        )
+        .toList();
   }
 
   @override
@@ -74,9 +78,7 @@ class DeviceDetailTest extends StatelessWidget {
                   text = snapshot.data.toString().substring(21).toUpperCase();
                   break;
               }
-              return TextButton(
-                  onPressed: onPressed,
-                  child: Text(text));
+              return TextButton(onPressed: onPressed, child: Text(text));
             },
           )
         ],
@@ -96,11 +98,12 @@ class DeviceDetailTest extends StatelessWidget {
                         : const Icon(Icons.bluetooth_disabled),
                     snapshot.data == BluetoothDeviceState.connected
                         ? StreamBuilder<int>(
-                        stream: rssiStream(),
-                        builder: (context, snapshot) {
-                          return Text(snapshot.hasData ? '${snapshot.data}dBm' : '',
-                              style: Theme.of(context).textTheme.caption);
-                        })
+                            stream: rssiStream(),
+                            builder: (context, snapshot) {
+                              return Text(
+                                  snapshot.hasData ? '${snapshot.data}dBm' : '',
+                                  style: Theme.of(context).textTheme.caption);
+                            })
                         : Text('', style: Theme.of(context).textTheme.caption),
                   ],
                 ),
@@ -150,17 +153,16 @@ class DeviceDetailTest extends StatelessWidget {
               builder: (c, snapshot) {
                 if (snapshot.hasData) {
                   return Column(
-                    children:_buildServiceTiles(snapshot.data!),
+                    children: _buildServiceTiles(snapshot.data!),
                   );
                 }
                 return Column(
-                  children:[
+                  children: [
                     //_buildServiceTiles(snapshot.data!)
                   ],
                 );
               },
             ),
-
           ],
         ),
       ),
@@ -181,12 +183,8 @@ class DeviceDetailTest extends StatelessWidget {
   }
 }
 
-
-
-
 /// TEST
 ///
-
 
 class ServiceTile extends StatelessWidget {
   final BluetoothService service;
@@ -216,7 +214,7 @@ class ServiceTile extends StatelessWidget {
       return ListTile(
         title: const Text('Service'),
         subtitle:
-        Text('0x${service.uuid.toString().toUpperCase().substring(4, 8)}'),
+            Text('0x${service.uuid.toString().toUpperCase().substring(4, 8)}'),
       );
     }
   }
@@ -231,11 +229,11 @@ class CharacteristicTile extends StatelessWidget {
 
   const CharacteristicTile(
       {Key? key,
-        required this.characteristic,
-        required this.descriptorTiles,
-        this.onReadPressed,
-        this.onWritePressed,
-        this.onNotificationPressed})
+      required this.characteristic,
+      required this.descriptorTiles,
+      this.onReadPressed,
+      this.onWritePressed,
+      this.onNotificationPressed})
       : super(key: key);
 
   @override
@@ -300,9 +298,9 @@ class DescriptorTile extends StatelessWidget {
 
   const DescriptorTile(
       {Key? key,
-        required this.descriptor,
-        this.onReadPressed,
-        this.onWritePressed})
+      required this.descriptor,
+      this.onReadPressed,
+      this.onWritePressed})
       : super(key: key);
 
   @override

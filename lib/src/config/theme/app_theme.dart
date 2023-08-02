@@ -114,7 +114,7 @@ abstract class AppTheme {
         blendLevel: 36,
         appBarElevation: 4.0,
         subThemesData: const FlexSubThemesData(
-          //defaultRadius: 45,
+          defaultRadius: 8,
           blendOnLevel: 20,
           inputDecoratorBorderType: FlexInputBorderType.underline,
           radioSchemeColor: SchemeColor.onSecondaryContainer,

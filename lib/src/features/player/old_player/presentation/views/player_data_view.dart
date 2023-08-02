@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/features/player/data/datasources/player_datasource.dart';
-import 'package:xmanager/src/features/player/data/repositories/player_repository_impl.dart';
-import 'package:xmanager/src/features/player/domain/repositories/player_repository.dart';
-import 'package:xmanager/src/features/player/presentation/bloc/bloc.dart';
+import 'package:xmanager/src/features/player/old_player/data/datasources/player_datasource.dart';
+import 'package:xmanager/src/features/player/old_player/data/repositories/player_repository_impl.dart';
+import 'package:xmanager/src/features/player/old_player/domain/repositories/player_repository.dart';
+import 'package:xmanager/src/features/player/old_player/presentation/bloc/bloc.dart';
 
 /*
 class PlayerDataView extends StatelessWidget {

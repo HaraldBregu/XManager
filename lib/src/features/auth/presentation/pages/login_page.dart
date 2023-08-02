@@ -32,24 +32,24 @@ class LoginPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   "Insert full name to unlock the app",
-                  textAlign: TextAlign.center,
-                  style: textTheme.titleLarge
+                  textAlign: TextAlign.left,
+                  style: textTheme.displaySmall
                       ?.copyWith(fontWeight: FontWeight.w900),
                   //.copyWith(color: Colors.black),
                 ),
               ),
-              Text(context.watch<UserBloc>().state is UserStateAuthorized
+              Text(context.watch<UserBloc>().state is UserAuthorizedState
                   ? "Authenticated"
                   : "UnAuthenticated"),
               BlocBuilder<UserBloc, UserState>(
                 buildWhen: (context, state) {
-                  return state is UserStateAuthorized;
+                  return state is UserAuthorizedState;
                 },
                 builder: (bloc, state) {
-                  if (state is UserStateAuthorized) {
+                  if (state is UserAuthorizedState) {
                     return const Text("authorized");
                   }
-                  if (state is UserStateUnAuthorized) {
+                  if (state is UserUnAuthorizedState) {
                     return const Text("Logged out");
                   }
 
@@ -105,7 +105,7 @@ class LoginPage extends StatelessWidget {
                           }
                         },
                         child: Text(
-                          context.read<UserBloc>().state is UserStateLoading
+                          context.read<UserBloc>().state is LoadingUserState
                               ? "Loading..."
                               : "UNLOCK",
                         ),

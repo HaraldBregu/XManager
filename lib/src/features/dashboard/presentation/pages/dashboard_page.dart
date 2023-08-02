@@ -10,7 +10,6 @@ import 'package:xmanager/src/core/presentation/bloc/user/user_state.dart';
 import 'package:xmanager/src/core/utils/localizations_extension.dart';
 import 'package:xmanager/src/core/utils/theme_extension.dart';
 
-
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
 
@@ -23,17 +22,14 @@ class DashboardPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text(
-          context.loc.dashboard,
-          style: context.textTheme.headlineSmall
-              ?.copyWith(fontWeight: FontWeight.w700),
-        ),
+        title: Text(context.loc.dashboard, style: context.textTheme.titleMedium
+            //  ?.copyWith(fontWeight: FontWeight.w700),
+            ),
         actions: [
           IconButton(
-            icon: const Icon(
-              Icons.settings,
-            ),
-            onPressed: () => context.go('/settings'),
+            icon: const Icon(Icons.settings),
+            //onPressed: () => GoRouter.of(context).goNamed('settings'),
+            onPressed: () => GoRouter.of(context).pushNamed('settings'),
           ),
           IconButton(
             icon: const Icon(
@@ -45,7 +41,6 @@ class DashboardPage extends StatelessWidget {
           ),
         ],
       ),
-      //body: Text("nothing"), //const _DashboardPageBody(),
       body: const _DashboardPageBody(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
@@ -59,7 +54,6 @@ class DashboardPage extends StatelessWidget {
           //context.read<DashboardBloc>().add(DashboardEventStart());
 
           final currentAccount = await Preferences.currentAccount();
-          print(currentAccount?.fullname);
 
           /*
           final json = objectBox.playerBox.getAll().first.toJson();
@@ -75,9 +69,7 @@ class DashboardPage extends StatelessWidget {
 
         splashColor: colorScheme.secondary,
         icon: const Icon(Icons.play_circle),
-        label: const Text(
-          'AVVIA PROGRAMMA',
-        ),
+        label: const Text('AVVIA PROGRAMMA'),
       ),
     );
   }
@@ -88,10 +80,22 @@ class _DashboardPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomScrollView(
+    return CustomScrollView(
       slivers: [
-        _ProfileSection(),
-        _TrainingSection(),
+        const _ProfileSection(),
+        const _TrainingSection(),
+        const _PlayerSection(),
+        SliverToBoxAdapter(
+          child: Column(
+            children: [
+              OutlinedButton(
+                child: const Text("Device list test"),
+                onPressed: () => context.pushNamed("Device list"),
+              ),
+            ],
+          ),
+        ),
+        
         //_DashboardPagePlayerHeaderSection(),
         //_DashboardPagePlayerSection(),
         SliverToBoxAdapter(
@@ -110,42 +114,52 @@ class _ProfileSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = theme.colorScheme;
 
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(5, 8, 5, 0),
-        child: Card(
-          elevation: 1,
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Column(
-              children: [
-                BlocBuilder<UserBloc, UserState>(
-                  builder: (bloc, state) {
-                    if (state is UserStateAuthorized) {
-                      return ListTile(
-                        title: const Text("Massimo Allegri"),
-                        subtitle: const Text("• FiFa Pro"),
-                        trailing: IconButton(
-                          icon: const Icon(
-                            Icons.settings,
+          padding: const EdgeInsets.fromLTRB(5, 8, 5, 0),
+          child: Card(
+            elevation: 1,
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Column(
+                children: [
+                  BlocBuilder<UserBloc, UserState>(
+                    builder: (bloc, state) {
+                      if (state is UserAuthorizedState) {
+                        return ListTile(
+                          title: const Text("Massimo Allegri"),
+                          subtitle: const Text("FiFa Pro"),
+                          leading: FittedBox(
+                            child: CircleAvatar(
+                              backgroundColor: colorScheme.secondary,
+                              child: Icon(
+                                Icons.person,
+                                color: colorScheme.onSecondary,
+                              ),
+                              //radius: 40,
+                            ),
                           ),
-                          onPressed: () => {},
-                        ),
-                      );
-                    }
-                    if (state is UserStateUnAuthorized) {
-                      return const Text("Logged out");
-                    }
+                          trailing: IconButton(
+                            icon: const Icon(
+                              Icons.menu,
+                            ),
+                            onPressed: () => {},
+                          ),
+                        );
+                      }
+                      if (state is UserUnAuthorizedState) {
+                        return const Text("Logged out");
+                      }
 
-                    return const Text("NO STATE");
-                  },
-                ),
-              ],
+                      return const Text("NO STATE");
+                    },
+                  ),
+                ],
+              ),
             ),
-          ),
-        ),
-      ),
+          )),
     );
   }
 }
@@ -162,41 +176,57 @@ class _TrainingSection extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Column(
         children: [
-          /*
           Padding(
             padding: const EdgeInsets.fromLTRB(5, 3, 5, 0),
             child: Card(
               elevation: 1,
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
-                child: ListTile(
-                  title: const Text(
-                    'PROGRAMMI',
-                  ),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.add,
-                          size: 28,
-                        ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ListTile(
+                      title: Row(
+                        children: [
+                          Icon(
+                            Icons.sports_soccer,
+                            size: 20,
+                            color: colorScheme.tertiary,
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          const Text(
+                            'Programmi di training',
+                          ),
+                        ],
                       ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.layers,
-                          size: 28,
-                        ),
+                      subtitle: const Text(
+                        "Non hai ancora creato nessun programma di training. Inizia ora!",
                       ),
-                    ],
-                  ),
+                      isThreeLine: true,
+                      /*trailing: const Icon(
+                        Icons.add,
+                      ),*/
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(13, 5, 13, 10),
+                      child: OutlinedButton(
+                        child: const Text("CREA UN PROGRAMMA"),
+                        onPressed: () => context.pushNamed("Program create"),
+                        //onPressed: () => context.pushNamed("Program detail",params: {"id": "fdlv"}),
+                        //onPressed: () => context
+                        //  .goNamed("Program detail", params: {"id": "2374"}),
+
+                        //onPressed: () => context.pushNamed("Program detail", params: {"name": "1123"}),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
-          */
+          /*
           Padding(
             padding: const EdgeInsets.fromLTRB(5, 3, 5, 0),
             child: Card(
@@ -243,17 +273,17 @@ class _TrainingSection extends StatelessWidget {
                       padding: const EdgeInsets.all(15.0),
                       child: CircleAvatar(
                         backgroundColor: colorScheme.background,
-                        radius: 120,
+                        radius: 100,
                         child: ClipRRect(
                           borderRadius: const BorderRadius.all(
-                            Radius.circular(120),
+                            Radius.circular(100),
                           ),
                           child: TweenAnimationBuilder(
                             tween: Tween(begin: 0.0, end: 0.75),
                             duration: const Duration(seconds: 10),
                             builder: (context, value, _) {
                               return CircularPercentIndicator(
-                                radius: 110,
+                                radius: 90,
                                 lineWidth: 14,
                                 percent: value,
                                 //progressColor: colorScheme.secondary,
@@ -266,7 +296,7 @@ class _TrainingSection extends StatelessWidget {
                                   children: [
                                     Icon(
                                       Icons.bolt,
-                                      size: 28,
+                                      size: 24,
                                       color: colorScheme.secondary,
                                     ),
                                     const SizedBox(
@@ -274,7 +304,7 @@ class _TrainingSection extends StatelessWidget {
                                     ),
                                     Text(
                                       '${(value * 100).round()} %',
-                                      style: context.textTheme.headlineLarge
+                                      style: context.textTheme.headlineSmall
                                           ?.copyWith(
                                               fontWeight: FontWeight.w700),
                                     ),
@@ -330,12 +360,210 @@ class _TrainingSection extends StatelessWidget {
               ),
             ),
           ),
+        */
         ],
       ),
     );
   }
 }
 
+class _PlayerSection extends StatelessWidget {
+  const _PlayerSection();
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextTheme textTheme = theme.textTheme;
+    final ColorScheme colorScheme = theme.colorScheme;
+
+    return SliverToBoxAdapter(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(5, 3, 5, 0),
+            child: Card(
+              elevation: 1,
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ListTile(
+                      title: Row(
+                        children: [
+                          Icon(
+                            Icons.person,
+                            size: 20,
+                            color: colorScheme.tertiary,
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          const Text(
+                            'Player',
+                          ),
+                        ],
+                      ),
+                      subtitle: const Text(
+                        "Registra nuovi player associando con i dispositivi bluetooth e inizia il training!",
+                      ),
+                      isThreeLine: true,
+                      /*trailing: const Icon(
+                        Icons.add,
+                      ),*/
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(13, 5, 13, 10),
+                      child: OutlinedButton(
+                        child: const Text("REGISTRA UN PLAYER"),
+                        onPressed: () => context.pushNamed("Player create"),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          /*
+          Padding(
+            padding: const EdgeInsets.fromLTRB(5, 3, 5, 0),
+            child: Card(
+              elevation: 1,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(5, 15, 5, 5),
+                child: Column(
+                  children: [
+                    ListTile(
+                      contentPadding: const EdgeInsets.only(
+                        top: 0,
+                        left: 5,
+                        right: 5,
+                      ),
+                      title: Text(
+                        'IN ESECUZIONE',
+                        textAlign: TextAlign.center,
+                        style: context.textTheme.labelSmall,
+                      ),
+                      subtitle: Text(
+                        "Allenamento pesante con tanti sforzi e tanto sudore",
+                        textAlign: TextAlign.center,
+                        style: context.textTheme.titleLarge
+                            ?.copyWith(fontWeight: FontWeight.w700),
+                      ),
+                      leading: IconButton(
+                        color: colorScheme.secondary,
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.layers,
+                          size: 28,
+                        ),
+                      ),
+                      trailing: IconButton(
+                        color: colorScheme.tertiary,
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.add,
+                          size: 28,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: CircleAvatar(
+                        backgroundColor: colorScheme.background,
+                        radius: 100,
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(100),
+                          ),
+                          child: TweenAnimationBuilder(
+                            tween: Tween(begin: 0.0, end: 0.75),
+                            duration: const Duration(seconds: 10),
+                            builder: (context, value, _) {
+                              return CircularPercentIndicator(
+                                radius: 90,
+                                lineWidth: 14,
+                                percent: value,
+                                //progressColor: colorScheme.secondary,
+                                //backgroundColor: colorScheme.onSecondary,
+                                progressColor: colorScheme.tertiary,
+                                backgroundColor: colorScheme.onTertiary,
+                                circularStrokeCap: CircularStrokeCap.round,
+                                center: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.bolt,
+                                      size: 24,
+                                      color: colorScheme.secondary,
+                                    ),
+                                    const SizedBox(
+                                      height: 6,
+                                    ),
+                                    Text(
+                                      '${(value * 100).round()} %',
+                                      style: context.textTheme.headlineSmall
+                                          ?.copyWith(
+                                              fontWeight: FontWeight.w700),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          //flex: 2,
+                          child: ListTile(
+                            title: Text(
+                              "DURATA",
+                              style: context.textTheme.bodySmall
+                                  ?.copyWith(fontWeight: FontWeight.w400),
+                            ),
+                            subtitle: Text(
+                              "00:26:00",
+                              style: context.textTheme.headlineMedium
+                                  ?.copyWith(fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          //flex: 2,
+                          child: ListTile(
+                            title: Text(
+                              "COUNTDOWN",
+                              textAlign: TextAlign.right,
+                              style: context.textTheme.bodySmall
+                                  ?.copyWith(fontWeight: FontWeight.w400),
+                            ),
+                            subtitle: Text(
+                              "00:25:46",
+                              textAlign: TextAlign.right,
+                              style: context.textTheme.headlineMedium
+                                  ?.copyWith(fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        */
+        ],
+      ),
+    );
+  }
+}
 
 class _DashboardPageTrainingSection extends StatelessWidget {
   const _DashboardPageTrainingSection();

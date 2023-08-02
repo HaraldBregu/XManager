@@ -1,9 +1,5 @@
-import 'dart:ffi';
-
 import 'package:xmanager/src/core/data/datasources/shared_preferences_datasource.dart';
 import 'package:xmanager/src/core/data/models/app_model.dart';
-import 'package:xmanager/src/core/data/models/user_model.dart';
-import 'package:xmanager/src/core/domain/entities/app_entity.dart';
 import 'package:xmanager/src/core/domain/entities/user_entity.dart';
 import 'package:xmanager/src/core/domain/repository/app_repository.dart';
 import 'package:xmanager/src/core/resources/data_state.dart';
@@ -35,6 +31,12 @@ class AppRepositoryImpl implements AppRepository {
   @override
   Future<DataState<bool>> exitUser() async {
     final user = await _sharedPreferencesDataSource.clearUserFullName();
+    return DataSuccess(user);
+  }
+  
+  @override
+  Future<DataState<UserEntity>> getUser() async {
+    final user = await _sharedPreferencesDataSource.getUser();
     return DataSuccess(user);
   }
 }

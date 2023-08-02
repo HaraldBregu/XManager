@@ -2,30 +2,23 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 abstract class UserState extends Equatable {
-  final bool loggedIn;
-  final bool loading;
+  const UserState();
 
-  const UserState({
-    this.loggedIn = false,
-    this.loading = false,
-  });
-  
   @override
-  List<Object?> get props => [loggedIn];
+  List<Object?> get props => [];
 }
 
-class UserStateInitial extends UserState {
-  const UserStateInitial();
+class InitialUserState extends UserState {}
+
+class LoadingUserState extends UserState {}
+
+class UserAuthorizedState extends UserState {
+  final String fullname;
+
+  const UserAuthorizedState({required this.fullname});
+
+  @override
+  List<Object?> get props => [fullname];
 }
 
-class UserStateLoading extends UserState {
-  const UserStateLoading();
-}
-
-class UserStateAuthorized extends UserState {
-  const UserStateAuthorized();
-}
-
-class UserStateUnAuthorized extends UserState {
-  const UserStateUnAuthorized();
-}
+class UserUnAuthorizedState extends UserState {}

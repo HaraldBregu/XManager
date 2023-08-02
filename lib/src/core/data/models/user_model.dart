@@ -3,7 +3,6 @@ import 'package:xmanager/src/core/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
   const UserModel({
-    required super.authenticated,
     required super.fullname,
     required super.description,
     required super.firstName,
@@ -11,14 +10,12 @@ class UserModel extends UserEntity {
   });
 
   UserModel copyWith({
-    bool? authenticated,
     String? fullname,
     String? description,
     String? firstName,
     String? lastName,
   }) {
     return UserModel(
-      authenticated: authenticated ?? false,
       fullname: fullname ?? "",
       description: description ?? "",
       firstName: firstName ?? "",
@@ -28,7 +25,6 @@ class UserModel extends UserEntity {
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      authenticated: map['authenticated'] as bool,
       fullname: map['fullname'] as String,
       description:
           map['description'] != null ? map['description'] as String : "",
@@ -41,7 +37,6 @@ class UserModel extends UserEntity {
 
   Map<String, dynamic> toMap() {
     return {
-      'authenticated': authenticated,
       'fullname': fullname,
       'description': description,
       'firstName': firstName,
