@@ -33,7 +33,8 @@ class SessionProgram {
   factory SessionProgram.fromJson(Map<String, dynamic> json) =>
       _$SessionProgramFromJson(json);
 
-  /// `toJson` is the convention for a class to declare support for serialization
+  /// `toJson` is the convention for a class
+  /// to declare support for serialization
   /// to JSON. The implementation simply calls the private, generated
   /// helper method `_$UserToJson`.
   Map<String, dynamic> toJson() => _$SessionProgramToJson(this);

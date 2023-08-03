@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/src/core/utils/common.dart';
+import 'package:xmanager/src/core/common.dart';
 import 'package:xmanager/src/core/data/models/models.dart';
 
 import '../../../config/routes/router.dart';
@@ -77,7 +77,7 @@ class _ProgramListState extends State<ProgramList> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(context, RouteNames.programCreate),
+        onPressed: () => Navigator.pushNamed(context, "/program_create"),
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(100.0))),
         child: const Icon(Icons.add),

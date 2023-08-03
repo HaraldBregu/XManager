@@ -7,3 +7,4 @@ abstract class DeviceEvent extends Equatable {
 }
 
 class DeviceEventStart extends DeviceEvent {}
+class StartScanDevicesEvent extends DeviceEvent {}

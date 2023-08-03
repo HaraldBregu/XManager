@@ -1,8 +1,4 @@
-import 'package:dartz/dartz.dart';
-import 'package:xmanager/src/core/error/exeptions.dart';
-import 'package:xmanager/src/core/error/failures.dart';
 import 'package:xmanager/src/features/player/old_player/data/datasources/player_datasource.dart';
-import 'package:xmanager/src/features/player/old_player/domain/entities/player_entity.dart';
 import 'package:xmanager/src/features/player/old_player/domain/repositories/player_repository.dart';
 
 class PlayerRepositoryImpl implements PlayerRepository {

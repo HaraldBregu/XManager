@@ -12,7 +12,7 @@ class Preferences {
     return json.decode(prefs.getString(key)!);
   }
 
-  static saveAccount(Account account) async {
+  static Future<void> saveAccount(Account account) async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     final accountString = json.encode(account.toMap());

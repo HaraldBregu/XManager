@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xmanager/src/config/theme/app_theme.dart';
+import 'package:xmanager/src/core/common.dart';
+import 'package:xmanager/src/core/data/datasources/ble_datasource.dart';
 import 'package:xmanager/src/core/data/datasources/shared_preferences_datasource.dart';
 import 'package:xmanager/src/core/data/repository/app_repository_impl.dart';
+import 'package:xmanager/src/core/data/repository/ble_repository_impl.dart';
 import 'package:xmanager/src/core/databases/objectbox_db.dart';
 import 'package:xmanager/src/core/domain/repository/app_repository.dart';
+import 'package:xmanager/src/core/domain/repository/ble_repository.dart';
 import 'package:xmanager/src/core/domain/usecases/authorised_user.dart';
 import 'package:xmanager/src/core/domain/usecases/current_user.dart';
 import 'package:xmanager/src/core/domain/usecases/exit_user.dart';
+import 'package:xmanager/src/core/domain/usecases/start_scan_ble_devices.dart';
 import 'package:xmanager/src/core/domain/usecases/unlock_user.dart';
+import 'package:xmanager/src/core/presentation/bloc/ble/ble_bloc.dart';
 import 'package:xmanager/src/core/presentation/bloc/user/bloc.dart';
-import 'package:xmanager/src/core/utils/common.dart';
 import 'package:xmanager/src/features/auth/presentation/pages/login_page.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:xmanager/src/features/device/presentation/pages/device_add.dart';
 import 'package:xmanager/src/features/device/presentation/pages/device_list.dart';
-import 'package:xmanager/src/features/device/presentation/pages/device_search.dart';
 import 'package:xmanager/src/features/player/presentation/pages/player_create.dart';
 import 'package:xmanager/src/features/player/presentation/pages/player_detail.dart';
 import 'package:xmanager/src/features/player/presentation/pages/player_list.dart';
@@ -45,10 +50,16 @@ Future<void> main() async {
   // Bloc
   sl.registerFactory(
     () => UserBloc(
-        currentUserUseCase: sl(),
-        authorisedUserUseCase: sl(),
-        unlockUserUseCase: sl(),
-        exitUserUseCase: sl()),
+      currentUserUseCase: sl(),
+      authorisedUserUseCase: sl(),
+      unlockUserUseCase: sl(),
+      exitUserUseCase: sl(),
+    ),
+  );
+  sl.registerFactory(
+    () => BleBloc(
+      startScanBleDevicesUseCase: sl(),
+    ),
   );
 
   // UseCases
@@ -56,16 +67,26 @@ Future<void> main() async {
   sl.registerLazySingleton(() => AuthorizedUserUseCase(sl()));
   sl.registerLazySingleton(() => UnlockUserUseCase(sl()));
   sl.registerLazySingleton(() => ExitUserUseCase(sl()));
+  //sl.registerLazySingleton(() => GetBleDevicesUseCase(sl()));
+  sl.registerLazySingleton(() => StartScanBleDevicesUseCase(sl()));
 
   // Repository
   sl.registerLazySingleton<AppRepository>(
     () => AppRepositoryImpl(sl()),
+  );
+  sl.registerLazySingleton<BleRepository>(
+    () => BleRepositoryImpl(sl()),
   );
 
   // Data sources
   sl.registerLazySingleton(
     () => SharedPreferencesDataSourceImpl(
       sharedPreferences: sl(),
+    ),
+  );
+  sl.registerLazySingleton(
+    () => BleDataSourceImpl(
+      flutterBluePlus: sl(),
     ),
   );
 
@@ -96,6 +117,7 @@ Future<void> main() async {
   // Drivers, network hardware data
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
+  sl.registerLazySingleton(() => FlutterBluePlus.instance);
 
   //final provider = GoRouterProvider();
   //sl.registerLazySingleton(() => provider);
@@ -106,6 +128,9 @@ Future<void> main() async {
       providers: [
         BlocProvider<UserBloc>(
           create: (_) => sl()..add(InitialUserEvent()),
+        ),
+        BlocProvider<BleBloc>(
+          create: (_) => sl(),
         ),
       ],
       child: const App(),
@@ -274,7 +299,7 @@ class App extends StatelessWidget {
               GoRoute(
                 name: "Device list",
                 path: 'devices',
-                builder: (context, state) => const DeviceSearch(),
+                builder: (context, state) => const DeviceList(),
                 routes: [
                   GoRoute(
                     name: "Device add",

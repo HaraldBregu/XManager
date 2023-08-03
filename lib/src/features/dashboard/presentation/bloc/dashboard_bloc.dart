@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xmanager/src/features/dashboard/domain/usecases/get_dashboard_players.dart';
 import 'package:xmanager/src/features/dashboard/domain/usecases/get_dashboard_profile.dart';
@@ -9,7 +11,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final GetDashboardProfile _getDashboardProfile;
   final GetDashboardTraining _getDashboardTraining;
   final GetDashboardPlayers _getDashboardPlayers;
-
+  
   DashboardBloc(this._getDashboardProfile, this._getDashboardTraining,
       this._getDashboardPlayers)
       : super(DashboardStateInitial()) {

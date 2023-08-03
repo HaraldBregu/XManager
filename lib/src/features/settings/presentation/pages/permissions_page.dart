@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:xmanager/src/core/utils/common.dart';
+import 'package:xmanager/src/core/common.dart';
 
 class PermissionsPage extends StatefulWidget {
   const PermissionsPage({super.key});

@@ -5,7 +5,6 @@ import 'package:xmanager/src/core/data/models/user_model.dart';
 
 abstract class SharedPreferencesDataSource {
   Future<UserModel> getUser();
-
   Future<AppModel> getApp();
   Future<bool> setApp(AppModel app);
   Future<bool> setUserFullName(String fullname);

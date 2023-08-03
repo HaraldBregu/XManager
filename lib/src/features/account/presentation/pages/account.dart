@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/src/config/routes/router.dart';
+import 'package:xmanager/src/core/common.dart';
 import 'package:xmanager/src/core/data/models/models.dart';
-import 'package:xmanager/src/core/utils/common.dart';
 
 class Account extends StatefulWidget {
   const Account({super.key});
@@ -88,13 +88,13 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
 
     widgets.add(ListTile(
       title: Text('App Permissions', style: textTheme.titleMedium),
-      onTap: () => Navigator.pushNamed(context, RouteNames.appPermissions),
+      onTap: () => Navigator.pushNamed(context, "/app_permissions"),
     ));
 
     widgets.add(ListTile(
       title: const Text('Bluetooth search'),
       trailing: const Icon(Icons.search),
-      onTap: () => Navigator.pushNamed(context, RouteNames.deviceSearch),
+      onTap: () => Navigator.pushNamed(context, "/device_search"),
     ));
 
     if (kDebugMode) {

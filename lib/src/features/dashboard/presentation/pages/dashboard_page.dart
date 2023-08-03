@@ -1,14 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:xmanager/src/core/data/models/account.dart';
 import 'package:xmanager/src/core/databases/preferences.dart';
-import 'package:xmanager/src/core/presentation/bloc/user/user_bloc.dart';
-import 'package:xmanager/src/core/presentation/bloc/user/user_event.dart';
-import 'package:xmanager/src/core/presentation/bloc/user/user_state.dart';
-import 'package:xmanager/src/core/utils/localizations_extension.dart';
-import 'package:xmanager/src/core/utils/theme_extension.dart';
+import 'package:xmanager/src/core/localizations_extension.dart';
+import 'package:xmanager/src/core/presentation/bloc/user/bloc.dart';
+import 'package:xmanager/src/core/theme_extension.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -45,13 +45,8 @@ class DashboardPage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
-          //const id = "";
-          //context.go('/detail/$id');
-          //context.go('/detail', extra: );
-
           const account = Account(fullname: 'Massimo Allegri');
           Preferences.saveAccount(account);
-          //context.read<DashboardBloc>().add(DashboardEventStart());
 
           final currentAccount = await Preferences.currentAccount();
 
@@ -95,7 +90,7 @@ class _DashboardPageBody extends StatelessWidget {
             ],
           ),
         ),
-        
+
         //_DashboardPagePlayerHeaderSection(),
         //_DashboardPagePlayerSection(),
         SliverToBoxAdapter(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-
-import 'device_detail_test.dart';
+import 'package:xmanager/src/features/device/presentation/pages/device_detail_test.dart';
 
 class DeviceSearch extends StatefulWidget {
   const DeviceSearch({super.key});

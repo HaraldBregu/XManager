@@ -9,10 +9,10 @@ abstract class DeviceState extends Equatable {
 
 class InitialDeviceState extends DeviceState {}
 
-class LoadingDeviceState extends DeviceState {}
+class DeviceLoadingState extends DeviceState {}
 
-class ListDeviceState extends DeviceState {
+class DeviceLoadedState extends DeviceState {
   final List<String> devices;
 
-  const ListDeviceState(this.devices);
+  const DeviceLoadedState(this.devices);
 }

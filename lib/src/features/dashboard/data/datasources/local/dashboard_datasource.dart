@@ -1,9 +1,7 @@
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/src/core/databases/preferences.dart';
-import 'package:xmanager/src/core/error/exeptions.dart';
-import 'package:xmanager/src/core/error/failures.dart';
-import 'package:xmanager/src/core/data/models/account.dart';
+import 'package:xmanager/src/core/exeptions.dart';
+import 'package:xmanager/src/core/failures.dart';
 import 'package:xmanager/src/features/dashboard/data/models/dashboard_player_model.dart';
 import 'package:xmanager/src/features/dashboard/data/models/dashboard_profile_model.dart';
 import 'package:xmanager/src/features/dashboard/data/models/dashboard_training_model.dart';

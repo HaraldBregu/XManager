@@ -1,10 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xmanager/src/core/domain/usecases/authorised_user.dart';
 import 'package:xmanager/src/core/domain/usecases/current_user.dart';
 import 'package:xmanager/src/core/domain/usecases/exit_user.dart';
 import 'package:xmanager/src/core/domain/usecases/unlock_user.dart';
 import 'package:xmanager/src/core/presentation/bloc/user/bloc.dart';
-import 'package:xmanager/src/core/resources/data_state.dart';
+import 'package:xmanager/src/core/data_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final CurrentUserUseCase currentUserUseCase;
@@ -23,24 +25,33 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<ExitUserEvent>(onExitUserEvent);
   }
 
+  Stream<double> getRandomValues() async* {
+    final random = Random(2);
+    while (true) {
+      await Future.delayed(Duration(seconds: 1));
+      yield random.nextDouble();
+    }
+  }
+
   Future<void> onInitialUserEvent(
     InitialUserEvent event,
     Emitter<UserState> emit,
   ) async {
-    final currentUser = await currentUserUseCase.call({});
-    final user = currentUser.data;
-
     final dataState = await authorisedUserUseCase.call({});
+
+    /*
+    await for (final value in getRandomValues()) {
+      print('1st: $value');
+      emit(UserAuthorizedState(fullname: "$value"));
+    }*/
   
-
-
     if (dataState is DataSuccess) {
       if (dataState.data == true) {
-        var fullname = currentUser.data?.fullname ?? "";
+        final currentUser = await currentUserUseCase.call({});
+        final user = currentUser.data;
+        final fullname = user?.fullname ?? "";
 
-        emit(UserAuthorizedState(
-          fullname: fullname,
-        ));
+        emit(UserAuthorizedState(fullname: fullname));
       } else {
         emit(UserUnAuthorizedState());
       }
@@ -70,7 +81,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     ExitUserEvent event,
     Emitter<UserState> emit,
   ) async {
-
     if (state is UserAuthorizedState) {
       final dataState = await exitUserUseCase.call({});
       if (dataState is DataSuccess) {

@@ -1,8 +1,8 @@
 import 'package:xmanager/src/core/data/datasources/shared_preferences_datasource.dart';
 import 'package:xmanager/src/core/data/models/app_model.dart';
+import 'package:xmanager/src/core/data_state.dart';
 import 'package:xmanager/src/core/domain/entities/user_entity.dart';
 import 'package:xmanager/src/core/domain/repository/app_repository.dart';
-import 'package:xmanager/src/core/resources/data_state.dart';
 
 class AppRepositoryImpl implements AppRepository {
   final SharedPreferencesDataSourceImpl _sharedPreferencesDataSource;

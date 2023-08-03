@@ -1,6 +1,6 @@
+import 'package:xmanager/src/core/data_state.dart';
 import 'package:xmanager/src/core/domain/repository/app_repository.dart';
-import 'package:xmanager/src/core/resources/data_state.dart';
-import 'package:xmanager/src/core/usecase/usecase.dart';
+import 'package:xmanager/src/core/usecase.dart';
 
 class ExitUserUseCase implements UseCase<DataState<bool>, void> {
   ExitUserUseCase(this._userRepository);

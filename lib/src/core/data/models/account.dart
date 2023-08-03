@@ -19,7 +19,7 @@ class Account {
 
   @override
   String toString() {
-    return 'Account{' + ' fullname: $fullname,' + '}';
+    return 'Account{ fullname: $fullname,}';
   }
 
   Account copyWith({
@@ -32,7 +32,7 @@ class Account {
 
   Map<String, dynamic> toMap() {
     return {
-      'fullname': this.fullname,
+      'fullname': fullname,
     };
   }
 

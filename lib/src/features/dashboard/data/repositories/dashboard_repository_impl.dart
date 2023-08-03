@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:xmanager/src/core/error/exeptions.dart';
-import 'package:xmanager/src/core/error/failures.dart';
+import 'package:xmanager/src/core/exeptions.dart';
+import 'package:xmanager/src/core/failures.dart';
 import 'package:xmanager/src/features/dashboard/data/datasources/local/dashboard_datasource.dart';
 import 'package:xmanager/src/features/dashboard/domain/entities/dashboard_player_entity.dart';
 import 'package:xmanager/src/features/dashboard/domain/entities/dashboard_profile_entity.dart';

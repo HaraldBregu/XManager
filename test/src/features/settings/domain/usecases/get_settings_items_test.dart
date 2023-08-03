@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:xmanager/src/core/error/failures.dart';
+import 'package:xmanager/src/core/failures.dart';
 import 'package:xmanager/src/features/settings/domain/entities/setttings_entity.dart';
 import 'package:xmanager/src/features/settings/domain/repositories/settings_repository.dart';
 import 'package:xmanager/src/features/settings/domain/usecases/get_settings_items.dart';

@@ -7,7 +7,7 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:xmanager/src/core/error/failures.dart' as _i5;
+import 'package:xmanager/src/core/failures.dart' as _i5;
 import 'package:xmanager/src/features/dashboard/domain/entities/dashboard_player_entity.dart'
     as _i8;
 import 'package:xmanager/src/features/dashboard/domain/entities/dashboard_profile_entity.dart'

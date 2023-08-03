@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-class DeviceEntity extends Equatable {
+class BleDeviceEntity extends Equatable {
   final String name;
   final String uuid;
 
-  const DeviceEntity({
+  const BleDeviceEntity({
     required this.name,
     required this.uuid,
   });

@@ -1,36 +1,26 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xmanager/src/core/domain/usecases/current_user.dart';
 import 'package:xmanager/src/features/device/presentation/bloc/bloc.dart';
 
 class DeviceBloc extends Bloc<DeviceEvent, DeviceState> {
+
   DeviceBloc() : super(InitialDeviceState()) {
-    //on<InitialUserEvent>(onInitialUserEvent);
+    on<StartScanDevicesEvent>(onStartScanDevicesEvent);
     //on<EnterUserEvent>(onEnterUserEvent);
     //on<ExitUserEvent>(onExitUserEvent);
   }
-/*
-  Future<void> onInitialUserEvent(
-    InitialUserEvent event,
-    Emitter<UserState> emit,
+
+  Future<void> onStartScanDevicesEvent(
+    StartScanDevicesEvent event,
+    Emitter<DeviceState> emit,
   ) async {
-    final currentUser = await currentUserUseCase.call({});
-    final user = currentUser.data;
 
-    final dataState = await authorisedUserUseCase.call({});
-  
+    //final devices = await _getBleDevicesUseCase.call({});
+    
 
-
-    if (dataState is DataSuccess) {
-      if (dataState.data == true) {
-        var fullname = currentUser.data?.fullname ?? "";
-
-        emit(UserAuthorizedState(
-          fullname: fullname,
-        ));
-      } else {
-        emit(UserUnAuthorizedState());
-      }
-    }
   }
+
+/*
 
   Future<void> onEnterUserEvent(
     EnterUserEvent event,
