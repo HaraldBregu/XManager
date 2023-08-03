@@ -17,7 +17,9 @@ import 'package:xmanager/src/core/domain/repository/ble_repository.dart';
 import 'package:xmanager/src/core/domain/usecases/authorised_user.dart';
 import 'package:xmanager/src/core/domain/usecases/current_user.dart';
 import 'package:xmanager/src/core/domain/usecases/exit_user.dart';
-import 'package:xmanager/src/core/domain/usecases/start_scan_ble_devices.dart';
+import 'package:xmanager/src/core/domain/usecases/get_ble_devices.dart';
+import 'package:xmanager/src/core/domain/usecases/start_ble_scan.dart';
+import 'package:xmanager/src/core/domain/usecases/stop_ble_scan.dart';
 import 'package:xmanager/src/core/domain/usecases/unlock_user.dart';
 import 'package:xmanager/src/core/presentation/bloc/ble/ble_bloc.dart';
 import 'package:xmanager/src/core/presentation/bloc/user/bloc.dart';
@@ -58,7 +60,9 @@ Future<void> main() async {
   );
   sl.registerFactory(
     () => BleBloc(
-      startScanBleDevicesUseCase: sl(),
+      startBleScanUseCase: sl(),
+      stopBleScanUseCase: sl(),
+      getBleDevicesUseCase: sl(),
     ),
   );
 
@@ -68,7 +72,9 @@ Future<void> main() async {
   sl.registerLazySingleton(() => UnlockUserUseCase(sl()));
   sl.registerLazySingleton(() => ExitUserUseCase(sl()));
   //sl.registerLazySingleton(() => GetBleDevicesUseCase(sl()));
-  sl.registerLazySingleton(() => StartScanBleDevicesUseCase(sl()));
+  sl.registerLazySingleton(() => StartBleScanUseCase(sl()));
+  sl.registerLazySingleton(() => StopBleScanUseCase(sl()));
+  sl.registerLazySingleton(() => GetBleDevicesUseCase(sl()));
 
   // Repository
   sl.registerLazySingleton<AppRepository>(

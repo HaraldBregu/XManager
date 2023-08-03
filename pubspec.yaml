@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   auto_route: ^5.0.4
+  bloc_concurrency: ^0.2.2
   connectivity: ^3.0.6
   dartz: ^0.10.1
   dio: ^5.2.1+1

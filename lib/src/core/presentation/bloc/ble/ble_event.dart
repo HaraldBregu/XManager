@@ -13,4 +13,9 @@ class BleStartScanEvent extends BleEvent {
   const BleStartScanEvent({required this.seconds});
 }
 
+
+class BleAddDeviceEvent extends BleEvent {
+  const BleAddDeviceEvent();
+}
+
 class BleStopScanEvent extends BleEvent {}
