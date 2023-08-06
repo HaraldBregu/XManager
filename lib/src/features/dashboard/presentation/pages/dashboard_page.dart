@@ -1,11 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:xmanager/src/core/data/models/account.dart';
-import 'package:xmanager/src/core/databases/preferences.dart';
 import 'package:xmanager/src/core/localizations_extension.dart';
 import 'package:xmanager/src/core/presentation/bloc/user/bloc.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
@@ -16,55 +12,33 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextTheme textTheme = theme.textTheme;
+    //final TextTheme textTheme = theme.textTheme;
     final ColorScheme colorScheme = theme.colorScheme;
 
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        title: Text(context.loc.dashboard, style: context.textTheme.titleMedium
-            //  ?.copyWith(fontWeight: FontWeight.w700),
-            ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            //onPressed: () => GoRouter.of(context).goNamed('settings'),
-            onPressed: () => GoRouter.of(context).pushNamed('settings'),
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.logout,
-            ),
-            onPressed: () {
-              context.read<UserBloc>().add(const ExitUserEvent());
-            },
-          ),
-        ],
-      ),
       body: const _DashboardPageBody(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          const account = Account(fullname: 'Massimo Allegri');
-          Preferences.saveAccount(account);
+      floatingActionButton: Visibility(
+        visible: false,
+        child: FloatingActionButton.extended(
+          onPressed: () async {
+            //const account = Account(fullname: 'Massimo Allegri');
+            //Preferences.saveAccount(account);
 
-          final currentAccount = await Preferences.currentAccount();
+            //final currentAccount = await Preferences.currentAccount();
 
-          /*
-          final json = objectBox.playerBox.getAll().first.toJson();
-          final objecjson = DashboardPlayerModel.fromJson(json);
-          print(objecjson.fullname);
-          */
-        },
-        //elevation: 0,
-        backgroundColor: colorScheme.secondaryContainer,
-        foregroundColor: colorScheme.onSecondaryContainer,
-        //backgroundColor: colorScheme.tertiaryContainer,
-        //foregroundColor: colorScheme.onTertiaryContainer,
-
-        splashColor: colorScheme.secondary,
-        icon: const Icon(Icons.play_circle),
-        label: const Text('AVVIA PROGRAMMA'),
+            /*
+            final json = objectBox.playerBox.getAll().first.toJson();
+            final objecjson = DashboardPlayerModel.fromJson(json);
+            print(objecjson.fullname);
+            */
+          },
+          backgroundColor: colorScheme.secondaryContainer,
+          foregroundColor: colorScheme.onSecondaryContainer,
+          splashColor: colorScheme.secondary,
+          icon: const Icon(Icons.play_circle),
+          label: const Text('AVVIA PROGRAMMA'),
+        ),
       ),
     );
   }
@@ -75,24 +49,12 @@ class _DashboardPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
+    return const CustomScrollView(
       slivers: [
-        const _ProfileSection(),
-        const _TrainingSection(),
-        const _PlayerSection(),
-        SliverToBoxAdapter(
-          child: Column(
-            children: [
-              OutlinedButton(
-                child: const Text("Device list test"),
-                onPressed: () => context.pushNamed("Device list"),
-              ),
-            ],
-          ),
-        ),
-
-        //_DashboardPagePlayerHeaderSection(),
-        //_DashboardPagePlayerSection(),
+        _DashboardPageHeader(),
+        _DashboardPageProfileSection(),
+        _TrainingSection(),
+        _PlayerSection(),
         SliverToBoxAdapter(
           child: SizedBox(
             height: 120,
@@ -103,8 +65,63 @@ class _DashboardPageBody extends StatelessWidget {
   }
 }
 
-class _ProfileSection extends StatelessWidget {
-  const _ProfileSection();
+class _DashboardPageHeader extends StatelessWidget {
+  const _DashboardPageHeader();
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      leading: IconButton(
+        icon: const Icon(Icons.menu),
+        onPressed: () => GoRouter.of(context).pushNamed('settings'),
+      ),
+      title: Text(
+        context.loc.dashboard,
+        style:
+            context.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
+      ),
+      centerTitle: false,
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.settings),
+          onPressed: () => context.pushNamed('settings'),
+        ),
+        IconButton(
+          icon: const Icon(Icons.bluetooth),
+          onPressed: () => context.pushNamed('Device list'),
+        ),
+        IconButton(
+          icon: const Icon(Icons.logout),
+          onPressed: () => showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text('Exit from dashboard'),
+                content: const SingleChildScrollView(
+                  child: ListBody(
+                    children: <Widget>[
+                      Text('Are you sure you want to exit from dashboard?'),
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('Exit'),
+                    onPressed: () =>
+                        context.read<UserBloc>().add(const ExitUserEvent()),
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _DashboardPageProfileSection extends StatelessWidget {
+  const _DashboardPageProfileSection();
 
   @override
   Widget build(BuildContext context) {
@@ -136,12 +153,15 @@ class _ProfileSection extends StatelessWidget {
                               //radius: 40,
                             ),
                           ),
+                          /*
                           trailing: IconButton(
                             icon: const Icon(
                               Icons.menu,
                             ),
                             onPressed: () => {},
                           ),
+                          */
+                          onTap: () => context.pushNamed("Profile page"),
                         );
                       }
                       if (state is UserUnAuthorizedState) {

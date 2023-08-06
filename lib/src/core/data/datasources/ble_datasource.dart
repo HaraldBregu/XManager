@@ -3,8 +3,12 @@ import 'package:xmanager/src/core/data/models/ble_device_model.dart';
 
 abstract class BleDataSource {
   Stream<List<BleDeviceModel>> startScan(int seconds);
-  Future stopScan();
-  Stream<List<BleDeviceModel>> scanResult();
+  Stream<bool> isScanning();
+  Future<void> stopScan();
+  Future<bool> isAvailable();
+  Future<void> turnOn();
+  Future<void> turnOff();
+  Future<bool> isOn();
 }
 
 class BleDataSourceImpl implements BleDataSource {
@@ -21,64 +25,49 @@ class BleDataSourceImpl implements BleDataSource {
     );
 
     final test = flutterBluePlus.scanResults.asyncMap((event) {
-      return List<BleDeviceModel>.from(event.map((e) =>
-          BleDeviceModel(name: e.device.name, uuid: e.device.id.toString())));
+      return List<BleDeviceModel>.from(
+        event.map(
+          (e) {
+            final device = e.device;
+            return BleDeviceModel(
+              name: device.name,
+              uuid: device.id.toString(),
+            );
+          },
+        ),
+      );
     });
     return test;
-    //return flutterBluePlus.scanResults;
-
-    /*
-    await for (final results in flutterBluePlus.scanResults) {
-      for (ScanResult r in results) {
-        print('${r.device.name} found! rssi: ${r.device.id}');
-      }
-    }*/
-
-    /*
-    await for (final scanResults in flutterBluePlus.scanResults) {
-      final List<BleDeviceModel> bleDevices = [];
-
-      for (final scanResult in scanResults) {
-        final device = scanResult.device;
-        final deviceName = device.name;
-        final deviceId = device.id.toString();
-
-        bleDevices.add(
-          BleDeviceModel(
-            name: deviceName,
-            uuid: deviceId,
-          ),
-        );
-      }
-      yield bleDevices;
-    }
-    */
+  }
+  
+  @override
+  Stream<bool> isScanning() {
+    return flutterBluePlus.isScanning;
   }
 
   @override
   Future stopScan() {
     return flutterBluePlus.stopScan();
   }
-
+  
   @override
-  Stream<List<BleDeviceModel>> scanResult() async* {
-    await for (final scanResults in flutterBluePlus.scanResults) {
-      final List<BleDeviceModel> bleDevices = [];
-
-      for (final scanResult in scanResults) {
-        final device = scanResult.device;
-        final deviceName = device.name;
-        final deviceId = device.id.toString();
-
-        bleDevices.add(
-          BleDeviceModel(
-            name: deviceName,
-            uuid: deviceId,
-          ),
-        );
-      }
-
-      yield bleDevices;
-    }
+  Future<bool> isAvailable() {
+    return flutterBluePlus.isAvailable;
   }
+  
+  @override
+  Future<void> turnOn() {
+    return flutterBluePlus.turnOn();
+  }
+  
+  @override
+  Future<void> turnOff() {
+    return flutterBluePlus.turnOff();
+  }
+  
+  @override
+  Future<bool> isOn() {
+    return flutterBluePlus.isOn;
+  }
+
 }

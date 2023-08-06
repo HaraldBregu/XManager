@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/src/config/routes/router.dart';
 import 'package:xmanager/src/core/common.dart';
 import 'package:xmanager/src/core/data/models/models.dart';
 
@@ -18,11 +17,10 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
   String blestate = "Unactive";
   final FlutterBluePlus flutterBlue = FlutterBluePlus.instance;
 
-
   Future<bool> _checkDeviceBluetoothIsOn() async {
     final i = await flutterBlue.isOn;
     setState(() {
-      if (i==true) {
+      if (i == true) {
         blestate = "Active";
       } else {
         blestate = "Unactive";
@@ -112,7 +110,6 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
       widgets.add(ListTile(
         title: const Text('Add test data'),
         onLongPress: () {
-
           try {
             Player pl = Player();
             pl.fullname = "Ezequiel Lavezzi";
@@ -204,26 +201,25 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
           } catch (error) {
             print(error);
           }
-
         },
       ));
       widgets.add(ListTile(
         title: const Text('Test Sliver'),
         onTap: () {
           const testSliver = TestSliver();
-          final materialRoute = MaterialPageRoute(builder: (context) => testSliver);
+          final materialRoute =
+              MaterialPageRoute(builder: (context) => testSliver);
           Navigator.push(context, materialRoute);
         },
       ));
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Account")),
-      body: ListView(
-        padding: const EdgeInsets.all(8),
-        children: widgets,
-      )
-    );
+        appBar: AppBar(title: const Text("Account")),
+        body: ListView(
+          padding: const EdgeInsets.all(8),
+          children: widgets,
+        ));
   }
 }
 
@@ -236,25 +232,23 @@ class TestSliver extends StatelessWidget {
       body: NestedScrollView(
           floatHeaderSlivers: true,
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          SliverAppBar(
-            title: const Text('App Bar'),
-            expandedHeight: 140,
-            forceElevated: innerBoxIsScrolled,
-            floating: true,
-            snap: true,
-            pinned: true,
-            //flexibleSpace: ,
-            actions: [
-              
-            ],
-          ),
-        ],
-        body: ListView.separated(
-            itemBuilder: (context, index) => ListTile(
-              title: const Text("Titolo"),
-            ),
-            separatorBuilder: (context, index) => const SizedBox(height: 1),
-            itemCount: 30)),
+                SliverAppBar(
+                  title: const Text('App Bar'),
+                  expandedHeight: 140,
+                  forceElevated: innerBoxIsScrolled,
+                  floating: true,
+                  snap: true,
+                  pinned: true,
+                  //flexibleSpace: ,
+                  actions: [],
+                ),
+              ],
+          body: ListView.separated(
+              itemBuilder: (context, index) => ListTile(
+                    title: const Text("Titolo"),
+                  ),
+              separatorBuilder: (context, index) => const SizedBox(height: 1),
+              itemCount: 30)),
     );
   }
 }

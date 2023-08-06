@@ -23,6 +23,7 @@ class _PermissionsState extends State<PermissionsPage> {
           padding: const EdgeInsets.all(8),
           children: Permission.values
               .where((permission) {
+
             final bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
             if (isIOS) {
               return permission != Permission.unknown &&
@@ -58,9 +59,9 @@ class _PermissionsState extends State<PermissionsPage> {
 
 /// Permission shared containing information about the passed [Permission]
 class PermissionWidget extends StatefulWidget {
-  /// Constructs a [PermissionWidget] for the supplied [Permission]
-  const PermissionWidget(this._permission);
   final Permission _permission;
+
+  const PermissionWidget(this._permission);
 
   @override
   _PermissionState createState() => _PermissionState(_permission);
@@ -79,7 +80,7 @@ class _PermissionState extends State<PermissionWidget> {
     _listenForPermissionStatus();
   }
 
-  void _listenForPermissionStatus() async {
+  Future<void> _listenForPermissionStatus() async {
     final status = await _permission.status;
     setState(() => _permissionStatus = status);
   }
@@ -108,7 +109,7 @@ class _PermissionState extends State<PermissionWidget> {
       subtitle: Text(_permissionStatus.toString(), style: TextStyle(color: getPermissionColor())),
       trailing: (_permission is PermissionWithService)
           ? IconButton(
-          icon: const Icon(Icons.info,),
+              icon: const Icon(Icons.info),
           onPressed: () => checkServiceStatus(context, _permission as PermissionWithService)) : null,
       onTap: () => requestPermission(_permission),
     );

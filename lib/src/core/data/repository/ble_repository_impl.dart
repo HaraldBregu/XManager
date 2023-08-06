@@ -1,6 +1,5 @@
 import 'package:xmanager/src/core/data/datasources/ble_datasource.dart';
 import 'package:xmanager/src/core/data/models/ble_device_model.dart';
-import 'package:xmanager/src/core/domain/entities/ble_device_entity.dart';
 import 'package:xmanager/src/core/domain/repository/ble_repository.dart';
 
 class BleRepositoryImpl implements BleRepository {
@@ -14,13 +13,13 @@ class BleRepositoryImpl implements BleRepository {
   }
 
   @override
-  Future<void> stopScan() {
-    return _bleDataSourceImpl.stopScan();
+  Stream<bool> isScanning() {
+    throw _bleDataSourceImpl.isScanning();
   }
 
   @override
-  Stream<List<BleDeviceEntity>> scanResult() {
-    return _bleDataSourceImpl.scanResult();
+  Future<void> stopScan() {
+    return _bleDataSourceImpl.stopScan();
   }
-
+  
 }

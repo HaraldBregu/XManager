@@ -1,12 +1,11 @@
 import 'dart:math';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xmanager/src/core/data_state.dart';
 import 'package:xmanager/src/core/domain/usecases/authorised_user.dart';
 import 'package:xmanager/src/core/domain/usecases/current_user.dart';
 import 'package:xmanager/src/core/domain/usecases/exit_user.dart';
 import 'package:xmanager/src/core/domain/usecases/unlock_user.dart';
 import 'package:xmanager/src/core/presentation/bloc/user/bloc.dart';
-import 'package:xmanager/src/core/data_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final CurrentUserUseCase currentUserUseCase;
