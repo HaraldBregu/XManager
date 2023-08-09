@@ -1,8 +1,9 @@
+import 'package:dartz/dartz.dart';
 import 'package:xmanager/src/core/data/datasources/shared_preferences_datasource.dart';
 import 'package:xmanager/src/core/data/models/app_model.dart';
-import 'package:xmanager/src/core/data_state.dart';
-import 'package:xmanager/src/core/domain/entities/user_entity.dart';
 import 'package:xmanager/src/core/domain/repository/app_repository.dart';
+import 'package:xmanager/src/core/exeptions.dart';
+import 'package:xmanager/src/core/failures.dart';
 
 class AppRepositoryImpl implements AppRepository {
   final SharedPreferencesDataSourceImpl _sharedPreferencesDataSource;
@@ -10,33 +11,53 @@ class AppRepositoryImpl implements AppRepository {
   AppRepositoryImpl(this._sharedPreferencesDataSource);
 
   @override
-  Future<DataState<AppModel>> getApp() async {
-    final app = await _sharedPreferencesDataSource.getApp();
-    return DataSuccess(app);
+  Future<Either<Failure, AppModel>> getApp() async {
+    try {
+      final app = await _sharedPreferencesDataSource.getApp();
+      return Right(app);
+    } on DatabaseExeption {
+      return Left(DatabaseFailure());
+    }
   }
 
-  @override
-  Future<DataState<bool>> saveFullName(String fullname) async {
-    final success =
-        await _sharedPreferencesDataSource.setUserFullName(fullname);
-    return DataSuccess(success);
-  }
+  // @override
+  // Future<Either<Failure, bool>> saveFullName(String fullname) async {
+  //   try {
+  //     final success =
+  //       await _sharedPreferencesDataSource.setUserFullName(fullname);
+  //     return Right(success);
+  //   } on DatabaseExeption {
+  //     return Left(DatabaseFailure());
+  //   }
+  // }
 
-  @override
-  Future<DataState<bool>> userAuthorised() async {
-    final user = await _sharedPreferencesDataSource.getUser();
-    return DataSuccess(user.fullname.isNotEmpty);
-  }
-  
-  @override
-  Future<DataState<bool>> exitUser() async {
-    final user = await _sharedPreferencesDataSource.clearUserFullName();
-    return DataSuccess(user);
-  }
-  
-  @override
-  Future<DataState<UserEntity>> getUser() async {
-    final user = await _sharedPreferencesDataSource.getUser();
-    return DataSuccess(user);
-  }
+  // @override
+  // Future<Either<Failure, UserEntity>> getUser() async {
+  //   try {
+  //     return Right(await _sharedPreferencesDataSource.getUser());
+  //   } on DatabaseExeption {
+  //     return Left(DatabaseFailure());
+  //   }
+  // }
+
+  // @override
+  // Future<Either<Failure, bool>> userAuthorised() async {
+  //   try {
+  //     final user = await _sharedPreferencesDataSource.getUser();
+  //     return Right(user.fullname.isNotEmpty);
+  //   } on DatabaseExeption {
+  //     return Left(DatabaseFailure());
+  //   }
+  // }
+
+  // @override
+  // Future<Either<Failure, bool>> exitUser() async {
+  //   try {
+  //     final user = await _sharedPreferencesDataSource.clearUserFullName();
+  //     return Right(user);
+  //   } on DatabaseExeption {
+  //     return Left(DatabaseFailure());
+  //   }
+  // }
+
 }

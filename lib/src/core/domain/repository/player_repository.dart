@@ -1,6 +1,7 @@
-import 'package:xmanager/src/core/data_state.dart';
-import 'package:xmanager/src/core/domain/entities/player_entity.dart';
+import 'package:dartz/dartz.dart';
+import 'package:xmanager/src/core/failures.dart';
+import 'package:xmanager/src/core/usecase.dart';
 
 abstract class PlayerRepository {
-  Future<DataState<bool>> savePlayer(PlayerEntity player);
+  Future<Either<Failure, bool>> savePlayer(PlayerParams player);
 }

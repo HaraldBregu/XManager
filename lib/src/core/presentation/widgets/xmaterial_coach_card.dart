@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:xmanager/src/core/widgets/xcard.dart';
-import 'package:xmanager/src/core/widgets/xmaterial_column.dart';
-import 'package:xmanager/src/core/widgets/xmaterial_info_item.dart';
-import 'package:xmanager/src/core/widgets/xmaterial_row.dart';
+import 'package:xmanager/src/core/presentation/widgets/xcard.dart';
+import 'package:xmanager/src/core/presentation/widgets/xmaterial_column.dart';
+import 'package:xmanager/src/core/presentation/widgets/xmaterial_info_item.dart';
+import 'package:xmanager/src/core/presentation/widgets/xmaterial_row.dart';
 
 class XMaterialCoachCard extends StatelessWidget {
   const XMaterialCoachCard(
@@ -27,8 +27,6 @@ class XMaterialCoachCard extends StatelessWidget {
             XMaterialInfoItem("description", icon: Icons.location_on_outlined),
           ]),
           const SizedBox(height: 8),
-
-
           const XMaterialRow(children: [
             XMaterialInfoItem("www.sports.com", icon: Icons.domain),
             SizedBox(width: 15),
@@ -54,7 +52,6 @@ class XMaterialCoachCard extends StatelessWidget {
         ],
       ),
     );
-    
   }
 }
 

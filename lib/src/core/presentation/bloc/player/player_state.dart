@@ -8,6 +8,7 @@ abstract class PlayerState extends Equatable {
 }
 
 class Initial extends PlayerState {}
+class Loading extends PlayerState {}
 
 class PlayerFullnameAdded extends PlayerState {
   final String fullName;
@@ -20,7 +21,5 @@ class PlayerFullnameAdded extends PlayerState {
 }
 
 class SavingPlayer extends PlayerState {}
-
 class SavedPlayerSuccess extends PlayerState {}
-
-class SavedPlayerError extends PlayerState {}
+class SavedPlayerFailure extends PlayerState {}

@@ -11,13 +11,6 @@ class InitialUserState extends UserState {}
 
 class LoadingUserState extends UserState {}
 
-class UserAuthorizedState extends UserState {
-  final String fullname;
-
-  const UserAuthorizedState({required this.fullname});
-
-  @override
-  List<Object?> get props => [fullname];
-}
+class UserAuthorizedState extends UserState {}
 
 class UserUnAuthorizedState extends UserState {}

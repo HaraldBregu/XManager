@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xmanager/src/core/data/models/app_model.dart';
 import 'package:xmanager/src/core/data/models/user_model.dart';
+import 'package:xmanager/src/core/exeptions.dart';
 
 abstract class SharedPreferencesDataSource {
   Future<UserModel> getUser();
@@ -29,14 +30,16 @@ class SharedPreferencesDataSourceImpl implements SharedPreferencesDataSource {
       return user;
     }
 
-    return const UserModel(
-      fullname: "",
-      description: "",
-      firstName: "",
-      lastName: "",
-    );
+    throw DatabaseExeption();
+
+    // return const UserModel(
+    //   fullname: "",
+    //   description: "",
+    //   firstName: "",
+    //   lastName: "",
+    // );
   }
-  
+
   @override
   Future<AppModel> getApp() async {
     return const AppModel(
@@ -50,8 +53,6 @@ class SharedPreferencesDataSourceImpl implements SharedPreferencesDataSource {
     final appString = json.encode(app.toMap());
     return sharedPreferences.setString(kAppSharedPrefs, appString);
   }
-
- 
 
   @override
   Future<bool> setUserFullName(String fullname) async {
@@ -87,7 +88,7 @@ class SharedPreferencesDataSourceImpl implements SharedPreferencesDataSource {
       final appString = json.encode(newUser.toMap());
       return sharedPreferences.setString(kUserSharedPrefs, appString);
     }
-
-    return true;
+    
+    throw DatabaseExeption();
   }
 }

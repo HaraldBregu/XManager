@@ -8,15 +8,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xmanager/src/config/theme/app_theme.dart';
 import 'package:xmanager/src/core/common.dart';
 import 'package:xmanager/src/core/data/datasources/ble_datasource.dart';
+import 'package:xmanager/src/core/data/datasources/player_datasource.dart';
 import 'package:xmanager/src/core/data/datasources/shared_preferences_datasource.dart';
 import 'package:xmanager/src/core/data/repository/app_repository_impl.dart';
 import 'package:xmanager/src/core/data/repository/ble_repository_impl.dart';
 import 'package:xmanager/src/core/data/repository/player_repository_impl.dart';
+import 'package:xmanager/src/core/data/repository/user_repository_impl.dart';
 import 'package:xmanager/src/core/databases/objectbox_db.dart';
 import 'package:xmanager/src/core/domain/repository/app_repository.dart';
 import 'package:xmanager/src/core/domain/repository/ble_repository.dart';
 import 'package:xmanager/src/core/domain/repository/player_repository.dart';
-import 'package:xmanager/src/core/domain/usecases/authorised_user.dart';
+import 'package:xmanager/src/core/domain/repository/user_repository.dart';
 import 'package:xmanager/src/core/domain/usecases/current_user.dart';
 import 'package:xmanager/src/core/domain/usecases/exit_user.dart';
 import 'package:xmanager/src/core/domain/usecases/save_player.dart';
@@ -26,20 +28,20 @@ import 'package:xmanager/src/core/domain/usecases/unlock_user.dart';
 import 'package:xmanager/src/core/presentation/bloc/ble/ble_bloc.dart';
 import 'package:xmanager/src/core/presentation/bloc/player/bloc.dart';
 import 'package:xmanager/src/core/presentation/bloc/user/bloc.dart';
-import 'package:xmanager/src/features/auth/presentation/pages/login_page.dart';
+import 'package:xmanager/src/features/auth/pages/login_page.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/dashboard_page.dart';
-import 'package:xmanager/src/features/device/presentation/pages/device_add.dart';
-import 'package:xmanager/src/features/device/presentation/pages/device_list.dart';
-import 'package:xmanager/src/features/player/presentation/pages/player_create.dart';
-import 'package:xmanager/src/features/player/presentation/pages/player_detail.dart';
-import 'package:xmanager/src/features/player/presentation/pages/player_list.dart';
-import 'package:xmanager/src/features/player/presentation/pages/player_update.dart';
-import 'package:xmanager/src/features/profile/presentation/pages/profile_page.dart';
+import 'package:xmanager/src/features/device/pages/device_add.dart';
+import 'package:xmanager/src/features/device/pages/device_list.dart';
+import 'package:xmanager/src/features/player/pages/player_create.dart';
+import 'package:xmanager/src/features/player/pages/player_detail.dart';
+import 'package:xmanager/src/features/player/pages/player_list.dart';
+import 'package:xmanager/src/features/player/pages/player_update.dart';
 import 'package:xmanager/src/features/program/presentation/pages/program_create.dart';
 import 'package:xmanager/src/features/program/presentation/pages/program_detail.dart';
 import 'package:xmanager/src/features/program/presentation/pages/program_list.dart';
 import 'package:xmanager/src/features/program/presentation/pages/program_update.dart';
 import 'package:xmanager/src/features/settings/presentation/pages/permissions_page.dart';
+import 'package:xmanager/src/features/settings/presentation/pages/profile_page.dart';
 import 'package:xmanager/src/features/settings/presentation/pages/settings_page.dart';
 
 late ObjectBox objectBox;
@@ -57,7 +59,7 @@ Future<void> main() async {
   sl.registerFactory(
     () => UserBloc(
       currentUserUseCase: sl(),
-      authorisedUserUseCase: sl(),
+      // authorisedUserUseCase: sl(),
       unlockUserUseCase: sl(),
       exitUserUseCase: sl(),
     ),
@@ -76,7 +78,7 @@ Future<void> main() async {
 
   // UseCases
   sl.registerLazySingleton(() => CurrentUserUseCase(sl()));
-  sl.registerLazySingleton(() => AuthorizedUserUseCase(sl()));
+//  sl.registerLazySingleton(() => AuthorizedUserUseCase(sl()));
   sl.registerLazySingleton(() => UnlockUserUseCase(sl()));
   sl.registerLazySingleton(() => ExitUserUseCase(sl()));
   sl.registerLazySingleton(() => StartBleScanUseCase(sl()));
@@ -87,11 +89,14 @@ Future<void> main() async {
   sl.registerLazySingleton<AppRepository>(
     () => AppRepositoryImpl(sl()),
   );
+  sl.registerLazySingleton<UserRepository>(
+    () => UserRepositoryImpl(sl()),
+  );
   sl.registerLazySingleton<BleRepository>(
     () => BleRepositoryImpl(sl()),
   );
   sl.registerLazySingleton<PlayerRepository>(
-    () => PlayerRepositoryImpl(),
+    () => PlayerRepositoryImpl(sl()),
   );
   
   // Data sources
@@ -105,6 +110,12 @@ Future<void> main() async {
       flutterBluePlus: sl(),
     ),
   );
+  sl.registerLazySingleton(
+    () => PlayerDataSourceImpl(
+        //flutterBluePlus: sl(),
+        ),
+  );
+  
 
   //sl.registerSingleton(SharedPreferencesService);
   // Objectbox
@@ -225,8 +236,10 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userState = context.watch<UserBloc>().state;
+    final userBloc = context.watch<UserBloc>();
+    final userState = userBloc.state;
     final userStateAuthorized = userState is UserAuthorizedState;
+    //final userStateAuthorized = context.watch<UserBloc>().authorized;
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,

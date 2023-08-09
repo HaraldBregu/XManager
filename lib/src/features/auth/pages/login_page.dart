@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/core/presentation/bloc/ble/ble_bloc.dart';
-import 'package:xmanager/src/core/presentation/bloc/ble/bloc.dart';
 import 'package:xmanager/src/core/presentation/bloc/user/bloc.dart';
 
 class LoginPage extends StatelessWidget {
@@ -39,24 +37,6 @@ class LoginPage extends StatelessWidget {
                       ?.copyWith(fontWeight: FontWeight.w900),
                   //.copyWith(color: Colors.black),
                 ),
-              ),
-              Text(context.watch<UserBloc>().state is UserAuthorizedState
-                  ? "Authenticated"
-                  : "UnAuthenticated"),
-              BlocBuilder<UserBloc, UserState>(
-                buildWhen: (context, state) {
-                  return state is UserAuthorizedState;
-                },
-                builder: (bloc, state) {
-                  if (state is UserAuthorizedState) {
-                    return const Text("authorized");
-                  }
-                  if (state is UserUnAuthorizedState) {
-                    return const Text("Logged out");
-                  }
-
-                  return const Text("NO STATE");
-                },
               ),
               Padding(
                 padding:
