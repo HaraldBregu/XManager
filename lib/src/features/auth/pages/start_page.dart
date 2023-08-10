@@ -61,7 +61,6 @@ class StartPage extends StatelessWidget {
             bottom: 250, //display untill the height of bottom widget
             left: 0,
             right: 0,
-            //mention top, bottom, left, right, for full size widget
             child: PageView(
               onPageChanged: (index) {},
               children: [
@@ -195,12 +194,13 @@ class StartPage extends StatelessWidget {
                       dotsCount: 5,
                       position: 2,
                       decorator: DotsDecorator(
-                        color: colorScheme.onPrimary,
-                        activeColor: colorScheme.primary,
-                        size: const Size(8, 8),
-                        activeSize: const Size(18.0, 9.0),
+                        //color: colorScheme.onPrimary,
+                        activeColor: colorScheme.secondary,
+                        //size: const Size(9, 9),
+                        //activeSize: const Size(9.0, 9.0),
                         activeShape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0)),
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
                       ),
                     ),
                   ],

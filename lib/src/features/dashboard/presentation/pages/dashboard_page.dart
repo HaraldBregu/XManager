@@ -55,6 +55,7 @@ class _DashboardPageBody extends StatelessWidget {
         _DashboardPageProfileSection(),
         _TrainingSection(),
         _PlayerSection(),
+        _PlayerList(),
         SliverToBoxAdapter(
           child: SizedBox(
             height: 120,
@@ -81,6 +82,7 @@ class _DashboardPageHeader extends StatelessWidget {
             context.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
       ),
       centerTitle: false,
+      pinned: true,
       actions: [
         IconButton(
           icon: const Icon(Icons.settings),
@@ -130,49 +132,59 @@ class _DashboardPageProfileSection extends StatelessWidget {
 
     return SliverToBoxAdapter(
       child: Padding(
-          padding: const EdgeInsets.fromLTRB(5, 8, 5, 0),
+          padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
           child: Card(
             elevation: 1,
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Column(
-                children: [
-                  BlocBuilder<UserBloc, UserState>(
-                    builder: (bloc, state) {
-                      if (state is UserAuthorizedState) {
-                        return ListTile(
-                          title: const Text("Massimo Allegri"),
-                          subtitle: const Text("FiFa Pro"),
-                          leading: FittedBox(
-                            child: CircleAvatar(
-                              backgroundColor: colorScheme.secondary,
-                              child: Icon(
-                                Icons.person,
-                                color: colorScheme.onSecondary,
-                              ),
-                              //radius: 40,
+            child: Column(
+              children: [
+                BlocBuilder<UserBloc, UserState>(
+                  builder: (bloc, state) {
+                    if (state is UserAuthorizedState) {
+                      return ListTile(
+                        title: const Text("Massimo Allegri"),
+                        subtitle: const Text("FiFa Pro"),
+                        leading: FittedBox(
+                          child: CircleAvatar(
+                            backgroundColor: colorScheme.secondary,
+                            child: Icon(
+                              Icons.person,
+                              color: colorScheme.onSecondary,
+                            ),
+                            //radius: 40,
+                          ),
+                        ),
+                        /*
+                        trailing: IconButton(
+                          icon: const Icon(
+                            Icons.menu,
+                          ),
+                          onPressed: () => {},
+                        ),
+                        */
+                        onTap: () => context.pushNamed("Profile page"),
+                      );
+                    }
+                    if (state is UserUnAuthorizedState) {
+                      return ListTile(
+                        title: const Text("Massimo Allegri"),
+                        subtitle: const Text("FiFa Pro"),
+                        leading: FittedBox(
+                          child: CircleAvatar(
+                            backgroundColor: colorScheme.secondary,
+                            child: Icon(
+                              Icons.person,
+                              color: colorScheme.onSecondary,
                             ),
                           ),
-                          /*
-                          trailing: IconButton(
-                            icon: const Icon(
-                              Icons.menu,
-                            ),
-                            onPressed: () => {},
-                          ),
-                          */
-                          onTap: () => context.pushNamed("Profile page"),
-                        );
-                      }
-                      if (state is UserUnAuthorizedState) {
-                        return const Text("Logged out");
-                      }
+                        ),
+                        onTap: () => context.pushNamed("Profile page"),
+                      );
+                    }
 
-                      return const Text("NO STATE");
-                    },
-                  ),
-                ],
-              ),
+                    return const Text("NO STATE");
+                  },
+                ),
+              ],
             ),
           )),
     );
@@ -192,7 +204,7 @@ class _TrainingSection extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(5, 3, 5, 0),
+            padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
             child: Card(
               elevation: 1,
               child: Padding(
@@ -395,7 +407,7 @@ class _PlayerSection extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(5, 3, 5, 0),
+            padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
             child: Card(
               elevation: 1,
               child: Padding(
@@ -575,6 +587,31 @@ class _PlayerSection extends StatelessWidget {
           ),
         */
         ],
+      ),
+    );
+  }
+}
+
+class _PlayerList extends StatelessWidget {
+  const _PlayerList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverList(
+      delegate: SliverChildListDelegate(
+        List.generate(23, (idx) {
+          return Padding(
+            padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+            child: Card(
+              elevation: 1,
+              child: ListTile(
+                title: Text("Marco Materazzi"),
+                subtitle: Text("Player role"),
+                onTap: () {},
+              ),
+            ),
+          );
+        }),
       ),
     );
   }

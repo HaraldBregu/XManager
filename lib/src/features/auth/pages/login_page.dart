@@ -64,6 +64,19 @@ class _LoginContainer extends StatelessWidget {
               height: 20,
             ),
             TextField(
+              keyboardType: TextInputType.phone,
+              decoration: const InputDecoration(
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                prefixIcon: Icon(Icons.phone),
+                hintText: 'Enter email address',
+                labelText: 'Email',
+              ),
+              onChanged: (value) {},
+            ),
+            const SizedBox(height: 10.0),
+
+            TextField(
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
                 contentPadding:

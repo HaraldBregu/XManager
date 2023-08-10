@@ -62,7 +62,6 @@ Future<void> main() async {
   sl.registerFactory(
     () => UserBloc(
       currentUserUseCase: sl(),
-      // authorisedUserUseCase: sl(),
       unlockUserUseCase: sl(),
       exitUserUseCase: sl(),
     ),
@@ -81,7 +80,6 @@ Future<void> main() async {
 
   // UseCases
   sl.registerLazySingleton(() => CurrentUserUseCase(sl()));
-//  sl.registerLazySingleton(() => AuthorizedUserUseCase(sl()));
   sl.registerLazySingleton(() => UnlockUserUseCase(sl()));
   sl.registerLazySingleton(() => ExitUserUseCase(sl()));
   sl.registerLazySingleton(() => StartBleScanUseCase(sl()));
@@ -89,55 +87,23 @@ Future<void> main() async {
   sl.registerLazySingleton(() => SavePlayerUseCase(sl()));
 
   // Repository
-  sl.registerLazySingleton<AppRepository>(
-    () => AppRepositoryImpl(sl()),
-  );
-  sl.registerLazySingleton<UserRepository>(
-    () => UserRepositoryImpl(sl()),
-  );
-  sl.registerLazySingleton<BleRepository>(
-    () => BleRepositoryImpl(sl()),
-  );
-  sl.registerLazySingleton<PlayerRepository>(
-    () => PlayerRepositoryImpl(sl()),
-  );
+  sl.registerLazySingleton<AppRepository>(() => AppRepositoryImpl(sl()));
+  sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(sl()));
+  sl.registerLazySingleton<BleRepository>(() => BleRepositoryImpl(sl()));
+  sl.registerLazySingleton<PlayerRepository>(() => PlayerRepositoryImpl(sl()));
 
   // Data sources
   sl.registerLazySingleton(
-    () => SharedPreferencesDataSourceImpl(
-      sharedPreferences: sl(),
-    ),
+    () => SharedPreferencesDataSourceImpl(sharedPreferences: sl()),
   );
-  sl.registerLazySingleton(
-    () => BleDataSourceImpl(
-      flutterBluePlus: sl(),
-    ),
-  );
-  sl.registerLazySingleton(
-    () => PlayerDataSourceImpl(
-        //flutterBluePlus: sl(),
-        ),
-  );
+  sl.registerLazySingleton(() => BleDataSourceImpl(flutterBluePlus: sl()));
+  sl.registerLazySingleton(() => PlayerDataSourceImpl());
 
   //sl.registerSingleton(SharedPreferencesService);
   // Objectbox
   //final objectBox = await ObjectBox.create();
   //sl.registerSingleton(objectBox);
   //sl.registerLazySingletonAsync<ObjectBox>(() => ObjectBox.create());
-
-//final route = sl.get<Gorouterpr>()
-
-  // Dio
-
-  // Dependencies
-  //sl.registerSingleton(SharedPreferencesServiceImpl);
-
-  //sl.registerSingleton(UserRepositoryImpl(sl()));
-
-  // UseCases
-  //sl.registerSingleton<GetUserUseCase>(GetUserUseCase(sl()));
-
-  //sl.registerFactory<UserDataBloc>(() => UserDataBloc(sl()));
 
   //! Core
   // input converter etc
@@ -148,22 +114,12 @@ Future<void> main() async {
   sl.registerLazySingleton(() => sharedPreferences);
   sl.registerLazySingleton(() => FlutterBluePlus.instance);
 
-  //final provider = GoRouterProvider();
-  //sl.registerLazySingleton(() => provider);
-  //sl.registerSingleton<GoRouterProvider>(GoRouterProvider());
-
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider<UserBloc>(
-          create: (_) => sl()..add(InitialUserEvent()),
-        ),
-        BlocProvider<BleBloc>(
-          create: (_) => sl(),
-        ),
-        BlocProvider<PlayerBloc>(
-          create: (_) => sl(),
-        ),
+        BlocProvider<UserBloc>(create: (_) => sl()..add(InitialUserEvent())),
+        BlocProvider<BleBloc>(create: (_) => sl()),
+        BlocProvider<PlayerBloc>(create: (_) => sl()),
       ],
       child: const App(),
     ),
@@ -251,7 +207,8 @@ class App extends StatelessWidget {
       routerConfig: GoRouter(
         //initialLocation: userStateAuthorized ? "/dashboard" : '/auth',
         //initialLocation: "/start/signup",
-        initialLocation: "/start",
+        //initialLocation: "/start",
+        initialLocation: "/",
         //redirect: (context, state) => userStateAuthorized ? null : '/start',
         //errorBuilder: (context, state) => const ErrorPage(),
         routes: [
@@ -371,7 +328,6 @@ class App extends StatelessWidget {
                 path: 'recovery',
                 builder: (context, state) => const RecoveryPage(),
               ),
-
             ],
           ),
         ],
