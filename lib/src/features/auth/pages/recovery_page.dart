@@ -1,8 +1,7 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class SignupPage extends StatelessWidget {
-  const SignupPage({super.key});
+class RecoveryPage extends StatelessWidget {
+  const RecoveryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,8 +9,8 @@ class SignupPage extends StatelessWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            _SignupHeader(),
-            _SignupContainer(),
+            _RecoveryHeader(),
+            _RecoveryContainer(),
           ],
         ),
       ),
@@ -19,8 +18,8 @@ class SignupPage extends StatelessWidget {
   }
 }
 
-class _SignupHeader extends StatelessWidget {
-  const _SignupHeader({super.key});
+class _RecoveryHeader extends StatelessWidget {
+  const _RecoveryHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +31,8 @@ class _SignupHeader extends StatelessWidget {
   }
 }
 
-class _SignupContainer extends StatelessWidget {
-  const _SignupContainer({super.key});
+class _RecoveryContainer extends StatelessWidget {
+  const _RecoveryContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,11 +49,11 @@ class _SignupContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Sign Up",
+              "Password recovery",
               textAlign: TextAlign.left,
               style: TextStyle(
                 color: Colors.white,
-                fontSize: textTheme.headlineLarge?.fontSize,
+                fontSize: textTheme.headlineMedium?.fontSize,
                 fontWeight: FontWeight.w900,
               ),
             ),
@@ -62,7 +61,7 @@ class _SignupContainer extends StatelessWidget {
               height: 10,
             ),
             Text(
-              "Create an account and start using xmanager app with all features",
+              "Add you email address and send a verification code to create a new password",
               textAlign: TextAlign.left,
               style: TextStyle(
                 //color: Colors.white,
@@ -71,18 +70,6 @@ class _SignupContainer extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            TextField(
-              keyboardType: TextInputType.text,
-              decoration: const InputDecoration(
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                prefixIcon: Icon(Icons.person_rounded),
-                hintText: 'Full name',
-                labelText: 'Full name',
-              ),
-              onChanged: (value) {},
-            ),
-            const SizedBox(height: 10.0),
             TextField(
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
@@ -94,15 +81,13 @@ class _SignupContainer extends StatelessWidget {
               ),
               onChanged: (value) {},
             ),
-            //const SizedBox(height: 20.0),
-
             const SizedBox(height: 25.0),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size.fromHeight(50),
               ),
               onPressed: () {},
-              child: Text("CONTINUE WITH EMAIL"),
+              child: Text("SEND EMAIL"),
             ),
           ],
         ),

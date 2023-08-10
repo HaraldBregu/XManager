@@ -29,6 +29,9 @@ import 'package:xmanager/src/core/presentation/bloc/ble/ble_bloc.dart';
 import 'package:xmanager/src/core/presentation/bloc/player/bloc.dart';
 import 'package:xmanager/src/core/presentation/bloc/user/bloc.dart';
 import 'package:xmanager/src/features/auth/pages/login_page.dart';
+import 'package:xmanager/src/features/auth/pages/recovery_page.dart';
+import 'package:xmanager/src/features/auth/pages/signup_page.dart';
+import 'package:xmanager/src/features/auth/pages/start_page.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:xmanager/src/features/device/pages/device_add.dart';
 import 'package:xmanager/src/features/device/pages/device_list.dart';
@@ -98,7 +101,7 @@ Future<void> main() async {
   sl.registerLazySingleton<PlayerRepository>(
     () => PlayerRepositoryImpl(sl()),
   );
-  
+
   // Data sources
   sl.registerLazySingleton(
     () => SharedPreferencesDataSourceImpl(
@@ -115,7 +118,6 @@ Future<void> main() async {
         //flutterBluePlus: sl(),
         ),
   );
-  
 
   //sl.registerSingleton(SharedPreferencesService);
   // Objectbox
@@ -248,7 +250,9 @@ class App extends StatelessWidget {
       darkTheme: AppTheme.dark,
       routerConfig: GoRouter(
         //initialLocation: userStateAuthorized ? "/dashboard" : '/auth',
-        redirect: (context, state) => userStateAuthorized ? null : '/auth',
+        //initialLocation: "/start/signup",
+        initialLocation: "/start",
+        //redirect: (context, state) => userStateAuthorized ? null : '/start',
         //errorBuilder: (context, state) => const ErrorPage(),
         routes: [
           GoRoute(
@@ -347,43 +351,28 @@ class App extends StatelessWidget {
               ),
             ],
           ),
-          /*
           GoRoute(
-            name: "program",
-            path: '/program',
-            builder: (context, state) => const ProgramDetail(),
+            name: "start",
+            path: '/start',
+            builder: (context, state) => const StartPage(),
             routes: [
               GoRoute(
-                path: 'detail',
-                builder: (context, state) => const SettingsPage(),
+                name: "login",
+                path: 'login',
+                builder: (context, state) => const LoginPage(),
               ),
-            ],
-          ),
-          GoRoute(
-            name: "player",
-            path: '/player',
-            builder: (context, state) => const SettingsPage(),
-            routes: [
               GoRoute(
-                path: 'info',
-                builder: (context, state) => const PermissionsPage(),
+                name: "signup",
+                path: 'signup',
+                builder: (context, state) => const SignupPage(),
               ),
-            ],
-          ),
-          GoRoute(
-            path: '/settings',
-            builder: (context, state) => const SettingsPage(),
-            routes: [
               GoRoute(
-                path: 'permissions',
-                builder: (context, state) => const PermissionsPage(),
+                name: "recovery",
+                path: 'recovery',
+                builder: (context, state) => const RecoveryPage(),
               ),
+
             ],
-          ),*/
-          GoRoute(
-            name: "auth",
-            path: '/auth',
-            builder: (context, state) => const LoginPage(),
           ),
         ],
       ),

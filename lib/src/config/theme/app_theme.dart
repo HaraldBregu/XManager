@@ -21,7 +21,7 @@ const TextTheme _textTheme = TextTheme(
 );
 
 //final String? _fontFamily = GoogleFonts.audiowide().fontFamily; // nice like games
-//final String? _fontFamily = GoogleFonts.bungee().fontFamily; //particular bold
+//final String? _fontFamily = GoogleFonts.bungee().fontFamily; //particular bold game style
 //final String? _fontFamily = GoogleFonts.bungeeInline().fontFamily; // particular bold
 //final String? _fontFamily = GoogleFonts.archivoBlack().fontFamily; // bold good
 //final String? _fontFamily = GoogleFonts.inter().fontFamily; //Hmm
@@ -101,6 +101,8 @@ abstract class AppTheme {
 
   static ThemeData get dark => FlexThemeData.dark(
         scheme: scheme,
+        fontFamily: _fontFamily,
+        //fontFamily: GoogleFonts.notoSans().fontFamily,
 
         //surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces, // GOOD
         //surfaceMode: FlexSurfaceMode.level, // GOOD
@@ -116,17 +118,31 @@ abstract class AppTheme {
         subThemesData: const FlexSubThemesData(
           defaultRadius: 8,
           blendOnLevel: 20,
+          // Inpit
+          inputDecoratorRadius: 0,
           inputDecoratorBorderType: FlexInputBorderType.underline,
+          //inputDecoratorBorderWidth: 0.0,
+          //inputDecoratorFocusedBorderWidth: 0.0,
+          //inputDecoratorUnfocusedHasBorder: false,
+          //inputDecoratorUnfocusedBorderIsColored: false,
+          //inputDecoratorIsFilled: false,
+          //inputDecoratorSchemeColor: SchemeColor.secondary,
+        
           radioSchemeColor: SchemeColor.onSecondaryContainer,
           sliderBaseSchemeColor: SchemeColor.onSecondaryContainer,
 
           // Elevated Button
-          elevatedButtonSecondarySchemeColor: SchemeColor.primary,
-          elevatedButtonSchemeColor: SchemeColor.onPrimary,
+          elevatedButtonRadius: 5,
+          elevatedButtonSchemeColor: SchemeColor.onSecondary,
+          elevatedButtonSecondarySchemeColor: SchemeColor.secondary,
+
+          // Outlined Button
+          outlinedButtonRadius: 5,
+          //outlinedButtonSchemeColor: SchemeColor.secondary,
+          //outlinedButtonOutlineSchemeColor: SchemeColor.onSecondary,
         ),
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         useMaterial3: true,
         swapLegacyOnMaterial3: true,
-        fontFamily: GoogleFonts.notoSans().fontFamily,
       );
 }

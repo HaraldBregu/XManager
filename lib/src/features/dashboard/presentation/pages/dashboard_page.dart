@@ -107,8 +107,8 @@ class _DashboardPageHeader extends StatelessWidget {
                 actions: <Widget>[
                   TextButton(
                     child: const Text('Exit'),
-                    onPressed: () =>
-                        context.read<UserBloc>().add(const ExitUserEvent()),
+                      onPressed: () => context.goNamed("dashboard")
+                      //context.read<UserBloc>().add(const ExitUserEvent()),
                   ),
                 ],
               );
