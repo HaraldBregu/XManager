@@ -9,6 +9,8 @@ abstract class UserEvent extends Equatable {
 
 class InitialUserEvent extends UserEvent {}
 
+// class EnterAsGuestUserEvent extends UserEvent {}
+
 class EnterUserEvent extends UserEvent {
   final String fullName;
   const EnterUserEvent(this.fullName);

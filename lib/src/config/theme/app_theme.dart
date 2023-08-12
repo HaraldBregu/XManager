@@ -38,12 +38,12 @@ abstract class AppTheme {
 
   static const FlexScheme scheme = FlexScheme.bigStone;
 
-/*
-  static const FlexSchemeData _xmScheme = FlexSchemeData(
+
+  static const FlexSchemeData _customSchemeColor = FlexSchemeData(
     name: 'XManager theme',
     description: 'XManager theme, custom definition of all colors',
     light: FlexSchemeColor(
-      primary: Color(0xFF00296B),
+      primary: Color(0xFF1A1D23),
       primaryContainer: Color(0xFFA0C2ED),
       secondary: Color(0xFFD26900),
       secondaryContainer: Color(0xFFFFD270),
@@ -51,14 +51,18 @@ abstract class AppTheme {
       tertiaryContainer: Color(0xFFC8DBF8),
     ),
     dark: FlexSchemeColor(
-      primary: Color(0xFFB1CFF5),
-      primaryContainer: Color(0xFF3873BA),
-      secondary: Color(0xFFFFD270),
+      primary: Color.fromARGB(255, 97, 97, 97),
+      primaryContainer: Color.fromARGB(255, 0, 0, 0),
+      secondary: Color(0xFFAA3535),
       secondaryContainer: Color(0xFFD26900),
-      tertiary: Color(0xFFC9CBFC),
-      tertiaryContainer: Color(0xFF535393),
+      tertiary: Color.fromARGB(255, 0, 4, 112),
+      tertiaryContainer: Color.fromARGB(255, 0, 0, 115),
+      appBarColor: Colors.red,
+      error: Colors.red,
+      errorContainer: Colors.white,
+      swapOnMaterial3: true,
     ),
-  );*/
+  );
 
   static ThemeData get light => FlexThemeData.light(
         scheme: scheme,
@@ -101,9 +105,11 @@ abstract class AppTheme {
 
   static ThemeData get dark => FlexThemeData.dark(
         scheme: scheme,
+        //colors: _customSchemeColor.dark,
+        textTheme: _textTheme,
         fontFamily: _fontFamily,
+        
         //fontFamily: GoogleFonts.notoSans().fontFamily,
-
         //surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces, // GOOD
         //surfaceMode: FlexSurfaceMode.level, // GOOD
         //surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold, // GOOD
@@ -116,7 +122,7 @@ abstract class AppTheme {
         blendLevel: 36,
         appBarElevation: 4.0,
         subThemesData: const FlexSubThemesData(
-          defaultRadius: 8,
+          defaultRadius: 13,
           blendOnLevel: 20,
           // Inpit
           inputDecoratorRadius: 0,
@@ -140,6 +146,8 @@ abstract class AppTheme {
           outlinedButtonRadius: 5,
           //outlinedButtonSchemeColor: SchemeColor.secondary,
           //outlinedButtonOutlineSchemeColor: SchemeColor.onSecondary,
+
+          //appBarBackgroundSchemeColor: SchemeColor.surfaceVariant
         ),
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         useMaterial3: true,

@@ -244,6 +244,7 @@ class StartPage extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 7.5),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
+                              // backgroundColor: colorScheme.tertiary,
                               minimumSize: const Size.fromHeight(50),
                               //  shape: const RoundedRectangleBorder(
                               //   borderRadius: BorderRadius.all(
