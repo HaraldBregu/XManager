@@ -44,6 +44,13 @@ class SettingsPage extends StatelessWidget {
             trailing: const Icon(Icons.search),
             onTap: () => {},
           ),
+          ListTile(
+            title: Text(
+              'Exit',
+              style: context.textTheme.titleMedium,
+            ),
+            onTap: () => context.go('/start'),
+          ),
         ],
       ),
     );

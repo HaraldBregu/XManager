@@ -71,7 +71,7 @@ class StartPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          "Train and Track",
+                          "Boost your Training!",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             //color: Colors.white,
@@ -99,7 +99,7 @@ class StartPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          "Train and Track",
+                          "Track your data!",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             //color: Colors.white,
@@ -127,7 +127,7 @@ class StartPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          "Train and Track",
+                          "Learn and improve",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             //color: Colors.white,

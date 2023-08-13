@@ -68,39 +68,43 @@ abstract class AppTheme {
         scheme: scheme,
         textTheme: _textTheme,
         fontFamily: _fontFamily,
-        surfaceMode: FlexSurfaceMode.highScaffoldLowSurface, // BAD hmmm
+       
+        surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold, // GOOD
 
-        blendLevel: 15,
-        //appBarBackground: Colors.red,
-        appBarStyle: FlexAppBarStyle.surface,
-        appBarElevation: 2,
-        //appBarOpacity: 1,
-
-        visualDensity: VisualDensity.standard,
-        subThemesData: const FlexSubThemesData(
-          //defaultRadius: 8,
-          blendOnLevel: 10,
-          blendOnColors: false,
-          //inputDecoratorFillColor: FlexInputBorderType,
-          //inputDecoratorRadius: 10,
-          //inputDecoratorFocusedBorderWidth: 3,
-          //inputDecoratorSchemeColor: SchemeColor.primary,
-          //inputDecoratorUnfocusedBorderIsColored: true,
-          inputDecoratorBorderType: FlexInputBorderType.underline,
-          sliderBaseSchemeColor: SchemeColor.onSecondaryContainer,
-
-          elevatedButtonSecondarySchemeColor: SchemeColor.primary,
-          elevatedButtonSchemeColor: SchemeColor.onPrimary,
-
-          //elevatedButtonRadius: 2,
-
-          //buttonMinSize: Size(200, 40),
-          //elevatedButtonRadius: 5,
-          //elevatedButtonElevation: 4,
-          //elevatedButtonTextStyle:
-        ),
+        blendLevel: 36,
+        appBarElevation: 4.0,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
         useMaterial3: true,
         swapLegacyOnMaterial3: true,
+
+        subThemesData: const FlexSubThemesData(
+          defaultRadius: 13,
+          blendOnLevel: 20,
+          // Inpit
+          inputDecoratorRadius: 0,
+          inputDecoratorBorderType: FlexInputBorderType.underline,
+          //inputDecoratorBorderWidth: 0.0,
+          //inputDecoratorFocusedBorderWidth: 0.0,
+          //inputDecoratorUnfocusedHasBorder: false,
+          //inputDecoratorUnfocusedBorderIsColored: false,
+          //inputDecoratorIsFilled: false,
+          //inputDecoratorSchemeColor: SchemeColor.secondary,
+
+          radioSchemeColor: SchemeColor.onSecondaryContainer,
+          sliderBaseSchemeColor: SchemeColor.onSecondaryContainer,
+
+          // Elevated Button
+          elevatedButtonRadius: 5,
+          elevatedButtonSchemeColor: SchemeColor.onSecondary,
+          elevatedButtonSecondarySchemeColor: SchemeColor.secondary,
+
+          // Outlined Button
+          outlinedButtonRadius: 5,
+          //outlinedButtonSchemeColor: SchemeColor.secondary,
+          //outlinedButtonOutlineSchemeColor: SchemeColor.onSecondary,
+
+          //appBarBackgroundSchemeColor: SchemeColor.surfaceVariant
+        ),
       );
 
   static ThemeData get dark => FlexThemeData.dark(
@@ -114,13 +118,16 @@ abstract class AppTheme {
         //surfaceMode: FlexSurfaceMode.level, // GOOD
         //surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold, // GOOD
         //surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold, // Boh
-
         //surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold, // GOOD
         surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold, // GOOD
         //surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces, // GOOD blendLevel: 16,
 
         blendLevel: 36,
         appBarElevation: 4.0,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        useMaterial3: true,
+        swapLegacyOnMaterial3: true,
+
         subThemesData: const FlexSubThemesData(
           defaultRadius: 13,
           blendOnLevel: 20,
@@ -149,8 +156,5 @@ abstract class AppTheme {
 
           //appBarBackgroundSchemeColor: SchemeColor.surfaceVariant
         ),
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        useMaterial3: true,
-        swapLegacyOnMaterial3: true,
       );
 }
