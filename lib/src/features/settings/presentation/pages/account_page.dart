@@ -5,14 +5,14 @@ import 'package:xmanager/main.dart';
 import 'package:xmanager/src/core/common.dart';
 import 'package:xmanager/src/core/data/models/models.dart';
 
-class Account extends StatefulWidget {
-  const Account({super.key});
+class AccountPage extends StatefulWidget {
+  const AccountPage({super.key});
 
   @override
-  State<Account> createState() => _AccountState();
+  State<AccountPage> createState() => _AccountPageState();
 }
 
-class _AccountState extends State<Account> with WidgetsBindingObserver {
+class _AccountPageState extends State<AccountPage> with WidgetsBindingObserver {
   bool switched = false;
   String blestate = "Unactive";
   final FlutterBluePlus flutterBlue = FlutterBluePlus.instance;

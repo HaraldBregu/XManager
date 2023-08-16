@@ -113,23 +113,26 @@ abstract class AppTheme {
         textTheme: _textTheme,
         fontFamily: _fontFamily,
         
-        //fontFamily: GoogleFonts.notoSans().fontFamily,
+        surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold, // GOOD current
+        //surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold, // GOOD current
+
         //surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces, // GOOD
         //surfaceMode: FlexSurfaceMode.level, // GOOD
         //surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold, // GOOD
         //surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold, // Boh
         //surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold, // GOOD
-        surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold, // GOOD
+        //surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold, // GOOD
         //surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces, // GOOD blendLevel: 16,
 
         blendLevel: 36,
+        //blendLevel: 2,
         appBarElevation: 4.0,
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         useMaterial3: true,
         swapLegacyOnMaterial3: true,
 
         subThemesData: const FlexSubThemesData(
-          defaultRadius: 13,
+          defaultRadius: 15,
           blendOnLevel: 20,
           // Inpit
           inputDecoratorRadius: 0,
@@ -145,12 +148,12 @@ abstract class AppTheme {
           sliderBaseSchemeColor: SchemeColor.onSecondaryContainer,
 
           // Elevated Button
-          elevatedButtonRadius: 5,
+          elevatedButtonRadius: 9,
           elevatedButtonSchemeColor: SchemeColor.onSecondary,
           elevatedButtonSecondarySchemeColor: SchemeColor.secondary,
 
           // Outlined Button
-          outlinedButtonRadius: 5,
+          outlinedButtonRadius: 9,
           //outlinedButtonSchemeColor: SchemeColor.secondary,
           //outlinedButtonOutlineSchemeColor: SchemeColor.onSecondary,
 

@@ -8,7 +8,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Account")),
+      appBar: AppBar(title: const Text("Settings")),
       body: ListView(
         padding: const EdgeInsets.all(8),
         children: [
@@ -37,13 +37,28 @@ class SettingsPage extends StatelessWidget {
               'App Permissions',
               style: context.textTheme.titleMedium,
             ),
-            onTap: () => context.go('/settings/permissions'),
+            onTap: () => context.pushNamed('Permissions page'),
           ),
           ListTile(
             title: const Text('Bluetooth search'),
             trailing: const Icon(Icons.search),
             onTap: () => {},
           ),
+          ListTile(
+            title: Text(
+              'Account',
+              style: context.textTheme.titleMedium,
+            ),
+            onTap: () => context.pushNamed('Account page'),
+          ),
+          ListTile(
+            title: Text(
+              'Profile edit',
+              style: context.textTheme.titleMedium,
+            ),
+            onTap: () => context.pushNamed('Profile page'),
+          ),
+
           ListTile(
             title: Text(
               'Exit',

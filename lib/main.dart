@@ -43,6 +43,7 @@ import 'package:xmanager/src/features/program/presentation/pages/program_create.
 import 'package:xmanager/src/features/program/presentation/pages/program_detail.dart';
 import 'package:xmanager/src/features/program/presentation/pages/program_list.dart';
 import 'package:xmanager/src/features/program/presentation/pages/program_update.dart';
+import 'package:xmanager/src/features/settings/presentation/pages/account_page.dart';
 import 'package:xmanager/src/features/settings/presentation/pages/permissions_page.dart';
 import 'package:xmanager/src/features/settings/presentation/pages/profile_page.dart';
 import 'package:xmanager/src/features/settings/presentation/pages/settings_page.dart';
@@ -218,32 +219,6 @@ class App extends StatelessWidget {
             builder: (context, state) => const DashboardPage(),
             routes: [
               GoRoute(
-                name: "settings",
-                path: 'settings',
-                pageBuilder: (context, state) {
-                  return CustomTransitionPage(
-                    key: state.pageKey,
-                    child: const SettingsPage(),
-                    //transitionDuration: const Duration(milliseconds: 400),
-                    //fullscreenDialog: true,
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      return FadeTransition(
-                        opacity: CurveTween(curve: Curves.easeInOutCirc)
-                            .animate(animation),
-                        child: child,
-                      );
-                    },
-                  );
-                },
-                routes: [
-                  GoRoute(
-                    path: 'permissions',
-                    builder: (context, state) => const PermissionsPage(),
-                  ),
-                ],
-              ),
-              GoRoute(
                 name: "Program list",
                 path: 'programs',
                 builder: (context, state) => const ProgramList(),
@@ -301,11 +276,6 @@ class App extends StatelessWidget {
                   ),
                 ],
               ),
-              GoRoute(
-                name: "Profile page",
-                path: 'profile',
-                builder: (context, state) => const ProfilePage(),
-              ),
             ],
           ),
           GoRoute(
@@ -327,6 +297,43 @@ class App extends StatelessWidget {
                 name: "recovery",
                 path: 'recovery',
                 builder: (context, state) => const RecoveryPage(),
+              ),
+            ],
+          ),
+          GoRoute(
+            name: "Settings page",
+            path: '/settings',
+            pageBuilder: (context, state) {
+              return CustomTransitionPage(
+                key: state.pageKey,
+                child: const SettingsPage(),
+                //transitionDuration: const Duration(milliseconds: 400),
+                //fullscreenDialog: true,
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(
+                    opacity: CurveTween(curve: Curves.easeInOutCirc)
+                        .animate(animation),
+                    child: child,
+                  );
+                },
+              );
+            },
+            routes: [
+              GoRoute(
+                name: "Permissions page",
+                path: 'permissions',
+                builder: (context, state) => const PermissionsPage(),
+              ),
+              GoRoute(
+                name: "Account page",
+                path: 'account',
+                builder: (context, state) => const AccountPage(),
+              ),
+              GoRoute(
+                name: "Profile page",
+                path: 'profile',
+                builder: (context, state) => const ProfilePage(),
               ),
             ],
           ),
