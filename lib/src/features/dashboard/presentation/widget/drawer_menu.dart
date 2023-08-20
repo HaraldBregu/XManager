@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xmanager/src/core/theme_extension.dart';
 
 class DrawerMenu extends StatelessWidget {
   const DrawerMenu({super.key});
@@ -6,43 +7,122 @@ class DrawerMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      width: 250,
+      width: 320,
       child: ListView(
         children: [
-          DrawerHeader(
-            child: Card(
-              elevation: 4,
-              child: Center(
-                child: Text('Drawer Header'),
+          Container(
+            decoration: BoxDecoration(
+              //color: context.colorScheme.background,
+              border: Border(
+                bottom: BorderSide(
+                  color: context.colorScheme.background,
+                ),
               ),
             ),
-          ),
-          DrawerButton(
-            onPressed: () {},
-          ),
-          DrawerButtonIcon(),
-          ListTile(
-            leading: CircleAvatar(
-              child: Icon(
-                Icons.person,
-              ),
+            child: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(15.0, 40.0, 0, 0),
+                      child: CircleAvatar(
+                        radius: 35,
+                        backgroundColor: context.colorScheme.primaryContainer,
+                        child: const Icon(
+                          Icons.person,
+                          size: 35,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 15.0, 10.0, 0),
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.light_mode,
+                          //Icons.dark_mode,
+                          // Icons.mode_night,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const ListTile(
+                  title: Text("Marco Materazzi"),
+                  subtitle: Text("marc@materazzi.com"),
+                  trailing: Icon(Icons.expand_more),
+                )
+              ],
             ),
-            title: Text("John Doe"),
-            subtitle: Text("Top Manager"),
           ),
-          ListTile(
-            title: Text("Dark mode"),
+          const ListTile(
+            title: Text("Search"),
+            leading: Icon(
+              Icons.search,
+            ),
           ),
-          ListTile(
-            title: Text("Title three"),
+          const ListTile(
+            title: Text("Players"),
+            leading: Icon(
+              Icons.groups,
+            ),
           ),
-          ListTile(
-            title: Text("Title four"),
+          const ListTile(
+            title: Text("Add player"),
+            leading: Icon(
+              Icons.person_add,
+            ),
           ),
-          SwitchListTile(
-            title: Text("Dark mode"),
-            value: false,
-            onChanged: (bool boolvalue) {},
+          const ListTile(
+            title: Text("Devices"),
+            leading: Icon(
+              Icons.devices,
+            ),
+          ),
+          const ListTile(
+            title: Text("Contacts"),
+            leading: Icon(
+              Icons.contacts,
+            ),
+          ),
+          const ListTile(
+            title: Text("Invita amici"),
+            leading: Icon(
+              Icons.group_add,
+            ),
+          ),
+          const ListTile(
+            title: Text("Condividi"),
+            leading: Icon(
+              Icons.share,
+            ),
+          ),
+          const ListTile(
+            title: Text("Funzioni di Xmanager"),
+            leading: Icon(Icons.help),
+          ),
+          const ListTile(
+            title: Text("Network"),
+            leading: Icon(Icons.public),
+          ),
+
+          Container(
+            height: 1,
+            color: context.colorScheme.background,
+          ),
+          const ListTile(
+            title: Text("Licences"),
+          ),
+          const ListTile(
+            title: Text("Terms and Conditions"),
+          ),
+          const ListTile(
+            title: Text("Exit"),
+            leading: Icon(
+              Icons.exit_to_app,
+            ),
           ),
         ],
       ),

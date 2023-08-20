@@ -31,61 +31,164 @@ class TrainingCard extends StatelessWidget {
                               "Program section",
                               style: TextStyle(
                                 fontSize:
-                                    context.textTheme.titleLarge?.fontSize,
+                                    context.textTheme.titleMedium?.fontSize,
                                 fontWeight: FontWeight.bold,
-                                color: context.colorScheme.onSecondaryContainer,
+                                //color: context.colorScheme.onSecondaryContainer,
+                              ),
+                            ),
+                            Text(
+                              "Passaggio con destra e sinistra continuo",
+                              style: TextStyle(
+                                fontSize: context.textTheme.bodySmall?.fontSize,
+                                fontWeight: FontWeight.normal,
+                                //color: context.colorScheme.onSecondaryContainer,
+                              ),
+                            ),
+                            Text(
+                              "Durata: 12:40",
+                              style: TextStyle(
+                                fontSize: context.textTheme.bodySmall?.fontSize,
+                                fontWeight: FontWeight.normal,
+                                //color: context.colorScheme.onSecondaryContainer,
                               ),
                             ),
                             const SizedBox(
-                              height: 15,
+                              height: 20,
                             ),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Icon(
-                                  Icons.radio_button_checked_rounded,
-                                  color: context.colorScheme.secondary,
-                                  size: 15,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        RichText(
+                                          text: TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: '12',
+                                                style: TextStyle(
+                                                  fontSize: context.textTheme
+                                                      .titleLarge?.fontSize,
+                                                  //fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text: ':',
+                                                style: TextStyle(
+                                                  fontSize: context.textTheme
+                                                      .titleLarge?.fontSize,
+                                                  //fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text: '34',
+                                                style: TextStyle(
+                                                  fontSize: context.textTheme
+                                                      .titleLarge?.fontSize,
+                                                  //fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Text(
+                                          "COUNTDOWN",
+                                          style: TextStyle(
+                                            //color: context.colorScheme.onSecondaryContainer,
+                                            fontSize: context
+                                                .textTheme.bodySmall?.fontSize,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        RichText(
+                                          text: TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: '5',
+                                                style: TextStyle(
+                                                  fontSize: context.textTheme
+                                                      .titleLarge?.fontSize,
+                                                  //fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text: '/32',
+                                                style: TextStyle(
+                                                  fontSize: context.textTheme
+                                                      .titleLarge?.fontSize,
+                                                  //fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Text(
+                                          "COMPLETED",
+                                          style: TextStyle(
+                                            fontSize: context
+                                                .textTheme.bodySmall?.fontSize,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                                const SizedBox(width: 10),
-                                Text(
-                                  "trainning progress",
-                                  style: TextStyle(
-                                    color: context
-                                        .colorScheme.onSecondaryContainer,
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 30,
+                                    top: 10,
+                                    bottom: 0,
+                                    right: 30,
                                   ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.trip_origin,
-                                  color: context.colorScheme.error,
-                                  size: 15,
-                                ),
-                                const SizedBox(width: 10),
-                                Text(
-                                  "one",
-                                  style: TextStyle(
-                                    color: context
-                                        .colorScheme.onSecondaryContainer,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.trip_origin,
-                                  color: context.colorScheme.secondary,
-                                  size: 15,
-                                ),
-                                const SizedBox(width: 10),
-                                Text(
-                                  "00:12:05",
-                                  style: TextStyle(
-                                    color: context
-                                        .colorScheme.onSecondaryContainer,
+                                  child: TweenAnimationBuilder(
+                                    tween: Tween(begin: 0.0, end: 0.6),
+                                    duration: const Duration(seconds: 60),
+                                    builder: (context, value, _) {
+                                      return CircularPercentIndicator(
+                                        radius: 60,
+                                        lineWidth: 10,
+                                        percent: value,
+                                        progressColor:
+                                            context.colorScheme.secondary,
+                                        backgroundColor:
+                                            context.colorScheme.onTertiary,
+                                        center: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.bolt,
+                                              size: 22,
+                                              color:
+                                                  context.colorScheme.secondary,
+                                            ),
+                                            const SizedBox(
+                                              height: 6,
+                                            ),
+                                            Text(
+                                              '${(value * 100).round()} %',
+                                              style: TextStyle(
+                                                fontSize: context.textTheme
+                                                    .titleLarge?.fontSize,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
                               ],
@@ -94,9 +197,10 @@ class TrainingCard extends StatelessWidget {
                         ),
                       ),
                     ),
+                    /*
                     Padding(
                       padding: const EdgeInsets.only(
-                        left: 0,
+                        left: 30,
                         top: 30,
                         bottom: 30,
                         right: 30,
@@ -137,12 +241,13 @@ class TrainingCard extends StatelessWidget {
                         },
                       ),
                     ),
+                    */
                   ],
                 ),
               ),
-              ListTile(
+              /*ListTile(
                 title: Text(
-                  'Training list',
+                  'Training programs',
                   style: TextStyle(
                     //fontSize: context.textTheme.titleSmall?.fontSize,
                     fontWeight: FontWeight.w700,
@@ -155,7 +260,7 @@ class TrainingCard extends StatelessWidget {
                   Icons.add,
                   size: 28,
                 ),
-              ),
+              ),*/
             ],
           ),
         ),

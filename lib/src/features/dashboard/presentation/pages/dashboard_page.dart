@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -16,15 +17,32 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final TextTheme textTheme = theme.textTheme;
-    final ColorScheme colorScheme = theme.colorScheme;
 
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {},
-        backgroundColor: colorScheme.secondaryContainer,
-        foregroundColor: colorScheme.onSecondaryContainer,
+        onPressed: () => showModalBottomSheet<void>(
+          context: context,
+          builder: (BuildContext context) {
+            return SizedBox(
+              height: 400,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const Text('Modal BottomSheet'),
+                    ElevatedButton(
+                      child: Text('Close BottomSheet'),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+        backgroundColor: context.colorScheme.secondaryContainer,
+        foregroundColor: context.colorScheme.onSecondaryContainer,
         icon: const Icon(Icons.play_circle),
         label: const Text('START'),
       ),
@@ -38,10 +56,27 @@ class DashboardPage extends StatelessWidget {
           _PlayerList(),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(13, 5, 13, 5),
-              child: TextButton(
-                onPressed: () {},
-                child: Text("ADD NEW"),
+              padding: const EdgeInsets.fromLTRB(13, 15, 13, 15),
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  style: TextStyle(
+                    fontSize: context.textTheme.titleMedium?.fontSize,
+                  ),
+                  children: [
+                    const WidgetSpan(
+                      child: Icon(
+                        Icons.add,
+                        size: 20,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'ADD NEW PLAYER',
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () => print('Tap Here onTap'),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -78,23 +113,10 @@ class _PlayerListTitle extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                trailing: const Text("9"),
                 //trailing: Icon(Icons.add),
               ),
-              const Card(
-                elevation: 9,
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: ListTile(
-                    title: Text(
-                      'Number of players',
-                    ),
-                    trailing: const Icon(
-                      Icons.add,
-                      size: 28,
-                    ),
-                  ),
-                ),
-              ),
+              //OutlinedButton(onPressed: () {}, child: Text("Create")),
             ],
           ),
         ),
@@ -118,9 +140,24 @@ class _PlayerList extends StatelessWidget {
               child: Card(
                 elevation: 1,
                 child: ListTile(
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: Container(
+                      height: 50.0,
+                      width: 50.0,
+                      color: context.colorScheme.primaryContainer,
+                      //color: Color(0xffFF0E58),
+                      child: const Icon(
+                        Icons.person,
+                        //color: Colors.white,
+                        size: 25.0,
+                      ),
+                    ),
+                  ),
                   title: Text("Marco Materazzi"),
                   subtitle: Text("Player role"),
-                  onTap: () {},
+                  onTap: () => context
+                      .pushNamed("Player detail", params: {"id": "relfkemr"}),
                 ),
               ),
             );

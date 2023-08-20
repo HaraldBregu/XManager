@@ -22,7 +22,7 @@ class CoachCard extends StatelessWidget {
                     if (state is UserAuthorizedState) {
                       return ListTile(
                         title: const Text("Massimo Allegri"),
-                        subtitle: const Text("FiFa Pro"),
+                        subtitle: const Text("Manager"),
                         leading: const FittedBox(
                           child: CircleAvatar(
                             child: Icon(
@@ -36,7 +36,7 @@ class CoachCard extends StatelessWidget {
                           ),
                           onPressed: () => {},
                         ),
-                        onTap: () => context.pushNamed("Profile page"),
+                        // onTap: () => context.pushNamed("Profile page"),
                       );
                     }
                     if (state is UserUnAuthorizedState) {

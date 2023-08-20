@@ -6,8 +6,8 @@ class PlayerDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Player detail")),
-      body: const Text("program detail id"),
+      appBar: AppBar(title: const Text("Player")),
+      body: const Text(""),
     );
   }
 }
