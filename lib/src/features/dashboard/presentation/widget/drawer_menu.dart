@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 
 class DrawerMenu extends StatelessWidget {
@@ -58,21 +59,9 @@ class DrawerMenu extends StatelessWidget {
             ),
           ),
           const ListTile(
-            title: Text("Search"),
-            leading: Icon(
-              Icons.search,
-            ),
-          ),
-          const ListTile(
             title: Text("Players"),
             leading: Icon(
               Icons.groups,
-            ),
-          ),
-          const ListTile(
-            title: Text("Add player"),
-            leading: Icon(
-              Icons.person_add,
             ),
           ),
           const ListTile(
@@ -107,7 +96,15 @@ class DrawerMenu extends StatelessWidget {
             title: Text("Network"),
             leading: Icon(Icons.public),
           ),
-
+          Container(
+            height: 1,
+            color: context.colorScheme.background,
+          ),
+          ListTile(
+            title: const Text("Bluetooth search"),
+            leading: const Icon(Icons.bluetooth),
+            onTap: () => context.pushNamed('bluetooth search page'),
+          ),
           Container(
             height: 1,
             color: context.colorScheme.background,

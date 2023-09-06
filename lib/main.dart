@@ -33,8 +33,10 @@ import 'package:xmanager/src/features/auth/pages/recovery_page.dart';
 import 'package:xmanager/src/features/auth/pages/signup_page.dart';
 import 'package:xmanager/src/features/auth/pages/start_page.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/dashboard_page.dart';
-import 'package:xmanager/src/features/device/pages/device_add.dart';
+import 'package:xmanager/src/features/debug/pages/ble_debug_page.dart';
+import 'package:xmanager/src/features/debug/pages/debug_page.dart';
 import 'package:xmanager/src/features/device/pages/device_list.dart';
+import 'package:xmanager/src/features/device/pages/device_search.dart';
 import 'package:xmanager/src/features/player/pages/player_create.dart';
 import 'package:xmanager/src/features/player/pages/player_detail.dart';
 import 'package:xmanager/src/features/player/pages/player_list.dart';
@@ -269,11 +271,11 @@ class App extends StatelessWidget {
                 path: 'devices',
                 builder: (context, state) => const DeviceList(),
                 routes: [
-                  GoRoute(
-                    name: "Device add",
-                    path: 'add',
-                    builder: (context, state) => const DeviceAdd(),
-                  ),
+                  // GoRoute(
+                  //   name: "Device add",
+                  //   path: 'add',
+                  //   builder: (context, state) => const DeviceAdd(),
+                  // ),
                 ],
               ),
             ],
@@ -334,6 +336,23 @@ class App extends StatelessWidget {
                 name: "Profile page",
                 path: 'profile',
                 builder: (context, state) => const ProfilePage(),
+              ),
+            ],
+          ),
+          GoRoute(
+            name: "Debug",
+            path: '/debug',
+            builder: (context, state) => const DebugPage(),
+            routes: [
+              GoRoute(
+                name: "bluetooth debug page",
+                path: 'bluetooth',
+                builder: (context, state) => const BleDebugPage(),
+              ),
+              GoRoute(
+                name: "bluetooth search page",
+                path: 'bluetooth_search',
+                builder: (context, state) => const DeviceSearch(),
               ),
             ],
           ),

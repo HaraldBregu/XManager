@@ -85,6 +85,10 @@ class NavBarDashboard extends StatelessWidget {
               ),
               onPressed: () => context.pushNamed('Settings page'),
             ),
+            // IconButton(
+            //   icon: const Icon(Icons.bluetooth),
+            //   onPressed: () => context.pushNamed('bluetooth debug page'),
+            // ),
           ],
         );
       },
