@@ -19,6 +19,8 @@ import 'package:xmanager/src/core/domain/repository/app_repository.dart';
 import 'package:xmanager/src/core/domain/repository/ble_repository.dart';
 import 'package:xmanager/src/core/domain/repository/player_repository.dart';
 import 'package:xmanager/src/core/domain/repository/user_repository.dart';
+import 'package:xmanager/src/core/domain/usecases/ble_is_scanning.dart';
+import 'package:xmanager/src/core/domain/usecases/ble_scan_results.dart';
 import 'package:xmanager/src/core/domain/usecases/current_user.dart';
 import 'package:xmanager/src/core/domain/usecases/exit_user.dart';
 import 'package:xmanager/src/core/domain/usecases/save_player.dart';
@@ -26,6 +28,7 @@ import 'package:xmanager/src/core/domain/usecases/start_ble_scan.dart';
 import 'package:xmanager/src/core/domain/usecases/stop_ble_scan.dart';
 import 'package:xmanager/src/core/domain/usecases/unlock_user.dart';
 import 'package:xmanager/src/core/presentation/bloc/ble/ble_bloc.dart';
+import 'package:xmanager/src/core/presentation/bloc/ble/bloc.dart';
 import 'package:xmanager/src/core/presentation/bloc/player/bloc.dart';
 import 'package:xmanager/src/core/presentation/bloc/user/bloc.dart';
 import 'package:xmanager/src/features/auth/pages/login_page.dart';
@@ -35,6 +38,7 @@ import 'package:xmanager/src/features/auth/pages/start_page.dart';
 import 'package:xmanager/src/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:xmanager/src/features/debug/pages/ble_debug_page.dart';
 import 'package:xmanager/src/features/debug/pages/debug_page.dart';
+import 'package:xmanager/src/features/debug/pages/permissions_debug_page.dart';
 import 'package:xmanager/src/features/device/pages/device_list.dart';
 import 'package:xmanager/src/features/device/pages/device_search.dart';
 import 'package:xmanager/src/features/player/pages/player_create.dart';
@@ -73,6 +77,8 @@ Future<void> main() async {
     () => BleBloc(
       startBleScanUseCase: sl(),
       stopBleScanUseCase: sl(),
+      bleIsScanningUseCase: sl(),
+      bleScanResultUseCase: sl(),
     ),
   );
   sl.registerFactory(
@@ -87,6 +93,8 @@ Future<void> main() async {
   sl.registerLazySingleton(() => ExitUserUseCase(sl()));
   sl.registerLazySingleton(() => StartBleScanUseCase(sl()));
   sl.registerLazySingleton(() => StopBleScanUseCase(sl()));
+  sl.registerLazySingleton(() => BleIsScanningUseCase(sl()));
+  sl.registerLazySingleton(() => BleScanResultsUseCase(sl()));
   sl.registerLazySingleton(() => SavePlayerUseCase(sl()));
 
   // Repository
@@ -99,7 +107,7 @@ Future<void> main() async {
   sl.registerLazySingleton(
     () => SharedPreferencesDataSourceImpl(sharedPreferences: sl()),
   );
-  sl.registerLazySingleton(() => BleDataSourceImpl(flutterBluePlus: sl()));
+  sl.registerLazySingleton(() => BleDataSourceImpl());
   sl.registerLazySingleton(() => PlayerDataSourceImpl());
 
   //sl.registerSingleton(SharedPreferencesService);
@@ -115,7 +123,7 @@ Future<void> main() async {
   // Drivers, network hardware data
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
-  sl.registerLazySingleton(() => FlutterBluePlus.instance);
+  //sl.registerLazySingleton(() => FlutterBluePlus.instance);
 
   runApp(
     MultiBlocProvider(
@@ -353,6 +361,16 @@ class App extends StatelessWidget {
                 name: "bluetooth search page",
                 path: 'bluetooth_search',
                 builder: (context, state) => const DeviceSearch(),
+              ),
+              GoRoute(
+                name: "bluetooth list page",
+                path: 'bluetooth_list',
+                builder: (context, state) => const DeviceList(),
+              ),
+              GoRoute(
+                name: "permission list page",
+                path: 'permission_list',
+                builder: (context, state) => const PermissionsDebugPage(),
               ),
             ],
           ),

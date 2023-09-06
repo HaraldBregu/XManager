@@ -100,7 +100,6 @@ class _PermissionState extends State<PermissionWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final AppLocalizations? localize = AppLocalizations.of(context);
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
 

@@ -5,6 +5,11 @@ abstract class BleEvent extends Equatable {
   const BleEvent();
 }
 
+// class InitialBle extends BleEvent {
+//   @override
+//   List<Object?> get props => [];
+// }
+
 class StartScanning extends BleEvent {
   final int seconds;
   const StartScanning({required this.seconds});

@@ -11,7 +11,7 @@ class BleDevicesList extends StatefulWidget {
 }
 
 class _BleDevicesListState extends State<BleDevicesList> {
-  final FlutterBluePlus flutterBlue = FlutterBluePlus.instance;
+  //final FlutterBluePlus flutterBlue = FlutterBluePlus.instance;
   final List<BluetoothDevice> devicesList = <BluetoothDevice>[];
   BluetoothDevice? _connectedDevice;
   List<BluetoothService> _services = [];
@@ -95,7 +95,7 @@ class _BleDevicesListState extends State<BleDevicesList> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
-                  flutterBlue.stopScan();
+                FlutterBluePlus.stopScan();
                   try {
                     await device.connect();
                   } on PlatformException catch (e) {
@@ -133,17 +133,19 @@ class _BleDevicesListState extends State<BleDevicesList> {
   void initState() {
     super.initState();
 
-    flutterBlue.connectedDevices.asStream().listen((List<BluetoothDevice> devices) {
+    FlutterBluePlus.connectedDevices
+        .asStream()
+        .listen((List<BluetoothDevice> devices) {
       for (BluetoothDevice device in devices) {
         _addDeviceTolist(device);
       }
     });
-    flutterBlue.scanResults.listen((List<ScanResult> results) {
+    FlutterBluePlus.scanResults.listen((List<ScanResult> results) {
       for (ScanResult result in results) {
         _addDeviceTolist(result.device);
       }
     });
-    flutterBlue.startScan();
+    FlutterBluePlus.startScan();
     //flutterBlue.startScan(withServices: [Guid("yourSpecificServiceUUIDString")]);
   }
 

@@ -2,7 +2,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xmanager/src/core/presentation/bloc/app/bloc.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
-  AppBloc(super.initialState);
+  
+  AppBloc(super.initialState) {
+    on<AppPermissions>(_onPermissionsEvent);
+  }
+
+  Future<void> _onPermissionsEvent(
+    AppPermissions event,
+    Emitter<AppState> emit,
+  ) async {}
+
+  //AppBloc(super.initialState);
   /*
   final GetUserUseCase getUserUseCase;
 

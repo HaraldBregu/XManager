@@ -15,10 +15,10 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> with WidgetsBindingObserver {
   bool switched = false;
   String blestate = "Unactive";
-  final FlutterBluePlus flutterBlue = FlutterBluePlus.instance;
+  //final FlutterBluePlus flutterBlue = FlutterBluePlus.instance;
 
   Future<bool> _checkDeviceBluetoothIsOn() async {
-    final i = await flutterBlue.isOn;
+    final i = await FlutterBluePlus.isOn;
     setState(() {
       if (i == true) {
         blestate = "Active";
@@ -32,7 +32,7 @@ class _AccountPageState extends State<AccountPage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    flutterBlue.state.listen((event) {
+    FlutterBluePlus.state.listen((event) {
       _checkDeviceBluetoothIsOn();
     });
     _checkDeviceBluetoothIsOn();

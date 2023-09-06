@@ -1,14 +1,16 @@
-import 'package:xmanager/src/core/domain/entities/ble_device_entity.dart';
+import 'package:dartz/dartz.dart';
 import 'package:xmanager/src/core/domain/repository/ble_repository.dart';
+import 'package:xmanager/src/core/failures.dart';
 import 'package:xmanager/src/core/usecase.dart';
 
-class StartBleScanUseCase implements StreamUseCase<List<BleDeviceEntity>, int> {
+class StartBleScanUseCase implements UseCase<void, int> {
   final BleRepository _bleRepository;
 
   const StartBleScanUseCase(this._bleRepository);
 
   @override
-  Stream<List<BleDeviceEntity>> call(int second) {
-    return _bleRepository.startScan(second);
+  Future<Either<Failure, void>> call(int second) async {
+    // ignore: void_checks
+    return Right(_bleRepository.startScan(second));
   }
 }

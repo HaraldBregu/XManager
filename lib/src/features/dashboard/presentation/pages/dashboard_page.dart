@@ -32,7 +32,7 @@ class DashboardPage extends StatelessWidget {
                   children: <Widget>[
                     const Text('Modal BottomSheet'),
                     ElevatedButton(
-                      child: Text('Close BottomSheet'),
+                      child: const Text('Close BottomSheet'),
                       onPressed: () => Navigator.pop(context),
                     ),
                   ],

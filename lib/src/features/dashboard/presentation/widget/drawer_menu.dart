@@ -101,10 +101,22 @@ class DrawerMenu extends StatelessWidget {
             color: context.colorScheme.background,
           ),
           ListTile(
+            title: const Text("Permissions"),
+            leading: const Icon(Icons.perm_camera_mic),
+            onTap: () => context.pushNamed('permission list page'),
+          ),
+          ListTile(
             title: const Text("Bluetooth search"),
             leading: const Icon(Icons.bluetooth),
             onTap: () => context.pushNamed('bluetooth search page'),
           ),
+          ListTile(
+            title: const Text("Bluetooth list"),
+            leading: const Icon(Icons.bluetooth),
+            onTap: () => context.pushNamed('bluetooth list page'),
+          ),
+
+          
           Container(
             height: 1,
             color: context.colorScheme.background,

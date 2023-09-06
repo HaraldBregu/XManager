@@ -1,25 +1,22 @@
 import 'package:xmanager/src/core/data/datasources/ble_datasource.dart';
-import 'package:xmanager/src/core/data/models/ble_device_model.dart';
+import 'package:xmanager/src/core/domain/entities/ble_device_entity.dart';
 import 'package:xmanager/src/core/domain/repository/ble_repository.dart';
 
 class BleRepositoryImpl implements BleRepository {
-  final BleDataSourceImpl _bleDataSourceImpl;
+  final BleDataSourceImpl _dataSource;
 
-  const BleRepositoryImpl(this._bleDataSourceImpl);
-
-  @override
-  Stream<List<BleDeviceModel>> startScan(int seconds) {
-    return _bleDataSourceImpl.startScan(seconds);
-  }
+  const BleRepositoryImpl(this._dataSource);
 
   @override
-  Stream<bool> isScanning() {
-    throw _bleDataSourceImpl.isScanning();
-  }
+  Future<bool> startScan(int seconds) => _dataSource.startScan(seconds);
 
   @override
-  Future<void> stopScan() {
-    return _bleDataSourceImpl.stopScan();
-  }
+  Stream<List<BleDeviceEntity>> scanResults() => _dataSource.scanResults();
+
+  @override
+  Stream<bool> isScanning() => _dataSource.isScanning();
+
+  @override
+  Future<void> stopScan() => _dataSource.stopScan();
   
 }

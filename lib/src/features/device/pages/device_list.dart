@@ -41,60 +41,40 @@ class _DeviceListBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        SliverToBoxAdapter(
+        const SliverToBoxAdapter(
           child: ListTile(
-            title: const Text("Bluetooth State"),
-            trailing: Switch(
-              value: false,
-              onChanged: (bool value) {},
-            ),
+            title: Text("Scanning State"),
+            subtitle: Text("scanning"),
           ),
         ),
-        SliverToBoxAdapter(
-          child: BlocBuilder<BleBloc, BleState>(
-            builder: (bloc, state) {
-              if (state is Scanning) {
-                final devices = state.devices;
-                final length = devices.length;
-                return ListView.builder(
-                  padding: const EdgeInsets.all(8),
-                  itemCount: length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final device = devices[index];
-                    return ListTile(
-                      title: Text(device.name),
-                      subtitle: Text(device.uuid),
-                      onTap: () {},
-                      onLongPress: () {},
-                    );
-                  },
-                );
-              }
-              if (state is EndScanning) {
-                return const Text("end scanning");
-              }
+        BlocBuilder<BleBloc, BleState>(
+          builder: (context, state) {
+            // if (state is AddingDevices) {
+            //   final devices = state.devices;
+            //   final length = devices.length;
 
-              return const Text("No data");
-            },
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: Column(
-            children: [
-              OutlinedButton(
-                child: const Text("Device list test"),
-                onPressed: () {},
+            //   return SliverList(
+            //     delegate: SliverChildBuilderDelegate(
+            //       (BuildContext context, int index) {
+            //         final device = devices[index];
+            //         return ListTile(
+            //           title: Text("Device name: ${device.name}"),
+            //           subtitle: Text(device.uuid),
+            //           onTap: () {},
+            //         );
+            //       },
+            //       childCount: length,
+            //     ),
+            //   );
+            // }
+            return const SliverToBoxAdapter(
+              child: SizedBox(
+                height: 0,
               ),
-            ],
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: SizedBox(
-            height: 120,
-          ),
+            );
+          },
         ),
       ],
     );
-    ;
   }
 }

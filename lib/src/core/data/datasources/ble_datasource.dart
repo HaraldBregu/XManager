@@ -2,29 +2,29 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:xmanager/src/core/data/models/ble_device_model.dart';
 
 abstract class BleDataSource {
-  Stream<List<BleDeviceModel>> startScan(int seconds);
+  Future<void> startScan(int seconds);
+  Stream<List<BleDeviceModel>> scanResults();
   Stream<bool> isScanning();
   Future<void> stopScan();
   Future<bool> isAvailable();
   Future<void> turnOn();
-  Future<void> turnOff();
-  Future<bool> isOn();
 }
 
 class BleDataSourceImpl implements BleDataSource {
-  final FlutterBluePlus flutterBluePlus;
-
-  BleDataSourceImpl({
-    required this.flutterBluePlus,
-  });
+  BleDataSourceImpl();
 
   @override
-  Stream<List<BleDeviceModel>> startScan(int seconds) {
-    flutterBluePlus.startScan(
+  Future<bool> startScan(int seconds) async {
+    await FlutterBluePlus.startScan(
       timeout: Duration(seconds: seconds),
     );
 
-    final test = flutterBluePlus.scanResults.asyncMap((event) {
+    return true;
+  }
+
+  @override
+  Stream<List<BleDeviceModel>> scanResults() {
+    final test = FlutterBluePlus.scanResults.asyncMap((event) {
       return List<BleDeviceModel>.from(
         event.map(
           (e) {
@@ -39,35 +39,34 @@ class BleDataSourceImpl implements BleDataSource {
     });
     return test;
   }
-  
+
   @override
   Stream<bool> isScanning() {
-    return flutterBluePlus.isScanning;
+    return FlutterBluePlus.isScanning;
   }
 
   @override
   Future stopScan() {
-    return flutterBluePlus.stopScan();
-  }
-  
-  @override
-  Future<bool> isAvailable() {
-    return flutterBluePlus.isAvailable;
-  }
-  
-  @override
-  Future<void> turnOn() {
-    return flutterBluePlus.turnOn();
-  }
-  
-  @override
-  Future<void> turnOff() {
-    return flutterBluePlus.turnOff();
-  }
-  
-  @override
-  Future<bool> isOn() {
-    return flutterBluePlus.isOn;
+    return FlutterBluePlus.stopScan();
   }
 
+  @override
+  Future<bool> isAvailable() {
+    return FlutterBluePlus.isAvailable;
+  }
+
+  @override
+  Future<void> turnOn() {
+    return FlutterBluePlus.turnOn();
+  }
+
+  // @override
+  // Future<void> turnOff() {
+  //   return FlutterBluePlus.turnOff();
+  // }
+
+  // @override
+  // Future<bool> isOn() {
+  //   return FlutterBluePlus.isOn;
+  // }
 }

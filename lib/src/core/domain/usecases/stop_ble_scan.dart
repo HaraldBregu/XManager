@@ -9,18 +9,8 @@ class StopBleScanUseCase implements UseCase<void, void> {
   const StopBleScanUseCase(this._bleRepository);
   
   @override
-  Future<Either<Failure, void>> call(void params) {
-    // TODO: implement call
-    throw UnimplementedError();
+  Future<Either<Failure, void>> call(void params) async {
+    return Right(_bleRepository.stopScan());
   }
 
-  // @override
-  // Future<Either<Failure, void>> call(void params) {
-  //   return _bleRepository.stopScan();
-  // }
-
-  // @override
-  // Future<void> call(void params) {
-  //   return _bleRepository.stopScan();
-  // }
 }

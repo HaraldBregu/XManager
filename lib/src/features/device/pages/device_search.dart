@@ -10,7 +10,6 @@ class DeviceSearch extends StatefulWidget {
 }
 
 class _DeviceSearchState extends State<DeviceSearch> {
-  final FlutterBluePlus flutterBlue = FlutterBluePlus.instance;
   final List<BluetoothDevice> devicesList = <BluetoothDevice>[];
   final Map<Guid, List<int>> readValues = <Guid, List<int>>{};
 
@@ -27,14 +26,14 @@ class _DeviceSearchState extends State<DeviceSearch> {
           actions: [
             TextButton(
               child: Text("SEARCH"),
-              onPressed: () => FlutterBluePlus.instance
+              onPressed: () => FlutterBluePlus
                   .startScan(timeout: const Duration(seconds: 5)),
             ),
           ],
         ),
         body: RefreshIndicator(
           onRefresh: () async {
-            FlutterBluePlus.instance
+            FlutterBluePlus
                 .startScan(timeout: const Duration(seconds: 5));
           },
           child: CustomScrollView(
@@ -42,19 +41,20 @@ class _DeviceSearchState extends State<DeviceSearch> {
               SliverToBoxAdapter(
                 child: StreamBuilder<List<BluetoothDevice>>(
                   stream: Stream.periodic(const Duration(seconds: 2)).asyncMap(
-                      (_) => FlutterBluePlus.instance.connectedDevices),
+                      (_) => FlutterBluePlus.connectedSystemDevices),
                   initialData: const [],
                   builder: (c, snapshot) => Column(
                     children: snapshot.data!
                         .map((d) => ListTile(
                               title: Text(d.name),
                               subtitle: Text(d.id.toString()),
-                              trailing: StreamBuilder<BluetoothDeviceState>(
+                              trailing: StreamBuilder<BluetoothConnectionState>(
                                 stream: d.state,
-                                initialData: BluetoothDeviceState.disconnected,
+                                initialData:
+                                    BluetoothConnectionState.disconnected,
                                 builder: (c, snapshot) {
                                   if (snapshot.data ==
-                                      BluetoothDeviceState.connected) {
+                                      BluetoothConnectionState.connected) {
                                     return ElevatedButton(
                                       child: const Text('OPEN'),
                                       onPressed: () {
@@ -77,7 +77,7 @@ class _DeviceSearchState extends State<DeviceSearch> {
               ),
               SliverToBoxAdapter(
                 child: StreamBuilder<List<ScanResult>>(
-                  stream: FlutterBluePlus.instance.scanResults,
+                  stream: FlutterBluePlus.scanResults,
                   initialData: const [],
                   builder: (c, snapshot) {
                     return Column(
@@ -91,11 +91,15 @@ class _DeviceSearchState extends State<DeviceSearch> {
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               DeviceDetailTest(
-                                                  device: r.device)),
+                                      device: r.device,
+                                    ),
+                                  ),
                                     );
                                   },
-                                ))
-                            .toList());
+                            ),
+                          )
+                          .toList(),
+                    );
                   },
                 ),
               ),
