@@ -1,10 +1,13 @@
-import 'package:equatable/equatable.dart';
-
-abstract class AppEvent extends Equatable {
+abstract class AppEvent {
   const AppEvent();
 }
 
-class AppPermissions extends AppEvent {
-  @override
-  List<Object?> get props => [];
-}
+class AppStartEvent extends AppEvent {}
+
+class RequestLocationPermission extends AppEvent {}
+
+class RequestBluetoothPermission extends AppEvent {}
+
+class RequestBluetoothConnectPermission extends AppEvent {}
+
+class RequestBluetoothScanPermission extends AppEvent {}

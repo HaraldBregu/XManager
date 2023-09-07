@@ -346,10 +346,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_blue_plus
-      sha256: "3b3e92a86ed70046322d6b5626caa2c70daa55b0f3936a02c5707b6069cb7c02"
+      sha256: "5769d96e30686d1478a9f7103a5d96114a98c566a609b796dd1ed44f57f204c0"
       url: "https://pub.dev"
     source: hosted
-    version: "1.14.18"
+    version: "1.14.23"
   flutter_driver:
     dependency: transitive
     description: flutter

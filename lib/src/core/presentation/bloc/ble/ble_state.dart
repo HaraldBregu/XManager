@@ -1,39 +1,22 @@
-import 'package:equatable/equatable.dart';
 import 'package:xmanager/src/core/domain/entities/ble_device_entity.dart';
 
-abstract class BleState extends Equatable {
-  const BleState();
+abstract class BleState {
+  final List<BleDeviceEntity> devices;
+  const BleState({required this.devices});
 }
 
 class InitialState extends BleState {
-  const InitialState();
-
-  @override
-  List<Object?> get props => [];
+  const InitialState({required super.devices});
 }
 
-class Scanning extends BleState {
-  final List<BleDeviceEntity> devices;
-  const Scanning(this.devices);
-
-  @override
-  List<Object?> get props => [];
+class ScanningStarted extends BleState {
+  const ScanningStarted({required super.devices});
 }
 
-class EndScanning extends BleState {
-  final List<BleDeviceEntity> devices;
-  const EndScanning(this.devices);
-
-  @override
-  List<Object?> get props => [devices];
+class ScanningDevices extends BleState {
+  const ScanningDevices({required super.devices});
 }
 
-// class AddingDevices extends BleState {
-//   const AddingDevices({
-//     required super.isScanning,
-//     required super.devices,
-//   });
-
-//   @override
-//   List<Object?> get props => [];
-// }
+class ScanningEnded extends BleState {
+  const ScanningEnded({required super.devices});
+}

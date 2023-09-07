@@ -32,3 +32,99 @@ class AppPermissionsStatusUseCase implements UseCase<bool, String> {
     throw UnimplementedError();
   }
 }
+
+///
+/// LOCATION PERMISSIONS
+///
+class LocationPermissionsGrantedUseCase implements UseCase<bool, NoParams> {
+  LocationPermissionsGrantedUseCase(this._appRepository);
+  final AppRepository _appRepository;
+
+  @override
+  Future<Either<Failure, bool>> call(NoParams params) async {
+    return Right(await _appRepository.locationPermissionGranted());
+  }
+}
+
+class RequestLocationPermissionsUseCase implements UseCase<bool, NoParams> {
+  RequestLocationPermissionsUseCase(this._appRepository);
+  final AppRepository _appRepository;
+
+  @override
+  Future<Either<Failure, bool>> call(NoParams params) async {
+    return Right(await _appRepository.requestLocationPermission());
+  }
+}
+
+///
+/// BLUETOOTH PERMISSIONS
+///
+class BluetoothPermissionsGrantedUseCase implements UseCase<bool, NoParams> {
+  BluetoothPermissionsGrantedUseCase(this._appRepository);
+  final AppRepository _appRepository;
+
+  @override
+  Future<Either<Failure, bool>> call(NoParams params) async {
+    return Right(await _appRepository.bluetoothPermissionGranted());
+  }
+}
+
+class RequestBluetoothPermissionsUseCase implements UseCase<bool, NoParams> {
+  RequestBluetoothPermissionsUseCase(this._appRepository);
+  final AppRepository _appRepository;
+
+  @override
+  Future<Either<Failure, bool>> call(NoParams params) async {
+    return Right(await _appRepository.requestBluetoothPermission());
+  }
+}
+
+///
+/// BLUETOOTH CONNECT PERMISSIONS
+///
+class BluetoothConnectPermissionsGrantedUseCase
+    implements UseCase<bool, NoParams> {
+  BluetoothConnectPermissionsGrantedUseCase(this._appRepository);
+  final AppRepository _appRepository;
+
+  @override
+  Future<Either<Failure, bool>> call(NoParams params) async {
+    return Right(await _appRepository.bluetoothConnectPermissionGranted());
+  }
+}
+
+class RequestBluetoothConnectPermissionsUseCase
+    implements UseCase<bool, NoParams> {
+  RequestBluetoothConnectPermissionsUseCase(this._appRepository);
+  final AppRepository _appRepository;
+
+  @override
+  Future<Either<Failure, bool>> call(NoParams params) async {
+    return Right(await _appRepository.requestBluetoothConnectPermission());
+  }
+}
+
+///
+/// BLUETOOTH SCAN PERMISSIONS
+///
+class BluetoothScanPermissionsGrantedUseCase
+    implements UseCase<bool, NoParams> {
+  BluetoothScanPermissionsGrantedUseCase(this._appRepository);
+  final AppRepository _appRepository;
+
+  @override
+  Future<Either<Failure, bool>> call(NoParams params) async {
+    return Right(await _appRepository.bluetoothScanPermissionGranted());
+  }
+}
+
+class RequestBluetoothScanPermissionsUseCase
+    implements UseCase<bool, NoParams> {
+  RequestBluetoothScanPermissionsUseCase(this._appRepository);
+  final AppRepository _appRepository;
+
+  @override
+  Future<Either<Failure, bool>> call(NoParams params) async {
+    return Right(await _appRepository.requestBluetoothScanPermission());
+  }
+}

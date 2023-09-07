@@ -111,6 +111,10 @@ class DrawerMenu extends StatelessWidget {
             onTap: () => context.pushNamed('bluetooth search page'),
           ),
           ListTile(
+            title: const Text("Bluetooth debug"),
+            onTap: () => context.pushNamed('bluetooth debug page'),
+          ),
+          ListTile(
             title: const Text("Bluetooth list"),
             leading: const Icon(Icons.bluetooth),
             onTap: () => context.pushNamed('bluetooth list page'),

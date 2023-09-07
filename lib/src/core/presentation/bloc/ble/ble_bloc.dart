@@ -1,92 +1,43 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/core/domain/usecases/ble_is_scanning.dart';
-import 'package:xmanager/src/core/domain/usecases/ble_scan_results.dart';
-import 'package:xmanager/src/core/domain/usecases/start_ble_scan.dart';
-import 'package:xmanager/src/core/domain/usecases/stop_ble_scan.dart';
+import 'package:xmanager/src/core/domain/usecases/ble_start_scan.dart';
+import 'package:xmanager/src/core/domain/usecases/ble_stop_scan.dart';
 import 'package:xmanager/src/core/presentation/bloc/ble/bloc.dart';
 
 class BleBloc extends Bloc<BleEvent, BleState> {
-  final StartBleScanUseCase startBleScanUseCase;
-  final StopBleScanUseCase stopBleScanUseCase;
-  final BleIsScanningUseCase bleIsScanningUseCase;
-  final BleScanResultsUseCase bleScanResultUseCase;
+  final BleStartScanUseCase bleStartScanUseCase;
+  final BleStopScanUseCase bleStopScanUseCase;
 
   BleBloc({
-    required this.startBleScanUseCase,
-    required this.stopBleScanUseCase,
-    required this.bleIsScanningUseCase,
-    required this.bleScanResultUseCase,
-  }) : super(const InitialState()) {
-    // on<StartScanning>(
-    //   _onStartScanningEvent,
-    //   transformer: restartable(),
-    // );
-    on<StartScanning>(_onStartScanningEvent);
-    on<StopScanning>(_onStopScanningEvent);
-    //on<AddDevice>(_onAddDeviceEvent);
+    required this.bleStartScanUseCase,
+    required this.bleStopScanUseCase,
+  }) : super(const InitialState(devices: [])) {
+    on<StartScanning>(_onStartScanningEvent, transformer: restartable());
+    //on<StopScanning>(_onStopScanningEvent);
   }
 
-  ///
-  /// ON INITAL EVENT
-  /// SET INITIAL STATE
-  ///
-  // Future<void> _onInitialEvent(
-  //   InitialBle event,
-  //   Emitter<BleState> emit,
-  // ) async {
-  //   emit(const Initial());
-  // }
-
-  ///
-  /// ON START SCANNING EVENT
-  /// ADD DEVICE EVENT
-  ///
   Future<void> _onStartScanningEvent(
     StartScanning event,
     Emitter<BleState> emit,
   ) async {
-    startBleScanUseCase.call(event.seconds);
+    
+    //emit(ScanningStarted(devices: state.devices));
+    //print("start scanning");
 
-    // bleIsScanningUseCase.call({}).listen((event) {
-    //   print("scanning");
-    // }).onDone(() {
-    //   print("done scanning");
-    // });
-
-    // await emit.onEach(
-    //   bleIsScanningUseCase.call({}),
-    //   onData: (data) {
-    //     if (data) {}
-    //   },
-    // );
-
-    // //emit(const Scanning([]));
-
-    // await emit.onEach(
-    //   bleScanResultUseCase.call({}),
-    //   onData: (data) {
-    //     for (final device in data) {
-    //       add(AddDevice(device));
-    //     }
-    //   },
-    // );
-  }
-
-  ///
-  /// ON STOP SCANNING EVENT
-  ///
-  Future<void> _onStopScanningEvent(
-    StopScanning event,
-    Emitter<BleState> emit,
-  ) async {
-    emit(
-      const EndScanning([]),
+    await emit.onEach(
+      bleStartScanUseCase.call(event.seconds),
+      onData: (data) {
+        //print("scanning");
+        //print("scanning $data");
+        for (final device in data) {
+          //print("the scanning ${device.uuid}");
+          //add(AddDevice(device));
+        }
+      },
     );
 
-    // if (state is Scanning) {
-    //   stopBleScanUseCase.call({});
-    // }
+    //print("end scanning");
+    //emit(ScanningEnded(devices: state.devices));
   }
 
   ///

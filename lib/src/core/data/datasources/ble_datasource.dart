@@ -2,8 +2,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:xmanager/src/core/data/models/ble_device_model.dart';
 
 abstract class BleDataSource {
-  Future<void> startScan(int seconds);
-  Stream<List<BleDeviceModel>> scanResults();
+  Stream<List<BleDeviceModel>> startScan(int seconds);
   Stream<bool> isScanning();
   Future<void> stopScan();
   Future<bool> isAvailable();
@@ -14,24 +13,27 @@ class BleDataSourceImpl implements BleDataSource {
   BleDataSourceImpl();
 
   @override
-  Future<bool> startScan(int seconds) async {
-    await FlutterBluePlus.startScan(
+  Stream<List<BleDeviceModel>> startScan(int seconds) {
+    print("start");
+
+    FlutterBluePlus.startScan(
       timeout: Duration(seconds: seconds),
     );
 
-    return true;
-  }
 
-  @override
-  Stream<List<BleDeviceModel>> scanResults() {
     final test = FlutterBluePlus.scanResults.asyncMap((event) {
+      print("searching: ${event.length}");
+
       return List<BleDeviceModel>.from(
         event.map(
           (e) {
             final device = e.device;
+            print("device name");
+
+            print(device.localName);
             return BleDeviceModel(
-              name: device.name,
-              uuid: device.id.toString(),
+              name: device.localName,
+              uuid: device.remoteId.toString(),
             );
           },
         ),

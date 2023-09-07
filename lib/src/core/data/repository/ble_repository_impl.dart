@@ -8,10 +8,8 @@ class BleRepositoryImpl implements BleRepository {
   const BleRepositoryImpl(this._dataSource);
 
   @override
-  Future<bool> startScan(int seconds) => _dataSource.startScan(seconds);
-
-  @override
-  Stream<List<BleDeviceEntity>> scanResults() => _dataSource.scanResults();
+  Stream<List<BleDeviceEntity>> startScan(int seconds) =>
+      _dataSource.startScan(seconds);
 
   @override
   Stream<bool> isScanning() => _dataSource.isScanning();
