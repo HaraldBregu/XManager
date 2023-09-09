@@ -5,9 +5,9 @@ import 'package:xmanager/src/core/failures.dart';
 import 'package:xmanager/src/core/usecase.dart';
 
 class PlayerRepositoryImpl implements PlayerRepository {
-  final PlayerDataSourceImpl _playerDataSourceImpl;
 
   const PlayerRepositoryImpl(this._playerDataSourceImpl);
+  final PlayerDataSourceImpl _playerDataSourceImpl;
 
   @override
   Future<Either<Failure, bool>> savePlayer(PlayerParams player) async {

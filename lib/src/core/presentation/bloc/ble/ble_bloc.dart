@@ -1,68 +1,80 @@
+import 'dart:async';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/core/domain/usecases/ble_start_scan.dart';
-import 'package:xmanager/src/core/domain/usecases/ble_stop_scan.dart';
+import 'package:xmanager/src/core/domain/usecases/bluetooth_usecases.dart';
 import 'package:xmanager/src/core/presentation/bloc/ble/bloc.dart';
+import 'package:xmanager/src/core/usecase.dart';
 
 class BleBloc extends Bloc<BleEvent, BleState> {
-  final BleStartScanUseCase bleStartScanUseCase;
-  final BleStopScanUseCase bleStopScanUseCase;
+  final BluetoothStartScan bluetoothStartScan;
+  final BluetoothIsScanning bluetoothIsScanning;
+  final BluetoothConnectDevice bluetoothConnectDevice;
+  final BluetoothDeviceConnected bluetoothDeviceConnected;
 
   BleBloc({
-    required this.bleStartScanUseCase,
-    required this.bleStopScanUseCase,
-  }) : super(const InitialState(devices: [])) {
+    required this.bluetoothStartScan,
+    required this.bluetoothIsScanning,
+    required this.bluetoothConnectDevice,
+    required this.bluetoothDeviceConnected,
+  }) : super(const BleState()) {
     on<StartScanning>(_onStartScanningEvent, transformer: restartable());
-    //on<StopScanning>(_onStopScanningEvent);
+    on<SelectDevice>(_onSelectDeviceEvent);
+    on<ConnectDevice>(_onConnectToDeviceEvent);
   }
-
+ 
   Future<void> _onStartScanningEvent(
     StartScanning event,
     Emitter<BleState> emit,
   ) async {
-    
-    //emit(ScanningStarted(devices: state.devices));
-    //print("start scanning");
 
+    bluetoothIsScanning.call(NoParams()).listen((scanning) {
+      emit(
+        state.copyWith(
+          isScanning: scanning,
+          devices: scanning ? [] : state.devices,
+        ),
+      );
+    });
+    
     await emit.onEach(
-      bleStartScanUseCase.call(event.seconds),
+      bluetoothStartScan.call(event.seconds),
       onData: (data) {
-        //print("scanning");
-        //print("scanning $data");
-        for (final device in data) {
-          //print("the scanning ${device.uuid}");
-          //add(AddDevice(device));
-        }
+        final currentDevices = [
+          ...state.devices,
+          ...data,
+        ];
+
+        final filteredDevices = [
+          ...{...currentDevices}
+        ];
+
+        emit(state.copyWith(devices: filteredDevices));
       },
     );
-
-    //print("end scanning");
-    //emit(ScanningEnded(devices: state.devices));
   }
 
-  ///
-  /// ON ADD DEVICE EVENT
-  ///
-  Future<void> _onAddDeviceEvent(
-    AddDevice event,
+  Future<void> _onSelectDeviceEvent(
+    SelectDevice event,
     Emitter<BleState> emit,
   ) async {
-    final state = this.state;
-
-    // if (state is AddingDevices) {
-    //   final dev = [
-    //     ...state.devices,
-    //     event.device,
-    //   ];
-
-    //   emit(
-    //     AddingDevices(
-    //       isScanning: true,
-    //       devices: [
-    //         ...{...dev}
-    //       ],
-    //     ),
-    //   );
-    // }
+    emit(state.copyWith(selectedDevice: event.device));
   }
+
+  Future<void> _onConnectToDeviceEvent(
+    ConnectDevice event,
+    Emitter<BleState> emit,
+  ) async {
+    final device = state.selectedDevice;
+    if (device == null) return;
+
+    bluetoothDeviceConnected.call(device.uuid).listen((connected) {
+      //await Future.delayed(const Duration(seconds: 1));
+      emit(state.copyWith(connected: connected));
+      print("connected: $connected");
+    });
+
+    bluetoothConnectDevice.call(device.uuid);
+
+  }
+
 }

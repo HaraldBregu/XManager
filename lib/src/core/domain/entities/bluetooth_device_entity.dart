@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-class BleDeviceEntity extends Equatable {
+class BluetoothDeviceEntity extends Equatable {
   final String name;
   final String uuid;
 
-  const BleDeviceEntity({
+  const BluetoothDeviceEntity({
     required this.name,
     required this.uuid,
   });

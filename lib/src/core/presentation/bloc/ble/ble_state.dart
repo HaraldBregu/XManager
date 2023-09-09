@@ -1,22 +1,39 @@
-import 'package:xmanager/src/core/domain/entities/ble_device_entity.dart';
+import 'package:equatable/equatable.dart';
+import 'package:xmanager/src/core/domain/entities/bluetooth_device_entity.dart';
 
-abstract class BleState {
-  final List<BleDeviceEntity> devices;
-  const BleState({required this.devices});
-}
+class BleState extends Equatable {
+  final bool isScanning;
+  final bool connected;
+  final List<BluetoothDeviceEntity> devices;
+  final BluetoothDeviceEntity? selectedDevice;
 
-class InitialState extends BleState {
-  const InitialState({required super.devices});
-}
+  const BleState({
+    this.isScanning = false,
+    this.connected = false,
+    this.devices = const [],
+    this.selectedDevice,
+  });
 
-class ScanningStarted extends BleState {
-  const ScanningStarted({required super.devices});
-}
-
-class ScanningDevices extends BleState {
-  const ScanningDevices({required super.devices});
-}
-
-class ScanningEnded extends BleState {
-  const ScanningEnded({required super.devices});
+  BleState copyWith({
+    bool? isScanning,
+    bool? connected,
+    List<BluetoothDeviceEntity>? devices,
+    BluetoothDeviceEntity? selectedDevice,
+  }) {
+    return BleState(
+      isScanning: isScanning ?? this.isScanning,
+      connected: connected ?? this.connected,
+      devices: devices ?? this.devices,
+      selectedDevice: selectedDevice ?? this.selectedDevice,
+    );
+  }
+  
+  @override
+  List<Object?> get props => [
+        isScanning,
+        connected,
+        devices,
+        selectedDevice,
+      ];
+      
 }

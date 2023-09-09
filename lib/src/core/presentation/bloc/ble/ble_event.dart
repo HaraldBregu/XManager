@@ -1,14 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:xmanager/src/core/domain/entities/ble_device_entity.dart';
+import 'package:xmanager/src/core/domain/entities/bluetooth_device_entity.dart';
 
 abstract class BleEvent extends Equatable {
   const BleEvent();
 }
-
-// class InitialBle extends BleEvent {
-//   @override
-//   List<Object?> get props => [];
-// }
 
 class StartScanning extends BleEvent {
   final int seconds;
@@ -22,9 +17,14 @@ class StopScanning extends BleEvent {
   List<Object?> get props => [];
 }
 
-class AddDevice extends BleEvent {
-  final BleDeviceEntity device;
-  const AddDevice(this.device);
+class SelectDevice extends BleEvent {
+  final BluetoothDeviceEntity device;
+  const SelectDevice(this.device);
   @override
   List<Object?> get props => [device];
+}
+
+class ConnectDevice extends BleEvent {
+  @override
+  List<Object?> get props => [];
 }

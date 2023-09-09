@@ -1,6 +1,6 @@
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:xmanager/main.dart';
-import 'package:xmanager/src/core/data/models/ble_device_model.dart';
+import 'package:xmanager/src/core/data/models/bluetooth_device_model.dart';
 import 'package:xmanager/src/core/data/models/player.dart';
 import 'package:xmanager/src/core/data/models/player_model.dart';
 

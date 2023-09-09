@@ -1,24 +1,24 @@
 import 'dart:convert';
-import 'package:xmanager/src/core/domain/entities/ble_device_entity.dart';
+import 'package:xmanager/src/core/domain/entities/bluetooth_device_entity.dart';
 
-class BleDeviceModel extends BleDeviceEntity {
-  const BleDeviceModel({
+class BluetoothDeviceModel extends BluetoothDeviceEntity {
+  const BluetoothDeviceModel({
     required super.name,
     required super.uuid,
   });
 
-  BleDeviceModel copyWith({
+  BluetoothDeviceModel copyWith({
     String? name,
     String? uuid,
   }) {
-    return BleDeviceModel(
+    return BluetoothDeviceModel(
       name: name ?? "",
       uuid: uuid ?? "",
     );
   }
 
-  factory BleDeviceModel.fromMap(Map<String, dynamic> map) {
-    return BleDeviceModel(
+  factory BluetoothDeviceModel.fromMap(Map<String, dynamic> map) {
+    return BluetoothDeviceModel(
       name: map['name'] as String,
       uuid: map['uuid'] as String,
     );

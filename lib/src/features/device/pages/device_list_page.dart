@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xmanager/src/core/presentation/bloc/ble/bloc.dart';
 
-class DeviceList extends StatelessWidget {
-  const DeviceList({super.key});
+class DeviceListPage extends StatelessWidget {
+  const DeviceListPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:xmanager/src/core/domain/entities/bluetooth_device_entity.dart';
 import 'package:xmanager/src/core/failures.dart';
 
 abstract class UseCase<Type, Params> {
@@ -10,6 +11,23 @@ class NoParams extends Equatable {
   @override
   List<Object?> get props => [];
 }
+
+class BluetoothDeviceParams extends Equatable {
+  final String name;
+  final String uuid;
+
+  const BluetoothDeviceParams({
+    required this.name,
+    required this.uuid,
+  });
+
+  @override
+  List<Object?> get props => [
+        name,
+        uuid,
+      ];
+}
+
 
 class PlayerParams extends Equatable {
   final String fullname;

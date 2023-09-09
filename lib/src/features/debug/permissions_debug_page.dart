@@ -14,8 +14,6 @@ class PermissionsDebugPage extends StatelessWidget {
             ),
             pinned: true,
           ),
-
-          //SliverList(delegate: delegate)
         ],
       ),
     );

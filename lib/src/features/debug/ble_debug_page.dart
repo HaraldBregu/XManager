@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xmanager/src/core/presentation/bloc/app/bloc.dart';
 import 'package:xmanager/src/core/presentation/bloc/ble/bloc.dart';
+import 'package:xmanager/src/features/device/widgets/device_list.dart';
 
 class BleDebugPage extends StatelessWidget {
   const BleDebugPage({super.key});
@@ -26,6 +27,7 @@ class _BleDebugHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SliverAppBar(
       title: Text("Ble debug"),
+      actions: [],
     );
   }
 }
@@ -36,128 +38,103 @@ class _BleDebugContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ListTile(
-            title: const Text("Location permission"),
-            subtitle: context.watch<AppBloc>().state.locationGranted
-                ? const Text("GRANTED")
-                : const Text("NOT GRANTED"),
-            onTap: () {
-              context.read<AppBloc>().add(RequestLocationPermission());
-            },
-          ),
-          ListTile(
-            title: const Text("Bluetooth permission"),
-            subtitle: context.watch<AppBloc>().state.bluetoothGranted
-                ? const Text("GRANTED")
-                : const Text("NOT GRANTED"),
-            onTap: () {
-              context.read<AppBloc>().add(RequestBluetoothPermission());
-            },
-          ),
-          ListTile(
-            title: const Text("Bluetooth connect permission"),
-            subtitle: context.watch<AppBloc>().state.bluetoothConnectGranted
-                ? const Text("GRANTED")
-                : const Text("NOT GRANTED"),
-            onTap: () {
-              context.read<AppBloc>().add(RequestBluetoothConnectPermission());
-            },
-          ),
-          ListTile(
-            title: const Text("Bluetooth scan permission"),
-            subtitle: context.watch<AppBloc>().state.bluetoothScanGranted
-                ? const Text("GRANTED")
-                : const Text("NOT GRANTED"),
-            onTap: () {
-              context.read<AppBloc>().add(RequestBluetoothScanPermission());
-            },
-          ),
-          ListTile(
-              title: const Text("Search for ble devices"),
-              trailing: const Icon(Icons.bluetooth),
-              onTap: () {
-                BlocProvider.of<BleBloc>(context)
-                    .add(const StartScanning(seconds: 10));
-
-                showModalBottomSheet<void>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return SizedBox(
-                      child: Center(
-                        child: BlocBuilder<BleBloc, BleState>(
-                          builder: (context, state) {
-                            return const Text("data");
-                          },
-                        ),
-                      ),
-                    );
-
-/*
-                    return SizedBox(
-                      height: 400,
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            const Text('Modal BottomSheet'),
-                            ElevatedButton(
-                              child: Text('Close BottomSheet'),
-                              onPressed: () => Navigator.pop(context),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                 
-                  */
-                  },
-                );
-
-                // showModalBottomSheet<void>(
-                //   context: context,
-                //   builder: (BuildContext context) {
-                //     return SizedBox(
-                //       height: 400,
-                //       child: Center(
-                //         child: Column(
-                //           mainAxisAlignment: MainAxisAlignment.center,
-                //           mainAxisSize: MainAxisSize.min,
-                //           children: <Widget>[
-                //             const Text('Modal BottomSheet'),
-                //             ElevatedButton(
-                //               child: Text('Close BottomSheet'),
-                //               onPressed: () => Navigator.pop(context),
-                //             ),
-                //           ],
-                //         ),
-                //       ),
-                //     );
-                //   },
-                // );
-              }),
-          const ListTile(
-            title: Text("Current selected device"),
-            subtitle: Text("E4IURNV34CEIFNC4"),
-          ),
-          const ListTile(
-            title: Text("State"),
-            subtitle: Text("DISCONNECTED"),
-          ),
-          ListTile(
-            leading: OutlinedButton(
-              onPressed: () {},
-              child: const Text("Connect"),
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (context.watch<BleBloc>().state.isScanning) ...[
+              const Text("Scanning ble devices..."),
+            ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Location permission"),
+                if (context.watch<AppBloc>().state.locationGranted)
+                  const Text("GRANTED")
+                else
+                  const Text("NOT GRANTED"),
+              ],
             ),
-            trailing: OutlinedButton(
-              onPressed: () {},
-              child: const Text("Disconnect"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Bluetooth permission"),
+                if (context.watch<AppBloc>().state.bluetoothGranted)
+                  const Text("GRANTED")
+                else
+                  const Text("NOT GRANTED"),
+              ],
             ),
-          ),
-        ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Bluetooth connect permission"),
+                if (context.watch<AppBloc>().state.bluetoothConnectGranted)
+                  const Text("GRANTED")
+                else
+                  const Text("NOT GRANTED"),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Bluetooth scan permission"),
+                if (context.watch<AppBloc>().state.bluetoothScanGranted)
+                  const Text("GRANTED")
+                else
+                  const Text("NOT GRANTED"),
+              ],
+            ),
+            Row(
+              children: [
+                OutlinedButton(
+                  child: const Text("Scan"),
+                  onPressed: () => BlocProvider.of<BleBloc>(context)
+                      .add(const StartScanning(seconds: 10)),
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                OutlinedButton(
+                  child: const Text("Show devices"),
+                  onPressed: () => showModalBottomSheet<void>(
+                    context: context,
+                    builder: (BuildContext context) => const DeviceList(),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Selected device",
+                    ),
+                    Text(
+                      "BLE: ${context.watch<BleBloc>().state.selectedDevice?.name}",
+                    ),
+                    Text(
+                      "UUID: ${context.watch<BleBloc>().state.selectedDevice?.uuid}",
+                    ),
+                    Text(
+                      context.watch<BleBloc>().state.connected
+                          ? "CONNECTED"
+                          : "DISCONNECTED",
+                    ),
+                  ],
+                ),
+                OutlinedButton(
+                  child: const Text("Connect"),
+                  onPressed: () => context.read<BleBloc>().add(ConnectDevice()),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

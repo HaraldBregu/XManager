@@ -6,21 +6,20 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xmanager/src/config/theme/app_theme.dart';
 import 'package:xmanager/src/core/common.dart';
-import 'package:xmanager/src/core/data/datasources/ble_datasource.dart';
+import 'package:xmanager/src/core/data/databases/objectbox_db.dart';
+import 'package:xmanager/src/core/data/datasources/bluetooth_datasource.dart';
 import 'package:xmanager/src/core/data/datasources/permissions_datasource.dart';
 import 'package:xmanager/src/core/data/datasources/player_datasource.dart';
 import 'package:xmanager/src/core/data/datasources/shared_preferences_datasource.dart';
 import 'package:xmanager/src/core/data/repository/app_repository_impl.dart';
-import 'package:xmanager/src/core/data/repository/ble_repository_impl.dart';
+import 'package:xmanager/src/core/data/repository/bluetooth_repository_impl.dart';
 import 'package:xmanager/src/core/data/repository/player_repository_impl.dart';
 import 'package:xmanager/src/core/data/repository/user_repository_impl.dart';
-import 'package:xmanager/src/core/databases/objectbox_db.dart';
 import 'package:xmanager/src/core/domain/repository/app_repository.dart';
-import 'package:xmanager/src/core/domain/repository/ble_repository.dart';
+import 'package:xmanager/src/core/domain/repository/bluetooth_repository.dart';
 import 'package:xmanager/src/core/domain/repository/player_repository.dart';
 import 'package:xmanager/src/core/domain/repository/user_repository.dart';
-import 'package:xmanager/src/core/domain/usecases/ble_start_scan.dart';
-import 'package:xmanager/src/core/domain/usecases/ble_stop_scan.dart';
+import 'package:xmanager/src/core/domain/usecases/bluetooth_usecases.dart';
 import 'package:xmanager/src/core/domain/usecases/current_user.dart';
 import 'package:xmanager/src/core/domain/usecases/exit_user.dart';
 import 'package:xmanager/src/core/domain/usecases/get_app_permissions.dart';
@@ -39,7 +38,7 @@ import 'package:xmanager/src/features/dashboard/presentation/pages/dashboard_pag
 import 'package:xmanager/src/features/debug/ble_debug_page.dart';
 import 'package:xmanager/src/features/debug/debug_page.dart';
 import 'package:xmanager/src/features/debug/permissions_debug_page.dart';
-import 'package:xmanager/src/features/device/pages/device_list.dart';
+import 'package:xmanager/src/features/device/pages/device_list_page.dart';
 import 'package:xmanager/src/features/device/pages/device_search.dart';
 import 'package:xmanager/src/features/player/pages/player_create.dart';
 import 'package:xmanager/src/features/player/pages/player_detail.dart';
@@ -88,8 +87,10 @@ Future<void> main() async {
   );
   sl.registerFactory(
     () => BleBloc(
-      bleStartScanUseCase: sl(),
-      bleStopScanUseCase: sl(),
+      bluetoothStartScan: sl(),
+      bluetoothIsScanning: sl(),
+      bluetoothConnectDevice: sl(),
+      bluetoothDeviceConnected: sl(),
     ),
   );
   sl.registerFactory(
@@ -114,8 +115,11 @@ Future<void> main() async {
   sl.registerLazySingleton(() => CurrentUserUseCase(sl()));
   sl.registerLazySingleton(() => UnlockUserUseCase(sl()));
   sl.registerLazySingleton(() => ExitUserUseCase(sl()));
-  sl.registerLazySingleton(() => BleStartScanUseCase(sl()));
-  sl.registerLazySingleton(() => BleStopScanUseCase(sl()));
+  sl.registerLazySingleton(() => BluetoothStartScan(sl()));
+  sl.registerLazySingleton(() => BluetoothIsScanning(sl()));
+  sl.registerLazySingleton(() => BluetoothConnectDevice(sl()));
+  sl.registerLazySingleton(() => BluetoothDeviceConnected(sl()));
+  
   sl.registerLazySingleton(() => SavePlayerUseCase(sl()));
 
   // Repository
@@ -126,7 +130,8 @@ Future<void> main() async {
     ),
   );
   sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(sl()));
-  sl.registerLazySingleton<BleRepository>(() => BleRepositoryImpl(sl()));
+  sl.registerLazySingleton<BluetoothRepository>(
+      () => BluetoothRepositoryImpl(sl()));
   sl.registerLazySingleton<PlayerRepository>(() => PlayerRepositoryImpl(sl()));
 
   // Data sources
@@ -138,7 +143,7 @@ Future<void> main() async {
       sharedPreferences: sl(),
     ),
   );
-  sl.registerLazySingleton(() => BleDataSourceImpl());
+  sl.registerLazySingleton(() => BluetoothDataSourceImpl());
   sl.registerLazySingleton(() => PlayerDataSourceImpl());
 
   //sl.registerSingleton(SharedPreferencesService);
@@ -174,9 +179,9 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userBloc = context.watch<UserBloc>();
-    final userState = userBloc.state;
-    final userStateAuthorized = userState is UserAuthorizedState;
+    //final userBloc = context.watch<UserBloc>();
+    //final userState = userBloc.state;
+    //final userStateAuthorized = userState is UserAuthorizedState;
     //final userStateAuthorized = context.watch<UserBloc>().authorized;
 
     return MaterialApp.router(
@@ -247,7 +252,7 @@ class App extends StatelessWidget {
               GoRoute(
                 name: "Device list",
                 path: 'devices',
-                builder: (context, state) => const DeviceList(),
+                builder: (context, state) => const DeviceListPage(),
                 routes: [
                   // GoRoute(
                   //   name: "Device add",
@@ -335,7 +340,7 @@ class App extends StatelessWidget {
               GoRoute(
                 name: "bluetooth list page",
                 path: 'bluetooth_list',
-                builder: (context, state) => const DeviceList(),
+                builder: (context, state) => const DeviceListPage(),
               ),
               GoRoute(
                 name: "permission list page",

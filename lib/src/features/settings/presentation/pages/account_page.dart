@@ -4,6 +4,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:xmanager/main.dart';
 import 'package:xmanager/src/core/common.dart';
 import 'package:xmanager/src/core/data/models/models.dart';
+import 'package:xmanager/src/core/theme_extension.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -61,14 +62,14 @@ class _AccountPageState extends State<AccountPage> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    final AppLocalizations? localize = AppLocalizations.of(context);
-    final ThemeData theme = Theme.of(context);
-    final TextTheme textTheme = theme.textTheme;
+    //final AppLocalizations? localize = AppLocalizations.of(context);
+    //final ThemeData theme = Theme.of(context);
+    //final TextTheme textTheme = theme.textTheme;
     final List<Widget> widgets = [];
 
     widgets.add(ListTile(
       trailing: const Icon(Icons.bluetooth),
-      title: Text('Bluetooth state', style: textTheme.titleMedium),
+      title: Text('Bluetooth state', style: context.textTheme.titleMedium),
       onTap: () => {},
     ));
 /*
@@ -85,7 +86,7 @@ class _AccountPageState extends State<AccountPage> with WidgetsBindingObserver {
     ));*/
 
     widgets.add(ListTile(
-      title: Text('App Permissions', style: textTheme.titleMedium),
+      title: Text('App Permissions', style: context.textTheme.titleMedium),
       onTap: () => Navigator.pushNamed(context, "/app_permissions"),
     ));
 
@@ -107,6 +108,7 @@ class _AccountPageState extends State<AccountPage> with WidgetsBindingObserver {
           },
       ),);
       */
+      /*
       widgets.add(ListTile(
         title: const Text('Add test data'),
         onLongPress: () {
@@ -202,7 +204,8 @@ class _AccountPageState extends State<AccountPage> with WidgetsBindingObserver {
             print(error);
           }
         },
-      ));
+        ),
+      );*/
       widgets.add(ListTile(
         title: const Text('Test Sliver'),
         onTap: () {
@@ -211,7 +214,8 @@ class _AccountPageState extends State<AccountPage> with WidgetsBindingObserver {
               MaterialPageRoute(builder: (context) => testSliver);
           Navigator.push(context, materialRoute);
         },
-      ));
+        ),
+      );
     }
 
     return Scaffold(
@@ -244,11 +248,13 @@ class TestSliver extends StatelessWidget {
                 ),
               ],
           body: ListView.separated(
-              itemBuilder: (context, index) => ListTile(
-                    title: const Text("Titolo"),
+          itemBuilder: (context, index) => const ListTile(
+            title: Text("Titolo"),
                   ),
               separatorBuilder: (context, index) => const SizedBox(height: 1),
-              itemCount: 30)),
+          itemCount: 30,
+        ),
+      ),
     );
   }
 }
