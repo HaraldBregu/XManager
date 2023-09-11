@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-class AppEntity extends Equatable {
+class ApplicationEntity extends Equatable {
   final String version;
   final bool darkMode;
 
-  const AppEntity({
+  const ApplicationEntity({
     required this.version,
     required this.darkMode,
   });

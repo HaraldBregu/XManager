@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xmanager/src/core/presentation/bloc/app/bloc.dart';
 import 'package:xmanager/src/core/presentation/bloc/ble/bloc.dart';
 import 'package:xmanager/src/features/device/widgets/device_list.dart';
+import 'package:xmanager/src/features/device/widgets/service_list.dart';
 
 class BleDebugPage extends StatelessWidget {
   const BleDebugPage({super.key});
@@ -91,13 +92,21 @@ class _BleDebugContent extends StatelessWidget {
                 OutlinedButton(
                   child: const Text("Scan"),
                   onPressed: () => BlocProvider.of<BleBloc>(context)
-                      .add(const StartScanning(seconds: 10)),
+                      .add(const StartScanning(seconds: 5)),
                 ),
                 const SizedBox(
                   width: 5,
                 ),
                 OutlinedButton(
-                  child: const Text("Show devices"),
+                  child: const Text("Stop"),
+                  onPressed: () =>
+                      BlocProvider.of<BleBloc>(context).add(StopScanning()),
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                OutlinedButton(
+                  child: const Text("BLE list"),
                   onPressed: () => showModalBottomSheet<void>(
                     context: context,
                     builder: (BuildContext context) => const DeviceList(),
@@ -120,18 +129,82 @@ class _BleDebugContent extends StatelessWidget {
                     Text(
                       "UUID: ${context.watch<BleBloc>().state.selectedDevice?.uuid}",
                     ),
-                    Text(
-                      context.watch<BleBloc>().state.connected
-                          ? "CONNECTED"
-                          : "DISCONNECTED",
+                    if (context.watch<BleBloc>().state.connectionState ==
+                        BleConnectionState.connecting) ...[
+                      const Text("CONNECTING..."),
+                    ],
+                    if (context.watch<BleBloc>().state.connectionState ==
+                        BleConnectionState.connected) ...[
+                      const Text("CONNECTED"),
+                    ] else if (context.watch<BleBloc>().state.connectionState ==
+                        BleConnectionState.disconnected) ...[
+                      const Text("DISCONNECTED"),
+                    ],
+                  ],
+                ),
+                Column(
+                  children: [
+                    OutlinedButton(
+                      child: const Text("Connect"),
+                      onPressed: () =>
+                          context.read<BleBloc>().add(ConnectDevice()),
+                    ),
+                    OutlinedButton(
+                      child: const Text("Disconnect"),
+                      onPressed: () =>
+                          context.read<BleBloc>().add(DisconnectDevice()),
                     ),
                   ],
                 ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
                 OutlinedButton(
-                  child: const Text("Connect"),
-                  onPressed: () => context.read<BleBloc>().add(ConnectDevice()),
+                  child: const Text("Discover services"),
+                  onPressed: () =>
+                      context.read<BleBloc>().add(DiscoverServices()),
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                OutlinedButton(
+                  child: const Text("Show services"),
+                  onPressed: () => showModalBottomSheet<void>(
+                    context: context,
+                    builder: (BuildContext context) => const ServiceList(),
+                  ),
                 ),
               ],
+            ),
+            if (context.watch<BleBloc>().state.discoveringServices) ...[
+              const Text("DISCOVERING SERVICES..."),
+            ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Selected service",
+                    ),
+                    Text(
+                      "${context.watch<BleBloc>().state.selectedService?.serviceUuid}",
+                    ),
+                    Text(
+                      "remoteId: ${context.watch<BleBloc>().state.selectedService?.remoteId}",
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            OutlinedButton(
+              child: const Text("Connect service"),
+              onPressed: () => context.read<BleBloc>().add(ConnectDevice()),
             ),
           ],
         ),

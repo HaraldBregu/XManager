@@ -1,21 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xmanager/src/core/domain/usecases/current_user.dart';
-import 'package:xmanager/src/core/domain/usecases/exit_user.dart';
-import 'package:xmanager/src/core/domain/usecases/unlock_user.dart';
 import 'package:xmanager/src/core/presentation/bloc/user/bloc.dart';
 import 'package:xmanager/src/core/usecase.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final CurrentUserUseCase currentUserUseCase;
-  final UnlockUserUseCase unlockUserUseCase;
-  final ExitUserUseCase exitUserUseCase;
 
   UserState get authorized => UserAuthorizedState();
 
   UserBloc({
     required this.currentUserUseCase,
-    required this.unlockUserUseCase,
-    required this.exitUserUseCase,
   }) : super(InitialUserState()) {
     on<InitialUserEvent>(onInitialUserEvent);
     on<EnterUserEvent>(onEnterUserEvent);
@@ -46,14 +40,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     
     emit(LoadingUserState());
 
-    final useCase = await unlockUserUseCase.call(
-      event.fullName,
-    );
+    // final useCase = await unlockUserUseCase.call(
+    //   event.fullName,
+    // );
 
-    useCase.fold(
-      (left) => emit(UserUnAuthorizedState()),
-      (right) => emit(UserAuthorizedState()),
-    );
+    // useCase.fold(
+    //   (left) => emit(UserUnAuthorizedState()),
+    //   (right) => emit(UserAuthorizedState()),
+    // );
   }
 
   Future<void> onExitUserEvent(
@@ -61,7 +55,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     Emitter<UserState> emit,
   ) async {
     if (state is UserAuthorizedState) {
-      final dataState = await exitUserUseCase.call(NoParams());
+      //final dataState = await exitUserUseCase.call(NoParams());
 
       // if (dataState is DataSuccess) {
       //   if (dataState.data == true) {

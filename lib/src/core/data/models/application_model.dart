@@ -1,18 +1,18 @@
 import 'dart:convert';
 
-import 'package:xmanager/src/core/domain/entities/app_entity.dart';
+import 'package:xmanager/src/core/domain/entities/application_entity.dart';
 
-class AppModel extends AppEntity {
-  const AppModel({
+class ApplicationModel extends ApplicationEntity {
+  const ApplicationModel({
     required super.version,
     required super.darkMode,
   });
 
-  AppModel copyWith({
+  ApplicationModel copyWith({
     String? version,
     bool? darkMode,
   }) {
-    return AppModel(
+    return ApplicationModel(
       version: version ?? this.version,
       darkMode: darkMode ?? this.darkMode,
     );
@@ -25,8 +25,8 @@ class AppModel extends AppEntity {
     return result;
   }
 
-  factory AppModel.fromMap(Map<String, dynamic> map) {
-    return AppModel(
+  factory ApplicationModel.fromMap(Map<String, dynamic> map) {
+    return ApplicationModel(
       version: map['version'] as String,
       darkMode: map['darkMode'] as bool,
     );
@@ -34,9 +34,10 @@ class AppModel extends AppEntity {
 
   String toJson() => json.encode(toMap());
 
-  factory AppModel.fromJson(String source) =>
-      AppModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ApplicationModel.fromJson(String source) =>
+      ApplicationModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'AppModel(version: $version, darkMode: $darkMode)';
+  String toString() =>
+      'ApplicationModel(version: $version, darkMode: $darkMode)';
 }

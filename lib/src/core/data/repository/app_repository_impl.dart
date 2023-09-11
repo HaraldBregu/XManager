@@ -2,12 +2,13 @@ import 'package:dartz/dartz.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:xmanager/src/core/data/datasources/permissions_datasource.dart';
 import 'package:xmanager/src/core/data/datasources/shared_preferences_datasource.dart';
-import 'package:xmanager/src/core/data/models/app_model.dart';
-import 'package:xmanager/src/core/domain/repository/app_repository.dart';
+import 'package:xmanager/src/core/data/models/application_model.dart';
+import 'package:xmanager/src/core/domain/entities/application_entity.dart';
+import 'package:xmanager/src/core/domain/repository/application_repository.dart';
 import 'package:xmanager/src/core/exeptions.dart';
 import 'package:xmanager/src/core/failures.dart';
 
-class AppRepositoryImpl implements AppRepository {
+class AppRepositoryImpl implements ApplicationRepository {
   final SharedPreferencesDataSourceImpl sharedPreferencesDataSourceImpl;
   final PermissionsDataSourceImpl permissionsDataSourceImpl;
 
@@ -16,15 +17,15 @@ class AppRepositoryImpl implements AppRepository {
     required this.permissionsDataSourceImpl,
   });
 
-  @override
-  Future<Either<Failure, AppModel>> getApp() async {
-    try {
-      final app = await sharedPreferencesDataSourceImpl.getApp();
-      return Right(app);
-    } on DatabaseExeption {
-      return Left(DatabaseFailure());
-    }
-  }
+  // @override
+  // Future<Either<Failure, AppModel>> getApp() async {
+  //   try {
+  //     final app = await sharedPreferencesDataSourceImpl.getApp();
+  //     return Right(app);
+  //   } on DatabaseExeption {
+  //     return Left(DatabaseFailure());
+  //   }
+  // }
   
   @override
   Future<bool> locationPermissionGranted() async {
@@ -70,6 +71,12 @@ class AppRepositoryImpl implements AppRepository {
     final req =
         await permissionsDataSourceImpl.requestBluetoothScanPermission();
     return req.isGranted;
+  }
+
+  @override
+  Future<Either<Failure, ApplicationEntity>> getApp() {
+    // TODO: implement getApp
+    throw UnimplementedError();
   }
 
   // @override

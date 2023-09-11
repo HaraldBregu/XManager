@@ -15,16 +15,13 @@ import 'package:xmanager/src/core/data/repository/app_repository_impl.dart';
 import 'package:xmanager/src/core/data/repository/bluetooth_repository_impl.dart';
 import 'package:xmanager/src/core/data/repository/player_repository_impl.dart';
 import 'package:xmanager/src/core/data/repository/user_repository_impl.dart';
-import 'package:xmanager/src/core/domain/repository/app_repository.dart';
+import 'package:xmanager/src/core/domain/repository/application_repository.dart';
 import 'package:xmanager/src/core/domain/repository/bluetooth_repository.dart';
 import 'package:xmanager/src/core/domain/repository/player_repository.dart';
 import 'package:xmanager/src/core/domain/repository/user_repository.dart';
 import 'package:xmanager/src/core/domain/usecases/bluetooth_usecases.dart';
 import 'package:xmanager/src/core/domain/usecases/current_user.dart';
-import 'package:xmanager/src/core/domain/usecases/exit_user.dart';
 import 'package:xmanager/src/core/domain/usecases/get_app_permissions.dart';
-import 'package:xmanager/src/core/domain/usecases/save_player.dart';
-import 'package:xmanager/src/core/domain/usecases/unlock_user.dart';
 import 'package:xmanager/src/core/presentation/bloc/app/bloc.dart';
 import 'package:xmanager/src/core/presentation/bloc/ble/ble_bloc.dart';
 import 'package:xmanager/src/core/presentation/bloc/ble/bloc.dart';
@@ -81,21 +78,23 @@ Future<void> main() async {
   sl.registerFactory(
     () => UserBloc(
       currentUserUseCase: sl(),
-      unlockUserUseCase: sl(),
-      exitUserUseCase: sl(),
     ),
   );
   sl.registerFactory(
     () => BleBloc(
       bluetoothStartScan: sl(),
+      bluetoothStopScan: sl(),
+      bluetoothScanResults: sl(),
       bluetoothIsScanning: sl(),
       bluetoothConnectDevice: sl(),
+      bluetoothDisconnectDevice: sl(),
       bluetoothDeviceConnected: sl(),
+      bluetoothDiscoverServices: sl(),
     ),
   );
   sl.registerFactory(
     () => PlayerBloc(
-      savePlayerUseCase: sl(),
+        // savePlayerUseCase: sl(),
     ),
   );
 
@@ -113,17 +112,18 @@ Future<void> main() async {
   sl.registerLazySingleton(() => RequestBluetoothScanPermissionsUseCase(sl()));
 
   sl.registerLazySingleton(() => CurrentUserUseCase(sl()));
-  sl.registerLazySingleton(() => UnlockUserUseCase(sl()));
-  sl.registerLazySingleton(() => ExitUserUseCase(sl()));
   sl.registerLazySingleton(() => BluetoothStartScan(sl()));
+  sl.registerLazySingleton(() => BluetoothStopScan(sl()));
+  sl.registerLazySingleton(() => BluetoothScanResults(sl()));
+
   sl.registerLazySingleton(() => BluetoothIsScanning(sl()));
   sl.registerLazySingleton(() => BluetoothConnectDevice(sl()));
+  sl.registerLazySingleton(() => BluetoothDisconnectDevice(sl()));
   sl.registerLazySingleton(() => BluetoothDeviceConnected(sl()));
+  sl.registerLazySingleton(() => BluetoothDiscoverServices(sl()));
   
-  sl.registerLazySingleton(() => SavePlayerUseCase(sl()));
-
   // Repository
-  sl.registerLazySingleton<AppRepository>(
+  sl.registerLazySingleton<ApplicationRepository>(
     () => AppRepositoryImpl(
       sharedPreferencesDataSourceImpl: sl(),
       permissionsDataSourceImpl: sl(),

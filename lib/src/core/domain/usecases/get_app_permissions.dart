@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:xmanager/src/core/domain/repository/app_repository.dart';
+import 'package:xmanager/src/core/domain/repository/application_repository.dart';
 import 'package:xmanager/src/core/failures.dart';
 import 'package:xmanager/src/core/usecase.dart';
 
@@ -38,7 +38,7 @@ class AppPermissionsStatusUseCase implements UseCase<bool, String> {
 ///
 class LocationPermissionsGrantedUseCase implements UseCase<bool, NoParams> {
   LocationPermissionsGrantedUseCase(this._appRepository);
-  final AppRepository _appRepository;
+  final ApplicationRepository _appRepository;
 
   @override
   Future<Either<Failure, bool>> call(NoParams params) async {
@@ -48,7 +48,7 @@ class LocationPermissionsGrantedUseCase implements UseCase<bool, NoParams> {
 
 class RequestLocationPermissionsUseCase implements UseCase<bool, NoParams> {
   RequestLocationPermissionsUseCase(this._appRepository);
-  final AppRepository _appRepository;
+  final ApplicationRepository _appRepository;
 
   @override
   Future<Either<Failure, bool>> call(NoParams params) async {
@@ -61,7 +61,7 @@ class RequestLocationPermissionsUseCase implements UseCase<bool, NoParams> {
 ///
 class BluetoothPermissionsGrantedUseCase implements UseCase<bool, NoParams> {
   BluetoothPermissionsGrantedUseCase(this._appRepository);
-  final AppRepository _appRepository;
+  final ApplicationRepository _appRepository;
 
   @override
   Future<Either<Failure, bool>> call(NoParams params) async {
@@ -71,7 +71,7 @@ class BluetoothPermissionsGrantedUseCase implements UseCase<bool, NoParams> {
 
 class RequestBluetoothPermissionsUseCase implements UseCase<bool, NoParams> {
   RequestBluetoothPermissionsUseCase(this._appRepository);
-  final AppRepository _appRepository;
+  final ApplicationRepository _appRepository;
 
   @override
   Future<Either<Failure, bool>> call(NoParams params) async {
@@ -85,7 +85,7 @@ class RequestBluetoothPermissionsUseCase implements UseCase<bool, NoParams> {
 class BluetoothConnectPermissionsGrantedUseCase
     implements UseCase<bool, NoParams> {
   BluetoothConnectPermissionsGrantedUseCase(this._appRepository);
-  final AppRepository _appRepository;
+  final ApplicationRepository _appRepository;
 
   @override
   Future<Either<Failure, bool>> call(NoParams params) async {
@@ -96,7 +96,7 @@ class BluetoothConnectPermissionsGrantedUseCase
 class RequestBluetoothConnectPermissionsUseCase
     implements UseCase<bool, NoParams> {
   RequestBluetoothConnectPermissionsUseCase(this._appRepository);
-  final AppRepository _appRepository;
+  final ApplicationRepository _appRepository;
 
   @override
   Future<Either<Failure, bool>> call(NoParams params) async {
@@ -110,7 +110,7 @@ class RequestBluetoothConnectPermissionsUseCase
 class BluetoothScanPermissionsGrantedUseCase
     implements UseCase<bool, NoParams> {
   BluetoothScanPermissionsGrantedUseCase(this._appRepository);
-  final AppRepository _appRepository;
+  final ApplicationRepository _appRepository;
 
   @override
   Future<Either<Failure, bool>> call(NoParams params) async {
@@ -121,7 +121,7 @@ class BluetoothScanPermissionsGrantedUseCase
 class RequestBluetoothScanPermissionsUseCase
     implements UseCase<bool, NoParams> {
   RequestBluetoothScanPermissionsUseCase(this._appRepository);
-  final AppRepository _appRepository;
+  final ApplicationRepository _appRepository;
 
   @override
   Future<Either<Failure, bool>> call(NoParams params) async {

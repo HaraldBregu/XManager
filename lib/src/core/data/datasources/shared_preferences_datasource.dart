@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:xmanager/src/core/data/models/app_model.dart';
+import 'package:xmanager/src/core/data/models/application_model.dart';
 import 'package:xmanager/src/core/data/models/user_model.dart';
 import 'package:xmanager/src/core/exeptions.dart';
 
 abstract class SharedPreferencesDataSource {
   Future<UserModel> getUser();
-  Future<AppModel> getApp();
-  Future<bool> setApp(AppModel app);
+  Future<ApplicationModel> getApp();
+  Future<bool> setApp(ApplicationModel app);
   Future<bool> setUserFullName(String fullname);
   Future<bool> clearUserFullName();
 }
@@ -41,15 +41,15 @@ class SharedPreferencesDataSourceImpl implements SharedPreferencesDataSource {
   }
 
   @override
-  Future<AppModel> getApp() async {
-    return const AppModel(
+  Future<ApplicationModel> getApp() async {
+    return const ApplicationModel(
       version: "123",
       darkMode: true,
     );
   }
 
   @override
-  Future<bool> setApp(AppModel app) async {
+  Future<bool> setApp(ApplicationModel app) async {
     final appString = json.encode(app.toMap());
     return sharedPreferences.setString(kAppSharedPrefs, appString);
   }

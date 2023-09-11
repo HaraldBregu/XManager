@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:xmanager/src/core/domain/entities/app_entity.dart';
+import 'package:xmanager/src/core/domain/entities/application_entity.dart';
 import 'package:xmanager/src/core/failures.dart';
 
-abstract class AppRepository {
+abstract class ApplicationRepository {
   Future<bool> locationPermissionGranted();
   Future<bool> requestLocationPermission();
   Future<bool> bluetoothPermissionGranted();
@@ -12,5 +12,5 @@ abstract class AppRepository {
   Future<bool> bluetoothScanPermissionGranted();
   Future<bool> requestBluetoothScanPermission();
 
-  Future<Either<Failure, AppEntity>> getApp();
+  Future<Either<Failure, ApplicationEntity>> getApp();
 }

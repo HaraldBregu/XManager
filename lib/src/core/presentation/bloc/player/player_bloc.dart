@@ -1,18 +1,17 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/core/domain/entities/player_entity.dart';
-import 'package:xmanager/src/core/domain/usecases/save_player.dart';
 import 'package:xmanager/src/core/presentation/bloc/player/bloc.dart';
 
 class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
-  SavePlayerUseCase savePlayerUseCase;
+  // SavePlayerUseCase savePlayerUseCase;
 
   PlayerState get initialState => Initial();
   PlayerState get loadingState => Loading();
   //PlayerState get fullnameAdded => PlayerFullnameAdded();
 
-  PlayerBloc({
-    required this.savePlayerUseCase,
-  }) : super(Initial()) {
+  PlayerBloc(
+      // required this.savePlayerUseCase,
+      )
+      : super(Initial()) {
     on<SetPlayerFullName>(_onSetPlayerFullName);
     on<SavePlayer>(_onSavePlayer);
   }
