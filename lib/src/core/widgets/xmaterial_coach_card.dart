@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:xmanager/src/core/presentation/widgets/xcard.dart';
-import 'package:xmanager/src/core/presentation/widgets/xmaterial_column.dart';
-import 'package:xmanager/src/core/presentation/widgets/xmaterial_info_item.dart';
-import 'package:xmanager/src/core/presentation/widgets/xmaterial_row.dart';
+import 'package:xmanager/src/core/widgets/xcard.dart';
+import 'package:xmanager/src/core/widgets/xmaterial_column.dart';
+import 'package:xmanager/src/core/widgets/xmaterial_info_item.dart';
+import 'package:xmanager/src/core/widgets/xmaterial_row.dart';
 
 class XMaterialCoachCard extends StatelessWidget {
   const XMaterialCoachCard(

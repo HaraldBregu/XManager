@@ -73,15 +73,4 @@ class BluetoothDataSourceImpl implements BluetoothDataSource {
     return services;
   }
 
-  
-//   test(String uuid) async {
-//     final device = BluetoothDevice.fromId(uuid);
-//     final services = await device.discoverServices();
-// final service = services.first;
-// BluetoothServiceEntity
-// //BluetoothService.fromProto(BmBluetoothService(serviceUuid: serviceUuid, remoteId: remoteId, isPrimary: isPrimary, characteristics: characteristics, includedServices: includedServices))
-
-//   }
-
-
 }

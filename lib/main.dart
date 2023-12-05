@@ -193,8 +193,8 @@ class App extends StatelessWidget {
         //initialLocation: userStateAuthorized ? "/dashboard" : '/auth',
         //initialLocation: "/start/signup",
         //initialLocation: "/start",
-        //initialLocation: "/",
-        initialLocation: "/debug/bluetooth",
+        initialLocation: "/",
+        //initialLocation: "/debug/bluetooth",
         //redirect: (context, state) => userStateAuthorized ? null : '/start',
         //errorBuilder: (context, state) => const ErrorPage(),
         routes: [

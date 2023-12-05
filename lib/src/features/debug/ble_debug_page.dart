@@ -202,10 +202,33 @@ class _BleDebugContent extends StatelessWidget {
                 ),
               ],
             ),
-            OutlinedButton(
-              child: const Text("Connect service"),
-              onPressed: () => context.read<BleBloc>().add(ConnectDevice()),
+            const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text("Send and get data"),
             ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(
+                  title: const Text("Feature one"),
+                  subtitle: const Text("select this feature blblblblb one"),
+                  trailing: OutlinedButton(
+                    child: const Text("Test 2"),
+                    onPressed: () {},
+                  ),
+                  onTap: () {},
+                ),
+                ListTile(
+                  title: const Text("Feature two"),
+                  subtitle: const Text("select this feature blblblblb one"),
+                  trailing: OutlinedButton(
+                    child: const Text("show data"),
+                    onPressed: () {},
+                  ),
+                  onTap: () {},
+                ),
+              ],
+            )
           ],
         ),
       ),

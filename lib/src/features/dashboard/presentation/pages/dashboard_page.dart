@@ -1,16 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:xmanager/src/core/localizations_extension.dart';
-import 'package:xmanager/src/core/presentation/bloc/user/bloc.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
-import 'package:xmanager/src/features/dashboard/presentation/widget/coach_card.dart';
-import 'package:xmanager/src/features/dashboard/presentation/widget/drawer_menu.dart';
-import 'package:xmanager/src/features/dashboard/presentation/widget/header_section.dart';
-import 'package:xmanager/src/features/dashboard/presentation/widget/nav_bar.dart';
-import 'package:xmanager/src/features/dashboard/presentation/widget/training_card.dart';
+import 'package:xmanager/src/core/widgets/drawer_menu.dart';
+import 'package:xmanager/src/core/widgets/header_card.dart';
+import 'package:xmanager/src/core/widgets/training_card.dart';
+import 'package:xmanager/src/core/widgets/nav_bar.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -48,12 +44,26 @@ class DashboardPage extends StatelessWidget {
       ),
       body: CustomScrollView(
         slivers: [
-          NavBarDashboard(),
-          HeaderSection(),
-          CoachCard(),
-          TrainingCard(),
-          _PlayerListTitle(),
-          _PlayerList(),
+          const NavBarDashboard(),
+          HeaderCard(
+            title: context.loc.dashboard,
+          ),
+          // CoachCard(),
+          TrainingCard(
+            title: "TRAINING SESSION",
+            subtitle: "Nessun programma attivo",
+            description: "3/4 programmi terminati", // optional
+            options: const [
+              "Current trainig program",
+              "Training program list",
+              "Create program",
+            ],
+            onTapOption: (option) async {
+              print(option);
+            },
+          ),
+          const _PlayerListTitle(),
+          const _PlayerList(),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(13, 15, 13, 15),

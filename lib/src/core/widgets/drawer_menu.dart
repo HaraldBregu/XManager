@@ -119,8 +119,6 @@ class DrawerMenu extends StatelessWidget {
             leading: const Icon(Icons.bluetooth),
             onTap: () => context.pushNamed('bluetooth list page'),
           ),
-
-          
           Container(
             height: 1,
             color: context.colorScheme.background,
