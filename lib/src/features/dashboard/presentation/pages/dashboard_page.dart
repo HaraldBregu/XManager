@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xmanager/src/core/localizations_extension.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
+import 'package:xmanager/src/core/widgets/coach_card.dart';
 import 'package:xmanager/src/core/widgets/drawer_menu.dart';
 import 'package:xmanager/src/core/widgets/header_card.dart';
+import 'package:xmanager/src/core/widgets/player_card.dart';
+import 'package:xmanager/src/core/widgets/profile_device_card.dart';
+import 'package:xmanager/src/core/widgets/profile_header_card.dart';
 import 'package:xmanager/src/core/widgets/training_card.dart';
 import 'package:xmanager/src/core/widgets/nav_bar.dart';
 
@@ -45,10 +49,67 @@ class DashboardPage extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           const NavBarDashboard(),
+
+          const ProfileHeaderCard(),
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 10,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: Text(
+                "DISPOSITIVI",
+                style: TextStyle(
+                  fontSize: context.textTheme.bodySmall?.fontSize,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+          const ProfileDeviceCard(),
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 10,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: Text(
+                "DISPOSITIVI",
+                style: TextStyle(
+                  fontSize: context.textTheme.bodySmall?.fontSize,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: TextButton(
+              onPressed: () {},
+              child: Text(
+                "Edit player",
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: TextButton(
+              onPressed: () {},
+              child: Text(
+                "Delete player",
+                style: TextStyle(color: context.colorScheme.error),
+              ),
+            ),
+          ),
+
+         
+         
           HeaderCard(
             title: context.loc.dashboard,
+            topTitle: "HARALD BREGU",
           ),
-          // CoachCard(),
           TrainingCard(
             title: "TRAINING SESSION",
             subtitle: "Nessun programma attivo",
@@ -63,7 +124,22 @@ class DashboardPage extends StatelessWidget {
             },
           ),
           const _PlayerListTitle(),
-          const _PlayerList(),
+          
+          // Here listen to current players stored in db
+          SliverList(
+            delegate: SliverChildListDelegate(
+              List.generate(
+                5,
+                (idx) {
+                  return PlayerCard(
+                    onTap: () => context
+                        .pushNamed("Player detail", params: {"id": "relfkemr"}),
+                  );
+                },
+              ),
+            ),
+          ),
+
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(13, 15, 13, 15),
@@ -90,7 +166,7 @@ class DashboardPage extends StatelessWidget {
               ),
             ),
           ),
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: SizedBox(
               height: 100,
             ),
@@ -135,45 +211,3 @@ class _PlayerListTitle extends StatelessWidget {
   }
 }
 
-class _PlayerList extends StatelessWidget {
-  const _PlayerList({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildListDelegate(
-        List.generate(
-          5,
-          (idx) {
-            return Padding(
-              padding: const EdgeInsets.fromLTRB(8, 5, 8, 0),
-              child: Card(
-                elevation: 1,
-                child: ListTile(
-                  leading: ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: Container(
-                      height: 50.0,
-                      width: 50.0,
-                      color: context.colorScheme.primaryContainer,
-                      //color: Color(0xffFF0E58),
-                      child: const Icon(
-                        Icons.person,
-                        //color: Colors.white,
-                        size: 25.0,
-                      ),
-                    ),
-                  ),
-                  title: Text("Marco Materazzi"),
-                  subtitle: Text("Player role"),
-                  onTap: () => context
-                      .pushNamed("Player detail", params: {"id": "relfkemr"}),
-                ),
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}

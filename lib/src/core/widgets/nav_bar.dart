@@ -12,42 +12,6 @@ class NavBarDashboard extends StatelessWidget {
         final scrolled = constraints.scrollOffset > 0;
         final scrolled50 = constraints.scrollOffset > 50;
 
-/*
-        return SliverAppBar.large(
-          backgroundColor: scrolled ? null : Colors.transparent,
-          title: Text(
-            "Dashboard",
-            style: const TextStyle(
-              //fontSize: textTheme.titleMedium?.fontSize,
-              fontWeight: FontWeight.w900,
-            ),
-          ),
-          pinned: true,
-          centerTitle: true,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.menu,
-              size: 28,
-            ),
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
-            }, // => GoRouter.of(context).pushNamed('Settings page'),
-          ),
-          actions: [
-            IconButton(
-              icon: const FittedBox(
-                child: CircleAvatar(
-                  child: Icon(
-                    Icons.person,
-                  ),
-                ),
-              ),
-              onPressed: () => context.pushNamed('Settings page'),
-            ),
-          ],
-        );
-        */
-
         return SliverAppBar(
           backgroundColor: scrolled ? null : Colors.transparent,
           title: scrolled50

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:xmanager/src/core/theme_extension.dart';
+import 'package:xmanager/src/core/widgets/nav_bar.dart';
+import 'package:xmanager/src/core/widgets/profile_device_card.dart';
+import 'package:xmanager/src/core/widgets/profile_header_card.dart';
 
 class PlayerDetail extends StatelessWidget {
   const PlayerDetail({super.key});
@@ -6,8 +10,31 @@ class PlayerDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Player")),
-      body: const Text(""),
+      body: CustomScrollView(
+        slivers: [
+          const NavBarDashboard(),
+          const ProfileHeaderCard(),
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 10,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: Text(
+                "DISPOSITIVI",
+                style: TextStyle(
+                  fontSize: context.textTheme.bodySmall?.fontSize,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+          const ProfileDeviceCard(),
+          const ProfileDeviceCard(),
+        ],
+      ),
     );
   }
 }

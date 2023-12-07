@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:xmanager/src/core/localizations_extension.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 
 class HeaderCard extends StatelessWidget {
   final String title;
+  final String topTitle;
 
   const HeaderCard({
     super.key,
     required this.title,
+    required this.topTitle,
   });
 
   @override
@@ -24,7 +25,7 @@ class HeaderCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "HARALD BREGU",
+              topTitle,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 //color: context.colorScheme.onBackground,
@@ -42,16 +43,6 @@ class HeaderCard extends StatelessWidget {
           ],
         ),
       ),
-      /*ListTile(
-        title: Text(
-          context.loc.dashboard,
-          style: TextStyle(
-            fontSize: context.textTheme.headlineMedium?.fontSize,
-            fontWeight: FontWeight.bold,
-            height: 2,
-          ),
-        ),
-      ),*/
     );
   }
 }

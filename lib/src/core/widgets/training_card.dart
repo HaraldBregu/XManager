@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 
 class TrainingCard extends StatelessWidget {
@@ -246,7 +245,7 @@ class TrainingCard extends StatelessWidget {
                                   height: 20,
                                 ),
                                 TweenAnimationBuilder(
-                                  tween: Tween(begin: 0.0, end: 0.6),
+                                  tween: Tween(begin: 0.0, end: 0.8),
                                   duration: const Duration(seconds: 60),
                                   builder: (context, value, _) {
                                     return ClipRRect(
