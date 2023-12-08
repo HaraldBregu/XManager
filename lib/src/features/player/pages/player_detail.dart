@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
-import 'package:xmanager/src/core/widgets/nav_bar.dart';
 import 'package:xmanager/src/core/widgets/profile_device_card.dart';
 import 'package:xmanager/src/core/widgets/profile_header_card.dart';
 
@@ -9,14 +9,61 @@ class PlayerDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> _showMyDialog() async {
+      return showDialog<void>(
+        context: context,
+        //barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('AlertDialog Title'),
+            content: const SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text('This is a demo alert dialog.'),
+                  Text('Would you like to approve of this message?'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Approve'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: const Text('Delete'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          const NavBarDashboard(),
+          const SliverAppBar(
+            title: Text(
+              "Profile",
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+            pinned: true,
+            centerTitle: false,
+          ),
           const ProfileHeaderCard(),
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 10,
+          SliverToBoxAdapter(
+            child: Divider(
+              height: 40,
+              thickness: 1,
+              indent: 20,
+              endIndent: 20,
+              color: context.colorScheme.surface,
             ),
           ),
           SliverToBoxAdapter(
@@ -32,7 +79,46 @@ class PlayerDetail extends StatelessWidget {
             ),
           ),
           const ProfileDeviceCard(),
-          const ProfileDeviceCard(),
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 50,
+            ),
+          ),
+          /*SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: Text(
+                "RISULTATI",
+                style: TextStyle(
+                  fontSize: context.textTheme.bodySmall?.fontSize,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),*/
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: TextButton(
+                onPressed: () => context.pushNamed('Player update'),
+                child: const Text(
+                  "Edit profile",
+                ),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: TextButton(
+                onPressed: () => _showMyDialog(),
+                child: Text(
+                  "Delete profile",
+                  style: TextStyle(color: context.colorScheme.error),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

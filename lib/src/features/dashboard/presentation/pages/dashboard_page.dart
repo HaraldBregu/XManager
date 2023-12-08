@@ -50,62 +50,6 @@ class DashboardPage extends StatelessWidget {
         slivers: [
           const NavBarDashboard(),
 
-          const ProfileHeaderCard(),
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 10,
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: Text(
-                "DISPOSITIVI",
-                style: TextStyle(
-                  fontSize: context.textTheme.bodySmall?.fontSize,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-          ),
-          const ProfileDeviceCard(),
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 10,
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: Text(
-                "DISPOSITIVI",
-                style: TextStyle(
-                  fontSize: context.textTheme.bodySmall?.fontSize,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: TextButton(
-              onPressed: () {},
-              child: Text(
-                "Edit player",
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: TextButton(
-              onPressed: () {},
-              child: Text(
-                "Delete player",
-                style: TextStyle(color: context.colorScheme.error),
-              ),
-            ),
-          ),
-
-         
-         
           HeaderCard(
             title: context.loc.dashboard,
             topTitle: "HARALD BREGU",

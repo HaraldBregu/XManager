@@ -22,13 +22,13 @@ class ProfileDeviceCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  width: 80,
-                  height: 80,
+                  width: 60,
+                  height: 60,
                   child: Card(
                     elevation: 4.0,
                     color: context.colorScheme.tertiaryContainer,
                     shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(4.0),
@@ -48,7 +48,7 @@ class ProfileDeviceCard extends StatelessWidget {
                 ),
                 Flexible(
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 5),
+                    padding: const EdgeInsets.only(top: 2),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,10 +57,9 @@ class ProfileDeviceCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  "DINAMO",
+                                  "Dinamo",
                                   style: TextStyle(
                                     fontSize:
                                         context.textTheme.titleSmall?.fontSize,
@@ -86,17 +85,21 @@ class ProfileDeviceCard extends StatelessWidget {
                             Row(
                               children: [
                                 Container(
-                                  decoration: BoxDecoration(
-                                    color: context.colorScheme.errorContainer,
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(2),
+                                  width: 20,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(3),
+                                      bottomLeft: Radius.circular(3),
                                     ),
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 3),
+                                      horizontal: 3,
+                                    ),
                                     child: Text(
-                                      "LEFT",
+                                      "L",
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize: context
                                             .textTheme.bodySmall?.fontSize,
@@ -106,21 +109,22 @@ class ProfileDeviceCard extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
                                 Container(
-                                  decoration: BoxDecoration(
-                                    color: context.colorScheme.errorContainer,
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(2),
+                                  width: 20,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(3),
+                                      bottomRight: Radius.circular(3),
                                     ),
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 3),
+                                      horizontal: 3,
+                                    ),
                                     child: Text(
-                                      "RIGHT",
+                                      "R",
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize: context
                                             .textTheme.bodySmall?.fontSize,
@@ -134,6 +138,7 @@ class ProfileDeviceCard extends StatelessWidget {
                             ),
                           ],
                         ),
+                        
                         PopupMenuButton(
                           itemBuilder: (context) => [
                             PopupMenuItem(

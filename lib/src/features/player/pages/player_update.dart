@@ -3,9 +3,26 @@ import 'package:flutter/material.dart';
 class PlayerUpdate extends StatelessWidget {
   const PlayerUpdate({super.key});
 
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+  
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          const SliverAppBar(
+            title: Text(
+              "Profile update",
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+            pinned: true,
+            centerTitle: false,
+          ),
+        ],
+      ),
+    );
   }
 }
 

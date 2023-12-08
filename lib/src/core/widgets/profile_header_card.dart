@@ -1,6 +1,4 @@
-import 'dart:typed_data';
-import 'dart:ui';
-
+import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 
@@ -21,17 +19,22 @@ class ProfileHeaderCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Flexible(
-              flex: 2,
+              flex: 1,
               fit: FlexFit.tight,
               child: AspectRatio(
                 aspectRatio: 3 / 4,
                 child: Card(
                   elevation: 4.0,
                   shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
+                    borderRadius: BorderRadius.all(Radius.circular(6)),
+                    /*borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(10),
                       topLeft: Radius.circular(10),
-                    ),
+                    ),*/
+                    /*borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    ),*/
                     side: BorderSide(
                       width: 1,
                       color: Colors.white,
@@ -55,40 +58,81 @@ class ProfileHeaderCard extends StatelessWidget {
               ),
             ),
             Flexible(
-                flex: 5,
+              flex: 3,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 15, top: 5),
+                padding: const EdgeInsets.only(left: 10, top: 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Dominic Toreto",
+                      "Tony Kross jr",
                         style: TextStyle(
                           fontSize: context.textTheme.titleLarge?.fontSize,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text(
-                        "23 ANNI",
-                        style: TextStyle(
-                          fontSize: context.textTheme.bodySmall?.fontSize,
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.calendar_month,
+                          size: 14,
                         ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "2012 - 23 ANNI",
+                          style: TextStyle(
+                            fontSize: context.textTheme.bodySmall?.fontSize,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.flag,
+                          size: 14,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        CountryFlag.fromCountryCode(
+                          'Al',
+                          height: 16,
+                          width: 20,
+                          borderRadius: 2,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        CountryFlag.fromCountryCode(
+                          'It',
+                          height: 16,
+                          width: 20,
+                          borderRadius: 2,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                      Text(
+                      "ATTACCANTE",
+                        style: TextStyle(
+                        fontSize: context.textTheme.bodySmall?.fontSize,
                       ),
-                      Text(
-                        "ATTACCANTE",
-                        style: TextStyle(
-                          fontSize: context.textTheme.bodyMedium?.fontSize,
-                        ),
-                      ),
-                      Text(
-                        "Italiana",
-                        style: TextStyle(
-                          fontSize: context.textTheme.bodyLarge?.fontSize,
-                        ),
-                      )
-                    ],
-                  ),
-                )),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
