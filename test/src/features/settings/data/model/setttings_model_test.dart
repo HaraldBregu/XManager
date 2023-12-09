@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:xmanager/src/features/settings/data/models/settings_model.dart';
-import 'package:xmanager/src/features/settings/domain/entities/setttings_entity.dart';
+import 'package:xmanager/src/core/data/models/settings_model.dart';
+import 'package:xmanager/src/core/domain/entities/setttings_entity.dart';
 import '../../../../../fixtures/fixture_reader.dart';
 
 void main() {

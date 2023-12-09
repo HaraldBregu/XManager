@@ -22,33 +22,35 @@ import 'package:xmanager/src/core/domain/repository/user_repository.dart';
 import 'package:xmanager/src/core/domain/usecases/bluetooth_usecases.dart';
 import 'package:xmanager/src/core/domain/usecases/current_user.dart';
 import 'package:xmanager/src/core/domain/usecases/get_app_permissions.dart';
-import 'package:xmanager/src/core/presentation/bloc/app/bloc.dart';
-import 'package:xmanager/src/core/presentation/bloc/ble/ble_bloc.dart';
-import 'package:xmanager/src/core/presentation/bloc/ble/bloc.dart';
-import 'package:xmanager/src/core/presentation/bloc/player/bloc.dart';
-import 'package:xmanager/src/core/presentation/bloc/user/bloc.dart';
-import 'package:xmanager/src/features/auth/pages/login_page.dart';
-import 'package:xmanager/src/features/auth/pages/recovery_page.dart';
-import 'package:xmanager/src/features/auth/pages/signup_page.dart';
-import 'package:xmanager/src/features/auth/pages/start_page.dart';
-import 'package:xmanager/src/features/dashboard/presentation/pages/dashboard_page.dart';
-import 'package:xmanager/src/features/debug/ble_debug_page.dart';
-import 'package:xmanager/src/features/debug/debug_page.dart';
-import 'package:xmanager/src/features/debug/permissions_debug_page.dart';
-import 'package:xmanager/src/features/device/pages/device_list_page.dart';
-import 'package:xmanager/src/features/device/pages/device_search.dart';
-import 'package:xmanager/src/features/player/pages/player_create.dart';
-import 'package:xmanager/src/features/player/pages/player_detail.dart';
-import 'package:xmanager/src/features/player/pages/player_list.dart';
-import 'package:xmanager/src/features/player/pages/player_update.dart';
-import 'package:xmanager/src/features/program/presentation/pages/program_create.dart';
-import 'package:xmanager/src/features/program/presentation/pages/program_detail.dart';
-import 'package:xmanager/src/features/program/presentation/pages/program_list.dart';
-import 'package:xmanager/src/features/program/presentation/pages/program_update.dart';
-import 'package:xmanager/src/features/settings/presentation/pages/account_page.dart';
-import 'package:xmanager/src/features/settings/presentation/pages/permissions_page.dart';
-import 'package:xmanager/src/features/settings/presentation/pages/profile_page.dart';
-import 'package:xmanager/src/features/settings/presentation/pages/settings_page.dart';
+import 'package:xmanager/src/presentation/bloc/app_bloc.dart';
+import 'package:xmanager/src/presentation/bloc/app_event.dart';
+import 'package:xmanager/src/presentation/bloc/ble_bloc.dart';
+import 'package:xmanager/src/presentation/bloc/player_bloc.dart';
+import 'package:xmanager/src/presentation/bloc/user_bloc.dart';
+import 'package:xmanager/src/presentation/bloc/user_event.dart';
+import 'package:xmanager/src/presentation/screens/account_page.dart';
+import 'package:xmanager/src/presentation/screens/ble_debug_page.dart';
+import 'package:xmanager/src/presentation/screens/dashboard_page.dart';
+import 'package:xmanager/src/presentation/screens/debug_page.dart';
+import 'package:xmanager/src/presentation/screens/device_list_page.dart';
+import 'package:xmanager/src/presentation/screens/device_page.dart';
+import 'package:xmanager/src/presentation/screens/device_search.dart';
+import 'package:xmanager/src/presentation/screens/login_page.dart';
+import 'package:xmanager/src/presentation/screens/permissions_debug_page.dart';
+import 'package:xmanager/src/presentation/screens/permissions_page.dart';
+import 'package:xmanager/src/presentation/screens/player_create.dart';
+import 'package:xmanager/src/presentation/screens/player_detail.dart';
+import 'package:xmanager/src/presentation/screens/player_list.dart';
+import 'package:xmanager/src/presentation/screens/player_update.dart';
+import 'package:xmanager/src/presentation/screens/profile_page.dart';
+import 'package:xmanager/src/presentation/screens/program_create.dart';
+import 'package:xmanager/src/presentation/screens/program_detail.dart';
+import 'package:xmanager/src/presentation/screens/program_list.dart';
+import 'package:xmanager/src/presentation/screens/program_update.dart';
+import 'package:xmanager/src/presentation/screens/recovery_page.dart';
+import 'package:xmanager/src/presentation/screens/settings_page.dart';
+import 'package:xmanager/src/presentation/screens/signup_page.dart';
+import 'package:xmanager/src/presentation/screens/start_page.dart';
 
 late ObjectBox objectBox;
 final sl = GetIt.instance;
@@ -194,6 +196,7 @@ class App extends StatelessWidget {
         //initialLocation: "/start/signup",
         //initialLocation: "/start",
         initialLocation: "/",
+        //initialLocation: "/players/:id",
         //initialLocation: "/debug/bluetooth",
         //redirect: (context, state) => userStateAuthorized ? null : '/start',
         //errorBuilder: (context, state) => const ErrorPage(),
@@ -235,7 +238,7 @@ class App extends StatelessWidget {
                   GoRoute(
                     name: "Player create",
                     path: 'create',
-                    builder: (context, state) => PlayerCreate(),
+                    builder: (context, state) => const PlayerCreate(),
                   ),
                   GoRoute(
                     name: "Player update",
@@ -254,6 +257,11 @@ class App extends StatelessWidget {
                 path: 'devices',
                 builder: (context, state) => const DeviceListPage(),
                 routes: [
+                  GoRoute(
+                    name: "Device page",
+                    path: 'devices/:id',
+                    builder: (context, state) => const DevicePage(),
+                  ),
                   // GoRoute(
                   //   name: "Device add",
                   //   path: 'add',
