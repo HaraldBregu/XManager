@@ -4,7 +4,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 
 class BleDevicesList extends StatefulWidget {
-  const BleDevicesList({Key? key}) : super(key: key);
+  const BleDevicesList({super.key});
 
   @override
   State<BleDevicesList> createState() => _BleDevicesListState();

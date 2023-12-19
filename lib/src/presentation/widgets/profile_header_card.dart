@@ -100,6 +100,7 @@ class ProfileHeaderCard extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
+                    /*
                     Row(
                       children: [
                         CountryFlag.fromCountryCode(
@@ -119,6 +120,7 @@ class ProfileHeaderCard extends StatelessWidget {
                         ),
                       ],
                     ),
+                    */
                   ],
                 ),
               ),

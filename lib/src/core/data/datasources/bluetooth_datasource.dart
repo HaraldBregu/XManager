@@ -24,11 +24,11 @@ class BluetoothDataSourceImpl implements BluetoothDataSource {
     if (FlutterBluePlus.isScanningNow) return;
     await FlutterBluePlus.startScan(
       timeout: Duration(seconds: seconds),
-      scanMode: ScanMode.lowLatency,
-      withServices: const [],
-      macAddresses: const [],
-      allowDuplicates: false,
-      androidUsesFineLocation: false,
+      //scanMode: ScanMode.lowLatency,
+      //withServices: [Guid("00001600-1212-efde-1523-785feabcd121")],
+      //macAddresses: const [],
+      //allowDuplicates: false,
+      //androidUsesFineLocation: false,
     );
   }  
   

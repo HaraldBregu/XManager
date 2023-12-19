@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/ble_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/ble_event.dart';
-import 'package:xmanager/src/presentation/bloc/ble_state.dart';
+import 'package:xmanager/src/presentation/widgets/device_list.dart';
 
 class DeviceListPage extends StatelessWidget {
   const DeviceListPage({super.key});
@@ -41,41 +41,15 @@ class _DeviceListBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
+    return const CustomScrollView(
       slivers: [
-        const SliverToBoxAdapter(
+        SliverToBoxAdapter(
           child: ListTile(
             title: Text("Scanning State"),
             subtitle: Text("scanning"),
           ),
         ),
-        BlocBuilder<BleBloc, BleState>(
-          builder: (context, state) {
-            // if (state is AddingDevices) {
-            //   final devices = state.devices;
-            //   final length = devices.length;
-
-            //   return SliverList(
-            //     delegate: SliverChildBuilderDelegate(
-            //       (BuildContext context, int index) {
-            //         final device = devices[index];
-            //         return ListTile(
-            //           title: Text("Device name: ${device.name}"),
-            //           subtitle: Text(device.uuid),
-            //           onTap: () {},
-            //         );
-            //       },
-            //       childCount: length,
-            //     ),
-            //   );
-            // }
-            return const SliverToBoxAdapter(
-              child: SizedBox(
-                height: 0,
-              ),
-            );
-          },
-        ),
+        DeviceList(),
       ],
     );
   }

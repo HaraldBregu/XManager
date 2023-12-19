@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 
@@ -68,7 +69,8 @@ class _AccountPageState extends State<AccountPage> with WidgetsBindingObserver {
       trailing: const Icon(Icons.bluetooth),
       title: Text('Bluetooth state', style: context.textTheme.titleMedium),
       onTap: () => {},
-    ));
+      ),
+    );
 /*
     widgets.add(ListTile(
         title: const Text('Theme Mode'),
@@ -84,13 +86,15 @@ class _AccountPageState extends State<AccountPage> with WidgetsBindingObserver {
 
     widgets.add(ListTile(
       title: Text('App Permissions', style: context.textTheme.titleMedium),
-      onTap: () => Navigator.pushNamed(context, "/app_permissions"),
+      // onTap: () => Navigator.pushNamed(context, "/app_permissions"),
     ));
 
     widgets.add(ListTile(
       title: const Text('Bluetooth search'),
       trailing: const Icon(Icons.search),
-      onTap: () => Navigator.pushNamed(context, "/device_search"),
+      onTap: () => context.pushNamed(
+        "bluetooth search page",
+      ),
     ));
 
     if (kDebugMode) {
