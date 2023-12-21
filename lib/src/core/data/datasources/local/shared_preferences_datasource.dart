@@ -61,16 +61,18 @@ class SharedPreferencesDataSourceImpl implements SharedPreferencesDataSource {
     if (string != null) {
       final map = json.decode(string) as Map<String, dynamic>;
       final user = UserModel.fromMap(map);
-      final newUser = user.copyWith(fullname: fullname);
+      // final newUser = user.copyWith(fullname: fullname);
+      final newUser = user.copyWith(email: fullname);
       final appString = json.encode(newUser.toMap());
       return sharedPreferences.setString(kUserSharedPrefs, appString);
     }
 
     final newUser = UserModel(
-      fullname: fullname,
-      description: "",
-      firstName: "",
-      lastName: "",
+      email: ""
+        // fullname: fullname,
+        // description: "",
+        // firstName: "",
+        // lastName: "",
     );
 
     final appString = json.encode(newUser.toMap());
@@ -84,7 +86,8 @@ class SharedPreferencesDataSourceImpl implements SharedPreferencesDataSource {
     if (string != null) {
       final map = json.decode(string) as Map<String, dynamic>;
       final user = UserModel.fromMap(map);
-      final newUser = user.copyWith(fullname: "");
+      // final newUser = user.copyWith(fullname: "");
+      final newUser = user.copyWith(email: "");
       final appString = json.encode(newUser.toMap());
       return sharedPreferences.setString(kUserSharedPrefs, appString);
     }

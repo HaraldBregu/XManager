@@ -1,7 +1,7 @@
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
-import 'package:xmanager/src/core/data/models/models.dart';
 import 'package:xmanager/src/core/data/databases/objectbox.g.dart';
+import 'package:xmanager/src/core/data/models/models.dart';
 
 class ObjectBox {
   late final Store store;

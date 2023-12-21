@@ -2,12 +2,47 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:xmanager/src/presentation/bloc/bloc.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Future<void> _showErrorDialog() async {
+      return showDialog<void>(
+        context: context,
+        //barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Error login'),
+            content: const SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text('This is a demo alert dialog.'),
+                  Text('Would you like to approve of this message?'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Password recovery'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: const Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     List<int> nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
@@ -233,7 +268,47 @@ class StartPage extends StatelessWidget {
                                 ),
                               ),*/
                             ),
-                            onPressed: () => context.goNamed("login"),
+                            onPressed: () {
+                              //_showErrorDialog();
+
+                              /*
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  behavior: SnackBarBehavior.floating,
+                                  backgroundColor: Colors.transparent,
+                                  elevation: 0,
+                                  content: Container(
+                                    padding: EdgeInsets.all(15),
+                                    height: 90,
+                                    decoration: BoxDecoration(
+                                      color: context.colorScheme.errorContainer,
+                                    ),
+                                    child: const Text(
+                                      "Login error, please do something else",
+                                    ),
+                                  ),
+                                ),
+                              );
+                            */
+
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                },
+                              );
+                              //context.goNamed("login");
+                              BlocProvider.of<AuthBloc>(context).add(
+                                LogInEvent(
+                                  email: "barry.allen@example.com",
+                                  password: "SuperSecretPassword!",
+                                ),
+                              );
+
+                              //Navigator.of(context).pop();
+                            },
                             child: const Text("Log In"),
                           ),
                         ),
@@ -251,6 +326,7 @@ class StartPage extends StatelessWidget {
                               //   ),
                               // ),
                             ),
+                            //onPressed: null,
                             onPressed: () => context.goNamed("signup"),
                             child: const Text("Join Now"),
                           ),

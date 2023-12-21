@@ -13,7 +13,6 @@ abstract class BluetoothDataSource {
   Future<void> disconnect(String uuid);
   Stream<bool> connected(String uuid);
   Future<List<BluetoothService>> discoverServices(String uuid);
-
 }
 
 class BluetoothDataSourceImpl implements BluetoothDataSource {
@@ -30,8 +29,8 @@ class BluetoothDataSourceImpl implements BluetoothDataSource {
       //allowDuplicates: false,
       //androidUsesFineLocation: false,
     );
-  }  
-  
+  }
+
   @override
   Future stopScan() async {
     if (!FlutterBluePlus.isScanningNow) return;
@@ -52,11 +51,11 @@ class BluetoothDataSourceImpl implements BluetoothDataSource {
 
   @override
   Future<void> connect(String uuid) => BluetoothDevice.fromId(uuid).connect();
-  
+
   @override
   Future<void> disconnect(String uuid) async =>
       BluetoothDevice.fromId(uuid).disconnect();
-  
+
   @override
   Stream<bool> connected(String uuid) {
     final bleDevice = BluetoothDevice.fromId(uuid);
@@ -72,5 +71,4 @@ class BluetoothDataSourceImpl implements BluetoothDataSource {
     final services = device.discoverServices();
     return services;
   }
-
 }

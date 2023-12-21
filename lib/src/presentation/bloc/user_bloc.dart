@@ -26,9 +26,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     useCase.fold(
       (left) => emit(UserUnAuthorizedState()),
       (right) => {
-        if (right.fullname.isEmpty)
-          emit(UserUnAuthorizedState())
-        else
           emit(UserAuthorizedState())
       },
     );

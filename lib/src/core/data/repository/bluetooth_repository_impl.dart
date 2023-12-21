@@ -1,4 +1,4 @@
-import 'package:xmanager/src/core/data/datasources/bluetooth_datasource.dart';
+import 'package:xmanager/src/core/data/datasources/local/bluetooth_datasource.dart';
 import 'package:xmanager/src/core/data/models/bluetooth_device_model.dart';
 import 'package:xmanager/src/core/data/models/bluetooth_service_model.dart';
 import 'package:xmanager/src/core/domain/repository/bluetooth_repository.dart';

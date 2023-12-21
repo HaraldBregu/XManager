@@ -1,11 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:xmanager/src/core/data/datasources/permissions_datasource.dart';
-import 'package:xmanager/src/core/data/datasources/shared_preferences_datasource.dart';
-import 'package:xmanager/src/core/data/models/application_model.dart';
+import 'package:xmanager/src/core/data/datasources/local/permissions_datasource.dart';
+import 'package:xmanager/src/core/data/datasources/local/shared_preferences_datasource.dart';
 import 'package:xmanager/src/core/domain/entities/application_entity.dart';
 import 'package:xmanager/src/core/domain/repository/application_repository.dart';
-import 'package:xmanager/src/core/exeptions.dart';
 import 'package:xmanager/src/core/failures.dart';
 
 class AppRepositoryImpl implements ApplicationRepository {

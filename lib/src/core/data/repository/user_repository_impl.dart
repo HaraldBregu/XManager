@@ -1,28 +1,34 @@
 import 'package:dartz/dartz.dart';
-import 'package:xmanager/src/core/data/datasources/shared_preferences_datasource.dart';
-import 'package:xmanager/src/core/domain/entities/user_entity.dart';
+import 'package:xmanager/src/core/data/datasources/local/shared_preferences_datasource.dart';
+import 'package:xmanager/src/core/data/datasources/remote/remote_datasource_impl.dart';
+import 'package:xmanager/src/core/data/models/user_model.dart';
 import 'package:xmanager/src/core/domain/repository/user_repository.dart';
 import 'package:xmanager/src/core/exeptions.dart';
 import 'package:xmanager/src/core/failures.dart';
 
 class UserRepositoryImpl implements UserRepository {
-  final SharedPreferencesDataSourceImpl _sharedPreferencesDataSource;
+  final RemoteDataSourceImpl remoteDataSourceImpl;
+  final SharedPreferencesDataSourceImpl sharedPreferencesDataSource;
 
-  UserRepositoryImpl(this._sharedPreferencesDataSource);
+  UserRepositoryImpl({
+    required this.remoteDataSourceImpl,
+    required this.sharedPreferencesDataSource,
+  });
 
+/*
   @override
   Future<Either<Failure, UserEntity>> currentUser() async {
     try {
-      return Right(await _sharedPreferencesDataSource.getUser());
+      return Right(await sharedPreferencesDataSource.getUser());
     } on DatabaseExeption {
       return Left(DatabaseFailure());
     }
-  }
+  }*/
 
   @override
   Future<Either<Failure, bool>> exitUser() async {
     try {
-      return Right(await _sharedPreferencesDataSource.clearUserFullName());
+      return Right(await sharedPreferencesDataSource.clearUserFullName());
     } on DatabaseExeption {
       return Left(DatabaseFailure());
     }
@@ -33,4 +39,40 @@ class UserRepositoryImpl implements UserRepository {
     // TODO: implement saveFullName
     throw UnimplementedError();
   }
+  
+  @override
+  Future<Either<Failure, UserModel>> login(
+    String email,
+    String password,
+  ) async {
+    try {
+      final credential = await remoteDataSourceImpl.login(email, password);
+
+      return const Right(
+        UserModel(
+          email: "dkjnv",
+          // firstName: "",
+          // lastName: "",
+          // fullname: "",
+          // description: "",
+        ),
+      );
+    } on DatabaseExeption {
+      return Left(LoginFailure());
+    }
+  }
+
+  @override
+  Future<bool> logOut() => remoteDataSourceImpl.logOut();
+
+  @override
+  Future<Either<Failure, UserModel>> currentUser() async {
+    try {
+      final credential = await remoteDataSourceImpl.currentUser;
+      return Right(credential!);
+    } on ServerExeption {
+      return Left(CurrentUserFailure());
+    }
+  }
+  
 }
