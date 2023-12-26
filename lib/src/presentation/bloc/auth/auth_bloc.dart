@@ -27,14 +27,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async {
     final authCurrent = await authCurrentUseCase.call(NoParams());
     authCurrent.fold(
-      (l) {
-        print("############## UNauthenticated");
-        emit(AuthUnAuthenticatedState());
-      },
-      (r) {
-        print("############## AUthenticated");
-        emit(AuthAuthenticatedState());
-      },
+      (l) => emit(AuthUnAuthenticatedState()),
+      (r) => emit(AuthAuthenticatedState()),
     );
   }
 

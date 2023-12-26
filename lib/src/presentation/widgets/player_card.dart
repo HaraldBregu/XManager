@@ -13,20 +13,18 @@ class PlayerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(8, 5, 8, 0),
+      padding: const EdgeInsets.fromLTRB(16, 10, 16, 5),
       child: Card(
         elevation: 1,
         child: ListTile(
           leading: ClipRRect(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(6.0),
             child: Container(
               height: 50.0,
               width: 50.0,
               color: context.colorScheme.primaryContainer,
-              //color: Color(0xffFF0E58),
               child: const Icon(
                 Icons.person,
-                //color: Colors.white,
                 size: 25.0,
               ),
             ),

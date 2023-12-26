@@ -4,8 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 import 'package:xmanager/src/presentation/widgets/profile_device_card.dart';
 
-import '../bloc/bloc.dart';
-import '../widgets/device_list.dart';
+import '../../bloc/ble_bloc.dart';
+import '../../bloc/ble_event.dart';
+import '../../widgets/device_list.dart';
 
 class DevicePage extends StatelessWidget {
   const DevicePage({super.key});

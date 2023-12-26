@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xmanager/src/core/localizations_extension.dart';
+import 'package:xmanager/src/core/theme_extension.dart';
 
 class NavBarDashboard extends StatelessWidget {
   const NavBarDashboard();
@@ -11,6 +12,27 @@ class NavBarDashboard extends StatelessWidget {
       builder: (BuildContext context, constraints) {
         final scrolled = constraints.scrollOffset > 0;
         final scrolled50 = constraints.scrollOffset > 50;
+      
+        /*
+        return SliverAppBar(
+          expandedHeight: 120.0,
+          floating: false,
+          pinned: true,
+          flexibleSpace: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              return FlexibleSpaceBar(
+                titlePadding: EdgeInsets.only(left: 18, bottom: 18),
+                title: Text(
+                  context.loc.dashboard,
+                  style: TextStyle(
+                    fontSize: context.textTheme.headlineSmall?.fontSize,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              );
+            },
+          ),
+        );*/
 
         return SliverAppBar(
           backgroundColor: scrolled ? null : Colors.transparent,
@@ -18,7 +40,6 @@ class NavBarDashboard extends StatelessWidget {
               ? Text(
                   context.loc.dashboard,
                   style: const TextStyle(
-                    //fontSize: textTheme.titleMedium?.fontSize,
                     fontWeight: FontWeight.w900,
                   ),
                 )
@@ -30,15 +51,13 @@ class NavBarDashboard extends StatelessWidget {
               Icons.menu,
               size: 28,
             ),
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
-            }, // => GoRouter.of(context).pushNamed('Settings page'),
+            onPressed: () => Scaffold.of(context).openDrawer(),
           ),
           actions: [
-            // IconButton(
-            //   icon: const Icon(Icons.logout),
-            //   onPressed: () => context.goNamed('start'),
-            // ),
+            IconButton(
+              icon: const Icon(Icons.notification_important_outlined),
+              onPressed: () {},
+            ),
             IconButton(
               icon: const FittedBox(
                 child: CircleAvatar(
@@ -49,10 +68,6 @@ class NavBarDashboard extends StatelessWidget {
               ),
               onPressed: () => context.pushNamed('Settings page'),
             ),
-            // IconButton(
-            //   icon: const Icon(Icons.bluetooth),
-            //   onPressed: () => context.pushNamed('bluetooth debug page'),
-            // ),
           ],
         );
       },

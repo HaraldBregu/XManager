@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
+
+import '../bloc/auth/auth_bloc.dart';
+import '../bloc/auth/auth_event.dart';
 
 class DrawerMenu extends StatelessWidget {
   const DrawerMenu({super.key});
@@ -129,11 +133,14 @@ class DrawerMenu extends StatelessWidget {
           const ListTile(
             title: Text("Terms and Conditions"),
           ),
-          const ListTile(
+          ListTile(
             title: Text("Exit"),
-            leading: Icon(
+            leading: const Icon(
               Icons.exit_to_app,
             ),
+            onTap: () {
+              BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
+            },
           ),
         ],
       ),

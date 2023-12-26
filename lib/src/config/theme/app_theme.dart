@@ -78,9 +78,9 @@ abstract class AppTheme {
         swapLegacyOnMaterial3: true,
 
         subThemesData: const FlexSubThemesData(
-          defaultRadius: 13,
+          defaultRadius: 9,
           blendOnLevel: 20,
-          // Inpit
+          // Input
           inputDecoratorRadius: 0,
           inputDecoratorBorderType: FlexInputBorderType.underline,
           //inputDecoratorBorderWidth: 0.0,
@@ -125,16 +125,15 @@ abstract class AppTheme {
         //surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces, // GOOD blendLevel: 16,
 
         blendLevel: 36,
-        //blendLevel: 2,
         appBarElevation: 4.0,
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         useMaterial3: true,
         swapLegacyOnMaterial3: true,
 
         subThemesData: const FlexSubThemesData(
-          defaultRadius: 15,
+          defaultRadius: 10,
           blendOnLevel: 20,
-          // Inpit
+          // Input
           inputDecoratorRadius: 0,
           inputDecoratorBorderType: FlexInputBorderType.underline,
           //inputDecoratorBorderWidth: 0.0,

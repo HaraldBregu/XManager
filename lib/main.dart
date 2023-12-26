@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
@@ -31,25 +33,24 @@ import 'package:xmanager/src/presentation/bloc/bloc.dart';
 import 'package:xmanager/src/presentation/bloc/player_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/user_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/user_event.dart';
-import 'package:xmanager/src/presentation/screens/account_page.dart';
 import 'package:xmanager/src/presentation/screens/auth/login_page.dart';
+import 'package:xmanager/src/presentation/screens/auth/recovery_page.dart';
 import 'package:xmanager/src/presentation/screens/auth/signup_page.dart';
-import 'package:xmanager/src/presentation/screens/auth/start_page.dart';
-import 'package:xmanager/src/presentation/screens/ble_debug_page.dart';
-import 'package:xmanager/src/presentation/screens/dashboard_page.dart';
-import 'package:xmanager/src/presentation/screens/debug_page.dart';
-import 'package:xmanager/src/presentation/screens/device_list_page.dart';
-import 'package:xmanager/src/presentation/screens/device_page.dart';
-import 'package:xmanager/src/presentation/screens/device_search.dart';
-import 'package:xmanager/src/presentation/screens/permissions_debug_page.dart';
-import 'package:xmanager/src/presentation/screens/permissions_page.dart';
-import 'package:xmanager/src/presentation/screens/profile_page.dart';
-import 'package:xmanager/src/presentation/screens/program_create.dart';
-import 'package:xmanager/src/presentation/screens/program_detail.dart';
-import 'package:xmanager/src/presentation/screens/program_list.dart';
-import 'package:xmanager/src/presentation/screens/program_update.dart';
-import 'package:xmanager/src/presentation/screens/recovery_page.dart';
-import 'package:xmanager/src/presentation/screens/settings_page.dart';
+import 'package:xmanager/src/presentation/screens/ble/ble_debug_page.dart';
+import 'package:xmanager/src/presentation/screens/ble/debug_page.dart';
+import 'package:xmanager/src/presentation/screens/ble/device_list_page.dart';
+import 'package:xmanager/src/presentation/screens/ble/device_page.dart';
+import 'package:xmanager/src/presentation/screens/ble/device_search.dart';
+import 'package:xmanager/src/presentation/screens/home/dashboard_page.dart';
+import 'package:xmanager/src/presentation/screens/home/profile_page.dart';
+import 'package:xmanager/src/presentation/screens/home/program_create.dart';
+import 'package:xmanager/src/presentation/screens/home/program_detail.dart';
+import 'package:xmanager/src/presentation/screens/home/program_list.dart';
+import 'package:xmanager/src/presentation/screens/home/program_update.dart';
+import 'package:xmanager/src/presentation/screens/settings/account_page.dart';
+import 'package:xmanager/src/presentation/screens/settings/permissions_page.dart';
+import 'package:xmanager/src/presentation/screens/settings/settings_page.dart';
+import 'package:xmanager/src/presentation/screens/start/start_page.dart';
 
 late ObjectBox objectBox;
 final sl = GetIt.instance;
@@ -61,6 +62,14 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  LicenseRegistry.addLicense(() async* {
+    final license = await rootBundle.loadString('fonts/Poppins/OFL.txt');
+    yield LicenseEntryWithLineBreaks(['google_fonts'], license);
+  });
+
+  
+
 
   //! Features
 
@@ -202,14 +211,9 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final userBloc = context.watch<UserBloc>();
-    //final userState = userBloc.state;
-    //final userStateAuthorized = userState is UserAuthorizedState;
-    //final userStateAuthorized = context.watch<UserBloc>().authorized;
-
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       routerConfig: GoRouter(
@@ -217,17 +221,27 @@ class App extends StatelessWidget {
         //initialLocation: "/start/signup",
         //initialLocation: "/start",
         //initialLocation: "/auth",
+        initialLocation:
+            context.watch<AuthBloc>().state is AuthAuthenticatedState
+                ? "/"
+                : "/start",
         //initialLocation: "/players/:id",
         //initialLocation: "/debug/bluetooth",
         //redirect: (context, state) => userStateAuthorized ? null : '/start',
-        redirect: (context, state) {
-          if (context.watch<AuthBloc>().state is AuthAuthenticatedState) {
-            return "/";
-          } else {
-            return "/start";
-          }
-        },
+        /*redirect: (context, state) {
+          final isAuthenticated =
+              context.watch<AuthBloc>().state is AuthAuthenticatedState;
 
+          print("###################");
+          print(state);
+
+          if (!isAuthenticated) {
+            return "/start";
+          } else if (isAuthenticated) {
+            return '/';
+          }
+          return null;
+        },*/
         //errorBuilder: (context, state) => const ErrorPage(),
         routes: [
           GoRoute(
@@ -361,11 +375,6 @@ class App extends StatelessWidget {
                 name: "bluetooth list page",
                 path: 'bluetooth_list',
                 builder: (context, state) => const DeviceListPage(),
-              ),
-              GoRoute(
-                name: "permission list page",
-                path: 'permission_list',
-                builder: (context, state) => const PermissionsDebugPage(),
               ),
             ],
           ),

@@ -48,7 +48,7 @@ class ProfilePage extends StatelessWidget {
         slivers: [
           const _ProfileHeader(),
           const ProfileHeaderCard(),
-          SliverToBoxAdapter(
+          /*SliverToBoxAdapter(
             child: Divider(
               height: 40,
               thickness: 1,
@@ -98,7 +98,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+          ),*/
         ],
       ),
     );

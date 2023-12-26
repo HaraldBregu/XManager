@@ -21,13 +21,14 @@ class TrainingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 5, 8, 0),
+        padding: const EdgeInsets.fromLTRB(16, 10, 16, 5),
         child: Card(
           elevation: 1,
           child: Column(
             children: [
               ColoredBox(
                 color: context.colorScheme.primaryContainer,
+                //color: context.colorScheme.errorContainer,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,

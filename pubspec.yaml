@@ -89,6 +89,7 @@ flutter:
   uses-material-design: true
   generate: true
   assets:
+    - assets/fonts/Poppins/
     - assets/header.jpg
     - assets/images/logo.svg
     - assets/gifs/ctrl_pannel.gif

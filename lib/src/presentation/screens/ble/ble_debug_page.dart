@@ -4,8 +4,9 @@ import 'package:xmanager/src/presentation/bloc/app_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/ble_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/ble_event.dart';
 import 'package:xmanager/src/presentation/bloc/ble_state.dart';
-import 'package:xmanager/src/presentation/screens/device_list.dart';
-import 'package:xmanager/src/presentation/screens/service_list.dart';
+import 'package:xmanager/src/presentation/screens/ble/service_list.dart';
+
+import '../../widgets/device_list.dart';
 
 class BleDebugPage extends StatelessWidget {
   const BleDebugPage({super.key});
