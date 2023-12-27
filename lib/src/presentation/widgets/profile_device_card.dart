@@ -52,12 +52,17 @@ class ProfileDeviceCard extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "PIEDE DESTRO",
-                              style: context.textTheme.titleMedium
-                                  ?.copyWith(fontWeight: FontWeight.bold)
-                                  .copyWith(
-                                      color: context.colorScheme.onSurface),
+                            Row(
+                              children: [
+                                
+                                Text(
+                                  "PIEDE DESTRO",
+                                  style: context.textTheme.titleMedium
+                                      ?.copyWith(fontWeight: FontWeight.bold)
+                                      .copyWith(
+                                          color: context.colorScheme.onSurface),
+                                ),
+                              ],
                             ),
                             Row(
                               children: [

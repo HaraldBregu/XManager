@@ -47,7 +47,14 @@ class DashboardPage extends StatelessWidget {
         backgroundColor: context.colorScheme.secondaryContainer,
         foregroundColor: context.colorScheme.onSecondaryContainer,
         icon: const Icon(Icons.play_circle),
-        label: const Text('START'),
+        label: Text(
+          'START TRAINING',
+          style: TextStyle(
+            fontSize: context.textTheme.labelLarge?.fontSize,
+            fontFamily: context.textTheme.labelLarge?.fontFamily,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
       ),
       body: CustomScrollView(
         slivers: [
@@ -67,7 +74,8 @@ class DashboardPage extends StatelessWidget {
                     context.loc.dashboard,
                     style: TextStyle(
                       fontSize: context.textTheme.headlineLarge?.fontSize,
-                      fontWeight: FontWeight.bold,
+                      fontFamily: context.textTheme.headlineLarge?.fontFamily,
+                      fontWeight: FontWeight.w900,
                     ),
                   ),
                 ],
@@ -80,7 +88,157 @@ class DashboardPage extends StatelessWidget {
                   context.pushNamed("Profile page", params: {"id": "relfkemr"}),
             ),
           ),
-          const ProfileDeviceCard(),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 10, 16, 5),
+              child: Card(
+                elevation: 1,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 5,
+                    vertical: 8,
+                  ),
+                  child: Column(
+                    children: [
+                      ListTile(
+                        title: const Text("Dinamo"),
+                        titleTextStyle: TextStyle(
+                          fontSize: context.textTheme.titleLarge?.fontSize,
+                          fontFamily: context.textTheme.titleLarge?.fontFamily,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                        child: Card(
+                          child: ListTile(
+                            title: Text(
+                              "Registra tutti i dispositivi!",
+                              style: TextStyle(
+                                fontSize:
+                                    context.textTheme.labelLarge?.fontSize,
+                                fontFamily:
+                                    context.textTheme.labelLarge?.fontFamily,
+                                fontWeight: FontWeight.w600,
+                                color: context.colorScheme.tertiaryContainer,
+                              ),
+                            ),
+                            leading: Icon(
+                              Icons.error,
+                              color: context.colorScheme.tertiaryContainer,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 0, 8, 5),
+                        child: SizedBox(
+                          height: 80,
+                          child: Card(
+                            child: InkWell(
+                              onTap: () {},
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(10, 10, 20, 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        const Card(
+                                          elevation: 20,
+                                          child: Padding(
+                                            padding: EdgeInsets.all(10),
+                                            child: Icon(
+                                              Icons.circle_outlined,
+                                              color: Colors.green,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "PIEDE SINISTRO",
+                                              style:
+                                                  context.textTheme.titleMedium,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 0, 8, 15),
+                        child: SizedBox(
+                          height: 80,
+                          child: Card(
+                            child: InkWell(
+                              onTap: () => context.pushNamed("Device screen"),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(10, 10, 20, 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        const Card(
+                                          elevation: 20,
+                                          child: Padding(
+                                            padding: EdgeInsets.all(10),
+                                            child: Icon(
+                                              Icons.circle_outlined,
+                                              color: Colors.yellow,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "PIEDE DESTRO",
+                                              style:
+                                                  context.textTheme.titleMedium,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    const Icon(Icons.arrow_forward),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
 
           /*TrainingCard(
             title: "TRAINING SESSION",

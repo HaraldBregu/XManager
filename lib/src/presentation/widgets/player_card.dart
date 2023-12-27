@@ -29,8 +29,22 @@ class PlayerCard extends StatelessWidget {
               ),
             ),
           ),
-          title: Text("Marco Materazzi"),
-          subtitle: Text("Player role"),
+          title: Text(
+            "Juan Martin",
+            style: TextStyle(
+              fontSize: context.textTheme.labelLarge?.fontSize,
+              fontFamily: context.textTheme.labelLarge?.fontFamily,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          subtitle: Text(
+            "28 anni",
+            style: TextStyle(
+              fontSize: context.textTheme.labelLarge?.fontSize,
+              fontFamily: context.textTheme.labelLarge?.fontFamily,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
           onTap: onTap,
         ),
       ),

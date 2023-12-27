@@ -39,7 +39,7 @@ dependencies:
   equatable: ^2.0.5
   firebase_auth: ^4.15.3
   firebase_core: ^2.24.2
-  flex_color_scheme: ^6.1.2
+  flex_color_scheme: ^7.3.1
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2

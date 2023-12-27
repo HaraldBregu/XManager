@@ -132,6 +132,7 @@ abstract class AppTheme {
 
         subThemesData: const FlexSubThemesData(
           defaultRadius: 10,
+          
           blendOnLevel: 20,
           // Input
           inputDecoratorRadius: 0,
@@ -155,6 +156,8 @@ abstract class AppTheme {
           outlinedButtonRadius: 9,
           //outlinedButtonSchemeColor: SchemeColor.secondary,
           //outlinedButtonOutlineSchemeColor: SchemeColor.onSecondary,
+
+          // Filled Button
 
           //appBarBackgroundSchemeColor: SchemeColor.surfaceVariant
         ),

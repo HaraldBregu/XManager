@@ -40,6 +40,7 @@ import 'package:xmanager/src/presentation/screens/ble/ble_debug_page.dart';
 import 'package:xmanager/src/presentation/screens/ble/debug_page.dart';
 import 'package:xmanager/src/presentation/screens/ble/device_list_page.dart';
 import 'package:xmanager/src/presentation/screens/ble/device_page.dart';
+import 'package:xmanager/src/presentation/screens/ble/device_screen.dart';
 import 'package:xmanager/src/presentation/screens/ble/device_search.dart';
 import 'package:xmanager/src/presentation/screens/home/dashboard_page.dart';
 import 'package:xmanager/src/presentation/screens/home/profile_page.dart';
@@ -62,14 +63,6 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  LicenseRegistry.addLicense(() async* {
-    final license = await rootBundle.loadString('fonts/Poppins/OFL.txt');
-    yield LicenseEntryWithLineBreaks(['google_fonts'], license);
-  });
-
-  
-
 
   //! Features
 
@@ -213,7 +206,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       routerConfig: GoRouter(
@@ -279,21 +272,9 @@ class App extends StatelessWidget {
                 builder: (context, state) => const ProfilePage(),
               ),
               GoRoute(
-                name: "Device list",
-                path: 'devices',
-                builder: (context, state) => const DeviceListPage(),
-                routes: [
-                  GoRoute(
-                    name: "Device page",
-                    path: 'devices/:id',
-                    builder: (context, state) => const DevicePage(),
-                  ),
-                  // GoRoute(
-                  //   name: "Device add",
-                  //   path: 'add',
-                  //   builder: (context, state) => const DeviceAdd(),
-                  // ),
-                ],
+                name: "Device screen",
+                path: 'device',
+                builder: (context, state) => const DeviceScreen(),
               ),
             ],
           ),
