@@ -1,7 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
@@ -42,7 +40,7 @@ import 'package:xmanager/src/presentation/screens/ble/device_list_page.dart';
 import 'package:xmanager/src/presentation/screens/ble/device_page.dart';
 import 'package:xmanager/src/presentation/screens/ble/device_screen.dart';
 import 'package:xmanager/src/presentation/screens/ble/device_search.dart';
-import 'package:xmanager/src/presentation/screens/home/dashboard_page.dart';
+import 'package:xmanager/src/presentation/screens/home/dashboard_screen.dart';
 import 'package:xmanager/src/presentation/screens/home/profile_page.dart';
 import 'package:xmanager/src/presentation/screens/home/program_create.dart';
 import 'package:xmanager/src/presentation/screens/home/program_detail.dart';
@@ -240,7 +238,7 @@ class App extends StatelessWidget {
           GoRoute(
             name: "dashboard",
             path: "/",
-            builder: (context, state) => const DashboardPage(),
+            builder: (context, state) => const DashboardScreen(),
             routes: [
               GoRoute(
                 name: "Program list",
@@ -263,7 +261,7 @@ class App extends StatelessWidget {
                 name: "Program detail",
                 path: 'programs/:id',
                 builder: (context, state) => ProgramDetail(
-                  id: state.params['id'],
+                  id: state.pathParameters['id'],
                 ),
               ),
               GoRoute(

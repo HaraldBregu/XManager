@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
+import 'package:xmanager/src/presentation/widgets/alert_card.dart';
+import 'package:xmanager/src/presentation/widgets/progress_card.dart';
 
 class DeviceScreen extends StatelessWidget {
   const DeviceScreen({super.key});
@@ -8,10 +10,7 @@ class DeviceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: TextButton(
-        onPressed: () {},
-        child: Text("Button"),
-      ),
+    
       body: CustomScrollView(
         slivers: [
           const SliverAppBar(
@@ -28,7 +27,7 @@ class DeviceScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(14, 20, 14, 10),
+              padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -36,15 +35,16 @@ class DeviceScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Card(
-                        elevation: 20,
+                        elevation: 4,
+                        shadowColor: Colors.transparent,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                         child: Padding(
                           padding: EdgeInsets.all(15),
                           child: Icon(
-                            Icons.circle_outlined,
-                            color: Colors.green,
+                            Icons.double_arrow,
+                            color: Colors.orange,
                             size: 70,
                           ),
                         ),
@@ -57,7 +57,7 @@ class DeviceScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const SizedBox(
-                            height: 10,
+                            height: 6,
                           ),
                           Text(
                             "PIEDE SINISTRO",
@@ -82,19 +82,25 @@ class DeviceScreen extends StatelessWidget {
                           Row(
                             children: [
                               Icon(
+                                Icons.play_circle,
+                                size: 25,
+                                color: context.colorScheme.primary,
+                              ),
+                              const SizedBox(width: 5),
+                              Icon(
                                 Icons.bluetooth,
                                 size: 25,
                                 color: context.colorScheme.primary,
                               ),
                               const SizedBox(width: 5),
                               Icon(
-                                Icons.update,
+                                Icons.bar_chart,
                                 size: 25,
                                 color: context.colorScheme.primary,
                               ),
                               const SizedBox(width: 5),
                               Icon(
-                                Icons.bar_chart,
+                                Icons.update,
                                 size: 25,
                                 color: context.colorScheme.primary,
                               ),
@@ -108,16 +114,91 @@ class DeviceScreen extends StatelessWidget {
               ),
             ),
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(14, 20, 14, 10),
-              child: FilledButton(
-                onPressed: () {},
-                child: Text("data"),
+          const AlertSliverCard(
+            state: AlertState.infoAlertState,
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            elevation: 4,
+            text:
+                "Connetti al dispositivo per effeturare download dati e aggiornamenti!",
+            icon: Icons.error,
+          ),
+          const AlertSliverCard(
+            state: AlertState.errorAlertState,
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            elevation: 4,
+            text: "Errore caricamento dati!",
+            icon: Icons.error,
+          ),
+          const AlertSliverCard(
+            state: AlertState.successAlertState,
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            elevation: 4,
+            text: "Scarica i dati raccolti dal dispositivo!",
+            icon: Icons.bar_chart,
+          ),
+          const ProgressSliverCard(
+            elevation: 4,
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            state: ProgresState.successProgressState,
+            text: "Download dati in corso",
+            percentValue: 10,
+          ),
+          const AlertSliverCard(
+            state: AlertState.warningAlertState,
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            elevation: 4,
+            text:
+                "Una nuova versione firmware è disponibile per questo dispositivo. Aggiorna ora!",
+            icon: Icons.update,
+          ),
+          const ProgressSliverCard(
+            elevation: 4,
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            state: ProgresState.warningProgressState,
+            text: "Aggiornamento in corso",
+            percentValue: 45,
+          ),
+        ],
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            /*
+            FilledButton.tonal(
+              onPressed: () {},
+              style: FilledButton.styleFrom(fixedSize: const Size(150, 50)),
+              child: Text(
+                'REGISTRA DISPOSITIVO',
+                style: TextStyle(
+                  fontSize: context.textTheme.labelLarge?.fontSize,
+                  fontFamily: context.textTheme.labelLarge?.fontFamily,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
-          )
-        ],
+            const SizedBox(height: 15),
+            FilledButton(
+              style: FilledButton.styleFrom(
+                backgroundColor: context.colorScheme.primaryContainer,
+                fixedSize: const Size(150, 50),
+              ),
+              onPressed: () {},
+              child: const Text('REGISTRA DISPOSITIVO'),
+            ),
+            const SizedBox(height: 15),
+            */
+            OutlinedButton(
+              style: FilledButton.styleFrom(
+                fixedSize: const Size(150, 50),
+              ),
+              onPressed: () {},
+              child: const Text('CONNECT TO DEVICE'),
+            ),
+          ],
+        ),
       ),
     );
   }

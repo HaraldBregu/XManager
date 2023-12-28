@@ -15,7 +15,7 @@ class PlayerCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 10, 16, 5),
       child: Card(
-        elevation: 1,
+        elevation: 6,
         child: ListTile(
           leading: ClipRRect(
             borderRadius: BorderRadius.circular(6.0),

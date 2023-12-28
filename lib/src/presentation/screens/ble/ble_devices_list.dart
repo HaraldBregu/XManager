@@ -133,13 +133,15 @@ class _BleDevicesListState extends State<BleDevicesList> {
   void initState() {
     super.initState();
 
+    /*
     FlutterBluePlus.connectedDevices
         .asStream()
         .listen((List<BluetoothDevice> devices) {
       for (BluetoothDevice device in devices) {
         _addDeviceTolist(device);
       }
-    });
+    });*/
+
     FlutterBluePlus.scanResults.listen((List<ScanResult> results) {
       for (ScanResult result in results) {
         _addDeviceTolist(result.device);

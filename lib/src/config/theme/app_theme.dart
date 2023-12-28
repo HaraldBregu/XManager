@@ -109,26 +109,13 @@ abstract class AppTheme {
 
   static ThemeData get dark => FlexThemeData.dark(
         scheme: scheme,
-        //colors: _customSchemeColor.dark,
-        textTheme: _textTheme,
+        //usedColors: 5,
+        //textTheme: _textTheme,
         fontFamily: _fontFamily,
-        
         surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold, // GOOD current
-        //surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold, // GOOD current
-
-        //surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces, // GOOD
-        //surfaceMode: FlexSurfaceMode.level, // GOOD
-        //surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold, // GOOD
-        //surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold, // Boh
-        //surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold, // GOOD
-        //surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold, // GOOD
-        //surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces, // GOOD blendLevel: 16,
-
-        blendLevel: 36,
-        appBarElevation: 4.0,
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        useMaterial3: true,
-        swapLegacyOnMaterial3: true,
+        blendLevel: 4,
+        //blendLevel: 36,
+        //appBarElevation: 4.0,
 
         subThemesData: const FlexSubThemesData(
           defaultRadius: 10,
@@ -158,8 +145,13 @@ abstract class AppTheme {
           //outlinedButtonOutlineSchemeColor: SchemeColor.onSecondary,
 
           // Filled Button
-
+          filledButtonRadius: 9,
+          
           //appBarBackgroundSchemeColor: SchemeColor.surfaceVariant
         ),
+      
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        useMaterial3: true,
+        swapLegacyOnMaterial3: true,
       );
 }
