@@ -37,7 +37,6 @@ import 'package:xmanager/src/presentation/screens/auth/signup_page.dart';
 import 'package:xmanager/src/presentation/screens/ble/ble_debug_page.dart';
 import 'package:xmanager/src/presentation/screens/ble/debug_page.dart';
 import 'package:xmanager/src/presentation/screens/ble/device_list_page.dart';
-import 'package:xmanager/src/presentation/screens/ble/device_page.dart';
 import 'package:xmanager/src/presentation/screens/ble/device_screen.dart';
 import 'package:xmanager/src/presentation/screens/ble/device_search.dart';
 import 'package:xmanager/src/presentation/screens/home/dashboard_screen.dart';
@@ -98,10 +97,11 @@ Future<void> main() async {
       bluetoothStopScan: sl(),
       bluetoothScanResults: sl(),
       bluetoothIsScanning: sl(),
-      bluetoothConnectDevice: sl(),
+      bluetoothConnectDeviceUseCase: sl(),
       bluetoothDisconnectDevice: sl(),
       bluetoothDeviceConnected: sl(),
       bluetoothDiscoverServices: sl(),
+      bluetoothDeviceIsConnectedUseCase: sl(),
     ),
   );
   sl.registerFactory(
@@ -132,11 +132,12 @@ Future<void> main() async {
   sl.registerLazySingleton(() => BluetoothScanResults(sl()));
 
   sl.registerLazySingleton(() => BluetoothIsScanning(sl()));
-  sl.registerLazySingleton(() => BluetoothConnectDevice(sl()));
+  sl.registerLazySingleton(() => BluetoothConnectDeviceUseCase(sl()));
   sl.registerLazySingleton(() => BluetoothDisconnectDevice(sl()));
   sl.registerLazySingleton(() => BluetoothDeviceConnected(sl()));
   sl.registerLazySingleton(() => BluetoothDiscoverServices(sl()));
-  
+  sl.registerLazySingleton(() => BluetoothDeviceIsConnectedUseCase(sl()));
+
   // Repository
   sl.registerLazySingleton<ApplicationRepository>(
     () => AppRepositoryImpl(
@@ -181,7 +182,6 @@ Future<void> main() async {
   // Drivers, network hardware data
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
-  //sl.registerLazySingleton(() => FlutterBluePlus.instance);
 
   runApp(
     MultiBlocProvider(

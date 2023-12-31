@@ -138,40 +138,45 @@ class DashboardScreen extends StatelessWidget {
                         text: "Registra tutti i dispositivi!",
                         icon: Icons.error,
                       ),
-                      SizedBox(
-                        height: 60,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Row(
-                            children: [
-                              const Card(
-                                elevation: 0,
-                                child: Padding(
-                                  padding: EdgeInsets.all(10),
-                                  child: RotatedBox(
-                                    quarterTurns: 2,
-                                    child: Icon(
-                                      Icons.double_arrow_outlined,
-                                      color: Colors.green,
+                      GestureDetector(
+                        onTap: () => context.pushNamed("Device screen"),
+                        child: Container(
+                          color: Colors.transparent,
+                          height: 60,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Row(
+                              children: [
+                                const Card(
+                                  elevation: 0,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: RotatedBox(
+                                      quarterTurns: 2,
+                                      child: Icon(
+                                        Icons.double_arrow_outlined,
+                                        color: Colors.green,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "PIEDE SINISTRO",
-                                style: context.textTheme.titleMedium,
-                              ),
-                            ],
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "PIEDE SINISTRO",
+                                  style: context.textTheme.titleMedium,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 60,
-                        child: GestureDetector(
-                          onTap: () => context.pushNamed("Device screen"),
+                      GestureDetector(
+                        onTap: () => context.pushNamed("Device screen"),
+                        child: Container(
+                          color: Colors.transparent,
+                          height: 60,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Row(

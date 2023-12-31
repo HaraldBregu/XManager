@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:xmanager/src/core/domain/entities/bluetooth_device_entity.dart';
 import 'package:xmanager/src/core/domain/entities/bluetooth_service_entity.dart';
 
 abstract class BleEvent extends Equatable {
@@ -18,26 +17,41 @@ class StopScanning extends BleEvent {
   List<Object?> get props => [];
 }
 
-class SelectDevice extends BleEvent {
-  final BluetoothDeviceEntity device;
-  const SelectDevice(this.device);
+class ListenConnectionState extends BleEvent {
+  final String uuid;
+  const ListenConnectionState(this.uuid);
+
   @override
-  List<Object?> get props => [device];
+  List<Object?> get props => [uuid];
 }
 
 class ConnectDevice extends BleEvent {
+  final String uuid;
+  const ConnectDevice(this.uuid);
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [uuid];
 }
 
 class DisconnectDevice extends BleEvent {
+  final String uuid;
+  const DisconnectDevice(this.uuid);
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [uuid];
 }
 
 class DiscoverServices extends BleEvent {
+  final String uuid;
+  const DiscoverServices(this.uuid);
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [uuid];
+}
+
+class DiscoverServicesEnded extends BleEvent {
+  final List<BluetoothServiceEntity> services;
+  DiscoverServicesEnded({required this.services});
+  @override
+  List<Object?> get props => [services];
 }
 
 class SelectService extends BleEvent {

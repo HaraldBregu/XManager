@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/app_bloc.dart';
-import 'package:xmanager/src/presentation/bloc/ble_bloc.dart';
-import 'package:xmanager/src/presentation/bloc/ble_event.dart';
-import 'package:xmanager/src/presentation/bloc/ble_state.dart';
+import 'package:xmanager/src/presentation/bloc/bloc.dart';
 import 'package:xmanager/src/presentation/screens/ble/service_list.dart';
-
-import '../../widgets/device_list.dart';
+import 'package:xmanager/src/presentation/widgets/device_list.dart';
 
 class BleDebugPage extends StatelessWidget {
   const BleDebugPage({super.key});
@@ -47,9 +44,9 @@ class _BleDebugContent extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (context.watch<BleBloc>().state.isScanning) ...[
-              const Text("Scanning ble devices..."),
-            ],
+            // if (context.watch<BleBloc>().state.isScanning) ...[
+            //   const Text("Scanning ble devices..."),
+            // ],
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -126,7 +123,7 @@ class _BleDebugContent extends StatelessWidget {
                     const Text(
                       "Selected device",
                     ),
-                    Text(
+                    /* Text(
                       "BLE: ${context.watch<BleBloc>().state.selectedDevice?.name}",
                     ),
                     Text(
@@ -142,7 +139,7 @@ class _BleDebugContent extends StatelessWidget {
                     ] else if (context.watch<BleBloc>().state.connectionState ==
                         BleConnectionState.disconnected) ...[
                       const Text("DISCONNECTED"),
-                    ],
+                    ],*/
                   ],
                 ),
                 Column(
@@ -150,12 +147,12 @@ class _BleDebugContent extends StatelessWidget {
                     OutlinedButton(
                       child: const Text("Connect"),
                       onPressed: () =>
-                          context.read<BleBloc>().add(ConnectDevice()),
+                          context.read<BleBloc>().add(ConnectDevice("")),
                     ),
                     OutlinedButton(
                       child: const Text("Disconnect"),
                       onPressed: () =>
-                          context.read<BleBloc>().add(DisconnectDevice()),
+                          context.read<BleBloc>().add(DisconnectDevice("")),
                     ),
                   ],
                 ),
@@ -169,7 +166,7 @@ class _BleDebugContent extends StatelessWidget {
                 OutlinedButton(
                   child: const Text("Discover services"),
                   onPressed: () =>
-                      context.read<BleBloc>().add(DiscoverServices()),
+                      context.read<BleBloc>().add(DiscoverServices("")),
                 ),
                 const SizedBox(
                   width: 5,
@@ -183,9 +180,9 @@ class _BleDebugContent extends StatelessWidget {
                 ),
               ],
             ),
-            if (context.watch<BleBloc>().state.discoveringServices) ...[
-              const Text("DISCOVERING SERVICES..."),
-            ],
+            // if (context.watch<BleBloc>().state.discoveringServices) ...[
+            //   const Text("DISCOVERING SERVICES..."),
+            // ],
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -195,12 +192,12 @@ class _BleDebugContent extends StatelessWidget {
                     const Text(
                       "Selected service",
                     ),
-                    Text(
-                      "${context.watch<BleBloc>().state.selectedService?.serviceUuid}",
-                    ),
-                    Text(
-                      "remoteId: ${context.watch<BleBloc>().state.selectedService?.remoteId}",
-                    ),
+                    // Text(
+                    //   "${context.watch<BleBloc>().state.selectedService?.serviceUuid}",
+                    // ),
+                    // Text(
+                    //   "remoteId: ${context.watch<BleBloc>().state.selectedService?.remoteId}",
+                    // ),
                   ],
                 ),
               ],

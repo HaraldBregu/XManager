@@ -82,4 +82,8 @@ class BluetoothRepositoryImpl implements BluetoothRepository {
 
     return newServices;
   }
+  
+  @override
+  Future<bool> isConnected(String uuid) => _dataSource.isConnected(uuid);
+  
 }

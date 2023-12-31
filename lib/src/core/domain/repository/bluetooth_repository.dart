@@ -9,5 +9,7 @@ abstract class BluetoothRepository {
   Future<void> connect(String uuid);
   Future<void> disconnect(String uuid);
   Stream<bool> connected(String uuid);
+  Future<bool> isConnected(String uuid);
   Future<List<BluetoothServiceEntity>> discoverServices(String uuid);
+  
 }

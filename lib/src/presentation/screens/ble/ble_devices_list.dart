@@ -11,7 +11,6 @@ class BleDevicesList extends StatefulWidget {
 }
 
 class _BleDevicesListState extends State<BleDevicesList> {
-  //final FlutterBluePlus flutterBlue = FlutterBluePlus.instance;
   final List<BluetoothDevice> devicesList = <BluetoothDevice>[];
   BluetoothDevice? _connectedDevice;
   List<BluetoothService> _services = [];

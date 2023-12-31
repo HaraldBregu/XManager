@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/presentation/bloc/ble_bloc.dart';
-import 'package:xmanager/src/presentation/bloc/ble_event.dart';
+import 'package:xmanager/src/presentation/bloc/bloc.dart';
 import 'package:xmanager/src/presentation/widgets/device_list.dart';
 
 class DeviceListPage extends StatelessWidget {

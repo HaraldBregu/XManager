@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/presentation/bloc/ble_bloc.dart';
-import 'package:xmanager/src/presentation/bloc/ble_event.dart';
-import 'package:xmanager/src/presentation/bloc/ble_state.dart';
+import 'package:xmanager/src/presentation/bloc/bloc.dart';
 
 class DeviceList extends StatelessWidget {
   const DeviceList({super.key});
@@ -12,13 +10,13 @@ class DeviceList extends StatelessWidget {
     return SizedBox(
       child: BlocBuilder<BleBloc, BleState>(
         builder: (context, state) {
-          final count = state.devices.length;
+          final count = 0; //state.devices.length;
           return ListView.builder(
             itemCount: count,
             itemBuilder: (_, index) {
-              final device = state.devices[index];
-              final name = device.name;
-              final uuid = device.uuid;
+              // final device = state.devices[index];
+              // final name = device.name;
+              // final uuid = device.uuid;
               // String type = "";
               // switch (device.type) {
               //   case BLEDeviceType.unknown:
@@ -36,10 +34,13 @@ class DeviceList extends StatelessWidget {
               // }
 
               return ListTile(
-                title: Text("Name: $name"),
-                subtitle: Text(uuid),
+                  //title: Text("Name: $name"),
+                  title: Text("Name:"),
+                  //subtitle: Text(uuid),
+                  subtitle: Text("uuid"),
                 //trailing: Text(type),
-                onTap: () => context.read<BleBloc>()..add(SelectDevice(device)),
+                  onTap:
+                      null //() => context.read<BleBloc>()..add(SelectDevice(device)),
               );
             },
           );

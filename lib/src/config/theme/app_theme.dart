@@ -146,7 +146,6 @@ abstract class AppTheme {
 
           // Filled Button
           filledButtonRadius: 9,
-          
           //appBarBackgroundSchemeColor: SchemeColor.surfaceVariant
         ),
       

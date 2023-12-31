@@ -1,9 +1,9 @@
 export 'auth/auth_bloc.dart';
 export 'auth/auth_event.dart';
 export 'auth/auth_state.dart';
-export 'ble_bloc.dart';
-export 'ble_event.dart';
-export 'ble_state.dart';
-export 'device_bloc.dart';
-export 'device_event.dart';
-export 'device_state.dart';
+export 'ble/ble_bloc.dart';
+export 'ble/ble_event.dart';
+export 'ble/ble_state.dart';
+export 'device/device_bloc.dart';
+export 'device/device_event.dart';
+export 'device/device_state.dart';

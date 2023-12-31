@@ -5,14 +5,12 @@ import 'package:xmanager/src/core/domain/repository/bluetooth_repository.dart';
 import 'package:xmanager/src/core/failures.dart';
 import 'package:xmanager/src/core/usecase.dart';
 
-class BluetoothStartScan
-    implements UseCase<void, int> {
+class BluetoothStartScan implements BaseUseCase<void, int> {
   const BluetoothStartScan(this._bluetoothRepository);
   final BluetoothRepository _bluetoothRepository;
 
   @override
-  Future<Either<Failure, void>> call(int seconds) async =>
-      Right(await _bluetoothRepository.startScan(seconds));
+  Future<void> call(int seconds) => _bluetoothRepository.startScan(seconds);
 }
 
 class BluetoothStopScan implements UseCase<void, NoParams> {
@@ -23,7 +21,6 @@ class BluetoothStopScan implements UseCase<void, NoParams> {
   Future<Either<Failure, void>> call(NoParams seconds) async =>
       Right(await _bluetoothRepository.stopScan());
 }
-
 
 class BluetoothScanResults
     implements StreamUseCase<List<BluetoothDeviceEntity>, NoParams> {
@@ -44,13 +41,13 @@ class BluetoothIsScanning implements StreamUseCase<bool, NoParams> {
   Stream<bool> call(NoParams params) => _bleRepository.isScanning;
 }
 
-class BluetoothConnectDevice implements UseCase<void, String> {
-  const BluetoothConnectDevice(this._bleRepository);
+class BluetoothConnectDeviceUseCase implements BaseUseCase<void, String> {
+  const BluetoothConnectDeviceUseCase(this._bleRepository);
   final BluetoothRepository _bleRepository;
 
   @override
-  Future<Either<Failure, void>> call(String uuid) async {
-    return Right(_bleRepository.connect(uuid));
+  Future<void> call(String uuid) async {
+    return _bleRepository.connect(uuid);
   }
 }
 
@@ -72,15 +69,21 @@ class BluetoothDeviceConnected implements StreamUseCase<bool, String> {
   Stream<bool> call(String uuid) => _bleRepository.connected(uuid);
 }
 
+class BluetoothDeviceIsConnectedUseCase implements BaseUseCase<bool, String> {
+  const BluetoothDeviceIsConnectedUseCase(this._bleRepository);
+  final BluetoothRepository _bleRepository;
+
+  @override
+  Future<bool> call(String uuid) => _bleRepository.isConnected(uuid);
+}
+
 class BluetoothDiscoverServices
-    implements UseCase<List<BluetoothServiceEntity>, String> {
+    implements BaseUseCase<List<BluetoothServiceEntity>, String> {
   const BluetoothDiscoverServices(this._bleRepository);
   final BluetoothRepository _bleRepository;
 
   @override
-  Future<Either<Failure, List<BluetoothServiceEntity>>> call(
-    String uuid,
-  ) async {
-    return Right(await _bleRepository.discoverServices(uuid));
-  }
+  Future<List<BluetoothServiceEntity>> call(String uuid) =>
+      _bleRepository.discoverServices(uuid);
+  
 }

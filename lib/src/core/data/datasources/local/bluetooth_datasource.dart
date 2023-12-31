@@ -12,7 +12,9 @@ abstract class BluetoothDataSource {
   Future<void> connect(String uuid);
   Future<void> disconnect(String uuid);
   Stream<bool> connected(String uuid);
+  Future<bool> isConnected(String uuid);
   Future<List<BluetoothService>> discoverServices(String uuid);
+  Future<void> readCharacteristic(String uuid);
 }
 
 class BluetoothDataSourceImpl implements BluetoothDataSource {
@@ -59,7 +61,7 @@ class BluetoothDataSourceImpl implements BluetoothDataSource {
   @override
   Stream<bool> connected(String uuid) {
     final bleDevice = BluetoothDevice.fromId(uuid);
-    return bleDevice.connectionState.map((event) {
+    return bleDevice.connectionState.map((event) {      
       final isConnected = (event == BluetoothConnectionState.connected);
       return isConnected;
     });
@@ -68,7 +70,40 @@ class BluetoothDataSourceImpl implements BluetoothDataSource {
   @override
   Future<List<BluetoothService>> discoverServices(String uuid) {
     final device = BluetoothDevice.fromId(uuid);
-    final services = device.discoverServices();
+    final services = device.discoverServices();  
     return services;
   }
+  
+  @override
+  Future<bool> isConnected(String uuid) async {
+    final bleDevice = BluetoothDevice.fromId(uuid);
+    return bleDevice.isConnected;
+  }
+
+  @override
+  Future<void> readCharacteristic(String uuid) async {
+    final device = BluetoothDevice.fromId(uuid);
+    final services = await device.discoverServices();
+
+    final service = services.firstWhere((element) => element.serviceUuid == "");
+    final characteristics = service.characteristics;
+    final chr = characteristics
+        .firstWhere((element) => element.characteristicUuid == "");
+    chr.write([0x03]);
+    chr.setNotifyValue(true);
+    chr.read();
+
+    final test = services
+        .firstWhere(
+          (element) => element.serviceUuid == Guid("serviceuuid"),
+        )
+        .characteristics
+        .firstWhere(
+          (element) => element.characteristicUuid == Guid("serviceuuid"),
+        );
+
+    final f = BluetoothCharacteristic.fromProto(
+        BmBluetoothCharacteristic.fromMap({}));
+  }
+  
 }

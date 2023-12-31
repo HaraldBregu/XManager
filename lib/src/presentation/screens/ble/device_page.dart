@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:xmanager/src/core/theme_extension.dart';
-import 'package:xmanager/src/presentation/widgets/profile_device_card.dart';
-
-import '../../bloc/ble_bloc.dart';
-import '../../bloc/ble_event.dart';
-import '../../widgets/device_list.dart';
+import 'package:xmanager/src/presentation/bloc/ble/ble_bloc.dart';
+import 'package:xmanager/src/presentation/bloc/bloc.dart';
+import 'package:xmanager/src/presentation/widgets/device_list.dart';
 
 class DevicePage extends StatelessWidget {
   const DevicePage({super.key});

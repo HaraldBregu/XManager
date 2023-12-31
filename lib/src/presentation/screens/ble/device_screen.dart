@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:xmanager/src/core/domain/usecases/bluetooth_usecases.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
+import 'package:xmanager/src/presentation/bloc/ble/ble_bloc.dart';
+import 'package:xmanager/src/presentation/bloc/bloc.dart';
 import 'package:xmanager/src/presentation/widgets/alert_card.dart';
+import 'package:xmanager/src/presentation/widgets/indicator_icon.dart';
 import 'package:xmanager/src/presentation/widgets/progress_card.dart';
 
 class DeviceScreen extends StatelessWidget {
@@ -9,21 +14,46 @@ class DeviceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bleState = context.watch<BleBloc>().state;
+
     return Scaffold(
     
       body: CustomScrollView(
         slivers: [
-          const SliverAppBar(
-            backgroundColor: Colors.transparent,
-            title: Text(
-              "Device",
+          SliverAppBar(
+            title: const Text(
+              "Dispositivo",
               style: TextStyle(
                 fontWeight: FontWeight.w900,
               ),
             ),
             pinned: true,
             //centerTitle: true,
-            actions: [],
+            actions: [
+              PopupMenuButton(
+                  // add icon, by default "3 dot" icon
+                  // icon: Icon(Icons.book)
+                  itemBuilder: (context) {
+                return const [
+                  PopupMenuItem<int>(
+                    value: 0,
+                    child: Text("Elimina dispositivo"),
+                  ),
+                  PopupMenuItem<int>(
+                    value: 1,
+                    child: Text("Disconnetti"),
+                  ),
+                ];
+              }, onSelected: (value) {
+                if (value == 0) {
+                  print("My account menu is selected.");
+                } else if (value == 1) {
+                  print("Settings menu is selected.");
+                } else if (value == 2) {
+                  print("Logout menu is selected.");
+                }
+              }),
+            ],
           ),
           SliverToBoxAdapter(
             child: Padding(
@@ -87,12 +117,15 @@ class DeviceScreen extends StatelessWidget {
                                 color: context.colorScheme.primary,
                               ),
                               const SizedBox(width: 5),
-                              Icon(
-                                Icons.bluetooth,
-                                size: 25,
-                                color: context.colorScheme.primary,
+                              IndicatorIcon(
+                                padding: const EdgeInsets.only(right: 5),
+                                icon: Icons.bluetooth,
+                                state: (bleState.connected)
+                                    ? IndicatorIconState
+                                        .activeIndicatorIconState
+                                    : IndicatorIconState
+                                        .initialIndicatorIconState,
                               ),
-                              const SizedBox(width: 5),
                               Icon(
                                 Icons.bar_chart,
                                 size: 25,
@@ -104,6 +137,7 @@ class DeviceScreen extends StatelessWidget {
                                 size: 25,
                                 color: context.colorScheme.primary,
                               ),
+                              const SizedBox(width: 5),
                             ],
                           ),
                         ],
@@ -115,14 +149,28 @@ class DeviceScreen extends StatelessWidget {
             ),
           ),
           const AlertSliverCard(
-            state: AlertState.infoAlertState,
+            visible: false,
+            state: AlertState.warningAlertState,
             padding: EdgeInsets.symmetric(horizontal: 10),
             elevation: 4,
             text:
-                "Connetti al dispositivo per effeturare download dati e aggiornamenti!",
-            icon: Icons.error,
+                "Dispositivo non registrato. Registra un dispositivo usando il codice pin!",
+            icon: Icons.warning_rounded,
+          ),
+          AlertSliverCard(
+            state: AlertState.infoAlertState,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            elevation: 4,
+            text: (bleState is BleConnecting)
+                ? "Connesione con il dispositivo in corso..."
+                : (bleState.connected)
+                    ? "Dispositivo bluetooth connesso"
+                    : "Connetti al dispositivo per effeturare download dati e aggiornamenti!",
+            icon:
+                (!bleState.connected) ? Icons.error : Icons.bluetooth_connected,
           ),
           const AlertSliverCard(
+            visible: false,
             state: AlertState.errorAlertState,
             padding: EdgeInsets.symmetric(horizontal: 10),
             elevation: 4,
@@ -130,20 +178,23 @@ class DeviceScreen extends StatelessWidget {
             icon: Icons.error,
           ),
           const AlertSliverCard(
-            state: AlertState.successAlertState,
+            visible: false,
+            state: AlertState.warningAlertState,
             padding: EdgeInsets.symmetric(horizontal: 10),
             elevation: 4,
             text: "Scarica i dati raccolti dal dispositivo!",
             icon: Icons.bar_chart,
           ),
           const ProgressSliverCard(
+            visible: false,
             elevation: 4,
             padding: EdgeInsets.symmetric(horizontal: 10),
-            state: ProgresState.successProgressState,
+            state: ProgresState.warningProgressState,
             text: "Download dati in corso",
             percentValue: 10,
           ),
           const AlertSliverCard(
+            visible: false,
             state: AlertState.warningAlertState,
             padding: EdgeInsets.symmetric(horizontal: 10),
             elevation: 4,
@@ -152,12 +203,16 @@ class DeviceScreen extends StatelessWidget {
             icon: Icons.update,
           ),
           const ProgressSliverCard(
+            visible: false,
             elevation: 4,
             padding: EdgeInsets.symmetric(horizontal: 10),
             state: ProgresState.warningProgressState,
             text: "Aggiornamento in corso",
             percentValue: 45,
           ),
+          SliverToBoxAdapter(
+            child: Text('$bleState'),
+          )
         ],
       ),
       bottomNavigationBar: Padding(
@@ -166,36 +221,76 @@ class DeviceScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            /*
-            FilledButton.tonal(
-              onPressed: () {},
-              style: FilledButton.styleFrom(fixedSize: const Size(150, 50)),
-              child: Text(
-                'REGISTRA DISPOSITIVO',
-                style: TextStyle(
-                  fontSize: context.textTheme.labelLarge?.fontSize,
-                  fontFamily: context.textTheme.labelLarge?.fontFamily,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-            const SizedBox(height: 15),
-            FilledButton(
-              style: FilledButton.styleFrom(
-                backgroundColor: context.colorScheme.primaryContainer,
-                fixedSize: const Size(150, 50),
-              ),
-              onPressed: () {},
-              child: const Text('REGISTRA DISPOSITIVO'),
-            ),
-            const SizedBox(height: 15),
-            */
+            // if (bleState is BleServiceDiscovering) ...{
+            //   Text('Start discovering...'),
+            // },
+            // if (bleState is BleServiceDiscovered) ...{
+            //   Text('Discovered'),
+            // },
             OutlinedButton(
               style: FilledButton.styleFrom(
                 fixedSize: const Size(150, 50),
               ),
-              onPressed: () {},
+              onPressed: () {
+                BlocProvider.of<BleBloc>(context)
+                    .add(const ListenConnectionState("E7:C8:DF:65:5B:4B"));
+              },
+              child: const Text('Start listening'),
+            ),
+            OutlinedButton(
+              style: FilledButton.styleFrom(
+                fixedSize: const Size(150, 50),
+              ),
+              onPressed: () {
+                BlocProvider.of<BleBloc>(context)
+                    .add(const ConnectDevice("E7:C8:DF:65:5B:4B"));
+              },
               child: const Text('CONNECT TO DEVICE'),
+            ),
+            OutlinedButton(
+              style: FilledButton.styleFrom(
+                fixedSize: const Size(150, 50),
+              ),
+              onPressed: () => BlocProvider.of<BleBloc>(context)
+                  .add(const DisconnectDevice("E7:C8:DF:65:5B:4B")),
+              child: const Text('DISCONNECT TO DEVICE'),
+            ),
+            OutlinedButton(
+              style: FilledButton.styleFrom(
+                fixedSize: const Size(150, 50),
+              ),
+              onPressed: () {
+                BlocProvider.of<BleBloc>(context)
+                    .add(const DiscoverServices("E7:C8:DF:65:5B:4B"));
+                //00001600-1212-efde-1523-785feabcd121
+
+                // showModalBottomSheet<void>(
+                //   context: context,
+                //   builder: (BuildContext context) {
+                //     return SizedBox(
+                //       height: 400,
+                //       child: ListView.builder(
+                //         itemCount:
+                //             context.watch<BleBloc>().state.services.length,
+                //         itemBuilder: (context, index) {
+                //           return ListTile(
+                //             title: Text(
+                //               context
+                //                   .watch<BleBloc>()
+                //                   .state
+                //                   .services[index]
+                //                   .characteristics
+                //                   .length
+                //                   .toString(),
+                //             ),
+                //           );
+                //         },
+                //       ),
+                //     );
+                //   },
+                // );
+              },
+              child: const Text('CONNECT TO SERVICE DATA'),
             ),
           ],
         ),
