@@ -15,7 +15,9 @@ class BleBloc extends Bloc<BleEvent, BleState> {
   final BluetoothDisconnectDevice bluetoothDisconnectDevice;
   final BluetoothDeviceConnected bluetoothDeviceConnected;
   final BluetoothDiscoverServices bluetoothDiscoverServices;
+  final BluetoothServicesList bluetoothServicesList;
   final BluetoothDeviceIsConnectedUseCase bluetoothDeviceIsConnectedUseCase;
+  final BluetoothWriteUseCase bluetoothWriteUseCase;
 
   BleBloc({
     required this.bluetoothStartScan,
@@ -26,7 +28,9 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     required this.bluetoothDisconnectDevice,
     required this.bluetoothDeviceConnected,
     required this.bluetoothDiscoverServices,
+    required this.bluetoothServicesList,
     required this.bluetoothDeviceIsConnectedUseCase,
+    required this.bluetoothWriteUseCase,
   }) : super(const BleInitial()) {
     // on<StartScanning>(_onStartScanningEvent, transformer: restartable());
     // on<StopScanning>(_onStopScanningEvent);
@@ -35,9 +39,12 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     on<DisconnectDevice>(_onDisconnectDeviceEvent);
 
     on<DiscoverServices>(_onDiscoverServicesEvent);
-    //   on<SelectService>(_onSelectServiceEvent);
+    on<ServicesList>(_onServicesListEvent);
 
-    //   on<DiscoverServicesEnded>(_onDiscoverServicesEnded);
+    on<SelectServiceUuid>(_onSelectServiceUuidEvent);
+    on<SelectCharacteristicUuid>(_onSelectCharacteristicUuidEvent);
+    on<BleWriteEvent>(_onBleWriteEventEvent);
+
   }
 
   Future<void> _onStartScanningEvent(
@@ -89,16 +96,8 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     await emit.onEach(
       bluetoothDeviceConnected.call(event.uuid),
       onData: (connected) {
-        print("Connected: $connected");
         emit(BleConnected(connected: connected));
-        print("Connected state: $state");
-
-        // if (connected) {
-        //   emit(const BleConnected());
-        // } else {
-        //   emit(const BleConnectionError());
-        // }
-        // emit(state.copyWith(isConnected: connected));
+        //emit(state.copyWith(connected: connected));
       },
     );
   }
@@ -110,10 +109,7 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     final isConnectedUseCase =
         await bluetoothDeviceIsConnectedUseCase.call(event.uuid);
     if (!isConnectedUseCase) {
-      print("is not connected, connecting...");
-
       emit(const BleConnecting());
-      //emit(BleState.connecting());
       bluetoothConnectDeviceUseCase.call(event.uuid);
     }
   }
@@ -133,46 +129,51 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     DiscoverServices event,
     Emitter<BleState> emit,
   ) async {
-    if (!state.connected) return;
-
-    //print("Current state: $state");
-
-    //emit(BleServiceDiscovering());
-    final services = await bluetoothDiscoverServices.call(event.uuid);
-    //emit(BleServiceDiscovered());
-    emit(state.copyWith(services: services));
-
-    //add(DiscoverServicesEnded(services: services));
-
-    //print("Current state after emitting: $state");
-
-    //    emit(state.copyWith(services: [services.first]));
-
-    //print("Current state: $state");
+    if (state.connected) {
+      final services = await bluetoothDiscoverServices.call(event.uuid);
+      emit(state.copyWith(services: services));
+    }
   }
 
-  Future<void> _onDiscoverServicesEnded(
-    DiscoverServicesEnded event,
+  Future<void> _onServicesListEvent(
+    ServicesList event,
     Emitter<BleState> emit,
   ) async {
-    print("Current state ended: $event");
-
-    //emit(state.copyWith(services: event.services));
-    /*
-    emit(BleServiceDiscovering());
-    final services = await bluetoothDiscoverServices.call(event.uuid);
-    emit(BleServiceDiscovered());
-    //print(state);
-    add(DiscoverServicesEnded(services: services));
-    print("Current state after emitting: $state");
-    emit(state.copyWith(services: [services.first]));
-    print("Current state: $state");*/
+    if (state.connected) {
+      final services = await bluetoothServicesList.call(event.uuid);
+      emit(state.copyWith(services: services));
+    }
   }
 
-  Future<void> _onSelectServiceEvent(
-    SelectService event,
+  Future<void> _onSelectServiceUuidEvent(
+    SelectServiceUuid event,
     Emitter<BleState> emit,
   ) async {
-    // emit(state.copyWith(selectedService: event.service));
+    final selectedService = state.services
+        .firstWhere((element) => element.serviceUuid == event.uuid);
+    emit(state.copyWith(selectedService: selectedService));
   }
+
+Future<void> _onSelectCharacteristicUuidEvent(
+    SelectCharacteristicUuid event,
+    Emitter<BleState> emit,
+  ) async {
+    final selectedService = state.selectedService?.characteristics
+        .firstWhere((element) => element.characteristicUuid == event.uuid);
+
+  }
+
+  Future<void> _onBleWriteEventEvent(
+    BleWriteEvent event,
+    Emitter<BleState> emit,
+  ) async {
+    bluetoothWriteUseCase.call(
+      BleWriteParams(
+        deviceUuid: event.deviceUuid,
+        serviceUuid: event.serviceUuid,
+        characteristicsUuid: event.characteristicUuid,
+      ),
+    );
+  }
+
 }

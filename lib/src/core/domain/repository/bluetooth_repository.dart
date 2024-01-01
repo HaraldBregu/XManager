@@ -11,5 +11,11 @@ abstract class BluetoothRepository {
   Stream<bool> connected(String uuid);
   Future<bool> isConnected(String uuid);
   Future<List<BluetoothServiceEntity>> discoverServices(String uuid);
-  
+  Future<List<BluetoothServiceEntity>> servicesList(String uuid);
+
+  Future write(
+    String deviceUuid,
+    String serviceUuid,
+    String characteristicsUuid,
+  );
 }

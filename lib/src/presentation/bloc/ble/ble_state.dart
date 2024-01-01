@@ -1,29 +1,40 @@
 import 'package:equatable/equatable.dart';
-import 'package:xmanager/src/core/domain/entities/bluetooth_device_entity.dart';
 import 'package:xmanager/src/core/domain/entities/bluetooth_service_entity.dart';
 
 class BleState extends Equatable {
   final bool connected;
   final List<BluetoothServiceEntity> services;
+  final BluetoothServiceEntity? selectedService;
+
+  // final List<BluetoothDeviceEntity> devices;
+  // final BluetoothDeviceEntity? selectedDevice;
+  // final bool discoveringServices;
+  // final List<BluetoothServiceEntity> services;
+  // final BluetoothServiceEntity? selectedService;
+
 
   const BleState({
     this.connected = false,
     this.services = const [],
+    this.selectedService,
   });
 
   BleState copyWith({
     bool? connected,
     List<BluetoothServiceEntity>? services,
+    BluetoothServiceEntity? selectedService,
   }) =>
       BleState(
         connected: connected ?? this.connected,
         services: services ?? this.services,
+        selectedService: selectedService ?? this.selectedService,
       );
 
   @override
   List<Object?> get props => [
         connected,
         services,
+        selectedService,
       ];
 }
 

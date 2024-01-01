@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:xmanager/src/core/data/models/bluetooth_device_model.dart';
 import 'package:xmanager/src/core/domain/entities/bluetooth_service_entity.dart';
@@ -14,7 +16,13 @@ abstract class BluetoothDataSource {
   Stream<bool> connected(String uuid);
   Future<bool> isConnected(String uuid);
   Future<List<BluetoothService>> discoverServices(String uuid);
+  Future<List<BluetoothService>> servicesList(String uuid);
   Future<void> readCharacteristic(String uuid);
+  Future<void> writeCharacteristic(
+    String deviceUuid,
+    String serviceUuid,
+    String characteristicsUuid,
+  );
 }
 
 class BluetoothDataSourceImpl implements BluetoothDataSource {
@@ -73,6 +81,9 @@ class BluetoothDataSourceImpl implements BluetoothDataSource {
     final services = device.discoverServices();  
     return services;
   }
+  @override
+  Future<List<BluetoothService>> servicesList(String uuid) async =>
+      BluetoothDevice.fromId(uuid).servicesList;
   
   @override
   Future<bool> isConnected(String uuid) async {
@@ -106,4 +117,28 @@ class BluetoothDataSourceImpl implements BluetoothDataSource {
         BmBluetoothCharacteristic.fromMap({}));
   }
   
+  @override
+  Future<void> writeCharacteristic(
+    String deviceUuid,
+    String serviceUuid,
+    String characteristicsUuid,
+  ) {
+    final device = BluetoothDevice.fromId(deviceUuid);
+    final services = device.servicesList;
+    print("service list");
+    print(services);
+    final characteristics = services
+        .firstWhere(
+          (element) => element.serviceUuid == Guid(serviceUuid),
+        )
+        .characteristics
+        .firstWhere(
+          (element) => element.characteristicUuid == Guid(characteristicsUuid),
+        );
+    print("chars list");
+    print(characteristics);
+    return characteristics.write([0x01, 0x02, 0x00, 0x05]);
+  }
+  
+
 }

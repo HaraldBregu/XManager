@@ -87,3 +87,27 @@ class BluetoothDiscoverServices
       _bleRepository.discoverServices(uuid);
   
 }
+
+class BluetoothServicesList
+    implements BaseUseCase<List<BluetoothServiceEntity>, String> {
+  const BluetoothServicesList(this._bleRepository);
+  final BluetoothRepository _bleRepository;
+
+  @override
+  Future<List<BluetoothServiceEntity>> call(String uuid) =>
+      _bleRepository.servicesList(uuid);
+}
+
+class BluetoothWriteUseCase implements BaseUseCase<void, BleWriteParams> {
+  const BluetoothWriteUseCase(this._bleRepository);
+  final BluetoothRepository _bleRepository;
+
+  @override
+  Future<void> call(BleWriteParams params) {
+    return _bleRepository.write(
+      params.deviceUuid,
+      params.serviceUuid,
+      params.characteristicsUuid,
+    );
+  }
+}

@@ -101,7 +101,9 @@ Future<void> main() async {
       bluetoothDisconnectDevice: sl(),
       bluetoothDeviceConnected: sl(),
       bluetoothDiscoverServices: sl(),
+      bluetoothServicesList: sl(),
       bluetoothDeviceIsConnectedUseCase: sl(),
+      bluetoothWriteUseCase: sl(),
     ),
   );
   sl.registerFactory(
@@ -136,7 +138,9 @@ Future<void> main() async {
   sl.registerLazySingleton(() => BluetoothDisconnectDevice(sl()));
   sl.registerLazySingleton(() => BluetoothDeviceConnected(sl()));
   sl.registerLazySingleton(() => BluetoothDiscoverServices(sl()));
+  sl.registerLazySingleton(() => BluetoothServicesList(sl()));
   sl.registerLazySingleton(() => BluetoothDeviceIsConnectedUseCase(sl()));
+  sl.registerLazySingleton(() => BluetoothWriteUseCase(sl()));
 
   // Repository
   sl.registerLazySingleton<ApplicationRepository>(

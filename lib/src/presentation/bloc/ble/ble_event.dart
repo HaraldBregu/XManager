@@ -42,21 +42,45 @@ class DisconnectDevice extends BleEvent {
 class DiscoverServices extends BleEvent {
   final String uuid;
   const DiscoverServices(this.uuid);
-
   @override
   List<Object?> get props => [uuid];
 }
 
-class DiscoverServicesEnded extends BleEvent {
-  final List<BluetoothServiceEntity> services;
-  DiscoverServicesEnded({required this.services});
+class ServicesList extends BleEvent {
+  final String uuid;
+  const ServicesList(this.uuid);
   @override
-  List<Object?> get props => [services];
+  List<Object?> get props => [uuid];
 }
 
-class SelectService extends BleEvent {
-  final BluetoothServiceEntity service;
-  const SelectService(this.service);
+class SelectServiceUuid extends BleEvent {
+  final String uuid;
+  const SelectServiceUuid(this.uuid);
   @override
-  List<Object?> get props => [service];
+  List<Object?> get props => [uuid];
+}
+
+class SelectCharacteristicUuid extends BleEvent {
+  final String uuid;
+  const SelectCharacteristicUuid(this.uuid);
+  @override
+  List<Object?> get props => [uuid];
+}
+
+class BleWriteEvent extends BleEvent {
+  final String deviceUuid;
+  final String serviceUuid;
+  final String characteristicUuid;
+  const BleWriteEvent(
+    this.deviceUuid,
+    this.serviceUuid,
+    this.characteristicUuid,
+  );
+
+  @override
+  List<Object?> get props => [
+        deviceUuid,
+        serviceUuid,
+        characteristicUuid,
+      ];
 }

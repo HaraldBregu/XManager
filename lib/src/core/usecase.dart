@@ -32,7 +32,6 @@ class LoginParams extends Equatable {
       ];
 }
 
-
 class BluetoothDeviceParams extends Equatable {
   final String name;
   final String uuid;
@@ -47,6 +46,20 @@ class BluetoothDeviceParams extends Equatable {
         name,
         uuid,
       ];
+}
+
+class BleWriteParams extends Equatable {
+  final String deviceUuid;
+  final String serviceUuid;
+  final String characteristicsUuid;
+  const BleWriteParams({
+    required this.deviceUuid,
+    required this.serviceUuid,
+    required this.characteristicsUuid,
+  });
+
+  @override
+  List<Object?> get props => [deviceUuid, serviceUuid, characteristicsUuid];
 }
 
 

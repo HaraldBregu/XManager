@@ -9,12 +9,25 @@ import 'package:xmanager/src/presentation/widgets/alert_card.dart';
 import 'package:xmanager/src/presentation/widgets/indicator_icon.dart';
 import 'package:xmanager/src/presentation/widgets/progress_card.dart';
 
+
+const String bleMac = "E7:C8:DF:65:5B:4B";
+const String trainingServiceUuid = "00001600-1212-efde-1523-785feabcd121";
+const String trainingCommandCharsUuid = "00001601-1212-efde-1523-785feabcd121";
+const String trainingDataCharsUuid = "00001602-1212-efde-1523-785feabcd121";
+
+
 class DeviceScreen extends StatelessWidget {
   const DeviceScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final bleState = context.watch<BleBloc>().state;
+    final selectedService = bleState.selectedService;
+
+    // final trainingService = bleState.services
+    //     .firstWhere((element) => element.serviceUuid == trainingServiceUuid);
+    // final remoteId = trainingService.remoteId;
+    // final serviceUuid = trainingService.serviceUuid;
 
     return Scaffold(
     
@@ -211,8 +224,12 @@ class DeviceScreen extends StatelessWidget {
             percentValue: 45,
           ),
           SliverToBoxAdapter(
-            child: Text('$bleState'),
-          )
+            child: Text('$selectedService'),
+          ),
+          // SliverToBoxAdapter(
+          //   child: Text('$serviceUuid'),
+          // ),
+
         ],
       ),
       bottomNavigationBar: Padding(
@@ -221,19 +238,13 @@ class DeviceScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // if (bleState is BleServiceDiscovering) ...{
-            //   Text('Start discovering...'),
-            // },
-            // if (bleState is BleServiceDiscovered) ...{
-            //   Text('Discovered'),
-            // },
             OutlinedButton(
               style: FilledButton.styleFrom(
                 fixedSize: const Size(150, 50),
               ),
               onPressed: () {
                 BlocProvider.of<BleBloc>(context)
-                    .add(const ListenConnectionState("E7:C8:DF:65:5B:4B"));
+                    .add(const ListenConnectionState(bleMac));
               },
               child: const Text('Start listening'),
             ),
@@ -243,7 +254,7 @@ class DeviceScreen extends StatelessWidget {
               ),
               onPressed: () {
                 BlocProvider.of<BleBloc>(context)
-                    .add(const ConnectDevice("E7:C8:DF:65:5B:4B"));
+                    .add(const ConnectDevice(bleMac));
               },
               child: const Text('CONNECT TO DEVICE'),
             ),
@@ -252,7 +263,7 @@ class DeviceScreen extends StatelessWidget {
                 fixedSize: const Size(150, 50),
               ),
               onPressed: () => BlocProvider.of<BleBloc>(context)
-                  .add(const DisconnectDevice("E7:C8:DF:65:5B:4B")),
+                  .add(const DisconnectDevice(bleMac)),
               child: const Text('DISCONNECT TO DEVICE'),
             ),
             OutlinedButton(
@@ -261,37 +272,61 @@ class DeviceScreen extends StatelessWidget {
               ),
               onPressed: () {
                 BlocProvider.of<BleBloc>(context)
-                    .add(const DiscoverServices("E7:C8:DF:65:5B:4B"));
-                //00001600-1212-efde-1523-785feabcd121
+                    .add(const DiscoverServices(bleMac));
 
-                // showModalBottomSheet<void>(
-                //   context: context,
-                //   builder: (BuildContext context) {
-                //     return SizedBox(
-                //       height: 400,
-                //       child: ListView.builder(
-                //         itemCount:
-                //             context.watch<BleBloc>().state.services.length,
-                //         itemBuilder: (context, index) {
-                //           return ListTile(
-                //             title: Text(
-                //               context
-                //                   .watch<BleBloc>()
-                //                   .state
-                //                   .services[index]
-                //                   .characteristics
-                //                   .length
-                //                   .toString(),
-                //             ),
-                //           );
-                //         },
-                //       ),
-                //     );
-                //   },
-                // );
+                showModalBottomSheet<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return SizedBox(
+                      height: 400,
+                      child: ListView.builder(
+                        itemCount:
+                            context.watch<BleBloc>().state.services.length,
+                        itemBuilder: (context, index) {
+                          final service =
+                              context.watch<BleBloc>().state.services[index];
+                          return ListTile(
+                            title: Text(service.serviceUuid.toString()),
+                            subtitle: Text(
+                              service.characteristics.length.toString(),
+                            ),
+                            onTap: () {
+                              context
+                                  .read<BleBloc>()
+                                  .add(SelectServiceUuid(service.serviceUuid));
+                            },
+                          );
+                        },
+                      ),
+                    );
+                  },
+                );
+              
               },
-              child: const Text('CONNECT TO SERVICE DATA'),
+              child: const Text('DISCOVER SERVICES'),
             ),
+            OutlinedButton(
+              style: FilledButton.styleFrom(
+                fixedSize: const Size(150, 50),
+              ),
+              onPressed: () =>
+                  context.read<BleBloc>().add(const ServicesList(bleMac)),
+              child: const Text('READ SERVICES LIST'),
+            ),
+            OutlinedButton(
+              style: FilledButton.styleFrom(
+                fixedSize: const Size(150, 50),
+              ),
+              onPressed: () => context.read<BleBloc>().add(
+                    const BleWriteEvent(
+                      bleMac,
+                      trainingServiceUuid,
+                      trainingCommandCharsUuid,
+                    ),
+                  ),
+              child: const Text('Write test'),
+            ),
+
           ],
         ),
       ),
