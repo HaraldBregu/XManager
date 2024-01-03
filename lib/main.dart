@@ -8,21 +8,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xmanager/firebase_options.dart';
 import 'package:xmanager/src/config/theme/app_theme.dart';
 import 'package:xmanager/src/core/common.dart';
-import 'package:xmanager/src/core/data/databases/objectbox_db.dart';
-import 'package:xmanager/src/core/data/datasources/local/bluetooth_datasource.dart';
+import 'package:xmanager/src/core/data/datasources/local/ble_datasource.dart';
 import 'package:xmanager/src/core/data/datasources/local/permissions_datasource.dart';
 import 'package:xmanager/src/core/data/datasources/local/shared_preferences_datasource.dart';
 import 'package:xmanager/src/core/data/datasources/remote/remote_datasource_impl.dart';
 import 'package:xmanager/src/core/data/repository/app_repository_impl.dart';
-import 'package:xmanager/src/core/data/repository/bluetooth_repository_impl.dart';
+import 'package:xmanager/src/core/data/repository/ble_repository_impl.dart';
 import 'package:xmanager/src/core/data/repository/user_repository_impl.dart';
 import 'package:xmanager/src/core/domain/repository/application_repository.dart';
-import 'package:xmanager/src/core/domain/repository/bluetooth_repository.dart';
+import 'package:xmanager/src/core/domain/repository/ble_repository.dart';
 import 'package:xmanager/src/core/domain/repository/user_repository.dart';
 import 'package:xmanager/src/core/domain/usecases/auth_current_usecase.dart';
 import 'package:xmanager/src/core/domain/usecases/auth_login_usecase.dart';
 import 'package:xmanager/src/core/domain/usecases/auth_logout_usecase.dart';
-import 'package:xmanager/src/core/domain/usecases/bluetooth_usecases.dart';
+import 'package:xmanager/src/core/domain/usecases/ble_usecases.dart';
 import 'package:xmanager/src/core/domain/usecases/current_user.dart';
 import 'package:xmanager/src/core/domain/usecases/get_app_permissions.dart';
 import 'package:xmanager/src/presentation/bloc/app_bloc.dart';
@@ -50,7 +49,7 @@ import 'package:xmanager/src/presentation/screens/settings/permissions_page.dart
 import 'package:xmanager/src/presentation/screens/settings/settings_page.dart';
 import 'package:xmanager/src/presentation/screens/start/start_page.dart';
 
-late ObjectBox objectBox;
+//late ObjectBox objectBox;
 final sl = GetIt.instance;
 
 Future<void> main() async {
@@ -93,17 +92,10 @@ Future<void> main() async {
 
   sl.registerFactory(
     () => BleBloc(
-      bluetoothStartScan: sl(),
-      bluetoothStopScan: sl(),
-      bluetoothScanResults: sl(),
-      bluetoothIsScanning: sl(),
-      bluetoothConnectDeviceUseCase: sl(),
-      bluetoothDisconnectDevice: sl(),
-      bluetoothDeviceConnected: sl(),
-      bluetoothDiscoverServices: sl(),
-      bluetoothServicesList: sl(),
-      bluetoothDeviceIsConnectedUseCase: sl(),
-      bluetoothWriteUseCase: sl(),
+      bleConnectDeviceUseCase: sl(),
+      bleDisconnectDeviceUseCase: sl(),
+      bleDeviceConnectedUseCase: sl(),
+      bleWriteUseCase: sl(),
     ),
   );
   sl.registerFactory(
@@ -129,18 +121,12 @@ Future<void> main() async {
   sl.registerLazySingleton(() => RequestBluetoothScanPermissionsUseCase(sl()));
 
   sl.registerLazySingleton(() => CurrentUserUseCase(sl()));
-  sl.registerLazySingleton(() => BluetoothStartScan(sl()));
-  sl.registerLazySingleton(() => BluetoothStopScan(sl()));
-  sl.registerLazySingleton(() => BluetoothScanResults(sl()));
 
-  sl.registerLazySingleton(() => BluetoothIsScanning(sl()));
-  sl.registerLazySingleton(() => BluetoothConnectDeviceUseCase(sl()));
-  sl.registerLazySingleton(() => BluetoothDisconnectDevice(sl()));
-  sl.registerLazySingleton(() => BluetoothDeviceConnected(sl()));
-  sl.registerLazySingleton(() => BluetoothDiscoverServices(sl()));
-  sl.registerLazySingleton(() => BluetoothServicesList(sl()));
-  sl.registerLazySingleton(() => BluetoothDeviceIsConnectedUseCase(sl()));
-  sl.registerLazySingleton(() => BluetoothWriteUseCase(sl()));
+  // BLE usecases
+  sl.registerLazySingleton(() => BleConnectDeviceUseCase(sl()));
+  sl.registerLazySingleton(() => BleDisconnectDeviceUseCase(sl()));
+  sl.registerLazySingleton(() => BleDeviceConnectedUseCase(sl()));
+  sl.registerLazySingleton(() => BleWriteUseCase(sl()));
 
   // Repository
   sl.registerLazySingleton<ApplicationRepository>(
@@ -155,8 +141,8 @@ Future<void> main() async {
       sharedPreferencesDataSource: sl(),
     ),
   );
-  sl.registerLazySingleton<BluetoothRepository>(
-    () => BluetoothRepositoryImpl(sl()),
+  sl.registerLazySingleton<BleRepository>(
+    () => BleRepositoryImpl(sl()),
   );
 
   // Data sources
@@ -171,7 +157,7 @@ Future<void> main() async {
       sharedPreferences: sl(),
     ),
   );
-  sl.registerLazySingleton(() => BluetoothDataSourceImpl());
+  sl.registerLazySingleton(() => BleDataSourceImpl());
 
   //sl.registerSingleton(SharedPreferencesService);
   // Objectbox

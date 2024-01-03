@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:xmanager/src/core/domain/usecases/bluetooth_usecases.dart';
+import 'package:xmanager/src/core/domain/usecases/ble_usecases.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
-import 'package:xmanager/src/presentation/bloc/ble/ble_bloc.dart';
+import 'package:xmanager/src/presentation/bloc/app_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
 import 'package:xmanager/src/presentation/widgets/alert_card.dart';
 import 'package:xmanager/src/presentation/widgets/indicator_icon.dart';
@@ -22,12 +22,6 @@ class DeviceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bleState = context.watch<BleBloc>().state;
-    final selectedService = bleState.selectedService;
-
-    // final trainingService = bleState.services
-    //     .firstWhere((element) => element.serviceUuid == trainingServiceUuid);
-    // final remoteId = trainingService.remoteId;
-    // final serviceUuid = trainingService.serviceUuid;
 
     return Scaffold(
     
@@ -224,11 +218,60 @@ class DeviceScreen extends StatelessWidget {
             percentValue: 45,
           ),
           SliverToBoxAdapter(
-            child: Text('$selectedService'),
+            child: Text('$bleState'),
           ),
           // SliverToBoxAdapter(
           //   child: Text('$serviceUuid'),
           // ),
+          SliverToBoxAdapter(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Bluetooth scan permission"),
+                if (context.watch<AppBloc>().state.bluetoothScanGranted)
+                  const Text("GRANTED")
+                else
+                  const Text("NOT GRANTED"),
+              ],
+            ),
+          ),
+
+          SliverToBoxAdapter(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Location permission"),
+                if (context.watch<AppBloc>().state.locationGranted)
+                  const Text("GRANTED")
+                else
+                  const Text("NOT GRANTED"),
+              ],
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Bluetooth connect permission"),
+                if (context.watch<AppBloc>().state.bluetoothConnectGranted)
+                  const Text("GRANTED")
+                else
+                  const Text("NOT GRANTED"),
+              ],
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Bluetooth permission"),
+                if (context.watch<AppBloc>().state.bluetoothGranted)
+                  const Text("GRANTED")
+                else
+                  const Text("NOT GRANTED"),
+              ],
+            ),
+          ),
 
         ],
       ),
@@ -238,16 +281,6 @@ class DeviceScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            OutlinedButton(
-              style: FilledButton.styleFrom(
-                fixedSize: const Size(150, 50),
-              ),
-              onPressed: () {
-                BlocProvider.of<BleBloc>(context)
-                    .add(const ListenConnectionState(bleMac));
-              },
-              child: const Text('Start listening'),
-            ),
             OutlinedButton(
               style: FilledButton.styleFrom(
                 fixedSize: const Size(150, 50),
@@ -266,13 +299,14 @@ class DeviceScreen extends StatelessWidget {
                   .add(const DisconnectDevice(bleMac)),
               child: const Text('DISCONNECT TO DEVICE'),
             ),
+            /*
             OutlinedButton(
               style: FilledButton.styleFrom(
                 fixedSize: const Size(150, 50),
               ),
               onPressed: () {
                 BlocProvider.of<BleBloc>(context)
-                    .add(const DiscoverServices(bleMac));
+                    .add(const StartScanning(seconds: 10));
 
                 showModalBottomSheet<void>(
                   context: context,
@@ -281,19 +315,17 @@ class DeviceScreen extends StatelessWidget {
                       height: 400,
                       child: ListView.builder(
                         itemCount:
-                            context.watch<BleBloc>().state.services.length,
+                            context.watch<BleBloc>().state.devices.length,
                         itemBuilder: (context, index) {
-                          final service =
-                              context.watch<BleBloc>().state.services[index];
+                          final device =
+                              context.watch<BleBloc>().state.devices[index];
                           return ListTile(
-                            title: Text(service.serviceUuid.toString()),
-                            subtitle: Text(
-                              service.characteristics.length.toString(),
-                            ),
+                            title: Text(device.name),
+                            subtitle: Text(device.uuid),
                             onTap: () {
-                              context
-                                  .read<BleBloc>()
-                                  .add(SelectServiceUuid(service.serviceUuid));
+                              // context
+                              //     .read<BleBloc>()
+                              //     .add(SelectServiceUuid(service.serviceUuid));
                             },
                           );
                         },
@@ -303,16 +335,9 @@ class DeviceScreen extends StatelessWidget {
                 );
               
               },
-              child: const Text('DISCOVER SERVICES'),
+              child: const Text('SCAN DEVICES'),
             ),
-            OutlinedButton(
-              style: FilledButton.styleFrom(
-                fixedSize: const Size(150, 50),
-              ),
-              onPressed: () =>
-                  context.read<BleBloc>().add(const ServicesList(bleMac)),
-              child: const Text('READ SERVICES LIST'),
-            ),
+            */
             OutlinedButton(
               style: FilledButton.styleFrom(
                 fixedSize: const Size(150, 50),
@@ -322,9 +347,24 @@ class DeviceScreen extends StatelessWidget {
                       bleMac,
                       trainingServiceUuid,
                       trainingCommandCharsUuid,
+                      [0x01, 0x02, 0x00, 0x05],
                     ),
                   ),
-              child: const Text('Write test'),
+              child: const Text('START ANIMATION'),
+            ),
+            OutlinedButton(
+              style: FilledButton.styleFrom(
+                fixedSize: const Size(150, 50),
+              ),
+              onPressed: () => context.read<BleBloc>().add(
+                    const BleWriteEvent(
+                      bleMac,
+                      trainingServiceUuid,
+                      trainingDataCharsUuid,
+                      [0, 0, 0, 0, 202, 233, 67, 252],
+                    ),
+                  ),
+              child: const Text('WRITE DATA'),
             ),
 
           ],

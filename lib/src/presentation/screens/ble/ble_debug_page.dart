@@ -163,11 +163,11 @@ class _BleDebugContent extends StatelessWidget {
             ),
             Row(
               children: [
-                OutlinedButton(
-                  child: const Text("Discover services"),
-                  onPressed: () =>
-                      context.read<BleBloc>().add(DiscoverServices("")),
-                ),
+                // OutlinedButton(
+                //   child: const Text("Discover services"),
+                //   onPressed: () =>
+                //       context.read<BleBloc>().add(DiscoverServices("")),
+                // ),
                 const SizedBox(
                   width: 5,
                 ),

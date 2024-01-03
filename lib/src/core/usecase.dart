@@ -52,16 +52,39 @@ class BleWriteParams extends Equatable {
   final String deviceUuid;
   final String serviceUuid;
   final String characteristicsUuid;
+  final List<int> value;
+
   const BleWriteParams({
     required this.deviceUuid,
     required this.serviceUuid,
     required this.characteristicsUuid,
+    required this.value,
   });
 
   @override
-  List<Object?> get props => [deviceUuid, serviceUuid, characteristicsUuid];
+  List<Object?> get props => [
+        deviceUuid,
+        serviceUuid,
+        characteristicsUuid,
+        value,
+      ];
 }
 
+class BleScanParams extends Equatable {
+  final int seconds;
+  final List<String>? services;
+
+  const BleScanParams({
+    required this.seconds,
+    required this.services,
+  });
+
+  @override
+  List<Object?> get props => [
+        seconds,
+        services,
+      ];
+}
 
 class PlayerParams extends Equatable {
   final String fullname;

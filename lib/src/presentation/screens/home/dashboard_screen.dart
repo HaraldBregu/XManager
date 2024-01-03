@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xmanager/src/core/localizations_extension.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
+import 'package:xmanager/src/presentation/bloc/ble/ble_bloc.dart';
+import 'package:xmanager/src/presentation/bloc/bloc.dart';
+import 'package:xmanager/src/presentation/screens/ble/device_screen.dart';
 import 'package:xmanager/src/presentation/widgets/alert_card.dart';
 import 'package:xmanager/src/presentation/widgets/drawer_menu.dart';
 import 'package:xmanager/src/presentation/widgets/nav_bar.dart';
@@ -139,7 +143,13 @@ class DashboardScreen extends StatelessWidget {
                         icon: Icons.error,
                       ),
                       GestureDetector(
-                        onTap: () => context.pushNamed("Device screen"),
+                        onTap: () {
+                          context.read<BleBloc>().add(
+                                const ListenConnectionState(
+                                    "E7:C8:DF:65:5B:4B"),
+                              );
+                          context.pushNamed("Device screen");
+                        },
                         child: Container(
                           color: Colors.transparent,
                           height: 60,

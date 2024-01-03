@@ -1,70 +1,94 @@
 import 'dart:async';
-import 'dart:math';
-import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/core/domain/usecases/bluetooth_usecases.dart';
+import 'package:xmanager/src/core/domain/usecases/ble_usecases.dart';
 import 'package:xmanager/src/core/usecase.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
 
 class BleBloc extends Bloc<BleEvent, BleState> {
-  final BluetoothStartScan bluetoothStartScan;
-  final BluetoothStopScan bluetoothStopScan;
-  final BluetoothScanResults bluetoothScanResults;
-  final BluetoothIsScanning bluetoothIsScanning;
-  final BluetoothConnectDeviceUseCase bluetoothConnectDeviceUseCase;
-  final BluetoothDisconnectDevice bluetoothDisconnectDevice;
-  final BluetoothDeviceConnected bluetoothDeviceConnected;
-  final BluetoothDiscoverServices bluetoothDiscoverServices;
-  final BluetoothServicesList bluetoothServicesList;
-  final BluetoothDeviceIsConnectedUseCase bluetoothDeviceIsConnectedUseCase;
-  final BluetoothWriteUseCase bluetoothWriteUseCase;
+  final BleConnectDeviceUseCase bleConnectDeviceUseCase;
+  final BleDisconnectDeviceUseCase bleDisconnectDeviceUseCase;
+  final BleDeviceConnectedUseCase bleDeviceConnectedUseCase;
+  final BleWriteUseCase bleWriteUseCase;
 
   BleBloc({
-    required this.bluetoothStartScan,
-    required this.bluetoothStopScan,
-    required this.bluetoothScanResults,
-    required this.bluetoothIsScanning,
-    required this.bluetoothConnectDeviceUseCase,
-    required this.bluetoothDisconnectDevice,
-    required this.bluetoothDeviceConnected,
-    required this.bluetoothDiscoverServices,
-    required this.bluetoothServicesList,
-    required this.bluetoothDeviceIsConnectedUseCase,
-    required this.bluetoothWriteUseCase,
+    required this.bleConnectDeviceUseCase,
+    required this.bleDisconnectDeviceUseCase,
+    required this.bleDeviceConnectedUseCase,
+    required this.bleWriteUseCase,
   }) : super(const BleInitial()) {
-    // on<StartScanning>(_onStartScanningEvent, transformer: restartable());
+    //on<StartScanning>(_onStartScanningEvent, transformer: restartable());
     // on<StopScanning>(_onStopScanningEvent);
     on<ListenConnectionState>(_onListenConnectionStateEvent);
     on<ConnectDevice>(_onConnectDeviceEvent);
     on<DisconnectDevice>(_onDisconnectDeviceEvent);
-
-    on<DiscoverServices>(_onDiscoverServicesEvent);
-    on<ServicesList>(_onServicesListEvent);
-
-    on<SelectServiceUuid>(_onSelectServiceUuidEvent);
-    on<SelectCharacteristicUuid>(_onSelectCharacteristicUuidEvent);
     on<BleWriteEvent>(_onBleWriteEventEvent);
-
   }
 
+  Future<void> _onListenConnectionStateEvent(
+    ListenConnectionState event,
+    Emitter<BleState> emit,
+  ) async {
+    await emit.onEach(
+      bleDeviceConnectedUseCase.call(event.uuid),
+      onData: (connected) {
+        print("connection is: $connected");
+        emit(BleConnected(connected: connected));
+      },
+    );
+  }
+
+  Future<void> _onConnectDeviceEvent(
+    ConnectDevice event,
+    Emitter<BleState> emit,
+  ) async {
+    if (!state.connected) emit(const BleConnecting());
+    final d = await bleConnectDeviceUseCase.call(event.uuid);
+    
+  }
+
+  Future<void> _onDisconnectDeviceEvent(
+    DisconnectDevice event,
+    Emitter<BleState> emit,
+  ) async {
+    bleDisconnectDeviceUseCase.call(event.uuid);
+  }
+
+  Future<void> _onBleWriteEventEvent(
+    BleWriteEvent event,
+    Emitter<BleState> emit,
+  ) async {
+    bleWriteUseCase.call(
+      BleWriteParams(
+        deviceUuid: event.deviceUuid,
+        serviceUuid: event.serviceUuid,
+        characteristicsUuid: event.characteristicUuid,
+        value: event.value,
+      ),
+    );
+  }
+
+  /*
   Future<void> _onStartScanningEvent(
     StartScanning event,
     Emitter<BleState> emit,
   ) async {
-    /*   
-    emit(state.copyWith(devices: []));
+    
     emit.onEach(
       bluetoothIsScanning.call(NoParams()),
       onData: (scanning) {
-        emit(
-          state.copyWith(
-            isScanning: scanning,
-          ),
-        );
+        emit(BleScanning(scanning: scanning));
+        print("scanning");
+        print(scanning);
+
       },
     );
 
-    bluetoothStartScan.call(event.seconds);
+    await bluetoothStartScan.call(
+      BleScanParams(
+        seconds: event.seconds,
+        services: event.services,
+      ),
+    );
 
     return emit.onEach(
       bluetoothScanResults.call(NoParams()),
@@ -76,10 +100,11 @@ class BleBloc extends Bloc<BleEvent, BleState> {
         final filteredDevices = [
           ...{...currentDevices}
         ];
+        print("filteredDevices");
+        print(filteredDevices);
         emit(state.copyWith(devices: filteredDevices));
       },
     );
-    */
   }
 
   Future<void> _onStopScanningEvent(
@@ -88,92 +113,47 @@ class BleBloc extends Bloc<BleEvent, BleState> {
   ) async {
     bluetoothStopScan.call(NoParams());
   }
-
-  Future<void> _onListenConnectionStateEvent(
-    ListenConnectionState event,
-    Emitter<BleState> emit,
-  ) async {
-    await emit.onEach(
-      bluetoothDeviceConnected.call(event.uuid),
-      onData: (connected) {
-        emit(BleConnected(connected: connected));
-        //emit(state.copyWith(connected: connected));
-      },
-    );
-  }
-
-  Future<void> _onConnectDeviceEvent(
-    ConnectDevice event,
-    Emitter<BleState> emit,
-  ) async {
-    final isConnectedUseCase =
-        await bluetoothDeviceIsConnectedUseCase.call(event.uuid);
-    if (!isConnectedUseCase) {
-      emit(const BleConnecting());
-      bluetoothConnectDeviceUseCase.call(event.uuid);
-    }
-  }
-
-  Future<void> _onDisconnectDeviceEvent(
-    DisconnectDevice event,
-    Emitter<BleState> emit,
-  ) async {
-    final isConnectedUseCase =
-        await bluetoothDeviceIsConnectedUseCase.call(event.uuid);
-    if (isConnectedUseCase) {
-      bluetoothDisconnectDevice.call(event.uuid);
-    }
-  }
-
-  Future<void> _onDiscoverServicesEvent(
-    DiscoverServices event,
-    Emitter<BleState> emit,
-  ) async {
-    if (state.connected) {
-      final services = await bluetoothDiscoverServices.call(event.uuid);
-      emit(state.copyWith(services: services));
-    }
-  }
-
-  Future<void> _onServicesListEvent(
-    ServicesList event,
-    Emitter<BleState> emit,
-  ) async {
-    if (state.connected) {
-      final services = await bluetoothServicesList.call(event.uuid);
-      emit(state.copyWith(services: services));
-    }
-  }
-
-  Future<void> _onSelectServiceUuidEvent(
-    SelectServiceUuid event,
-    Emitter<BleState> emit,
-  ) async {
-    final selectedService = state.services
-        .firstWhere((element) => element.serviceUuid == event.uuid);
-    emit(state.copyWith(selectedService: selectedService));
-  }
-
-Future<void> _onSelectCharacteristicUuidEvent(
-    SelectCharacteristicUuid event,
-    Emitter<BleState> emit,
-  ) async {
-    final selectedService = state.selectedService?.characteristics
-        .firstWhere((element) => element.characteristicUuid == event.uuid);
-
-  }
-
-  Future<void> _onBleWriteEventEvent(
-    BleWriteEvent event,
-    Emitter<BleState> emit,
-  ) async {
-    bluetoothWriteUseCase.call(
-      BleWriteParams(
-        deviceUuid: event.deviceUuid,
-        serviceUuid: event.serviceUuid,
-        characteristicsUuid: event.characteristicUuid,
-      ),
-    );
-  }
-
+  */
 }
+
+
+/*
+
+List<int> numberToBytes(int number) {
+  List<int> result = [];
+
+  // Iterate through each byte
+  for (int i = 0; i < 8; i++) {
+    // Extract the least significant byte
+    int byte = (number >> (i * 8)) & 0xFF;
+
+    // Add the byte to the result list
+    result.insert(0, byte);
+  }
+
+  return result;
+}
+
+void main() {
+  // Get the current DateTime
+  DateTime now = DateTime.now();
+
+  // Convert DateTime to Unix timestamp (milliseconds since epoch)
+  int unixTimestamp = now.millisecondsSinceEpoch;
+
+  // Transform the Unix timestamp into a token (string)
+  String token = unixTimestamp.toString();
+
+  print('DateTime: $now');
+  print('Token: $token');
+
+  int number = int.parse(token);
+
+  // Convert the number to a list of bytes
+  List<int> bytes = numberToBytes(number);
+
+  print('Original Number: $number');
+  print('Bytes: $bytes');
+}
+
+ */

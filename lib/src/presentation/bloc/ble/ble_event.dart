@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:xmanager/src/core/domain/entities/bluetooth_service_entity.dart';
 
 abstract class BleEvent extends Equatable {
   const BleEvent();
@@ -7,9 +6,17 @@ abstract class BleEvent extends Equatable {
 
 class StartScanning extends BleEvent {
   final int seconds;
-  const StartScanning({required this.seconds});
+  final List<String>? services;
+  const StartScanning({
+    required this.seconds,
+    this.services,
+  });
+  
   @override
-  List<Object?> get props => [seconds];
+  List<Object?> get props => [
+        seconds,
+        services,
+      ];
 }
 
 class StopScanning extends BleEvent {
@@ -39,42 +46,45 @@ class DisconnectDevice extends BleEvent {
   List<Object?> get props => [uuid];
 }
 
-class DiscoverServices extends BleEvent {
-  final String uuid;
-  const DiscoverServices(this.uuid);
-  @override
-  List<Object?> get props => [uuid];
-}
+// class DiscoverServices extends BleEvent {
+//   final String uuid;
+//   const DiscoverServices(this.uuid);
+//   @override
+//   List<Object?> get props => [uuid];
+// }
 
-class ServicesList extends BleEvent {
-  final String uuid;
-  const ServicesList(this.uuid);
-  @override
-  List<Object?> get props => [uuid];
-}
+// class ServicesList extends BleEvent {
+//   final String uuid;
+//   const ServicesList(this.uuid);
+//   @override
+//   List<Object?> get props => [uuid];
+// }
 
-class SelectServiceUuid extends BleEvent {
-  final String uuid;
-  const SelectServiceUuid(this.uuid);
-  @override
-  List<Object?> get props => [uuid];
-}
+// class SelectServiceUuid extends BleEvent {
+//   final String uuid;
+//   const SelectServiceUuid(this.uuid);
+//   @override
+//   List<Object?> get props => [uuid];
+// }
 
-class SelectCharacteristicUuid extends BleEvent {
-  final String uuid;
-  const SelectCharacteristicUuid(this.uuid);
-  @override
-  List<Object?> get props => [uuid];
-}
+// class SelectCharacteristicUuid extends BleEvent {
+//   final String uuid;
+//   const SelectCharacteristicUuid(this.uuid);
+//   @override
+//   List<Object?> get props => [uuid];
+// }
 
 class BleWriteEvent extends BleEvent {
   final String deviceUuid;
   final String serviceUuid;
   final String characteristicUuid;
+  final List<int> value;
+
   const BleWriteEvent(
     this.deviceUuid,
     this.serviceUuid,
     this.characteristicUuid,
+    this.value,
   );
 
   @override
@@ -82,5 +92,6 @@ class BleWriteEvent extends BleEvent {
         deviceUuid,
         serviceUuid,
         characteristicUuid,
+        value,
       ];
 }
