@@ -17,7 +17,6 @@ abstract class BleDataSource {
     String deviceUuid,
     String serviceUuid,
     String characteristicsUuid,
-    // bool notify,
   );
 
   Future<void> writeCharacteristic(
@@ -25,7 +24,19 @@ abstract class BleDataSource {
     String serviceUuid,
     String characteristicsUuid,
     List<int> value,
-    //  bool notify,
+  );
+
+  Future<void> setNotifications(
+    String deviceUuid,
+    String serviceUuid,
+    String characteristicsUuid,
+    bool enable,
+  );
+
+  Stream<List<int>> lastValueStream(
+    String deviceUuid,
+    String serviceUuid,
+    String characteristicsUuid,
   );
 }
 
@@ -70,6 +81,7 @@ class BleDataSourceImpl implements BleDataSource {
   @override
   Future<List<BluetoothService>> connect(String uuid) async {
     final device = BluetoothDevice.fromId(uuid);
+    //await device.requestMtu(512);
     if (!device.isConnected) await device.connect();
     return await device.discoverServices();
   }
@@ -94,23 +106,14 @@ class BleDataSourceImpl implements BleDataSource {
     String deviceUuid,
     String serviceUuid,
     String characteristicsUuid,
-    //   bool notify,
   ) async {
-    final device = BluetoothDevice.fromId(deviceUuid);
+    final characteristics = await getCharacteristics(
+      deviceUuid,
+      serviceUuid,
+      characteristicsUuid,
+    );
 
-    if (!device.isConnected || device.servicesList.isEmpty) return null;
-
-    final characteristics = device.servicesList
-        .firstWhere((e) => e.serviceUuid == Guid(serviceUuid))
-        .characteristics
-        .firstWhere((element) =>
-            element.characteristicUuid == Guid(characteristicsUuid));
-
-    // final data = characteristics.lastValueStream;
-    const bool notify = false;
-    if (characteristics.isNotifying != notify) {
-      await characteristics.setNotifyValue(notify);
-    }
+    if (characteristics == null) return null;
 
     return await characteristics.read();
   }
@@ -121,11 +124,29 @@ class BleDataSourceImpl implements BleDataSource {
     String serviceUuid,
     String characteristicsUuid,
     List<int> value,
-    // bool notify,
   ) async {
+    final characteristics = await getCharacteristics(
+      deviceUuid,
+      serviceUuid,
+      characteristicsUuid,
+    );
+
+    if (characteristics == null) return;
+
+    return await characteristics.write(value);
+  }
+
+  @override
+  Stream<List<int>> lastValueStream(
+    String deviceUuid,
+    String serviceUuid,
+    String characteristicsUuid,
+  ) {
     final device = BluetoothDevice.fromId(deviceUuid);
 
-    if (!device.isConnected || device.servicesList.isEmpty) return;
+    if (!device.isConnected || device.servicesList.isEmpty) {
+      return StreamController<List<int>>().stream;
+    }
 
     final characteristics = device.servicesList
         .firstWhere((e) => e.serviceUuid == Guid(serviceUuid))
@@ -133,11 +154,51 @@ class BleDataSourceImpl implements BleDataSource {
         .firstWhere((element) =>
             element.characteristicUuid == Guid(characteristicsUuid));
 
-    const bool notify = false;
-    if (characteristics.isNotifying != notify) {
-      await characteristics.setNotifyValue(notify);
+    return characteristics.lastValueStream;
+  }
+
+  @override
+  Future<void> setNotifications(
+    String deviceUuid,
+    String serviceUuid,
+    String characteristicsUuid,
+    bool enable,
+  ) async {
+    final characteristics = await getCharacteristics(
+      deviceUuid,
+      serviceUuid,
+      characteristicsUuid,
+    );
+
+    if (characteristics == null) return;
+
+    if (characteristics.isNotifying != enable) {
+      await characteristics.setNotifyValue(enable);
+    }
+  }
+
+  // UTILS
+
+  Future<BluetoothCharacteristic?> getCharacteristics(
+    String deviceUuid,
+    String serviceUuid,
+    String characteristicsUuid,
+  ) async {
+    final device = BluetoothDevice.fromId(deviceUuid);
+
+    if (!device.isConnected || device.servicesList.isEmpty) {
+      return null;
     }
 
-    return await characteristics.write(value);
+    final services = device.servicesList;
+    final service = services.firstWhere(
+      (e) => e.serviceUuid == Guid(serviceUuid),
+    );
+    final characteristics = service.characteristics;
+    final characteristic = characteristics.firstWhere(
+      (e) => e.characteristicUuid == Guid(characteristicsUuid),
+    );
+
+    return characteristic;
   }
 }

@@ -96,6 +96,7 @@ Future<void> main() async {
       bleDisconnectDeviceUseCase: sl(),
       bleDeviceConnectedUseCase: sl(),
       bleWriteUseCase: sl(),
+      bleLastValueStreamUseCase: sl(),
     ),
   );
   sl.registerFactory(
@@ -127,6 +128,7 @@ Future<void> main() async {
   sl.registerLazySingleton(() => BleDisconnectDeviceUseCase(sl()));
   sl.registerLazySingleton(() => BleDeviceConnectedUseCase(sl()));
   sl.registerLazySingleton(() => BleWriteUseCase(sl()));
+  sl.registerLazySingleton(() => BleLastValueStreamUseCase(sl()));
 
   // Repository
   sl.registerLazySingleton<ApplicationRepository>(

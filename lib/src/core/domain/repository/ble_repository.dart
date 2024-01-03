@@ -17,4 +17,24 @@ abstract class BleRepository {
     String characteristicsUuid,
     List<int> value,
   );
+
+  Future<List<int>> read(
+    String deviceUuid,
+    String serviceUuid,
+    String characteristicsUuid,
+  );
+
+  Stream<List<int>> lastValueStream(
+    String deviceUuid,
+    String serviceUuid,
+    String characteristicsUuid,
+  );
+
+  Future<void> setNotifications(
+    String deviceUuid,
+    String serviceUuid,
+    String characteristicsUuid,
+    bool enable,
+  );
+  
 }

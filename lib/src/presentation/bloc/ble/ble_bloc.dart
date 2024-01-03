@@ -9,12 +9,14 @@ class BleBloc extends Bloc<BleEvent, BleState> {
   final BleDisconnectDeviceUseCase bleDisconnectDeviceUseCase;
   final BleDeviceConnectedUseCase bleDeviceConnectedUseCase;
   final BleWriteUseCase bleWriteUseCase;
+  final BleLastValueStreamUseCase bleLastValueStreamUseCase;
 
   BleBloc({
     required this.bleConnectDeviceUseCase,
     required this.bleDisconnectDeviceUseCase,
     required this.bleDeviceConnectedUseCase,
     required this.bleWriteUseCase,
+    required this.bleLastValueStreamUseCase,
   }) : super(const BleInitial()) {
     //on<StartScanning>(_onStartScanningEvent, transformer: restartable());
     // on<StopScanning>(_onStopScanningEvent);
@@ -57,13 +59,27 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     BleWriteEvent event,
     Emitter<BleState> emit,
   ) async {
-    bleWriteUseCase.call(
+    await bleWriteUseCase.call(
       BleWriteParams(
         deviceUuid: event.deviceUuid,
         serviceUuid: event.serviceUuid,
         characteristicsUuid: event.characteristicUuid,
         value: event.value,
       ),
+    );
+
+
+    emit.onEach(
+      bleLastValueStreamUseCase.call(
+        BleParams(
+          deviceUuid: event.deviceUuid,
+          serviceUuid: event.serviceUuid,
+          characteristicsUuid: event.characteristicUuid,
+        ),
+      ),
+      onData: (value) {
+        print("stream value is: $value");
+      },
     );
   }
 

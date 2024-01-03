@@ -106,3 +106,15 @@ class BleWriteUseCase implements BaseUseCase<void, BleWriteParams> {
     );
   }
 }
+
+class BleLastValueStreamUseCase implements StreamUseCase<List<int>, BleParams> {
+  const BleLastValueStreamUseCase(this._bleRepository);
+  final BleRepository _bleRepository;
+
+  @override
+  Stream<List<int>> call(BleParams params) => _bleRepository.lastValueStream(
+        params.deviceUuid,
+        params.serviceUuid,
+        params.characteristicsUuid,
+      );
+}

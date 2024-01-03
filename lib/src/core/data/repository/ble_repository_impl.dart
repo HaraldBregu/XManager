@@ -168,4 +168,39 @@ class BleRepositoryImpl implements BleRepository {
       value,
     );
   }
+  
+  @override
+  Future<List<int>> read(
+    String deviceUuid,
+    String serviceUuid,
+    String characteristicsUuid,
+  ) {
+    // TODO: implement read
+    throw UnimplementedError();
+  }
+
+  @override
+  Stream<List<int>> lastValueStream(
+    String deviceUuid,
+    String serviceUuid,
+    String characteristicsUuid,
+  ) {
+    return _dataSource.lastValueStream(
+      deviceUuid,
+      serviceUuid,
+      characteristicsUuid,
+    );
+  }
+
+  @override
+  Future<void> setNotifications(
+    String deviceUuid,
+    String serviceUuid,
+    String characteristicsUuid,
+    bool enable,
+  ) {
+    // TODO: implement setNotifications
+    throw UnimplementedError();
+  }
+  
 }

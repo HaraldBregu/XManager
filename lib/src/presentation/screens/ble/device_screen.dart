@@ -15,7 +15,6 @@ const String trainingServiceUuid = "00001600-1212-efde-1523-785feabcd121";
 const String trainingCommandCharsUuid = "00001601-1212-efde-1523-785feabcd121";
 const String trainingDataCharsUuid = "00001602-1212-efde-1523-785feabcd121";
 
-
 class DeviceScreen extends StatelessWidget {
   const DeviceScreen({super.key});
 
