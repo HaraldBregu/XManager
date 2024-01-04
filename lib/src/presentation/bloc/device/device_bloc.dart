@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/core/domain/usecases/current_user.dart';
+import 'package:xmanager/src/domain/usecases/current_user.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
 
 class DeviceBloc extends Bloc<DeviceEvent, DeviceState> {

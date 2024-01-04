@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/core/domain/usecases/auth_current_usecase.dart';
-import 'package:xmanager/src/core/domain/usecases/auth_login_usecase.dart';
-import 'package:xmanager/src/core/domain/usecases/auth_logout_usecase.dart';
+import 'package:xmanager/src/domain/usecases/auth_current_usecase.dart';
+import 'package:xmanager/src/domain/usecases/auth_login_usecase.dart';
+import 'package:xmanager/src/domain/usecases/auth_logout_usecase.dart';
 import 'package:xmanager/src/core/usecase.dart';
 import 'package:xmanager/src/presentation/bloc/auth/auth_event.dart';
 import 'package:xmanager/src/presentation/bloc/auth/auth_state.dart';

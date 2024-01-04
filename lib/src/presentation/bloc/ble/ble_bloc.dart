@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/core/domain/usecases/ble_usecases.dart';
+import 'package:xmanager/src/domain/usecases/ble_usecases.dart';
 import 'package:xmanager/src/core/usecase.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
 
@@ -69,18 +69,18 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     );
 
 
-    emit.onEach(
-      bleLastValueStreamUseCase.call(
-        BleParams(
-          deviceUuid: event.deviceUuid,
-          serviceUuid: event.serviceUuid,
-          characteristicsUuid: event.characteristicUuid,
-        ),
-      ),
-      onData: (value) {
-        print("stream value is: $value");
-      },
-    );
+    // emit.onEach(
+    //   bleLastValueStreamUseCase.call(
+    //     BleParams(
+    //       deviceUuid: event.deviceUuid,
+    //       serviceUuid: event.serviceUuid,
+    //       characteristicsUuid: event.characteristicUuid,
+    //     ),
+    //   ),
+    //   onData: (value) {
+    //     print("stream value is: $value");
+    //   },
+    // );
   }
 
   /*

@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/core/domain/usecases/get_app_permissions.dart';
+import 'package:xmanager/src/domain/usecases/get_app_permissions.dart';
 import 'package:xmanager/src/core/usecase.dart';
 import 'package:xmanager/src/presentation/bloc/app_event.dart';
 import 'package:xmanager/src/presentation/bloc/app_state.dart';

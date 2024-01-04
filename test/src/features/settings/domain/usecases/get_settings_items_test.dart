@@ -3,9 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:xmanager/src/core/failures.dart';
-import 'package:xmanager/src/core/domain/entities/setttings_entity.dart';
-import 'package:xmanager/src/core/domain/repository/settings_repository.dart';
-import 'package:xmanager/src/core/domain/usecases/get_settings_items.dart';
+import 'package:xmanager/src/domain/entities/setttings_entity.dart';
+import 'package:xmanager/src/domain/repository/settings_repository.dart';
+import 'package:xmanager/src/domain/usecases/get_settings_items.dart';
 
 import 'get_settings_items_test.mocks.dart';
 

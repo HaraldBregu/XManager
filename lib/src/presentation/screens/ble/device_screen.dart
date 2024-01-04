@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:xmanager/src/core/domain/usecases/ble_usecases.dart';
+import 'package:xmanager/src/domain/usecases/ble_usecases.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 import 'package:xmanager/src/presentation/bloc/app_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
@@ -355,14 +355,16 @@ class DeviceScreen extends StatelessWidget {
               style: FilledButton.styleFrom(
                 fixedSize: const Size(150, 50),
               ),
-              onPressed: () => context.read<BleBloc>().add(
+              onPressed: () {
+                context.read<BleBloc>().add(
                     const BleWriteEvent(
                       bleMac,
                       trainingServiceUuid,
                       trainingDataCharsUuid,
                       [0, 0, 0, 0, 202, 233, 67, 252],
                     ),
-                  ),
+                    );
+              },
               child: const Text('WRITE DATA'),
             ),
 

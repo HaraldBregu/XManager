@@ -7,8 +7,8 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:xmanager/src/core/domain/entities/setttings_entity.dart' as _i6;
-import 'package:xmanager/src/core/domain/repository/settings_repository.dart'
+import 'package:xmanager/src/domain/entities/setttings_entity.dart' as _i6;
+import 'package:xmanager/src/domain/repository/settings_repository.dart'
     as _i3;
 import 'package:xmanager/src/core/failures.dart' as _i5;
 
