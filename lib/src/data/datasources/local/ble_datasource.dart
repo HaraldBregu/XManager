@@ -13,7 +13,7 @@ abstract class BleDataSource {
   Stream<bool> connected(String uuid);
   Future<bool> isConnected(String uuid);
 
-  Future<List<int>?> readCharacteristic(
+  Future<List<int>> readCharacteristic(
     String deviceUuid,
     String serviceUuid,
     String characteristicsUuid,
@@ -24,6 +24,7 @@ abstract class BleDataSource {
     String serviceUuid,
     String characteristicsUuid,
     List<int> value,
+    bool withoutResponse,
   );
 
   Future<void> setNotifications(
@@ -102,7 +103,7 @@ class BleDataSourceImpl implements BleDataSource {
       BluetoothDevice.fromId(uuid).isConnected;
 
   @override
-  Future<List<int>?> readCharacteristic(
+  Future<List<int>> readCharacteristic(
     String deviceUuid,
     String serviceUuid,
     String characteristicsUuid,
@@ -113,7 +114,7 @@ class BleDataSourceImpl implements BleDataSource {
       characteristicsUuid,
     );
 
-    if (characteristics == null) return null;
+    if (characteristics == null) return [];
 
     return await characteristics.read();
   }
@@ -124,6 +125,7 @@ class BleDataSourceImpl implements BleDataSource {
     String serviceUuid,
     String characteristicsUuid,
     List<int> value,
+    bool withoutResponse,
   ) async {
     final characteristics = await getCharacteristics(
       deviceUuid,
@@ -132,8 +134,8 @@ class BleDataSourceImpl implements BleDataSource {
     );
 
     if (characteristics == null) return;
-
-    return await characteristics.write(value);
+    
+    return await characteristics.write(value, withoutResponse: withoutResponse);
   }
 
   @override
@@ -149,11 +151,14 @@ class BleDataSourceImpl implements BleDataSource {
     }
 
     final characteristics = device.servicesList
-        .firstWhere((e) => e.serviceUuid == Guid(serviceUuid))
+        .firstWhere(
+          (e) => e.serviceUuid == Guid(serviceUuid),
+        )
         .characteristics
-        .firstWhere((element) =>
-            element.characteristicUuid == Guid(characteristicsUuid));
-
+        .firstWhere(
+          (e) => e.characteristicUuid == Guid(characteristicsUuid),
+        );
+            
     return characteristics.lastValueStream;
   }
 

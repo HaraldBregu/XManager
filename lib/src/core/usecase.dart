@@ -51,41 +51,76 @@ class BluetoothDeviceParams extends Equatable {
 class BleParams extends Equatable {
   final String deviceUuid;
   final String serviceUuid;
-  final String characteristicsUuid;
+  final String characteristicUuid;
 
   const BleParams({
-    required this.deviceUuid,
-    required this.serviceUuid,
-    required this.characteristicsUuid,
+    this.deviceUuid = '',
+    this.serviceUuid = '',
+    this.characteristicUuid = '',
   });
+
+  BleParams copyWith({
+    String? deviceUuid,
+    String? serviceUuid,
+    String? characteristicUuid,
+  }) =>
+      BleParams(
+        deviceUuid: deviceUuid ?? this.deviceUuid,
+        serviceUuid: serviceUuid ?? this.serviceUuid,
+        characteristicUuid: characteristicUuid ?? this.characteristicUuid,
+      );
 
   @override
   List<Object?> get props => [
         deviceUuid,
         serviceUuid,
-        characteristicsUuid,
+        characteristicUuid,
       ];
 }
 
-class BleWriteParams extends Equatable {
-  final String deviceUuid;
-  final String serviceUuid;
-  final String characteristicsUuid;
+class BleReadParams extends BleParams {
+  const BleReadParams({
+    required super.deviceUuid,
+    required super.serviceUuid,
+    required super.characteristicUuid,
+  });
+
+  @override
+  List<Object?> get props => [];
+}
+
+class BleWriteParams extends BleParams {
   final List<int> value;
+  final bool withoutResponse;
 
   const BleWriteParams({
-    required this.deviceUuid,
-    required this.serviceUuid,
-    required this.characteristicsUuid,
+    required super.deviceUuid,
+    required super.serviceUuid,
+    required super.characteristicUuid,
     required this.value,
+    required this.withoutResponse,
   });
 
   @override
   List<Object?> get props => [
-        deviceUuid,
-        serviceUuid,
-        characteristicsUuid,
         value,
+        withoutResponse,
+      ];
+}
+
+class BleSetNotificationParams extends BleParams {
+  final bool enable;
+
+  const BleSetNotificationParams({
+    required super.deviceUuid,
+    required super.serviceUuid,
+    required super.characteristicUuid,
+    required this.enable,
+  });
+
+  @override
+  List<Object?> get props => [
+        enable,
       ];
 }
 

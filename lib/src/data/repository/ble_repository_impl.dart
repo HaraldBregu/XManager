@@ -79,78 +79,7 @@ class BleRepositoryImpl implements BleRepository {
 
   @override
   Stream<bool> connected(String uuid) => _dataSource.connected(uuid);
-/*
-  @override
-  Future<List<BluetoothServiceModel>> discoverServices(String uuid) async {
-    final services = await _dataSource.discoverServices(uuid);
 
-    final newServices = services.map((e) {
-      final chars = e.characteristics.map((ch) {
-        final descrs = ch.descriptors.map((des) {
-          return BluetoothDescriptorModel(
-            characteristicUuid: des.characteristicUuid.toString(),
-            descriptorUuid: des.descriptorUuid.toString(),
-          );
-        }).toList();
-
-        return BluetoothCharacteristicModel(
-          characteristicUuid: ch.characteristicUuid.toString(),
-          descriptors: descrs,
-        );
-      }).toList();
-
-      // final inclServ = e.includedServices.map((e) {
-      //   return BluetoothServiceModel(
-      //     remoteId: e.remoteId.str,
-      //     serviceUuid:  e.serviceUuid.toString(),
-      //     isPrimary: e.isPrimary,
-      //     characteristics: [],
-      //     includedServices: includedServices),
-      // }):
-
-      return BluetoothServiceModel(
-        remoteId: e.remoteId.str,
-        serviceUuid: e.serviceUuid.toString(),
-        isPrimary: e.isPrimary,
-        characteristics: chars,
-        includedServices: const [],
-      );
-    }).toList();
-
-    return newServices;
-  }
-
-  @override
-  Future<List<BluetoothServiceEntity>> servicesList(String uuid) async {
-    final services = await _dataSource.servicesList(uuid);
-
-    final newServices = services.map((e) {
-      final chars = e.characteristics.map((ch) {
-        final descrs = ch.descriptors.map((des) {
-          return BluetoothDescriptorModel(
-            characteristicUuid: des.characteristicUuid.toString(),
-            descriptorUuid: des.descriptorUuid.toString(),
-          );
-        }).toList();
-
-        return BluetoothCharacteristicModel(
-          characteristicUuid: ch.characteristicUuid.toString(),
-          descriptors: descrs,
-        );
-      }).toList();
-
-      return BluetoothServiceModel(
-        remoteId: e.remoteId.str,
-        serviceUuid: e.serviceUuid.toString(),
-        isPrimary: e.isPrimary,
-        characteristics: chars,
-        includedServices: const [],
-      );
-    }).toList();
-
-    return newServices;
-  }
-*/
   @override
   Future<bool> isConnected(String uuid) => _dataSource.isConnected(uuid);
 
@@ -160,37 +89,41 @@ class BleRepositoryImpl implements BleRepository {
     String serviceUuid,
     String characteristicsUuid,
     List<int> value,
-  ) {
-    return _dataSource.writeCharacteristic(
+    bool withoutResponse,
+  ) =>
+      _dataSource.writeCharacteristic(
       deviceUuid,
       serviceUuid,
       characteristicsUuid,
       value,
+        withoutResponse,
     );
-  }
+  
 
   @override
   Future<List<int>> read(
     String deviceUuid,
     String serviceUuid,
     String characteristicsUuid,
-  ) {
-    // TODO: implement read
-    throw UnimplementedError();
-  }
-
+  ) =>
+      _dataSource.readCharacteristic(
+        deviceUuid,
+        serviceUuid,
+        characteristicsUuid,
+      );
+  
   @override
   Stream<List<int>> lastValueStream(
     String deviceUuid,
     String serviceUuid,
     String characteristicsUuid,
-  ) {
-    return _dataSource.lastValueStream(
+  ) =>
+      _dataSource.lastValueStream(
       deviceUuid,
       serviceUuid,
       characteristicsUuid,
     );
-  }
+  
 
   @override
   Future<void> setNotifications(
@@ -198,8 +131,11 @@ class BleRepositoryImpl implements BleRepository {
     String serviceUuid,
     String characteristicsUuid,
     bool enable,
-  ) {
-    // TODO: implement setNotifications
-    throw UnimplementedError();
-  }
+  ) =>
+      _dataSource.setNotifications(
+        deviceUuid,
+        serviceUuid,
+        characteristicsUuid,
+        enable,
+      );
 }

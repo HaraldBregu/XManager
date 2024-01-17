@@ -16,6 +16,7 @@ abstract class BleRepository {
     String serviceUuid,
     String characteristicsUuid,
     List<int> value,
+    bool withoutResponse,
   );
 
   Future<List<int>> read(

@@ -1,7 +1,8 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:xmanager/src/domain/usecases/ble_usecases.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 import 'package:xmanager/src/presentation/bloc/app_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
@@ -9,11 +10,11 @@ import 'package:xmanager/src/presentation/widgets/alert_card.dart';
 import 'package:xmanager/src/presentation/widgets/indicator_icon.dart';
 import 'package:xmanager/src/presentation/widgets/progress_card.dart';
 
-
 const String bleMac = "E7:C8:DF:65:5B:4B";
-const String trainingServiceUuid = "00001600-1212-efde-1523-785feabcd121";
-const String trainingCommandCharsUuid = "00001601-1212-efde-1523-785feabcd121";
-const String trainingDataCharsUuid = "00001602-1212-efde-1523-785feabcd121";
+const String customServiceUuid = "00001600-1212-efde-1523-785feabcd121";
+const String actionsCharsUuid = "00001601-1212-efde-1523-785feabcd121";
+const String trainingCommandCharsUuid = "00001602-1212-efde-1523-785feabcd121";
+const String trainingDataCharsUuid = "00001603-1212-efde-1523-785feabcd121";
 
 class DeviceScreen extends StatelessWidget {
   const DeviceScreen({super.key});
@@ -21,6 +22,7 @@ class DeviceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bleState = context.watch<BleBloc>().state;
+    final lastValue = bleState.data;
 
     return Scaffold(
     
@@ -49,14 +51,28 @@ class DeviceScreen extends StatelessWidget {
                     value: 1,
                     child: Text("Disconnetti"),
                   ),
+                  PopupMenuItem<int>(
+                    value: 2,
+                    child: Text("Demo animation"),
+                  ),
+
                 ];
               }, onSelected: (value) {
                 if (value == 0) {
                   print("My account menu is selected.");
                 } else if (value == 1) {
-                  print("Settings menu is selected.");
+                  print("Disconnect from BLE");
+                  context.read<BleBloc>().add(const DisconnectDevice(bleMac));
                 } else if (value == 2) {
-                  print("Logout menu is selected.");
+                  print("Demo animation");
+                  context.read<BleBloc>().add(
+                        const BleWriteEvent(
+                            bleMac,
+                            customServiceUuid,
+                            trainingCommandCharsUuid,
+                            [0x01, 0x02, 0x00, 0x05],
+                            false),
+                      );
                 }
               }),
             ],
@@ -175,26 +191,18 @@ class DeviceScreen extends StatelessWidget {
             icon:
                 (!bleState.connected) ? Icons.error : Icons.bluetooth_connected,
           ),
-          const AlertSliverCard(
-            visible: false,
-            state: AlertState.errorAlertState,
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            elevation: 4,
-            text: "Errore caricamento dati!",
-            icon: Icons.error,
-          ),
-          const AlertSliverCard(
-            visible: false,
+          AlertSliverCard(
+            visible: bleState.connected,
             state: AlertState.warningAlertState,
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             elevation: 4,
             text: "Scarica i dati raccolti dal dispositivo!",
             icon: Icons.bar_chart,
           ),
-          const ProgressSliverCard(
-            visible: false,
+          ProgressSliverCard(
+            visible: bleState.connected && bleState is BleDownloadingData,
             elevation: 4,
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             state: ProgresState.warningProgressState,
             text: "Download dati in corso",
             percentValue: 10,
@@ -216,12 +224,11 @@ class DeviceScreen extends StatelessWidget {
             text: "Aggiornamento in corso",
             percentValue: 45,
           ),
+         
           SliverToBoxAdapter(
             child: Text('$bleState'),
           ),
-          // SliverToBoxAdapter(
-          //   child: Text('$serviceUuid'),
-          // ),
+         
           SliverToBoxAdapter(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -234,7 +241,6 @@ class DeviceScreen extends StatelessWidget {
               ],
             ),
           ),
-
           SliverToBoxAdapter(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -271,7 +277,6 @@ class DeviceScreen extends StatelessWidget {
               ],
             ),
           ),
-
         ],
       ),
       bottomNavigationBar: Padding(
@@ -280,76 +285,63 @@ class DeviceScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            OutlinedButton(
-              style: FilledButton.styleFrom(
-                fixedSize: const Size(150, 50),
+            Visibility(
+              visible: !bleState.connected,
+              child: OutlinedButton(
+                style: FilledButton.styleFrom(
+                  fixedSize: const Size(150, 50),
+                ),
+                onPressed: (bleState is BleConnecting)
+                    ? null
+                    : () => context
+                        .read<BleBloc>()
+                        .add(const ConnectDevice(bleMac)),
+                child: const Text('CONNECT TO DEVICE'),
               ),
-              onPressed: () {
-                BlocProvider.of<BleBloc>(context)
-                    .add(const ConnectDevice(bleMac));
-              },
-              child: const Text('CONNECT TO DEVICE'),
             ),
-            OutlinedButton(
-              style: FilledButton.styleFrom(
-                fixedSize: const Size(150, 50),
-              ),
-              onPressed: () => BlocProvider.of<BleBloc>(context)
-                  .add(const DisconnectDevice(bleMac)),
-              child: const Text('DISCONNECT TO DEVICE'),
-            ),
-            /*
-            OutlinedButton(
-              style: FilledButton.styleFrom(
-                fixedSize: const Size(150, 50),
-              ),
-              onPressed: () {
-                BlocProvider.of<BleBloc>(context)
-                    .add(const StartScanning(seconds: 10));
 
-                showModalBottomSheet<void>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return SizedBox(
-                      height: 400,
-                      child: ListView.builder(
-                        itemCount:
-                            context.watch<BleBloc>().state.devices.length,
-                        itemBuilder: (context, index) {
-                          final device =
-                              context.watch<BleBloc>().state.devices[index];
-                          return ListTile(
-                            title: Text(device.name),
-                            subtitle: Text(device.uuid),
-                            onTap: () {
-                              // context
-                              //     .read<BleBloc>()
-                              //     .add(SelectServiceUuid(service.serviceUuid));
-                            },
-                          );
-                        },
+            /*Visibility(
+              visible: bleState.connected,
+              child: OutlinedButton(
+                style: FilledButton.styleFrom(
+                  fixedSize: const Size(150, 50),
+                ),
+                onPressed: () {
+                  context.read<BleBloc>().add(
+                        const BleLastValueEvent(
+                          bleMac,
+                          customServiceUuid,
+                          trainingDataCharsUuid,
+                        ),
+                      );
+                  context.read<BleBloc>().add(
+                        const BleSetNotificationEvent(
+                          bleMac,
+                          customServiceUuid,
+                          trainingDataCharsUuid,
+                          true,
+                        ),
+                      );
+                },
+                child: const Text('SCARICA DATI'),
+              ),
+            ),*/
+            
+            OutlinedButton(
+              style: FilledButton.styleFrom(
+                fixedSize: const Size(150, 50),
+              ),
+              onPressed: () {
+                context.read<BleBloc>().add(
+                      const BleSetNotificationEvent(
+                        bleMac,
+                        customServiceUuid,
+                        trainingDataCharsUuid,
+                        true,
                       ),
                     );
-                  },
-                );
-              
               },
-              child: const Text('SCAN DEVICES'),
-            ),
-            */
-            OutlinedButton(
-              style: FilledButton.styleFrom(
-                fixedSize: const Size(150, 50),
-              ),
-              onPressed: () => context.read<BleBloc>().add(
-                    const BleWriteEvent(
-                      bleMac,
-                      trainingServiceUuid,
-                      trainingCommandCharsUuid,
-                      [0x01, 0x02, 0x00, 0x05],
-                    ),
-                  ),
-              child: const Text('START ANIMATION'),
+              child: const Text('ENABLE NOTIFICATIONS'),
             ),
             OutlinedButton(
               style: FilledButton.styleFrom(
@@ -357,17 +349,130 @@ class DeviceScreen extends StatelessWidget {
               ),
               onPressed: () {
                 context.read<BleBloc>().add(
-                    const BleWriteEvent(
-                      bleMac,
-                      trainingServiceUuid,
-                      trainingDataCharsUuid,
-                      [0, 0, 0, 0, 202, 233, 67, 252],
-                    ),
+                      const BleLastValueEvent(
+                        bleMac,
+                        customServiceUuid,
+                        trainingDataCharsUuid,
+                      ),
                     );
               },
-              child: const Text('WRITE DATA'),
+              child: const Text('LISTEN LAST VALUE'),
+            ),
+            
+            OutlinedButton(
+              style: FilledButton.styleFrom(
+                fixedSize: const Size(150, 50),
+              ),
+              onPressed: () {
+                context.read<BleBloc>().add(
+                      const BleReadEvent(
+                        bleMac,
+                        customServiceUuid,
+                        trainingDataCharsUuid,
+                      ),
+                    );
+              },
+              child: const Text('READ BIG DATA'),
+            ),
+            BlocListener<BleBloc, BleState>(
+              listenWhen: (context, state) {
+                return state is BleWillWriteData ||
+                    state is BleDidWriteData ||
+                    state is BleWillReadData ||
+                    state is BleDidReadData;
+              },
+              listener: (context, state) {
+                if (state is BleDidWriteData) {
+                  print("BleDidWriteData");
+                  /*context.read<BleBloc>().add(
+                        const BleReadEvent(
+                          bleMac,
+                          customServiceUuid,
+                          trainingDataCharsUuid,
+                        ),
+                      );*/
+
+                } else if (state is BleDidReadData) {
+                  print("BleDidReadData");
+                }
+              },
+              child: OutlinedButton(
+                style: FilledButton.styleFrom(
+                  fixedSize: const Size(150, 50),
+                ),
+                onPressed: () {
+                  context.read<BleBloc>().add(
+                        const BleWriteEvent(
+                          bleMac,
+                          customServiceUuid,
+                          actionsCharsUuid,
+                          [23, 1, 15, 12, 30, 46],
+                          false,
+                      ),
+                    );
+                },
+                child: const Text('WRITE ACTION'),
+              ),
             ),
 
+            /*
+            
+           
+            OutlinedButton(
+              style: FilledButton.styleFrom(
+                fixedSize: const Size(150, 50),
+              ),
+              onPressed: () {
+                context.read<BleBloc>().add(
+                      const BleSetNotificationEvent(
+                        bleMac,
+                        customServiceUuid,
+                        trainingDataCharsUuid,
+                        false,
+                      ),
+                    );
+              },
+              child: const Text('DISABLE NOTIFICATIONS'),
+            ),
+            OutlinedButton(
+              style: FilledButton.styleFrom(
+                fixedSize: const Size(150, 50),
+              ),
+              onPressed: () {
+                final randNumber = Random();
+                for (int i = 0; i < 1; i++) {
+                  context.read<BleBloc>().add(
+                        BleWriteEvent(
+                          bleMac,
+                          customServiceUuid,
+                          actionsCharsUuid,
+                          [
+                            randNumber.nextInt(254),
+                            randNumber.nextInt(254),
+                            randNumber.nextInt(254),
+                          ],
+                        ),
+                      );
+                }
+              },
+              child: const Text('WRITE ACTION'),
+            ),
+            OutlinedButton(
+              style: FilledButton.styleFrom(
+                fixedSize: const Size(150, 50),
+              ),
+              onPressed: () {
+                context.read<BleBloc>().add(
+                      const BleReadEvent(
+                        bleMac,
+                        customServiceUuid,
+                        trainingDataCharsUuid,
+                      ),
+                    );
+              },
+              child: const Text('READ BIG DATA'),
+            ),
+            */
           ],
         ),
       ),
