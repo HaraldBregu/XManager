@@ -92,10 +92,10 @@ class BleRepositoryImpl implements BleRepository {
     bool withoutResponse,
   ) =>
       _dataSource.writeCharacteristic(
-      deviceUuid,
-      serviceUuid,
-      characteristicsUuid,
-      value,
+        deviceUuid,
+        serviceUuid,
+        characteristicsUuid,
+        value,
         withoutResponse,
     );
   

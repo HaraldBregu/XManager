@@ -67,20 +67,8 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     BleReadEvent event,
     Emitter<BleState> emit,
   ) async {
-    // emit(
-    //   state.copyWith(
-    //     data: await bleReadUseCase.call(
-    //       BleReadParams(
-    //         deviceUuid: event.deviceUuid,
-    //         serviceUuid: event.serviceUuid,
-    //         characteristicUuid: event.characteristicUuid,
-    //       ),
-    //     ),
-    //   ),
-    // );
     emit(BleWillReadData(data: state.data, connected: state.connected));
 
-// do something here
     final data = await bleReadUseCase.call(
       BleReadParams(
         deviceUuid: event.deviceUuid,
@@ -88,34 +76,8 @@ class BleBloc extends Bloc<BleEvent, BleState> {
         characteristicUuid: event.characteristicUuid,
       ),
     );
-    //await Future.delayed(const Duration(seconds: 1));
-    // do stuff
-    emit(
-      BleDidReadData(
-        data: data,
-        connected: state.connected,
-      ),
-    );
-    return;
-    // await Future.delayed(const Duration(microseconds: 2000));
-    Future.delayed(const Duration(seconds: 2), () async {
-      // do something here
-      final data = await bleReadUseCase.call(
-        BleReadParams(
-          deviceUuid: event.deviceUuid,
-          serviceUuid: event.serviceUuid,
-          characteristicUuid: event.characteristicUuid,
-        ),
-      );
-      //await Future.delayed(const Duration(seconds: 1));
-      // do stuff
-      emit(
-        BleDidReadData(
-          data: data,
-          connected: state.connected,
-        ),
-      );
-    });
+
+    emit(BleDidReadData(data: data, connected: state.connected));
   }
 
   Future<void> _onBleWriteEvent(
@@ -130,9 +92,11 @@ class BleBloc extends Bloc<BleEvent, BleState> {
         serviceUuid: event.serviceUuid,
         characteristicUuid: event.characteristicUuid,
         value: event.value,
-        withoutResponse: false,
+        withoutResponse: event.withoutResponse,
       ),
     );
+    
+    //emit(BleDidWriteData(data: state.data, connected: state.connected));
   }
 
   Future<void> _onBleSetNotificationEvent(
@@ -161,82 +125,24 @@ class BleBloc extends Bloc<BleEvent, BleState> {
       ),
     );
 
-    await for (final data in stream) {
-      if (state is BleWillWriteData) {
-        emit(BleDidWriteData(data: data, connected: state.connected));
-      } else if (state is BleWillReadData) {
-        emit(BleDidReadData(data: data, connected: state.connected));
-      }
-    }
-
-    return;
     return await emit.forEach(
       stream,
       onData: (data) {
         print(data);
-        emit(BleDidWriteData(data: data, connected: state.connected));
+        if (state is BleWillWriteData) {
+          print("BleDidWriteData");
+          emit(BleDidWriteData(data: data, connected: state.connected));
+        } else if (state is BleDidWriteData) {
+          print("BleDidWriteData");
+        } else if (state is BleWillReadData) {
+          //emit(BleDidReadData(data: data, connected: state.connected));
+        }
+        //emit(BleDidWriteData(data: data, connected: state.connected));
         return state;
       },
     ).catchError((error) {
       print(error);
     });
-  }
-
-  Future<void> writeFirstBytes() async {
-    await bleWriteUseCase.call(
-      const BleWriteParams(
-        deviceUuid: "E7:C8:DF:65:5B:4B",
-        serviceUuid: "00001600-1212-efde-1523-785feabcd121",
-        characteristicUuid: "00001601-1212-efde-1523-785feabcd121",
-        value: [23, 1, 15, 12, 30, 45], // start byte
-        withoutResponse: false,
-      ),
-    );
-  }
-
-  Future<void> readFirstBytes() async {
-    await bleReadUseCase.call(
-      const BleReadParams(
-        deviceUuid: "E7:C8:DF:65:5B:4B",
-        serviceUuid: "00001600-1212-efde-1523-785feabcd121",
-        characteristicUuid: "00001603-1212-efde-1523-785feabcd121",
-      ),
-    );
-  }
-
-  Future<void> _onBleDownloadDataEvent(
-    BleDownloadDataEvent event,
-    Emitter<BleState> emit,
-  ) async {
-    // Enable notifications
-    await bleSetNotificationUseCase.call(
-      const BleSetNotificationParams(
-        deviceUuid: "E7:C8:DF:65:5B:4B",
-        serviceUuid: "00001600-1212-efde-1523-785feabcd121",
-        characteristicUuid: "00001603-1212-efde-1523-785feabcd121",
-        enable: true,
-      ),
-    );
-
-    await writeFirstBytes();
-
-    // Last Value Stream
-    final value = await emit.forEach(
-      bleLastValueStreamUseCase.call(
-        const BleParams(
-          deviceUuid: "E7:C8:DF:65:5B:4B",
-          serviceUuid: "00001600-1212-efde-1523-785feabcd121",
-          characteristicUuid: "00001603-1212-efde-1523-785feabcd121",
-        ),
-      ),
-      onData: (data) {
-        print("reading first byte");
-        print(data);
-        return state;
-      },
-    );
-
-
   }
 
   /*

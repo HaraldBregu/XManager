@@ -299,8 +299,88 @@ class DeviceScreen extends StatelessWidget {
                 child: const Text('CONNECT TO DEVICE'),
               ),
             ),
+            Visibility(
+              visible: bleState.connected,
+              child: BlocListener<BleBloc, BleState>(
+                listenWhen: (context, state) {
+                  return state is BleWillWriteData ||
+                      state is BleDidWriteData ||
+                      state is BleWillReadData ||
+                      state is BleDidReadData;
+                },
+                listener: (context, state) {
+                  if (state is BleWillWriteData) {
+                    print("BleWillWriteData");
+                  } else if (state is BleDidWriteData) {
+                    print("BleDidWriteData");
+                    context.read<BleBloc>().add(
+                          const BleReadEvent(
+                            bleMac,
+                            customServiceUuid,
+                            trainingDataCharsUuid,
+                          ),
+                        );
+                  } else if (state is BleWillReadData) {
+                    print("BleWillReadData");
+                  } else if (state is BleDidReadData) {
+                    print("BleDidReadData");
+                    print(state.data);
 
-            /*Visibility(
+                    Future.delayed(
+                      const Duration(milliseconds: 200),
+                      () async {
+                        context.read<BleBloc>().add(
+                              BleWriteEvent(
+                                bleMac,
+                                customServiceUuid,
+                                actionsCharsUuid,
+                                state.data,
+                                false,
+                              ),
+                            );
+                      },
+                    );
+                  }
+                },
+                child: OutlinedButton(
+                  style: FilledButton.styleFrom(
+                    fixedSize: const Size(150, 50),
+                  ),
+                  onPressed: () {
+                    context.read<BleBloc>().add(
+                          const BleSetNotificationEvent(
+                            bleMac,
+                            customServiceUuid,
+                            trainingDataCharsUuid,
+                            true,
+                          ),
+                        );
+         
+                    context.read<BleBloc>().add(
+                          const BleLastValueEvent(
+                            bleMac,
+                            customServiceUuid,
+                            trainingDataCharsUuid,
+                          ),
+                        );
+
+                    context.read<BleBloc>().add(
+                          const BleWriteEvent(
+                            bleMac,
+                            customServiceUuid,
+                            actionsCharsUuid,
+                            [23, 1, 15, 12, 30, 46],
+                            false,
+                          ),
+                        );
+                  },
+                  child: const Text('SCARICA DATI'),
+                ),
+              ),
+            ),
+
+            /*
+            Visibility(
               visible: bleState.connected,
               child: OutlinedButton(
                 style: FilledButton.styleFrom(
@@ -327,6 +407,7 @@ class DeviceScreen extends StatelessWidget {
               ),
             ),*/
             
+            /*
             OutlinedButton(
               style: FilledButton.styleFrom(
                 fixedSize: const Size(150, 50),
@@ -357,64 +438,8 @@ class DeviceScreen extends StatelessWidget {
                     );
               },
               child: const Text('LISTEN LAST VALUE'),
-            ),
+            ),*/
             
-            OutlinedButton(
-              style: FilledButton.styleFrom(
-                fixedSize: const Size(150, 50),
-              ),
-              onPressed: () {
-                context.read<BleBloc>().add(
-                      const BleReadEvent(
-                        bleMac,
-                        customServiceUuid,
-                        trainingDataCharsUuid,
-                      ),
-                    );
-              },
-              child: const Text('READ BIG DATA'),
-            ),
-            BlocListener<BleBloc, BleState>(
-              listenWhen: (context, state) {
-                return state is BleWillWriteData ||
-                    state is BleDidWriteData ||
-                    state is BleWillReadData ||
-                    state is BleDidReadData;
-              },
-              listener: (context, state) {
-                if (state is BleDidWriteData) {
-                  print("BleDidWriteData");
-                  /*context.read<BleBloc>().add(
-                        const BleReadEvent(
-                          bleMac,
-                          customServiceUuid,
-                          trainingDataCharsUuid,
-                        ),
-                      );*/
-
-                } else if (state is BleDidReadData) {
-                  print("BleDidReadData");
-                }
-              },
-              child: OutlinedButton(
-                style: FilledButton.styleFrom(
-                  fixedSize: const Size(150, 50),
-                ),
-                onPressed: () {
-                  context.read<BleBloc>().add(
-                        const BleWriteEvent(
-                          bleMac,
-                          customServiceUuid,
-                          actionsCharsUuid,
-                          [23, 1, 15, 12, 30, 46],
-                          false,
-                      ),
-                    );
-                },
-                child: const Text('WRITE ACTION'),
-              ),
-            ),
-
             /*
             
            
