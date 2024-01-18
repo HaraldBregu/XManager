@@ -6,7 +6,9 @@ abstract class BleRepository {
   Stream<List<BluetoothDeviceEntity>> get scanResult;
   Stream<bool> get isScanning;
   Future<void> stopScan();
-  Future<List<BluetoothServiceEntity>> connect(String uuid);
+  Future<void> connect(String uuid);
+  Future<void> connectAndDiscoverServices(String uuid);
+  Future<void> discoverServices(String uuid);
   Future<void> disconnect(String uuid);
   Stream<bool> connected(String uuid);
   Future<bool> isConnected(String uuid);

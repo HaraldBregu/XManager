@@ -8,8 +8,10 @@ abstract class BleDataSource {
   Stream<bool> get isScanning;
   Future<bool> get isSupported;
   Future<void> turnOn();
-  Future<List<BluetoothService>> connect(String uuid);
+  Future<void> connect(String uuid);
+  Future<void> connectAndDiscoverServices(String uuid);
   Future<void> disconnect(String uuid);
+  Future<void> discoverServices(String uuid);
   Stream<bool> connected(String uuid);
   Future<bool> isConnected(String uuid);
 
@@ -80,13 +82,19 @@ class BleDataSourceImpl implements BleDataSource {
   Future<void> turnOn() => FlutterBluePlus.turnOn();
 
   @override
-  Future<List<BluetoothService>> connect(String uuid) async {
+  Future<void> connect(String uuid) => BluetoothDevice.fromId(uuid).connect();
+
+  @override
+  Future<void> connectAndDiscoverServices(String uuid) async {
     final device = BluetoothDevice.fromId(uuid);
-    //await device.requestMtu(512);
-    if (!device.isConnected) await device.connect();
-    return await device.discoverServices();
+    await device.connect();
+    await device.discoverServices();
   }
 
+  @override
+  Future<void> discoverServices(String uuid) =>
+      BluetoothDevice.fromId(uuid).discoverServices();
+  
   @override
   Future<void> disconnect(String uuid) async {
     final device = BluetoothDevice.fromId(uuid);

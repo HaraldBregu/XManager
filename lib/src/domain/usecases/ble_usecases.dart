@@ -71,6 +71,14 @@ class BleDeviceIsConnectedUseCase implements BaseUseCase<bool, String> {
   Future<bool> call(String uuid) => _bleRepository.isConnected(uuid);
 }
 
+class BleDiscoverServicesUseCase implements BaseUseCase<void, String> {
+  const BleDiscoverServicesUseCase(this._bleRepository);
+  final BleRepository _bleRepository;
+
+  @override
+  Future<void> call(String uuid) => _bleRepository.discoverServices(uuid);
+}
+
 class BleReadUseCase implements BaseUseCase<List<int>, BleReadParams> {
   const BleReadUseCase(this._bleRepository);
   final BleRepository _bleRepository;

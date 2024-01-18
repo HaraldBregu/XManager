@@ -58,6 +58,8 @@ Future<void> init() async {
 
   sl.registerFactory(
     () => BleBloc(
+      bleDeviceIsConnectedUseCase: sl(),
+      bleDiscoverServicesUseCase: sl(),
       bleConnectDeviceUseCase: sl(),
       bleDisconnectDeviceUseCase: sl(),
       bleDeviceConnectedUseCase: sl(),
@@ -92,6 +94,9 @@ Future<void> init() async {
   sl.registerLazySingleton(() => CurrentUserUseCase(sl()));
 
   // BLE usecases
+  
+  sl.registerLazySingleton(() => BleDeviceIsConnectedUseCase(sl()));
+  sl.registerLazySingleton(() => BleDiscoverServicesUseCase(sl()));
   sl.registerLazySingleton(() => BleConnectDeviceUseCase(sl()));
   sl.registerLazySingleton(() => BleDisconnectDeviceUseCase(sl()));
   sl.registerLazySingleton(() => BleDeviceConnectedUseCase(sl()));

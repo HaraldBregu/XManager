@@ -37,43 +37,16 @@ class BleRepositoryImpl implements BleRepository {
   Future<void> stopScan() => _dataSource.stopScan();
 
   @override
-  Future<List<BluetoothServiceModel>> connect(String uuid) async {
-    final services = await _dataSource.connect(uuid);
+  Future<void> connect(String uuid) => _dataSource.connect(uuid);
 
-    return services.map((e) {
-      final chars = e.characteristics.map((ch) {
-        final descrs = ch.descriptors.map((des) {
-          return BluetoothDescriptorModel(
-            characteristicUuid: des.characteristicUuid.toString(),
-            descriptorUuid: des.descriptorUuid.toString(),
-          );
-        }).toList();
-
-        return BluetoothCharacteristicModel(
-          characteristicUuid: ch.characteristicUuid.toString(),
-          descriptors: descrs,
-        );
-      }).toList();
-
-      // final inclServ = e.includedServices.map((e) {
-      //   return BluetoothServiceModel(
-      //     remoteId: e.remoteId.str,
-      //     serviceUuid:  e.serviceUuid.toString(),
-      //     isPrimary: e.isPrimary,
-      //     characteristics: [],
-      //     includedServices: includedServices),
-      // }):
-
-      return BluetoothServiceModel(
-        remoteId: e.remoteId.str,
-        serviceUuid: e.serviceUuid.toString(),
-        isPrimary: e.isPrimary,
-        characteristics: chars,
-        includedServices: const [],
-      );
-    }).toList();
-  }
-
+  @override
+  Future<void> connectAndDiscoverServices(String uuid) =>
+      _dataSource.connectAndDiscoverServices(uuid);
+  
+  @override
+  Future<void> discoverServices(String uuid) =>
+      _dataSource.discoverServices(uuid);
+  
   @override
   Future<void> disconnect(String uuid) => _dataSource.disconnect(uuid);
 

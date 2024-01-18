@@ -6,6 +6,8 @@ import 'package:xmanager/src/domain/usecases/ble_usecases.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
 
 class BleBloc extends Bloc<BleEvent, BleState> {
+  final BleDeviceIsConnectedUseCase bleDeviceIsConnectedUseCase;
+  final BleDiscoverServicesUseCase bleDiscoverServicesUseCase;
   final BleConnectDeviceUseCase bleConnectDeviceUseCase;
   final BleDisconnectDeviceUseCase bleDisconnectDeviceUseCase;
   final BleDeviceConnectedUseCase bleDeviceConnectedUseCase;
@@ -15,6 +17,8 @@ class BleBloc extends Bloc<BleEvent, BleState> {
   final BleSetNotificationUseCase bleSetNotificationUseCase;
 
   BleBloc({
+    required this.bleDeviceIsConnectedUseCase,
+    required this.bleDiscoverServicesUseCase,
     required this.bleConnectDeviceUseCase,
     required this.bleDisconnectDeviceUseCase,
     required this.bleDeviceConnectedUseCase,
@@ -52,8 +56,15 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     ConnectDevice event,
     Emitter<BleState> emit,
   ) async {
-    if (!state.connected) emit(const BleConnecting());
-    await bleConnectDeviceUseCase.call(event.uuid);
+    final deviceIsConnected =
+        await bleDeviceIsConnectedUseCase.call(event.uuid);
+
+    if (!deviceIsConnected) {
+      emit(const BleConnecting());
+      await bleConnectDeviceUseCase.call(event.uuid);
+    }
+
+    await bleDiscoverServicesUseCase.call(event.uuid);
   }
 
   Future<void> _onDisconnectDeviceEvent(
@@ -128,7 +139,7 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     return await emit.forEach(
       stream,
       onData: (data) {
-        print(data);
+        // print(data);
         if (state is BleWillWriteData) {
           print("BleDidWriteData");
           emit(BleDidWriteData(data: data, connected: state.connected));
@@ -136,7 +147,7 @@ class BleBloc extends Bloc<BleEvent, BleState> {
           print("BleDidWriteData");
         } else if (state is BleWillReadData) {
           //emit(BleDidReadData(data: data, connected: state.connected));
-        }
+        } 
         //emit(BleDidWriteData(data: data, connected: state.connected));
         return state;
       },
