@@ -47,7 +47,7 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     await emit.onEach(
       bleDeviceConnectedUseCase.call(event.uuid),
       onData: (connected) {
-        emit(BleConnected(data: state.data, connected: connected));
+        emit(state.copyWith(data: state.data, connected: connected));
       },
     );
   }

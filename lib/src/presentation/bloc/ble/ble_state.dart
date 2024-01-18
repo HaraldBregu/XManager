@@ -30,10 +30,6 @@ class BleConnecting extends BleState {
   const BleConnecting({super.data, super.connected = false});
 }
 
-class BleConnected extends BleState {
-  const BleConnected({super.data, super.connected = false});
-}
-
 class BleDownloadingData extends BleState {
   const BleDownloadingData({super.data, super.connected = false});
 }
