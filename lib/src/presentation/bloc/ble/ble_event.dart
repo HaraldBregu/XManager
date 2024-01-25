@@ -39,6 +39,30 @@ class ConnectDevice extends BleEvent {
   List<Object?> get props => [uuid];
 }
 
+class ConnectAndAuthenticateDevice extends BleEvent {
+  final String deviceUuid;
+  final String serviceUuid;
+  final String characteristicUuid;
+  final List<int> value;
+  final bool withoutResponse;
+
+  const ConnectAndAuthenticateDevice(
+    this.deviceUuid,
+    this.serviceUuid,
+    this.characteristicUuid,
+    this.value,
+    this.withoutResponse,
+  );
+
+  @override
+  List<Object?> get props => [
+        deviceUuid,
+        serviceUuid,
+        characteristicUuid,
+        value,
+        withoutResponse,
+      ];
+}
 class DisconnectDevice extends BleEvent {
   final String uuid;
   const DisconnectDevice(this.uuid);
@@ -70,7 +94,7 @@ class BleWriteEvent extends BleEvent {
   final String serviceUuid;
   final String characteristicUuid;
   final List<int> value;
-final bool withoutResponse;
+  final bool withoutResponse;
 
   const BleWriteEvent(
     this.deviceUuid,

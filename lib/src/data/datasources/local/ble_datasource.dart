@@ -87,6 +87,8 @@ class BleDataSourceImpl implements BleDataSource {
   @override
   Future<void> connectAndDiscoverServices(String uuid) async {
     final device = BluetoothDevice.fromId(uuid);
+    //await device.clearGattCache();
+    //device.connect(mtu: 512);
     await device.connect();
     await device.discoverServices();
   }

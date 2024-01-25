@@ -34,6 +34,10 @@ class BleDownloadingData extends BleState {
   const BleDownloadingData({super.data, super.connected = false});
 }
 
+class BleDownloadDataComplete extends BleState {
+  const BleDownloadDataComplete({super.data, super.connected = false});
+}
+
 class BleWillWriteData extends BleState {
   const BleWillWriteData({super.data, super.connected});
 }

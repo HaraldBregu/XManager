@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
@@ -15,6 +13,28 @@ const String customServiceUuid = "00001600-1212-efde-1523-785feabcd121";
 const String actionsCharsUuid = "00001601-1212-efde-1523-785feabcd121";
 const String trainingCommandCharsUuid = "00001602-1212-efde-1523-785feabcd121";
 const String trainingDataCharsUuid = "00001603-1212-efde-1523-785feabcd121";
+const List<int> password = [
+  56,
+  148,
+  132,
+  156,
+  147,
+  134,
+  152,
+  174,
+  236,
+  7,
+  185,
+  208,
+  186,
+  98,
+  59,
+  181,
+  202,
+  0,
+  77,
+  147,
+];
 
 class DeviceScreen extends StatelessWidget {
   const DeviceScreen({super.key});
@@ -285,6 +305,7 @@ class DeviceScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+
             Visibility(
               visible: !bleState.connected,
               child: OutlinedButton(
@@ -295,24 +316,25 @@ class DeviceScreen extends StatelessWidget {
                     ? null
                     : () => context
                         .read<BleBloc>()
-                        .add(const ConnectDevice(bleMac)),
+                        .add(const ConnectAndAuthenticateDevice(
+                          bleMac,
+                          customServiceUuid,
+                          actionsCharsUuid,
+                          password,
+                          true,
+                        )),
                 child: const Text('CONNECT TO DEVICE'),
               ),
             ),
+         
             Visibility(
               visible: bleState.connected,
               child: BlocListener<BleBloc, BleState>(
                 listenWhen: (context, state) {
-                  return state is BleWillWriteData ||
-                      state is BleDidWriteData ||
-                      state is BleWillReadData ||
-                      state is BleDidReadData;
+                  return state is BleDidWriteData || state is BleDidReadData;
                 },
                 listener: (context, state) {
-                  if (state is BleWillWriteData) {
-                    print("BleWillWriteData");
-                  } else if (state is BleDidWriteData) {
-                    print("BleDidWriteData");
+                  if (state is BleDidWriteData) {
                     context.read<BleBloc>().add(
                           const BleReadEvent(
                             bleMac,
@@ -320,12 +342,7 @@ class DeviceScreen extends StatelessWidget {
                             trainingDataCharsUuid,
                           ),
                         );
-                  } else if (state is BleWillReadData) {
-                    print("BleWillReadData");
                   } else if (state is BleDidReadData) {
-                    print("BleDidReadData");
-                    print(state.data);
-
                     Future.delayed(
                       const Duration(milliseconds: 200),
                       () async {

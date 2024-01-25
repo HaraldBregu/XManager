@@ -31,6 +31,7 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     // on<StopScanning>(_onStopScanningEvent);
     on<ListenConnectionState>(_onListenConnectionStateEvent);
     on<ConnectDevice>(_onConnectDeviceEvent);
+    on<ConnectAndAuthenticateDevice>(_onConnectAndAuthenticateDeviceEvent);
     on<DisconnectDevice>(_onDisconnectDeviceEvent);
     on<BleSetNotificationEvent>(_onBleSetNotificationEvent);
     on<BleLastValueEvent>(_onBleLastValueEvent);
@@ -65,6 +66,33 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     }
 
     await bleDiscoverServicesUseCase.call(event.uuid);
+  }
+
+  Future<void> _onConnectAndAuthenticateDeviceEvent(
+    ConnectAndAuthenticateDevice event,
+    Emitter<BleState> emit,
+  ) async {
+    final deviceIsConnected =
+        await bleDeviceIsConnectedUseCase.call(event.deviceUuid);
+
+    if (!deviceIsConnected) {
+      emit(const BleConnecting());
+      await bleConnectDeviceUseCase.call(event.deviceUuid);
+    }
+
+    await bleDiscoverServicesUseCase.call(event.deviceUuid);
+
+    emit(BleWillWriteData(data: state.data, connected: state.connected));
+
+    await bleWriteUseCase.call(
+      BleWriteParams(
+        deviceUuid: event.deviceUuid,
+        serviceUuid: event.serviceUuid,
+        characteristicUuid: event.characteristicUuid,
+        value: event.value,
+        withoutResponse: event.withoutResponse,
+      ),
+    );
   }
 
   Future<void> _onDisconnectDeviceEvent(
@@ -141,14 +169,9 @@ class BleBloc extends Bloc<BleEvent, BleState> {
       onData: (data) {
         // print(data);
         if (state is BleWillWriteData) {
-          print("BleDidWriteData");
           emit(BleDidWriteData(data: data, connected: state.connected));
-        } else if (state is BleDidWriteData) {
-          print("BleDidWriteData");
-        } else if (state is BleWillReadData) {
-          //emit(BleDidReadData(data: data, connected: state.connected));
         } 
-        //emit(BleDidWriteData(data: data, connected: state.connected));
+        
         return state;
       },
     ).catchError((error) {
