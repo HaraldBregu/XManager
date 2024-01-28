@@ -16,6 +16,32 @@ class NoParams extends Equatable {
   List<Object?> get props => [];
 }
 
+enum DeviceType {
+  none,
+  dinamo,
+}
+
+class DeviceParams extends Equatable {
+  final DeviceType type;
+  final String version;
+  final String name;
+
+  const DeviceParams({
+    required this.type,
+    required this.version,
+    required this.name,
+  });
+
+  @override
+  List<Object?> get props => [
+        type,
+        version,
+        name,
+      ];
+}
+
+
+
 class LoginParams extends Equatable {
   final String email;
   final String password;

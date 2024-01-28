@@ -108,10 +108,56 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "5:7310995955925224460",
+      "lastPropertyId": "7:1017968642511537596",
+      "name": "User",
+      "properties": [
+        {
+          "id": "1:8982345125835003799",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6668513622713303230",
+          "name": "fullname",
+          "type": 9,
+          "flags": 2080,
+          "indexId": "3:2746940215013751864"
+        },
+        {
+          "id": "3:7416909721912551910",
+          "name": "birthdate",
+          "type": 10
+        },
+        {
+          "id": "4:7907521402553467372",
+          "name": "weight",
+          "type": 8
+        },
+        {
+          "id": "5:3241214933951934163",
+          "name": "height",
+          "type": 8
+        },
+        {
+          "id": "6:8908268571206559789",
+          "name": "role",
+          "type": 9
+        },
+        {
+          "id": "7:1017968642511537596",
+          "name": "nationality",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "4:5790660189180963841",
-  "lastIndexId": "2:494764993099841677",
+  "lastEntityId": "5:7310995955925224460",
+  "lastIndexId": "3:2746940215013751864",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

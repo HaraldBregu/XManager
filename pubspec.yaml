@@ -83,7 +83,7 @@ dev_dependencies:
   objectbox_generator: any
 
 objectbox:
-  output_dir: src/core/databases
+  output_dir: src/data/databases
 
 flutter:
   uses-material-design: true
