@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:xmanager/src/core/error/exeptions.dart';
 import 'package:xmanager/src/data/models/application_model.dart';
 import 'package:xmanager/src/data/models/user_model.dart';
-import 'package:xmanager/src/core/exeptions.dart';
 
 abstract class SharedPreferencesDataSource {
   Future<UserModel> getUser();

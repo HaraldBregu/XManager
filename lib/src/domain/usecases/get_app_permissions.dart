@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:xmanager/src/domain/repository/application_repository.dart';
-import 'package:xmanager/src/core/failures.dart';
+import 'package:xmanager/src/core/error/failures.dart';
 import 'package:xmanager/src/core/usecase.dart';
+import 'package:xmanager/src/domain/repository/application_repository.dart';
 
 class GetAppPermissionsUseCase implements UseCase<bool, NoParams> {
   GetAppPermissionsUseCase();

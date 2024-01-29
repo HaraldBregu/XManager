@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:xmanager/src/data/datasources/remote/remote_datasource.dart';
+import 'package:xmanager/src/data/models/dinamo_model.dart';
+import 'package:xmanager/src/data/models/profile_model.dart';
 import 'package:xmanager/src/data/models/user_model.dart';
 
 class RemoteDataSourceImpl implements RemoteDataSource {
+
   RemoteDataSourceImpl();
 
   @override
@@ -41,4 +44,13 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       rethrow;
     }
   }
+
+  @override
+  Future<ProfileModel> getCurrentProfile() async => const ProfileModel(
+        fullname: "",
+        dinamo: DinamoModel(
+          leftBleMac: "",
+          rightBleMac: "",
+        ),
+      );
 }

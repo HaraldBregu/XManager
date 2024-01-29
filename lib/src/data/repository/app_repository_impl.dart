@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:xmanager/src/core/error/failures.dart';
 import 'package:xmanager/src/data/datasources/local/permissions_datasource.dart';
 import 'package:xmanager/src/data/datasources/local/shared_preferences_datasource.dart';
 import 'package:xmanager/src/domain/entities/application_entity.dart';
 import 'package:xmanager/src/domain/repository/application_repository.dart';
-import 'package:xmanager/src/core/failures.dart';
 
 class AppRepositoryImpl implements ApplicationRepository {
   final SharedPreferencesDataSourceImpl sharedPreferencesDataSourceImpl;

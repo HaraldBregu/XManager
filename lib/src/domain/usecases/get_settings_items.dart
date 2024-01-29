@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:xmanager/src/core/failures.dart';
+import 'package:xmanager/src/core/error/failures.dart';
 import 'package:xmanager/src/domain/entities/setttings_entity.dart';
 import 'package:xmanager/src/domain/repository/settings_repository.dart';
 

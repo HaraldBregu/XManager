@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
+import 'package:xmanager/src/core/error/failures.dart';
+import 'package:xmanager/src/core/usecase.dart';
 import 'package:xmanager/src/domain/entities/user_entity.dart';
 import 'package:xmanager/src/domain/repository/user_repository.dart';
-import 'package:xmanager/src/core/failures.dart';
-import 'package:xmanager/src/core/usecase.dart';
 
-class CurrentUserUseCase implements UseCase<UserEntity, NoParams> {
+class GetCurrentUserUseCase implements UseCase<UserEntity, NoParams> {
   final UserRepository _userRepository;
 
-  CurrentUserUseCase(this._userRepository);
+  GetCurrentUserUseCase(this._userRepository);
 
   @override
   Future<Either<Failure, UserEntity>> call(NoParams params) async {

@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:xmanager/src/domain/entities/bluetooth_device_entity.dart';
-import 'package:xmanager/src/core/failures.dart';
+import 'package:xmanager/src/core/error/failures.dart';
 
 abstract class BaseUseCase<Type, Params> {
   Future<Type> call(Params params);

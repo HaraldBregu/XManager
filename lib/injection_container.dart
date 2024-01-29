@@ -14,8 +14,8 @@ import 'package:xmanager/src/domain/usecases/auth_current_usecase.dart';
 import 'package:xmanager/src/domain/usecases/auth_login_usecase.dart';
 import 'package:xmanager/src/domain/usecases/auth_logout_usecase.dart';
 import 'package:xmanager/src/domain/usecases/ble_usecases.dart';
-import 'package:xmanager/src/domain/usecases/current_user.dart';
 import 'package:xmanager/src/domain/usecases/get_app_permissions.dart';
+import 'package:xmanager/src/domain/usecases/get_current_user.dart';
 import 'package:xmanager/src/presentation/bloc/app_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
 import 'package:xmanager/src/presentation/bloc/player_bloc.dart';
@@ -91,7 +91,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => BluetoothScanPermissionsGrantedUseCase(sl()));
   sl.registerLazySingleton(() => RequestBluetoothScanPermissionsUseCase(sl()));
 
-  sl.registerLazySingleton(() => CurrentUserUseCase(sl()));
+  sl.registerLazySingleton(() => GetCurrentUserUseCase(sl()));
 
   // BLE usecases
   

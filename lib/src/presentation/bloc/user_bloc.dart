@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/domain/usecases/current_user.dart';
 import 'package:xmanager/src/core/usecase.dart';
+import 'package:xmanager/src/domain/usecases/get_current_user.dart';
 import 'package:xmanager/src/presentation/bloc/user_event.dart';
 import 'package:xmanager/src/presentation/bloc/user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  final CurrentUserUseCase currentUserUseCase;
+  final GetCurrentUserUseCase currentUserUseCase;
 
   UserState get authorized => UserAuthorizedState();
 
