@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 
 class PlayerCard extends StatelessWidget {

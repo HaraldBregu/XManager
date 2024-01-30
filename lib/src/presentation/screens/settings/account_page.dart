@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:go_router/go_router.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 
 class AccountPage extends StatefulWidget {
@@ -53,6 +53,9 @@ class _AccountPageState extends State<AccountPage> with WidgetsBindingObserver {
         break;
       case AppLifecycleState.detached:
         print("app in detached");
+        break;
+      case AppLifecycleState.hidden:
+        // TODO: Handle this case.
         break;
     }
   }

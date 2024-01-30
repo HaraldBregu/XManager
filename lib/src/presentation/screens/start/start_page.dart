@@ -9,7 +9,7 @@ class StartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<void> _showErrorDialog() async {
+    /*  Future<void> _showErrorDialog() async {
       return showDialog<void>(
         context: context,
         //barrierDismissible: false, // user must tap button!
@@ -42,13 +42,13 @@ class StartPage extends StatelessWidget {
         },
       );
     }
-
-    List<int> nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+*/
+    //List<int> nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
     final ColorScheme colorScheme = theme.colorScheme;
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    final fullnameController = TextEditingController();
+    //final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    //final fullnameController = TextEditingController();
 
     return Scaffold(
         body: SafeArea(
@@ -364,8 +364,9 @@ class StartPage extends StatelessWidget {
   }
 }
 
+// ignore: unused_element
 class _StartPageBody extends StatelessWidget {
-  const _StartPageBody({super.key});
+  const _StartPageBody();
 
   @override
   Widget build(BuildContext context) {
@@ -374,52 +375,50 @@ class _StartPageBody extends StatelessWidget {
         Expanded(
           child: Align(
             alignment: Alignment.bottomCenter,
-            child: Container(
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.all(15),
-                          child: OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                              //minimumSize: const Size(300, 50),
-                              minimumSize: const Size.fromHeight(60),
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.elliptical(9, 9),
-                                ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(15),
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            //minimumSize: const Size(300, 50),
+                            minimumSize: const Size.fromHeight(60),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.elliptical(9, 9),
                               ),
                             ),
-                            onPressed: () {},
-                            child: const Text("Log In"),
                           ),
+                          onPressed: () {},
+                          child: const Text("Log In"),
                         ),
                       ),
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.all(15),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              //minimumSize: const Size(300, 50),
-                              minimumSize: const Size.fromHeight(60),
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.elliptical(9, 9),
-                                ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(15),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            //minimumSize: const Size(300, 50),
+                            minimumSize: const Size.fromHeight(60),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.elliptical(9, 9),
                               ),
                             ),
-                            onPressed: () {},
-                            child: const Text("Join Now"),
                           ),
+                          onPressed: () {},
+                          child: const Text("Join Now"),
                         ),
                       ),
-                    ],
-                  )
-                ],
-              ),
+                    ),
+                  ],
+                )
+              ],
             ),
           ),
         ),

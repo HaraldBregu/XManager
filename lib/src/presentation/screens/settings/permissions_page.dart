@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:xmanager/src/core/common.dart';
 
 class PermissionsPage extends StatefulWidget {
   const PermissionsPage({super.key});
@@ -18,7 +17,7 @@ class _PermissionsState extends State<PermissionsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Permissions")),
+      appBar: AppBar(title: const Text("Permissions")),
       body: ListView(
           padding: const EdgeInsets.all(8),
           children: Permission.values

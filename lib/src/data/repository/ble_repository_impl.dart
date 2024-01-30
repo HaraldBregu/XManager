@@ -1,7 +1,5 @@
 import 'package:xmanager/src/data/datasources/local/ble_datasource.dart';
 import 'package:xmanager/src/data/models/bluetooth_device_model.dart';
-import 'package:xmanager/src/data/models/bluetooth_service_model.dart';
-import 'package:xmanager/src/domain/entities/bluetooth_service_entity.dart';
 import 'package:xmanager/src/domain/repository/ble_repository.dart';
 
 class BleRepositoryImpl implements BleRepository {

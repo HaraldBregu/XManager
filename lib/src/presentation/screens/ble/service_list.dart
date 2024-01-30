@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/presentation/bloc/bloc.dart';
 
 class ServiceList extends StatelessWidget {
   const ServiceList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    return const Placeholder();
     // return SizedBox(
     //   child: BlocBuilder<BleBloc, BleState>(
     //     builder: (context, state) {

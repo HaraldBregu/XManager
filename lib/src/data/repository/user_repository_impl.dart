@@ -46,7 +46,7 @@ class UserRepositoryImpl implements UserRepository {
     String password,
   ) async {
     try {
-      final credential = await remoteDataSourceImpl.login(email, password);
+      //final credential = await remoteDataSourceImpl.login(email, password);
 
       return const Right(
         UserModel(
@@ -69,7 +69,7 @@ class UserRepositoryImpl implements UserRepository {
   Future<Either<Failure, UserModel>> currentUser() async {
     try {
       final credential = await remoteDataSourceImpl.currentUser;
-      return Right(credential!);
+      return Right(credential);
     } on ServerExeption {
       return Left(NoCurrentUser());
     }

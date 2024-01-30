@@ -1,5 +1,4 @@
 import 'package:xmanager/src/domain/entities/bluetooth_device_entity.dart';
-import 'package:xmanager/src/domain/entities/bluetooth_service_entity.dart';
 
 abstract class BleRepository {
   Future<void> startScan(int seconds, List<String>? services);

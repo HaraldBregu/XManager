@@ -38,9 +38,9 @@ class _RecoveryContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
-    final ColorScheme colorScheme = theme.colorScheme;
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    final fullnameController = TextEditingController();
+    //final ColorScheme colorScheme = theme.colorScheme;
+    //final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    //final fullnameController = TextEditingController();
 
     return SliverToBoxAdapter(
       child: Padding(

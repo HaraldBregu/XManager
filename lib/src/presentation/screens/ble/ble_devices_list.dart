@@ -12,10 +12,10 @@ class BleDevicesList extends StatefulWidget {
 
 class _BleDevicesListState extends State<BleDevicesList> {
   final List<BluetoothDevice> devicesList = <BluetoothDevice>[];
-  BluetoothDevice? _connectedDevice;
-  List<BluetoothService> _services = [];
+  //List<BluetoothService> _services = [];
   final Map<Guid, List<int>> readValues = <Guid, List<int>>{};
 
+  // ignore: always_declare_return_types, avoid_final_parameters
   _addDeviceTolist(final BluetoothDevice device) {
     if (!devicesList.contains(device)) {
       setState(() {
@@ -24,57 +24,9 @@ class _BleDevicesListState extends State<BleDevicesList> {
     }
   }
 
-  ListView _buildConnectDeviceView() {
-    List<Widget> containers = <Widget>[];
-
-    for (BluetoothService service in _services) {
-      List<Widget> characteristicsWidget = <Widget>[];
-
-      for (BluetoothCharacteristic characteristic in service.characteristics) {
-        characteristicsWidget.add(
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Text(characteristic.uuid.toString(),
-                        style: const TextStyle(fontWeight: FontWeight.bold)),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    //..._buildReadWriteNotifyButton(characteristic),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Text('Value: ${readValues[characteristic.uuid]}'),
-                  ],
-                ),
-                const Divider(),
-              ],
-            ),
-          ),
-        );
-      }
-      containers.add(
-        ExpansionTile(
-            title: Text(service.uuid.toString()),
-            children: characteristicsWidget),
-      );
-    }
-
-    return ListView(
-      padding: const EdgeInsets.all(8),
-      children: <Widget>[
-        ...containers,
-      ],
-    );
-  }
 
   ListView _buildListViewOfDevices() {
-    List<Widget> containers = <Widget>[];
+    final List<Widget> containers = <Widget>[];
     for (BluetoothDevice device in devicesList) {
       containers.add(
 
@@ -102,10 +54,9 @@ class _BleDevicesListState extends State<BleDevicesList> {
                       rethrow;
                     }
                   } finally {
-                    _services = await device.discoverServices();
+                  //_services = await device.discoverServices();
                   }
-                  setState(() {
-                    _connectedDevice = device;
+                setState(() {
                   });
                 },
               ),

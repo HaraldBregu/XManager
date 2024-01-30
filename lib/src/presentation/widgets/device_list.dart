@@ -1,16 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:xmanager/src/presentation/bloc/bloc.dart';
 
 class DeviceList extends StatelessWidget {
   const DeviceList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    return const Placeholder();
     // return BlocBuilder<BleBloc, BleState>(
     //   builder: (context, state) {
     //     final devices = state.devices;
