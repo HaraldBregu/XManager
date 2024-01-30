@@ -1,18 +1,18 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/domain/usecases/auth_current_usecase.dart';
-import 'package:xmanager/src/domain/usecases/auth_login_usecase.dart';
-import 'package:xmanager/src/domain/usecases/auth_logout_usecase.dart';
 import 'package:xmanager/src/core/usecase.dart';
+import 'package:xmanager/src/domain/usecases/auth_current_usecase.dart';
+import 'package:xmanager/src/domain/usecases/auth_logout_usecase.dart';
+import 'package:xmanager/src/domain/usecases/login_with_email_usecase.dart';
 import 'package:xmanager/src/presentation/bloc/auth/auth_event.dart';
 import 'package:xmanager/src/presentation/bloc/auth/auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthLogInUseCase authLogInUseCase;
+  final LogInWithEmailUseCase logInWithEmailUseCase;
   final AuthCurrentUseCase authCurrentUseCase;
   final AuthLogOutUseCase authLogOutUseCase;
 
   AuthBloc({
-    required this.authLogInUseCase,
+    required this.logInWithEmailUseCase,
     required this.authCurrentUseCase,
     required this.authLogOutUseCase,
   }) : super(AuthInitialState()) {
@@ -36,7 +36,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     LogInEvent event,
     Emitter<AuthState> emit,
   ) async {
-    final authLoginUsecase = await authLogInUseCase.call(
+    final authLoginUsecase = await logInWithEmailUseCase.call(
       LoginParams(
         email: event.email,
         password: event.password,

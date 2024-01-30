@@ -17,11 +17,16 @@ class ProfileRepositoryImpl implements ProfileRepository {
   @override
   Future<Either<Failure, ProfileModel>> getCurrentProfile() async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.getCurrentProfile());
+    try {
+      final result = await remoteDataSource.getCurrentProfile();
+      return Right(result);
+    } catch (e) {
+      return Left(NoCurrentProfile());
+    }
   }
 
   @override
-  Future<Either<Failure, ProfileModel>> saveCurrentProfile(String fullname) {
+  Future<Either<Failure, ProfileModel>> saveProfile(String fullname) {
     throw UnimplementedError();
   }
 }

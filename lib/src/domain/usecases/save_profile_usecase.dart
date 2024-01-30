@@ -4,12 +4,12 @@ import 'package:xmanager/src/core/usecase.dart';
 import 'package:xmanager/src/domain/entities/profile_entity.dart';
 import 'package:xmanager/src/domain/repository/profile_repository.dart';
 
-class GetCurrentProfileUsecase implements UseCase<ProfileEntity, NoParams> {
+class SaveProfileUsecase implements UseCase<ProfileEntity, ProfileParams> {
   final ProfileRepository profileRepository;
 
-  GetCurrentProfileUsecase(this.profileRepository);
+  SaveProfileUsecase(this.profileRepository);
 
   @override
-  Future<Either<Failure, ProfileEntity>> call(NoParams params) async =>
-      profileRepository.getCurrentProfile();
+  Future<Either<Failure, ProfileEntity>> call(ProfileParams params) async =>
+      profileRepository.saveProfile(params.fullname);
 }

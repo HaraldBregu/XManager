@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/presentation/bloc/player_event.dart';
-import 'package:xmanager/src/presentation/bloc/player_state.dart';
+import 'package:xmanager/src/presentation/bloc/player/player_event.dart';
+import 'package:xmanager/src/presentation/bloc/player/player_state.dart';
 
 class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   // SavePlayerUseCase savePlayerUseCase;

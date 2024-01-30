@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:xmanager/src/presentation/bloc/player_bloc.dart';
-import 'package:xmanager/src/presentation/bloc/player_event.dart';
-import 'package:xmanager/src/presentation/bloc/player_state.dart';
+import 'package:xmanager/src/presentation/bloc/player/player_bloc.dart';
+import 'package:xmanager/src/presentation/bloc/player/player_event.dart';
+import 'package:xmanager/src/presentation/bloc/player/player_state.dart';
 
 class PlayerCreate extends StatelessWidget {
   const PlayerCreate({super.key});

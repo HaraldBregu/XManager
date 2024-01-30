@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/domain/usecases/get_app_permissions.dart';
 import 'package:xmanager/src/core/usecase.dart';
-import 'package:xmanager/src/presentation/bloc/app_event.dart';
-import 'package:xmanager/src/presentation/bloc/app_state.dart';
+import 'package:xmanager/src/domain/usecases/get_app_permissions.dart';
+import 'package:xmanager/src/presentation/bloc/app/app_event.dart';
+import 'package:xmanager/src/presentation/bloc/app/app_state.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
   final LocationPermissionsGrantedUseCase locationPermissionsGrantedUseCase;

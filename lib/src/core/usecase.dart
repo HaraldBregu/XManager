@@ -15,6 +15,17 @@ class NoParams extends Equatable {
   List<Object?> get props => [];
 }
 
+class ProfileParams extends Equatable {
+  final String fullname;
+
+  const ProfileParams({
+    required this.fullname,
+  });
+
+  @override
+  List<Object?> get props => [fullname];
+}
+
 enum DeviceType {
   none,
   dinamo,
@@ -38,8 +49,6 @@ class DeviceParams extends Equatable {
         name,
       ];
 }
-
-
 
 class LoginParams extends Equatable {
   final String email;

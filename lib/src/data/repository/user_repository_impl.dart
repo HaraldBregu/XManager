@@ -58,7 +58,7 @@ class UserRepositoryImpl implements UserRepository {
         ),
       );
     } on DatabaseExeption {
-      return Left(LoginFailure());
+      return Left(LoginError());
     }
   }
 
@@ -71,7 +71,7 @@ class UserRepositoryImpl implements UserRepository {
       final credential = await remoteDataSourceImpl.currentUser;
       return Right(credential!);
     } on ServerExeption {
-      return Left(CurrentUserFailure());
+      return Left(NoCurrentUser());
     }
   }
 }

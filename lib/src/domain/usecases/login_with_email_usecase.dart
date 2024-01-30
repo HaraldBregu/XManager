@@ -4,12 +4,12 @@ import 'package:xmanager/src/core/usecase.dart';
 import 'package:xmanager/src/domain/entities/user_entity.dart';
 import 'package:xmanager/src/domain/repository/user_repository.dart';
 
-class AuthLogInUseCase implements UseCase<UserEntity, LoginParams> {
-  AuthLogInUseCase(this._userRepository);
+class LogInWithEmailUseCase implements UseCase<UserEntity, LoginParams> {
   final UserRepository _userRepository;
 
+  LogInWithEmailUseCase(this._userRepository);
+
   @override
-  Future<Either<Failure, UserEntity>> call(LoginParams params) async {
-    return _userRepository.login(params.email, params.password);
-  }
+  Future<Either<Failure, UserEntity>> call(LoginParams params) async =>
+      _userRepository.login(params.email, params.password);
 }

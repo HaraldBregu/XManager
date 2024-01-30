@@ -4,5 +4,5 @@ import 'package:xmanager/src/domain/entities/profile_entity.dart';
 
 abstract class ProfileRepository {
   Future<Either<Failure, ProfileEntity>> getCurrentProfile();
-  Future<Either<Failure, ProfileEntity>> saveCurrentProfile(String fullname);
+  Future<Either<Failure, ProfileEntity>> saveProfile(String fullname);
 }

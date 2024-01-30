@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
-import 'package:xmanager/src/presentation/bloc/app_bloc.dart';
+import 'package:xmanager/src/presentation/bloc/app/app_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
 import 'package:xmanager/src/presentation/widgets/alert_card.dart';
 import 'package:xmanager/src/presentation/widgets/indicator_icon.dart';

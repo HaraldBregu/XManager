@@ -7,21 +7,21 @@ import 'package:xmanager/src/core/usecase.dart';
 import 'package:xmanager/src/domain/entities/dinamo_entity.dart';
 import 'package:xmanager/src/domain/entities/profile_entity.dart';
 import 'package:xmanager/src/domain/repository/profile_repository.dart';
-import 'package:xmanager/src/domain/usecases/get_current_profile_usecase.dart';
+import 'package:xmanager/src/domain/usecases/save_profile_usecase.dart';
 
-import 'get_current_profile_usecase_test.mocks.dart';
+import 'save_profile_usecase_test.mocks.dart';
 
 @GenerateMocks([ProfileRepository])
 void main() {
   late MockProfileRepository mockProfileRepository;
-  late GetCurrentProfileUsecase usecase;
+  late SaveProfileUsecase usecase;
 
   setUp(() {
     mockProfileRepository = MockProfileRepository();
-    usecase = GetCurrentProfileUsecase(mockProfileRepository);
+    usecase = SaveProfileUsecase(mockProfileRepository);
   });
 
-  test('should get current profile from repository', () async {
+  test('should save profile from repository', () async {
     const tProfile = ProfileEntity(
       fullname: '',
       dinamo: DinamoEntity(
@@ -30,24 +30,26 @@ void main() {
       ),
     );
 
-    when(mockProfileRepository.getCurrentProfile())
+    when(mockProfileRepository.saveProfile("fullname"))
         .thenAnswer((_) async => const Right(tProfile));
 
-    final result = await usecase(NoParams());
+    const profileParams = ProfileParams(fullname: "fullname");
+    final result = await usecase(profileParams);
 
     expect(result, const Right(tProfile));
-    verify(mockProfileRepository.getCurrentProfile());
+    verify(mockProfileRepository.saveProfile("fullname"));
     verifyNoMoreInteractions(mockProfileRepository);
   });
 
-  test('should get error on current profile from repository', () async {
-    when(mockProfileRepository.getCurrentProfile())
-        .thenAnswer((_) async => Left(NoCurrentProfile()));
+  test('should return error on save profile from repository', () async {
+    when(mockProfileRepository.saveProfile("fullname"))
+        .thenAnswer((_) async => Left(SaveProfileError()));
 
-    final result = await usecase(NoParams());
+    const profileParams = ProfileParams(fullname: "fullname");
+    final result = await usecase(profileParams);
 
-    expect(result, Left(NoCurrentProfile()));
-    verify(mockProfileRepository.getCurrentProfile());
+    expect(result, Left(SaveProfileError()));
+    verify(mockProfileRepository.saveProfile("fullname"));
     verifyNoMoreInteractions(mockProfileRepository);
   });
 }

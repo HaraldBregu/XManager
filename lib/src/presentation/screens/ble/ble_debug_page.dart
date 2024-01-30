@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xmanager/src/presentation/bloc/app_bloc.dart';
+import 'package:xmanager/src/presentation/bloc/app/app_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
 import 'package:xmanager/src/presentation/screens/ble/service_list.dart';
 import 'package:xmanager/src/presentation/widgets/device_list.dart';

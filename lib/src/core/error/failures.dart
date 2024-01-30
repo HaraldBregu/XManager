@@ -11,6 +11,10 @@ class CacheFailure extends Failure {}
 
 class DatabaseFailure extends Failure {}
 
-class LoginFailure extends Failure {}
+class LoginError extends Failure {}
 
-class CurrentUserFailure extends Failure {}
+class NoCurrentUser extends Failure {}
+
+class NoCurrentProfile extends Failure {}
+
+class SaveProfileError extends Failure {}

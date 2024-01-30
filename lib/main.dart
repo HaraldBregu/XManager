@@ -8,12 +8,12 @@ import 'package:xmanager/firebase_options.dart';
 import 'package:xmanager/injection_container.dart' as di;
 import 'package:xmanager/injection_container.dart';
 import 'package:xmanager/src/core/common.dart';
-import 'package:xmanager/src/presentation/bloc/app_bloc.dart';
-import 'package:xmanager/src/presentation/bloc/app_event.dart';
+import 'package:xmanager/src/presentation/bloc/app/app_bloc.dart';
+import 'package:xmanager/src/presentation/bloc/app/app_event.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
-import 'package:xmanager/src/presentation/bloc/player_bloc.dart';
-import 'package:xmanager/src/presentation/bloc/user_bloc.dart';
-import 'package:xmanager/src/presentation/bloc/user_event.dart';
+import 'package:xmanager/src/presentation/bloc/player/player_bloc.dart';
+import 'package:xmanager/src/presentation/bloc/user/user_bloc.dart';
+import 'package:xmanager/src/presentation/bloc/user/user_event.dart';
 import 'package:xmanager/src/presentation/screens/auth/login_page.dart';
 import 'package:xmanager/src/presentation/screens/auth/recovery_page.dart';
 import 'package:xmanager/src/presentation/screens/auth/signup_page.dart';
@@ -70,24 +70,16 @@ class App extends StatelessWidget {
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       routerConfig: GoRouter(
-        //initialLocation: userStateAuthorized ? "/dashboard" : '/auth',
-        //initialLocation: "/start/signup",
-        //initialLocation: "/start",
         //initialLocation: "/auth",
         initialLocation:
             context.watch<AuthBloc>().state is AuthAuthenticatedState
-                ? "/"
-                : "/start",
-        //initialLocation: "/players/:id",
-        //initialLocation: "/debug/bluetooth",
-        //redirect: (context, state) => userStateAuthorized ? null : '/start',
+                ? "/dashboard"
+                : "/",
         /*redirect: (context, state) {
           final isAuthenticated =
               context.watch<AuthBloc>().state is AuthAuthenticatedState;
-
           print("###################");
           print(state);
-
           if (!isAuthenticated) {
             return "/start";
           } else if (isAuthenticated) {
@@ -98,8 +90,35 @@ class App extends StatelessWidget {
         //errorBuilder: (context, state) => const ErrorPage(),
         routes: [
           GoRoute(
-            name: "dashboard",
-            path: "/",
+            name: "first screen",
+            path: '/',
+            builder: (context, state) => const StartPage(),
+          ),
+          GoRoute(
+            name: "login screen",
+            path: '/login',
+            builder: (context, state) => const LoginPage(),
+            routes: [
+              GoRoute(
+                name: "recovery screen",
+                path: 'recovery',
+                builder: (context, state) => const RecoveryPage(),
+              ),
+              GoRoute(
+                name: "profile screen",
+                path: 'profile',
+                builder: (context, state) => const ProfilePage(),
+              ),
+            ],
+          ),
+          GoRoute(
+            name: "signup screen",
+            path: '/signup',
+            builder: (context, state) => const SignupPage(),
+          ),
+          GoRoute(
+            name: "dashboard screen",
+            path: "/dashboard",
             builder: (context, state) => const DashboardScreen(),
             routes: [
               GoRoute(
@@ -127,8 +146,8 @@ class App extends StatelessWidget {
                 ),
               ),
               GoRoute(
-                name: "Profile page",
-                path: 'profile/:id',
+                name: "profile page",
+                path: 'profile',
                 builder: (context, state) => const ProfilePage(),
               ),
               GoRoute(
@@ -139,29 +158,7 @@ class App extends StatelessWidget {
             ],
           ),
           GoRoute(
-            name: "start",
-            path: '/start',
-            builder: (context, state) => const StartPage(),
-            routes: [
-              GoRoute(
-                name: "login",
-                path: 'login',
-                builder: (context, state) => const LoginPage(),
-              ),
-              GoRoute(
-                name: "signup",
-                path: 'signup',
-                builder: (context, state) => const SignupPage(),
-              ),
-              GoRoute(
-                name: "recovery",
-                path: 'recovery',
-                builder: (context, state) => const RecoveryPage(),
-              ),
-            ],
-          ),
-          GoRoute(
-            name: "Settings page",
+            name: "settings page",
             path: '/settings',
             pageBuilder: (context, state) {
               return CustomTransitionPage(

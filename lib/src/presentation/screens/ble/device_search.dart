@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:xmanager/src/presentation/bloc/app_bloc.dart';
-import 'package:xmanager/src/presentation/bloc/app_event.dart';
+import 'package:xmanager/src/presentation/bloc/app/app_bloc.dart';
+import 'package:xmanager/src/presentation/bloc/app/app_event.dart';
 
 import 'device_detail_test.dart';
 

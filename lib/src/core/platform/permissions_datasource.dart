@@ -1,5 +1,11 @@
 import 'package:permission_handler/permission_handler.dart';
 
+//permission.isDenied
+//permission.isGranted
+//permission.isLimited
+//permission.isPermanentlyDenied
+//permission.isRestricted
+
 abstract class PermissionsDataSource {
   Future<List<Permission>> permissionList();
   Future<PermissionStatus> permissionStatus(Permission permission);
@@ -12,12 +18,6 @@ abstract class PermissionsDataSource {
   Future<bool> bluetoothConnectPermissionGranted();
   Future<PermissionStatus> requestBluetoothScanPermission();
   Future<bool> bluetoothScanPermissionGranted();
-
-  //permission.isDenied
-  //permission.isGranted
-  //permission.isLimited
-  //permission.isPermanentlyDenied
-  //permission.isRestricted
 }
 
 class PermissionsDataSourceImpl implements PermissionsDataSource {
@@ -32,12 +32,12 @@ class PermissionsDataSourceImpl implements PermissionsDataSource {
   Future<PermissionStatus> permissionStatus(Permission permission) {
     return permission.status;
   }
-  
+
   @override
   Future<PermissionStatus> requestPermission(Permission permission) {
     return permission.request();
   }
-  
+
   @override
   Future<PermissionStatus> requestLocationPermission() async {
     return Permission.location.request();
@@ -77,5 +77,4 @@ class PermissionsDataSourceImpl implements PermissionsDataSource {
   Future<PermissionStatus> requestBluetoothScanPermission() {
     return Permission.bluetoothScan.request();
   }
-  
 }

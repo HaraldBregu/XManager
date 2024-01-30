@@ -1,25 +1,25 @@
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:xmanager/src/core/platform/permissions_datasource.dart';
 import 'package:xmanager/src/data/datasources/local/ble_datasource.dart';
-import 'package:xmanager/src/data/datasources/local/permissions_datasource.dart';
 import 'package:xmanager/src/data/datasources/local/shared_preferences_datasource.dart';
 import 'package:xmanager/src/data/datasources/remote/remote_datasource_impl.dart';
-import 'package:xmanager/src/data/repository/app_repository_impl.dart';
 import 'package:xmanager/src/data/repository/ble_repository_impl.dart';
+import 'package:xmanager/src/data/repository/permissions_repository_impl.dart';
 import 'package:xmanager/src/data/repository/user_repository_impl.dart';
-import 'package:xmanager/src/domain/repository/application_repository.dart';
 import 'package:xmanager/src/domain/repository/ble_repository.dart';
+import 'package:xmanager/src/domain/repository/permissions_repository.dart';
 import 'package:xmanager/src/domain/repository/user_repository.dart';
 import 'package:xmanager/src/domain/usecases/auth_current_usecase.dart';
-import 'package:xmanager/src/domain/usecases/auth_login_usecase.dart';
 import 'package:xmanager/src/domain/usecases/auth_logout_usecase.dart';
 import 'package:xmanager/src/domain/usecases/ble_usecases.dart';
 import 'package:xmanager/src/domain/usecases/get_app_permissions.dart';
-import 'package:xmanager/src/domain/usecases/get_current_user.dart';
-import 'package:xmanager/src/presentation/bloc/app_bloc.dart';
+import 'package:xmanager/src/domain/usecases/get_current_user_usecase.dart';
+import 'package:xmanager/src/domain/usecases/login_with_email_usecase.dart';
+import 'package:xmanager/src/presentation/bloc/app/app_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
-import 'package:xmanager/src/presentation/bloc/player_bloc.dart';
-import 'package:xmanager/src/presentation/bloc/user_bloc.dart';
+import 'package:xmanager/src/presentation/bloc/player/player_bloc.dart';
+import 'package:xmanager/src/presentation/bloc/user/user_bloc.dart';
 
 final getIt = GetIt.instance;
 
@@ -33,7 +33,7 @@ Future<void> init() async {
     () => AuthBloc(
       authCurrentUseCase: sl(),
       authLogOutUseCase: sl(),
-      authLogInUseCase: sl(),
+      logInWithEmailUseCase: sl(),
     ),
   );
 
@@ -77,7 +77,7 @@ Future<void> init() async {
 
   // UseCases
   sl.registerLazySingleton(() => AuthCurrentUseCase(sl()));
-  sl.registerLazySingleton(() => AuthLogInUseCase(sl()));
+  sl.registerLazySingleton(() => LogInWithEmailUseCase(sl()));
   sl.registerLazySingleton(() => AuthLogOutUseCase(sl()));
 
   sl.registerLazySingleton(() => LocationPermissionsGrantedUseCase(sl()));
@@ -106,9 +106,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => BleSetNotificationUseCase(sl()));
 
   // Repository
-  sl.registerLazySingleton<ApplicationRepository>(
-    () => AppRepositoryImpl(
-      sharedPreferencesDataSourceImpl: sl(),
+  sl.registerLazySingleton<PermissionsRepository>(
+    () => PermissionsRepositoryImpl(
       permissionsDataSourceImpl: sl(),
     ),
   );
