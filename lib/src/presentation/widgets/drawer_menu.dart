@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
-
-import '../bloc/auth/auth_bloc.dart';
-import '../bloc/auth/auth_event.dart';
+import 'package:xmanager/src/presentation/bloc/bloc.dart';
 
 class DrawerMenu extends StatelessWidget {
   const DrawerMenu({super.key});
@@ -139,7 +137,7 @@ class DrawerMenu extends StatelessWidget {
               Icons.exit_to_app,
             ),
             onTap: () {
-              BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
+              BlocProvider.of<UserBloc>(context).add(LogOutEvent());
             },
           ),
         ],

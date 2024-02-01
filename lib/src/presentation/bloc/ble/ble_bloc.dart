@@ -29,7 +29,7 @@ class BleBloc extends Bloc<BleEvent, BleState> {
   }) : super(const BleInitial()) {
     //on<StartScanning>(_onStartScanningEvent, transformer: restartable());
     // on<StopScanning>(_onStopScanningEvent);
-    on<ListenConnectionState>(_onListenConnectionStateEvent);
+    on<ListenConnectionStateEvent>(_onListenConnectionStateEvent);
     on<ConnectDevice>(_onConnectDeviceEvent);
     on<ConnectAndAuthenticateDevice>(_onConnectAndAuthenticateDeviceEvent);
     on<DisconnectDevice>(_onDisconnectDeviceEvent);
@@ -42,7 +42,7 @@ class BleBloc extends Bloc<BleEvent, BleState> {
   }
 
   Future<void> _onListenConnectionStateEvent(
-    ListenConnectionState event,
+    ListenConnectionStateEvent event,
     Emitter<BleState> emit,
   ) async {
     await emit.onEach(

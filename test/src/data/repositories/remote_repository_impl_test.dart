@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:xmanager/src/core/error/failures.dart';
-import 'package:xmanager/src/core/platform/network_info.dart';
+import 'package:xmanager/src/data/datasources/local/network_datasource.dart';
 import 'package:xmanager/src/data/datasources/remote/remote_datasource.dart';
 import 'package:xmanager/src/data/models/dinamo_model.dart';
 import 'package:xmanager/src/data/models/profile_model.dart';
@@ -12,25 +12,25 @@ import 'package:xmanager/src/data/repository/profile_repository_impl.dart';
 import 'remote_repository_impl_test.mocks.dart';
 
 @GenerateMocks([RemoteDataSource])
-@GenerateMocks([NetworkInfo])
+@GenerateMocks([NetworkDataSource])
 void main() {
-  late ProfileRepositoryImpl profileRepository;
+  late ProfileRepositoryImpl profileRepositoryImpl;
   late MockRemoteDataSource mockRemoteDataSource;
-  late MockNetworkInfo mockNetworkInfo;
+  late MockNetworkDataSource mockNetworkDataSource;
 
   setUp(() {
     mockRemoteDataSource = MockRemoteDataSource();
-    mockNetworkInfo = MockNetworkInfo();
-    profileRepository = ProfileRepositoryImpl(
+    mockNetworkDataSource = MockNetworkDataSource();
+    profileRepositoryImpl = ProfileRepositoryImpl(
       remoteDataSource: mockRemoteDataSource,
-      networkInfo: mockNetworkInfo,
+      networkDataSource: mockNetworkDataSource,
     );
   });
 
   void runTestsOnline(Function body) {
     group('device is online', () {
       setUp(() {
-        when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+        when(mockNetworkDataSource.isConnected).thenAnswer((_) async => true);
       });
 
       body();
@@ -40,7 +40,7 @@ void main() {
   void runTestsOffline(Function body) {
     group('device is offline', () {
       setUp(() {
-        when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
+        when(mockNetworkDataSource.isConnected).thenAnswer((_) async => false);
       });
 
       body();
@@ -56,9 +56,9 @@ void main() {
     test(
       'should check if the device is online',
       () async {
-        when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-        profileRepository.getCurrentProfile();
-        verify(mockNetworkInfo.isConnected);
+        when(mockNetworkDataSource.isConnected).thenAnswer((_) async => true);
+        profileRepositoryImpl.getCurrentProfile();
+        verify(mockNetworkDataSource.isConnected);
       },
     );
 
@@ -69,7 +69,7 @@ void main() {
           when(mockRemoteDataSource.getCurrentProfile())
               .thenAnswer((_) async => tCurrentProfile);
 
-          final result = await profileRepository.getCurrentProfile();
+          final result = await profileRepositoryImpl.getCurrentProfile();
 
           verify(mockRemoteDataSource.getCurrentProfile());
           expect(result, equals(const Right(tCurrentProfile)));
@@ -81,7 +81,7 @@ void main() {
         () async {
           when(mockRemoteDataSource.getCurrentProfile())
               .thenThrow(NoCurrentProfile());
-          final result = await profileRepository.getCurrentProfile();
+          final result = await profileRepositoryImpl.getCurrentProfile();
           verify(mockRemoteDataSource.getCurrentProfile());
           expect(result, equals(Left(NoCurrentProfile())));
         },
@@ -95,7 +95,7 @@ void main() {
           when(mockRemoteDataSource.getCurrentProfile())
               .thenAnswer((_) async => tCurrentProfile);
 
-          final result = await profileRepository.getCurrentProfile();
+          final result = await profileRepositoryImpl.getCurrentProfile();
 
           verify(mockRemoteDataSource.getCurrentProfile());
           expect(result, equals(const Right(tCurrentProfile)));
@@ -107,7 +107,7 @@ void main() {
         () async {
           when(mockRemoteDataSource.getCurrentProfile())
               .thenThrow(NoCurrentProfile());
-          final result = await profileRepository.getCurrentProfile();
+          final result = await profileRepositoryImpl.getCurrentProfile();
           verify(mockRemoteDataSource.getCurrentProfile());
           expect(result, equals(Left(NoCurrentProfile())));
         },

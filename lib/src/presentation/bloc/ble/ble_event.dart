@@ -24,9 +24,9 @@ class StopScanning extends BleEvent {
   List<Object?> get props => [];
 }
 
-class ListenConnectionState extends BleEvent {
+class ListenConnectionStateEvent extends BleEvent {
   final String uuid;
-  const ListenConnectionState(this.uuid);
+  const ListenConnectionStateEvent(this.uuid);
 
   @override
   List<Object?> get props => [uuid];

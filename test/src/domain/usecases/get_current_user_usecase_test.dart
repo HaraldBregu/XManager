@@ -25,24 +25,24 @@ void main() {
       email: 'test@mail.com',
     );
 
-    when(mockUserRepository.currentUser())
+    when(mockUserRepository.currentUser)
         .thenAnswer((_) async => const Right(tUser));
 
     final result = await usecase(NoParams());
 
     expect(result, const Right(tUser));
-    verify(mockUserRepository.currentUser());
+    verify(mockUserRepository.currentUser);
     verifyNoMoreInteractions(mockUserRepository);
   });
 
   test('should get exception from repository when not logged in', () async {
-    when(mockUserRepository.currentUser())
+    when(mockUserRepository.currentUser)
         .thenAnswer((_) async => Left(NoCurrentUser()));
 
     final result = await usecase(NoParams());
 
     expect(result, Left(NoCurrentUser()));
-    verify(mockUserRepository.currentUser());
+    verify(mockUserRepository.currentUser);
     verifyNoMoreInteractions(mockUserRepository);
   });
 }

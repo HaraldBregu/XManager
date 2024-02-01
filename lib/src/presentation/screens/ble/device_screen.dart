@@ -45,7 +45,6 @@ class DeviceScreen extends StatelessWidget {
     //final lastValue = bleState.data;
 
     return Scaffold(
-    
       body: CustomScrollView(
         slivers: [
           SliverAppBar(

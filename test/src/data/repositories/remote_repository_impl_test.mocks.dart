@@ -3,14 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:xmanager/src/core/platform/network_info.dart' as _i6;
+import 'package:xmanager/src/data/datasources/local/network_datasource.dart'
+    as _i6;
 import 'package:xmanager/src/data/datasources/remote/remote_datasource.dart'
-    as _i4;
-import 'package:xmanager/src/data/models/profile_model.dart' as _i3;
-import 'package:xmanager/src/data/models/user_model.dart' as _i2;
+    as _i3;
+import 'package:xmanager/src/data/models/profile_model.dart' as _i2;
+import 'package:xmanager/src/data/models/user_model.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -25,18 +26,8 @@ import 'package:xmanager/src/data/models/user_model.dart' as _i2;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeUserModel_0 extends _i1.SmartFake implements _i2.UserModel {
-  _FakeUserModel_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeProfileModel_1 extends _i1.SmartFake implements _i3.ProfileModel {
-  _FakeProfileModel_1(
+class _FakeProfileModel_0 extends _i1.SmartFake implements _i2.ProfileModel {
+  _FakeProfileModel_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -48,22 +39,19 @@ class _FakeProfileModel_1 extends _i1.SmartFake implements _i3.ProfileModel {
 /// A class which mocks [RemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRemoteDataSource extends _i1.Mock implements _i4.RemoteDataSource {
+class MockRemoteDataSource extends _i1.Mock implements _i3.RemoteDataSource {
   MockRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.UserModel> get currentUser => (super.noSuchMethod(
+  _i4.Future<_i5.UserModel?> get currentUser => (super.noSuchMethod(
         Invocation.getter(#currentUser),
-        returnValue: _i5.Future<_i2.UserModel>.value(_FakeUserModel_0(
-          this,
-          Invocation.getter(#currentUser),
-        )),
-      ) as _i5.Future<_i2.UserModel>);
+        returnValue: _i4.Future<_i5.UserModel?>.value(),
+      ) as _i4.Future<_i5.UserModel?>);
 
   @override
-  _i5.Future<void> login(
+  _i4.Future<void> login(
     String? email,
     String? password,
   ) =>
@@ -75,21 +63,21 @@ class MockRemoteDataSource extends _i1.Mock implements _i4.RemoteDataSource {
             password,
           ],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
-  _i5.Future<bool> logOut() => (super.noSuchMethod(
+  _i4.Future<bool> logOut() => (super.noSuchMethod(
         Invocation.method(
           #logOut,
           [],
         ),
-        returnValue: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 
   @override
-  _i5.Future<void> register(
+  _i4.Future<void> register(
     String? email,
     String? password,
   ) =>
@@ -101,37 +89,37 @@ class MockRemoteDataSource extends _i1.Mock implements _i4.RemoteDataSource {
             password,
           ],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
-  _i5.Future<_i3.ProfileModel> getCurrentProfile() => (super.noSuchMethod(
+  _i4.Future<_i2.ProfileModel> getCurrentProfile() => (super.noSuchMethod(
         Invocation.method(
           #getCurrentProfile,
           [],
         ),
-        returnValue: _i5.Future<_i3.ProfileModel>.value(_FakeProfileModel_1(
+        returnValue: _i4.Future<_i2.ProfileModel>.value(_FakeProfileModel_0(
           this,
           Invocation.method(
             #getCurrentProfile,
             [],
           ),
         )),
-      ) as _i5.Future<_i3.ProfileModel>);
+      ) as _i4.Future<_i2.ProfileModel>);
 }
 
-/// A class which mocks [NetworkInfo].
+/// A class which mocks [NetworkDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNetworkInfo extends _i1.Mock implements _i6.NetworkInfo {
-  MockNetworkInfo() {
+class MockNetworkDataSource extends _i1.Mock implements _i6.NetworkDataSource {
+  MockNetworkDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<bool> get isConnected => (super.noSuchMethod(
+  _i4.Future<bool> get isConnected => (super.noSuchMethod(
         Invocation.getter(#isConnected),
-        returnValue: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 }

@@ -1,3 +1,5 @@
+class NetworkConnectionExeption implements Exception {}
+
 class ServerExeption implements Exception {}
 
 class CacheExeption implements Exception {}

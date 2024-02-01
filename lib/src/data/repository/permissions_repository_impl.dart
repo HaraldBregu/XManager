@@ -1,12 +1,10 @@
-import 'package:xmanager/src/core/platform/permissions_datasource.dart';
+import 'package:xmanager/src/data/datasources/local/permissions_datasource.dart';
 import 'package:xmanager/src/domain/repository/permissions_repository.dart';
 
 class PermissionsRepositoryImpl implements PermissionsRepository {
   final PermissionsDataSourceImpl permissionsDataSourceImpl;
 
-  PermissionsRepositoryImpl({
-    required this.permissionsDataSourceImpl,
-  });
+  PermissionsRepositoryImpl(this.permissionsDataSourceImpl);
 
   @override
   Future<bool> locationPermissionGranted() async =>

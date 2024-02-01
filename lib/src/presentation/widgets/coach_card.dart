@@ -18,7 +18,7 @@ class CoachCard extends StatelessWidget {
               children: [
                 BlocBuilder<UserBloc, UserState>(
                   builder: (bloc, state) {
-                    if (state is UserAuthorizedState) {
+                    if (state is Authorized) {
                       return ListTile(
                         title: const Text("Massimo Allegri"),
                         subtitle: const Text("Manager"),
@@ -38,7 +38,7 @@ class CoachCard extends StatelessWidget {
                         // onTap: () => context.pushNamed("Profile page"),
                       );
                     }
-                    if (state is UserUnAuthorizedState) {
+                    if (state is UnAuthorized) {
                       return ListTile(
                         title: const Text("Massimo Allegri"),
                         subtitle: const Text("FiFa Pro"),

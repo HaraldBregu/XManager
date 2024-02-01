@@ -1,42 +1,53 @@
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:xmanager/src/core/platform/permissions_datasource.dart';
 import 'package:xmanager/src/data/datasources/local/ble_datasource.dart';
+import 'package:xmanager/src/data/datasources/local/permissions_datasource.dart';
 import 'package:xmanager/src/data/datasources/local/shared_preferences_datasource.dart';
-import 'package:xmanager/src/data/datasources/remote/remote_datasource_impl.dart';
+import 'package:xmanager/src/data/datasources/local/utils_datasource.dart';
+import 'package:xmanager/src/data/datasources/remote/remote_datasource.dart';
 import 'package:xmanager/src/data/repository/ble_repository_impl.dart';
 import 'package:xmanager/src/data/repository/permissions_repository_impl.dart';
 import 'package:xmanager/src/data/repository/user_repository_impl.dart';
+import 'package:xmanager/src/data/repository/utils_repository_impl.dart';
 import 'package:xmanager/src/domain/repository/ble_repository.dart';
 import 'package:xmanager/src/domain/repository/permissions_repository.dart';
 import 'package:xmanager/src/domain/repository/user_repository.dart';
-import 'package:xmanager/src/domain/usecases/auth_current_usecase.dart';
+import 'package:xmanager/src/domain/repository/utils_repository.dart';
 import 'package:xmanager/src/domain/usecases/auth_logout_usecase.dart';
 import 'package:xmanager/src/domain/usecases/ble_usecases.dart';
 import 'package:xmanager/src/domain/usecases/get_app_permissions.dart';
 import 'package:xmanager/src/domain/usecases/get_current_user_usecase.dart';
 import 'package:xmanager/src/domain/usecases/login_with_email_usecase.dart';
+import 'package:xmanager/src/domain/usecases/password_strength_color_usecase.dart';
+import 'package:xmanager/src/domain/usecases/password_strength_perc_usecase.dart';
+import 'package:xmanager/src/domain/usecases/valid_email_usecase%20copy.dart';
 import 'package:xmanager/src/presentation/bloc/app/app_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
-import 'package:xmanager/src/presentation/bloc/player/player_bloc.dart';
-import 'package:xmanager/src/presentation/bloc/user/user_bloc.dart';
-
-final getIt = GetIt.instance;
+import 'package:xmanager/src/presentation/screens/login/bloc/login_bloc.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
+  
   //! Features
 
   // Bloc
   sl.registerFactory(
-    () => AuthBloc(
-      authCurrentUseCase: sl(),
-      authLogOutUseCase: sl(),
-      logInWithEmailUseCase: sl(),
+    () => LoginBloc(
+      validEmailUseCase: sl(),
+      passwordStrengthPercUseCase: sl(),
+      passwordStrengthColorUseCase: sl(),
     ),
   );
 
+  sl.registerFactory(
+    () => UserBloc(
+      logInWithEmailUseCase: sl(),
+      currentUserUseCase: sl(),
+      logOutUserUseCase: sl(),
+    ),
+  );
+  
   sl.registerFactory(
     () => AppBloc(
       locationPermissionsGrantedUseCase: sl(),
@@ -47,12 +58,6 @@ Future<void> init() async {
       requestBluetoothConnectPermissionsUseCase: sl(),
       bluetoothScanPermissionsGrantedUseCase: sl(),
       requestBluetoothScanPermissionsUseCase: sl(),
-    ),
-  );
-
-  sl.registerFactory(
-    () => UserBloc(
-      currentUserUseCase: sl(),
     ),
   );
 
@@ -69,17 +74,10 @@ Future<void> init() async {
       bleSetNotificationUseCase: sl(),
     ),
   );
-  sl.registerFactory(
-    () => PlayerBloc(
-        // savePlayerUseCase: sl(),
-        ),
-  );
 
   // UseCases
-  sl.registerLazySingleton(() => AuthCurrentUseCase(sl()));
   sl.registerLazySingleton(() => LogInWithEmailUseCase(sl()));
-  sl.registerLazySingleton(() => AuthLogOutUseCase(sl()));
-
+  sl.registerLazySingleton(() => LogOutUserUseCase(sl()));
   sl.registerLazySingleton(() => LocationPermissionsGrantedUseCase(sl()));
   sl.registerLazySingleton(() => RequestLocationPermissionsUseCase(sl()));
   sl.registerLazySingleton(() => BluetoothPermissionsGrantedUseCase(sl()));
@@ -90,11 +88,10 @@ Future<void> init() async {
       () => RequestBluetoothConnectPermissionsUseCase(sl()));
   sl.registerLazySingleton(() => BluetoothScanPermissionsGrantedUseCase(sl()));
   sl.registerLazySingleton(() => RequestBluetoothScanPermissionsUseCase(sl()));
-
   sl.registerLazySingleton(() => GetCurrentUserUseCase(sl()));
-
-  // BLE usecases
-  
+  sl.registerLazySingleton(() => ValidEmailUseCase(sl()));
+  sl.registerLazySingleton(() => PasswordStrengthPercUseCase(sl()));
+  sl.registerLazySingleton(() => PasswordStrengthColorUseCase(sl()));
   sl.registerLazySingleton(() => BleDeviceIsConnectedUseCase(sl()));
   sl.registerLazySingleton(() => BleDiscoverServicesUseCase(sl()));
   sl.registerLazySingleton(() => BleConnectDeviceUseCase(sl()));
@@ -107,35 +104,23 @@ Future<void> init() async {
 
   // Repository
   sl.registerLazySingleton<PermissionsRepository>(
-    () => PermissionsRepositoryImpl(
-      permissionsDataSourceImpl: sl(),
-    ),
-  );
-  sl.registerLazySingleton<UserRepository>(
-    () => UserRepositoryImpl(
-      remoteDataSourceImpl: sl(),
-      sharedPreferencesDataSource: sl(),
-    ),
-  );
-  sl.registerLazySingleton<BleRepository>(
-    () => BleRepositoryImpl(sl()),
-  );
+      () => PermissionsRepositoryImpl(sl()));
+  sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(sl()));
+  sl.registerLazySingleton<BleRepository>(() => BleRepositoryImpl(sl()));
+  sl.registerLazySingleton<UtilsRepository>(() => UtilsRepositoryImpl(sl()));
 
   // Data sources
-  sl.registerLazySingleton(
-    () => RemoteDataSourceImpl(),
-  );
-  sl.registerLazySingleton(
-    () => PermissionsDataSourceImpl(),
-  );
-  sl.registerLazySingleton(
+  sl.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl());
+  sl.registerLazySingleton<PermissionsDataSource>(
+      () => PermissionsDataSourceImpl());
+  sl.registerLazySingleton<SharedPreferencesDataSource>(
     () => SharedPreferencesDataSourceImpl(
       sharedPreferences: sl(),
     ),
   );
-  sl.registerLazySingleton(() => BleDataSourceImpl());
+  sl.registerLazySingleton<BleDataSource>(() => BleDataSourceImpl());
+  sl.registerLazySingleton<UtilsDataSource>(() => UtilsDataSourceImpl());
 
-  //sl.registerSingleton(SharedPreferencesService);
   // Objectbox
   //final objectBox = await ObjectBox.create();
   //sl.registerSingleton(objectBox);

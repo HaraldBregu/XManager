@@ -122,8 +122,8 @@ abstract class AppTheme {
           
           blendOnLevel: 20,
           // Input
-          inputDecoratorRadius: 0,
-          inputDecoratorBorderType: FlexInputBorderType.underline,
+          inputDecoratorRadius: 9,
+          //inputDecoratorBorderType: FlexInputBorderType.underline,
           //inputDecoratorBorderWidth: 0.0,
           //inputDecoratorFocusedBorderWidth: 0.0,
           //inputDecoratorUnfocusedHasBorder: false,

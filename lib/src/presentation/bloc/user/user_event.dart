@@ -2,14 +2,12 @@ import 'package:equatable/equatable.dart';
 
 abstract class UserEvent extends Equatable {
   const UserEvent();
+}
 
+class StartUserEvent extends UserEvent {
   @override
   List<Object?> get props => [];
 }
-
-class InitialUserEvent extends UserEvent {}
-
-// class EnterAsGuestUserEvent extends UserEvent {}
 
 class EnterUserEvent extends UserEvent {
   final String fullName;
@@ -19,6 +17,20 @@ class EnterUserEvent extends UserEvent {
   List<Object?> get props => [fullName];
 }
 
-class ExitUserEvent extends UserEvent {
-  const ExitUserEvent();
+class LogInWithEmailEvent extends UserEvent {
+  final String email;
+  final String password;
+
+  const LogInWithEmailEvent({
+    required this.email,
+    required this.password,
+  });
+
+  @override
+  List<Object?> get props => [email, password];
+}
+
+class LogOutEvent extends UserEvent {
+  @override
+  List<Object?> get props => [];
 }

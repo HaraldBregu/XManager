@@ -43,6 +43,17 @@ class MockUserRepository extends _i1.Mock implements _i3.UserRepository {
   }
 
   @override
+  _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity?>> get currentUser =>
+      (super.noSuchMethod(
+        Invocation.getter(#currentUser),
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity?>>.value(
+            _FakeEither_0<_i5.Failure, _i6.UserEntity?>(
+          this,
+          Invocation.getter(#currentUser),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity?>>);
+
+  @override
   _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity>> login(
     String? email,
     String? password,
@@ -76,23 +87,6 @@ class MockUserRepository extends _i1.Mock implements _i3.UserRepository {
         ),
         returnValue: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
-
-  @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity>> currentUser() =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #currentUser,
-          [],
-        ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity>>.value(
-            _FakeEither_0<_i5.Failure, _i6.UserEntity>(
-          this,
-          Invocation.method(
-            #currentUser,
-            [],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity>>);
 
   @override
   _i4.Future<_i2.Either<_i5.Failure, bool>> saveFullName(String? fullname) =>

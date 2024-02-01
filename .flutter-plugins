@@ -4,6 +4,7 @@ cloud_firestore_web=/Users/haraldbregu/.pub-cache/hosted/pub.dev/cloud_firestore
 connectivity=/Users/haraldbregu/.pub-cache/hosted/pub.dev/connectivity-3.0.6/
 connectivity_for_web=/Users/haraldbregu/.pub-cache/hosted/pub.dev/connectivity_for_web-0.4.0+1/
 connectivity_macos=/Users/haraldbregu/.pub-cache/hosted/pub.dev/connectivity_macos-0.2.1+2/
+connectivity_plus=/Users/haraldbregu/.pub-cache/hosted/pub.dev/connectivity_plus-5.0.2/
 device_info_plus=/Users/haraldbregu/.pub-cache/hosted/pub.dev/device_info_plus-9.1.1/
 firebase_auth=/Users/haraldbregu/.pub-cache/hosted/pub.dev/firebase_auth-4.15.3/
 firebase_auth_web=/Users/haraldbregu/.pub-cache/hosted/pub.dev/firebase_auth_web-5.8.12/
