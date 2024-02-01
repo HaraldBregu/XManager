@@ -1,8 +1,16 @@
 import 'package:equatable/equatable.dart';
+import 'package:xmanager/src/core/enums.dart';
 
 abstract class Failure extends Equatable {
   @override
   List<Object?> get props => [];
+}
+
+class NetworkFailure extends Failure {}
+
+class LoginFailure extends Failure {
+  final LoginErrorType errorType;
+  LoginFailure(this.errorType);
 }
 
 class ServerFailure extends Failure {}

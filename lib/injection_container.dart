@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xmanager/src/data/datasources/local/ble_datasource.dart';
+import 'package:xmanager/src/data/datasources/local/network_datasource.dart';
 import 'package:xmanager/src/data/datasources/local/permissions_datasource.dart';
 import 'package:xmanager/src/data/datasources/local/shared_preferences_datasource.dart';
 import 'package:xmanager/src/data/datasources/local/utils_datasource.dart';
@@ -105,11 +106,13 @@ Future<void> init() async {
   // Repository
   sl.registerLazySingleton<PermissionsRepository>(
       () => PermissionsRepositoryImpl(sl()));
-  sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(sl()));
+  sl.registerLazySingleton<UserRepository>(
+      () => UserRepositoryImpl(sl(), sl()));
   sl.registerLazySingleton<BleRepository>(() => BleRepositoryImpl(sl()));
   sl.registerLazySingleton<UtilsRepository>(() => UtilsRepositoryImpl(sl()));
 
   // Data sources
+  sl.registerLazySingleton<NetworkDataSource>(() => NetworkDataSourceImpl());
   sl.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl());
   sl.registerLazySingleton<PermissionsDataSource>(
       () => PermissionsDataSourceImpl());

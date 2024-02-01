@@ -1,7 +1,37 @@
 import 'package:equatable/equatable.dart';
-
+import 'package:xmanager/src/core/enums.dart';
 
 class UserState extends Equatable {
+  const UserState();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class UserInitialState extends UserState {}
+
+class UserAuthenticatingState extends UserState {}
+
+class UserNetworkErrorState extends UserState {}
+
+class UserLoginErrorState extends UserState {
+  final LoginErrorType type;
+  const UserLoginErrorState(this.type);
+}
+
+class UserAuthenticatedState extends UserState {}
+
+class UserRegisteringState extends UserState {}
+
+class UserRegisteredState extends UserState {}
+
+class UserRegistrationErrorState extends UserState {
+  final LoginErrorType type;
+  const UserRegistrationErrorState(this.type);
+}
+
+/*
+
   final String? email;
   final bool emailVerified;
   final String? phoneNumber;
@@ -29,18 +59,5 @@ class UserState extends Equatable {
         emailVerified,
         phoneNumber,
       ];
-}
 
-class UserInitialState extends UserState {}
-
-class LoadingUserState extends UserState {}
-
-class Authenticated extends UserState {}
-
-class Authorized extends UserState {}
-
-class UnAuthorized extends UserState {}
-
-class AuthLoadingState extends UserState {}
-
-class UnAuthenticated extends UserState {}
+ */

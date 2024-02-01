@@ -26,19 +26,19 @@ Future<void> main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider<LoginBloc>(create: (_) => sl()),
         BlocProvider<UserBloc>(create: (_) => sl()..add(StartUserEvent())),
+        BlocProvider<LoginBloc>(create: (_) => sl()),
         BlocProvider<AppBloc>(create: (_) => sl()..add(AppStartEvent())),
         BlocProvider<BleBloc>(create: (_) => sl()),
         BlocProvider<PlayerBloc>(create: (_) => sl()),
       ],
-      child: const App(),
+      child: const MainApp(),
     ),
   );
 }
 
-class App extends StatelessWidget {
-  const App({super.key});
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class App extends StatelessWidget {
       themeMode: ThemeMode.dark,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
-      routerConfig: router,
+      routerConfig: router(context),
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
