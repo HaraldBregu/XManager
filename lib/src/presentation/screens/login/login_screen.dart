@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lorem_ipsum/lorem_ipsum.dart';
@@ -27,7 +28,7 @@ class LoginScreen extends StatelessWidget {
 }
 
 class _LoginAppBar extends StatelessWidget {
-  const _LoginAppBar({super.key});
+  const _LoginAppBar();
 
   @override
   Widget build(BuildContext context) {
@@ -35,65 +36,42 @@ class _LoginAppBar extends StatelessWidget {
       backgroundColor: Colors.transparent,
       actions: <Widget>[
         IconButton(
-            icon: const Icon(Icons.help_outline),
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('Information!'),
-                      content: SizedBox(
-                        height: 400,
-                        width: 300,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: <Widget>[
-                              const SizedBox(height: 20),
-                              Text(
-                                loremIpsum(
-                                    words: 360,
-                                    paragraphs: 3,
-                                    initWithLorem: true),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      actions: [
-                        TextButton(
-                          onPressed: () => context.pop(),
-                          child: const Text("Done"),
-                        ),
-                      ],
-                    );
-                  });
-            }),
+          icon: const Icon(Icons.help_outline),
+          onPressed: () => showInfoDialog(context),
+        ),
       ],
-      /* leadingWidth: 100.0,
-      leading: TextButton.icon(
-        style: TextButton.styleFrom(
-            foregroundColor: Colors.white,
-            textStyle: const TextStyle(fontSize: 20)),
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () {},
-        label: Text(
-          'back',
-          style: TextStyle(
-            fontSize: context.textTheme.titleSmall?.fontSize,
-            fontFamily: context.textTheme.titleSmall?.fontFamily,
-            fontWeight: FontWeight.w400,
+    );
+  }
+
+  Future<void> showInfoDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Information!'),
+          content: SizedBox(
+            height: 400,
+            width: 300,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  const SizedBox(height: 20),
+                  Text(
+                    loremIpsum(words: 360, paragraphs: 3, initWithLorem: true),
+                  )
+                ],
+              ),
+            ),
           ),
-        ),
-      ),*/
-      /*title: Text(
-        "Back",
-        style: TextStyle(
-          fontSize: context.textTheme.titleSmall?.fontSize,
-          fontFamily: context.textTheme.titleSmall?.fontFamily,
-          fontWeight: FontWeight.w400,
-        ),
-      ),*/
+          actions: [
+            TextButton(
+              onPressed: () => context.pop(),
+              child: const Text("Done"),
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -107,7 +85,7 @@ class _LoginContainer extends StatelessWidget {
 
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.only(top: 0.0, left: 15, right: 15),
+        padding: const EdgeInsets.only(left: 15, right: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -123,18 +101,6 @@ class _LoginContainer extends StatelessWidget {
                 fontWeight: FontWeight.w900,
               ),
             ),
-            /*.animate()
-                .fadeIn(duration: 600.ms)
-                .then(delay: 200.ms) // baseline=800ms
-                .slide(),*/
-            /* .animate()
-                .fadeIn()
-                .scale()
-                .move(
-                  delay: 300.ms,
-                  duration: 600.ms,
-                )
-                .blurXY(),*/
             const SizedBox(
               height: 10,
             ),
@@ -148,28 +114,33 @@ class _LoginContainer extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30.0),
-            TextField(
-              keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
-                contentPadding:
-                    const EdgeInsets.only(top: 16, bottom: 16, left: 16),
-                prefixIcon: const Icon(Icons.email_outlined),
-                hintText: 'Enter email address',
-                labelText: 'Email address',
-                errorText: context.watch<LoginBloc>().state.emailError,
-              ),
-              onTapOutside: (value) {
-                FocusScope.of(context).unfocus();
-                context.read<LoginBloc>().add(InputEmailFinishedEvent());
-              },
-              onChanged: (value) =>
-                  context.read<LoginBloc>().add(InputEmailEvent(email: value)),
-            ),
+            TextFormField(
+                initialValue: context.read<LoginBloc>().state.email,
+                keyboardType: TextInputType.emailAddress,
+                autofillHints: const [AutofillHints.email],
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  contentPadding:
+                      const EdgeInsets.only(top: 16, bottom: 16, left: 16),
+                  prefixIcon: const Icon(Icons.email_outlined),
+                  hintText: 'Enter email address',
+                  labelText: 'Email address',
+                  errorText: context.watch<LoginBloc>().state.emailError,
+                ),
+                onTapOutside: (value) {
+                  FocusScope.of(context).unfocus();
+                  context.read<LoginBloc>().add(InputEmailFinishedEvent());
+                },
+                onChanged: (value) {
+                  //emailController.text = value;
+                  context.read<LoginBloc>().add(InputEmailEvent(email: value));
+                }),
             const SizedBox(height: 20.0),
-            TextField(
+            TextFormField(
+              initialValue: context.read<LoginBloc>().state.password,
               obscureText: !context.watch<LoginBloc>().state.passwordVisible,
               enableSuggestions: false,
+              autofillHints: const [AutofillHints.password],
               autocorrect: false,
               obscuringCharacter: "*",
               keyboardType: TextInputType.visiblePassword,
@@ -201,14 +172,6 @@ class _LoginContainer extends StatelessWidget {
                   .add(InputPasswordEvent(password: value)),
             ),
             const SizedBox(height: 10.0),
-            /*Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: LinearProgressIndicator(
-                value: context.watch<LoginBloc>()..passwordStrengthPerc,
-                semanticsLabel: 'Linear progress indicator',
-              ),
-            ),*/
-            const SizedBox(height: 20.0),
             Align(
               alignment: Alignment.centerRight,
               child: RichText(
@@ -231,10 +194,21 @@ class _LoginContainer extends StatelessWidget {
               listenWhen: (context, state) {
                 return state is UserNetworkErrorState ||
                     state is UserLoginErrorState ||
-                    state is UserAuthenticatedState;
+                    state is UserAuthenticatingState;
               },
               listener: (context, state) {
-                if (state is UserNetworkErrorState) {
+                if (state is UserAuthenticatingState) {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  );
+                } else if (state is UserNetworkErrorState) {
+                  context.pop();
+
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -252,9 +226,9 @@ class _LoginContainer extends StatelessWidget {
                       );
                     },
                   );
-                }
-                if (state is UserLoginErrorState) {
-                  final e = state as UserLoginErrorState;
+                } else if (state is UserLoginErrorState) {
+                  context.pop();
+
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -273,34 +247,25 @@ class _LoginContainer extends StatelessWidget {
                     },
                   );
                 }
-                if (state is UserAuthenticatedState) {
-                  //context.goNamed("home screen");
-                }
-                return;
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
-                );
               },
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size.fromHeight(55),
                 ),
-                /*
-                onPressed: () {
-                  context.pushNamed('complete profile screen');
-                },*/
                 onPressed: loginEnabled
-                    ? () => context.read<UserBloc>().add(
-                          const LogInWithEmailEvent(
-                            email: "barry.allen@example.com",
-                            password: "SuperSecretPassword!",
-                          ),
-                        )
+                    ? () {
+                        TextInput.finishAutofillContext();
+                        final loginBloc = context.read<LoginBloc>();
+                        final email = loginBloc.state.email;
+                        final password = loginBloc.state.password;
+                        final event = LogInWithEmailEvent(
+                          email: email ?? '',
+                          password: password ?? '',
+                        );
+
+                        final userBloc = context.read<UserBloc>();
+                        userBloc.add(event);
+                      }
                     : null,
                 child: Text(
                   "Continue",
@@ -328,7 +293,7 @@ class _LoginContainer extends StatelessWidget {
                     ),
                     const TextSpan(text: ' '),
                     TextSpan(
-                      text: 'SignUp',
+                      text: 'Sign Up',
                       style: TextStyle(
                         color: context.colorScheme.primary,
                         fontSize: context.textTheme.titleMedium?.fontSize,

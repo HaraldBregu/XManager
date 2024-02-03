@@ -137,9 +137,8 @@ class DrawerMenu extends StatelessWidget {
               Icons.exit_to_app,
             ),
             onTap: () {
-              // BlocProvider.of<UserBloc>(context,listen: true).add(LogOutEvent());
-              context.read<UserBloc>().add(LogOutEvent());
-              //context.goNamed('start screen');
+              final userBloc = context.read<UserBloc>();
+              userBloc.add(LogOutEvent());
             },
           ),
         ],

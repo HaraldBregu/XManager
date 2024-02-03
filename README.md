@@ -39,3 +39,8 @@ Open android studio Tools->Flutter->Clean.
 Go to File -> Invalidate Caches / Restart.
 Or open terminal run "flutter clean"
 Remove pubspec.lock.
+
+
+# build splash screen 
+ dart run flutter_native_splash:create --path=flutter_native_splash.yaml
+  

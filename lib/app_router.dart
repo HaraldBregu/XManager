@@ -17,11 +17,11 @@ import 'package:xmanager/src/presentation/screens/home/program_update.dart';
 import 'package:xmanager/src/presentation/screens/home_screen.dart';
 import 'package:xmanager/src/presentation/screens/login/login_screen.dart';
 import 'package:xmanager/src/presentation/screens/profile_screen.dart';
-import 'package:xmanager/src/presentation/screens/recovery_screen.dart';
+import 'package:xmanager/src/presentation/screens/recovery/recovery_screen.dart';
 import 'package:xmanager/src/presentation/screens/settings/account_page.dart';
 import 'package:xmanager/src/presentation/screens/settings/permissions_page.dart';
 import 'package:xmanager/src/presentation/screens/settings/settings_page.dart';
-import 'package:xmanager/src/presentation/screens/signup_screen.dart';
+import 'package:xmanager/src/presentation/screens/signup/signup_screen.dart';
 import 'package:xmanager/src/presentation/screens/start_screen.dart';
 
 class GoRouterObserver extends NavigatorObserver {
@@ -67,51 +67,56 @@ class GoRouterRefreshStream extends ChangeNotifier {
   }
 }
 
+/*class AppRouterListenable extends ChangeNotifier {
+  AppRouterListenable({required this.authRepository}) {
+    _authStateSubscription =
+        authRepository.authStateChanges().listen((appUser) {
+      _isLoggedIn = appUser != null;
+      notifyListeners();
+    });
+  }
+  late final StreamSubscription<UserBloc?> _authStateSubscription;
+  var _isLoggedIn = false;
+  bool get isLoggedIn => _isLoggedIn;
+
+  @override
+  void dispose() {
+    _authStateSubscription.cancel();
+    super.dispose();
+  }
+}*/
+
+
 GoRouter router(BuildContext context) {
-  final userStateWatch = context.read<UserBloc>().state;
-  final authenticated = userStateWatch is UserAuthenticatedState;
 
   return GoRouter(
-    refreshListenable: GoRouterRefreshStream(context.watch<UserBloc>().stream),
-    debugLogDiagnostics: true,
-    observers: [GoRouterObserver(context)],
-    initialLocation: authenticated ? '/home' : '/',
+    //initialLocation: '/', //authenticated ? '/home' : '/',
+    //refreshListenable: GoRouterRefreshStream(userWatch.stream),
+    //refreshListenable: null,
+    //refreshListenable:    authenticatedWatch ? GoRouterRefreshStream(userWatch.stream) : null,
+    //debugLogDiagnostics: true,
+    //observers: [GoRouterObserver(context)],
     redirect: (context, state) {
+      return null;
+
       final location = state.matchedLocation;
+      //final loginPath = location.startsWith('/login');
+      //final signupPath = location.startsWith('/signup');
 
-      //print("location: $location");
 
-      if (authenticated && location == '/login') {
-        return '/home';
-      } else if (!authenticated && location != '/login') {
-        // return '/';
-      }
+      // print("GoRouter redirect route: $location auth: $authenticatedWatch");
+
+      // if (location == '/login' && !authenticatedWatch) {
+      //   print("GoRouter redirect login path");
+      //   return '/login';
+      // }
+
+      // if (location == '/' && authenticatedWatch) {
+      //   //return '/home';
+      // }
+
       return null;
     },
-    /*redirect: (context, state) {
-      final location = state.matchedLocation;
-      final startPath = location == '/';
-      final loginPath = location.startsWith('/login');
-      final signupPath = location.startsWith('/signup');
-
-      print("authentication: $authenticated");
-      print("location: $location");
-
-//final res = context.select<UserBloc, UserState>((value) => value.state);
-
-      if (authenticated && (loginPath || signupPath)) {
-        print("location: in login path");
-        return null;
-      } else if (!authenticated && (loginPath || signupPath)) {
-        print("location: in login path unath");
-        return null;
-      } else if (authenticated) {
-        print("location: only authenticated");
-        return '/home';
-      }
-
-      return null;
-    },*/
     routes: [
       GoRoute(
         name: "start screen",

@@ -26,39 +26,34 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     StartUserEvent event,
     Emitter<UserState> emit,
   ) async {
-    //emit(UserInitialState());
-    emit(UserAuthenticatedState());
-
-    /*final useCase = await currentUserUseCase.call(NoParams());
+    final useCase = await currentUserUseCase.call(NoParams());
 
     useCase.fold(
       (left) => emit(UserInitialState()),
       (right) => emit(UserAuthenticatedState()),
-    );*/
+    );
   }
 
   Future<void> _onLogInWithEmailEvent(
     LogInWithEmailEvent event,
     Emitter<UserState> emit,
   ) async {
+    emit(UserInitialState());
+    emit(UserAuthenticatingState());
+
     final params = LoginParams(
       email: event.email,
       password: event.password,
     );
     
-    emit(UserAuthenticatedState());
-
-    return;
     final authLoginUsecase = await logInWithEmailUseCase.call(params);
 
     authLoginUsecase.fold(
       (Failure failure) {
         if (failure is NetworkFailure) {
           emit(UserNetworkErrorState());
-          emit(UserInitialState());
         } else if (failure is LoginFailure) {
           emit(UserLoginErrorState(failure.errorType));
-          emit(UserInitialState());
         }
       },
       (r) => emit(UserAuthenticatedState()),
