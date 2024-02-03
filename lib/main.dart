@@ -35,7 +35,7 @@ Future<void> main() async {
         BlocProvider<UserBloc>(create: (_) => sl()..add(StartUserEvent())),
         BlocProvider<LoginBloc>(create: (_) => sl()),
         BlocProvider<AppBloc>(create: (_) => sl()..add(AppStartEvent())),
-        BlocProvider<BleBloc>(create: (_) => sl()),
+        BlocProvider<BleBloc>(create: (_) => sl()..add(const BleStartEvent())),
       ],
       child: const MainApp(),
     ),
@@ -47,7 +47,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.dark,

@@ -143,13 +143,11 @@ class HomeScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          /*
-                          context.read<BleBloc>().add(
-                                const ListenConnectionStateEvent(
-                                    "E7:C8:DF:65:5B:4B"),
-                              );
+                          const event =
+                              ListenConnectionStateEvent("E7:C8:DF:65:5B:4B");
+                          context.read<BleBloc>().add(event);
                           context.pushNamed("Device screen");
-                          */
+                          
                         },
                         child: Container(
                           color: Colors.transparent,

@@ -27,6 +27,8 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     required this.bleLastValueStreamUseCase,
     required this.bleSetNotificationUseCase,
   }) : super(const BleInitial()) {
+    on<BleStartEvent>(_onBleStartEvent);
+
     //on<StartScanning>(_onStartScanningEvent, transformer: restartable());
     // on<StopScanning>(_onStopScanningEvent);
     on<ListenConnectionStateEvent>(_onListenConnectionStateEvent);
@@ -40,6 +42,12 @@ class BleBloc extends Bloc<BleEvent, BleState> {
 
     //on<BleDownloadDataEvent>(_onBleDownloadDataEvent);
   }
+
+  Future<void> _onBleStartEvent(
+    BleStartEvent event,
+    Emitter<BleState> emit,
+  ) async =>
+      emit(const BleInitial());
 
   Future<void> _onListenConnectionStateEvent(
     ListenConnectionStateEvent event,

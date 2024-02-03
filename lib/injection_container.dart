@@ -84,9 +84,11 @@ Future<void> init() async {
   sl.registerLazySingleton(() => BluetoothPermissionsGrantedUseCase(sl()));
   sl.registerLazySingleton(() => RequestBluetoothPermissionsUseCase(sl()));
   sl.registerLazySingleton(
-      () => BluetoothConnectPermissionsGrantedUseCase(sl()));
+    () => BluetoothConnectPermissionsGrantedUseCase(sl()),
+  );
   sl.registerLazySingleton(
-      () => RequestBluetoothConnectPermissionsUseCase(sl()));
+    () => RequestBluetoothConnectPermissionsUseCase(sl()),
+  );
   sl.registerLazySingleton(() => BluetoothScanPermissionsGrantedUseCase(sl()));
   sl.registerLazySingleton(() => RequestBluetoothScanPermissionsUseCase(sl()));
   sl.registerLazySingleton(() => GetCurrentUserUseCase(sl()));
@@ -104,24 +106,27 @@ Future<void> init() async {
   sl.registerLazySingleton(() => BleSetNotificationUseCase(sl()));
 
   // Repository
-  sl.registerLazySingleton<PermissionsRepository>(
-      () => PermissionsRepositoryImpl(sl()));
-  sl.registerLazySingleton<UserRepository>(
-      () => UserRepositoryImpl(sl(), sl()));
   sl.registerLazySingleton<BleRepository>(() => BleRepositoryImpl(sl()));
+  sl.registerLazySingleton<PermissionsRepository>(
+    () => PermissionsRepositoryImpl(sl()),
+  );
+  sl.registerLazySingleton<UserRepository>(
+    () => UserRepositoryImpl(sl(), sl()),
+  );
   sl.registerLazySingleton<UtilsRepository>(() => UtilsRepositoryImpl(sl()));
 
   // Data sources
+  sl.registerLazySingleton<BleDataSource>(() => BleDataSourceImpl());
   sl.registerLazySingleton<NetworkDataSource>(() => NetworkDataSourceImpl());
   sl.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl());
   sl.registerLazySingleton<PermissionsDataSource>(
-      () => PermissionsDataSourceImpl());
+    () => PermissionsDataSourceImpl(),
+  );
   sl.registerLazySingleton<SharedPreferencesDataSource>(
     () => SharedPreferencesDataSourceImpl(
       sharedPreferences: sl(),
     ),
   );
-  sl.registerLazySingleton<BleDataSource>(() => BleDataSourceImpl());
   sl.registerLazySingleton<UtilsDataSource>(() => UtilsDataSourceImpl());
 
   // Objectbox

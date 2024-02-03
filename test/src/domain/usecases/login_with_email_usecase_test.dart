@@ -21,17 +21,13 @@ void main() {
   });
 
   test('should login and return current user', () async {
-    const tUser = UserEntity(
-      email: 'test@mail.com',
-    );
-
     when(mockUserRepository.login("email", "password"))
         .thenAnswer((_) async => const Right(true));
 
     const loginParams = LoginParams(email: "email", password: "password");
     final result = await usecase(loginParams);
 
-    expect(result, const Right(tUser));
+    expect(result, const Right(true));
     verify(mockUserRepository.login("email", "password"));
     verifyNoMoreInteractions(mockUserRepository);
   });

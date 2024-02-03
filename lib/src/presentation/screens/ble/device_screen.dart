@@ -42,7 +42,6 @@ class DeviceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bleState = context.watch<BleBloc>().state;
-    //final lastValue = bleState.data;
 
     return Scaffold(
       body: CustomScrollView(
