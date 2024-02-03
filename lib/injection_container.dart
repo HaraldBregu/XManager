@@ -106,7 +106,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => BleSetNotificationUseCase(sl()));
 
   // Repository
-  sl.registerLazySingleton<BleRepository>(() => BleRepositoryImpl(sl()));
+  sl.registerLazySingleton<BleRepository>(() => BleRepositoryImpl(sl(), sl()));
   sl.registerLazySingleton<PermissionsRepository>(
     () => PermissionsRepositoryImpl(sl()),
   );

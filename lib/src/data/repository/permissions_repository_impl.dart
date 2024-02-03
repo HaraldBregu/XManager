@@ -2,39 +2,39 @@ import 'package:xmanager/src/data/datasources/local/permissions_datasource.dart'
 import 'package:xmanager/src/domain/repository/permissions_repository.dart';
 
 class PermissionsRepositoryImpl implements PermissionsRepository {
-  final PermissionsDataSourceImpl permissionsDataSourceImpl;
+  final PermissionsDataSource permissionsDataSource;
 
-  PermissionsRepositoryImpl(this.permissionsDataSourceImpl);
+  PermissionsRepositoryImpl(this.permissionsDataSource);
 
   @override
   Future<bool> locationPermissionGranted() async =>
-      permissionsDataSourceImpl.locationPermissionGranted();
+      permissionsDataSource.locationPermissionGranted();
 
   @override
   Future<void> requestLocationPermission() async =>
-      permissionsDataSourceImpl.requestLocationPermission();
+      permissionsDataSource.requestLocationPermission();
 
   @override
   Future<bool> bluetoothPermissionGranted() async =>
-      permissionsDataSourceImpl.bluetoothPermissionGranted();
+      permissionsDataSource.bluetoothPermissionGranted();
 
   @override
   Future<void> requestBluetoothPermission() async =>
-      permissionsDataSourceImpl.requestBluetoothPermission();
+      permissionsDataSource.requestBluetoothPermission();
 
   @override
   Future<bool> bluetoothConnectPermissionGranted() async =>
-      permissionsDataSourceImpl.bluetoothConnectPermissionGranted();
+      permissionsDataSource.bluetoothConnectPermissionGranted();
 
   @override
   Future<void> requestBluetoothConnectPermission() async =>
-      permissionsDataSourceImpl.requestBluetoothConnectPermission();
+      permissionsDataSource.requestBluetoothConnectPermission();
 
   @override
   Future<bool> bluetoothScanPermissionGranted() async =>
-      permissionsDataSourceImpl.bluetoothScanPermissionGranted();
+      permissionsDataSource.bluetoothScanPermissionGranted();
 
   @override
   Future<void> requestBluetoothScanPermission() async =>
-      permissionsDataSourceImpl.requestBluetoothScanPermission();
+      permissionsDataSource.requestBluetoothScanPermission();
 }

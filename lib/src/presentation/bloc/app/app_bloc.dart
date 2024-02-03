@@ -41,76 +41,44 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   ) async {
     final locationUsecase =
         await locationPermissionsGrantedUseCase.call(NoParams());
-    locationUsecase.fold(
-      (l) => {},
-      (r) => emit(state.copyWith(locationGranted: r)),
-    );
-
     final bluetoothUsecase =
         await bluetoothPermissionsGrantedUseCase.call(NoParams());
-    bluetoothUsecase.fold(
-      (l) => {},
-      (r) => emit(state.copyWith(bluetoothGranted: r)),
-    );
-
     final bluetoothConnectUsecase =
         await bluetoothConnectPermissionsGrantedUseCase.call(NoParams());
-    bluetoothConnectUsecase.fold(
-      (l) => {},
-      (r) => emit(state.copyWith(bluetoothConnectGranted: r)),
-    );
-
     final bluetoothScanUsecase =
         await bluetoothScanPermissionsGrantedUseCase.call(NoParams());
-    bluetoothScanUsecase.fold(
-      (l) => {},
-      (r) => emit(state.copyWith(bluetoothScanGranted: r)),
-    );
+
+    emit(state.copyWith(locationGranted: locationUsecase));
+    emit(state.copyWith(bluetoothGranted: bluetoothUsecase));
+    emit(state.copyWith(bluetoothConnectGranted: bluetoothConnectUsecase));
+    emit(state.copyWith(bluetoothScanGranted: bluetoothScanUsecase));
   }
 
   Future<void> _onRequestLocationPermission(
     RequestLocationPermission event,
     Emitter<AppState> emit,
   ) async {
-    final usecase = await requestLocationPermissionsUseCase.call(NoParams());
-    usecase.fold(
-      (l) => {},
-      (r) => emit(state.copyWith(locationGranted: r)),
-    );
+    await requestLocationPermissionsUseCase.call(NoParams());
   }
 
   Future<void> _onRequestBluetoothPermission(
     RequestBluetoothPermission event,
     Emitter<AppState> emit,
   ) async {
-    final usecase = await requestBluetoothPermissionsUseCase.call(NoParams());
-    usecase.fold(
-      (l) => {},
-      (r) => emit(state.copyWith(bluetoothGranted: r)),
-    );
+    await requestBluetoothPermissionsUseCase.call(NoParams());
   }
 
   Future<void> _onRequestBluetoothConnectPermission(
     RequestBluetoothConnectPermission event,
     Emitter<AppState> emit,
   ) async {
-    final usecase =
-        await requestBluetoothConnectPermissionsUseCase.call(NoParams());
-    usecase.fold(
-      (l) => {},
-      (r) => emit(state.copyWith(bluetoothConnectGranted: r)),
-    );
+    await requestBluetoothConnectPermissionsUseCase.call(NoParams());
   }
 
   Future<void> _onRequestBluetoothScanPermission(
     RequestBluetoothScanPermission event,
     Emitter<AppState> emit,
   ) async {
-    final usecase =
-        await requestBluetoothScanPermissionsUseCase.call(NoParams());
-    usecase.fold(
-      (l) => {},
-      (r) => emit(state.copyWith(bluetoothConnectGranted: r)),
-    );
+    await requestBluetoothScanPermissionsUseCase.call(NoParams());
   }
 }

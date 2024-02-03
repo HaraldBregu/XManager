@@ -1,14 +1,19 @@
 import 'package:xmanager/src/data/datasources/local/ble_datasource.dart';
+import 'package:xmanager/src/data/datasources/local/permissions_datasource.dart';
 import 'package:xmanager/src/data/models/bluetooth_device_model.dart';
 import 'package:xmanager/src/domain/repository/ble_repository.dart';
 
 class BleRepositoryImpl implements BleRepository {
-  const BleRepositoryImpl(this._dataSource);
-  final BleDataSourceImpl _dataSource;
+  const BleRepositoryImpl(this._dataSource, this._permissionsDataSource);
+  final BleDataSource _dataSource;
+  final PermissionsDataSource _permissionsDataSource;
 
   @override
-  Future<void> startScan(int seconds, List<String>? services) =>
-      _dataSource.startScan(seconds, services);
+  Future<void> startScan(int seconds, List<String>? services) {
+    final scanGranted = _permissionsDataSource.bluetoothScanPermissionGranted();
+
+    return _dataSource.startScan(seconds, services);
+  }
 
   @override
   Stream<List<BluetoothDeviceModel>> get scanResult =>
