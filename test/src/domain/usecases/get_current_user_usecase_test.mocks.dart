@@ -54,7 +54,7 @@ class MockUserRepository extends _i1.Mock implements _i3.UserRepository {
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity?>>);
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity>> login(
+  _i4.Future<_i2.Either<_i5.Failure, bool>> login(
     String? email,
     String? password,
   ) =>
@@ -66,8 +66,8 @@ class MockUserRepository extends _i1.Mock implements _i3.UserRepository {
             password,
           ],
         ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity>>.value(
-            _FakeEither_0<_i5.Failure, _i6.UserEntity>(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, bool>>.value(
+            _FakeEither_0<_i5.Failure, bool>(
           this,
           Invocation.method(
             #login,
@@ -77,47 +77,15 @@ class MockUserRepository extends _i1.Mock implements _i3.UserRepository {
             ],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity>>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, bool>>);
 
   @override
-  _i4.Future<bool> logOut() => (super.noSuchMethod(
+  _i4.Future<void> logOut() => (super.noSuchMethod(
         Invocation.method(
           #logOut,
           [],
         ),
-        returnValue: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
-
-  @override
-  _i4.Future<_i2.Either<_i5.Failure, bool>> saveFullName(String? fullname) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #saveFullName,
-          [fullname],
-        ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, bool>>.value(
-            _FakeEither_0<_i5.Failure, bool>(
-          this,
-          Invocation.method(
-            #saveFullName,
-            [fullname],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, bool>>);
-
-  @override
-  _i4.Future<_i2.Either<_i5.Failure, bool>> exitUser() => (super.noSuchMethod(
-        Invocation.method(
-          #exitUser,
-          [],
-        ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, bool>>.value(
-            _FakeEither_0<_i5.Failure, bool>(
-          this,
-          Invocation.method(
-            #exitUser,
-            [],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, bool>>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }

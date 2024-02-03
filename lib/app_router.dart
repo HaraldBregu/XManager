@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -50,14 +49,20 @@ class GoRouterObserver extends NavigatorObserver {
   }
 }
 
-/// makes GoRouter redirect when stream recevies an event
 class GoRouterRefreshStream extends ChangeNotifier {
-  GoRouterRefreshStream(Stream<dynamic> stream) {
+  GoRouterRefreshStream(Stream<UserState> stream) {
     notifyListeners();
-    _subscription = stream.asBroadcastStream().listen(
-          (dynamic _) => notifyListeners(),
-        );
+
+    final broadcastStream = stream.asBroadcastStream();
+    _subscription = broadcastStream.listen((UserState state) {
+      if (state is UserAuthenticatedState) {
+        notifyListeners();
+      } else if (state is UserInitialState) {
+        notifyListeners();
+      }
+    });
   }
+
   late final StreamSubscription<dynamic> _subscription;
 
   @override
@@ -67,53 +72,28 @@ class GoRouterRefreshStream extends ChangeNotifier {
   }
 }
 
-/*class AppRouterListenable extends ChangeNotifier {
-  AppRouterListenable({required this.authRepository}) {
-    _authStateSubscription =
-        authRepository.authStateChanges().listen((appUser) {
-      _isLoggedIn = appUser != null;
-      notifyListeners();
-    });
-  }
-  late final StreamSubscription<UserBloc?> _authStateSubscription;
-  var _isLoggedIn = false;
-  bool get isLoggedIn => _isLoggedIn;
-
-  @override
-  void dispose() {
-    _authStateSubscription.cancel();
-    super.dispose();
-  }
-}*/
-
-
 GoRouter router(BuildContext context) {
-
   return GoRouter(
-    //initialLocation: '/', //authenticated ? '/home' : '/',
-    //refreshListenable: GoRouterRefreshStream(userWatch.stream),
-    //refreshListenable: null,
-    //refreshListenable:    authenticatedWatch ? GoRouterRefreshStream(userWatch.stream) : null,
-    //debugLogDiagnostics: true,
-    //observers: [GoRouterObserver(context)],
+    initialLocation: '/',
+    refreshListenable: GoRouterRefreshStream(context.read<UserBloc>().stream),
     redirect: (context, state) {
-      return null;
-
       final location = state.matchedLocation;
-      //final loginPath = location.startsWith('/login');
-      //final signupPath = location.startsWith('/signup');
+      final loginPath = location.startsWith('/login');
+      final signupPath = location.startsWith('/signup');
+      final homePath = location.startsWith('/home');
 
+      final userbloc = context.read<UserBloc>().state;
+      print(userbloc);
 
-      // print("GoRouter redirect route: $location auth: $authenticatedWatch");
+      final userAuthenticated = userbloc is UserAuthenticatedState;
 
-      // if (location == '/login' && !authenticatedWatch) {
-      //   print("GoRouter redirect login path");
-      //   return '/login';
-      // }
-
-      // if (location == '/' && authenticatedWatch) {
-      //   //return '/home';
-      // }
+      if (userAuthenticated && homePath) {
+        return null;
+      } else if (userAuthenticated) {
+        return '/home';
+      } else if (!userAuthenticated && !loginPath && !signupPath) {
+        return '/';
+      }
 
       return null;
     },
@@ -133,24 +113,12 @@ GoRouter router(BuildContext context) {
                 path: 'recovery',
                 builder: (context, state) => const RecoveryScreen(),
               ),
-              GoRoute(
-                name: "complete profile screen",
-                path: 'profile',
-                builder: (context, state) => const ProfileScreen(),
-              ),
             ],
           ),
           GoRoute(
             name: "signup screen",
             path: 'signup',
             builder: (context, state) => const SignupScreen(),
-            routes: [
-              GoRoute(
-                name: "create profile screen",
-                path: 'profile',
-                builder: (context, state) => const ProfileScreen(),
-              ),
-            ],
           ),
         ],
       ),
@@ -159,6 +127,11 @@ GoRouter router(BuildContext context) {
         path: "/home",
         builder: (context, state) => const HomeScreen(),
         routes: [
+          GoRoute(
+            name: "update profile screen",
+            path: 'profile',
+            builder: (context, state) => const ProfileScreen(),
+          ),
           GoRoute(
             name: "Program list",
             path: 'programs',

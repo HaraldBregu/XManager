@@ -108,7 +108,9 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.normal,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    context.pushNamed("update profile screen");
+                  },
                 ),
               ),
             ),

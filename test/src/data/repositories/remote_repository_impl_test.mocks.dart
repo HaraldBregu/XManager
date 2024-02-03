@@ -68,13 +68,14 @@ class MockRemoteDataSource extends _i1.Mock implements _i3.RemoteDataSource {
       ) as _i4.Future<void>);
 
   @override
-  _i4.Future<bool> logOut() => (super.noSuchMethod(
+  _i4.Future<void> logOut() => (super.noSuchMethod(
         Invocation.method(
           #logOut,
           [],
         ),
-        returnValue: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
   _i4.Future<void> register(

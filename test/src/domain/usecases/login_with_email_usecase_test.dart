@@ -6,7 +6,6 @@ import 'package:xmanager/src/core/error/failures.dart';
 import 'package:xmanager/src/core/usecase.dart';
 import 'package:xmanager/src/domain/entities/user_entity.dart';
 import 'package:xmanager/src/domain/repository/user_repository.dart';
-import 'package:xmanager/src/domain/usecases/get_current_user_usecase.dart';
 import 'package:xmanager/src/domain/usecases/login_with_email_usecase.dart';
 
 import 'get_current_user_usecase_test.mocks.dart';
@@ -27,7 +26,7 @@ void main() {
     );
 
     when(mockUserRepository.login("email", "password"))
-        .thenAnswer((_) async => const Right(tUser));
+        .thenAnswer((_) async => const Right(true));
 
     const loginParams = LoginParams(email: "email", password: "password");
     final result = await usecase(loginParams);
