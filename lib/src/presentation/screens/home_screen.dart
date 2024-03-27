@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xmanager/src/core/localizations_extension.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
+import 'package:xmanager/src/presentation/bloc/app/app_bloc.dart';
+import 'package:xmanager/src/presentation/bloc/app/app_event.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
 import 'package:xmanager/src/presentation/widgets/alert_card.dart';
 import 'package:xmanager/src/presentation/widgets/drawer_menu.dart';
@@ -143,11 +145,11 @@ class HomeScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          const event =
-                              ListenConnectionStateEvent("E7:C8:DF:65:5B:4B");
-                          context.read<BleBloc>().add(event);
+                          context.read<AppBloc>().add(AppStartEvent());
+                          context.read<BleBloc>().add(
+                              const ListenConnectionStateEvent(
+                                  "E7:C8:DF:65:5B:4B"));
                           context.pushNamed("Device screen");
-                          
                         },
                         child: Container(
                           color: Colors.transparent,

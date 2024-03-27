@@ -1,3 +1,4 @@
+import 'package:xmanager/src/core/error/exeptions.dart';
 import 'package:xmanager/src/data/datasources/local/ble_datasource.dart';
 import 'package:xmanager/src/data/datasources/local/permissions_datasource.dart';
 import 'package:xmanager/src/data/models/bluetooth_device_model.dart';
@@ -9,10 +10,11 @@ class BleRepositoryImpl implements BleRepository {
   final PermissionsDataSource _permissionsDataSource;
 
   @override
-  Future<void> startScan(int seconds, List<String>? services) {
-    final scanGranted = _permissionsDataSource.bluetoothScanPermissionGranted();
-
-    return _dataSource.startScan(seconds, services);
+  Future<void> startScan(int seconds, List<String>? services) async {
+    if (!await _permissionsDataSource.bluetoothScanPermissionGranted()) {
+      throw BluetoothPermissionsExeption();
+    }
+    _dataSource.startScan(seconds, services);
   }
 
   @override
@@ -24,7 +26,7 @@ class BleRepositoryImpl implements BleRepository {
               (e) {
                 final device = e.device;
                 return BluetoothDeviceModel(
-                  name: device.localName,
+                  name: device.platformName,
                   uuid: device.remoteId.toString(),
                 );
               },
@@ -40,16 +42,31 @@ class BleRepositoryImpl implements BleRepository {
   Future<void> stopScan() => _dataSource.stopScan();
 
   @override
-  Future<void> connect(String uuid) => _dataSource.connect(uuid);
+  Future<void> connect(String uuid) async {
+    if (!await _permissionsDataSource.bluetoothConnectPermissionGranted()) {
+      throw BluetoothPermissionsExeption();
+    }
+    await _dataSource.connect(uuid);
+  }
 
   @override
-  Future<void> connectAndDiscoverServices(String uuid) =>
-      _dataSource.connectAndDiscoverServices(uuid);
-  
+  Future<void> connectAndDiscoverServices(String uuid) async {
+    if (!await _permissionsDataSource.bluetoothConnectPermissionGranted()) {
+      throw BluetoothPermissionsExeption();
+    }
+
+    await _dataSource.connectAndDiscoverServices(uuid);
+  }
+
   @override
-  Future<void> discoverServices(String uuid) =>
-      _dataSource.discoverServices(uuid);
-  
+  Future<void> discoverServices(String uuid) async {
+    if (!await _permissionsDataSource.bluetoothConnectPermissionGranted()) {
+      throw BluetoothPermissionsExeption();
+    }
+
+    await _dataSource.discoverServices(uuid);
+  }
+
   @override
   Future<void> disconnect(String uuid) => _dataSource.disconnect(uuid);
 
@@ -57,7 +74,13 @@ class BleRepositoryImpl implements BleRepository {
   Stream<bool> connected(String uuid) => _dataSource.connected(uuid);
 
   @override
-  Future<bool> isConnected(String uuid) => _dataSource.isConnected(uuid);
+  Future<bool> isConnected(String uuid) async {
+    if (!await _permissionsDataSource.bluetoothConnectPermissionGranted()) {
+      //  return throw BluetoothConnectPermissionExeption();
+    }
+
+    return await _dataSource.isConnected(uuid);
+  }
 
   @override
   Future write(
@@ -73,8 +96,7 @@ class BleRepositoryImpl implements BleRepository {
         characteristicsUuid,
         value,
         withoutResponse,
-    );
-  
+      );
 
   @override
   Future<List<int>> read(
@@ -87,7 +109,7 @@ class BleRepositoryImpl implements BleRepository {
         serviceUuid,
         characteristicsUuid,
       );
-  
+
   @override
   Stream<List<int>> lastValueStream(
     String deviceUuid,
@@ -95,11 +117,10 @@ class BleRepositoryImpl implements BleRepository {
     String characteristicsUuid,
   ) =>
       _dataSource.lastValueStream(
-      deviceUuid,
-      serviceUuid,
-      characteristicsUuid,
-    );
-  
+        deviceUuid,
+        serviceUuid,
+        characteristicsUuid,
+      );
 
   @override
   Future<void> setNotifications(

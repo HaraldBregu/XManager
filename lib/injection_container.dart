@@ -24,6 +24,7 @@ import 'package:xmanager/src/domain/usecases/password_strength_perc_usecase.dart
 import 'package:xmanager/src/domain/usecases/valid_email_usecase%20copy.dart';
 import 'package:xmanager/src/presentation/bloc/app/app_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
+import 'package:xmanager/src/presentation/screens/device/bloc/device_bloc.dart';
 import 'package:xmanager/src/presentation/screens/login/bloc/login_bloc.dart';
 
 final sl = GetIt.instance;
@@ -74,6 +75,10 @@ Future<void> init() async {
       bleLastValueStreamUseCase: sl(),
       bleSetNotificationUseCase: sl(),
     ),
+  );
+
+  sl.registerFactory(
+    () => DeviceBloc(),
   );
 
   // UseCases

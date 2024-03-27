@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 import 'package:xmanager/src/presentation/bloc/app/app_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
+import 'package:xmanager/src/presentation/screens/device/bloc/device_bloc.dart';
 import 'package:xmanager/src/presentation/widgets/alert_card.dart';
 import 'package:xmanager/src/presentation/widgets/indicator_icon.dart';
 import 'package:xmanager/src/presentation/widgets/progress_card.dart';
@@ -41,6 +42,8 @@ class DeviceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appState = context.watch<AppBloc>().state;
+    //final deviceState = context.watch<DeviceBloc>().state;
     final bleState = context.watch<BleBloc>().state;
 
     return Scaffold(
@@ -73,7 +76,6 @@ class DeviceScreen extends StatelessWidget {
                     value: 2,
                     child: Text("Demo animation"),
                   ),
-
                 ];
               }, onSelected: (value) {
                 if (value == 0) {
@@ -242,11 +244,9 @@ class DeviceScreen extends StatelessWidget {
             text: "Aggiornamento in corso",
             percentValue: 45,
           ),
-         
           SliverToBoxAdapter(
             child: Text('$bleState'),
           ),
-         
           SliverToBoxAdapter(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -303,28 +303,112 @@ class DeviceScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-
             Visibility(
-              visible: !bleState.connected,
-              child: OutlinedButton(
-                style: FilledButton.styleFrom(
-                  fixedSize: const Size(150, 50),
-                ),
-                onPressed: (bleState is BleConnecting)
-                    ? null
-                    : () => context
-                        .read<BleBloc>()
-                        .add(const ConnectAndAuthenticateDevice(
-                          bleMac,
-                          customServiceUuid,
-                          actionsCharsUuid,
-                          password,
-                          true,
-                        )),
-                child: const Text('CONNECT TO DEVICE'),
-              ),
-            ),
-         
+                visible: !bleState.connected,
+                child: BlocListener<BleBloc, BleState>(
+                  listener: (context, state) {
+                    if (state is BleMissingPermissions) {
+                      showGeneralDialog(
+                        context: context,
+                        barrierDismissible: true,
+                        barrierLabel: '',
+                        transitionDuration: const Duration(milliseconds: 40),
+                        pageBuilder: (context, animation1, animation2) {
+                          return Container();
+                        },
+                        transitionBuilder: (context, a1, a2, widget) {
+                          final appState = context.watch<AppBloc>().state;
+
+                          return ScaleTransition(
+                            scale:
+                                Tween<double>(begin: 0.5, end: 1.0).animate(a1),
+                            child: FadeTransition(
+                              opacity: Tween<double>(begin: 0.5, end: 1.0)
+                                  .animate(a1),
+                              child: Dialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(7),
+                                ),
+                                child: SizedBox(
+                                  height: 300,
+                                  child: Column(
+                                    children: [
+                                      Text("Title"),
+                                      if (appState.bluetoothGranted) ...[
+                                        Text("Bluetooth granted"),
+                                      ] else ...[
+                                        Text("Bluetooth not granted"),
+                                      ],
+                                      if (appState.bluetoothConnectGranted) ...[
+                                        Text("Bluetooth connect granted"),
+                                      ] else ...[
+                                        Text("Bluetooth connect not granted"),
+                                      ],
+                                      if (appState.bluetoothScanGranted) ...[
+                                        Text("Bluetooth scan granted"),
+                                      ] else ...[
+                                        Text("Bluetooth scan not granted"),
+                                      ],
+                                      if (appState.locationGranted) ...[
+                                        Text("Location granted"),
+                                      ] else ...[
+                                        Text("Location not granted"),
+                                      ],
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+
+                      //AppSettings.openAppSettingsPanel(AppSettingsPanelType.volume);
+                      //AppSettings.openAppSettingsPanel(AppSettingsPanelType.internetConnectivity);
+                      //AppSettings.openAppSettingsPanel(AppSettingsPanelType.nfc);
+                      //AppSettings.openAppSettingsPanel(AppSettingsPanelType.wifi);
+
+                      /*
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Dialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(7),
+                        ),
+                        child: const SizedBox(
+                          height: 300,
+                          child: Column(
+                            children: [
+                              Text("test"),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );*/
+
+                      //  AppSettings.openAppSettings();
+                    }
+                  },
+                  child: OutlinedButton(
+                    style: FilledButton.styleFrom(
+                      fixedSize: const Size(150, 50),
+                    ),
+                    onPressed: (bleState is BleConnecting)
+                        ? null
+                        : () => context
+                            .read<BleBloc>()
+                            .add(const ConnectAndAuthenticateDevice(
+                              bleMac,
+                              customServiceUuid,
+                              actionsCharsUuid,
+                              password,
+                              true,
+                            )),
+                    child: const Text('CONNECT TO DEVICE'),
+                  ),
+                )),
             Visibility(
               visible: bleState.connected,
               child: BlocListener<BleBloc, BleState>(
@@ -370,7 +454,7 @@ class DeviceScreen extends StatelessWidget {
                             true,
                           ),
                         );
-         
+
                     context.read<BleBloc>().add(
                           const BleLastValueEvent(
                             bleMac,
@@ -421,7 +505,7 @@ class DeviceScreen extends StatelessWidget {
                 child: const Text('SCARICA DATI'),
               ),
             ),*/
-            
+
             /*
             OutlinedButton(
               style: FilledButton.styleFrom(
@@ -454,7 +538,7 @@ class DeviceScreen extends StatelessWidget {
               },
               child: const Text('LISTEN LAST VALUE'),
             ),*/
-            
+
             /*
             
            

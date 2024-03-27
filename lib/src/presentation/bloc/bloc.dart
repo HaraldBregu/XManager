@@ -1,9 +1,6 @@
 export 'ble/ble_bloc.dart';
 export 'ble/ble_event.dart';
 export 'ble/ble_state.dart';
-export 'device/device_bloc.dart';
-export 'device/device_event.dart';
-export 'device/device_state.dart';
 export 'user/user_bloc.dart';
 export 'user/user_event.dart';
 export 'user/user_state.dart';

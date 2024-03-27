@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xmanager/src/core/error/exeptions.dart';
 import 'package:xmanager/src/core/usecase.dart';
 import 'package:xmanager/src/domain/usecases/ble_usecases.dart';
+import 'package:xmanager/src/domain/usecases/get_app_permissions.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
 
 class BleBloc extends Bloc<BleEvent, BleState> {
@@ -80,15 +82,38 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     ConnectAndAuthenticateDevice event,
     Emitter<BleState> emit,
   ) async {
-    final deviceIsConnected =
-        await bleDeviceIsConnectedUseCase.call(event.deviceUuid);
-
-    if (!deviceIsConnected) {
-      emit(const BleConnecting());
-      await bleConnectDeviceUseCase.call(event.deviceUuid);
+    // Check if is not connected
+    // and then connect to device
+    if (!await bleDeviceIsConnectedUseCase.call(event.deviceUuid)) {
+      try {
+        emit(const BleConnecting());
+        await bleConnectDeviceUseCase.call(event.deviceUuid);
+      } on BluetoothPermissionsExeption {
+        // Change state
+        // if didnt connect to device
+        // for missing permissions
+        emit(const BleMissingPermissions());
+        return;
+      } catch (error) {
+        print("couldnt connecto to device");
+        return;
+      }
     }
 
-    await bleDiscoverServicesUseCase.call(event.deviceUuid);
+    // Discover services
+    // catch exceptions
+    try {
+      emit(const BleDiscoveringServices());
+      await bleDiscoverServicesUseCase.call(event.deviceUuid);
+    } on BluetoothPermissionsExeption {
+      // Change state
+      // for missing permissions
+      emit(const BleMissingPermissions());
+      return;
+    } catch (error) {
+      print("couldn't discover services");
+      return;
+    }
 
     emit(BleWillWriteData(data: state.data, connected: state.connected));
 
@@ -142,7 +167,7 @@ class BleBloc extends Bloc<BleEvent, BleState> {
         withoutResponse: event.withoutResponse,
       ),
     );
-    
+
     //emit(BleDidWriteData(data: state.data, connected: state.connected));
   }
 
@@ -178,8 +203,8 @@ class BleBloc extends Bloc<BleEvent, BleState> {
         // print(data);
         if (state is BleWillWriteData) {
           emit(BleDidWriteData(data: data, connected: state.connected));
-        } 
-        
+        }
+
         return state;
       },
     ).catchError((error) {
