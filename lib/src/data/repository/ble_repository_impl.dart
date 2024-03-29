@@ -1,3 +1,5 @@
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/core/error/exeptions.dart';
 import 'package:xmanager/src/data/datasources/local/ble_datasource.dart';
 import 'package:xmanager/src/data/datasources/local/permissions_datasource.dart';
@@ -11,9 +13,6 @@ class BleRepositoryImpl implements BleRepository {
 
   @override
   Future<void> startScan(int seconds, List<String>? services) async {
-    if (!await _permissionsDataSource.bluetoothScanPermissionGranted()) {
-      throw BluetoothPermissionsExeption();
-    }
     _dataSource.startScan(seconds, services);
   }
 
@@ -43,27 +42,26 @@ class BleRepositoryImpl implements BleRepository {
 
   @override
   Future<void> connect(String uuid) async {
-    if (!await _permissionsDataSource.bluetoothConnectPermissionGranted()) {
-      throw BluetoothPermissionsExeption();
+    if (!await _dataSource.isOn) {
+      throw BluetoothOffExeption();
     }
+    
+    final bleConnectPermissions =
+        await _permissionsDataSource.bluetoothConnectPermissionsStatus();
+    if (bleConnectPermissions != AppPermissionStatus.granted) {
+      throw PermissionsExeption();
+    }
+
     await _dataSource.connect(uuid);
   }
 
   @override
   Future<void> connectAndDiscoverServices(String uuid) async {
-    if (!await _permissionsDataSource.bluetoothConnectPermissionGranted()) {
-      throw BluetoothPermissionsExeption();
-    }
-
     await _dataSource.connectAndDiscoverServices(uuid);
   }
 
   @override
   Future<void> discoverServices(String uuid) async {
-    if (!await _permissionsDataSource.bluetoothConnectPermissionGranted()) {
-      throw BluetoothPermissionsExeption();
-    }
-
     await _dataSource.discoverServices(uuid);
   }
 
@@ -75,10 +73,6 @@ class BleRepositoryImpl implements BleRepository {
 
   @override
   Future<bool> isConnected(String uuid) async {
-    if (!await _permissionsDataSource.bluetoothConnectPermissionGranted()) {
-      //  return throw BluetoothConnectPermissionExeption();
-    }
-
     return await _dataSource.isConnected(uuid);
   }
 

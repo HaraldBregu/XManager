@@ -7,6 +7,9 @@ abstract class BleDataSource {
   Stream<List<ScanResult>> get scanResults;
   Stream<bool> get isScanning;
   Future<bool> get isSupported;
+  Future<bool> get isOn;
+  Stream<BluetoothAdapterState> get adapterState;
+  Future<BluetoothAdapterState> get adapterStateNow;
   Future<void> turnOn();
   Future<void> connect(String uuid);
   Future<void> connectAndDiscoverServices(String uuid);
@@ -79,10 +82,27 @@ class BleDataSourceImpl implements BleDataSource {
   Future<bool> get isSupported => FlutterBluePlus.isSupported;
 
   @override
-  Future<void> turnOn() => FlutterBluePlus.turnOn();
+  Future<bool> get isOn async {
+    return FlutterBluePlus.adapterStateNow == BluetoothAdapterState.on;
+  }
 
   @override
-  Future<void> connect(String uuid) => BluetoothDevice.fromId(uuid).connect();
+  Stream<BluetoothAdapterState> get adapterState =>
+      FlutterBluePlus.adapterState;
+
+  @override
+  Future<BluetoothAdapterState> get adapterStateNow async =>
+      FlutterBluePlus.adapterStateNow;
+
+  @override
+  Future<void> turnOn() async {
+    return await FlutterBluePlus.turnOn();
+  }
+
+  @override
+  Future<void> connect(String uuid) {
+    return BluetoothDevice.fromId(uuid).connect();
+  }
 
   @override
   Future<void> connectAndDiscoverServices(String uuid) async {
@@ -96,7 +116,7 @@ class BleDataSourceImpl implements BleDataSource {
   @override
   Future<void> discoverServices(String uuid) =>
       BluetoothDevice.fromId(uuid).discoverServices();
-  
+
   @override
   Future<void> disconnect(String uuid) async {
     final device = BluetoothDevice.fromId(uuid);
@@ -144,7 +164,7 @@ class BleDataSourceImpl implements BleDataSource {
     );
 
     if (characteristics == null) return;
-    
+
     return await characteristics.write(value, withoutResponse: withoutResponse);
   }
 
@@ -168,7 +188,7 @@ class BleDataSourceImpl implements BleDataSource {
         .firstWhere(
           (e) => e.characteristicUuid == Guid(characteristicsUuid),
         );
-            
+
     return characteristics.lastValueStream;
   }
 

@@ -6,6 +6,8 @@ import 'package:xmanager/src/core/theme_extension.dart';
 import 'package:xmanager/src/presentation/bloc/app/app_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/app/app_event.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
+import 'package:xmanager/src/presentation/screens/device/bloc/device_bloc.dart';
+import 'package:xmanager/src/presentation/screens/device/bloc/device_event.dart';
 import 'package:xmanager/src/presentation/widgets/alert_card.dart';
 import 'package:xmanager/src/presentation/widgets/drawer_menu.dart';
 import 'package:xmanager/src/presentation/widgets/nav_bar.dart';
@@ -145,10 +147,18 @@ class HomeScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          context.read<AppBloc>().add(AppStartEvent());
+                          context
+                              .read<AppBloc>()
+                              .add(AppPermissionsStatusEvent());
                           context.read<BleBloc>().add(
-                              const ListenConnectionStateEvent(
-                                  "E7:C8:DF:65:5B:4B"));
+                                const ListenConnectionStateEvent(
+                                    "E7:C8:DF:65:5B:4B"),
+                              );
+
+                          const deviceEvent =
+                              DeviceSelectEvent("E7:C8:DF:65:5B:4B");
+                          context.read<DeviceBloc>().add(deviceEvent);
+
                           context.pushNamed("Device screen");
                         },
                         child: Container(
@@ -184,7 +194,17 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () => context.pushNamed("Device screen"),
+                        onTap: () {
+                          context.read<AppBloc>().add(AppStartEvent());
+                          context.read<BleBloc>().add(
+                                const ListenConnectionStateEvent(
+                                    "E7:C8:DF:65:5B:4B"),
+                              );
+                          final deviceEvent = DeviceStartEvent();
+                          context.read<DeviceBloc>().add(deviceEvent);
+
+                          context.pushNamed("Device screen");
+                        },
                         child: Container(
                           color: Colors.transparent,
                           height: 60,

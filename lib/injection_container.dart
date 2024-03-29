@@ -52,14 +52,10 @@ Future<void> init() async {
   
   sl.registerFactory(
     () => AppBloc(
-      locationPermissionsGrantedUseCase: sl(),
-      requestLocationPermissionsUseCase: sl(),
-      bluetoothPermissionsGrantedUseCase: sl(),
-      requestBluetoothPermissionsUseCase: sl(),
-      bluetoothConnectPermissionsGrantedUseCase: sl(),
-      requestBluetoothConnectPermissionsUseCase: sl(),
-      bluetoothScanPermissionsGrantedUseCase: sl(),
-      requestBluetoothScanPermissionsUseCase: sl(),
+      locationPermissions: sl(),
+      bluetoothPermissions: sl(),
+      bluetoothConnectPermissions: sl(),
+      bluetoothScanPermissions: sl(),
     ),
   );
 
@@ -67,7 +63,7 @@ Future<void> init() async {
     () => BleBloc(
       bleDeviceIsConnectedUseCase: sl(),
       bleDiscoverServicesUseCase: sl(),
-      bleConnectDeviceUseCase: sl(),
+      bluetoothConnectUseCase: sl(),
       bleDisconnectDeviceUseCase: sl(),
       bleDeviceConnectedUseCase: sl(),
       bleReadUseCase: sl(),
@@ -78,31 +74,28 @@ Future<void> init() async {
   );
 
   sl.registerFactory(
-    () => DeviceBloc(),
+    () => DeviceBloc(
+      bluetoothConnectPermissions: sl(),
+      bluetoothConnect: sl(),
+    ),
   );
 
   // UseCases
   sl.registerLazySingleton(() => LogInWithEmailUseCase(sl()));
   sl.registerLazySingleton(() => LogOutUserUseCase(sl()));
-  sl.registerLazySingleton(() => LocationPermissionsGrantedUseCase(sl()));
-  sl.registerLazySingleton(() => RequestLocationPermissionsUseCase(sl()));
-  sl.registerLazySingleton(() => BluetoothPermissionsGrantedUseCase(sl()));
-  sl.registerLazySingleton(() => RequestBluetoothPermissionsUseCase(sl()));
-  sl.registerLazySingleton(
-    () => BluetoothConnectPermissionsGrantedUseCase(sl()),
-  );
-  sl.registerLazySingleton(
-    () => RequestBluetoothConnectPermissionsUseCase(sl()),
-  );
-  sl.registerLazySingleton(() => BluetoothScanPermissionsGrantedUseCase(sl()));
-  sl.registerLazySingleton(() => RequestBluetoothScanPermissionsUseCase(sl()));
+  
+  sl.registerLazySingleton(() => LocationPermissionsUseCase(sl()));
+  sl.registerLazySingleton(() => BluetoothPermissionsUseCase(sl()));
+  sl.registerLazySingleton(() => BluetoothConnectPermissionsUseCase(sl()));
+  sl.registerLazySingleton(() => BluetoothScanPermissionsUseCase(sl()));
+
   sl.registerLazySingleton(() => GetCurrentUserUseCase(sl()));
   sl.registerLazySingleton(() => ValidEmailUseCase(sl()));
   sl.registerLazySingleton(() => PasswordStrengthPercUseCase(sl()));
   sl.registerLazySingleton(() => PasswordStrengthColorUseCase(sl()));
   sl.registerLazySingleton(() => BleDeviceIsConnectedUseCase(sl()));
   sl.registerLazySingleton(() => BleDiscoverServicesUseCase(sl()));
-  sl.registerLazySingleton(() => BleConnectDeviceUseCase(sl()));
+  sl.registerLazySingleton(() => BluetoothConnectUseCase(sl()));
   sl.registerLazySingleton(() => BleDisconnectDeviceUseCase(sl()));
   sl.registerLazySingleton(() => BleDeviceConnectedUseCase(sl()));
   sl.registerLazySingleton(() => BleReadUseCase(sl()));

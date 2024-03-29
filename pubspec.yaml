@@ -28,7 +28,6 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  app_settings: ^5.1.1
   auto_route: ^7.8.4
   bloc_concurrency: ^0.2.2
   cloud_firestore: ^4.13.6

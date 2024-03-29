@@ -1,10 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 import 'package:xmanager/src/presentation/bloc/app/app_bloc.dart';
+import 'package:xmanager/src/presentation/bloc/app/app_event.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
 import 'package:xmanager/src/presentation/screens/device/bloc/device_bloc.dart';
+import 'package:xmanager/src/presentation/screens/device/bloc/device_state.dart';
 import 'package:xmanager/src/presentation/widgets/alert_card.dart';
 import 'package:xmanager/src/presentation/widgets/indicator_icon.dart';
 import 'package:xmanager/src/presentation/widgets/progress_card.dart';
@@ -43,7 +47,7 @@ class DeviceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppBloc>().state;
-    //final deviceState = context.watch<DeviceBloc>().state;
+    final deviceState = context.watch<DeviceBloc>().state;
     final bleState = context.watch<BleBloc>().state;
 
     return Scaffold(
@@ -248,53 +252,11 @@ class DeviceScreen extends StatelessWidget {
             child: Text('$bleState'),
           ),
           SliverToBoxAdapter(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text("Bluetooth scan permission"),
-                if (context.watch<AppBloc>().state.bluetoothScanGranted)
-                  const Text("GRANTED")
-                else
-                  const Text("NOT GRANTED"),
-              ],
-            ),
-          ),
+            child: Text('$appState'),
+          ),          
           SliverToBoxAdapter(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text("Location permission"),
-                if (context.watch<AppBloc>().state.locationGranted)
-                  const Text("GRANTED")
-                else
-                  const Text("NOT GRANTED"),
-              ],
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text("Bluetooth connect permission"),
-                if (context.watch<AppBloc>().state.bluetoothConnectGranted)
-                  const Text("GRANTED")
-                else
-                  const Text("NOT GRANTED"),
-              ],
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text("Bluetooth permission"),
-                if (context.watch<AppBloc>().state.bluetoothGranted)
-                  const Text("GRANTED")
-                else
-                  const Text("NOT GRANTED"),
-              ],
-            ),
-          ),
+            child: Text('$deviceState'),
+          ),          
         ],
       ),
       bottomNavigationBar: Padding(
@@ -303,92 +265,129 @@ class DeviceScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Visibility(
-                visible: !bleState.connected,
-                child: BlocListener<BleBloc, BleState>(
-                  listener: (context, state) {
-                    if (state is BleMissingPermissions) {
-                      showGeneralDialog(
-                        context: context,
-                        barrierDismissible: true,
-                        barrierLabel: '',
-                        transitionDuration: const Duration(milliseconds: 40),
-                        pageBuilder: (context, animation1, animation2) {
-                          return Container();
-                        },
-                        transitionBuilder: (context, a1, a2, widget) {
-                          final appState = context.watch<AppBloc>().state;
 
-                          return ScaleTransition(
-                            scale:
+            // REGISTER DEVICE BUTTON
+            Visibility(
+              visible: deviceState is DeviceRegisterState,
+              child: OutlinedButton(
+                style: FilledButton.styleFrom(
+                  fixedSize: const Size(150, 50),
+                ),
+                onPressed: () {},
+                child: const Text('REGISTER DEVICE'),
+              ),
+            ),
+
+            // CONNECT DEVICE BUTTON
+            Visibility(
+              visible: deviceState is DeviceCanConnectState,
+              child: OutlinedButton(
+                style: FilledButton.styleFrom(
+                  fixedSize: const Size(150, 50),
+                ),
+                onPressed: () {},
+                child: const Text('CONNECT TO DEVICE'),
+              ),
+            ),
+
+            // REQUEST PERMISSIONS DEVICE BUTTON
+            Visibility(
+              visible: deviceState is MissingBleConnPermissionsState,
+              child: OutlinedButton(
+                style: FilledButton.styleFrom(
+                  fixedSize: const Size(150, 50),
+                ),
+                onPressed: () {},
+                child: const Text('REQUEST PERMISSIONS'),
+              ),
+            ),
+
+            Visibility(
+              visible: false, // !bleState.connected,
+              child: BlocListener<BleBloc, BleState>(
+                listener: (context, state) {
+                  if (state is BleMissingPermissions) {
+                    showGeneralDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      barrierLabel: '',
+                      transitionDuration: const Duration(milliseconds: 40),
+                      pageBuilder: (context, animation1, animation2) {
+                        return Container();
+                      },
+                      transitionBuilder: (context, a1, a2, widget) {
+                        final appState = context.watch<AppBloc>().state;
+
+                        return ScaleTransition(
+                          scale:
+                              Tween<double>(begin: 0.5, end: 1.0).animate(a1),
+                          child: FadeTransition(
+                            opacity:
                                 Tween<double>(begin: 0.5, end: 1.0).animate(a1),
-                            child: FadeTransition(
-                              opacity: Tween<double>(begin: 0.5, end: 1.0)
-                                  .animate(a1),
-                              child: Dialog(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                ),
-                                child: SizedBox(
-                                  height: 300,
-                                  child: Column(
-                                    children: [
-                                      Text("Title"),
-                                      if (appState.bluetoothGranted) ...[
-                                        Text("Bluetooth granted"),
-                                      ] else ...[
-                                        Text("Bluetooth not granted"),
-                                      ],
-                                      if (appState.bluetoothConnectGranted) ...[
-                                        Text("Bluetooth connect granted"),
-                                      ] else ...[
-                                        Text("Bluetooth connect not granted"),
-                                      ],
-                                      if (appState.bluetoothScanGranted) ...[
-                                        Text("Bluetooth scan granted"),
-                                      ] else ...[
-                                        Text("Bluetooth scan not granted"),
-                                      ],
-                                      if (appState.locationGranted) ...[
-                                        Text("Location granted"),
-                                      ] else ...[
-                                        Text("Location not granted"),
-                                      ],
+                            child: Dialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(7),
+                              ),
+                              child: SizedBox(
+                                height: 300,
+                                child: Column(
+                                  children: [
+                                    const Text("Title"),
+                                    if (appState.bluetoothPermissionStatus !=
+                                        AppPermissionStatus.granted) ...[
+                                      ListTile(
+                                        title:
+                                            const Text("Bluetooth not granted"),
+                                        onTap: () {},
+                                      ),
                                     ],
-                                  ),
+                                    if (appState
+                                            .bluetoothConnectPermissionStatus !=
+                                        AppPermissionStatus.granted) ...[
+                                      ListTile(
+                                        title: const Text(
+                                            "Bluetooth connect not granted"),
+                                        onTap: () {
+                                          context.read<AppBloc>().add(
+                                              RequestBluetoothConnectPermission());
+                                        },
+                                      ),
+                                    ],
+                                    if (appState
+                                            .bluetoothScanPermissionStatus !=
+                                        AppPermissionStatus.granted) ...[
+                                      ListTile(
+                                        title: const Text(
+                                            "Bluetooth scan not granted"),
+                                        onTap: () {
+                                          context.read<AppBloc>().add(
+                                              RequestBluetoothScanPermission());
+                                        },
+                                      ),
+                                    ],
+                                    if (context
+                                            .read<AppBloc>()
+                                            .state
+                                            .locationPermissionStatus !=
+                                        AppPermissionStatus.granted) ...[
+                                      ListTile(
+                                        title:
+                                            const Text("Location not granted"),
+                                        onTap: () async {
+                                          context
+                                              .read<AppBloc>()
+                                              .add(RequestLocationPermission());
+                                        },
+                                      ),
+                                    ]
+                                  ],
                                 ),
                               ),
                             ),
-                          );
-                        },
-                      );
-
-                      //AppSettings.openAppSettingsPanel(AppSettingsPanelType.volume);
-                      //AppSettings.openAppSettingsPanel(AppSettingsPanelType.internetConnectivity);
-                      //AppSettings.openAppSettingsPanel(AppSettingsPanelType.nfc);
-                      //AppSettings.openAppSettingsPanel(AppSettingsPanelType.wifi);
-
-                      /*
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Dialog(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(7),
-                        ),
-                        child: const SizedBox(
-                          height: 300,
-                          child: Column(
-                            children: [
-                              Text("test"),
-                            ],
                           ),
-                        ),
-                      );
-                    },
-                  );*/
-
-                      //  AppSettings.openAppSettings();
+                        );
+                      },
+                    );
                     }
                   },
                   child: OutlinedButton(
@@ -408,7 +407,8 @@ class DeviceScreen extends StatelessWidget {
                             )),
                     child: const Text('CONNECT TO DEVICE'),
                   ),
-                )),
+              ),
+            ),
             Visibility(
               visible: bleState.connected,
               child: BlocListener<BleBloc, BleState>(

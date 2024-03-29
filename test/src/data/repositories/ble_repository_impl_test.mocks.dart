@@ -8,6 +8,7 @@ import 'dart:async' as _i3;
 import 'package:flutter_blue_plus/flutter_blue_plus.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:permission_handler/permission_handler.dart' as _i6;
+import 'package:xmanager/src/core/enums.dart' as _i7;
 import 'package:xmanager/src/data/datasources/local/ble_datasource.dart' as _i2;
 import 'package:xmanager/src/data/datasources/local/permissions_datasource.dart'
     as _i5;
@@ -50,6 +51,12 @@ class MockBleDataSource extends _i1.Mock implements _i2.BleDataSource {
         Invocation.getter(#isSupported),
         returnValue: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
+  @override
+  _i3.Stream<_i4.BluetoothAdapterState> get adapterState => (super.noSuchMethod(
+        Invocation.getter(#adapterState),
+        returnValue: _i3.Stream<_i4.BluetoothAdapterState>.empty(),
+      ) as _i3.Stream<_i4.BluetoothAdapterState>);
 
   @override
   _i3.Future<void> startScan(
@@ -247,54 +254,65 @@ class MockPermissionsDataSource extends _i1.Mock
       ) as _i3.Future<List<_i6.Permission>>);
 
   @override
-  _i3.Future<_i6.PermissionStatus> permissionStatus(
+  _i3.Future<_i7.AppPermissionStatus> permissionStatus(
           _i6.Permission? permission) =>
       (super.noSuchMethod(
         Invocation.method(
           #permissionStatus,
           [permission],
         ),
-        returnValue:
-            _i3.Future<_i6.PermissionStatus>.value(_i6.PermissionStatus.denied),
-      ) as _i3.Future<_i6.PermissionStatus>);
+        returnValue: _i3.Future<_i7.AppPermissionStatus>.value(
+            _i7.AppPermissionStatus.granted),
+      ) as _i3.Future<_i7.AppPermissionStatus>);
 
   @override
-  _i3.Future<_i6.PermissionStatus> requestPermission(
+  _i3.Future<_i7.AppPermissionStatus> requestPermission(
           _i6.Permission? permission) =>
       (super.noSuchMethod(
         Invocation.method(
           #requestPermission,
           [permission],
         ),
-        returnValue:
-            _i3.Future<_i6.PermissionStatus>.value(_i6.PermissionStatus.denied),
-      ) as _i3.Future<_i6.PermissionStatus>);
+        returnValue: _i3.Future<_i7.AppPermissionStatus>.value(
+            _i7.AppPermissionStatus.granted),
+      ) as _i3.Future<_i7.AppPermissionStatus>);
 
   @override
-  _i3.Future<_i6.PermissionStatus> requestLocationPermission() =>
+  _i3.Future<_i7.AppPermissionStatus> locationPermissionRequest() =>
       (super.noSuchMethod(
         Invocation.method(
-          #requestLocationPermission,
+          #locationPermissionRequest,
           [],
         ),
-        returnValue:
-            _i3.Future<_i6.PermissionStatus>.value(_i6.PermissionStatus.denied),
-      ) as _i3.Future<_i6.PermissionStatus>);
+        returnValue: _i3.Future<_i7.AppPermissionStatus>.value(
+            _i7.AppPermissionStatus.granted),
+      ) as _i3.Future<_i7.AppPermissionStatus>);
 
   @override
-  _i3.Future<bool> locationPermissionGranted() => (super.noSuchMethod(
+  _i3.Future<_i7.AppPermissionStatus> locationPermissionStatus() =>
+      (super.noSuchMethod(
         Invocation.method(
-          #locationPermissionGranted,
+          #locationPermissionStatus,
+          [],
+        ),
+        returnValue: _i3.Future<_i7.AppPermissionStatus>.value(
+            _i7.AppPermissionStatus.granted),
+      ) as _i3.Future<_i7.AppPermissionStatus>);
+
+  @override
+  _i3.Future<bool> bluetoothPermissionRequest() => (super.noSuchMethod(
+        Invocation.method(
+          #bluetoothPermissionRequest,
           [],
         ),
         returnValue: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
 
   @override
-  _i3.Future<_i6.PermissionStatus> requestBluetoothPermission() =>
+  _i3.Future<_i6.PermissionStatus> bluetoothPermissionStatus() =>
       (super.noSuchMethod(
         Invocation.method(
-          #requestBluetoothPermission,
+          #bluetoothPermissionStatus,
           [],
         ),
         returnValue:
@@ -311,10 +329,19 @@ class MockPermissionsDataSource extends _i1.Mock
       ) as _i3.Future<bool>);
 
   @override
-  _i3.Future<_i6.PermissionStatus> requestBluetoothConnectPermission() =>
+  _i3.Future<bool> bluetoothConnectPermissionRequest() => (super.noSuchMethod(
+        Invocation.method(
+          #bluetoothConnectPermissionRequest,
+          [],
+        ),
+        returnValue: _i3.Future<bool>.value(false),
+      ) as _i3.Future<bool>);
+
+  @override
+  _i3.Future<_i6.PermissionStatus> bluetoothConnectPermissionStatus() =>
       (super.noSuchMethod(
         Invocation.method(
-          #requestBluetoothConnectPermission,
+          #bluetoothConnectPermissionStatus,
           [],
         ),
         returnValue:
@@ -331,10 +358,19 @@ class MockPermissionsDataSource extends _i1.Mock
       ) as _i3.Future<bool>);
 
   @override
-  _i3.Future<_i6.PermissionStatus> requestBluetoothScanPermission() =>
+  _i3.Future<bool> bluetoothScanPermissionRequest() => (super.noSuchMethod(
+        Invocation.method(
+          #bluetoothScanPermissionRequest,
+          [],
+        ),
+        returnValue: _i3.Future<bool>.value(false),
+      ) as _i3.Future<bool>);
+
+  @override
+  _i3.Future<_i6.PermissionStatus> bluetoothScanPermissionStatus() =>
       (super.noSuchMethod(
         Invocation.method(
-          #requestBluetoothScanPermission,
+          #bluetoothScanPermissionStatus,
           [],
         ),
         returnValue:

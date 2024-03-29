@@ -37,6 +37,9 @@ class BleDiscoveringServices extends BleState {
 class BleMissingPermissions extends BleState {
   const BleMissingPermissions({super.data, super.connected = false});
 }
+class BleOff extends BleState {
+  const BleOff({super.data, super.connected = false});
+}
 
 class BleDownloadingData extends BleState {
   const BleDownloadingData({super.data, super.connected = false});

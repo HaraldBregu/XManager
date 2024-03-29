@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/presentation/bloc/app/app_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
 import 'package:xmanager/src/presentation/screens/ble/service_list.dart';
@@ -51,7 +52,8 @@ class _BleDebugContent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text("Location permission"),
-                if (context.watch<AppBloc>().state.locationGranted)
+                if (context.watch<AppBloc>().state.locationPermissionStatus ==
+                    AppPermissionStatus.granted)
                   const Text("GRANTED")
                 else
                   const Text("NOT GRANTED"),
@@ -61,7 +63,8 @@ class _BleDebugContent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text("Bluetooth permission"),
-                if (context.watch<AppBloc>().state.bluetoothGranted)
+                if (context.watch<AppBloc>().state.bluetoothPermissionStatus ==
+                    AppPermissionStatus.granted)
                   const Text("GRANTED")
                 else
                   const Text("NOT GRANTED"),
@@ -71,7 +74,11 @@ class _BleDebugContent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text("Bluetooth connect permission"),
-                if (context.watch<AppBloc>().state.bluetoothConnectGranted)
+                if (context
+                        .watch<AppBloc>()
+                        .state
+                        .bluetoothConnectPermissionStatus ==
+                    AppPermissionStatus.granted)
                   const Text("GRANTED")
                 else
                   const Text("NOT GRANTED"),
@@ -81,7 +88,11 @@ class _BleDebugContent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text("Bluetooth scan permission"),
-                if (context.watch<AppBloc>().state.bluetoothScanGranted)
+                if (context
+                        .watch<AppBloc>()
+                        .state
+                        .bluetoothScanPermissionStatus ==
+                    AppPermissionStatus.granted)
                   const Text("GRANTED")
                 else
                   const Text("NOT GRANTED"),

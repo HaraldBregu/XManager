@@ -1,80 +1,115 @@
 import 'package:permission_handler/permission_handler.dart';
-
-//permission.isDenied
-//permission.isGranted
-//permission.isLimited
-//permission.isPermanentlyDenied
-//permission.isRestricted
+import 'package:xmanager/src/core/enums.dart';
+import 'package:xmanager/src/core/error/exeptions.dart';
 
 abstract class PermissionsDataSource {
+  
   Future<List<Permission>> permissionList();
-  Future<PermissionStatus> permissionStatus(Permission permission);
-  Future<PermissionStatus> requestPermission(Permission permission);
-  Future<PermissionStatus> requestLocationPermission();
-  Future<bool> locationPermissionGranted();
-  Future<PermissionStatus> requestBluetoothPermission();
-  Future<bool> bluetoothPermissionGranted();
-  Future<PermissionStatus> requestBluetoothConnectPermission();
-  Future<bool> bluetoothConnectPermissionGranted();
-  Future<PermissionStatus> requestBluetoothScanPermission();
-  Future<bool> bluetoothScanPermissionGranted();
+
+  Future<AppPermissionStatus> permissionStatus(Permission permission);
+  Future<AppPermissionStatus> requestPermission(Permission permission);
+
+  Future<AppPermissionStatus> locationPermissionsRequest();
+  Future<AppPermissionStatus> locationPermissionsStatus();
+
+  Future<AppPermissionStatus> bluetoothPermissionsRequest();
+  Future<AppPermissionStatus> bluetoothPermissionsStatus();
+
+  Future<AppPermissionStatus> bluetoothConnectPermissionsRequest();
+  Future<AppPermissionStatus> bluetoothConnectPermissionsStatus();
+
+  Future<AppPermissionStatus> bluetoothScanPermissionsRequest();
+  Future<AppPermissionStatus> bluetoothScanPermissionsStatus();
 }
 
 class PermissionsDataSourceImpl implements PermissionsDataSource {
   PermissionsDataSourceImpl();
 
   @override
-  Future<List<Permission>> permissionList() async {
-    return Permission.values;
+  Future<List<Permission>> permissionList() async => Permission.values;
+
+  @override
+  Future<AppPermissionStatus> permissionStatus(Permission permission) async {
+    switch (await permission.status) {
+      case PermissionStatus.denied:
+        return AppPermissionStatus.denied;
+      case PermissionStatus.granted:
+        return AppPermissionStatus.granted;
+      case PermissionStatus.restricted:
+        return AppPermissionStatus.denied;
+      case PermissionStatus.limited:
+        return AppPermissionStatus.granted;
+      case PermissionStatus.permanentlyDenied:
+        return AppPermissionStatus.permanentlyDenied;
+      case PermissionStatus.provisional:
+        return AppPermissionStatus.granted;
+    }
   }
 
   @override
-  Future<PermissionStatus> permissionStatus(Permission permission) {
-    return permission.status;
+  Future<AppPermissionStatus> requestPermission(Permission permission) async {
+    final status = await permission.request();
+    switch (status) {
+      case PermissionStatus.denied:
+        return AppPermissionStatus.denied;
+      case PermissionStatus.granted:
+        return AppPermissionStatus.granted;
+      case PermissionStatus.restricted:
+        return AppPermissionStatus.granted;
+      case PermissionStatus.limited:
+        return AppPermissionStatus.granted;
+      case PermissionStatus.permanentlyDenied:
+        return AppPermissionStatus.permanentlyDenied;
+      case PermissionStatus.provisional:
+        return AppPermissionStatus.granted;
+    }
+  }
+
+  // LOCATION
+
+  @override
+  Future<AppPermissionStatus> locationPermissionsRequest() async {
+    final statusRequest = await requestPermission(Permission.location);
+    return statusRequest;
   }
 
   @override
-  Future<PermissionStatus> requestPermission(Permission permission) {
-    return permission.request();
+  Future<AppPermissionStatus> locationPermissionsStatus() =>
+      permissionStatus(Permission.location);
+
+  // BLUETOOTH CONNECT
+
+  @override
+  Future<AppPermissionStatus> bluetoothConnectPermissionsRequest() async {
+    final statusRequest = await requestPermission(Permission.bluetoothConnect);
+    return statusRequest;
   }
 
   @override
-  Future<PermissionStatus> requestLocationPermission() async {
-    return Permission.location.request();
+  Future<AppPermissionStatus> bluetoothConnectPermissionsStatus() =>
+      permissionStatus(Permission.bluetoothConnect);
+
+  // BLUETOOTH
+
+  @override
+  Future<AppPermissionStatus> bluetoothPermissionsRequest() async {
+    final statusRequest = await requestPermission(Permission.bluetooth);
+    return statusRequest;
   }
 
   @override
-  Future<bool> locationPermissionGranted() async {
-    return Permission.location.isGranted;
-  }
+  Future<AppPermissionStatus> bluetoothPermissionsStatus() =>
+      permissionStatus(Permission.bluetooth);
+
+  // BLUETOOTH SCAN
 
   @override
-  Future<PermissionStatus> requestBluetoothPermission() {
-    return Permission.bluetooth.request();
+  Future<AppPermissionStatus> bluetoothScanPermissionsRequest() async {
+    final statusRequest = await requestPermission(Permission.bluetoothScan);
+    return statusRequest;
   }
-
+      
   @override
-  Future<bool> bluetoothPermissionGranted() async {
-    return Permission.bluetooth.isGranted;
-  }
-
-  @override
-  Future<PermissionStatus> requestBluetoothConnectPermission() async {
-    return Permission.bluetoothConnect.request();
-  }
-
-  @override
-  Future<bool> bluetoothConnectPermissionGranted() async {
-    return Permission.bluetoothConnect.isGranted;
-  }
-
-  @override
-  Future<bool> bluetoothScanPermissionGranted() {
-    return Permission.bluetoothScan.isGranted;
-  }
-
-  @override
-  Future<PermissionStatus> requestBluetoothScanPermission() {
-    return Permission.bluetoothScan.request();
-  }
+  Future<AppPermissionStatus> bluetoothScanPermissionsStatus() =>
+      permissionStatus(Permission.bluetoothScan);
 }

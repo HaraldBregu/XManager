@@ -39,8 +39,8 @@ class BleIsScanningUseCase implements StreamUseCase<bool, NoParams> {
   Stream<bool> call(NoParams params) => _bleRepository.isScanning;
 }
 
-class BleConnectDeviceUseCase implements BaseUseCase<void, String> {
-  const BleConnectDeviceUseCase(this._bleRepository);
+class BluetoothConnectUseCase implements BaseUseCase<void, String> {
+  const BluetoothConnectUseCase(this._bleRepository);
   final BleRepository _bleRepository;
 
   @override

@@ -4,6 +4,8 @@ abstract class AppEvent {
 
 class AppStartEvent extends AppEvent {}
 
+class AppPermissionsStatusEvent extends AppEvent {}
+
 class RequestLocationPermission extends AppEvent {}
 
 class RequestBluetoothPermission extends AppEvent {}

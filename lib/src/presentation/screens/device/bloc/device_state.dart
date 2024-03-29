@@ -1,28 +1,39 @@
 import 'package:equatable/equatable.dart';
 
-/// DEVICE STATE
-///
-/// Initial is empty, no pairing BLE device added
-/// Paired device has uuid, name ecc but not connected
-///
-/// ON BLE connecion update the device state
-/// name, version, data
+class DeviceState extends Equatable {
+  final String? uuid;
 
-abstract class DeviceState extends Equatable {
-  const DeviceState();
+  const DeviceState({
+    this.uuid,
+  });
+
+  DeviceState copyWith({
+    String? uuid,
+  }) {
+    return DeviceState(
+      uuid: uuid ?? this.uuid,
+    );
+  }
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [
+        uuid,
+      ];
+
 }
 
-class InitialDeviceState extends DeviceState {}
+class DeviceRegisterState extends DeviceState {
+  const DeviceRegisterState();
+}
 
-class DeviceRegisteredState extends DeviceState {}
+class DeviceCanConnectState extends DeviceState {
+  const DeviceCanConnectState({super.uuid});
+}
 
-class DeviceLoadingState extends DeviceState {}
+class MissingBleConnPermissionsState extends DeviceState {
+  const MissingBleConnPermissionsState();
+}
 
-class DeviceLoadedState extends DeviceState {
-  final List<String> devices;
-
-  const DeviceLoadedState(this.devices);
+class MissingBlePermPermissionsState extends DeviceState {
+  const MissingBlePermPermissionsState();
 }

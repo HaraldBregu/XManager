@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/presentation/bloc/app/app_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/app/app_event.dart';
 
@@ -56,7 +57,11 @@ class _DeviceSearchState extends State<DeviceSearch> {
                   ListTile(
                     title: const Text("Location granted"),
                     trailing: Text(
-                        context.watch<AppBloc>().state.locationGranted
+                        context
+                                .watch<AppBloc>()
+                                .state
+                                .locationPermissionStatus ==
+                            AppPermissionStatus.granted
                             ? "true"
                             : "false"),
                     onTap: () => context.read<AppBloc>()
@@ -65,7 +70,11 @@ class _DeviceSearchState extends State<DeviceSearch> {
                   ListTile(
                     title: const Text("Bluetooth granted"),
                     trailing: Text(
-                        context.watch<AppBloc>().state.bluetoothGranted
+                        context
+                                .watch<AppBloc>()
+                                .state
+                                .bluetoothPermissionStatus ==
+                            AppPermissionStatus.granted
                             ? "true"
                             : "false"),
                     onTap: () => context.read<AppBloc>()

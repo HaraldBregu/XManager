@@ -13,4 +13,8 @@ class CacheExeption implements Exception {}
 
 class DatabaseExeption implements Exception {}
 
-class BluetoothPermissionsExeption implements Exception {}
+// APP PERMISSIONS
+
+class PermissionsExeption implements Exception {}
+
+class BluetoothOffExeption implements Exception {}

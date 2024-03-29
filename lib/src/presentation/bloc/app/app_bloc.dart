@@ -5,30 +5,19 @@ import 'package:xmanager/src/presentation/bloc/app/app_event.dart';
 import 'package:xmanager/src/presentation/bloc/app/app_state.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
-  final LocationPermissionsGrantedUseCase locationPermissionsGrantedUseCase;
-  final RequestLocationPermissionsUseCase requestLocationPermissionsUseCase;
-  final BluetoothPermissionsGrantedUseCase bluetoothPermissionsGrantedUseCase;
-  final RequestBluetoothPermissionsUseCase requestBluetoothPermissionsUseCase;
-  final BluetoothConnectPermissionsGrantedUseCase
-      bluetoothConnectPermissionsGrantedUseCase;
-  final RequestBluetoothConnectPermissionsUseCase
-      requestBluetoothConnectPermissionsUseCase;
-  final BluetoothScanPermissionsGrantedUseCase
-      bluetoothScanPermissionsGrantedUseCase;
-  final RequestBluetoothScanPermissionsUseCase
-      requestBluetoothScanPermissionsUseCase;
+  final LocationPermissionsUseCase locationPermissions;
+  final BluetoothPermissionsUseCase bluetoothPermissions;
+  final BluetoothConnectPermissionsUseCase bluetoothConnectPermissions;
+  final BluetoothScanPermissionsUseCase bluetoothScanPermissions;
 
   AppBloc({
-    required this.locationPermissionsGrantedUseCase,
-    required this.requestLocationPermissionsUseCase,
-    required this.bluetoothPermissionsGrantedUseCase,
-    required this.requestBluetoothPermissionsUseCase,
-    required this.bluetoothConnectPermissionsGrantedUseCase,
-    required this.requestBluetoothConnectPermissionsUseCase,
-    required this.bluetoothScanPermissionsGrantedUseCase,
-    required this.requestBluetoothScanPermissionsUseCase,
+    required this.locationPermissions,
+    required this.bluetoothPermissions,
+    required this.bluetoothConnectPermissions,
+    required this.bluetoothScanPermissions,
   }) : super(const AppState()) {
     on<AppStartEvent>(_onStartEvent);
+    on<AppPermissionsStatusEvent>(_onPermissionsStatusEvent);
     on<RequestLocationPermission>(_onRequestLocationPermission);
     on<RequestBluetoothPermission>(_onRequestBluetoothPermission);
     on<RequestBluetoothConnectPermission>(_onRequestBluetoothConnectPermission);
@@ -38,47 +27,68 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   Future<void> _onStartEvent(
     AppStartEvent event,
     Emitter<AppState> emit,
-  ) async {
-    final locationUsecase =
-        await locationPermissionsGrantedUseCase.call(NoParams());
-    final bluetoothUsecase =
-        await bluetoothPermissionsGrantedUseCase.call(NoParams());
-    final bluetoothConnectUsecase =
-        await bluetoothConnectPermissionsGrantedUseCase.call(NoParams());
-    final bluetoothScanUsecase =
-        await bluetoothScanPermissionsGrantedUseCase.call(NoParams());
+  ) async {}
 
-    emit(state.copyWith(locationGranted: locationUsecase));
-    emit(state.copyWith(bluetoothGranted: bluetoothUsecase));
-    emit(state.copyWith(bluetoothConnectGranted: bluetoothConnectUsecase));
-    emit(state.copyWith(bluetoothScanGranted: bluetoothScanUsecase));
+  Future<void> _onPermissionsStatusEvent(
+    AppPermissionsStatusEvent event,
+    Emitter<AppState> emit,
+  ) async {
+    final locationStatus =
+        await locationPermissions.call(const PermissionsParams());
+    final bluetoothStatus =
+        await bluetoothPermissions.call(const PermissionsParams());
+    final bluetoothConnectStatus =
+        await bluetoothConnectPermissions.call(const PermissionsParams());
+    final bluetoothScanStatus =
+        await bluetoothScanPermissions.call(const PermissionsParams());
+
+    emit(
+      state.copyWith(
+        locationPermissionStatus: locationStatus,
+        bluetoothPermissionStatus: bluetoothStatus,
+        bluetoothConnectPermissionStatus: bluetoothConnectStatus,
+        bluetoothScanPermissionStatus: bluetoothScanStatus,
+      ),
+    );
   }
 
   Future<void> _onRequestLocationPermission(
     RequestLocationPermission event,
     Emitter<AppState> emit,
   ) async {
-    await requestLocationPermissionsUseCase.call(NoParams());
+    final request =
+        await locationPermissions.call(const PermissionsParams(request: true));
+    final newState = state.copyWith(locationPermissionStatus: request);
+    emit(newState);
   }
 
   Future<void> _onRequestBluetoothPermission(
     RequestBluetoothPermission event,
     Emitter<AppState> emit,
   ) async {
-    await requestBluetoothPermissionsUseCase.call(NoParams());
+    final request =
+        await bluetoothPermissions.call(const PermissionsParams(request: true));
+    final newState = state.copyWith(bluetoothPermissionStatus: request);
+    emit(newState);
   }
 
   Future<void> _onRequestBluetoothConnectPermission(
     RequestBluetoothConnectPermission event,
     Emitter<AppState> emit,
   ) async {
-    await requestBluetoothConnectPermissionsUseCase.call(NoParams());
+    final request = await bluetoothConnectPermissions
+        .call(const PermissionsParams(request: true));
+    final newState = state.copyWith(bluetoothConnectPermissionStatus: request);
+    emit(newState);
   }
 
   Future<void> _onRequestBluetoothScanPermission(
     RequestBluetoothScanPermission event,
     Emitter<AppState> emit,
   ) async {
-    await requestBluetoothScanPermissionsUseCase.call(NoParams());
+    final request = await bluetoothScanPermissions
+        .call(const PermissionsParams(request: true));
+    final newState = state.copyWith(bluetoothScanPermissionStatus: request);
+    emit(newState);
   }
 }

@@ -10,7 +10,7 @@ import 'package:xmanager/src/presentation/bloc/bloc.dart';
 class BleBloc extends Bloc<BleEvent, BleState> {
   final BleDeviceIsConnectedUseCase bleDeviceIsConnectedUseCase;
   final BleDiscoverServicesUseCase bleDiscoverServicesUseCase;
-  final BleConnectDeviceUseCase bleConnectDeviceUseCase;
+  final BluetoothConnectUseCase bluetoothConnectUseCase;
   final BleDisconnectDeviceUseCase bleDisconnectDeviceUseCase;
   final BleDeviceConnectedUseCase bleDeviceConnectedUseCase;
   final BleReadUseCase bleReadUseCase;
@@ -21,7 +21,7 @@ class BleBloc extends Bloc<BleEvent, BleState> {
   BleBloc({
     required this.bleDeviceIsConnectedUseCase,
     required this.bleDiscoverServicesUseCase,
-    required this.bleConnectDeviceUseCase,
+    required this.bluetoothConnectUseCase,
     required this.bleDisconnectDeviceUseCase,
     required this.bleDeviceConnectedUseCase,
     required this.bleReadUseCase,
@@ -72,7 +72,7 @@ class BleBloc extends Bloc<BleEvent, BleState> {
 
     if (!deviceIsConnected) {
       emit(const BleConnecting());
-      await bleConnectDeviceUseCase.call(event.uuid);
+      await bluetoothConnectUseCase.call(event.uuid);
     }
 
     await bleDiscoverServicesUseCase.call(event.uuid);
@@ -87,17 +87,24 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     if (!await bleDeviceIsConnectedUseCase.call(event.deviceUuid)) {
       try {
         emit(const BleConnecting());
-        await bleConnectDeviceUseCase.call(event.deviceUuid);
-      } on BluetoothPermissionsExeption {
+        await bluetoothConnectUseCase.call(event.deviceUuid);
+      } on PermissionsExeption {
         // Change state
         // if didnt connect to device
         // for missing permissions
         emit(const BleMissingPermissions());
         return;
+      } on BluetoothOffExeption {
+        // Change state
+        // if didnt connect to device
+        // for ble off
+        emit(const BleOff());
+        return;
       } catch (error) {
-        print("couldnt connecto to device");
+        print("couldnt connect to device");
         return;
       }
+      print("couldnt connect to device");
     }
 
     // Discover services
@@ -105,27 +112,33 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     try {
       emit(const BleDiscoveringServices());
       await bleDiscoverServicesUseCase.call(event.deviceUuid);
-    } on BluetoothPermissionsExeption {
+    } /*on BluetoothPermissionsExeption {
       // Change state
       // for missing permissions
       emit(const BleMissingPermissions());
       return;
-    } catch (error) {
+    } */
+    catch (error) {
       print("couldn't discover services");
       return;
     }
 
-    emit(BleWillWriteData(data: state.data, connected: state.connected));
+    // Write data
+    try {
+      emit(BleWillWriteData(data: state.data, connected: state.connected));
 
-    await bleWriteUseCase.call(
-      BleWriteParams(
-        deviceUuid: event.deviceUuid,
-        serviceUuid: event.serviceUuid,
-        characteristicUuid: event.characteristicUuid,
-        value: event.value,
-        withoutResponse: event.withoutResponse,
-      ),
-    );
+      await bleWriteUseCase.call(
+        BleWriteParams(
+          deviceUuid: event.deviceUuid,
+          serviceUuid: event.serviceUuid,
+          characteristicUuid: event.characteristicUuid,
+          value: event.value,
+          withoutResponse: event.withoutResponse,
+        ),
+      );
+    } catch (error) {
+      print("couldn't write data");
+    }
   }
 
   Future<void> _onDisconnectDeviceEvent(

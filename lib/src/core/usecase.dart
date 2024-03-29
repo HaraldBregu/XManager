@@ -15,6 +15,16 @@ class NoParams extends Equatable {
   List<Object?> get props => [];
 }
 
+class PermissionsParams extends Equatable {
+  final bool request;
+  const PermissionsParams({
+    this.request = false,
+  });
+
+  @override
+  List<Object?> get props => [request];
+}
+
 class ProfileParams extends Equatable {
   final String fullname;
 

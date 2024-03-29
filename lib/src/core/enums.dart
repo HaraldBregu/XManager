@@ -41,3 +41,9 @@ LoginErrorType parseLoginErrorCode(String errorCode) {
       throw ArgumentError('Invalid login error code: $errorCode');
   }
 }
+
+enum AppPermissionStatus {
+  granted,
+  denied,
+  permanentlyDenied,
+}
