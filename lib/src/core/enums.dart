@@ -47,3 +47,13 @@ enum AppPermissionStatus {
   denied,
   permanentlyDenied,
 }
+
+enum AppBluetoothAdapterState {
+  unknown,
+  unavailable,
+  unauthorized,
+  turningOn,
+  on,
+  turningOff,
+  off
+}

@@ -8,6 +8,7 @@ import 'package:xmanager/src/presentation/bloc/app/app_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/app/app_event.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
 import 'package:xmanager/src/presentation/screens/device/bloc/device_bloc.dart';
+import 'package:xmanager/src/presentation/screens/device/bloc/device_event.dart';
 import 'package:xmanager/src/presentation/screens/device/bloc/device_state.dart';
 import 'package:xmanager/src/presentation/widgets/alert_card.dart';
 import 'package:xmanager/src/presentation/widgets/indicator_icon.dart';
@@ -194,16 +195,17 @@ class DeviceScreen extends StatelessWidget {
               ),
             ),
           ),
-          const AlertSliverCard(
-            visible: false,
+          AlertSliverCard(
+            visible: deviceState is DeviceRegisterState,
             state: AlertState.warningAlertState,
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             elevation: 4,
             text:
                 "Dispositivo non registrato. Registra un dispositivo usando il codice pin!",
             icon: Icons.warning_rounded,
           ),
           AlertSliverCard(
+            visible: deviceState is DeviceCanConnectState,
             state: AlertState.infoAlertState,
             padding: const EdgeInsets.symmetric(horizontal: 10),
             elevation: 4,
@@ -248,15 +250,7 @@ class DeviceScreen extends StatelessWidget {
             text: "Aggiornamento in corso",
             percentValue: 45,
           ),
-          SliverToBoxAdapter(
-            child: Text('$bleState'),
-          ),
-          SliverToBoxAdapter(
-            child: Text('$appState'),
-          ),          
-          SliverToBoxAdapter(
-            child: Text('$deviceState'),
-          ),          
+         
         ],
       ),
       bottomNavigationBar: Padding(
@@ -269,9 +263,11 @@ class DeviceScreen extends StatelessWidget {
             // REGISTER DEVICE BUTTON
             Visibility(
               visible: deviceState is DeviceRegisterState,
-              child: OutlinedButton(
+              child: TextButton(
                 style: FilledButton.styleFrom(
                   fixedSize: const Size(150, 50),
+                  backgroundColor: context.colorScheme.secondaryContainer,
+                  foregroundColor: context.colorScheme.onSecondaryContainer,
                 ),
                 onPressed: () {},
                 child: const Text('REGISTER DEVICE'),
@@ -285,20 +281,12 @@ class DeviceScreen extends StatelessWidget {
                 style: FilledButton.styleFrom(
                   fixedSize: const Size(150, 50),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  context
+                      .read<DeviceBloc>()
+                      .add(DeviceConnectEvent(deviceState.uuid ?? ''));
+                },
                 child: const Text('CONNECT TO DEVICE'),
-              ),
-            ),
-
-            // REQUEST PERMISSIONS DEVICE BUTTON
-            Visibility(
-              visible: deviceState is MissingBleConnPermissionsState,
-              child: OutlinedButton(
-                style: FilledButton.styleFrom(
-                  fixedSize: const Size(150, 50),
-                ),
-                onPressed: () {},
-                child: const Text('REQUEST PERMISSIONS'),
               ),
             ),
 
@@ -388,25 +376,25 @@ class DeviceScreen extends StatelessWidget {
                         );
                       },
                     );
-                    }
-                  },
-                  child: OutlinedButton(
-                    style: FilledButton.styleFrom(
-                      fixedSize: const Size(150, 50),
-                    ),
-                    onPressed: (bleState is BleConnecting)
-                        ? null
-                        : () => context
-                            .read<BleBloc>()
-                            .add(const ConnectAndAuthenticateDevice(
-                              bleMac,
-                              customServiceUuid,
-                              actionsCharsUuid,
-                              password,
-                              true,
-                            )),
-                    child: const Text('CONNECT TO DEVICE'),
+                  }
+                },
+                child: OutlinedButton(
+                  style: FilledButton.styleFrom(
+                    fixedSize: const Size(150, 50),
                   ),
+                  onPressed: (bleState is BleConnecting)
+                      ? null
+                      : () => context
+                          .read<BleBloc>()
+                          .add(const ConnectAndAuthenticateDevice(
+                            bleMac,
+                            customServiceUuid,
+                            actionsCharsUuid,
+                            password,
+                            true,
+                          )),
+                  child: const Text('CONNECT TO DEVICE'),
+                ),
               ),
             ),
             Visibility(

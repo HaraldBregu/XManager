@@ -36,6 +36,9 @@ class BleRepositoryImpl implements BleRepository {
 
   @override
   Stream<bool> get isScanning => _dataSource.isScanning;
+      
+  @override
+  Stream<AppBluetoothAdapterState> get adapterState => _dataSource.adapterState;
 
   @override
   Future<void> stopScan() => _dataSource.stopScan();
@@ -129,4 +132,6 @@ class BleRepositoryImpl implements BleRepository {
         characteristicsUuid,
         enable,
       );
+      
+      
 }

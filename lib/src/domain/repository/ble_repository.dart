@@ -1,3 +1,4 @@
+import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/domain/entities/bluetooth_device_entity.dart';
 
 abstract class BleRepository {
@@ -10,6 +11,7 @@ abstract class BleRepository {
   Future<void> discoverServices(String uuid);
   Future<void> disconnect(String uuid);
   Stream<bool> connected(String uuid);
+  Stream<AppBluetoothAdapterState> get adapterState;
   Future<bool> isConnected(String uuid);
 
   Future write(

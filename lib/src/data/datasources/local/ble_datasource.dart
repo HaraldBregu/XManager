@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:xmanager/src/core/enums.dart';
 
 abstract class BleDataSource {
   Future<void> startScan(int seconds, List<String>? services);
@@ -8,7 +9,7 @@ abstract class BleDataSource {
   Stream<bool> get isScanning;
   Future<bool> get isSupported;
   Future<bool> get isOn;
-  Stream<BluetoothAdapterState> get adapterState;
+  Stream<AppBluetoothAdapterState> get adapterState;
   Future<BluetoothAdapterState> get adapterStateNow;
   Future<void> turnOn();
   Future<void> connect(String uuid);
@@ -87,8 +88,26 @@ class BleDataSourceImpl implements BleDataSource {
   }
 
   @override
-  Stream<BluetoothAdapterState> get adapterState =>
-      FlutterBluePlus.adapterState;
+  Stream<AppBluetoothAdapterState> get adapterState async* {
+    FlutterBluePlus.adapterState.map((state) {
+      switch (state) {
+        case BluetoothAdapterState.unknown:
+          return AppBluetoothAdapterState.unknown;
+        case BluetoothAdapterState.unavailable:
+          return AppBluetoothAdapterState.unavailable;
+        case BluetoothAdapterState.unauthorized:
+          return AppBluetoothAdapterState.unauthorized;
+        case BluetoothAdapterState.turningOn:
+          return AppBluetoothAdapterState.turningOn;
+        case BluetoothAdapterState.on:
+          return AppBluetoothAdapterState.on;
+        case BluetoothAdapterState.turningOff:
+          return AppBluetoothAdapterState.turningOff;
+        case BluetoothAdapterState.off:
+          return AppBluetoothAdapterState.off;
+      }
+    });
+  }
 
   @override
   Future<BluetoothAdapterState> get adapterStateNow async =>

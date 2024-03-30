@@ -19,6 +19,10 @@ class DeviceSelectEvent extends DeviceEvent {
 }
 
 class DeviceConnectEvent extends DeviceEvent {
+  final String uuid;
+
+  const DeviceConnectEvent(this.uuid);
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [uuid];
 }
