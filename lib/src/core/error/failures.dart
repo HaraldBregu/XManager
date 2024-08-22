@@ -26,3 +26,15 @@ class NoCurrentUser extends Failure {}
 class NoCurrentProfile extends Failure {}
 
 class SaveProfileError extends Failure {}
+
+class MissingPermissionsFailure extends Failure {}
+
+class PermissionsDeniedFailure extends Failure {}
+
+class PermissionsPermanentlyDeniedFailure extends Failure {}
+
+class BluetoothConnectionFailure extends Failure {}
+
+class BluetoothDiscoverServicesFailure extends Failure {}
+
+class PlatformFailure extends Failure {}

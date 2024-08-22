@@ -1,6 +1,9 @@
+import 'package:dartz/dartz.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/core/error/exeptions.dart';
+import 'package:xmanager/src/core/error/failures.dart';
 import 'package:xmanager/src/data/datasources/local/ble_datasource.dart';
 import 'package:xmanager/src/data/datasources/local/permissions_datasource.dart';
 import 'package:xmanager/src/data/models/bluetooth_device_model.dart';
@@ -36,7 +39,7 @@ class BleRepositoryImpl implements BleRepository {
 
   @override
   Stream<bool> get isScanning => _dataSource.isScanning;
-      
+
   @override
   Stream<AppBluetoothAdapterState> get adapterState => _dataSource.adapterState;
 
@@ -44,18 +47,29 @@ class BleRepositoryImpl implements BleRepository {
   Future<void> stopScan() => _dataSource.stopScan();
 
   @override
-  Future<void> connect(String uuid) async {
-    if (!await _dataSource.isOn) {
-      throw BluetoothOffExeption();
-    }
-    
-    final bleConnectPermissions =
+  Future<Either<Failure, void>> connect(String uuid) async {
+    final bcPermissions =
         await _permissionsDataSource.bluetoothConnectPermissionsStatus();
-    if (bleConnectPermissions != AppPermissionStatus.granted) {
-      throw PermissionsExeption();
+
+    if (bcPermissions == AppPermissionStatus.denied) {
+      return Left(PermissionsDeniedFailure());
     }
 
-    await _dataSource.connect(uuid);
+    if (bcPermissions == AppPermissionStatus.permanentlyDenied) {
+      return Left(PermissionsPermanentlyDeniedFailure());
+    }
+
+    try {
+      await _dataSource.connect(uuid);
+    } on FlutterBluePlusException catch (e) {
+      return Left(BluetoothConnectionFailure());
+    } on PlatformException catch (e) {
+      return Left(PlatformFailure());
+    } catch (e) {
+      return Left(PlatformFailure());
+    }
+
+    return const Right(null);
   }
 
   @override
@@ -64,8 +78,13 @@ class BleRepositoryImpl implements BleRepository {
   }
 
   @override
-  Future<void> discoverServices(String uuid) async {
-    await _dataSource.discoverServices(uuid);
+  Future<Either<Failure, void>> discoverServices(String uuid) async {
+    try {
+      await _dataSource.discoverServices(uuid);
+    } catch (e) {
+      return Left(BluetoothDiscoverServicesFailure());
+    }
+    return const Right(null);
   }
 
   @override
@@ -132,6 +151,4 @@ class BleRepositoryImpl implements BleRepository {
         characteristicsUuid,
         enable,
       );
-      
-      
 }

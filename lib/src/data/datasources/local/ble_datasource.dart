@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:xmanager/src/core/enums.dart';
+import 'package:xmanager/src/core/error/exeptions.dart';
+import 'package:xmanager/src/data/datasources/local/permissions_datasource.dart';
 
 abstract class BleDataSource {
   Future<void> startScan(int seconds, List<String>? services);
@@ -119,8 +121,12 @@ class BleDataSourceImpl implements BleDataSource {
   }
 
   @override
-  Future<void> connect(String uuid) {
-    return BluetoothDevice.fromId(uuid).connect();
+  Future<void> connect(String uuid) async {
+    final device = BluetoothDevice.fromId(uuid);
+    if (device.isConnected) {
+      return;
+    }
+    return device.connect();
   }
 
   @override
@@ -133,8 +139,12 @@ class BleDataSourceImpl implements BleDataSource {
   }
 
   @override
-  Future<void> discoverServices(String uuid) =>
-      BluetoothDevice.fromId(uuid).discoverServices();
+  Future<void> discoverServices(String uuid) async {
+    final device = BluetoothDevice.fromId(uuid);
+    if (device.isConnected) {
+      await BluetoothDevice.fromId(uuid).discoverServices();
+    }
+  }
 
   @override
   Future<void> disconnect(String uuid) async {

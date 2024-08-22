@@ -9,13 +9,11 @@ import 'package:xmanager/src/presentation/screens/ble/debug_page.dart';
 import 'package:xmanager/src/presentation/screens/ble/device_list_page.dart';
 import 'package:xmanager/src/presentation/screens/ble/device_search.dart';
 import 'package:xmanager/src/presentation/screens/device/device_screen.dart';
-import 'package:xmanager/src/presentation/screens/home/program_create.dart';
-import 'package:xmanager/src/presentation/screens/home/program_detail.dart';
-import 'package:xmanager/src/presentation/screens/home/program_list.dart';
-import 'package:xmanager/src/presentation/screens/home/program_update.dart';
 import 'package:xmanager/src/presentation/screens/home_screen.dart';
 import 'package:xmanager/src/presentation/screens/login/login_screen.dart';
 import 'package:xmanager/src/presentation/screens/profile_screen.dart';
+import 'package:xmanager/src/presentation/screens/program/program_edit_screen.dart';
+import 'package:xmanager/src/presentation/screens/program/program_list_screen.dart';
 import 'package:xmanager/src/presentation/screens/recovery/recovery_screen.dart';
 import 'package:xmanager/src/presentation/screens/settings/account_page.dart';
 import 'package:xmanager/src/presentation/screens/settings/permissions_page.dart';
@@ -132,28 +130,16 @@ GoRouter router(BuildContext context) {
             builder: (context, state) => const ProfileScreen(),
           ),
           GoRoute(
-            name: "Program list",
+            name: "program list screen",
             path: 'programs',
-            builder: (context, state) => const ProgramList(),
+            builder: (context, state) => const ProgramListScreen(),
             routes: [
               GoRoute(
-                name: "Program create",
+                name: "program edit screen",
                 path: 'create',
-                builder: (context, state) => const ProgramCreate(),
-              ),
-              GoRoute(
-                name: "Program update",
-                path: 'update',
-                builder: (context, state) => const ProgramUpdate(),
+                builder: (context, state) => const ProgramEditScreen(),
               ),
             ],
-          ),
-          GoRoute(
-            name: "Program detail",
-            path: 'programs/:id',
-            builder: (context, state) => ProgramDetail(
-              id: state.pathParameters['id'],
-            ),
           ),
           GoRoute(
             name: "Device screen",

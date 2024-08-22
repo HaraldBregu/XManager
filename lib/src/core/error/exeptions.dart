@@ -15,6 +15,13 @@ class DatabaseExeption implements Exception {}
 
 // APP PERMISSIONS
 
+class BluetoothConnectPermissionsExeption implements Exception {}
+
+class BluetoothConnectPermissionsDeniedExeption implements Exception {}
+
+class BluetoothConnectPermissionsPermanentlyDeniedExeption
+    implements Exception {}
+
 class PermissionsExeption implements Exception {}
 
-class BluetoothOffExeption implements Exception {}
+class BluetoothUnactiveExeption implements Exception {}

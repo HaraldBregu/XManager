@@ -9,12 +9,14 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   final BluetoothPermissionsUseCase bluetoothPermissions;
   final BluetoothConnectPermissionsUseCase bluetoothConnectPermissions;
   final BluetoothScanPermissionsUseCase bluetoothScanPermissions;
+  final GoToSettingsUseCase goToSettings;
 
   AppBloc({
     required this.locationPermissions,
     required this.bluetoothPermissions,
     required this.bluetoothConnectPermissions,
     required this.bluetoothScanPermissions,
+    required this.goToSettings,
   }) : super(const AppState()) {
     on<AppStartEvent>(_onStartEvent);
     on<AppPermissionsStatusEvent>(_onPermissionsStatusEvent);
@@ -22,6 +24,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     on<RequestBluetoothPermission>(_onRequestBluetoothPermission);
     on<RequestBluetoothConnectPermission>(_onRequestBluetoothConnectPermission);
     on<RequestBluetoothScanPermission>(_onRequestBluetoothScanPermission);
+    on<GoToSettings>(_onGoToSettings);
   }
 
   Future<void> _onStartEvent(
@@ -90,5 +93,12 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         .call(const PermissionsParams(request: true));
     final newState = state.copyWith(bluetoothScanPermissionStatus: request);
     emit(newState);
+  }
+
+  Future<void> _onGoToSettings(
+    GoToSettings event,
+    Emitter<AppState> emit,
+  ) async {
+    await goToSettings.call(NoParams());
   }
 }

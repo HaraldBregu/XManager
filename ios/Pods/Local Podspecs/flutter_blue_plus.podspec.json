@@ -8,19 +8,13 @@
     "file": "../LICENSE"
   },
   "authors": {
-    "Bosko Popovic": "boskokg@gmail.com"
+    "Chip Weinberger": "weinberger.c@gmail.com"
   },
   "source": {
     "path": "."
   },
-  "source_files": [
-    "Classes/**/*",
-    "gen/**/*"
-  ],
-  "public_header_files": [
-    "Classes/**/*.h",
-    "gen/**/*.h"
-  ],
+  "source_files": "Classes/**/*",
+  "public_header_files": "Classes/**/*.h",
   "dependencies": {
     "Flutter": [
 
@@ -31,23 +25,6 @@
   },
   "frameworks": "CoreBluetooth",
   "pod_target_xcconfig": {
-    "DEFINES_MODULE": "YES",
-    "GCC_PREPROCESSOR_DEFINITIONS": "$(inherited) GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1"
-  },
-  "subspecs": [
-    {
-      "name": "Protos",
-      "source_files": [
-        "gen/*.pbobjc.{h,m}",
-        "gen/**/*.pbobjc.{h,m}"
-      ],
-      "header_mappings_dir": "gen",
-      "requires_arc": false,
-      "dependencies": {
-        "Protobuf": [
-          "~> 3.11"
-        ]
-      }
-    }
-  ]
+    "DEFINES_MODULE": "YES"
+  }
 }

@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+import 'package:xmanager/src/core/error/failures.dart';
 import 'package:xmanager/src/core/usecase.dart';
 import 'package:xmanager/src/domain/entities/bluetooth_device_entity.dart';
 import 'package:xmanager/src/domain/repository/ble_repository.dart';
@@ -39,12 +41,13 @@ class BleIsScanningUseCase implements StreamUseCase<bool, NoParams> {
   Stream<bool> call(NoParams params) => _bleRepository.isScanning;
 }
 
-class BluetoothConnectUseCase implements BaseUseCase<void, String> {
+class BluetoothConnectUseCase implements UseCase<void, String> {
   const BluetoothConnectUseCase(this._bleRepository);
   final BleRepository _bleRepository;
 
   @override
-  Future<void> call(String uuid) => _bleRepository.connect(uuid);
+  Future<Either<Failure, void>> call(String uuid) =>
+      _bleRepository.connect(uuid);
 }
 
 class BleDisconnectDeviceUseCase implements BaseUseCase<void, String> {
@@ -71,12 +74,13 @@ class BleDeviceIsConnectedUseCase implements BaseUseCase<bool, String> {
   Future<bool> call(String uuid) => _bleRepository.isConnected(uuid);
 }
 
-class BleDiscoverServicesUseCase implements BaseUseCase<void, String> {
+class BleDiscoverServicesUseCase implements UseCase<void, String> {
   const BleDiscoverServicesUseCase(this._bleRepository);
   final BleRepository _bleRepository;
 
   @override
-  Future<void> call(String uuid) => _bleRepository.discoverServices(uuid);
+  Future<Either<Failure, void>> call(String uuid) =>
+      _bleRepository.discoverServices(uuid);
 }
 
 class BleReadUseCase implements BaseUseCase<List<int>, BleReadParams> {

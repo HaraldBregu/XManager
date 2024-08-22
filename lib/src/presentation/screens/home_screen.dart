@@ -11,6 +11,7 @@ import 'package:xmanager/src/presentation/screens/device/bloc/device_event.dart'
 import 'package:xmanager/src/presentation/widgets/alert_card.dart';
 import 'package:xmanager/src/presentation/widgets/drawer_menu.dart';
 import 'package:xmanager/src/presentation/widgets/nav_bar.dart';
+import 'package:xmanager/src/presentation/widgets/training_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -80,7 +81,7 @@ class HomeScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 10, 16, 5),
+              padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
               child: Card(
                 elevation: 6,
                 child: ListTile(
@@ -121,7 +122,29 @@ class HomeScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 10, 16, 5),
+              padding: const EdgeInsets.fromLTRB(16, 5, 16, 0),
+              child: Card(
+                elevation: 6,
+                child: ListTile(
+                  title: Text(
+                    "Program list",
+                    style: TextStyle(
+                      fontSize: context.textTheme.labelLarge?.fontSize,
+                      fontFamily: context.textTheme.labelLarge?.fontFamily,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    context.pushNamed("program list screen");
+                  },
+                ),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 5, 16, 0),
               child: Card(
                 elevation: 6,
                 child: Padding(
@@ -243,7 +266,8 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
 
-          /*TrainingCard(
+          /*
+          TrainingCard(
             title: "TRAINING SESSION",
             subtitle: "Nessun programma attivo",
             description: "3/4 programmi terminati", // optional

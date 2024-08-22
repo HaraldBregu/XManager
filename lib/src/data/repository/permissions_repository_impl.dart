@@ -49,4 +49,9 @@ class PermissionsRepositoryImpl implements PermissionsRepository {
     final status = await permissionsDataSource.bluetoothScanPermissionsStatus();
     return status;
   }
+  
+  @override
+  Future<bool> goToSettings() async {
+    return permissionsDataSource.goToSettings();
+  }
 }

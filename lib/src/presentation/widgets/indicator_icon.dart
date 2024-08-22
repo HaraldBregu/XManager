@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 
 enum IndicatorIconState {
+  hiddenIconState,
   initialIndicatorIconState,
   activeIndicatorIconState,
   warningIndicatorIconState,

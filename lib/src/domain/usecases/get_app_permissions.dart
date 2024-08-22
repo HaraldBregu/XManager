@@ -56,3 +56,14 @@ class BluetoothScanPermissionsUseCase
   Future<AppPermissionStatus> call(PermissionsParams params) =>
       _permissionsRepository.bluetoothScanPermissions(params.request);
 }
+
+///
+/// GO TO SETTINGS
+///
+class GoToSettingsUseCase implements BaseUseCase<bool, NoParams> {
+  GoToSettingsUseCase(this._permissionsRepository);
+  final PermissionsRepository _permissionsRepository;
+
+  @override
+  Future<bool> call(NoParams params) => _permissionsRepository.goToSettings();
+}

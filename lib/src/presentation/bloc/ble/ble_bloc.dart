@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xmanager/src/core/error/exeptions.dart';
 import 'package:xmanager/src/core/usecase.dart';
 import 'package:xmanager/src/domain/usecases/ble_usecases.dart';
-import 'package:xmanager/src/domain/usecases/get_app_permissions.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
 
 class BleBloc extends Bloc<BleEvent, BleState> {
@@ -38,7 +37,7 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     on<ConnectAndAuthenticateDevice>(_onConnectAndAuthenticateDeviceEvent);
     on<DisconnectDevice>(_onDisconnectDeviceEvent);
     on<BleSetNotificationEvent>(_onBleSetNotificationEvent);
-    on<BleLastValueEvent>(_onBleLastValueEvent);
+    on<BleLastValueListenerEvent>(_onBleLastValueListenerEvent);
     on<BleReadEvent>(_onBleReadEvent);
     on<BleWriteEvent>(_onBleWriteEvent);
 
@@ -94,13 +93,9 @@ class BleBloc extends Bloc<BleEvent, BleState> {
         // for missing permissions
         emit(const BleMissingPermissions());
         return;
-      } on BluetoothOffExeption {
-        // Change state
-        // if didnt connect to device
-        // for ble off
-        emit(const BleOff());
-        return;
       } catch (error) {
+        emit(const BleOff());
+
         print("couldnt connect to device");
         return;
       }
@@ -112,12 +107,7 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     try {
       emit(const BleDiscoveringServices());
       await bleDiscoverServicesUseCase.call(event.deviceUuid);
-    } /*on BluetoothPermissionsExeption {
-      // Change state
-      // for missing permissions
-      emit(const BleMissingPermissions());
-      return;
-    } */
+    }
     catch (error) {
       print("couldn't discover services");
       return;
@@ -198,8 +188,8 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     );
   }
 
-  Future<void> _onBleLastValueEvent(
-    BleLastValueEvent event,
+  Future<void> _onBleLastValueListenerEvent(
+    BleLastValueListenerEvent event,
     Emitter<BleState> emit,
   ) async {
     final stream = bleLastValueStreamUseCase.call(
@@ -213,7 +203,7 @@ class BleBloc extends Bloc<BleEvent, BleState> {
     return await emit.forEach(
       stream,
       onData: (data) {
-        // print(data);
+        print(data);
         if (state is BleWillWriteData) {
           emit(BleDidWriteData(data: data, connected: state.connected));
         }

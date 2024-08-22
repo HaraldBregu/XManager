@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:xmanager/src/core/enums.dart';
-import 'package:xmanager/src/core/theme_extension.dart';
+import 'package:go_router/go_router.dart';
 import 'package:xmanager/src/presentation/bloc/app/app_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/app/app_event.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
@@ -12,9 +10,12 @@ import 'package:xmanager/src/presentation/screens/device/bloc/device_event.dart'
 import 'package:xmanager/src/presentation/screens/device/bloc/device_state.dart';
 import 'package:xmanager/src/presentation/widgets/alert_card.dart';
 import 'package:xmanager/src/presentation/widgets/indicator_icon.dart';
+import 'package:xmanager/src/presentation/widgets/modals/permission_modal_bottom_sheet.dart';
 import 'package:xmanager/src/presentation/widgets/progress_card.dart';
+import 'package:xmanager/src/presentation/widgets/sections/device_section.dart';
 
-const String bleMac = "E7:C8:DF:65:5B:4B";
+//const String bleMac = "E7:C8:DF:65:5B:4B";
+const String bleMac = "E8:29:77:C6:A9:C0";
 const String customServiceUuid = "00001600-1212-efde-1523-785feabcd121";
 const String actionsCharsUuid = "00001601-1212-efde-1523-785feabcd121";
 const String trainingCommandCharsUuid = "00001602-1212-efde-1523-785feabcd121";
@@ -49,7 +50,6 @@ class DeviceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final appState = context.watch<AppBloc>().state;
     final deviceState = context.watch<DeviceBloc>().state;
-    final bleState = context.watch<BleBloc>().state;
 
     return Scaffold(
       body: CustomScrollView(
@@ -64,10 +64,7 @@ class DeviceScreen extends StatelessWidget {
             pinned: true,
             //centerTitle: true,
             actions: [
-              PopupMenuButton(
-                  // add icon, by default "3 dot" icon
-                  // icon: Icon(Icons.book)
-                  itemBuilder: (context) {
+              PopupMenuButton(itemBuilder: (context) {
                 return const [
                   PopupMenuItem<int>(
                     value: 0,
@@ -87,116 +84,48 @@ class DeviceScreen extends StatelessWidget {
                   print("My account menu is selected.");
                 } else if (value == 1) {
                   print("Disconnect from BLE");
-                  context.read<BleBloc>().add(const DisconnectDevice(bleMac));
+                  context
+                      .read<DeviceBloc>()
+                      .add(const DisconnectFromDevice(bleMac));
                 } else if (value == 2) {
                   print("Demo animation");
                   context.read<BleBloc>().add(
                         const BleWriteEvent(
-                            bleMac,
-                            customServiceUuid,
-                            trainingCommandCharsUuid,
-                            [0x01, 0x02, 0x00, 0x05],
-                            false),
+                          bleMac,
+                          customServiceUuid,
+                          trainingCommandCharsUuid,
+                          [0x01, 0x02, 0x00, 0x05],
+                          false,
+                        ),
                       );
                 }
               }),
             ],
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Card(
-                        elevation: 4,
-                        shadowColor: Colors.transparent,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(15),
-                          child: Icon(
-                            Icons.double_arrow,
-                            color: Colors.orange,
-                            size: 70,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const SizedBox(
-                            height: 6,
-                          ),
-                          Text(
-                            "PIEDE SINISTRO",
-                            style: TextStyle(
-                              fontSize:
-                                  context.textTheme.headlineSmall?.fontSize,
-                              fontFamily:
-                                  context.textTheme.headlineSmall?.fontFamily,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                          Text(
-                            "Dispositivo non registrato",
-                            style: TextStyle(
-                              fontSize: context.textTheme.bodyMedium?.fontSize,
-                              fontFamily:
-                                  context.textTheme.bodyMedium?.fontFamily,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.play_circle,
-                                size: 25,
-                                color: context.colorScheme.primary,
-                              ),
-                              const SizedBox(width: 5),
-                              IndicatorIcon(
-                                padding: const EdgeInsets.only(right: 5),
-                                icon: Icons.bluetooth,
-                                state: (bleState.connected)
-                                    ? IndicatorIconState
-                                        .activeIndicatorIconState
-                                    : IndicatorIconState
-                                        .initialIndicatorIconState,
-                              ),
-                              Icon(
-                                Icons.bar_chart,
-                                size: 25,
-                                color: context.colorScheme.primary,
-                              ),
-                              const SizedBox(width: 5),
-                              Icon(
-                                Icons.update,
-                                size: 25,
-                                color: context.colorScheme.primary,
-                              ),
-                              const SizedBox(width: 5),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+          DeviceSection(
+            iconWidget: RotatedBox(
+              quarterTurns: deviceState is DeviceCanConnectState ? 2 : 4,
+              child: Icon(
+                Icons.double_arrow,
+                color: deviceState is DeviceCanConnectState
+                    ? Colors.green
+                    : Colors.orange,
+                size: 70,
               ),
             ),
+            title: "LEFT DEVICE",
+            description: "Dispositivo non registrato",
+            playState: IndicatorIconState.initialIndicatorIconState,
+            bleState: deviceState is DeviceConnected
+                ? IndicatorIconState.activeIndicatorIconState
+                : IndicatorIconState.initialIndicatorIconState,
+            chartState: deviceState is DeviceConnected
+                ? IndicatorIconState.successIndicatorIconState
+                : IndicatorIconState.initialIndicatorIconState,
+            updateState: IndicatorIconState.initialIndicatorIconState,
           ),
           AlertSliverCard(
-            visible: deviceState is DeviceRegisterState,
+            visible: deviceState is DeviceInitial,
             state: AlertState.warningAlertState,
             padding: const EdgeInsets.symmetric(horizontal: 10),
             elevation: 4,
@@ -205,30 +134,53 @@ class DeviceScreen extends StatelessWidget {
             icon: Icons.warning_rounded,
           ),
           AlertSliverCard(
-            visible: deviceState is DeviceCanConnectState,
+            visible: deviceState is DeviceCanConnectState ||
+                deviceState is PermissionsDeniedState ||
+                deviceState is PermissionsPermanentlyDeniedState ||
+                deviceState is DeviceDisconnected,
             state: AlertState.infoAlertState,
             padding: const EdgeInsets.symmetric(horizontal: 10),
             elevation: 4,
-            text: (bleState is BleConnecting)
-                ? "Connesione con il dispositivo in corso..."
-                : (bleState.connected)
-                    ? "Dispositivo bluetooth connesso"
-                    : "Connetti al dispositivo per effeturare download dati e aggiornamenti!",
-            icon:
-                (!bleState.connected) ? Icons.error : Icons.bluetooth_connected,
+            text:
+                "Connetti al dispositivo per effeturare download dati e aggiornamenti!",
+            icon: Icons.info,
           ),
           AlertSliverCard(
-            visible: bleState.connected,
+            visible: deviceState is DeviceConnecting,
+            state: AlertState.infoAlertState,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            elevation: 4,
+            text: "Connesione con il dispositivo in corso...",
+            icon: Icons.bluetooth,
+          ),
+          AlertSliverCard(
+            visible: deviceState is DeviceConnected,
+            state: AlertState.infoAlertState,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            elevation: 4,
+            text: "Dispositivo bluetooth connesso",
+            icon: Icons.bluetooth_connected,
+          ),
+          AlertSliverCard(
+            visible: deviceState is DeviceConnectionErrorState,
+            state: AlertState.errorAlertState,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            elevation: 4,
+            text: "Errore connessione al dispositivo bluetooth!",
+            icon: Icons.error,
+          ),
+          AlertSliverCard(
+            visible: deviceState is DeviceConnected,
             state: AlertState.warningAlertState,
             padding: const EdgeInsets.symmetric(horizontal: 10),
             elevation: 4,
             text: "Scarica i dati raccolti dal dispositivo!",
             icon: Icons.bar_chart,
           ),
-          ProgressSliverCard(
-            visible: bleState.connected && bleState is BleDownloadingData,
+          const ProgressSliverCard(
+            visible: false,
             elevation: 4,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: EdgeInsets.symmetric(horizontal: 10),
             state: ProgresState.warningProgressState,
             text: "Download dati in corso",
             percentValue: 10,
@@ -250,7 +202,9 @@ class DeviceScreen extends StatelessWidget {
             text: "Aggiornamento in corso",
             percentValue: 45,
           ),
-         
+          SliverToBoxAdapter(
+            child: Text("$deviceState"),
+          ),
         ],
       ),
       bottomNavigationBar: Padding(
@@ -259,172 +213,189 @@ class DeviceScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-
             // REGISTER DEVICE BUTTON
             Visibility(
-              visible: deviceState is DeviceRegisterState,
-              child: TextButton(
-                style: FilledButton.styleFrom(
-                  fixedSize: const Size(150, 50),
-                  backgroundColor: context.colorScheme.secondaryContainer,
-                  foregroundColor: context.colorScheme.onSecondaryContainer,
+              visible: deviceState is DeviceInitial,
+              child: OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  fixedSize: const Size.fromHeight(50),
                 ),
                 onPressed: () {},
-                child: const Text('REGISTER DEVICE'),
+                child: const Text('REGISTRA DISPOSITIVO'),
               ),
             ),
 
             // CONNECT DEVICE BUTTON
-            Visibility(
-              visible: deviceState is DeviceCanConnectState,
-              child: OutlinedButton(
-                style: FilledButton.styleFrom(
-                  fixedSize: const Size(150, 50),
-                ),
-                onPressed: () {
-                  context
-                      .read<DeviceBloc>()
-                      .add(DeviceConnectEvent(deviceState.uuid ?? ''));
-                },
-                child: const Text('CONNECT TO DEVICE'),
-              ),
-            ),
-
-            Visibility(
-              visible: false, // !bleState.connected,
-              child: BlocListener<BleBloc, BleState>(
-                listener: (context, state) {
-                  if (state is BleMissingPermissions) {
-                    showGeneralDialog(
+            BlocListener<DeviceBloc, DeviceState>(
+              listenWhen: (previous, current) {
+                return previous != current &&
+                    (deviceState is DeviceDisconnected ||
+                        deviceState is DeviceConnecting ||
+                        deviceState is DeviceCanConnectState ||
+                        deviceState is DeviceConnectionErrorState ||
+                        deviceState is PermissionsDeniedState ||
+                        deviceState is PermissionsPermanentlyDeniedState);
+              },
+              listener: (context, state) {
+                if (state is PermissionsDeniedState) {
+                  showPermissionModalBottomSheet<void>(
+                    context: context,
+                    isScrollControlled: true,
+                    header: const Icon(
+                      Icons.bluetooth,
+                      size: 100,
+                    ),
+                    title: "Dispositivi nelle vicinanze",
+                    description:
+                        "Per utilizzare tutte le funzionalità dell'app, è necessario attivare il permesso Bluetooth. Attivando il Bluetooth, potrai accedere a una vasta gamma di servizi e interazioni che migliorano l'esperienza dell'app. Ti preghiamo di concedere il permesso Bluetooth per continuare. Grazie!",
+                    actionTitle: "ATTIVA",
+                    onPressed: () {
+                      context.pop();
+                      context
+                          .read<AppBloc>()
+                          .add(RequestBluetoothConnectPermission());
+                    },
+                  );
+                } else if (state is PermissionsPermanentlyDeniedState) {
+                  showPermissionModalBottomSheet<void>(
+                    context: context,
+                    isScrollControlled: true,
+                    header: const Icon(
+                      Icons.bluetooth,
+                      size: 100,
+                    ),
+                    title: "Dispositivi nelle vicinanze",
+                    description:
+                        "Per utilizzare tutte le funzionalità dell'app, è necessario attivare il permesso Bluetooth. Attivando il Bluetooth, potrai accedere a una vasta gamma di servizi e interazioni che migliorano l'esperienza dell'app. Ti preghiamo di concedere il permesso Bluetooth per continuare. Grazie!",
+                    actionTitle: "VAI IN IMPOSTAZIONI",
+                    onPressed: () {
+                      context.pop();
+                      context.read<AppBloc>().add(GoToSettings());
+                    },
+                  );
+                } else if (state is DeviceConnectionErrorState) {
+                  Future<void> _showMyDialog() async {
+                    return showDialog<void>(
                       context: context,
-                      barrierDismissible: true,
-                      barrierLabel: '',
-                      transitionDuration: const Duration(milliseconds: 40),
-                      pageBuilder: (context, animation1, animation2) {
-                        return Container();
-                      },
-                      transitionBuilder: (context, a1, a2, widget) {
-                        final appState = context.watch<AppBloc>().state;
-
-                        return ScaleTransition(
-                          scale:
-                              Tween<double>(begin: 0.5, end: 1.0).animate(a1),
-                          child: FadeTransition(
-                            opacity:
-                                Tween<double>(begin: 0.5, end: 1.0).animate(a1),
-                            child: Dialog(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(7),
-                              ),
-                              child: SizedBox(
-                                height: 300,
-                                child: Column(
-                                  children: [
-                                    const Text("Title"),
-                                    if (appState.bluetoothPermissionStatus !=
-                                        AppPermissionStatus.granted) ...[
-                                      ListTile(
-                                        title:
-                                            const Text("Bluetooth not granted"),
-                                        onTap: () {},
-                                      ),
-                                    ],
-                                    if (appState
-                                            .bluetoothConnectPermissionStatus !=
-                                        AppPermissionStatus.granted) ...[
-                                      ListTile(
-                                        title: const Text(
-                                            "Bluetooth connect not granted"),
-                                        onTap: () {
-                                          context.read<AppBloc>().add(
-                                              RequestBluetoothConnectPermission());
-                                        },
-                                      ),
-                                    ],
-                                    if (appState
-                                            .bluetoothScanPermissionStatus !=
-                                        AppPermissionStatus.granted) ...[
-                                      ListTile(
-                                        title: const Text(
-                                            "Bluetooth scan not granted"),
-                                        onTap: () {
-                                          context.read<AppBloc>().add(
-                                              RequestBluetoothScanPermission());
-                                        },
-                                      ),
-                                    ],
-                                    if (context
-                                            .read<AppBloc>()
-                                            .state
-                                            .locationPermissionStatus !=
-                                        AppPermissionStatus.granted) ...[
-                                      ListTile(
-                                        title:
-                                            const Text("Location not granted"),
-                                        onTap: () async {
-                                          context
-                                              .read<AppBloc>()
-                                              .add(RequestLocationPermission());
-                                        },
-                                      ),
-                                    ]
-                                  ],
+                      barrierDismissible: false, // user must tap button!
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('AlertDialog Title'),
+                          content: const SingleChildScrollView(
+                            child: ListBody(
+                              children: <Widget>[
+                                Text('This is a demo alert dialog.'),
+                                Text(
+                                  'Would you like to approve of this message?',
                                 ),
-                              ),
+                              ],
                             ),
                           ),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text('Approve'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
                         );
                       },
                     );
                   }
-                },
+
+                  _showMyDialog();
+                }
+              },
+              child: Visibility(
+                visible: deviceState is! DeviceConnected,
                 child: OutlinedButton(
-                  style: FilledButton.styleFrom(
-                    fixedSize: const Size(150, 50),
+                  style: OutlinedButton.styleFrom(
+                    fixedSize: const Size.fromHeight(50),
                   ),
-                  onPressed: (bleState is BleConnecting)
+                  onPressed: deviceState is DeviceConnecting
                       ? null
-                      : () => context
-                          .read<BleBloc>()
-                          .add(const ConnectAndAuthenticateDevice(
-                            bleMac,
-                            customServiceUuid,
-                            actionsCharsUuid,
-                            password,
-                            true,
-                          )),
-                  child: const Text('CONNECT TO DEVICE'),
+                      : () {
+                          context.read<DeviceBloc>().add(
+                                const ConnectToDevice(
+                                  bleMac,
+                                  customServiceUuid,
+                                  actionsCharsUuid,
+                                  password,
+                                  true,
+                                ),
+                              );
+                        },
+                  child: const Text('CONNETTI AL DISPOSITIVO'),
                 ),
               ),
             ),
+
+            // DOWNLOAD DATA BUTTON
+            /*Visibility(
+              visible: deviceState is DeviceConnected,
+              child: BlocListener<DeviceBloc, DeviceState>(
+                listenWhen: (context, state) {
+                  return state is DeviceConnected;
+                },
+                listener: (context, state) {},
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        fixedSize: const Size(0, 50),
+                      ),
+                      onPressed: () {},
+                      child: const Text('SCARICA DATI'),
+                    );
+                  },
+                ),
+              ),
+            ),*/
+
             Visibility(
-              visible: bleState.connected,
+              visible: deviceState is DeviceConnected,
               child: BlocListener<BleBloc, BleState>(
                 listenWhen: (context, state) {
                   return state is BleDidWriteData || state is BleDidReadData;
                 },
                 listener: (context, state) {
+                  final bleBloc = context.read<BleBloc>();
                   if (state is BleDidWriteData) {
-                    context.read<BleBloc>().add(
-                          const BleReadEvent(
-                            bleMac,
-                            customServiceUuid,
-                            trainingDataCharsUuid,
-                          ),
-                        );
+                    bleBloc.add(
+                      const BleReadEvent(
+                        bleMac,
+                        customServiceUuid,
+                        trainingDataCharsUuid,
+                      ),
+                    );
                   } else if (state is BleDidReadData) {
+                    final data = state.data;
+                    final List<int> newData = [];
+                    newData.add(data.first + 1);
+
                     Future.delayed(
                       const Duration(milliseconds: 200),
                       () async {
-                        context.read<BleBloc>().add(
-                              BleWriteEvent(
-                                bleMac,
-                                customServiceUuid,
-                                actionsCharsUuid,
-                                state.data,
-                                false,
-                              ),
-                            );
+                        /*
+                        bleBloc.add(
+                          BleWriteEvent(
+                            bleMac,
+                            customServiceUuid,
+                            actionsCharsUuid,
+                            state.data,
+                            false,
+                          ),
+                        );*/
+                        bleBloc.add(
+                          BleWriteEvent(
+                            bleMac,
+                            customServiceUuid,
+                            trainingDataCharsUuid,
+                            newData,
+                            false,
+                          ),
+                        );
                       },
                     );
                   }
@@ -434,32 +405,59 @@ class DeviceScreen extends StatelessWidget {
                     fixedSize: const Size(150, 50),
                   ),
                   onPressed: () {
-                    context.read<BleBloc>().add(
-                          const BleSetNotificationEvent(
-                            bleMac,
-                            customServiceUuid,
-                            trainingDataCharsUuid,
-                            true,
-                          ),
-                        );
+                    final bleBloc = context.read<BleBloc>();
 
-                    context.read<BleBloc>().add(
-                          const BleLastValueEvent(
-                            bleMac,
-                            customServiceUuid,
-                            trainingDataCharsUuid,
-                          ),
-                        );
+                    // NOTIFICATION ENABLE
+                    bleBloc.add(
+                      const BleSetNotificationEvent(
+                        bleMac,
+                        customServiceUuid,
+                        trainingDataCharsUuid,
+                        true,
+                      ),
+                    );
 
-                    context.read<BleBloc>().add(
+                    // CHARACTERISTICS LAST VALUE LISTENER
+                    bleBloc.add(
+                      const BleLastValueListenerEvent(
+                        bleMac,
+                        customServiceUuid,
+                        trainingDataCharsUuid,
+                      ),
+                    );
+
+                    // CHARACTERISTICS WRITE VALUE
+                    // SEND LAST VALUE REGISTERED
+                    // IT CAN BE EMPTY OR WITH DATA
+                    /*bleBloc.add(
                           const BleWriteEvent(
                             bleMac,
                             customServiceUuid,
                             actionsCharsUuid,
-                            [23, 1, 15, 12, 30, 46],
+                        //[],
+                        [23, 1, 15, 12, 30, 46],
                             false,
                           ),
-                        );
+                        );*/
+
+                    final List<int> initialCommand = [];
+                    for (int i = 0; i < 1; i++) {
+                      initialCommand.add(0);
+                    }
+
+                    // CHARACTERISTICS WRITE VALUE
+                    // SEND LAST VALUE REGISTERED
+                    // IT CAN BE EMPTY OR WITH DATA
+                    bleBloc.add(
+                      BleWriteEvent(
+                        bleMac,
+                        customServiceUuid,
+                        trainingDataCharsUuid,
+                        initialCommand,
+                        //[23, 1, 15, 12, 30, 46],
+                        false,
+                      ),
+                    );
                   },
                   child: const Text('SCARICA DATI'),
                 ),
@@ -527,9 +525,7 @@ class DeviceScreen extends StatelessWidget {
               child: const Text('LISTEN LAST VALUE'),
             ),*/
 
-            /*
-            
-           
+            /*     
             OutlinedButton(
               style: FilledButton.styleFrom(
                 fixedSize: const Size(150, 50),

@@ -143,12 +143,12 @@ class BleSetNotificationEvent extends BleEvent {
       ];
 }
 
-class BleLastValueEvent extends BleEvent {
+class BleLastValueListenerEvent extends BleEvent {
   final String deviceUuid;
   final String serviceUuid;
   final String characteristicUuid;
 
-  const BleLastValueEvent(
+  const BleLastValueListenerEvent(
     this.deviceUuid,
     this.serviceUuid,
     this.characteristicUuid,

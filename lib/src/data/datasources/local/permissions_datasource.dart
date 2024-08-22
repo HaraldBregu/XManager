@@ -1,9 +1,9 @@
 import 'package:permission_handler/permission_handler.dart';
 import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/core/error/exeptions.dart';
+import 'package:xmanager/src/presentation/bloc/app/app_event.dart';
 
 abstract class PermissionsDataSource {
-  
   Future<List<Permission>> permissionList();
 
   Future<AppPermissionStatus> permissionStatus(Permission permission);
@@ -20,6 +20,8 @@ abstract class PermissionsDataSource {
 
   Future<AppPermissionStatus> bluetoothScanPermissionsRequest();
   Future<AppPermissionStatus> bluetoothScanPermissionsStatus();
+
+  Future<bool> goToSettings();
 }
 
 class PermissionsDataSourceImpl implements PermissionsDataSource {
@@ -108,8 +110,14 @@ class PermissionsDataSourceImpl implements PermissionsDataSource {
     final statusRequest = await requestPermission(Permission.bluetoothScan);
     return statusRequest;
   }
-      
+
   @override
   Future<AppPermissionStatus> bluetoothScanPermissionsStatus() =>
       permissionStatus(Permission.bluetoothScan);
+
+  @override
+  Future<bool> goToSettings() async {
+    return openAppSettings();
+  }
+  
 }

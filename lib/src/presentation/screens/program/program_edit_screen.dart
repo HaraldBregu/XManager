@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ProgramCreate extends StatelessWidget {
-  const ProgramCreate({super.key});
+class ProgramEditScreen extends StatelessWidget {
+  const ProgramEditScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

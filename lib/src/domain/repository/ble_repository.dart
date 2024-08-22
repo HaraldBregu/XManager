@@ -1,4 +1,6 @@
+import 'package:dartz/dartz.dart';
 import 'package:xmanager/src/core/enums.dart';
+import 'package:xmanager/src/core/error/failures.dart';
 import 'package:xmanager/src/domain/entities/bluetooth_device_entity.dart';
 
 abstract class BleRepository {
@@ -6,9 +8,9 @@ abstract class BleRepository {
   Stream<List<BluetoothDeviceEntity>> get scanResult;
   Stream<bool> get isScanning;
   Future<void> stopScan();
-  Future<void> connect(String uuid);
+  Future<Either<Failure, void>> connect(String uuid);
   Future<void> connectAndDiscoverServices(String uuid);
-  Future<void> discoverServices(String uuid);
+  Future<Either<Failure, void>> discoverServices(String uuid);
   Future<void> disconnect(String uuid);
   Stream<bool> connected(String uuid);
   Stream<AppBluetoothAdapterState> get adapterState;

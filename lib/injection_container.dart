@@ -56,6 +56,7 @@ Future<void> init() async {
       bluetoothPermissions: sl(),
       bluetoothConnectPermissions: sl(),
       bluetoothScanPermissions: sl(),
+      goToSettings: sl(),
     ),
   );
 
@@ -75,8 +76,13 @@ Future<void> init() async {
 
   sl.registerFactory(
     () => DeviceBloc(
-      bluetoothConnectPermissions: sl(),
-      bluetoothConnect: sl(),
+      bleConnectPermissions: sl(),
+      bleConnect: sl(),
+      bleDisconnect: sl(),
+      bleConnected: sl(),
+      bleDiscoverServices: sl(),
+      bleWrite: sl(),
+      
     ),
   );
 
@@ -88,6 +94,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => BluetoothPermissionsUseCase(sl()));
   sl.registerLazySingleton(() => BluetoothConnectPermissionsUseCase(sl()));
   sl.registerLazySingleton(() => BluetoothScanPermissionsUseCase(sl()));
+  sl.registerLazySingleton(() => GoToSettingsUseCase(sl()));
 
   sl.registerLazySingleton(() => GetCurrentUserUseCase(sl()));
   sl.registerLazySingleton(() => ValidEmailUseCase(sl()));
@@ -114,7 +121,9 @@ Future<void> init() async {
   sl.registerLazySingleton<UtilsRepository>(() => UtilsRepositoryImpl(sl()));
 
   // Data sources
-  sl.registerLazySingleton<BleDataSource>(() => BleDataSourceImpl());
+  sl.registerLazySingleton<BleDataSource>(
+    () => BleDataSourceImpl(),
+  );
   sl.registerLazySingleton<NetworkDataSource>(() => NetworkDataSourceImpl());
   sl.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl());
   sl.registerLazySingleton<PermissionsDataSource>(
