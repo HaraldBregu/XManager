@@ -58,7 +58,8 @@ class DeviceBloc extends Bloc<DeviceEvent, DeviceState> {
     Emitter<DeviceState> emit,
   ) async {
     emit(const DeviceConnecting());
-//"E7:C8:DF:65:5B:4B"
+    
+    //"E7:C8:DF:65:5B:4B"
     final connect = await bleConnect.call(event.deviceUuid);
     connect.fold(
       (left) {

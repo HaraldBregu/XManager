@@ -38,7 +38,6 @@ abstract class AppTheme {
 
   static const FlexScheme scheme = FlexScheme.bigStone;
 
-
   static const FlexSchemeData _customSchemeColor = FlexSchemeData(
     name: 'XManager theme',
     description: 'XManager theme, custom definition of all colors',
@@ -123,6 +122,7 @@ abstract class AppTheme {
           blendOnLevel: 20,
           // Input
           inputDecoratorRadius: 9,
+          //inputDecoratorRadius: 5,
           //inputDecoratorBorderType: FlexInputBorderType.underline,
           //inputDecoratorBorderWidth: 0.0,
           //inputDecoratorFocusedBorderWidth: 0.0,

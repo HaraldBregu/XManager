@@ -13,6 +13,8 @@ import 'package:xmanager/src/presentation/bloc/app/app_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/app/app_event.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
 import 'package:xmanager/src/presentation/screens/device/bloc/device_bloc.dart';
+import 'package:xmanager/src/presentation/screens/home/bloc/home_bloc.dart';
+import 'package:xmanager/src/presentation/screens/home/bloc/home_event.dart';
 import 'package:xmanager/src/presentation/screens/login/bloc/login_bloc.dart';
 
 Future<void> main() async {
@@ -33,6 +35,7 @@ Future<void> main() async {
   runApp(
     MultiBlocProvider(
       providers: [
+        BlocProvider<HomeBloc>(create: (_) => sl()..add(HomeStartEvent())),
         BlocProvider<UserBloc>(create: (_) => sl()..add(StartUserEvent())),
         BlocProvider<LoginBloc>(create: (_) => sl()),
         BlocProvider<DeviceBloc>(create: (_) => sl()),

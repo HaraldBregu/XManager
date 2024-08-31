@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -9,17 +10,17 @@ import 'package:xmanager/src/presentation/screens/ble/debug_page.dart';
 import 'package:xmanager/src/presentation/screens/ble/device_list_page.dart';
 import 'package:xmanager/src/presentation/screens/ble/device_search.dart';
 import 'package:xmanager/src/presentation/screens/device/device_screen.dart';
-import 'package:xmanager/src/presentation/screens/home_screen.dart';
+import 'package:xmanager/src/presentation/screens/home/home_screen.dart';
 import 'package:xmanager/src/presentation/screens/login/login_screen.dart';
 import 'package:xmanager/src/presentation/screens/profile_screen.dart';
-import 'package:xmanager/src/presentation/screens/program/program_edit_screen.dart';
-import 'package:xmanager/src/presentation/screens/program/program_list_screen.dart';
 import 'package:xmanager/src/presentation/screens/recovery/recovery_screen.dart';
 import 'package:xmanager/src/presentation/screens/settings/account_page.dart';
 import 'package:xmanager/src/presentation/screens/settings/permissions_page.dart';
 import 'package:xmanager/src/presentation/screens/settings/settings_page.dart';
 import 'package:xmanager/src/presentation/screens/signup/signup_screen.dart';
 import 'package:xmanager/src/presentation/screens/start_screen.dart';
+import 'package:xmanager/src/presentation/screens/training_program/training_program_edit_screen.dart';
+import 'package:xmanager/src/presentation/screens/training_program/training_program_list_screen.dart';
 
 class GoRouterObserver extends NavigatorObserver {
   final BuildContext context;
@@ -122,7 +123,9 @@ GoRouter router(BuildContext context) {
       GoRoute(
         name: "home screen",
         path: "/home",
+        //builder: (context, state) => const ProgramEditScreen(),
         builder: (context, state) => const HomeScreen(),
+        
         routes: [
           GoRoute(
             name: "update profile screen",
@@ -132,7 +135,7 @@ GoRouter router(BuildContext context) {
           GoRoute(
             name: "program list screen",
             path: 'programs',
-            builder: (context, state) => const ProgramListScreen(),
+            builder: (context, state) => const TrainingProgramListScreen(),
             routes: [
               GoRoute(
                 name: "program edit screen",

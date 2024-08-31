@@ -379,4 +379,13 @@ class MockPermissionsDataSource extends _i1.Mock
         returnValue: _i3.Future<_i5.AppPermissionStatus>.value(
             _i5.AppPermissionStatus.granted),
       ) as _i3.Future<_i5.AppPermissionStatus>);
+
+  @override
+  _i3.Future<bool> goToSettings() => (super.noSuchMethod(
+        Invocation.method(
+          #goToSettings,
+          [],
+        ),
+        returnValue: _i3.Future<bool>.value(false),
+      ) as _i3.Future<bool>);
 }
