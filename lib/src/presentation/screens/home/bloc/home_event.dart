@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:xmanager/src/domain/entities/bluetooth_device_pairs_entity.dart';
+import 'package:xmanager/src/domain/entities/training_program_entity.dart';
 
 abstract class HomeEvent extends Equatable {
   const HomeEvent();
@@ -10,19 +12,17 @@ class HomeStartEvent extends HomeEvent {
 }
 
 class HomeUploadProgramToDeviceEvent extends HomeEvent {
-  // Device object
-  final String device;
-  // Program object
-  final String program;
+  final BluetoothDevicePairsEntity devicePairs;
+  final TrainingProgramEntity program;
 
   const HomeUploadProgramToDeviceEvent({
-    required this.device,
+    required this.devicePairs,
     required this.program,
   });
 
   @override
   List<Object?> get props => [
-        device,
+        devicePairs,
         program,
       ];
 }

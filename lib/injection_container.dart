@@ -42,8 +42,17 @@ Future<void> init() async {
     ),
   );
 
-  sl.registerFactory(() => HomeBloc());
-  
+  sl.registerFactory(
+    () => HomeBloc(
+      bleConnectPermissions: sl(),
+      bleConnect: sl(),
+      bleDisconnect: sl(),
+      bleConnected: sl(),
+      bleDiscoverServices: sl(),
+      bleWrite: sl(),
+    ),
+  );
+
   sl.registerFactory(
     () => UserBloc(
       logInWithEmailUseCase: sl(),

@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xmanager/src/core/localizations_extension.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
+import 'package:xmanager/src/domain/entities/bluetooth_device_entity.dart';
+import 'package:xmanager/src/domain/entities/bluetooth_device_pairs_entity.dart';
+import 'package:xmanager/src/domain/entities/training_program_entity.dart';
 import 'package:xmanager/src/presentation/bloc/app/app_bloc.dart';
 import 'package:xmanager/src/presentation/bloc/app/app_event.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
@@ -423,8 +426,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 icon: const Icon(Icons.run_circle),
                 label: const Text("START TRAINING"),
-                onPressed: () async {
-                  return;
+                onPressed: () {
                   showModalBottomSheet<void>(
                     context: context,
                     isScrollControlled: true,
@@ -450,17 +452,26 @@ class HomeScreen extends StatelessWidget {
                                 TrainingProgramList(
                                   onSelectTrainingProgram: () {
                                     context.pop();
-                                    /*if (deviceState is! DeviceConnecting) {
-                                      context.read<DeviceBloc>().add(
-                                            const ConnectToDevice(
-                                              bleMac,
-                                              customServiceUuid,
-                                              actionsCharsUuid,
-                                              password,
-                                              true,
-                                            ),
-                                          );
-                                    }*/
+                                    const devicePairs =
+                                        BluetoothDevicePairsEntity(
+                                      name: "Dinamo",
+                                      left: BluetoothDeviceEntity(
+                                        name: "name",
+                                        uuid: "uuid",
+                                      ),
+                                      right: BluetoothDeviceEntity(
+                                        name: "name",
+                                        uuid: "uuid",
+                                      ),
+                                    );
+                                    const program = TrainingProgramEntity();
+
+                                    context.read<HomeBloc>().add(
+                                          const HomeUploadProgramToDeviceEvent(
+                                            devicePairs: devicePairs,
+                                            program: program,
+                                          ),
+                                        );
                                   },
                                 ),
                               ],
