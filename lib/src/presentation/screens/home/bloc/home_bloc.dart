@@ -1,4 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xmanager/src/core/enums.dart';
+import 'package:xmanager/src/core/error/failures.dart';
+import 'package:xmanager/src/core/usecase.dart';
 import 'package:xmanager/src/domain/usecases/ble_usecases.dart';
 import 'package:xmanager/src/domain/usecases/get_app_permissions.dart';
 import 'package:xmanager/src/presentation/screens/home/bloc/home_event.dart';
@@ -35,36 +38,85 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) async {
     /*
-
     Future todo
     - Get device list from RemoteConfig to compare the current device
+    - Get Authorization Token for selected devices
 
     - Read Selected Program
+    - Get Program Left and Right 
 
     - Read Device Pairs
-    - Check if both are used?
+    
+    if (Program.Left && Device.Left) 
 
-    - Read Left Device data
-    - Connect
-    - Authenticate
-    - Upload Program
+    - Read Left Device Data
+    - Connect (uuid of device)
+    - Authenticate (uuid service and token authentication)
+    - Upload Program (uuid service and send data)
     - Disconnect
 
-    - Read Right Device data
-    - Connect
-    - Authenticate
-    - Upload Program
+    if (Program.Right && Device.Right) 
+    - Read Right Device Data
+    - Connect (uuid of device)
+    - Authenticate (uuid service and token authentication)
+    - Upload Program (uuid service and send data)
     - Disconnect
-
     */
-    // 5- Connect to device pairs
-    // 6- Authenticate to current device
-    // 7- Upload program to current device
-    // 8- Disconnect
-    // 9- Repeat for other devices
+
+    emit(const HomeInitialState());
+
+    emit(const UploadingProgramToDevicePairsState());
+
+    return;
+    const deviceUuid = "E7:C8:DF:65:5B:4B";
+    final connect = await bleConnect.call(deviceUuid);
+    connect.fold(
+      (left) {
+        if (left is PermissionsDeniedFailure) {
+          const state = AppPermissionsErrorState(
+            permissionState: AppPermissionStatus.denied,
+          );
+          emit(state);
+        } else if (left is PermissionsPermanentlyDeniedFailure) {
+          const state = AppPermissionsErrorState(
+            permissionState: AppPermissionStatus.permanentlyDenied,
+          );
+          emit(state);
+        } else if (left is BluetoothConnectionFailure) {
+          emit(const BluetoothErrorState());
+        } else {
+          emit(const BluetoothErrorState());
+        }
+      },
+      (right) {
+        print("right");
+        //emit(const DeviceConnected());
+      },
+    );
+
+    final services = await bleDiscoverServices.call(deviceUuid);
+
+    emit(const BluetoothAuthenticationState());
+
+    const serviceUuid = "";
+    const characteristicUuid = "";
+    await bleWrite.call(
+      const BleWriteParams(
+        deviceUuid: deviceUuid,
+        serviceUuid: serviceUuid,
+        characteristicUuid: characteristicUuid,
+        value: [23],
+        withoutResponse: true,
+      ),
+    );
 
     final devicePairs = event.devicePairs;
     final program = event.program;
+
+    final uploadState = UploadingProgramToDevicePairsState();
+
+    //emit(uploadState);
+
     print("carica programma");
   }
 }
