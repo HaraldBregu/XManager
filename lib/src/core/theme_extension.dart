@@ -11,3 +11,10 @@ extension ColorSchemeContext on BuildContext {
 extension TextThemeContext on BuildContext {
   TextTheme get textTheme => theme.textTheme;
 }
+
+extension DarkMode on BuildContext {
+  bool get isDarkMode {
+    final brightness = MediaQuery.of(this).platformBrightness;
+    return brightness == Brightness.dark;
+  }
+}

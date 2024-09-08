@@ -12,14 +12,13 @@ import 'package:xmanager/src/presentation/bloc/app/app_event.dart';
 import 'package:xmanager/src/presentation/bloc/bloc.dart';
 import 'package:xmanager/src/presentation/screens/device/bloc/device_bloc.dart';
 import 'package:xmanager/src/presentation/screens/device/bloc/device_event.dart';
-import 'package:xmanager/src/presentation/screens/device/bloc/device_state.dart';
 import 'package:xmanager/src/presentation/screens/home/bloc/home_bloc.dart';
 import 'package:xmanager/src/presentation/screens/home/bloc/home_event.dart';
 import 'package:xmanager/src/presentation/screens/home/bloc/home_state.dart';
 import 'package:xmanager/src/presentation/widgets/alert_card.dart';
 import 'package:xmanager/src/presentation/widgets/drawer_menu.dart';
-import 'package:xmanager/src/presentation/widgets/modals/permission_modal_bottom_sheet.dart';
 import 'package:xmanager/src/presentation/widgets/nav_bar.dart';
+import 'package:xmanager/src/presentation/widgets/program_uploader_box.dart';
 import 'package:xmanager/src/presentation/widgets/training_program_list.dart';
 
 const String bleMac = "E8:29:77:C6:A9:C0";
@@ -183,7 +182,6 @@ class HomeScreen extends StatelessWidget {
                                 const ListenConnectionStateEvent(
                                     "E7:C8:DF:65:5B:4B"),
                               );
-
                           const deviceEvent =
                               DeviceSelectEvent("E7:C8:DF:65:5B:4B");
                           context.read<DeviceBloc>().add(deviceEvent);
@@ -376,70 +374,10 @@ class HomeScreen extends StatelessWidget {
                     },
                   );
                 } else if (state is UploadingProgramToDevicePairsState) {
-                  showModalBottomSheet<void>(
+                  showModalBottomSheetProgramUploader(
                     context: context,
-                    isScrollControlled: true,
-                    useSafeArea: true,
-                    enableDrag: false,
-                    isDismissible: false,
-                    builder: (context) {
-                      return Wrap(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 20,
-                              left: 20,
-                              right: 20,
-                            ),
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Column(
-                                children: [
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      "Upload programma",
-                                      style: TextStyle(
-                                        fontSize: context
-                                            .textTheme.titleLarge?.fontSize,
-                                        fontFamily: context
-                                            .textTheme.titleLarge?.fontFamily,
-                                        fontWeight: FontWeight.w600,
-                                        color: context.colorScheme.onBackground,
-                                      ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(top: 5),
-                                      child: Text(
-                                        "Tocco esterno veloce",
-                                        style: TextStyle(
-                                          fontSize: context
-                                              .textTheme.bodyMedium?.fontSize,
-                                          fontFamily: context
-                                              .textTheme.bodyMedium?.fontFamily,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      context.pop();
-                                    },
-                                    child: Text("close"),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
-                    },
                   );
-                } 
+                }
               },
               buildWhen: (context, state) {
                 return state is HomeInitialState;
@@ -449,7 +387,7 @@ class HomeScreen extends StatelessWidget {
                   style: OutlinedButton.styleFrom(
                     fixedSize: const Size(150, 50),
                   ),
-                  icon: const Icon(Icons.run_circle),
+                  icon: const Icon(Icons.directions_run),
                   label: const Text("START TRAINING"),
                   onPressed: () {
                     showModalBottomSheet<void>(
@@ -466,11 +404,12 @@ class HomeScreen extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Container(
-                                    margin: const EdgeInsets.only(top: 8.0),
+                                    margin: const EdgeInsets.only(top: 10.0),
                                     width: 30.0,
                                     height: 3.0,
                                     decoration: BoxDecoration(
-                                      color: Colors.red,
+                                      color: context
+                                          .colorScheme.onPrimaryContainer,
                                       borderRadius: BorderRadius.circular(24.0),
                                     ),
                                   ),

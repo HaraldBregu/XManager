@@ -39,7 +39,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   ) async {
     /*
     Future todo
-    - Get device list from RemoteConfig to compare the current device
+    - Get supported device from Program
+    {
+      name: "Dinmao",
+      version: 2.0.0,
+      token: "fvnerkjnlerjnvòr"
+    }
+
     - Get Authorization Token for selected devices
 
     - Read Selected Program
