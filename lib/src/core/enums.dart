@@ -57,3 +57,15 @@ enum AppBluetoothAdapterState {
   turningOff,
   off
 }
+
+enum DeviceType {
+  none,
+  dinamo,
+}
+
+enum DevicePosition {
+  none,
+  dinamoLeft,
+  dinamoRight,
+  dinamoLeftRight,
+}

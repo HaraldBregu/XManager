@@ -7,8 +7,8 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:xmanager/src/core/enums.dart' as _i7;
 import 'package:xmanager/src/core/error/failures.dart' as _i5;
-import 'package:xmanager/src/core/usecase.dart' as _i7;
 import 'package:xmanager/src/domain/entities/device_entity.dart' as _i6;
 import 'package:xmanager/src/domain/repository/device_repository.dart' as _i3;
 
@@ -42,6 +42,24 @@ class MockDeviceRepository extends _i1.Mock implements _i3.DeviceRepository {
   MockDeviceRepository() {
     _i1.throwOnMissingStub(this);
   }
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, List<_i6.DeviceEntity>>> getMyDevices() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getMyDevices,
+          [],
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, List<_i6.DeviceEntity>>>.value(
+                _FakeEither_0<_i5.Failure, List<_i6.DeviceEntity>>(
+          this,
+          Invocation.method(
+            #getMyDevices,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, List<_i6.DeviceEntity>>>);
 
   @override
   _i4.Future<_i2.Either<_i5.Failure, _i6.DeviceEntity>> getDeviceByType(

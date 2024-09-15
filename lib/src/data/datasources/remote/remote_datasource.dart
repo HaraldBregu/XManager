@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/core/error/exeptions.dart';
+import 'package:xmanager/src/data/models/device_model.dart';
 import 'package:xmanager/src/data/models/dinamo_model.dart';
 import 'package:xmanager/src/data/models/profile_model.dart';
 import 'package:xmanager/src/data/models/user_model.dart';
@@ -11,6 +12,7 @@ abstract class RemoteDataSource {
   Future<void> register(String email, String password);
   Future<UserModel?> get currentUser;
   Future<ProfileModel> getCurrentProfile();
+  Future<List<DeviceModel>> getMyDevices();
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -55,4 +57,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
           rightBleMac: "",
         ),
       );
+      
+  @override
+  Future<List<DeviceModel>> getMyDevices() {
+    throw UnimplementedError();
+  }
 }
