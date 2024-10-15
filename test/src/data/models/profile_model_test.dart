@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:xmanager/src/data/models/dinamo_model.dart';
-import 'package:xmanager/src/data/models/profile_model.dart';
-import 'package:xmanager/src/domain/entities/profile_entity.dart';
+import 'package:xmanager/src/shared/data/models/dinamo_model.dart';
+import 'package:xmanager/src/shared/data/models/profile_model.dart';
+import 'package:xmanager/src/shared/domain/entities/profile_entity.dart';
 
 import '../../../fixtures/fixture_reader.dart';
 

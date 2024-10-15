@@ -8,9 +8,9 @@ import 'dart:async' as _i4;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:xmanager/src/core/error/failures.dart' as _i5;
-import 'package:xmanager/src/domain/entities/training_program_entity.dart'
+import 'package:xmanager/src/shared/domain/entities/program_entity.dart'
     as _i6;
-import 'package:xmanager/src/domain/repository/training_program_repository.dart'
+import 'package:xmanager/src/shared/domain/repository/training_program_repository.dart'
     as _i3;
 
 // ignore_for_file: type=lint

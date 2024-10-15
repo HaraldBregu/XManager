@@ -4,8 +4,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:xmanager/src/core/error/failures.dart';
 import 'package:xmanager/src/core/usecase.dart';
-import 'package:xmanager/src/domain/repository/user_repository.dart';
-import 'package:xmanager/src/domain/usecases/login_with_email_usecase.dart';
+import 'package:xmanager/src/shared/domain/repository/user_repository.dart';
+import 'package:xmanager/src/shared/domain/usecases/login_with_email_usecase.dart';
 
 import 'get_current_user_usecase_test.mocks.dart';
 

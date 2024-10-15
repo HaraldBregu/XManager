@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:xmanager/src/data/datasources/local/utils_datasource.dart';
-import 'package:xmanager/src/data/repository/utils_repository_impl.dart';
+import 'package:xmanager/src/shared/data/datasources/local/utils_datasource.dart';
+import 'package:xmanager/src/shared/data/repository/utils_repository_impl.dart';
 
 import 'utils_repository_impl_test.mocks.dart';
 

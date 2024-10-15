@@ -9,8 +9,9 @@ import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:xmanager/src/core/enums.dart' as _i7;
 import 'package:xmanager/src/core/error/failures.dart' as _i5;
-import 'package:xmanager/src/domain/entities/device_entity.dart' as _i6;
-import 'package:xmanager/src/domain/repository/device_repository.dart' as _i3;
+import 'package:xmanager/src/shared/domain/entities/device_entity.dart' as _i6;
+import 'package:xmanager/src/shared/domain/repository/device_repository.dart'
+    as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values

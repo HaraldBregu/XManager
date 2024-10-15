@@ -1,4 +1,4 @@
-import 'package:xmanager/src/core/enums.dart';
+import '../enums.dart';
 
 class NetworkConnectionExeption implements Exception {}
 

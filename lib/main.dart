@@ -9,13 +9,13 @@ import 'package:xmanager/firebase_options.dart';
 import 'package:xmanager/injection_container.dart' as di;
 import 'package:xmanager/injection_container.dart';
 import 'package:xmanager/src/core/common.dart';
-import 'package:xmanager/src/presentation/bloc/app/app_bloc.dart';
-import 'package:xmanager/src/presentation/bloc/app/app_event.dart';
-import 'package:xmanager/src/presentation/bloc/bloc.dart';
-import 'package:xmanager/src/presentation/screens/device/bloc/device_bloc.dart';
-import 'package:xmanager/src/presentation/screens/home/bloc/home_bloc.dart';
-import 'package:xmanager/src/presentation/screens/home/bloc/home_event.dart';
-import 'package:xmanager/src/presentation/screens/login/bloc/login_bloc.dart';
+import 'package:xmanager/src/features/auth/presentation/bloc/login_bloc.dart';
+import 'package:xmanager/src/features/device/presentation/bloc/device_bloc.dart';
+import 'package:xmanager/src/features/home/presentation/bloc/home_bloc.dart';
+import 'package:xmanager/src/features/home/presentation/bloc/home_event.dart';
+import 'package:xmanager/src/shared/presentation/bloc/app/app_bloc.dart';
+import 'package:xmanager/src/shared/presentation/bloc/app/app_event.dart';
+import 'package:xmanager/src/shared/presentation/bloc/bloc.dart';
 
 Future<void> main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +24,7 @@ Future<void> main() async {
 
   await Future.delayed(Durations.short1);
 
-  FlutterNativeSplash.remove(); 
+  FlutterNativeSplash.remove();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

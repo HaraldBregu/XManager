@@ -26,5 +26,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:361288387306:ios:1455adbeb13a4f852ee593</string>
+	<key>DATABASE_URL</key>
+	<string>https://spartans-284709-default-rtdb.europe-west1.firebasedatabase.app</string>
 </dict>
 </plist>

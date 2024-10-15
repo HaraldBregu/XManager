@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:xmanager/src/domain/repository/utils_repository.dart';
-import 'package:xmanager/src/domain/usecases/password_strength_perc_usecase.dart';
+import 'package:xmanager/src/shared/domain/repository/utils_repository.dart';
+import 'package:xmanager/src/shared/domain/usecases/password_strength_perc_usecase.dart';
 
 import 'valid_email_usecase_test.mocks.dart';
 

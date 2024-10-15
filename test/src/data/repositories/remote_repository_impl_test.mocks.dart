@@ -6,12 +6,13 @@
 import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:xmanager/src/data/datasources/local/network_datasource.dart'
-    as _i6;
-import 'package:xmanager/src/data/datasources/remote/remote_datasource.dart'
+import 'package:xmanager/src/shared/data/datasources/local/network_datasource.dart'
+    as _i7;
+import 'package:xmanager/src/shared/data/datasources/remote/remote_datasource.dart'
     as _i3;
-import 'package:xmanager/src/data/models/profile_model.dart' as _i2;
-import 'package:xmanager/src/data/models/user_model.dart' as _i5;
+import 'package:xmanager/src/shared/data/models/device_model.dart' as _i6;
+import 'package:xmanager/src/shared/data/models/profile_model.dart' as _i2;
+import 'package:xmanager/src/shared/data/models/user_model.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -108,12 +109,22 @@ class MockRemoteDataSource extends _i1.Mock implements _i3.RemoteDataSource {
           ),
         )),
       ) as _i4.Future<_i2.ProfileModel>);
+
+  @override
+  _i4.Future<List<_i6.DeviceModel>> getMyDevices() => (super.noSuchMethod(
+        Invocation.method(
+          #getMyDevices,
+          [],
+        ),
+        returnValue:
+            _i4.Future<List<_i6.DeviceModel>>.value(<_i6.DeviceModel>[]),
+      ) as _i4.Future<List<_i6.DeviceModel>>);
 }
 
 /// A class which mocks [NetworkDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNetworkDataSource extends _i1.Mock implements _i6.NetworkDataSource {
+class MockNetworkDataSource extends _i1.Mock implements _i7.NetworkDataSource {
   MockNetworkDataSource() {
     _i1.throwOnMissingStub(this);
   }

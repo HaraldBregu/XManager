@@ -3,11 +3,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:xmanager/src/core/error/failures.dart';
-import 'package:xmanager/src/data/datasources/local/network_datasource.dart';
-import 'package:xmanager/src/data/datasources/remote/remote_datasource.dart';
-import 'package:xmanager/src/data/models/dinamo_model.dart';
-import 'package:xmanager/src/data/models/profile_model.dart';
-import 'package:xmanager/src/data/repository/profile_repository_impl.dart';
+import 'package:xmanager/src/shared/data/datasources/local/network_datasource.dart';
+import 'package:xmanager/src/shared/data/datasources/remote/remote_datasource.dart';
+import 'package:xmanager/src/shared/data/models/dinamo_model.dart';
+import 'package:xmanager/src/shared/data/models/profile_model.dart';
+import 'package:xmanager/src/shared/data/repository/profile_repository_impl.dart';
 
 import 'remote_repository_impl_test.mocks.dart';
 

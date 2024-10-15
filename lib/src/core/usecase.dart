@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:xmanager/src/core/enums.dart';
-import 'package:xmanager/src/core/error/failures.dart';
+
+import 'enums.dart';
+import 'error/failures.dart';
 
 abstract class BaseUseCase<Type, Params> {
   Future<Type> call(Params params);

@@ -65,7 +65,6 @@ enum DeviceType {
 
 enum DevicePosition {
   none,
-  dinamoLeft,
-  dinamoRight,
-  dinamoLeftRight,
+  leftFoot,
+  rightFoot,
 }

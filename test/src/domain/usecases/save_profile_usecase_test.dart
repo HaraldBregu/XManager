@@ -4,10 +4,10 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:xmanager/src/core/error/failures.dart';
 import 'package:xmanager/src/core/usecase.dart';
-import 'package:xmanager/src/domain/entities/dinamo_entity.dart';
-import 'package:xmanager/src/domain/entities/profile_entity.dart';
-import 'package:xmanager/src/domain/repository/profile_repository.dart';
-import 'package:xmanager/src/domain/usecases/save_profile_usecase.dart';
+import 'package:xmanager/src/shared/domain/entities/dinamo_entity.dart';
+import 'package:xmanager/src/shared/domain/entities/profile_entity.dart';
+import 'package:xmanager/src/shared/domain/repository/profile_repository.dart';
+import 'package:xmanager/src/shared/domain/usecases/save_profile_usecase.dart';
 
 import 'save_profile_usecase_test.mocks.dart';
 

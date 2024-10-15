@@ -9,8 +9,9 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:permission_handler/permission_handler.dart' as _i7;
 import 'package:xmanager/src/core/enums.dart' as _i5;
-import 'package:xmanager/src/data/datasources/local/ble_datasource.dart' as _i2;
-import 'package:xmanager/src/data/datasources/local/permissions_datasource.dart'
+import 'package:xmanager/src/shared/data/datasources/local/ble_datasource.dart'
+    as _i2;
+import 'package:xmanager/src/shared/data/datasources/local/permissions_datasource.dart'
     as _i6;
 
 // ignore_for_file: type=lint

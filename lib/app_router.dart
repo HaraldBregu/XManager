@@ -1,26 +1,26 @@
+// ignore_for_file: always_use_package_imports
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:xmanager/src/presentation/bloc/bloc.dart';
-import 'package:xmanager/src/presentation/screens/ble/ble_debug_page.dart';
-import 'package:xmanager/src/presentation/screens/ble/debug_page.dart';
-import 'package:xmanager/src/presentation/screens/ble/device_list_page.dart';
-import 'package:xmanager/src/presentation/screens/ble/device_search.dart';
-import 'package:xmanager/src/presentation/screens/device/device_screen.dart';
-import 'package:xmanager/src/presentation/screens/home/home_screen.dart';
-import 'package:xmanager/src/presentation/screens/login/login_screen.dart';
-import 'package:xmanager/src/presentation/screens/profile_screen.dart';
-import 'package:xmanager/src/presentation/screens/recovery/recovery_screen.dart';
-import 'package:xmanager/src/presentation/screens/settings/account_page.dart';
-import 'package:xmanager/src/presentation/screens/settings/permissions_page.dart';
-import 'package:xmanager/src/presentation/screens/settings/settings_page.dart';
-import 'package:xmanager/src/presentation/screens/signup/signup_screen.dart';
-import 'package:xmanager/src/presentation/screens/start_screen.dart';
-import 'package:xmanager/src/presentation/screens/training_program/training_program_edit_screen.dart';
-import 'package:xmanager/src/presentation/screens/training_program/training_program_list_screen.dart';
+import 'src/features/account/presentation/screens/account_page.dart';
+import 'src/features/account/presentation/screens/permissions_page.dart';
+import 'src/features/account/presentation/screens/profile_screen.dart';
+import 'src/features/account/presentation/screens/settings_page.dart';
+import 'src/features/auth/presentation/screens/login_screen.dart';
+import 'src/features/auth/presentation/screens/recovery_screen.dart';
+import 'src/features/auth/presentation/screens/signup_screen.dart';
+import 'src/features/auth/presentation/screens/start_screen.dart';
+import 'src/features/device/presentation/screens/ble_debug_page.dart';
+import 'src/features/device/presentation/screens/debug_page.dart';
+import 'src/features/device/presentation/screens/device_list_page.dart';
+import 'src/features/device/presentation/screens/device_screen.dart';
+import 'src/features/device/presentation/screens/device_search.dart';
+import 'src/features/home/presentation/screens/home_screen.dart';
+import 'src/features/training/presentation/screens/training_program_edit_screen.dart';
+import 'src/features/training/presentation/screens/training_program_list_screen.dart';
+import 'src/shared/presentation/bloc/bloc.dart';
 
 class GoRouterObserver extends NavigatorObserver {
   final BuildContext context;

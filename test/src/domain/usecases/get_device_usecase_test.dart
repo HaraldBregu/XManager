@@ -3,9 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:xmanager/src/core/usecase.dart';
-import 'package:xmanager/src/domain/entities/device_entity.dart';
-import 'package:xmanager/src/domain/repository/device_repository.dart';
-import 'package:xmanager/src/domain/usecases/get_device_usecase.dart';
+import 'package:xmanager/src/shared/domain/entities/device_entity.dart';
+import 'package:xmanager/src/shared/domain/repository/device_repository.dart';
+import 'package:xmanager/src/shared/domain/usecases/get_device_usecase.dart';
 
 import 'get_device_usecase_test.mocks.dart';
 

@@ -7,7 +7,8 @@ import 'dart:async' as _i4;
 import 'dart:ui' as _i2;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:xmanager/src/domain/repository/utils_repository.dart' as _i3;
+import 'package:xmanager/src/shared/domain/repository/utils_repository.dart'
+    as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values

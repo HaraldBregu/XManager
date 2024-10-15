@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:xmanager/src/data/datasources/local/ble_datasource.dart';
-import 'package:xmanager/src/data/datasources/local/permissions_datasource.dart';
-import 'package:xmanager/src/data/repository/ble_repository_impl.dart';
+import 'package:xmanager/src/shared/data/datasources/local/ble_datasource.dart';
+import 'package:xmanager/src/shared/data/datasources/local/permissions_datasource.dart';
+import 'package:xmanager/src/shared/data/repository/ble_repository_impl.dart';
 
 import 'ble_repository_impl_test.mocks.dart';
 
