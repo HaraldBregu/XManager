@@ -35,7 +35,7 @@ Future<void> main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider<HomeBloc>(create: (_) => sl()..add(HomeStartEvent())),
+        BlocProvider<HomeBloc>(create: (_) => sl()..add(InitialHomeEvent())),
         BlocProvider<UserBloc>(create: (_) => sl()..add(StartUserEvent())),
         BlocProvider<LoginBloc>(create: (_) => sl()),
         BlocProvider<DeviceBloc>(create: (_) => sl()),

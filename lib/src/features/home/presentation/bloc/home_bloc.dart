@@ -26,17 +26,38 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     required this.bleWrite,
     required this.getProgramsUseCase,
   }) : super(const HomeInitialState()) {
-    on<HomeStartEvent>(_onStartEvent);
+    on<InitialHomeEvent>(_onInitialHomeEvent);
+    on<LoadHomeDataEvent>(_onLoadHomeDataEvent);
+
     on<HomeUploadProgramToDeviceEvent>(_onUploadProgramEvent);
     on<ShowProgramListEvent>(_onShowProgramListEvent);
     on<SelectProgramEvent>(_onSelectProgramEvent);
     on<UploadProgramEvent>(_onUploadProgram2Event);
   }
 
-  Future<void> _onStartEvent(
-    HomeStartEvent event,
+  Future<void> _onInitialHomeEvent(
+    InitialHomeEvent event,
     Emitter<HomeState> emit,
   ) async {}
+
+  Future<void> _onLoadHomeDataEvent(
+    LoadHomeDataEvent event,
+    Emitter<HomeState> emit,
+  ) async {
+    // usecase
+    // homeDataUseCase.call
+    // entity = HomeDataEntity
+    // Profile
+    // Data analysis = true/false
+    // Programs count = true/false
+    // Devices = list with embeded device_uploaded_program
+
+    // 1. Show Loading state
+    // GettingDataState
+
+    // 2. Get data
+    // DataLoadedState
+  }
 
   Future<void> _onUploadProgramEvent(
     HomeUploadProgramToDeviceEvent event,
@@ -150,14 +171,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     SelectProgramEvent event,
     Emitter<HomeState> emit,
   ) async {
-    emit(SelectAndUploadProgramState(event.program));
+    emit(StartUploadingState(event.program));
   }
 
   Future<void> _onUploadProgram2Event(
     UploadProgramEvent event,
     Emitter<HomeState> emit,
   ) async {
-    //emit(BluetoothConnectingState(event.program));
-    emit(SelectAndUploadProgramState(event.program));
+    emit(StartUploadingState(event.program));
+    //emit(StartUploadingState(event.program, uploadingFirsDevice: true or false));
   }
 }

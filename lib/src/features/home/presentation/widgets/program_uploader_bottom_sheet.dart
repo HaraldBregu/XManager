@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 import 'package:xmanager/src/shared/domain/entities/program_entity.dart';
 import 'package:xmanager/src/shared/widgets/info_container.dart';
@@ -10,7 +11,7 @@ typedef UploadProgram = void Function(ProgramEntity program);
 Future<void> showModalBottomSheetProgramUploader({
   required BuildContext context,
   required ProgramEntity program,
-  required UploadProgram onUpload,
+  required UploadProgram onStartUploading,
 }) {
   return showModalBottomSheet<void>(
     context: context,
@@ -24,7 +25,6 @@ Future<void> showModalBottomSheetProgramUploader({
         child: Wrap(
           runSpacing: 20.0,
           children: [
-            // Header section
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -36,7 +36,7 @@ Future<void> showModalBottomSheetProgramUploader({
                       fontSize: context.textTheme.titleLarge?.fontSize,
                       fontFamily: context.textTheme.titleLarge?.fontFamily,
                       fontWeight: FontWeight.w600,
-                      color: context.colorScheme.onBackground,
+                      color: context.colorScheme.onSurface,
                     ),
                   ),
                 ),
@@ -50,7 +50,7 @@ Future<void> showModalBottomSheetProgramUploader({
                           Icon(
                             Icons.directions_run,
                             size: 18,
-                            color: context.colorScheme.onBackground,
+                            color: context.colorScheme.onSurface,
                           ),
                           Text(
                             program.title,
@@ -69,7 +69,7 @@ Future<void> showModalBottomSheetProgramUploader({
                           Icon(
                             Icons.timelapse,
                             size: 18,
-                            color: context.colorScheme.onBackground,
+                            color: context.colorScheme.onSurface,
                           ),
                           const SizedBox(width: 4),
                           Text(
@@ -93,11 +93,13 @@ Future<void> showModalBottomSheetProgramUploader({
                       Icon(
                         Icons.bluetooth,
                         size: 18,
-                        color: context.colorScheme.onBackground,
+                        color: context.colorScheme.onSurface,
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        "Dinamo v1.3.0",
+                        program.deviceType == DeviceType.dinamo
+                            ? "Dinamo v${program.deviceVersion}"
+                            : "NoDevice",
                         style: TextStyle(
                           fontSize: context.textTheme.bodyMedium?.fontSize,
                           fontFamily: context.textTheme.bodyMedium?.fontFamily,
@@ -107,6 +109,7 @@ Future<void> showModalBottomSheetProgramUploader({
                     ],
                   ),
                 ),
+                /*
                 Padding(
                   padding: const EdgeInsets.only(
                     top: 5,
@@ -117,7 +120,7 @@ Future<void> showModalBottomSheetProgramUploader({
                       Icon(
                         Icons.person,
                         size: 18,
-                        color: context.colorScheme.onBackground,
+                        color: context.colorScheme.onSurface,
                       ),
                       const SizedBox(width: 4),
                       Text(
@@ -131,6 +134,7 @@ Future<void> showModalBottomSheetProgramUploader({
                     ],
                   ),
                 ),
+                */
               ],
             ),
 
@@ -285,7 +289,7 @@ Future<void> showModalBottomSheetProgramUploader({
                     ),
                   ),
                   onPressed: () {
-                    onUpload.call(program);
+                    onStartUploading.call(program);
                   },
                   child: const Text("UPLOAD & START"),
                 ),

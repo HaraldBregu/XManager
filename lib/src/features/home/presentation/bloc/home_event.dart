@@ -6,10 +6,16 @@ abstract class HomeEvent extends Equatable {
   const HomeEvent();
 }
 
-class HomeStartEvent extends HomeEvent {
+class InitialHomeEvent extends HomeEvent {
   @override
   List<Object?> get props => [];
 }
+
+class LoadHomeDataEvent extends HomeEvent {
+  @override
+  List<Object?> get props => [];
+}
+
 
 class HomeUploadProgramToDeviceEvent extends HomeEvent {
   final BluetoothDevicePairsEntity devicePairs;

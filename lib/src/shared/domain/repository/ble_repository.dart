@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import '../../../core/enums.dart';
-import '../../../core/error/failures.dart';
-import '../entities/bluetooth_device_entity.dart';
+import 'package:xmanager/src/core/enums.dart';
+import 'package:xmanager/src/core/error/failures.dart';
+import 'package:xmanager/src/shared/domain/entities/bluetooth_device_entity.dart';
 
 abstract class BleRepository {
   Future<void> startScan(int seconds, List<String>? services);

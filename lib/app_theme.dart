@@ -111,15 +111,16 @@ abstract class AppTheme {
         //usedColors: 5,
         //textTheme: _textTheme,
         fontFamily: _fontFamily,
-        surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold, // GOOD current
-        blendLevel: 4,
+        //surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold, // GOOD current
+        surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold,
+        blendLevel: 14,
         //blendLevel: 36,
         //appBarElevation: 4.0,
 
         subThemesData: const FlexSubThemesData(
+          cardElevation: 2,
           defaultRadius: 10,
-          
-          blendOnLevel: 20,
+          //blendOnLevel: 20,
           // Input
           inputDecoratorRadius: 9,
           //inputDecoratorRadius: 5,

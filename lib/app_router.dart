@@ -1,26 +1,26 @@
-// ignore_for_file: always_use_package_imports
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'src/features/account/presentation/screens/account_page.dart';
-import 'src/features/account/presentation/screens/permissions_page.dart';
-import 'src/features/account/presentation/screens/profile_screen.dart';
-import 'src/features/account/presentation/screens/settings_page.dart';
-import 'src/features/auth/presentation/screens/login_screen.dart';
-import 'src/features/auth/presentation/screens/recovery_screen.dart';
-import 'src/features/auth/presentation/screens/signup_screen.dart';
-import 'src/features/auth/presentation/screens/start_screen.dart';
-import 'src/features/device/presentation/screens/ble_debug_page.dart';
-import 'src/features/device/presentation/screens/debug_page.dart';
-import 'src/features/device/presentation/screens/device_list_page.dart';
-import 'src/features/device/presentation/screens/device_screen.dart';
-import 'src/features/device/presentation/screens/device_search.dart';
-import 'src/features/home/presentation/screens/home_screen.dart';
-import 'src/features/training/presentation/screens/training_program_edit_screen.dart';
-import 'src/features/training/presentation/screens/training_program_list_screen.dart';
-import 'src/shared/presentation/bloc/bloc.dart';
+import 'package:xmanager/src/features/account/presentation/screens/account_page.dart';
+import 'package:xmanager/src/features/account/presentation/screens/permissions_page.dart';
+import 'package:xmanager/src/features/account/presentation/screens/profile_screen.dart';
+import 'package:xmanager/src/features/account/presentation/screens/settings_page.dart';
+import 'package:xmanager/src/features/auth/presentation/screens/login_screen.dart';
+import 'package:xmanager/src/features/auth/presentation/screens/recovery_screen.dart';
+import 'package:xmanager/src/features/auth/presentation/screens/signup_screen.dart';
+import 'package:xmanager/src/features/auth/presentation/screens/start_screen.dart';
+import 'package:xmanager/src/features/device/presentation/screens/devices_scan_screen.dart';
+import 'package:xmanager/src/features/device/presentation/screens/old/ble_debug_page.dart';
+import 'package:xmanager/src/features/device/presentation/screens/old/debug_page.dart';
+import 'package:xmanager/src/features/device/presentation/screens/old/device_list_page.dart';
+import 'package:xmanager/src/features/device/presentation/screens/device_screen.dart';
+import 'package:xmanager/src/features/device/presentation/screens/old/device_search.dart';
+import 'package:xmanager/src/features/home/presentation/screens/home_screen.dart';
+import 'package:xmanager/src/features/training/presentation/screens/training_program_edit_screen.dart';
+import 'package:xmanager/src/features/training/presentation/screens/training_program_list_screen.dart';
+import 'package:xmanager/src/shared/presentation/bloc/bloc.dart';
 
 class GoRouterObserver extends NavigatorObserver {
   final BuildContext context;
@@ -80,12 +80,13 @@ GoRouter router(BuildContext context) {
       final loginPath = location.startsWith('/login');
       final signupPath = location.startsWith('/signup');
       final homePath = location.startsWith('/home');
+      final registerDevicePath = location.startsWith('/devices_scan_screen');
 
       final userbloc = context.read<UserBloc>().state;
 
       final userAuthenticated = userbloc is UserAuthenticatedState;
 
-      if (userAuthenticated && homePath) {
+      if (userAuthenticated && (homePath || registerDevicePath)) {
         return null;
       } else if (userAuthenticated) {
         return '/home';
@@ -123,15 +124,18 @@ GoRouter router(BuildContext context) {
       GoRoute(
         name: "home screen",
         path: "/home",
-        //builder: (context, state) => const ProgramEditScreen(),
-        builder: (context, state) => const HomeScreen(),
-        
+        //builder: (context, state) => const HomeScreen(),
+        builder: (context, state) => const ProgramEditScreen(),
         routes: [
+
+          // Profile Screen
           GoRoute(
             name: "update profile screen",
             path: 'profile',
             builder: (context, state) => const ProfileScreen(),
           ),
+          
+          // Programs Flow
           GoRoute(
             name: "program list screen",
             path: 'programs',
@@ -144,13 +148,23 @@ GoRouter router(BuildContext context) {
               ),
             ],
           ),
+          
+          // Device Screen 
           GoRoute(
-            name: "Device screen",
+            name: "device screen",
             path: 'device',
             builder: (context, state) => const DeviceScreen(),
           ),
+
+          // Register Device Flow
+          GoRoute(
+            name: "devices scan screen",
+            path: '/devices_scan_screen',
+            builder: (context, state) => const DevicesScanScreen(),
+          ),
         ],
       ),
+     
       GoRoute(
         name: "settings page",
         path: '/settings',

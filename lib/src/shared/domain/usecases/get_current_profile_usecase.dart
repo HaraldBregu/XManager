@@ -1,9 +1,8 @@
 import 'package:dartz/dartz.dart';
-
-import '../../../core/error/failures.dart';
-import '../../../core/usecase.dart';
-import '../entities/profile_entity.dart';
-import '../repository/profile_repository.dart';
+import 'package:xmanager/src/core/error/failures.dart';
+import 'package:xmanager/src/core/usecase.dart';
+import 'package:xmanager/src/shared/domain/entities/profile_entity.dart';
+import 'package:xmanager/src/shared/domain/repository/profile_repository.dart';
 
 class GetCurrentProfileUsecase implements UseCase<ProfileEntity, NoParams> {
   final ProfileRepository profileRepository;

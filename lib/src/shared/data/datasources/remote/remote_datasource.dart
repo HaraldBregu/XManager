@@ -71,15 +71,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<List<ProgramModel>> getPrograms() async {
     final firestore = FirebaseFirestore.instance;
-    final programsRef = firestore.collection('programs');
-    //final query = programsRef.orderBy("id");
-    //final query = programsRef.where("title", isNull: false);
-    /*
-    .where("data", isNotEqualTo: []);
-    .where("devicePosition", isNull: false)
-    .where("deviceType", isNull: false)
-    .where("deviceVersion", isNull: false)
-    */
+
+    final programsRef = firestore
+        .collection('programs')
+        .where("user_id", isNull: false)
+        .where("user_id", isEqualTo: FirebaseAuth.instance.currentUser?.uid);
+
     final data = await programsRef.get();
 
     final programs = data.docs.map((doc) {
@@ -89,10 +86,42 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     }).where((element) {
       final hasTitle = element.title.isNotEmpty;
       final hasData = element.data.isNotEmpty;
+      final hasType = element.deviceType != DeviceType.none;
+      final hasPosition = element.devicePosition != DevicePosition.none;
       final hasDeviceVersion = element.deviceVersion.isNotEmpty;
-      return hasTitle && hasData && hasDeviceVersion;
+      return hasTitle && hasData && hasType && hasPosition && hasDeviceVersion;
     }).toList();
 
     return programs;
+  }
+
+  // TEST
+  Future<void> createProgram(ProgramModel program) async {
+    final firestore = FirebaseFirestore.instance;
+
+    // personal: 32td54OR8efto9xixr6pbLJVdu12
+    // Spartan: DlOPAJLSCuVC2jwsqYQm1M9j3ZI2
+    final programsRef = firestore.collection('programs');
+    final programsprivate = programsRef.doc();
+    /*
+                      const newProgram = ProgramEntity(
+                        title: "User A",
+                        data: [],
+                        deviceType: DeviceType.none,
+                        devicePosition: DevicePosition.none,
+                        deviceVersion: '',
+                      );*/
+    programsprivate.set(program.toJson());
+    /*
+                      programsprivate.set({
+                        "user_id": FirebaseAuth.instance.currentUser?.uid,
+                        "title": "Tiro con l'esterno destro",
+                        "data": [23, 45, 98],
+                        "device_type": 0,
+                        "device_position": 1,
+                        "device_version": "1.0.0",
+                      });*/
+
+    //final query = programsRef.orderBy("id");
   }
 }

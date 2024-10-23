@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/theme_extension.dart';
-import '../../../../core/widgets/svg_loader.dart';
+import 'package:xmanager/src/core/theme_extension.dart';
+import 'package:xmanager/src/core/widgets/svg_loader.dart';
 
 class ProgramEditScreen extends StatefulWidget {
   const ProgramEditScreen({super.key});
@@ -26,11 +26,14 @@ class _ProgramEditScreenState extends State<ProgramEditScreen>
 
   @override
   Widget build(BuildContext context) {
+    const paddingHorizontally = 20.0;
+    int selectedOption = 1;
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            title: const Text('New program'),
+            title: const Text('Program'),
             pinned: true,
             //snap: false,
             //floating: false,
@@ -46,71 +49,206 @@ class _ProgramEditScreenState extends State<ProgramEditScreen>
               ),
             ],
           ),
+
+          // Program title
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 5),
+              padding: const EdgeInsets.fromLTRB(
+                paddingHorizontally,
+                50,
+                paddingHorizontally,
+                0,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(
-                      "Name of program",
-                      style: TextStyle(
-                        fontSize: context.textTheme.titleMedium?.fontSize,
-                        fontFamily: context.textTheme.titleMedium?.fontFamily,
-                        fontWeight: FontWeight.bold,
-                        color: context.colorScheme.onSurface,
-                      ),
-                    ),
-                    subtitle: Text(
-                      "Set a name fot this program in order to make it reconizable fron other programs.",
-                      style: TextStyle(
-                        fontSize: context.textTheme.bodySmall?.fontSize,
-                        fontFamily: context.textTheme.bodySmall?.fontFamily,
-                        //fontWeight: FontWeight.bold,
-                        color: context.colorScheme.onPrimaryContainer,
-                      ),
+                  Text(
+                    "Program title",
+                    style: TextStyle(
+                      fontSize: context.textTheme.titleLarge?.fontSize,
+                      fontFamily: context.textTheme.titleLarge?.fontFamily,
+                      fontWeight: FontWeight.w900,
+                      color: context.colorScheme.onSurface,
                     ),
                   ),
+                  const SizedBox(height: 5),
+                  Text(
+                    "Provide or update the title for the program. This title will help you easily identify it when selecting from the list of available programs.",
+                    style: TextStyle(
+                      fontSize: context.textTheme.titleSmall?.fontSize,
+                      fontFamily: context.textTheme.titleSmall?.fontFamily,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const SizedBox(height: 25),
                   TextFormField(
                     decoration: const InputDecoration(
                       contentPadding:
                           EdgeInsets.only(top: 16, bottom: 16, left: 16),
-                      hintText: '',
-                      labelText: 'Program name',
+                      hintText: 'Title of program',
+                      labelText: 'Title of program',
                     ),
                   ),
                 ],
               ),
             ),
           ),
+
+          // Divider
+          const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                paddingHorizontally,
+                50,
+                paddingHorizontally,
+                0,
+              ),
+              child: Divider(),
+            ),
+          ),
+
+          // Light Selection
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
+              padding: const EdgeInsets.fromLTRB(
+                paddingHorizontally,
+                50,
+                paddingHorizontally,
+                0,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(
-                      "Light selection",
-                      style: TextStyle(
-                        fontSize: context.textTheme.titleMedium?.fontSize,
-                        fontFamily: context.textTheme.titleMedium?.fontFamily,
-                        fontWeight: FontWeight.bold,
-                        color: context.colorScheme.onSurface,
-                      ),
+                  Text(
+                    "Light selection",
+                    style: TextStyle(
+                      fontSize: context.textTheme.titleLarge?.fontSize,
+                      fontFamily: context.textTheme.titleLarge?.fontFamily,
+                      fontWeight: FontWeight.w900,
+                      color: context.colorScheme.onSurface,
                     ),
-                    subtitle: Text(
-                      "Touch and select the position you want to use.",
-                      style: TextStyle(
-                        fontSize: context.textTheme.bodySmall?.fontSize,
-                        fontFamily: context.textTheme.bodySmall?.fontFamily,
-                        //fontWeight: FontWeight.bold,
-                        color: context.colorScheme.onPrimaryContainer,
-                      ),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    "Choose one or more light positions to use. The available positions are shown below. Select at least one option that best fits your needs.",
+                    style: TextStyle(
+                      fontSize: context.textTheme.titleSmall?.fontSize,
+                      fontFamily: context.textTheme.titleSmall?.fontFamily,
+                      fontWeight: FontWeight.w900,
                     ),
+                  ),
+                  const SizedBox(height: 25),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Top',
+                        style: TextStyle(
+                          fontSize: context.textTheme.titleMedium?.fontSize,
+                          fontFamily: context.textTheme.titleMedium?.fontFamily,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Checkbox(
+                        fillColor: WidgetStateColor.resolveWith(
+                          (states) => context.colorScheme.secondary,
+                        ),
+                        tristate: true,
+                        value: true,
+                        onChanged: null,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Top Extern',
+                        style: TextStyle(
+                          fontSize: context.textTheme.titleMedium?.fontSize,
+                          fontFamily: context.textTheme.titleMedium?.fontFamily,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Checkbox(
+                        fillColor: WidgetStateColor.resolveWith(
+                          (states) {
+                            print(states);
+                            final f = WidgetState.selected;
+                            return context.colorScheme.secondary;
+                          },
+                        ),
+                        tristate: true,
+                        value: false,
+                        onChanged: (bool? value) {},
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Extern',
+                        style: TextStyle(
+                          fontSize: context.textTheme.titleMedium?.fontSize,
+                          fontFamily: context.textTheme.titleMedium?.fontFamily,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Checkbox(
+                        fillColor: WidgetStateColor.resolveWith(
+                          (states) => context.colorScheme.secondary,
+                        ),
+                        isError: true,
+                        tristate: true,
+                        value: false,
+                        onChanged: (bool? value) {},
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Top Intern',
+                        style: TextStyle(
+                          fontSize: context.textTheme.titleMedium?.fontSize,
+                          fontFamily: context.textTheme.titleMedium?.fontFamily,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Checkbox(
+                        fillColor: WidgetStateColor.resolveWith(
+                          (states) => context.colorScheme.secondary,
+                        ),
+                        isError: true,
+                        tristate: true,
+                        value: false,
+                        onChanged: (bool? value) {},
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Intern',
+                        style: TextStyle(
+                          fontSize: context.textTheme.titleMedium?.fontSize,
+                          fontFamily: context.textTheme.titleMedium?.fontFamily,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Checkbox(
+                        fillColor: WidgetStateColor.resolveWith(
+                          (states) => context.colorScheme.secondary,
+                        ),
+                        isError: true,
+                        tristate: true,
+                        value: false,
+                        onChanged: (bool? value) {},
+                      ),
+                    ],
                   ),
                   FutureBuilder<ElementData>(
                     future:
@@ -230,79 +368,148 @@ class _ProgramEditScreenState extends State<ProgramEditScreen>
               ),
             ),
           ),
+
+          // Divider
+          const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                paddingHorizontally,
+                50,
+                paddingHorizontally,
+                0,
+              ),
+              child: Divider(),
+            ),
+          ),
+
+          // Light animation
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
+              padding: const EdgeInsets.fromLTRB(
+                paddingHorizontally,
+                50,
+                paddingHorizontally,
+                0,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(
-                      "Select the animation",
-                      style: TextStyle(
-                        fontSize: context.textTheme.titleMedium?.fontSize,
-                        fontFamily: context.textTheme.titleMedium?.fontFamily,
-                        fontWeight: FontWeight.bold,
-                        color: context.colorScheme.onSurface,
-                      ),
-                    ),
-                    subtitle: Text(
-                      "Set a name fot this program in order to make it reconizable fron other programs.",
-                      style: TextStyle(
-                        fontSize: context.textTheme.bodySmall?.fontSize,
-                        fontFamily: context.textTheme.bodySmall?.fontFamily,
-                        //fontWeight: FontWeight.bold,
-                        color: context.colorScheme.onPrimaryContainer,
-                      ),
+                  Text(
+                    "Light animation",
+                    style: TextStyle(
+                      fontSize: context.textTheme.titleLarge?.fontSize,
+                      fontFamily: context.textTheme.titleLarge?.fontFamily,
+                      fontWeight: FontWeight.w900,
+                      color: context.colorScheme.onSurface,
                     ),
                   ),
-                  DropdownButtonFormField(
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.only(
-                        top: 16,
-                        bottom: 16,
-                        left: 16,
-                      ),
+                  const SizedBox(height: 5),
+                  Text(
+                    "Select the desired light animation style. You can choose between the following animations:",
+                    style: TextStyle(
+                      fontSize: context.textTheme.titleSmall?.fontSize,
+                      fontFamily: context.textTheme.titleSmall?.fontFamily,
+                      fontWeight: FontWeight.w900,
                     ),
-                    items: const [
-                      DropdownMenuItem(value: "0", child: Text("Item one")),
-                      DropdownMenuItem(value: "1", child: Text("Item two")),
-                      DropdownMenuItem(value: "2", child: Text("Item three")),
+                  ),
+                  const SizedBox(height: 25),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Blink animation',
+                        style: TextStyle(
+                          fontSize: context.textTheme.titleMedium?.fontSize,
+                          fontFamily: context.textTheme.titleMedium?.fontFamily,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Radio<int>(
+                        fillColor: WidgetStateColor.resolveWith(
+                          (states) => context.colorScheme.secondary,
+                        ),
+                        focusColor: WidgetStateColor.resolveWith(
+                          (states) => context.colorScheme.secondary,
+                        ),
+                        value: 1,
+                        groupValue: selectedOption,
+                        onChanged: (value) {},
+                      ),
                     ],
-                    onChanged: (value) => {},
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Fade animation',
+                        style: TextStyle(
+                          fontSize: context.textTheme.titleMedium?.fontSize,
+                          fontFamily: context.textTheme.titleMedium?.fontFamily,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Radio<int>(
+                        fillColor: WidgetStateColor.resolveWith(
+                          (states) => context.colorScheme.secondary,
+                        ),
+                        focusColor: WidgetStateColor.resolveWith(
+                          (states) => context.colorScheme.secondary,
+                        ),
+                        value: 2,
+                        groupValue: selectedOption,
+                        onChanged: (value) {},
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
           ),
+
+          // Divider
+          const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                paddingHorizontally,
+                50,
+                paddingHorizontally,
+                0,
+              ),
+              child: Divider(),
+            ),
+          ),
+
+          // Duration
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
+              padding: const EdgeInsets.fromLTRB(
+                paddingHorizontally,
+                50,
+                paddingHorizontally,
+                0,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(
-                      "Select duration",
-                      style: TextStyle(
-                        fontSize: context.textTheme.titleMedium?.fontSize,
-                        fontFamily: context.textTheme.titleMedium?.fontFamily,
-                        fontWeight: FontWeight.bold,
-                        color: context.colorScheme.onSurface,
-                      ),
-                    ),
-                    subtitle: Text(
-                      "Set a name fot this program in order to make it reconizable fron other programs.",
-                      style: TextStyle(
-                        fontSize: context.textTheme.bodySmall?.fontSize,
-                        fontFamily: context.textTheme.bodySmall?.fontFamily,
-                        //fontWeight: FontWeight.bold,
-                        color: context.colorScheme.onPrimaryContainer,
-                      ),
+                  Text(
+                    "Duration",
+                    style: TextStyle(
+                      fontSize: context.textTheme.titleLarge?.fontSize,
+                      fontFamily: context.textTheme.titleLarge?.fontFamily,
+                      fontWeight: FontWeight.w900,
+                      color: context.colorScheme.onSurface,
                     ),
                   ),
+                  const SizedBox(height: 5),
+                  Text(
+                    "Use the slider to select the desired duration for the program, ranging from 1 minute to 120 minutes. This setting will determine how long the light animation will run.",
+                    style: TextStyle(
+                      fontSize: context.textTheme.titleSmall?.fontSize,
+                      fontFamily: context.textTheme.titleSmall?.fontFamily,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const SizedBox(height: 25),
                   Slider(
                     value: 50,
                     max: 100,
@@ -314,25 +521,29 @@ class _ProgramEditScreenState extends State<ProgramEditScreen>
               ),
             ),
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  FilledButton(
-                    style: FilledButton.styleFrom(
-                      fixedSize: const Size.fromHeight(50),
-                    ),
-                    onPressed: () {},
-                    child: const Text('SALVA'),
-                  ),
-                ],
-              ),
-            ),
-          ),
         ],
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            FilledButton.icon(
+              style: FilledButton.styleFrom(
+                fixedSize: const Size(150, 50),
+              ),
+              label: Text(
+                "SALVE",
+                style: TextStyle(
+                  color: context.colorScheme.surface,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              onPressed: () async {},
+            ),
+          ],
+        ),
       ),
     );
   }
