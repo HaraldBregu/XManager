@@ -305,7 +305,7 @@ Future<void> showModalBottomSheetProgramUploader({
                   child: const Text("CLOSE"),
                 ),
               ],
-            )
+            ),
           ],
         ),
       );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:xmanager/src/core/theme_extension.dart';
 
 class TrainingProgramListScreen extends StatelessWidget {
   const TrainingProgramListScreen({super.key});
@@ -10,14 +11,8 @@ class TrainingProgramListScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            title: const Text(
-              "Program list",
-              style: TextStyle(
-                fontWeight: FontWeight.w900,
-              ),
-            ),
+            title: const Text('Programs'),
             pinned: true,
-            //centerTitle: true,
             actions: [
               PopupMenuButton(
                 itemBuilder: (context) {
@@ -44,28 +39,60 @@ class TrainingProgramListScreen extends StatelessWidget {
               ),
             ],
           ),
-          /*
-          SliverToBoxAdapter(
-            child: ProgramList(
-              onSelectTrainingProgram: () {},
+          
+          // Spacer
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 20,
             ),
-          ),*/
+          ),
+
+          SliverList(
+            delegate: SliverChildListDelegate(
+              List.generate(
+                5,
+                (idx) {
+                  return ListTile(
+                    title: Text(
+                      "Title program",
+                      style: context.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    trailing: const Icon(
+                      Icons.chevron_right,
+                      size: 30,
+                    ),
+                    onTap: () {
+                      context.pushNamed('program edit screen');
+                    },
+                  );
+                },
+              ),
+            ),
+          )
         ],
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(18.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                fixedSize: const Size.fromHeight(50),
+            FilledButton.icon(
+              style: FilledButton.styleFrom(
+                fixedSize: const Size(150, 50),
+              ),
+              label: Text(
+                "CREATE NEW PROGRAM",
+                style: TextStyle(
+                  color: context.colorScheme.surface,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
               onPressed: () {
-                context.pushNamed("program edit screen");
+                context.pushNamed('program edit screen');
               },
-              child: const Text('CREA PROGRAMMA'),
             ),
           ],
         ),

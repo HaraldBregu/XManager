@@ -1,13 +1,13 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:xmanager/app_router.dart';
 import 'package:xmanager/app_theme.dart';
-import 'package:xmanager/firebase_options.dart';
 import 'package:xmanager/injection_container.dart' as di;
 import 'package:xmanager/injection_container.dart';
+import 'package:xmanager/local_variables.dart';
 import 'package:xmanager/src/core/common.dart';
 import 'package:xmanager/src/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:xmanager/src/features/device/presentation/bloc/device_bloc.dart';
@@ -19,15 +19,13 @@ import 'package:xmanager/src/shared/presentation/bloc/bloc.dart';
 
 Future<void> main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  //FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  //await Future.delayed(Durations.short1);
+  //FlutterNativeSplash.remove();
 
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-
-  await Future.delayed(Durations.short1);
-
-  FlutterNativeSplash.remove();
-
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+  await Supabase.initialize(
+    url: SUPABASE_URL,
+    anonKey: SUPABASE_ANON_KEY,
   );
 
   await di.init();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
-import 'package:xmanager/src/core/widgets/svg_loader.dart';
+import 'package:xmanager/src/shared/widgets/svg_loader.dart';
 
 class ProgramEditScreen extends StatefulWidget {
   const ProgramEditScreen({super.key});
@@ -26,8 +26,11 @@ class _ProgramEditScreenState extends State<ProgramEditScreen>
 
   @override
   Widget build(BuildContext context) {
+    const topSpace = 50.0;
+    const bottomSpace = 50.0;
     const paddingHorizontally = 20.0;
-    int selectedOption = 1;
+    const paddingVertically = 40.0;
+    const selectedOption = 1;
 
     return Scaffold(
       body: CustomScrollView(
@@ -35,13 +38,6 @@ class _ProgramEditScreenState extends State<ProgramEditScreen>
           SliverAppBar(
             title: const Text('Program'),
             pinned: true,
-            //snap: false,
-            //floating: false,
-            /*
-          flexibleSpace: FlexibleSpaceBar(
-            centerTitle: true,
-            title: Text("testo"),
-          ),*/
             actions: [
               IconButton(
                 icon: const Icon(Icons.more_vert),
@@ -50,33 +46,32 @@ class _ProgramEditScreenState extends State<ProgramEditScreen>
             ],
           ),
 
+          // Spacer
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: topSpace,
+            ),
+          ),
+
           // Program title
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(
-                paddingHorizontally,
-                50,
-                paddingHorizontally,
-                0,
+              padding: const EdgeInsets.symmetric(
+                horizontal: paddingHorizontally,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Program title",
-                    style: TextStyle(
-                      fontSize: context.textTheme.titleLarge?.fontSize,
-                      fontFamily: context.textTheme.titleLarge?.fontFamily,
+                    style: context.textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.w900,
-                      color: context.colorScheme.onSurface,
                     ),
                   ),
                   const SizedBox(height: 5),
                   Text(
                     "Provide or update the title for the program. This title will help you easily identify it when selecting from the list of available programs.",
-                    style: TextStyle(
-                      fontSize: context.textTheme.titleSmall?.fontSize,
-                      fontFamily: context.textTheme.titleSmall?.fontFamily,
+                    style: context.textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.w900,
                     ),
                   ),
@@ -97,11 +92,9 @@ class _ProgramEditScreenState extends State<ProgramEditScreen>
           // Divider
           const SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                paddingHorizontally,
-                50,
-                paddingHorizontally,
-                0,
+              padding: EdgeInsets.symmetric(
+                horizontal: paddingHorizontally,
+                vertical: paddingVertically,
               ),
               child: Divider(),
             ),
@@ -110,11 +103,8 @@ class _ProgramEditScreenState extends State<ProgramEditScreen>
           // Light Selection
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(
-                paddingHorizontally,
-                50,
-                paddingHorizontally,
-                0,
+              padding: const EdgeInsets.symmetric(
+                horizontal: paddingHorizontally,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -141,228 +131,249 @@ class _ProgramEditScreenState extends State<ProgramEditScreen>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Top',
-                        style: TextStyle(
-                          fontSize: context.textTheme.titleMedium?.fontSize,
-                          fontFamily: context.textTheme.titleMedium?.fontFamily,
-                          fontWeight: FontWeight.w500,
+                      FutureBuilder<ElementData>(
+                        future: loadSvgImage(
+                          svgImage: "assets/upper_area_shoe.svg",
                         ),
-                      ),
-                      Checkbox(
-                        fillColor: WidgetStateColor.resolveWith(
-                          (states) => context.colorScheme.secondary,
-                        ),
-                        tristate: true,
-                        value: true,
-                        onChanged: null,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Top Extern',
-                        style: TextStyle(
-                          fontSize: context.textTheme.titleMedium?.fontSize,
-                          fontFamily: context.textTheme.titleMedium?.fontFamily,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Checkbox(
-                        fillColor: WidgetStateColor.resolveWith(
-                          (states) {
-                            print(states);
-                            final f = WidgetState.selected;
-                            return context.colorScheme.secondary;
-                          },
-                        ),
-                        tristate: true,
-                        value: false,
-                        onChanged: (bool? value) {},
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Extern',
-                        style: TextStyle(
-                          fontSize: context.textTheme.titleMedium?.fontSize,
-                          fontFamily: context.textTheme.titleMedium?.fontFamily,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Checkbox(
-                        fillColor: WidgetStateColor.resolveWith(
-                          (states) => context.colorScheme.secondary,
-                        ),
-                        isError: true,
-                        tristate: true,
-                        value: false,
-                        onChanged: (bool? value) {},
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Top Intern',
-                        style: TextStyle(
-                          fontSize: context.textTheme.titleMedium?.fontSize,
-                          fontFamily: context.textTheme.titleMedium?.fontFamily,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Checkbox(
-                        fillColor: WidgetStateColor.resolveWith(
-                          (states) => context.colorScheme.secondary,
-                        ),
-                        isError: true,
-                        tristate: true,
-                        value: false,
-                        onChanged: (bool? value) {},
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Intern',
-                        style: TextStyle(
-                          fontSize: context.textTheme.titleMedium?.fontSize,
-                          fontFamily: context.textTheme.titleMedium?.fontFamily,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Checkbox(
-                        fillColor: WidgetStateColor.resolveWith(
-                          (states) => context.colorScheme.secondary,
-                        ),
-                        isError: true,
-                        tristate: true,
-                        value: false,
-                        onChanged: (bool? value) {},
-                      ),
-                    ],
-                  ),
-                  FutureBuilder<ElementData>(
-                    future:
-                        loadSvgImage(svgImage: "assets/upper_area_shoe.svg"),
-                    builder: (context, snapshot) {
-                      final outlines = snapshot.data?.outlines ?? [];
-                      final upperAreas = snapshot.data?.upperAreas ?? [];
-                      final lightDots = snapshot.data?.lightDots ?? [];
-                      final width = snapshot.data?.width ?? 0;
-                      final height = snapshot.data?.height ?? 0;
+                        builder: (context, snapshot) {
+                          final outlines = snapshot.data?.outlines ?? [];
+                          final lightDots = snapshot.data?.lightDots ?? [];
+                          final width = snapshot.data?.width ?? 0;
+                          final height = snapshot.data?.height ?? 0;
 
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                          return Row(
+                            children: [
+                              SizedBox(
+                                height: height / 2,
+                                width: width / 2,
+                                child: InteractiveViewer(
+                                  child: Stack(
+                                    children: [
+                                      for (final outline in outlines) ...[
+                                        CustomPaint(
+                                          painter: ShoeAreaPainter(
+                                            svgPath: outline.path,
+                                            strokeColor:
+                                                context.colorScheme.onSurface,
+                                            strokeWidth: 0.4,
+                                            scaleFactor: 0.5,
+                                          ),
+                                          child: Container(),
+                                        ),
+                                      ],
+                                      for (final lightDot in lightDots) ...[
+                                        CustomPaint(
+                                          painter: PointPainter(
+                                            point:
+                                                Offset(lightDot.x, lightDot.y),
+                                            color: Colors.blue,
+                                            pointSize: 10.0,
+                                            scaleFactor: 0.5,
+                                          ),
+                                        ),
+                                      ],
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 5),
+                              SizedBox(
+                                height: height / 2,
+                                width: width / 2,
+                                child: InteractiveViewer(
+                                  child: Stack(
+                                    children: [
+                                      for (final outline in outlines) ...[
+                                        CustomPaint(
+                                          painter: ShoeAreaPainter(
+                                            svgPath: outline.path,
+                                            strokeColor:
+                                                context.colorScheme.onSurface,
+                                            strokeWidth: 0.4,
+                                            flipHorizontally: true,
+                                            scaleFactor: 0.5,
+                                          ),
+                                          child: Container(),
+                                        ),
+                                      ],
+                                      for (final lightDot in lightDots) ...[
+                                        CustomPaint(
+                                          painter: PointPainter(
+                                            point:
+                                                Offset(lightDot.x, lightDot.y),
+                                            color: Colors.blue,
+                                            pointSize: 10.0,
+                                            width: width,
+                                            flipHorizontally: true,
+                                            scaleFactor: 0.5,
+                                          ),
+                                        ),
+                                      ],
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          SizedBox(
-                            height: height,
-                            width: width,
-                            //color: Colors.black45,
-                            child: InteractiveViewer(
-                              child: Stack(
-                                children: [
-                                  for (final outline in outlines) ...[
-                                    CustomPaint(
-                                      painter: ShoeAreaPainter(
-                                        svgPath: outline.path,
-                                        strokeColor:
-                                            context.colorScheme.onBackground,
-                                        strokeWidth: 0.2,
-                                      ),
-                                      child: Container(),
-                                    ),
-                                  ],
-                                  for (final area in upperAreas) ...[
-                                    ClipPath(
-                                      clipper: ShoeAreaClipper(
-                                        svgPath: area.path,
-                                      ),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          print("Selected area: ${area.id}");
-                                        },
-                                        child: Container(
-                                          color: Colors.transparent,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                  for (final lightDot in lightDots) ...[
-                                    CustomPaint(
-                                      painter: PointPainter(
-                                        point: Offset(lightDot.x, lightDot.y),
-                                        color: Colors.blue,
-                                        pointSize: 4.0,
-                                      ),
-                                    ),
-                                  ],
-                                ],
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Top',
+                                style: TextStyle(
+                                  fontSize:
+                                      context.textTheme.titleMedium?.fontSize,
+                                  fontFamily:
+                                      context.textTheme.titleMedium?.fontFamily,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                            ),
+                              Checkbox(
+                                fillColor: WidgetStateColor.resolveWith(
+                                  (states) {
+                                    if (!states
+                                        .contains(WidgetState.selected)) {
+                                      return context.colorScheme.onSurface;
+                                    }
+                                    return context
+                                        .colorScheme.secondaryContainer;
+                                  },
+                                ),
+                                tristate: true,
+                                value: true,
+                                onChanged: null,
+                              ),
+                            ],
                           ),
-                          const SizedBox(width: 5),
-                          SizedBox(
-                            height: height,
-                            width: width,
-                            //color: Colors.black45,
-                            child: InteractiveViewer(
-                              child: Stack(
-                                children: [
-                                  for (final outline in outlines) ...[
-                                    CustomPaint(
-                                      painter: ShoeAreaPainter(
-                                        svgPath: outline.path,
-                                        strokeColor:
-                                            context.colorScheme.onBackground,
-                                        strokeWidth: 0.2,
-                                        flipHorizontally: true,
-                                      ),
-                                      child: Container(),
-                                    ),
-                                  ],
-                                  for (final area in upperAreas) ...[
-                                    ClipPath(
-                                      clipper: ShoeAreaClipper(
-                                        svgPath: area.path,
-                                        flipHorizontally: true,
-                                      ),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          print("Selected area: ${area.id}");
-                                        },
-                                        child: Container(
-                                          color: Colors.transparent,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                  for (final lightDot in lightDots) ...[
-                                    CustomPaint(
-                                      painter: PointPainter(
-                                        point: Offset(lightDot.x, lightDot.y),
-                                        color: Colors.blue,
-                                        pointSize: 4.0,
-                                        width: width,
-                                        flipHorizontally: true,
-                                      ),
-                                    ),
-                                  ],
-                                ],
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Top Extern',
+                                style: TextStyle(
+                                  fontSize:
+                                      context.textTheme.titleMedium?.fontSize,
+                                  fontFamily:
+                                      context.textTheme.titleMedium?.fontFamily,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                            ),
+                              Checkbox(
+                                fillColor: WidgetStateColor.resolveWith(
+                                  (states) {
+                                    if (!states
+                                        .contains(WidgetState.selected)) {
+                                      return context.colorScheme.onSurface;
+                                    }
+                                    return context
+                                        .colorScheme.secondaryContainer;
+                                  },
+                                ),
+                                tristate: true,
+                                value: false,
+                                onChanged: (bool? value) {},
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Extern',
+                                style: TextStyle(
+                                  fontSize:
+                                      context.textTheme.titleMedium?.fontSize,
+                                  fontFamily:
+                                      context.textTheme.titleMedium?.fontFamily,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Checkbox(
+                                fillColor: WidgetStateColor.resolveWith(
+                                  (states) {
+                                    if (!states
+                                        .contains(WidgetState.selected)) {
+                                      return context.colorScheme.onSurface;
+                                    }
+                                    return context
+                                        .colorScheme.secondaryContainer;
+                                  },
+                                ),
+                                tristate: true,
+                                value: false,
+                                onChanged: (bool? value) {},
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Top Intern',
+                                style: TextStyle(
+                                  fontSize:
+                                      context.textTheme.titleMedium?.fontSize,
+                                  fontFamily:
+                                      context.textTheme.titleMedium?.fontFamily,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Checkbox(
+                                fillColor: WidgetStateColor.resolveWith(
+                                  (states) {
+                                    if (!states
+                                        .contains(WidgetState.selected)) {
+                                      return context.colorScheme.onSurface;
+                                    }
+                                    return context
+                                        .colorScheme.secondaryContainer;
+                                  },
+                                ),
+                                tristate: true,
+                                value: false,
+                                onChanged: (bool? value) {},
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Intern',
+                                style: TextStyle(
+                                  fontSize:
+                                      context.textTheme.titleMedium?.fontSize,
+                                  fontFamily:
+                                      context.textTheme.titleMedium?.fontFamily,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Checkbox(
+                                fillColor: WidgetStateColor.resolveWith(
+                                  (states) {
+                                    if (!states
+                                        .contains(WidgetState.selected)) {
+                                      return context.colorScheme.onSurface;
+                                    }
+                                    return context
+                                        .colorScheme.secondaryContainer;
+                                  },
+                                ),
+                                tristate: true,
+                                value: false,
+                                onChanged: (bool? value) {},
+                              ),
+                            ],
                           ),
                         ],
-                      );
-                    },
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -372,11 +383,9 @@ class _ProgramEditScreenState extends State<ProgramEditScreen>
           // Divider
           const SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                paddingHorizontally,
-                50,
-                paddingHorizontally,
-                0,
+              padding: EdgeInsets.symmetric(
+                horizontal: paddingHorizontally,
+                vertical: paddingVertically,
               ),
               child: Divider(),
             ),
@@ -385,11 +394,8 @@ class _ProgramEditScreenState extends State<ProgramEditScreen>
           // Light animation
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(
-                paddingHorizontally,
-                50,
-                paddingHorizontally,
-                0,
+              padding: const EdgeInsets.symmetric(
+                horizontal: paddingHorizontally,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -469,11 +475,9 @@ class _ProgramEditScreenState extends State<ProgramEditScreen>
           // Divider
           const SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                paddingHorizontally,
-                50,
-                paddingHorizontally,
-                0,
+              padding: EdgeInsets.symmetric(
+                horizontal: paddingHorizontally,
+                vertical: paddingVertically,
               ),
               child: Divider(),
             ),
@@ -482,11 +486,8 @@ class _ProgramEditScreenState extends State<ProgramEditScreen>
           // Duration
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(
-                paddingHorizontally,
-                50,
-                paddingHorizontally,
-                0,
+              padding: const EdgeInsets.symmetric(
+                horizontal: paddingHorizontally,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -510,15 +511,107 @@ class _ProgramEditScreenState extends State<ProgramEditScreen>
                     ),
                   ),
                   const SizedBox(height: 25),
-                  Slider(
-                    value: 50,
-                    max: 100,
-                    onChanged: (double value) {
-                      print(value);
-                    },
+                  Text(
+                    "23:00",
+                    style: context.textTheme.displayMedium
+                        ?.copyWith(fontWeight: FontWeight.w900),
+                  ),
+                  const SizedBox(height: 5),
+                  SliderTheme(
+                    data: SliderThemeData(
+                      trackShape: CustomTrackShape(),
+                    ),
+                    child: Slider(
+                      value: 50,
+                      max: 100,
+                      onChanged: (double value) {},
+                    ),
                   ),
                 ],
               ),
+            ),
+          ),
+
+          // Divider
+          const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: paddingHorizontally,
+                vertical: paddingVertically,
+              ),
+              child: Divider(),
+            ),
+          ),
+
+          // Privacy
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: paddingHorizontally,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Make program private',
+                        style: TextStyle(
+                          fontSize: context.textTheme.titleMedium?.fontSize,
+                          fontFamily: context.textTheme.titleMedium?.fontFamily,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Checkbox(
+                        fillColor: WidgetStateColor.resolveWith((states) {
+                          if (!states.contains(WidgetState.selected)) {
+                            return context.colorScheme.onSurface;
+                          }
+                          return context.colorScheme.secondaryContainer;
+                        }),
+                        tristate: true,
+                        value: false,
+                        onChanged: null,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Other permission',
+                        style: TextStyle(
+                          fontSize: context.textTheme.titleMedium?.fontSize,
+                          fontFamily: context.textTheme.titleMedium?.fontFamily,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Checkbox(
+                        fillColor: WidgetStateColor.resolveWith(
+                          (states) {
+                            if (!states.contains(WidgetState.selected)) {
+                              return context.colorScheme.onSurface;
+                            }
+                            return context.colorScheme.secondaryContainer;
+                          },
+                        ),
+                        tristate: true,
+                        value: true,
+                        onChanged: (bool? value) {},
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // Spacer
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: bottomSpace,
             ),
           ),
         ],
@@ -534,7 +627,7 @@ class _ProgramEditScreenState extends State<ProgramEditScreen>
                 fixedSize: const Size(150, 50),
               ),
               label: Text(
-                "SALVE",
+                "SAVE",
                 style: TextStyle(
                   color: context.colorScheme.surface,
                   fontWeight: FontWeight.w900,
@@ -546,5 +639,23 @@ class _ProgramEditScreenState extends State<ProgramEditScreen>
         ),
       ),
     );
+  }
+}
+
+class CustomTrackShape extends RoundedRectSliderTrackShape {
+  @override
+  Rect getPreferredRect({
+    required RenderBox parentBox,
+    Offset offset = Offset.zero,
+    required SliderThemeData sliderTheme,
+    bool isEnabled = false,
+    bool isDiscrete = false,
+  }) {
+    final double trackHeight = sliderTheme.trackHeight ?? 0;
+    final double trackLeft = offset.dx;
+    final double trackTop =
+        offset.dy + (parentBox.size.height - trackHeight) / 2;
+    final double trackWidth = parentBox.size.width;
+    return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
   }
 }

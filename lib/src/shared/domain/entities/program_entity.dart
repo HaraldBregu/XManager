@@ -7,6 +7,7 @@ class ProgramEntity extends Equatable {
   final DeviceType deviceType;
   final DevicePosition devicePosition;
   final String deviceVersion;
+  final int duration;
 
   const ProgramEntity({
     required this.title,
@@ -14,6 +15,7 @@ class ProgramEntity extends Equatable {
     required this.deviceType,
     required this.devicePosition,
     required this.deviceVersion,
+    required this.duration,
   });
 
   @override
@@ -23,6 +25,7 @@ class ProgramEntity extends Equatable {
         deviceType,
         devicePosition,
         deviceVersion,
+        duration
       ];
 
   factory ProgramEntity.fromJson(Map<String, dynamic> json) {
@@ -32,6 +35,7 @@ class ProgramEntity extends Equatable {
       deviceType: json['device_type'] as DeviceType,
       devicePosition: json['device_position'] as DevicePosition,
       deviceVersion: json['device_version'] as String,
+      duration: json['duration'] as int,
     );
   }
 
@@ -42,6 +46,7 @@ class ProgramEntity extends Equatable {
       'device_type': deviceType.index,
       'device_position': devicePosition.index,
       'device_version': deviceVersion,
+      'duration': duration,
     };
   }
 }

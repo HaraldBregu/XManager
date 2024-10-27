@@ -8,6 +8,7 @@ class ProgramModel extends ProgramEntity {
     required super.devicePosition,
     required super.deviceType,
     required super.deviceVersion,
+    required super.duration,
   });
 
   factory ProgramModel.fromJson(Map<String, dynamic> json) {
@@ -25,6 +26,7 @@ class ProgramModel extends ProgramEntity {
       deviceVersion: json['device_version'] != null
           ? json['device_version'] as String
           : '',
+      duration: json['duration'] as int,
     );
   }
 
@@ -36,6 +38,7 @@ class ProgramModel extends ProgramEntity {
       'device_type': deviceType.index,
       'device_position': devicePosition.index,
       'device_version': deviceVersion,
+      'duration': duration,
     };
   }
 }

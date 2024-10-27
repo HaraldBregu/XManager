@@ -7,6 +7,7 @@ import 'package:xmanager/src/core/theme_extension.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/home_bloc.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/home_event.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/home_state.dart';
+import 'package:xmanager/src/features/home/presentation/widgets/device_list_bottom_sheet.dart';
 import 'package:xmanager/src/features/home/presentation/widgets/home_nav_bar.dart';
 import 'package:xmanager/src/features/home/presentation/widgets/program_list_bottom_sheet.dart';
 import 'package:xmanager/src/features/home/presentation/widgets/program_uploader_bottom_sheet.dart';
@@ -202,7 +203,9 @@ class HomeScreen extends StatelessWidget {
               child: Card(
                 margin: EdgeInsets.zero,
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    context.pushNamed("program list screen");
+                  },
                   child: Padding(
                     padding: const EdgeInsets.all(20),
                     child: Row(
@@ -229,7 +232,88 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
 
-          // Title divider
+          // DEVICES divider
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: paddingHorizontally,
+                vertical: 10,
+              ),
+              child: Text(
+                "DEVICES",
+                style: TextStyle(
+                  fontSize: context.textTheme.bodySmall?.fontSize,
+                  fontFamily: context.textTheme.bodySmall?.fontFamily,
+                  color: context.colorScheme.inversePrimary,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ),
+          ),
+
+          // DEVICE list
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: paddingHorizontally,
+              ),
+              child: Card(
+                margin: EdgeInsets.zero,
+                child: InkWell(
+                  onTap: () {
+                    context.pushNamed("device screen");
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Dinamo",
+                              style: context.textTheme.titleLarge
+                                  ?.copyWith(fontWeight: FontWeight.w900),
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            Text(
+                              "LEFT FOOT",
+                              style: context.textTheme.bodyMedium
+                                  ?.copyWith(fontWeight: FontWeight.w400),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "V1.0.0",
+                              style: context.textTheme.bodyMedium
+                                  ?.copyWith(fontWeight: FontWeight.w700)
+                                  .copyWith(
+                                    color: context.colorScheme.primaryFixed,
+                                  ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Icon(
+                              Icons.check_circle,
+                              color: context.colorScheme.primary,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          // ACTION divider
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(
@@ -344,7 +428,8 @@ class HomeScreen extends StatelessWidget {
                     current is UploadingProgramToDevicePairsState ||
                     current is BluetoothConnectingState ||
                     current is ProgramListState ||
-                    current is StartUploadingState;
+                    current is StartUploadingState ||
+                    current is SelectProgramState;
               },
               listener: (context, state) {
                 if (state is AppPermissionsErrorState &&
@@ -423,6 +508,7 @@ class HomeScreen extends StatelessWidget {
                   );
                 } else if (state is UploadingProgramToDevicePairsState) {
                 } else if (state is ProgramListState) {
+                  // Present program list
                   showProgramListBottomSheet(
                     context: context,
                     programList: state.programList,
@@ -431,6 +517,18 @@ class HomeScreen extends StatelessWidget {
                       final bloc = context.read<HomeBloc>();
                       final event = SelectProgramEvent(program);
                       bloc.add(event);
+                    },
+                  );
+                } else if (state is SelectProgramState) {
+                  // Present devices list
+                  showDeviceListBottomSheet(
+                    context: context,
+                    deviceList: [],
+                    onSelectDevice: (program) {
+                      context.pop();
+                      // final bloc = context.read<HomeBloc>();
+                      // final event = SelectProgramEvent(program);
+                      // bloc.add(event);
                     },
                   );
                 } else if (state is StartUploadingState) {

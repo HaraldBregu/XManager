@@ -20,16 +20,7 @@ const TextTheme _textTheme = TextTheme(
   labelSmall: TextStyle(fontSize: 11, letterSpacing: 0.5), // overline
 );
 
-//final String? _fontFamily = GoogleFonts.audiowide().fontFamily; // nice like games
-//final String? _fontFamily = GoogleFonts.bungee().fontFamily; //particular bold game style
-//final String? _fontFamily = GoogleFonts.bungeeInline().fontFamily; // particular bold
-//final String? _fontFamily = GoogleFonts.archivoBlack().fontFamily; // bold good
-//final String? _fontFamily = GoogleFonts.inter().fontFamily; //Hmm
-//final String? _fontFamily = GoogleFonts.karla().fontFamily; // good
-//final String? _fontFamily = GoogleFonts.mulish().fontFamily; // good
-//final String? _fontFamily = GoogleFonts.raleway().fontFamily; // ok
-//final String? _fontFamily = GoogleFonts.lato().fontFamily; // no
-final String? _fontFamily = GoogleFonts.poppins().fontFamily; // good
+final String? _fontFamily = GoogleFonts.poppins().fontFamily; 
 //final String? _fontFamily = GoogleFonts.roboto().fontFamily;
 //final String? _fontFamily = GoogleFonts.notoSans().fontFamily;
 
@@ -109,7 +100,7 @@ abstract class AppTheme {
   static ThemeData get dark => FlexThemeData.dark(
         scheme: scheme,
         //usedColors: 5,
-        //textTheme: _textTheme,
+        textTheme: _textTheme,
         fontFamily: _fontFamily,
         //surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold, // GOOD current
         surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold,

@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
-
-import '../../../core/error/failures.dart';
-import '../../domain/repository/profile_repository.dart';
-import '../datasources/local/network_datasource.dart';
-import '../datasources/remote/remote_datasource.dart';
-import '../models/profile_model.dart';
+import 'package:xmanager/src/core/error/failures.dart';
+import 'package:xmanager/src/shared/data/datasources/local/network_datasource.dart';
+import 'package:xmanager/src/shared/data/datasources/remote/remote_datasource.dart';
+import 'package:xmanager/src/shared/data/models/profile_model.dart';
+import 'package:xmanager/src/shared/domain/repository/profile_repository.dart';
 
 class ProfileRepositoryImpl implements ProfileRepository {
   final RemoteDataSource remoteDataSource;

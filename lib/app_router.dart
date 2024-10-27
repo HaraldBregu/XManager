@@ -97,6 +97,7 @@ GoRouter router(BuildContext context) {
       return null;
     },
     routes: [
+      // Start routes
       GoRoute(
         name: "start screen",
         path: '/',
@@ -121,20 +122,20 @@ GoRouter router(BuildContext context) {
           ),
         ],
       ),
+
+      // Home routes
       GoRoute(
         name: "home screen",
         path: "/home",
-        //builder: (context, state) => const HomeScreen(),
-        builder: (context, state) => const ProgramEditScreen(),
+        builder: (context, state) => const HomeScreen(),
         routes: [
-
           // Profile Screen
           GoRoute(
             name: "update profile screen",
             path: 'profile',
             builder: (context, state) => const ProfileScreen(),
           ),
-          
+
           // Programs Flow
           GoRoute(
             name: "program list screen",
@@ -148,8 +149,8 @@ GoRouter router(BuildContext context) {
               ),
             ],
           ),
-          
-          // Device Screen 
+
+          // Device Screen
           GoRoute(
             name: "device screen",
             path: 'device',
@@ -162,65 +163,66 @@ GoRouter router(BuildContext context) {
             path: '/devices_scan_screen',
             builder: (context, state) => const DevicesScanScreen(),
           ),
-        ],
-      ),
-     
-      GoRoute(
-        name: "settings page",
-        path: '/settings',
-        pageBuilder: (context, state) {
-          return CustomTransitionPage(
-            key: state.pageKey,
-            child: const SettingsPage(),
-            //transitionDuration: const Duration(milliseconds: 400),
-            //fullscreenDialog: true,
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity:
-                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
-                child: child,
+
+          // Settings screen
+          GoRoute(
+            name: "settings page",
+            path: '/settings',
+            pageBuilder: (context, state) {
+              return CustomTransitionPage(
+                key: state.pageKey,
+                child: const SettingsPage(),
+                //transitionDuration: const Duration(milliseconds: 400),
+                //fullscreenDialog: true,
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(
+                    opacity: CurveTween(curve: Curves.easeInOutCirc)
+                        .animate(animation),
+                    child: child,
+                  );
+                },
               );
             },
-          );
-        },
-        routes: [
-          GoRoute(
-            name: "Permissions page",
-            path: 'permissions',
-            builder: (context, state) => const PermissionsPage(),
+            routes: [
+              GoRoute(
+                name: "Permissions page",
+                path: 'permissions',
+                builder: (context, state) => const PermissionsPage(),
+              ),
+              GoRoute(
+                name: "Account page",
+                path: 'account',
+                builder: (context, state) => const AccountPage(),
+              ),
+              GoRoute(
+                name: "Current profile page",
+                path: 'profile',
+                builder: (context, state) => const ProfileScreen(),
+              ),
+            ],
           ),
           GoRoute(
-            name: "Account page",
-            path: 'account',
-            builder: (context, state) => const AccountPage(),
-          ),
-          GoRoute(
-            name: "Current profile page",
-            path: 'profile',
-            builder: (context, state) => const ProfileScreen(),
-          ),
-        ],
-      ),
-      GoRoute(
-        name: "Debug",
-        path: '/debug',
-        builder: (context, state) => const DebugPage(),
-        routes: [
-          GoRoute(
-            name: "bluetooth debug page",
-            path: 'bluetooth',
-            builder: (context, state) => const BleDebugPage(),
-          ),
-          GoRoute(
-            name: "bluetooth search page",
-            path: 'bluetooth_search',
-            builder: (context, state) => const DeviceSearch(),
-          ),
-          GoRoute(
-            name: "bluetooth list page",
-            path: 'bluetooth_list',
-            builder: (context, state) => const DeviceListPage(),
+            name: "Debug",
+            path: '/debug',
+            builder: (context, state) => const DebugPage(),
+            routes: [
+              GoRoute(
+                name: "bluetooth debug page",
+                path: 'bluetooth',
+                builder: (context, state) => const BleDebugPage(),
+              ),
+              GoRoute(
+                name: "bluetooth search page",
+                path: 'bluetooth_search',
+                builder: (context, state) => const DeviceSearch(),
+              ),
+              GoRoute(
+                name: "bluetooth list page",
+                path: 'bluetooth_list',
+                builder: (context, state) => const DeviceListPage(),
+              ),
+            ],
           ),
         ],
       ),

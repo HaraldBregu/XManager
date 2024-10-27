@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
-
-import '../enums.dart';
+import 'package:xmanager/src/core/enums.dart';
 
 abstract class Failure extends Equatable {
   @override

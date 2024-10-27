@@ -1,5 +1,7 @@
 enum LoginErrorType {
+  invalidCredentials,
   invalidEmail,
+  emailNotConfirmed,
   userNotfound,
   wrongPassword,
   userDisabled,
@@ -17,6 +19,11 @@ enum LoginErrorType {
 
 LoginErrorType parseLoginErrorCode(String errorCode) {
   switch (errorCode) {
+    case 'invalid_credentials':
+      return LoginErrorType.invalidEmail;
+    case 'email_not_confirmed':
+      return LoginErrorType.invalidEmail;
+
     case 'invalid-email':
       return LoginErrorType.invalidEmail;
     case 'user-not-found':

@@ -2,17 +2,17 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../bloc/device_bloc.dart';
-import '../bloc/device_event.dart';
-import '../bloc/device_state.dart';
-import '../../../../shared/presentation/bloc/app/app_bloc.dart';
-import '../../../../shared/presentation/bloc/app/app_event.dart';
-import '../../../../shared/presentation/bloc/bloc.dart';
-import '../../../../shared/widgets/alert_card.dart';
-import '../../../../shared/widgets/indicator_icon.dart';
-import '../../../../shared/widgets/permission_modal_bottom_sheet.dart';
-import '../../../../shared/widgets/progress_card.dart';
-import '../../../../shared/widgets/device_section.dart';
+import 'package:xmanager/src/features/device/presentation/bloc/device_bloc.dart';
+import 'package:xmanager/src/features/device/presentation/bloc/device_event.dart';
+import 'package:xmanager/src/features/device/presentation/bloc/device_state.dart';
+import 'package:xmanager/src/shared/presentation/bloc/app/app_bloc.dart';
+import 'package:xmanager/src/shared/presentation/bloc/app/app_event.dart';
+import 'package:xmanager/src/shared/presentation/bloc/bloc.dart';
+import 'package:xmanager/src/shared/widgets/alert_card.dart';
+import 'package:xmanager/src/shared/widgets/device_section.dart';
+import 'package:xmanager/src/shared/widgets/indicator_icon.dart';
+import 'package:xmanager/src/shared/widgets/permission_modal_bottom_sheet.dart';
+import 'package:xmanager/src/shared/widgets/progress_card.dart';
 
 //const String bleMac = "E7:C8:DF:65:5B:4B";
 const String bleMac = "E8:29:77:C6:A9:C0";
@@ -48,7 +48,6 @@ class DeviceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appState = context.watch<AppBloc>().state;
     final deviceState = context.watch<DeviceBloc>().state;
 
     return Scaffold(

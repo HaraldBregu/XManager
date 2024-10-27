@@ -1,7 +1,4 @@
-import 'dart:ffi';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/core/error/exeptions.dart';
 import 'package:xmanager/src/shared/data/models/device_model.dart';
@@ -26,21 +23,21 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<void> login(String email, String password) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await Supabase.instance.client.auth.signInWithPassword(
         email: email,
         password: password,
       );
-    } on FirebaseAuthException catch (e) {
-      throw LoginWithEmailException(parseLoginErrorCode(e.code));
+    } on AuthApiException catch (e) {
+      throw LoginWithEmailException(parseLoginErrorCode(e.code ?? ''));
     }
   }
 
   @override
-  Future<void> logOut() => FirebaseAuth.instance.signOut();
+  Future<void> logOut() => Supabase.instance.client.auth.signOut();
 
   @override
   Future<void> register(String email, String password) {
-    return FirebaseAuth.instance.createUserWithEmailAndPassword(
+    return Supabase.instance.client.auth.signUp(
       email: email,
       password: password,
     );
@@ -48,7 +45,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<UserModel?> get currentUser async {
-    final currentUser = FirebaseAuth.instance.currentUser;
+    final currentUser = Supabase.instance.client.auth.currentUser;
     return currentUser != null
         ? UserModel(email: currentUser.email ?? '')
         : null;
@@ -64,26 +61,27 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       );
 
   @override
-  Future<List<DeviceModel>> getMyDevices() {
+  Future<List<DeviceModel>> getMyDevices() async {
+    final data = await Supabase.instance.client.from('devices').select();
+    /*final devices = data.map((doc) {
+      final data = DeviceModel.fromJson(doc);
+      return data;
+    }).toList();*/
     throw UnimplementedError();
   }
 
   @override
   Future<List<ProgramModel>> getPrograms() async {
-    final firestore = FirebaseFirestore.instance;
+    final data = await Supabase.instance.client
+        .from('device_programs')
+        .select()
+        .order('updated_at', ascending: false);
 
-    final programsRef = firestore
-        .collection('programs')
-        .where("user_id", isNull: false)
-        .where("user_id", isEqualTo: FirebaseAuth.instance.currentUser?.uid);
-
-    final data = await programsRef.get();
-
-    final programs = data.docs.map((doc) {
-      final map = doc.data();
-      final data = ProgramModel.fromJson(map);
+    final programs = data.map((doc) {
+      final data = ProgramModel.fromJson(doc);
       return data;
-    }).where((element) {
+    }).toList();
+    /*.where((element) {
       final hasTitle = element.title.isNotEmpty;
       final hasData = element.data.isNotEmpty;
       final hasType = element.deviceType != DeviceType.none;
@@ -91,18 +89,19 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       final hasDeviceVersion = element.deviceVersion.isNotEmpty;
       return hasTitle && hasData && hasType && hasPosition && hasDeviceVersion;
     }).toList();
-
+    */
+  
     return programs;
   }
 
   // TEST
   Future<void> createProgram(ProgramModel program) async {
-    final firestore = FirebaseFirestore.instance;
+    //final firestore = FirebaseFirestore.instance;
 
     // personal: 32td54OR8efto9xixr6pbLJVdu12
     // Spartan: DlOPAJLSCuVC2jwsqYQm1M9j3ZI2
-    final programsRef = firestore.collection('programs');
-    final programsprivate = programsRef.doc();
+    //final programsRef = firestore.collection('programs');
+    //final programsprivate = programsRef.doc();
     /*
                       const newProgram = ProgramEntity(
                         title: "User A",
@@ -111,7 +110,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
                         devicePosition: DevicePosition.none,
                         deviceVersion: '',
                       );*/
-    programsprivate.set(program.toJson());
+    //programsprivate.set(program.toJson());
     /*
                       programsprivate.set({
                         "user_id": FirebaseAuth.instance.currentUser?.uid,

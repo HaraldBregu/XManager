@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import '../../../core/error/failures.dart';
-import '../../../core/usecase.dart';
-import '../entities/user_entity.dart';
-import '../repository/user_repository.dart';
+import 'package:xmanager/src/core/error/failures.dart';
+import 'package:xmanager/src/core/usecase.dart';
+import 'package:xmanager/src/shared/domain/entities/user_entity.dart';
+import 'package:xmanager/src/shared/domain/repository/user_repository.dart';
 
 class GetCurrentUserUseCase implements UseCase<UserEntity?, NoParams> {
   final UserRepository _userRepository;

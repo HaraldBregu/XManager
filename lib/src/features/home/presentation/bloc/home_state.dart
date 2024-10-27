@@ -51,6 +51,11 @@ class ProgramListState extends HomeState {
   const ProgramListState(this.programList);
 }
 
+class SelectProgramState extends HomeState {
+  final ProgramEntity program;
+  const SelectProgramState(this.program);
+}
+
 class StartUploadingState extends HomeState {
   final ProgramEntity program;
   const StartUploadingState(this.program);

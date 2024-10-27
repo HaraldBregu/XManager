@@ -171,7 +171,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     SelectProgramEvent event,
     Emitter<HomeState> emit,
   ) async {
-    emit(StartUploadingState(event.program));
+    emit(SelectProgramState(event.program));
+    //emit(StartUploadingState(event.program));
   }
 
   Future<void> _onUploadProgram2Event(
