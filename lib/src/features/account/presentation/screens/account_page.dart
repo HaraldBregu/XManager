@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:go_router/go_router.dart';
+import 'package:xmanager/src/core/theme_extension.dart';
 
-import '../../../../core/theme_extension.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -13,28 +13,11 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> with WidgetsBindingObserver {
-  bool switched = false;
-  String blestate = "Unactive";
 
-  Future<bool> _checkDeviceBluetoothIsOn() async {
-    final i = await FlutterBluePlus.isOn;
-    setState(() {
-      if (i == true) {
-        blestate = "Active";
-      } else {
-        blestate = "Unactive";
-      }
-    });
-    return i;
-  }
 
   @override
   void initState() {
     super.initState();
-    FlutterBluePlus.state.listen((event) {
-      _checkDeviceBluetoothIsOn();
-    });
-    _checkDeviceBluetoothIsOn();
   }
 
   @override
@@ -44,7 +27,6 @@ class _AccountPageState extends State<AccountPage> with WidgetsBindingObserver {
     switch (state) {
       case AppLifecycleState.resumed:
         print("app in resumed");
-        _checkDeviceBluetoothIsOn();
         break;
       case AppLifecycleState.inactive:
         print("app in inactive");
@@ -63,9 +45,6 @@ class _AccountPageState extends State<AccountPage> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    //final AppLocalizations? localize = AppLocalizations.of(context);
-    //final ThemeData theme = Theme.of(context);
-    //final TextTheme textTheme = theme.textTheme;
     final List<Widget> widgets = [];
 
     widgets.add(ListTile(

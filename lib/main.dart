@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:xmanager/app_router.dart';
 import 'package:xmanager/app_theme.dart';
@@ -10,9 +9,9 @@ import 'package:xmanager/injection_container.dart';
 import 'package:xmanager/local_variables.dart';
 import 'package:xmanager/src/core/common.dart';
 import 'package:xmanager/src/features/auth/presentation/bloc/login_bloc.dart';
+import 'package:xmanager/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'package:xmanager/src/features/dashboard/presentation/bloc/dashboard_event.dart';
 import 'package:xmanager/src/features/device/presentation/bloc/device_bloc.dart';
-import 'package:xmanager/src/features/home/presentation/bloc/home_bloc.dart';
-import 'package:xmanager/src/features/home/presentation/bloc/home_event.dart';
 import 'package:xmanager/src/shared/presentation/bloc/app/app_bloc.dart';
 import 'package:xmanager/src/shared/presentation/bloc/app/app_event.dart';
 import 'package:xmanager/src/shared/presentation/bloc/bloc.dart';
@@ -33,7 +32,8 @@ Future<void> main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider<HomeBloc>(create: (_) => sl()..add(InitialHomeEvent())),
+        BlocProvider<DashboardBloc>(create: (_) => sl()..add(StartDashboard())),
+        //BlocProvider<TrainingProgramBloc>(create: (_) => sl()..add(StartTrainginProgramEvent())),
         BlocProvider<UserBloc>(create: (_) => sl()..add(StartUserEvent())),
         BlocProvider<LoginBloc>(create: (_) => sl()),
         BlocProvider<DeviceBloc>(create: (_) => sl()),
@@ -50,6 +50,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.dark,

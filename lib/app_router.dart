@@ -11,13 +11,16 @@ import 'package:xmanager/src/features/auth/presentation/screens/login_screen.dar
 import 'package:xmanager/src/features/auth/presentation/screens/recovery_screen.dart';
 import 'package:xmanager/src/features/auth/presentation/screens/signup_screen.dart';
 import 'package:xmanager/src/features/auth/presentation/screens/start_screen.dart';
+import 'package:xmanager/src/features/dashboard/presentation/screens/dashboard_screen.dart';
+import 'package:xmanager/src/features/dashboard/presentation/screens/devices_screen.dart';
+import 'package:xmanager/src/features/dashboard/presentation/screens/main_screen.dart';
+import 'package:xmanager/src/features/dashboard/presentation/screens/program_screen.dart';
+import 'package:xmanager/src/features/device/presentation/screens/device_screen.dart';
 import 'package:xmanager/src/features/device/presentation/screens/devices_scan_screen.dart';
 import 'package:xmanager/src/features/device/presentation/screens/old/ble_debug_page.dart';
 import 'package:xmanager/src/features/device/presentation/screens/old/debug_page.dart';
 import 'package:xmanager/src/features/device/presentation/screens/old/device_list_page.dart';
-import 'package:xmanager/src/features/device/presentation/screens/device_screen.dart';
 import 'package:xmanager/src/features/device/presentation/screens/old/device_search.dart';
-import 'package:xmanager/src/features/home/presentation/screens/home_screen.dart';
 import 'package:xmanager/src/features/training/presentation/screens/training_program_edit_screen.dart';
 import 'package:xmanager/src/features/training/presentation/screens/training_program_list_screen.dart';
 import 'package:xmanager/src/shared/presentation/bloc/bloc.dart';
@@ -127,7 +130,8 @@ GoRouter router(BuildContext context) {
       GoRoute(
         name: "home screen",
         path: "/home",
-        builder: (context, state) => const HomeScreen(),
+        //builder: (context, state) => const HomeScreen(),
+        builder: (context, state) => const MainScreen(),
         routes: [
           // Profile Screen
           GoRoute(
@@ -136,7 +140,23 @@ GoRouter router(BuildContext context) {
             builder: (context, state) => const ProfileScreen(),
           ),
 
-          // Programs Flow
+          // Programs select screen
+          GoRoute(
+            name: "program select screen",
+            path: 'select_program',
+            builder: (context, state) => const ProgramsScreen(),
+            //routes: [],
+          ),
+
+          // Devices select screen
+          GoRoute(
+            name: "select devices screen",
+            path: 'select_devices',
+            builder: (context, state) => const DevicesScreen(),
+            //routes: [],
+          ),
+
+          // Programs List Flow
           GoRoute(
             name: "program list screen",
             path: 'programs',
@@ -150,6 +170,8 @@ GoRouter router(BuildContext context) {
             ],
           ),
 
+        
+          
           // Device Screen
           GoRoute(
             name: "device screen",

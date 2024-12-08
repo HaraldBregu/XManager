@@ -2,9 +2,9 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/core/error/exeptions.dart';
 import 'package:xmanager/src/shared/data/models/device_model.dart';
+import 'package:xmanager/src/shared/data/models/device_program_model.dart';
 import 'package:xmanager/src/shared/data/models/dinamo_model.dart';
 import 'package:xmanager/src/shared/data/models/profile_model.dart';
-import 'package:xmanager/src/shared/data/models/program_model.dart';
 import 'package:xmanager/src/shared/data/models/user_model.dart';
 
 abstract class RemoteDataSource {
@@ -13,8 +13,8 @@ abstract class RemoteDataSource {
   Future<void> register(String email, String password);
   Future<UserModel?> get currentUser;
   Future<ProfileModel> getCurrentProfile();
-  Future<List<DeviceModel>> getMyDevices();
-  Future<List<ProgramModel>> getPrograms();
+  Future<List<DeviceModel>> getDevices();
+  Future<List<DeviceProgramModel>> getPrograms();
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -61,41 +61,31 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       );
 
   @override
-  Future<List<DeviceModel>> getMyDevices() async {
-    final data = await Supabase.instance.client.from('devices').select();
-    /*final devices = data.map((doc) {
+  Future<List<DeviceModel>> getDevices() async {
+    final data = await Supabase.instance.client
+        .from('devices')
+        .select('')
+        .order('updated_at', ascending: false);
+
+    final devices = data.map((doc) {
       final data = DeviceModel.fromJson(doc);
       return data;
-    }).toList();*/
-    throw UnimplementedError();
+    }).toList();
+
+    return devices;
   }
 
   @override
-  Future<List<ProgramModel>> getPrograms() async {
+  Future<List<DeviceProgramModel>> getPrograms() async {
     final data = await Supabase.instance.client
-        .from('device_programs')
-        .select()
-        .order('updated_at', ascending: false);
+        .from('device_programs_versions_view')
+        .select();
 
-    final programs = data.map((doc) {
-      final data = ProgramModel.fromJson(doc);
-      return data;
-    }).toList();
-    /*.where((element) {
-      final hasTitle = element.title.isNotEmpty;
-      final hasData = element.data.isNotEmpty;
-      final hasType = element.deviceType != DeviceType.none;
-      final hasPosition = element.devicePosition != DevicePosition.none;
-      final hasDeviceVersion = element.deviceVersion.isNotEmpty;
-      return hasTitle && hasData && hasType && hasPosition && hasDeviceVersion;
-    }).toList();
-    */
-  
-    return programs;
+    return data.map((doc) => DeviceProgramModel.fromJson(doc)).toList();
   }
 
   // TEST
-  Future<void> createProgram(ProgramModel program) async {
+  Future<void> createProgram(DeviceProgramModel program) async {
     //final firestore = FirebaseFirestore.instance;
 
     // personal: 32td54OR8efto9xixr6pbLJVdu12

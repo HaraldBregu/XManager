@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
-
-import 'dinamo_entity.dart';
+import 'package:xmanager/src/shared/domain/entities/dinamo_entity.dart';
 
 class ProfileEntity extends Equatable {
   final String fullname;

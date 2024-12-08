@@ -124,6 +124,7 @@ abstract class AppTheme {
           //inputDecoratorSchemeColor: SchemeColor.secondary,
         
           radioSchemeColor: SchemeColor.onSecondaryContainer,
+          
           sliderBaseSchemeColor: SchemeColor.onSecondaryContainer,
 
           // Elevated Button

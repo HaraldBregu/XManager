@@ -1,7 +1,6 @@
 import 'dart:convert';
-
-import '../../domain/entities/profile_entity.dart';
-import 'dinamo_model.dart';
+import 'package:xmanager/src/shared/data/models/dinamo_model.dart';
+import 'package:xmanager/src/shared/domain/entities/profile_entity.dart';
 
 class ProfileModel extends ProfileEntity {
   const ProfileModel({

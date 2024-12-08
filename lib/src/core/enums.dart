@@ -66,12 +66,82 @@ enum AppBluetoothAdapterState {
 }
 
 enum DeviceType {
-  none,
-  dinamo,
+  dinamo;
+
+  String get value {
+    switch (this) {
+      case DeviceType.dinamo:
+        return 'DINAMO';
+    }
+  }
+
+  String get description {
+    switch (this) {
+      case DeviceType.dinamo:
+        return 'Dinamo';
+    }
+  }
+
+  static DeviceType fromString(String value) {
+    switch (value) {
+      case 'DINAMO':
+        return DeviceType.dinamo;
+      default:
+        throw ArgumentError('Invalid device type: $value');
+    }
+  }
 }
 
-enum DevicePosition {
-  none,
+enum DeviceLocation {
   leftFoot,
-  rightFoot,
+  rightFoot;
+
+  String get value {
+    switch (this) {
+      case DeviceLocation.leftFoot:
+        return 'LEFT_FOOT';
+      case DeviceLocation.rightFoot:
+        return 'RIGHT_FOOT';
+    }
+  }
+
+  String get description {
+    switch (this) {
+      case DeviceLocation.leftFoot:
+        return 'Left foot';
+      case DeviceLocation.rightFoot:
+        return 'Right foot';
+    }
+  }
+
+  static DeviceLocation fromString(String value) {
+    switch (value) {
+      case 'LEFT_FOOT':
+        return DeviceLocation.leftFoot;
+      case 'RIGHT_FOOT':
+        return DeviceLocation.rightFoot;
+      default:
+        throw ArgumentError('Invalid device location: $value');
+    }
+  }
+}
+
+enum DeviceFeature {
+  demo;
+
+  String get value {
+    switch (this) {
+      case DeviceFeature.demo:
+        return 'DEMO';
+    }
+  }
+
+  static DeviceFeature fromString(String value) {
+    switch (value) {
+      case 'DEMO':
+        return DeviceFeature.demo;
+      default:
+        throw ArgumentError('Invalid device location: $value');
+    }
+  }
 }

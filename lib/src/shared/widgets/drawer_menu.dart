@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../core/theme_extension.dart';
-import '../presentation/bloc/bloc.dart';
+import 'package:xmanager/src/core/theme_extension.dart';
+import 'package:xmanager/src/shared/presentation/bloc/bloc.dart';
 
 class DrawerMenu extends StatelessWidget {
   const DrawerMenu({super.key});

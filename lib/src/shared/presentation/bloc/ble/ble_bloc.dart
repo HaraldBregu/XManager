@@ -1,10 +1,9 @@
 import 'dart:async';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/error/exeptions.dart';
-import '../../../../core/usecase.dart';
-import '../../../domain/usecases/ble_usecases.dart';
-import '../bloc.dart';
+import 'package:xmanager/src/core/error/exeptions.dart';
+import 'package:xmanager/src/core/usecase.dart';
+import 'package:xmanager/src/shared/domain/usecases/ble_usecases.dart';
+import 'package:xmanager/src/shared/presentation/bloc/bloc.dart';
 
 class BleBloc extends Bloc<BleEvent, BleState> {
   final BleDeviceIsConnectedUseCase bleDeviceIsConnectedUseCase;

@@ -3,8 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:xmanager/src/core/usecase.dart';
-import 'package:xmanager/src/shared/domain/entities/program_entity.dart';
-import 'package:xmanager/src/shared/domain/repository/training_program_repository.dart';
+import 'package:xmanager/src/shared/domain/entities/device_program_entity.dart';
 import 'package:xmanager/src/shared/domain/usecases/get_programs_usecase.dart';
 
 import 'get_my_training_program_list_usecase_test.mocks.dart';
