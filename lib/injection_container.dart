@@ -1,11 +1,11 @@
 import 'package:get_it/get_it.dart';
-import 'package:xmanager/src/features/auth/presentation/bloc/login_bloc.dart';
-import 'package:xmanager/src/features/dashboard/data/repository/home_repository_impl.dart';
-import 'package:xmanager/src/features/dashboard/domain/repositories/home_repository.dart';
-import 'package:xmanager/src/features/dashboard/domain/usecases/get_home_data_usecase.dart';
-import 'package:xmanager/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
-import 'package:xmanager/src/features/device/presentation/bloc/device_bloc.dart';
-import 'package:xmanager/src/features/training/presentation/bloc/training_program_bloc.dart';
+import 'package:xmanager/src/features/home/data/repository/home_repository_impl.dart';
+import 'package:xmanager/src/features/home/domain/repositories/home_repository.dart';
+import 'package:xmanager/src/features/home/domain/usecases/get_home_data_usecase.dart';
+import 'package:xmanager/src/features/home/presentation/bloc/device/device_bloc.dart';
+import 'package:xmanager/src/features/home/presentation/bloc/home/home_bloc.dart';
+import 'package:xmanager/src/features/home/presentation/bloc/program/program_bloc.dart';
+import 'package:xmanager/src/features/start/presentation/bloc/login_bloc.dart';
 import 'package:xmanager/src/shared/data/datasources/local/ble_datasource.dart';
 import 'package:xmanager/src/shared/data/datasources/local/network_datasource.dart';
 import 'package:xmanager/src/shared/data/datasources/local/permissions_datasource.dart';
@@ -51,7 +51,7 @@ Future<void> init() async {
   );
 
   sl.registerFactory(
-    () => DashboardBloc(
+    () => HomeBloc(
       getHomeDataUseCase: sl(),
       bleConnectPermissions: sl(),
       bleConnect: sl(),
@@ -65,7 +65,7 @@ Future<void> init() async {
   );
 
   sl.registerFactory(
-    () => TrainingProgramBloc(
+    () => ProgramBloc(
       getProgramsUseCase: sl(), 
     ),
   );
@@ -110,6 +110,7 @@ Future<void> init() async {
       bleConnected: sl(),
       bleDiscoverServices: sl(),
       bleWrite: sl(),
+      getDevicesUsecase: sl(),
     ),
   );
 

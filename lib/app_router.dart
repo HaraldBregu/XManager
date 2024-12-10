@@ -1,28 +1,28 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:xmanager/src/features/account/presentation/screens/account_page.dart';
-import 'package:xmanager/src/features/account/presentation/screens/permissions_page.dart';
-import 'package:xmanager/src/features/account/presentation/screens/profile_screen.dart';
-import 'package:xmanager/src/features/account/presentation/screens/settings_page.dart';
-import 'package:xmanager/src/features/auth/presentation/screens/login_screen.dart';
-import 'package:xmanager/src/features/auth/presentation/screens/recovery_screen.dart';
-import 'package:xmanager/src/features/auth/presentation/screens/signup_screen.dart';
-import 'package:xmanager/src/features/auth/presentation/screens/start_screen.dart';
-import 'package:xmanager/src/features/dashboard/presentation/screens/dashboard_screen.dart';
-import 'package:xmanager/src/features/dashboard/presentation/screens/devices_screen.dart';
-import 'package:xmanager/src/features/dashboard/presentation/screens/main_screen.dart';
-import 'package:xmanager/src/features/dashboard/presentation/screens/program_screen.dart';
-import 'package:xmanager/src/features/device/presentation/screens/device_screen.dart';
-import 'package:xmanager/src/features/device/presentation/screens/devices_scan_screen.dart';
-import 'package:xmanager/src/features/device/presentation/screens/old/ble_debug_page.dart';
-import 'package:xmanager/src/features/device/presentation/screens/old/debug_page.dart';
-import 'package:xmanager/src/features/device/presentation/screens/old/device_list_page.dart';
-import 'package:xmanager/src/features/device/presentation/screens/old/device_search.dart';
-import 'package:xmanager/src/features/training/presentation/screens/training_program_edit_screen.dart';
-import 'package:xmanager/src/features/training/presentation/screens/training_program_list_screen.dart';
+import 'package:xmanager/src/features/home/presentation/screens/device/device_screen.dart';
+import 'package:xmanager/src/features/home/presentation/screens/device/devices_select_screen.dart';
+import 'package:xmanager/src/features/home/presentation/screens/main_screen.dart';
+import 'package:xmanager/src/features/home/presentation/screens/old/account_page.dart';
+import 'package:xmanager/src/features/home/presentation/screens/old/ble_debug_page.dart';
+import 'package:xmanager/src/features/home/presentation/screens/old/debug_page.dart';
+import 'package:xmanager/src/features/home/presentation/screens/old/device_list_page.dart';
+import 'package:xmanager/src/features/home/presentation/screens/old/device_search.dart';
+import 'package:xmanager/src/features/home/presentation/screens/old/devices_scan_screen.dart';
+import 'package:xmanager/src/features/home/presentation/screens/old/permissions_page.dart';
+import 'package:xmanager/src/features/home/presentation/screens/old/profile_screen.dart';
+import 'package:xmanager/src/features/home/presentation/screens/old/settings_page.dart';
+import 'package:xmanager/src/features/home/presentation/screens/program/program_select_screen.dart';
+import 'package:xmanager/src/features/home/presentation/screens/program/programs_screen.dart';
+import 'package:xmanager/src/features/home/presentation/screens/program/training_program_edit_screen.dart';
+import 'package:xmanager/src/features/start/presentation/screens/login_screen.dart';
+import 'package:xmanager/src/features/start/presentation/screens/recovery_screen.dart';
+import 'package:xmanager/src/features/start/presentation/screens/signup_screen.dart';
+import 'package:xmanager/src/features/start/presentation/screens/start_screen.dart';
 import 'package:xmanager/src/shared/presentation/bloc/bloc.dart';
 
 class GoRouterObserver extends NavigatorObserver {
@@ -100,7 +100,7 @@ GoRouter router(BuildContext context) {
       return null;
     },
     routes: [
-      // Start routes
+      // START routes (unauthenticated)
       GoRoute(
         name: "start screen",
         path: '/',
@@ -126,41 +126,39 @@ GoRouter router(BuildContext context) {
         ],
       ),
 
-      // Home routes
+      // HOME routes (authenticated)
       GoRoute(
         name: "home screen",
         path: "/home",
-        //builder: (context, state) => const HomeScreen(),
         builder: (context, state) => const MainScreen(),
         routes: [
-          // Profile Screen
+          
+          // PROFILE
           GoRoute(
             name: "update profile screen",
             path: 'profile',
             builder: (context, state) => const ProfileScreen(),
           ),
 
-          // Programs select screen
+          // Select PROGRAM
           GoRoute(
             name: "program select screen",
             path: 'select_program',
-            builder: (context, state) => const ProgramsScreen(),
-            //routes: [],
+            builder: (context, state) => const ProgramSelectScreen(),
           ),
-
-          // Devices select screen
+          
+          // Select DEVICES
           GoRoute(
             name: "select devices screen",
             path: 'select_devices',
-            builder: (context, state) => const DevicesScreen(),
-            //routes: [],
+            builder: (context, state) => const DevicesSelectScreen(),
           ),
 
-          // Programs List Flow
+          // PROGRAM LIST
           GoRoute(
             name: "program list screen",
             path: 'programs',
-            builder: (context, state) => const TrainingProgramListScreen(),
+            builder: (context, state) => const ProgramsScreen(),
             routes: [
               GoRoute(
                 name: "program edit screen",
@@ -170,8 +168,6 @@ GoRouter router(BuildContext context) {
             ],
           ),
 
-        
-          
           // Device Screen
           GoRoute(
             name: "device screen",

@@ -8,10 +8,13 @@ import 'package:xmanager/injection_container.dart' as di;
 import 'package:xmanager/injection_container.dart';
 import 'package:xmanager/local_variables.dart';
 import 'package:xmanager/src/core/common.dart';
-import 'package:xmanager/src/features/auth/presentation/bloc/login_bloc.dart';
-import 'package:xmanager/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
-import 'package:xmanager/src/features/dashboard/presentation/bloc/dashboard_event.dart';
-import 'package:xmanager/src/features/device/presentation/bloc/device_bloc.dart';
+import 'package:xmanager/src/features/home/presentation/bloc/device/device_event.dart';
+import 'package:xmanager/src/features/home/presentation/bloc/program/program_bloc.dart';
+import 'package:xmanager/src/features/home/presentation/bloc/program/program_event.dart';
+import 'package:xmanager/src/features/start/presentation/bloc/login_bloc.dart';
+import 'package:xmanager/src/features/home/presentation/bloc/home/home_bloc.dart';
+import 'package:xmanager/src/features/home/presentation/bloc/home/home_event.dart';
+import 'package:xmanager/src/features/home/presentation/bloc/device/device_bloc.dart';
 import 'package:xmanager/src/shared/presentation/bloc/app/app_bloc.dart';
 import 'package:xmanager/src/shared/presentation/bloc/app/app_event.dart';
 import 'package:xmanager/src/shared/presentation/bloc/bloc.dart';
@@ -32,11 +35,19 @@ Future<void> main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider<DashboardBloc>(create: (_) => sl()..add(StartDashboard())),
-        //BlocProvider<TrainingProgramBloc>(create: (_) => sl()..add(StartTrainginProgramEvent())),
-        BlocProvider<UserBloc>(create: (_) => sl()..add(StartUserEvent())),
+        BlocProvider<UserBloc>(
+          create: (_) => sl()..add(StartUserEvent()),
+        ),
         BlocProvider<LoginBloc>(create: (_) => sl()),
-        BlocProvider<DeviceBloc>(create: (_) => sl()),
+        BlocProvider<HomeBloc>(
+          create: (_) => sl()..add(StartDashboard()),
+        ),
+        BlocProvider<ProgramBloc>(
+          create: (_) => sl()..add(const GetPrograms()),
+        ),
+        BlocProvider<DeviceBloc>(
+          create: (_) => sl()..add(const GetDevices()),
+        ),
         BlocProvider<AppBloc>(create: (_) => sl()..add(AppStartEvent())),
         BlocProvider<BleBloc>(create: (_) => sl()..add(const BleStartEvent())),
       ],
