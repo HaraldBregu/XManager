@@ -51,22 +51,109 @@ class DevicesSelectScreen extends StatelessWidget {
                     childCount: state.devices.length,
                     (BuildContext context, int index) {
                       final device = state.devices[index];
-                      final hashCode = device.hashCode;
 
-                      final selectedHashCode =
-                          context.watch<DeviceBloc>().state.device.hashCode;
-
+                      final selectedDevices =
+                          context.watch<DeviceBloc>().state.selectedDevices;
+                      final isSelected = selectedDevices.contains(device);
+/*
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Checkbox(
+                                tristate: true,
+                                value: true,
+                                onChanged: (bool? value) {},
+                              ),
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "type",
+                                    style:
+                                        context.textTheme.titleMedium?.copyWith(
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                  ),
+                                  Text(
+                                    "location",
+                                    style: context.textTheme.bodySmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w400,
+                                        )
+                                        .copyWith(
+                                          color:
+                                              context.colorScheme.primaryFixed,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Icon(
+                                        Icons.check_circle_sharp,
+                                        size: 18,
+                                        color: context.colorScheme.primaryFixed,
+                                      ),
+                                      const SizedBox(width: 4),
+                                      Text(
+                                        "supported",
+                                        style: context.textTheme.bodySmall
+                                            ?.copyWith(
+                                              fontWeight: FontWeight.w900,
+                                            )
+                                            .copyWith(
+                                              color: context
+                                                  .colorScheme.primaryFixed,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    "version",
+                                    style: context.textTheme.bodySmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w400,
+                                        )
+                                        .copyWith(
+                                          color:
+                                              context.colorScheme.primaryFixed,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );*/
                       return ListTile(
                         title: Text(
-                          device.macAddress,
+                          device.type.description,
                           style: context.textTheme.titleLarge?.copyWith(
                             fontWeight: FontWeight.w900,
                           ),
                         ),
-                        leading: Radio<int>(
-                          value: hashCode,
-                          groupValue: selectedHashCode,
-                          onChanged: (value) {
+                        subtitle: Text(
+                          "${device.location.value} (${device.version})",
+                          style: context.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        trailing: Checkbox(
+                          tristate: true,
+                          value: isSelected,
+                          onChanged: (bool? value) {
                             context
                                 .read<DeviceBloc>()
                                 .add(SelectDevice(device));
@@ -102,7 +189,8 @@ class DevicesSelectScreen extends StatelessWidget {
                   fontWeight: FontWeight.w900,
                 ),
               ),
-              onPressed: context.watch<DeviceBloc>().state.devices == null
+              onPressed:
+                  context.watch<DeviceBloc>().state.selectedDevices.isEmpty
                   ? null
                   : () {
                       // final bloc = context.read<HomeBloc>();

@@ -3,26 +3,30 @@ import 'package:xmanager/src/shared/domain/entities/device_entity.dart';
 
 class DeviceState extends Equatable {
   final List<DeviceEntity> devices;
-  final DeviceEntity? device;
+  final List<DeviceEntity> selectedDevices;
+  final DeviceEntity? selectedDevice;
   final String? uuid;
   final List<int>? password;
 
   const DeviceState({
     this.devices = const [],
-    this.device,
+    this.selectedDevices = const [],
+    this.selectedDevice,
     this.uuid,
     this.password,
   });
 
   DeviceState copyWith({
     List<DeviceEntity>? devices,
-    DeviceEntity? device,
+    List<DeviceEntity>? selectedDevices,
+    DeviceEntity? selectedDevice,
     String? uuid,
     List<int>? password,
   }) {
     return DeviceState(
       devices: devices ?? this.devices,
-      device: device ?? this.device,
+      selectedDevices: selectedDevices ?? this.selectedDevices,
+      selectedDevice: selectedDevice ?? this.selectedDevice,
       uuid: uuid ?? this.uuid,
       password: password ?? this.password,
     );
@@ -30,6 +34,9 @@ class DeviceState extends Equatable {
 
   @override
   List<Object?> get props => [
+        devices,
+        selectedDevices,
+        selectedDevice,
         uuid,
         password,
       ];

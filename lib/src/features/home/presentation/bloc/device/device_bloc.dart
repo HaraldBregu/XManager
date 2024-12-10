@@ -3,6 +3,7 @@ import 'package:xmanager/src/core/error/failures.dart';
 import 'package:xmanager/src/core/usecase.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/device/device_event.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/device/device_state.dart';
+import 'package:xmanager/src/shared/domain/entities/device_entity.dart';
 import 'package:xmanager/src/shared/domain/usecases/ble_usecases.dart';
 import 'package:xmanager/src/shared/domain/usecases/get_app_permissions.dart';
 import 'package:xmanager/src/shared/domain/usecases/get_devices_usecase.dart';
@@ -122,9 +123,20 @@ class DeviceBloc extends Bloc<DeviceEvent, DeviceState> {
     SelectDevice event,
     Emitter<DeviceState> emit,
   ) async {
-    emit(
-      state.copyWith(device: event.device),
-    );
+    
+    if (state.selectedDevices.contains(event.device)) {
+      final newData = List<DeviceEntity>.from(state.selectedDevices);
+      newData.removeWhere((d) => d.macAddress == event.device.macAddress);
+      emit(state.copyWith(selectedDevices: newData));
+    } else {
+      final newData = List<DeviceEntity>.from(state.selectedDevices);
+      newData.add(event.device);
+      emit(state.copyWith(selectedDevices: newData));
+    }
+
+    emit(state.copyWith(selectedDevice: event.device));
+
+
     //emit(DeviceCanConnectState(uuid: event.uuid));
 
     /*await emit.onEach(
