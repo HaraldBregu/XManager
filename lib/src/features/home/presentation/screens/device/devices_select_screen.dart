@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/device/device_bloc.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/device/device_event.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/device/device_state.dart';
+import 'package:xmanager/src/features/home/presentation/bloc/uploader/uploader_bloc.dart';
+import 'package:xmanager/src/features/home/presentation/bloc/uploader/uploader_event.dart';
 
 class DevicesSelectScreen extends StatelessWidget {
   const DevicesSelectScreen({super.key});
@@ -39,13 +42,7 @@ class DevicesSelectScreen extends StatelessWidget {
                   pinned: true,
                 ),
 
-                SliverToBoxAdapter(
-                  child: Container(
-                    height: 10,
-                  ),
-                ),
-
-                // List
+                // DEVICES
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
                     childCount: state.devices.length,
@@ -53,115 +50,100 @@ class DevicesSelectScreen extends StatelessWidget {
                       final device = state.devices[index];
 
                       final selectedDevices =
-                          context.watch<DeviceBloc>().state.selectedDevices;
-                      final isSelected = selectedDevices.contains(device);
-/*
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Checkbox(
-                                tristate: true,
-                                value: true,
-                                onChanged: (bool? value) {},
-                              ),
-                            ),
-                            Expanded(
-                              flex: 3,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "type",
-                                    style:
-                                        context.textTheme.titleMedium?.copyWith(
-                                      fontWeight: FontWeight.w900,
-                                    ),
-                                  ),
-                                  Text(
-                                    "location",
-                                    style: context.textTheme.bodySmall
-                                        ?.copyWith(
-                                          fontWeight: FontWeight.w400,
-                                        )
-                                        .copyWith(
-                                          color:
-                                              context.colorScheme.primaryFixed,
-                                        ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              flex: 3,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Icon(
-                                        Icons.check_circle_sharp,
-                                        size: 18,
-                                        color: context.colorScheme.primaryFixed,
-                                      ),
-                                      const SizedBox(width: 4),
-                                      Text(
-                                        "supported",
-                                        style: context.textTheme.bodySmall
-                                            ?.copyWith(
-                                              fontWeight: FontWeight.w900,
-                                            )
-                                            .copyWith(
-                                              color: context
-                                                  .colorScheme.primaryFixed,
-                                            ),
-                                      ),
-                                    ],
-                                  ),
-                                  Text(
-                                    "version",
-                                    style: context.textTheme.bodySmall
-                                        ?.copyWith(
-                                          fontWeight: FontWeight.w400,
-                                        )
-                                        .copyWith(
-                                          color:
-                                              context.colorScheme.primaryFixed,
-                                        ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );*/
-                      return ListTile(
-                        title: Text(
-                          device.type.description,
-                          style: context.textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                        subtitle: Text(
-                          "${device.location.value} (${device.version})",
-                          style: context.textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        trailing: Checkbox(
-                          tristate: true,
-                          value: isSelected,
-                          onChanged: (bool? value) {
-                            context
-                                .read<DeviceBloc>()
-                                .add(SelectDevice(device));
-                          },
-                        ),
+                          context.watch<UploaderBloc>().state.devices;
+
+                      final isSelected =
+                          selectedDevices.any((e) => e.device == device);
+
+                      return InkWell(
                         onTap: () {
-                          context.read<DeviceBloc>().add(SelectDevice(device));
+                          context
+                              .read<UploaderBloc>()
+                              .add(SelectDevice(device));
                         },
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            top: 14,
+                            bottom: 14,
+                            right: 16,
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Checkbox(
+                                  tristate: true,
+                                  value: isSelected,
+                                  onChanged: (bool? value) {
+                                    context
+                                        .read<UploaderBloc>()
+                                        .add(SelectDevice(device));
+                                  },
+                                ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      device.type.value,
+                                      style: context.textTheme.titleMedium
+                                          ?.copyWith(
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                    Text(
+                                      device.location.value,
+                                      style: context.textTheme.bodySmall
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.w400,
+                                          )
+                                          .copyWith(
+                                            color: context
+                                                .colorScheme.primaryFixed,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          "SUPPORTED",
+                                          style: context.textTheme.bodySmall
+                                              ?.copyWith(
+                                                fontWeight: FontWeight.w900,
+                                              )
+                                              .copyWith(
+                                                color: context
+                                                    .colorScheme.primaryFixed,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      "v${device.version}",
+                                      style: context.textTheme.bodySmall
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.w400,
+                                          )
+                                          .copyWith(
+                                            color: context
+                                                .colorScheme.primaryFixed,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       );
                     },
                   ),
@@ -189,14 +171,13 @@ class DevicesSelectScreen extends StatelessWidget {
                   fontWeight: FontWeight.w900,
                 ),
               ),
-              onPressed:
-                  context.watch<DeviceBloc>().state.selectedDevices.isEmpty
+              onPressed: context.watch<UploaderBloc>().state.devices.isEmpty
                   ? null
                   : () {
                       // final bloc = context.read<HomeBloc>();
                       // context.pushNamed('program select device screen');
                       // bloc.add(const GetDevicesHomeEvent());
-                      //context.pushNamed('program edit screen');
+                      context.pushNamed('upload program screen');
                     },
             ),
           ],

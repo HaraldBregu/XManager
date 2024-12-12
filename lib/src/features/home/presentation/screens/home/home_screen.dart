@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/core/localizations_extension.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/home/home_bloc.dart';
@@ -10,7 +11,9 @@ import 'package:xmanager/src/features/home/presentation/bloc/home/home_event.dar
 import 'package:xmanager/src/features/home/presentation/bloc/home/home_state.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/program/program_bloc.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/program/program_event.dart';
+import 'package:xmanager/src/features/home/presentation/widgets/bottom_sheets/program_uploader_bottom_sheet.dart';
 import 'package:xmanager/src/features/home/presentation/widgets/buttons/start_training_button.dart';
+import 'package:xmanager/src/shared/domain/entities/device_program_entity.dart';
 import 'package:xmanager/src/shared/widgets/drawer_menu.dart';
 
 const String bleMac = "E8:29:77:C6:A9:C0";
@@ -551,126 +554,6 @@ class HomeWidget extends StatelessWidget {
             ),
           ),
         ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: paddingHorizontally,
-            ),
-            child: Card(
-              margin: EdgeInsets.zero,
-              child: InkWell(
-                onTap: () {
-                  context.pushNamed("device screen");
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Dinamo",
-                            style: context.textTheme.titleLarge
-                                ?.copyWith(fontWeight: FontWeight.w900),
-                          ),
-                          const SizedBox(
-                            height: 4,
-                          ),
-                          Text(
-                            "LEFT FOOT",
-                            style: context.textTheme.bodyMedium
-                                ?.copyWith(fontWeight: FontWeight.w400),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "V1.0.0",
-                            style: context.textTheme.bodyMedium
-                                ?.copyWith(fontWeight: FontWeight.w700)
-                                .copyWith(
-                                  color: context.colorScheme.primaryFixed,
-                                ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Icon(
-                            Icons.check_circle,
-                            color: context.colorScheme.primary,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: paddingHorizontally,
-            ),
-            child: Card(
-              margin: EdgeInsets.zero,
-              child: InkWell(
-                onTap: () {
-                  context.pushNamed("device screen");
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Dinamo",
-                            style: context.textTheme.titleLarge
-                                ?.copyWith(fontWeight: FontWeight.w900),
-                          ),
-                          const SizedBox(
-                            height: 4,
-                          ),
-                          Text(
-                            "LEFT FOOT",
-                            style: context.textTheme.bodyMedium
-                                ?.copyWith(fontWeight: FontWeight.w400),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "V1.0.0",
-                            style: context.textTheme.bodyMedium
-                                ?.copyWith(fontWeight: FontWeight.w700)
-                                .copyWith(
-                                  color: context.colorScheme.primaryFixed,
-                                ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Icon(
-                            Icons.check_circle,
-                            color: context.colorScheme.primary,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
 
         // ACTION divider
         SliverToBoxAdapter(
@@ -744,6 +627,22 @@ class HomeWidget extends StatelessWidget {
               margin: EdgeInsets.zero,
               child: InkWell(
                 onTap: () {
+                  /*showModalBottomSheetProgramUploader(
+                    context: context,
+                    program: const DeviceProgramEntity(
+                      title: "title",
+                      duration: 23,
+                      feature: DeviceFeature.demo,
+                      command: [],
+                      type: DeviceType.dinamo,
+                      version: "version",
+                    ),
+                    onStartUploading: (program) {
+                      //final bloc = context.read<HomeBloc>();
+                      //final event = UploadProgramEvent(program);
+                      //bloc.add(event);
+                    },
+                  );*/
                   context.pushNamed("devices scan screen");
                 },
                 child: Padding(

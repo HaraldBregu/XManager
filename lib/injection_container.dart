@@ -5,6 +5,7 @@ import 'package:xmanager/src/features/home/domain/usecases/get_home_data_usecase
 import 'package:xmanager/src/features/home/presentation/bloc/device/device_bloc.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/home/home_bloc.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/program/program_bloc.dart';
+import 'package:xmanager/src/features/home/presentation/bloc/uploader/uploader_bloc.dart';
 import 'package:xmanager/src/features/start/presentation/bloc/login_bloc.dart';
 import 'package:xmanager/src/shared/data/datasources/local/ble_datasource.dart';
 import 'package:xmanager/src/shared/data/datasources/local/network_datasource.dart';
@@ -69,6 +70,11 @@ Future<void> init() async {
       getProgramsUseCase: sl(), 
     ),
   );
+
+  sl.registerFactory(
+    () => UploaderBloc(),
+  );
+
 
   sl.registerFactory(
     () => UserBloc(

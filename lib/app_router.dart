@@ -19,6 +19,7 @@ import 'package:xmanager/src/features/home/presentation/screens/old/settings_pag
 import 'package:xmanager/src/features/home/presentation/screens/program/program_select_screen.dart';
 import 'package:xmanager/src/features/home/presentation/screens/program/programs_screen.dart';
 import 'package:xmanager/src/features/home/presentation/screens/program/training_program_edit_screen.dart';
+import 'package:xmanager/src/features/home/presentation/screens/uploader/program_upload_screen.dart';
 import 'package:xmanager/src/features/start/presentation/screens/login_screen.dart';
 import 'package:xmanager/src/features/start/presentation/screens/recovery_screen.dart';
 import 'package:xmanager/src/features/start/presentation/screens/signup_screen.dart';
@@ -140,18 +141,29 @@ GoRouter router(BuildContext context) {
             builder: (context, state) => const ProfileScreen(),
           ),
 
-          // Select PROGRAM
+          // SELECT PROGRAM
           GoRoute(
             name: "program select screen",
             path: 'select_program',
             builder: (context, state) => const ProgramSelectScreen(),
           ),
           
-          // Select DEVICES
+          // SELECT DEVICES
           GoRoute(
             name: "select devices screen",
             path: 'select_devices',
             builder: (context, state) => const DevicesSelectScreen(),
+          ),
+
+          // PROGRAM UPLOAD 
+          GoRoute(
+            name: "upload program screen",
+            path: 'upload_program',
+            /*pageBuilder: (context, state) => const MaterialPage(
+              fullscreenDialog: true,
+              child: ProgramUploadScreen(),
+            ),*/
+            builder: (context, state) => const ProgramUploadScreen(),
           ),
 
           // PROGRAM LIST

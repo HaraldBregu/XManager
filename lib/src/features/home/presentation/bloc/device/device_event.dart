@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:xmanager/src/shared/domain/entities/device_entity.dart';
 
 abstract class DeviceEvent extends Equatable {
   const DeviceEvent();
@@ -58,12 +57,4 @@ class GetDevices extends DeviceEvent {
 
   @override
   List<Object?> get props => [];
-}
-
-class SelectDevice extends DeviceEvent {
-  final DeviceEntity device;
-  const SelectDevice(this.device);
-
-  @override
-  List<Object?> get props => [device];
 }

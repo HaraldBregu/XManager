@@ -3,11 +3,9 @@ import 'package:xmanager/src/shared/domain/entities/device_program_entity.dart';
 
 class ProgramState extends Equatable {
   final List<DeviceProgramEntity> programs;
-  final DeviceProgramEntity? program;
 
   const ProgramState({
     this.programs = const [],
-    this.program,
   });
 
   ProgramState copyWith({
@@ -16,16 +14,11 @@ class ProgramState extends Equatable {
   }) {
     return ProgramState(
       programs: programs ?? this.programs,
-      program: program ?? this.program,
     );
   }
 
   @override
-  List<Object?> get props => [programs, program];
-}
-
-class ProgramInitialState extends ProgramState {
-  const ProgramInitialState();
+  List<Object?> get props => [programs];
 }
 
 class GetProgramsLoading extends ProgramState {

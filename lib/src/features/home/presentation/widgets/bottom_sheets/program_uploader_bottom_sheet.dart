@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
+import 'package:xmanager/src/features/home/presentation/widgets/device_checkbox_row.dart';
+import 'package:xmanager/src/shared/domain/entities/device_entity.dart';
 import 'package:xmanager/src/shared/domain/entities/device_program_entity.dart';
 import 'package:xmanager/src/shared/widgets/info_container.dart';
 
@@ -106,24 +109,30 @@ Future<void> showModalBottomSheetProgramUploader({
                     ),
 
                     // Devices
-                    // Expanded(
-                    //   child: SingleChildScrollView(
-                    //     controller: scrollController,
-                    //     child: DeviceCheckboxList(
-                    //       devices: devices,
-                    //       selectedDevices: selectedDevices,
-                    //       onSelectDevice: (device) {
-                    //         setState(() {
-                    //           if (selectedDevices.contains(device)) {
-                    //             selectedDevices.remove(device);
-                    //           } else {
-                    //             selectedDevices.add(device);
-                    //           }
-                    //         });
-                    //       },
-                    //     ),
-                    //   ),
-                    // ),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        controller: scrollController,
+                        child: DeviceCheckboxList(
+                          devices: [
+                            DeviceEntity(
+                              type: DeviceType.dinamo,
+                              location: DeviceLocation.leftFoot,
+                              version: "version",
+                              macAddress: "macAddress",
+                            ),
+                          ],
+                          selectedDevices: [
+                            DeviceEntity(
+                              type: DeviceType.dinamo,
+                              location: DeviceLocation.leftFoot,
+                              version: "version",
+                              macAddress: "macAddress",
+                            ),
+                          ],
+                          onSelectDevice: (device) {},
+                        ),
+                      ),
+                    ),
 
                     // Action button
                     Padding(

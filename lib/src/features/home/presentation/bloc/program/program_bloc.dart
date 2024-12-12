@@ -11,7 +11,6 @@ class ProgramBloc extends Bloc<ProgramEvent, ProgramState> {
     required this.getProgramsUseCase,
   }) : super(const ProgramState()) {
     on<GetPrograms>(_onGetProgramsEvent);
-    on<SelectProgram>(_onSelectProgramEvent);
   }
 
   Future<void> _onGetProgramsEvent(
@@ -22,21 +21,8 @@ class ProgramBloc extends Bloc<ProgramEvent, ProgramState> {
 
     final response = await getProgramsUseCase.call(NoParams());
     response.fold(
-      (left) {
-        emit(const GetProgramsFailure());
-      },
-      (right) {
-        emit(GetProgramsSuccess(programs: right));
-      },
-    );
-  }
-
-  Future<void> _onSelectProgramEvent(
-    SelectProgram event,
-    Emitter<ProgramState> emit,
-  ) async {
-    emit(
-      state.copyWith(program: event.program),
+      (left) => emit(const GetProgramsFailure()),
+      (right) => emit(GetProgramsSuccess(programs: right)),
     );
   }
 }

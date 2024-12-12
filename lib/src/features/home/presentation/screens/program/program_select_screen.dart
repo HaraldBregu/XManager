@@ -8,6 +8,8 @@ import 'package:xmanager/src/features/home/presentation/bloc/device/device_event
 import 'package:xmanager/src/features/home/presentation/bloc/program/program_bloc.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/program/program_event.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/program/program_state.dart';
+import 'package:xmanager/src/features/home/presentation/bloc/uploader/uploader_bloc.dart';
+import 'package:xmanager/src/features/home/presentation/bloc/uploader/uploader_event.dart';
 
 class ProgramSelectScreen extends StatelessWidget {
   const ProgramSelectScreen({super.key});
@@ -15,27 +17,26 @@ class ProgramSelectScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GlobalLoaderOverlay(
-      child: BlocBuilder<ProgramBloc, ProgramState>(
-        buildWhen: (context, state) =>
-            state is GetProgramsLoading ||
-            state is GetProgramsSuccess ||
-            state is GetProgramsFailure,
-        builder: (context, state) {
-          if (state is GetProgramsLoading) {
-            context.loaderOverlay.show();
-          } else if (state is GetProgramsSuccess ||
-              state is GetProgramsFailure) {
-            context.loaderOverlay.hide();
-          }
-
-          return Scaffold(
-            body: RefreshIndicator(
-              onRefresh: () async {
-                final bloc = context.read<ProgramBloc>();
-                const event = GetPrograms();
-                bloc.add(event);
-              },
-              child: CustomScrollView(
+      child: Scaffold(
+        body: RefreshIndicator(
+          onRefresh: () async {
+            final bloc = context.read<ProgramBloc>();
+            const event = GetPrograms();
+            bloc.add(event);
+          },
+          child: BlocBuilder<ProgramBloc, ProgramState>(
+            buildWhen: (context, state) =>
+                state is GetProgramsLoading ||
+                state is GetProgramsSuccess ||
+                state is GetProgramsFailure,
+            builder: (context, state) {
+              if (state is GetProgramsLoading) {
+                context.loaderOverlay.show();
+              } else if (state is GetProgramsSuccess ||
+                  state is GetProgramsFailure) {
+                context.loaderOverlay.hide();
+              }
+              return CustomScrollView(
                 slivers: [
                   SliverAppBar(
                     title: Text(
@@ -62,7 +63,11 @@ class ProgramSelectScreen extends StatelessWidget {
                         final hashCode = program.hashCode;
 
                         final selectedHashCode =
-                            context.watch<ProgramBloc>().state.program.hashCode;
+                            context
+                            .watch<UploaderBloc>()
+                            .state
+                            .program
+                            .hashCode;
 
                         return ListTile(
                           title: Text(
@@ -76,13 +81,13 @@ class ProgramSelectScreen extends StatelessWidget {
                             groupValue: selectedHashCode,
                             onChanged: (value) {
                               context
-                                  .read<ProgramBloc>()
+                                  .read<UploaderBloc>()
                                   .add(SelectProgram(program));
                             },
                           ),
                           onTap: () {
                             context
-                                .read<ProgramBloc>()
+                                .read<UploaderBloc>()
                                 .add(SelectProgram(program));
                           },
                         );
@@ -90,6 +95,8 @@ class ProgramSelectScreen extends StatelessWidget {
                     ),
                   ),
                 ],
+              );
+            },
               ),
             ),
             bottomNavigationBar: Padding(
@@ -110,7 +117,7 @@ class ProgramSelectScreen extends StatelessWidget {
                         fontWeight: FontWeight.w900,
                       ),
                     ),
-                    onPressed: context.watch<ProgramBloc>().state.program ==
+                onPressed: context.watch<UploaderBloc>().state.program ==
                             null
                         ? null
                         : () {
@@ -120,9 +127,7 @@ class ProgramSelectScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-          );
-        },
+        ),
       ),
     );
   }
