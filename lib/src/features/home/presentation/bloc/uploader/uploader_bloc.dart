@@ -1,10 +1,20 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xmanager/src/core/usecase.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/uploader/uploader_event.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/uploader/uploader_state.dart';
 import 'package:xmanager/src/shared/domain/entities/device_upload_entity.dart';
+import 'package:xmanager/src/shared/domain/usecases/ble_usecases.dart';
 
 class UploaderBloc extends Bloc<UploaderEvent, UploaderState> {
-  UploaderBloc() : super(const UploaderState()) {
+  final BluetoothConnectUseCase bleConnect;
+  final BleDiscoverServicesUseCase bleDiscoverServices;
+  final BleWriteUseCase bleWrite;
+
+  UploaderBloc({
+    required this.bleConnect,
+    required this.bleDiscoverServices,
+    required this.bleWrite,
+  }) : super(const UploaderState()) {
     on<SelectProgram>(_onSelectProgramEvent);
     on<SelectDevice>(_onSelectDeviceEvent);
     on<StartUploading>(_onStartUploadingEvent);
@@ -55,29 +65,76 @@ class UploaderBloc extends Bloc<UploaderEvent, UploaderState> {
     Emitter<UploaderState> emit,
   ) async {
     final program = state.program;
+    if (program == null) return;
     final devices = state.devices;
-    final device = devices[0];
+    final data = devices[0];
+    final device = data.device;
+    final index = devices.indexWhere((el) => el.device == device);
 
-    // Change state to uploading
-
-    // - Get first device
+    final macAddress = device.macAddress;
+    final customService =
+        device.data.services.firstWhere((el) => el.name == "CUSTOM_SERVICE");
+    final actionsChar =
+        customService.characteristics.firstWhere((el) => el.name == "ACTIONS");
 
     // 1. Connect
     // * Connecting()
     // * ConnectingSuccess()
     // * ConnectingFailure()
-    emit(const Connecting());
-    emit(const ConnectingSuccess());
-    emit(const ConnectingFailure());
+
+    devices[index] = data.copyWith(
+      connected: false,
+      authenticated: false,
+      progress: 0.1,
+    );
+
+    emit(Connecting(program: program, devices: devices));
+
+    final connect = await bleConnect.call(macAddress);
+    connect.fold(
+      (left) {
+        devices[index] = data.copyWith(
+          connected: false,
+          authenticated: false,
+          progress: 0.2,
+          failure: left,
+        );
+        emit(ConnectingFailure(program: program, devices: devices));
+      },
+      (right) {
+        devices[index] = data.copyWith(
+          connected: true,
+          authenticated: false,
+          progress: 0.2,
+        );
+        emit(ConnectingSuccess(program: program, devices: devices));
+      },
+    );
+
+    // DISCOVER SERVICES
+    await bleDiscoverServices.call(macAddress);
 
     // 2. Authenticate
-    // * Authenticating()
-    // * AuthenticatingSuccess()
-    // * AuthenticatingFailure()
-    emit(const Authenticating());
-    emit(const AuthenticatingSuccess());
-    emit(const AuthenticatingFailure());
+    // emit(const Authenticating());
+    // emit(const AuthenticatingSuccess());
+    // emit(const AuthenticatingFailure());
+    devices[index] = data.copyWith(
+      connected: true,
+      authenticated: false,
+      progress: 0.3,
+    );
 
+    await bleWrite.call(
+      BleWriteParams(
+        deviceUuid: macAddress,
+        serviceUuid: customService.uuid,
+        characteristicUuid: actionsChar.uuid,
+        value: program.command,
+        withoutResponse: true,
+      ),
+    );
+
+    return;
     // 3. Upload data
     // * Uploading()
     // * UploadingSuccess()

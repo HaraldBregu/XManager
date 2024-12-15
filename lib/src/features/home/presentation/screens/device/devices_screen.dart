@@ -51,30 +51,69 @@ class DevicesWidget extends StatelessWidget {
                 pinned: true,
               ),
 
-              SliverToBoxAdapter(
-                child: Container(
-                  height: 10,
-                ),
-              ),
-
-              // List
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   childCount: state.devices.length,
                   (BuildContext context, int index) {
                     final device = state.devices[index];
 
-                    return ListTile(
-                      title: Text(
-                        device.macAddress,
-                        style: context.textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w900,
+                    return InkWell(
+                      onTap: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 14,
+                          horizontal: 16,
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 3,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    device.type.value,
+                                    style:
+                                        context.textTheme.titleMedium?.copyWith(
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                  ),
+                                  Text(
+                                    device.location.value,
+                                    style: context.textTheme.bodySmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w400,
+                                        )
+                                        .copyWith(
+                                          color:
+                                              context.colorScheme.primaryFixed,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    "v${device.version}",
+                                    style: context.textTheme.bodySmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w900,
+                                        )
+                                        .copyWith(
+                                          color:
+                                              context.colorScheme.primaryFixed,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      onTap: () {
-                        // final bloc = context.read<DashboardBloc>();
-                        // bloc.add(SelectTrainingProgramEvent(program));
-                      },
                     );
                   },
                 ),

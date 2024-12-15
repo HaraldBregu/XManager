@@ -17,8 +17,8 @@ class DeviceProgramModel extends DeviceProgramEntity {
       duration: json['duration'] as int,
       feature: DeviceFeature.fromString(json['feature'] as String),
       command: List<int>.from(json['command'] as List),
-      type: DeviceType.fromString(json['device_type'] as String),
-      version: json['device_version'] as String,
+      type: DeviceType.fromString(json['type'] as String),
+      version: json['version'] as String,
     );
   }
 }

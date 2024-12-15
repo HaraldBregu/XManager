@@ -64,24 +64,46 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<List<DeviceModel>> getDevices() async {
     final data = await Supabase.instance.client
         .from('devices')
-        .select('')
-        .order('updated_at', ascending: false);
+        .select('location, mac_address, versions!inner(type, version, data)');
 
-    final devices = data.map((doc) {
-      final data = DeviceModel.fromJson(doc);
-      return data;
-    }).toList();
+    final devices = data
+        .map((element) {
+          final dvs = element['versions'] as Map<String, dynamic>;
+          return {
+            'location': element['location'],
+            'mac_address': element['mac_address'],
+            'type': dvs['type'],
+            'version': dvs['version'],
+            'data': dvs['data'],
+          };
+        })
+        .map((Map<String, dynamic> doc) => DeviceModel.fromJson(doc))
+        .toList();
 
     return devices;
   }
 
   @override
   Future<List<DeviceProgramModel>> getPrograms() async {
-    final data = await Supabase.instance.client
-        .from('device_programs_versions_view')
-        .select();
 
-    return data.map((doc) => DeviceProgramModel.fromJson(doc)).toList();
+    final data = await Supabase.instance.client.from('programs').select(
+          'title, duration, feature, command, versions!inner(type, version)',
+        );
+
+    return data
+        .map((element) {
+          final dvs = element['versions'] as Map<String, dynamic>;
+          return {
+            'title': element['title'],
+            'duration': element['duration'],
+            'feature': element['feature'],
+            'command': element['command'],
+            'type': dvs['type'],
+            'version': dvs['version'],
+          };
+        })
+        .map((doc) => DeviceProgramModel.fromJson(doc))
+        .toList();
   }
 
   // TEST

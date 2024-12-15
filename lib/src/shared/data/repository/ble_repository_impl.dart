@@ -60,9 +60,9 @@ class BleRepositoryImpl implements BleRepository {
 
     try {
       await _dataSource.connect(uuid);
-    } on FlutterBluePlusException catch (e) {
+    } on FlutterBluePlusException catch (_) {
       return Left(BluetoothConnectionFailure());
-    } on PlatformException catch (e) {
+    } on PlatformException catch (_) {
       return Left(PlatformFailure());
     } catch (e) {
       return Left(PlatformFailure());

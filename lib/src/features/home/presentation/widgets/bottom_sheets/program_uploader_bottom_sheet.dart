@@ -114,20 +114,8 @@ Future<void> showModalBottomSheetProgramUploader({
                         controller: scrollController,
                         child: DeviceCheckboxList(
                           devices: [
-                            DeviceEntity(
-                              type: DeviceType.dinamo,
-                              location: DeviceLocation.leftFoot,
-                              version: "version",
-                              macAddress: "macAddress",
-                            ),
                           ],
                           selectedDevices: [
-                            DeviceEntity(
-                              type: DeviceType.dinamo,
-                              location: DeviceLocation.leftFoot,
-                              version: "version",
-                              macAddress: "macAddress",
-                            ),
                           ],
                           onSelectDevice: (device) {},
                         ),

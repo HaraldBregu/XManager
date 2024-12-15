@@ -72,7 +72,11 @@ Future<void> init() async {
   );
 
   sl.registerFactory(
-    () => UploaderBloc(),
+    () => UploaderBloc(
+      bleConnect: sl(),
+      bleDiscoverServices: sl(),
+      bleWrite: sl(),
+    ),
   );
 
 
