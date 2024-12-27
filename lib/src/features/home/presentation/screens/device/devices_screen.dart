@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/device/device_bloc.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/device/device_event.dart';

@@ -1,8 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/usecase.dart';
-import '../../../domain/usecases/get_app_permissions.dart';
-import 'app_event.dart';
-import 'app_state.dart';
+import 'package:xmanager/src/core/usecase.dart';
+import 'package:xmanager/src/shared/domain/usecases/ble_usecases.dart';
+import 'package:xmanager/src/shared/domain/usecases/get_app_permissions.dart';
+import 'package:xmanager/src/shared/presentation/bloc/app/app_event.dart';
+import 'package:xmanager/src/shared/presentation/bloc/app/app_state.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
   final LocationPermissionsUseCase locationPermissions;
@@ -10,6 +11,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   final BluetoothConnectPermissionsUseCase bluetoothConnectPermissions;
   final BluetoothScanPermissionsUseCase bluetoothScanPermissions;
   final GoToSettingsUseCase goToSettings;
+  final BleTurnOnUseCase bleTurnOn;
 
   AppBloc({
     required this.locationPermissions,
@@ -17,6 +19,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     required this.bluetoothConnectPermissions,
     required this.bluetoothScanPermissions,
     required this.goToSettings,
+    required this.bleTurnOn,
   }) : super(const AppState()) {
     on<AppStartEvent>(_onStartEvent);
     on<AppPermissionsStatusEvent>(_onPermissionsStatusEvent);
@@ -25,6 +28,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     on<RequestBluetoothConnectPermission>(_onRequestBluetoothConnectPermission);
     on<RequestBluetoothScanPermission>(_onRequestBluetoothScanPermission);
     on<GoToSettings>(_onGoToSettings);
+    on<TurnOnBluetooth>(_onTurnOnBluetooth);
   }
 
   Future<void> _onStartEvent(
@@ -100,5 +104,16 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     Emitter<AppState> emit,
   ) async {
     await goToSettings.call(NoParams());
+  }
+
+  Future<void> _onTurnOnBluetooth(
+    TurnOnBluetooth event,
+    Emitter<AppState> emit,
+  ) async {
+    final turnOn = await bleTurnOn.call(NoParams());
+    turnOn.fold(
+      (failure) {},
+      (_) {},
+    );
   }
 }

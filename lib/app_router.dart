@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:xmanager/src/features/home/presentation/screens/device/device_screen.dart';
-import 'package:xmanager/src/features/home/presentation/screens/device/devices_select_screen.dart';
+import 'package:xmanager/src/features/home/presentation/screens/uploader/devices_select_screen.dart';
 import 'package:xmanager/src/features/home/presentation/screens/main_screen.dart';
 import 'package:xmanager/src/features/home/presentation/screens/old/account_page.dart';
 import 'package:xmanager/src/features/home/presentation/screens/old/ble_debug_page.dart';
@@ -16,7 +16,7 @@ import 'package:xmanager/src/features/home/presentation/screens/old/devices_scan
 import 'package:xmanager/src/features/home/presentation/screens/old/permissions_page.dart';
 import 'package:xmanager/src/features/home/presentation/screens/old/profile_screen.dart';
 import 'package:xmanager/src/features/home/presentation/screens/old/settings_page.dart';
-import 'package:xmanager/src/features/home/presentation/screens/program/program_select_screen.dart';
+import 'package:xmanager/src/features/home/presentation/screens/uploader/program_select_screen.dart';
 import 'package:xmanager/src/features/home/presentation/screens/program/programs_screen.dart';
 import 'package:xmanager/src/features/home/presentation/screens/program/training_program_edit_screen.dart';
 import 'package:xmanager/src/features/home/presentation/screens/uploader/program_upload_screen.dart';

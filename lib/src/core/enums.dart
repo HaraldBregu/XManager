@@ -68,6 +68,18 @@ enum AppBluetoothAdapterState {
 enum DeviceType {
   dinamo;
 
+  static DeviceType fromString(String value) {
+    switch (value) {
+      case 'DINAMO':
+        return DeviceType.dinamo;
+      default:
+        throw ArgumentError('Invalid device type: $value');
+    }
+  }
+}
+
+extension Description on DeviceType {
+  
   String get value {
     switch (this) {
       case DeviceType.dinamo:
@@ -79,15 +91,6 @@ enum DeviceType {
     switch (this) {
       case DeviceType.dinamo:
         return 'Dinamo';
-    }
-  }
-
-  static DeviceType fromString(String value) {
-    switch (value) {
-      case 'DINAMO':
-        return DeviceType.dinamo;
-      default:
-        throw ArgumentError('Invalid device type: $value');
     }
   }
 }

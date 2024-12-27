@@ -2,7 +2,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/core/error/exeptions.dart';
 import 'package:xmanager/src/shared/data/models/device_model.dart';
-import 'package:xmanager/src/shared/data/models/device_program_model.dart';
+import 'package:xmanager/src/shared/data/models/program_model.dart';
 import 'package:xmanager/src/shared/data/models/dinamo_model.dart';
 import 'package:xmanager/src/shared/data/models/profile_model.dart';
 import 'package:xmanager/src/shared/data/models/user_model.dart';
@@ -14,7 +14,7 @@ abstract class RemoteDataSource {
   Future<UserModel?> get currentUser;
   Future<ProfileModel> getCurrentProfile();
   Future<List<DeviceModel>> getDevices();
-  Future<List<DeviceProgramModel>> getPrograms();
+  Future<List<ProgramModel>> getPrograms();
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -84,7 +84,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
-  Future<List<DeviceProgramModel>> getPrograms() async {
+  Future<List<ProgramModel>> getPrograms() async {
 
     final data = await Supabase.instance.client.from('programs').select(
           'title, duration, feature, command, versions!inner(type, version)',
@@ -102,12 +102,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
             'version': dvs['version'],
           };
         })
-        .map((doc) => DeviceProgramModel.fromJson(doc))
+        .map((doc) => ProgramModel.fromJson(doc))
         .toList();
   }
 
   // TEST
-  Future<void> createProgram(DeviceProgramModel program) async {
+  Future<void> createProgram(ProgramModel program) async {
     //final firestore = FirebaseFirestore.instance;
 
     // personal: 32td54OR8efto9xixr6pbLJVdu12

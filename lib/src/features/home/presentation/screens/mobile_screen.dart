@@ -5,6 +5,8 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/program/program_bloc.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/program/program_event.dart';
+import 'package:xmanager/src/features/home/presentation/bloc/uploader/uploader_bloc.dart';
+import 'package:xmanager/src/features/home/presentation/bloc/uploader/uploader_event.dart';
 import 'package:xmanager/src/features/home/presentation/screens/analytics/analytics_screen.dart';
 import 'package:xmanager/src/features/home/presentation/screens/device/devices_screen.dart';
 import 'package:xmanager/src/features/home/presentation/screens/home/home_screen.dart';
@@ -52,6 +54,7 @@ class _MobileScreenState extends State<MobileScreen> {
           backgroundColor: context.colorScheme.secondaryContainer,
           onPressed: () {
             context.read<ProgramBloc>().add(const GetPrograms());
+            context.read<UploaderBloc>().add(const ResetUploader());
             context.pushNamed("program select screen");
           },
         );

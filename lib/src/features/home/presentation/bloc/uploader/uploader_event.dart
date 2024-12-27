@@ -1,13 +1,20 @@
 import 'package:equatable/equatable.dart';
 import 'package:xmanager/src/shared/domain/entities/device_entity.dart';
-import 'package:xmanager/src/shared/domain/entities/device_program_entity.dart';
+import 'package:xmanager/src/shared/domain/entities/program_entity.dart';
 
 abstract class UploaderEvent extends Equatable {
   const UploaderEvent();
 }
 
+class ResetUploader extends UploaderEvent {
+  const ResetUploader();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class SelectProgram extends UploaderEvent {
-  final DeviceProgramEntity program;
+  final ProgramEntity program;
   const SelectProgram(this.program);
 
   @override

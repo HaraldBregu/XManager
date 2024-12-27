@@ -1,3 +1,6 @@
+import 'package:dartz/dartz.dart';
+import 'package:xmanager/src/core/error/failures.dart';
+
 import '../../../core/enums.dart';
 import '../../../core/usecase.dart';
 import '../repository/permissions_repository.dart';
@@ -39,6 +42,29 @@ class BluetoothConnectPermissionsUseCase
   @override
   Future<AppPermissionStatus> call(PermissionsParams params) =>
       _permissionsRepository.bluetoothConnectPermissions(params.request);
+}
+
+///
+/// BLUETOOTH HAS CONNECT PERMISSIONS
+///
+class BluetoothConnectPermissionsGrantedUseCase
+    implements UseCase<void, NoParams> {
+  BluetoothConnectPermissionsGrantedUseCase(this._permissionsRepository);
+  final PermissionsRepository _permissionsRepository;
+
+  @override
+  Future<Either<Failure, void>> call(NoParams params) =>
+      _permissionsRepository.bluetoothConnectPermissionsGranted;
+}
+
+class BluetoothScanPermissionsGrantedUseCase
+    implements UseCase<void, NoParams> {
+  BluetoothScanPermissionsGrantedUseCase(this._permissionsRepository);
+  final PermissionsRepository _permissionsRepository;
+
+  @override
+  Future<Either<Failure, void>> call(NoParams params) =>
+      _permissionsRepository.bluetoothScanPermissionsGranted;
 }
 
 ///

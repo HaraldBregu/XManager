@@ -37,4 +37,6 @@ class BluetoothConnectionFailure extends Failure {}
 
 class BluetoothDiscoverServicesFailure extends Failure {}
 
+class BluetoothTurnOnFailure extends Failure {}
+
 class PlatformFailure extends Failure {}

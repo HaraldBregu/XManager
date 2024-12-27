@@ -51,27 +51,17 @@ class BleDataSourceImpl implements BleDataSource {
   BleDataSourceImpl();
 
   @override
-  Future<void> startScan(int seconds, List<String>? services) async {
-    if (FlutterBluePlus.isScanningNow) return;
-
-    //final guidServices = services!.map((e) => Guid(e)).toList();
-
-    await FlutterBluePlus.startScan(
-      timeout: Duration(seconds: seconds),
-      //scanMode: ScanMode.lowLatency,
-      //withServices: [Guid("00001600-1212-efde-1523-785feabcd121")],
-      //withServices: guidServices,
-      //macAddresses: const [],
-      //allowDuplicates: false,
-      //androidUsesFineLocation: false,
-    );
-  }
+  Future<void> startScan(int seconds, List<String>? services) async =>
+      FlutterBluePlus.isScanningNow
+          ? await Future.value()
+          : await FlutterBluePlus.startScan(
+              timeout: Duration(seconds: seconds),
+            );
 
   @override
-  Future stopScan() async {
-    if (!FlutterBluePlus.isScanningNow) return;
-    await FlutterBluePlus.stopScan();
-  }
+  Future<void> stopScan() async => FlutterBluePlus.isScanningNow
+      ? await FlutterBluePlus.stopScan()
+      : await Future.value();
 
   @override
   Stream<List<ScanResult>> get scanResults => FlutterBluePlus.scanResults;
@@ -84,7 +74,15 @@ class BleDataSourceImpl implements BleDataSource {
 
   @override
   Future<bool> get isOn async {
-    return FlutterBluePlus.adapterStateNow == BluetoothAdapterState.on;
+    if (FlutterBluePlus.adapterStateNow == BluetoothAdapterState.unknown) {
+      // For iOS to test
+      //await FlutterBluePlus.turnOn();
+      //await Future.delayed(const Duration(seconds: 1));
+    }
+
+    final state = await FlutterBluePlus.adapterState.first;
+    //final state = FlutterBluePlus.adapterStateNow;
+    return state == BluetoothAdapterState.on;
   }
 
   @override

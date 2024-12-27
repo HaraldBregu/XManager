@@ -1,9 +1,17 @@
 import 'package:dartz/dartz.dart';
+import 'package:xmanager/src/core/error/failures.dart';
+import 'package:xmanager/src/core/usecase.dart';
+import 'package:xmanager/src/shared/domain/entities/bluetooth_device_entity.dart';
+import 'package:xmanager/src/shared/domain/repository/ble_repository.dart';
 
-import '../../../core/error/failures.dart';
-import '../../../core/usecase.dart';
-import '../entities/bluetooth_device_entity.dart';
-import '../repository/ble_repository.dart';
+class BleTurnOnUseCase implements UseCase<void, NoParams> {
+  const BleTurnOnUseCase(this._bleRepository);
+  final BleRepository _bleRepository;
+
+  @override
+  Future<Either<Failure, void>> call(NoParams params) =>
+      _bleRepository.turnOn();
+}
 
 class BleStartScanUseCase implements BaseUseCase<void, BleScanParams> {
   const BleStartScanUseCase(this._bleRepository);
@@ -49,6 +57,14 @@ class BluetoothConnectUseCase implements UseCase<void, String> {
   @override
   Future<Either<Failure, void>> call(String uuid) =>
       _bleRepository.connect(uuid);
+}
+
+class BluetoothIsOnUseCase implements BaseUseCase<bool, NoParams> {
+  const BluetoothIsOnUseCase(this._bleRepository);
+  final BleRepository _bleRepository;
+
+  @override
+  Future<bool> call(NoParams noParams) => _bleRepository.isOn;
 }
 
 class BleDisconnectDeviceUseCase implements BaseUseCase<void, String> {

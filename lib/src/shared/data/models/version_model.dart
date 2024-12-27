@@ -46,11 +46,17 @@ class ServiceModel extends ServiceEntity {
   });
 
   factory ServiceModel.fromJson(Map<String, dynamic> json) {
+    final characteristics = json['characteristics'] as List;
+    final characteristicsList = characteristics
+        .map(
+          (el) => CharacteristicsModel.fromJson(el as Map<String, dynamic>),
+        )
+        .toList();
+
     return ServiceModel(
       name: json['name'] as String,
       uuid: json['uuid'] as String,
-      characteristics: (json['characteristics'] as List<dynamic>)
-          .cast<CharacteristicsModel>(),
+      characteristics: characteristicsList,
     );
   }
 }
@@ -60,13 +66,17 @@ class CharacteristicsModel extends CharacteristicsEntity {
     required super.name,
     required super.uuid,
     required super.properties,
+    required super.data,
   });
 
   factory CharacteristicsModel.fromJson(Map<String, dynamic> json) {
     return CharacteristicsModel(
       name: json['name'] as String,
       uuid: json['uuid'] as String,
-      properties: (json['properties'] as List<dynamic>).cast<String>(),
+      properties: List<String>.from(json['properties'] as List<dynamic>),
+      data: json['data'] != null
+          ? Map<String, dynamic>.from(json['data'] as Map<dynamic, dynamic>)
+          : <String, dynamic>{},
     );
   }
 }

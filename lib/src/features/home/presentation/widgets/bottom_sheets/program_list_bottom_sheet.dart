@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
-import 'package:xmanager/src/shared/domain/entities/device_program_entity.dart';
+import 'package:xmanager/src/shared/domain/entities/program_entity.dart';
 
 Future<void> showProgramListBottomSheet({
   required BuildContext context,
-  required List<DeviceProgramEntity> programList,
-  required Function(DeviceProgramEntity program) onSelectProgram,
+  required List<ProgramEntity> programList,
+  required Function(ProgramEntity program) onSelectProgram,
 }) {
   return showModalBottomSheet<void>(
     context: context,

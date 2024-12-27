@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 import 'package:xmanager/src/features/home/presentation/widgets/device_checkbox_row.dart';
-import 'package:xmanager/src/shared/domain/entities/device_entity.dart';
-import 'package:xmanager/src/shared/domain/entities/device_program_entity.dart';
+import 'package:xmanager/src/shared/domain/entities/program_entity.dart';
 import 'package:xmanager/src/shared/widgets/info_container.dart';
 
-typedef UploadProgram = void Function(DeviceProgramEntity program);
+typedef UploadProgram = void Function(ProgramEntity program);
 
 Future<void> showModalBottomSheetProgramUploader({
   required BuildContext context,
-  required DeviceProgramEntity? program,
+  required ProgramEntity? program,
   required UploadProgram onStartUploading,
 }) {
   return showModalBottomSheet<void>(

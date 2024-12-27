@@ -1,16 +1,15 @@
 import 'package:equatable/equatable.dart';
-import 'package:xmanager/src/shared/domain/entities/device_program_entity.dart';
+import 'package:xmanager/src/shared/domain/entities/program_entity.dart';
 
 class ProgramState extends Equatable {
-  final List<DeviceProgramEntity> programs;
+  final List<ProgramEntity> programs;
 
   const ProgramState({
     this.programs = const [],
   });
 
   ProgramState copyWith({
-    List<DeviceProgramEntity>? programs,
-    DeviceProgramEntity? program,
+    List<ProgramEntity>? programs,
   }) {
     return ProgramState(
       programs: programs ?? this.programs,

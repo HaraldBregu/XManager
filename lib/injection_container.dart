@@ -76,9 +76,11 @@ Future<void> init() async {
       bleConnect: sl(),
       bleDiscoverServices: sl(),
       bleWrite: sl(),
+      bleDisconnect: sl(),
+      bleIsOn: sl(),
+      bleConnectPermissionsGranted: sl(),
     ),
   );
-
 
   sl.registerFactory(
     () => UserBloc(
@@ -95,6 +97,7 @@ Future<void> init() async {
       bluetoothConnectPermissions: sl(),
       bluetoothScanPermissions: sl(),
       goToSettings: sl(),
+      bleTurnOn: sl(),
     ),
   );
 
@@ -133,6 +136,12 @@ Future<void> init() async {
   sl.registerLazySingleton(() => BluetoothConnectPermissionsUseCase(sl()));
   sl.registerLazySingleton(() => BluetoothScanPermissionsUseCase(sl()));
   sl.registerLazySingleton(() => GoToSettingsUseCase(sl()));
+  sl.registerLazySingleton(() => BluetoothIsOnUseCase(sl()));
+  sl.registerLazySingleton(
+    () => BluetoothConnectPermissionsGrantedUseCase(sl()),
+  );
+  sl.registerLazySingleton(() => BleTurnOnUseCase(sl()));
+  sl.registerLazySingleton(() => BluetoothScanPermissionsGrantedUseCase(sl()));
 
   sl.registerLazySingleton(() => GetCurrentUserUseCase(sl()));
   sl.registerLazySingleton(() => ValidEmailUseCase(sl()));

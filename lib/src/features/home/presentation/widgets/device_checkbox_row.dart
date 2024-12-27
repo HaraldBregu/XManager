@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 import 'package:xmanager/src/shared/domain/entities/device_entity.dart';
 

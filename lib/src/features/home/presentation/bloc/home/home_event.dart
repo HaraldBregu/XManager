@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:xmanager/src/shared/domain/entities/bluetooth_device_pairs_entity.dart';
-import 'package:xmanager/src/shared/domain/entities/device_program_entity.dart';
+import 'package:xmanager/src/shared/domain/entities/program_entity.dart';
 
 abstract class HomeEvent extends Equatable {
   const HomeEvent();
@@ -37,7 +37,7 @@ class LoadHomeDataHomeEvent extends HomeEvent {
 
 class HomeUploadProgramToDeviceEvent extends HomeEvent {
   final BluetoothDevicePairsEntity devicePairs;
-  final DeviceProgramEntity program;
+  final ProgramEntity program;
 
   const HomeUploadProgramToDeviceEvent({
     required this.devicePairs,
@@ -52,7 +52,7 @@ class HomeUploadProgramToDeviceEvent extends HomeEvent {
 }
 
 class UploadProgramEvent extends HomeEvent {
-  final DeviceProgramEntity program;
+  final ProgramEntity program;
   const UploadProgramEvent(this.program);
 
   @override

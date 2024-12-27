@@ -1,6 +1,5 @@
 import 'package:permission_handler/permission_handler.dart';
-
-import '../../../../core/enums.dart';
+import 'package:xmanager/src/core/enums.dart';
 
 abstract class PermissionsDataSource {
   Future<List<Permission>> permissionList();

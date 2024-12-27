@@ -2,18 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/core/localizations_extension.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/home/home_bloc.dart';
-import 'package:xmanager/src/features/home/presentation/bloc/home/home_event.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/home/home_state.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/program/program_bloc.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/program/program_event.dart';
-import 'package:xmanager/src/features/home/presentation/widgets/bottom_sheets/program_uploader_bottom_sheet.dart';
 import 'package:xmanager/src/features/home/presentation/widgets/buttons/start_training_button.dart';
-import 'package:xmanager/src/shared/domain/entities/device_program_entity.dart';
 import 'package:xmanager/src/shared/widgets/drawer_menu.dart';
 
 const String bleMac = "E8:29:77:C6:A9:C0";
@@ -59,6 +54,7 @@ class HomeScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+
               BlocConsumer<HomeBloc, HomeState>(
                 listenWhen: (previous, current) {
                   return previous != current && current is InitialHomeState ||

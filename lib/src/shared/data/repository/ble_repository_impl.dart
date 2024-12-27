@@ -61,8 +61,11 @@ class BleRepositoryImpl implements BleRepository {
     try {
       await _dataSource.connect(uuid);
     } on FlutterBluePlusException catch (_) {
+      // If the connection fails, it's because the device is not available
       return Left(BluetoothConnectionFailure());
     } on PlatformException catch (_) {
+      // If the connection fails, it's because the bluetooth
+      // of the smartphone is off
       return Left(PlatformFailure());
     } catch (e) {
       return Left(PlatformFailure());
@@ -150,4 +153,18 @@ class BleRepositoryImpl implements BleRepository {
         characteristicsUuid,
         enable,
       );
+
+  @override
+  Future<bool> get isOn => _dataSource.isOn;
+
+  @override
+  Future<Either<Failure, void>> turnOn() async {
+    try {
+      await _dataSource.turnOn();
+    } catch (e) {
+      return Left(BluetoothTurnOnFailure());
+    }
+
+    return const Right(null);
+  }
 }

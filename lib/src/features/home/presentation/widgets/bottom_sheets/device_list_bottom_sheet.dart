@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 import 'package:xmanager/src/features/home/presentation/widgets/device_checkbox_row.dart';
 import 'package:xmanager/src/shared/domain/entities/device_entity.dart';
-import 'package:xmanager/src/shared/domain/entities/device_program_entity.dart';
+import 'package:xmanager/src/shared/domain/entities/program_entity.dart';
 
 Future<void> showDeviceListBottomSheet({
   required BuildContext context,
-  required DeviceProgramEntity? program,
+  required ProgramEntity? program,
   required List<DeviceEntity> devices,
   required Function(List<DeviceEntity> devices) onSelectDevices,
 }) {

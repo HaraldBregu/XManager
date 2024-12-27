@@ -15,6 +15,8 @@ abstract class BleRepository {
   Stream<bool> connected(String uuid);
   Stream<AppBluetoothAdapterState> get adapterState;
   Future<bool> isConnected(String uuid);
+  Future<bool> get isOn;
+  Future<Either<Failure, void>> turnOn();
 
   Future write(
     String deviceUuid,

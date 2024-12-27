@@ -1,110 +1,178 @@
 import 'package:equatable/equatable.dart';
-import 'package:xmanager/src/shared/domain/entities/device_program_entity.dart';
-import 'package:xmanager/src/shared/domain/entities/device_upload_entity.dart';
+import 'package:xmanager/src/shared/domain/entities/program_entity.dart';
+import 'package:xmanager/src/shared/domain/entities/uploader_entity.dart';
 
 class UploaderState extends Equatable {
-  final DeviceProgramEntity? program;
-  final List<DeviceUploadEntity> devices;
+  final ProgramEntity? program;
+  final List<UploaderEntity> uploaderEntities;
+  final UploaderEntity? currentUploaderEntity;
 
   const UploaderState({
     this.program,
-    this.devices = const [],
+    this.uploaderEntities = const [],
+    this.currentUploaderEntity,
   });
 
   UploaderState copyWith({
-    DeviceProgramEntity? program,
-    List<DeviceUploadEntity>? devices,
+    ProgramEntity? program,
+    List<UploaderEntity>? uploaderEntities,
+    UploaderEntity? currentUploaderEntity,
   }) {
     return UploaderState(
       program: program ?? this.program,
-      devices: devices ?? this.devices,
+      uploaderEntities: uploaderEntities ?? this.uploaderEntities,
+      currentUploaderEntity:
+          currentUploaderEntity ?? this.currentUploaderEntity,
     );
   }
 
   @override
-  List<Object?> get props => [program, devices];
+  List<Object?> get props => [program, uploaderEntities];
+}
+
+class BluetoothDisabled extends UploaderState {
+  const BluetoothDisabled({
+    super.program,
+    super.uploaderEntities,
+  });
+}
+
+class BluetoothConnectPermissionsDenied extends UploaderState {
+  const BluetoothConnectPermissionsDenied({
+    super.program,
+    super.uploaderEntities,
+  });
+}
+
+class BluetoothConnectPermissionsPermanentlyDenied extends UploaderState {
+  const BluetoothConnectPermissionsPermanentlyDenied({
+    super.program,
+    super.uploaderEntities,
+  });
+}
+
+class BluetoothScanPermissionsDenied extends UploaderState {
+  const BluetoothScanPermissionsDenied({
+    super.program,
+    super.uploaderEntities,
+  });
+}
+
+class BluetoothScanPermissionsPermanentlyDenied extends UploaderState {
+  const BluetoothScanPermissionsPermanentlyDenied({
+    super.program,
+    super.uploaderEntities,
+  });
 }
 
 class Connecting extends UploaderState {
   const Connecting({
     super.program,
-    super.devices,
+    super.uploaderEntities,
   });
 }
 
 class ConnectingSuccess extends UploaderState {
   const ConnectingSuccess({
     super.program,
-    super.devices,
+    super.uploaderEntities,
   });
 }
 
 class ConnectingFailure extends UploaderState {
   const ConnectingFailure({
     super.program,
-    super.devices,
+    super.uploaderEntities,
+  });
+}
+
+class DiscoveringServices extends UploaderState {
+  const DiscoveringServices({
+    super.program,
+    super.uploaderEntities,
+  });
+}
+
+class DiscoveringServicesSuccess extends UploaderState {
+  const DiscoveringServicesSuccess({
+    super.program,
+    super.uploaderEntities,
+  });
+}
+
+class DiscoveringServicesFailure extends UploaderState {
+  const DiscoveringServicesFailure({
+    super.program,
+    super.uploaderEntities,
   });
 }
 
 class Authenticating extends UploaderState {
   const Authenticating({
     super.program,
-    super.devices,
+    super.uploaderEntities,
   });
 }
 
 class AuthenticatingSuccess extends UploaderState {
   const AuthenticatingSuccess({
     super.program,
-    super.devices,
+    super.uploaderEntities,
   });
 }
 
 class AuthenticatingFailure extends UploaderState {
   const AuthenticatingFailure({
     super.program,
-    super.devices,
+    super.uploaderEntities,
   });
 }
 
 class Uploading extends UploaderState {
   const Uploading({
     super.program,
-    super.devices,
+    super.uploaderEntities,
   });
 }
 
 class UploadingSuccess extends UploaderState {
   const UploadingSuccess({
     super.program,
-    super.devices,
+    super.uploaderEntities,
   });
 }
 
 class UploadingFailure extends UploaderState {
   const UploadingFailure({
     super.program,
-    super.devices,
+    super.uploaderEntities,
   });
 }
 
 class Saving extends UploaderState {
   const Saving({
     super.program,
-    super.devices,
+    super.uploaderEntities,
   });
 }
 
 class SavingSuccess extends UploaderState {
   const SavingSuccess({
     super.program,
-    super.devices,
+    super.uploaderEntities,
   });
 }
 
 class SavingFailure extends UploaderState {
   const SavingFailure({
     super.program,
-    super.devices,
+    super.uploaderEntities,
+  });
+}
+
+class NoAvailableDevicesFailure extends UploaderState {
+  const NoAvailableDevicesFailure({
+    required super.program,
+    required super.uploaderEntities,
   });
 }

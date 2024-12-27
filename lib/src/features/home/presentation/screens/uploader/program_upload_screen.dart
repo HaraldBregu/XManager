@@ -17,7 +17,7 @@ class ProgramUploadScreen extends StatelessWidget {
     final uploaderBloc = context.watch<UploaderBloc>();
     final uploaderState = uploaderBloc.state;
     final program = uploaderState.program;
-    final devices = uploaderState.devices;
+    final devices = uploaderState.uploaderEntities;
 
     return Scaffold(
       body: CustomScrollView(
@@ -85,13 +85,53 @@ class ProgramUploadScreen extends StatelessWidget {
                 final deviceUpload = devices[index];
                 final device = deviceUpload.device;
 
-                final title =
-                    "${device.type.value} ${device.location.value} (${device.version})";
+                final isConnecting = uploaderState is Connecting;
+                final isDiscoveringServices =
+                    uploaderState is DiscoveringServices;
+                final isAuthenticating = uploaderState is Authenticating;
+                final isUploading = uploaderState is Uploading;
 
-                final titleText = Text(
-                  title,
+                var statusText = '';
+                if (isConnecting) {
+                  statusText = "CONNECTING";
+                } else if (isDiscoveringServices) {
+                  statusText = "DISCOVERING SERVICES";
+                } else if (isAuthenticating) {
+                  statusText = "AUTHENTICATING";
+                } else if (isUploading) {
+                  statusText = "UPLOADING";
+                } else {
+                  statusText = "STOPPED";
+                }
+
+                final typeValueWidget = Text(
+                  device.type.value,
                   style: context.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w900,
+                  ),
+                );
+
+                final locationValueWidget = Text(
+                  device.location.value,
+                  style: context.textTheme.bodySmall?.copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: context.colorScheme.primaryFixed,
+                  ),
+                );
+
+                final statusTextWidget = Text(
+                  statusText,
+                  style: context.textTheme.bodySmall?.copyWith(
+                    fontWeight: FontWeight.w900,
+                    color: context.colorScheme.primaryFixed,
+                  ),
+                );
+
+                final versionText = Text(
+                  "v${device.version}",
+                  style: context.textTheme.bodySmall?.copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: context.colorScheme.primaryFixed,
                   ),
                 );
 
@@ -109,23 +149,8 @@ class ProgramUploadScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  device.type.value,
-                                  style:
-                                      context.textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ),
-                                Text(
-                                  device.location.value,
-                                  style: context.textTheme.bodySmall
-                                      ?.copyWith(
-                                        fontWeight: FontWeight.w400,
-                                      )
-                                      .copyWith(
-                                        color: context.colorScheme.primaryFixed,
-                                      ),
-                                ),
+                                typeValueWidget,
+                                locationValueWidget,
                               ],
                             ),
                           ),
@@ -134,32 +159,8 @@ class ProgramUploadScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      "SUPPORTED",
-                                      style: context.textTheme.bodySmall
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.w900,
-                                          )
-                                          .copyWith(
-                                            color: context
-                                                .colorScheme.primaryFixed,
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                                Text(
-                                  "v${device.version}",
-                                  style: context.textTheme.bodySmall
-                                      ?.copyWith(
-                                        fontWeight: FontWeight.w400,
-                                      )
-                                      .copyWith(
-                                        color: context.colorScheme.primaryFixed,
-                                      ),
-                                ),
+                                statusTextWidget,
+                                versionText,
                               ],
                             ),
                           ),
@@ -185,53 +186,71 @@ class ProgramUploadScreen extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: BlocConsumer<UploaderBloc, UploaderState>(
-        listenWhen: (previous, current) =>
-            previous != current && current is ConnectingFailure,
-        listener: (context, state) {
-          final denied = true;
-          //state.devices == AppPermissionStatus.denied;
-          final title = denied
-              ? "Dispositivi nelle vicinanze"
-              : "Dispositivi nelle vicinanze";
-          final description = denied
-              ? "Per utilizzare tutte le funzionalità dell'app, è necessario attivare il permesso Bluetooth. Attivando il Bluetooth, potrai accedere a una vasta gamma di servizi e interazioni che migliorano l'esperienza dell'app. Ti preghiamo di concedere il permesso Bluetooth per continuare. Grazie!"
-              : "Per utilizzare tutte le funzionalità dell'app, è necessario attivare il permesso Bluetooth. Attivando il Bluetooth, potrai accedere a una vasta gamma di servizi e interazioni che migliorano l'esperienza dell'app. Ti preghiamo di concedere il permesso Bluetooth per continuare. Grazie!";
-          final actionTitle = denied ? "ATTIVA" : "VAI IN IMPOSTAZIONI";
+        listenWhen: (previous, current) {
+          final stateChanged = previous != current;
+          final bluetoothDisabled = current is BluetoothDisabled;
+          final bluetoothConnectPermissionsDenied =
+              current is BluetoothConnectPermissionsDenied;
+          final bluetoothConnectPermissionsPermanentlyDenied =
+              current is BluetoothConnectPermissionsPermanentlyDenied;
 
-          showDialog<void>(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text(title),
-                icon: const Icon(
-                  Icons.bluetooth,
-                  size: 50,
+          return stateChanged &&
+              (bluetoothConnectPermissionsDenied ||
+                  bluetoothConnectPermissionsPermanentlyDenied ||
+                  bluetoothDisabled);
+        },
+        listener: (context, state) {
+          if (state is BluetoothConnectPermissionsDenied ||
+              state is BluetoothConnectPermissionsPermanentlyDenied) {
+            showDialog<void>(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const Text("Connect permissions required"),
+                content: const Text(
+                  "Please grant the necessary permissions to continue.",
                 ),
-                content: SingleChildScrollView(
-                  child: ListBody(
-                    children: <Widget>[
-                      Text(description),
-                    ],
-                  ),
-                ),
-                actions: <Widget>[
-                  TextButton(
-                    child: Text(actionTitle),
-                    onPressed: () {
-                      context.pop();
-                      if (denied) {
+                actions: [
+                  if (state is BluetoothConnectPermissionsDenied)
+                    TextButton(
+                      child: const Text("GRANT PERMISSIONS"),
+                      onPressed: () {
+                        context.pop();
                         context
                             .read<AppBloc>()
                             .add(RequestBluetoothConnectPermission());
-                      } else {
+                      },
+                    ),
+                  if (state is BluetoothConnectPermissionsPermanentlyDenied)
+                    TextButton(
+                      child: const Text("GO TO SETTINGS"),
+                      onPressed: () {
+                        context.pop();
                         context.read<AppBloc>().add(GoToSettings());
-                      }
+                      },
+                    ),
+                ],
+              ),
+            );
+            return;
+          } else if (state is BluetoothDisabled) {
+            showDialog<void>(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const Text("Bluetooth is off"),
+                content: const Text("Please turn on Bluetooth to continue."),
+                actions: [
+                  TextButton(
+                    child: const Text("TURN ON"),
+                    onPressed: () {
+                      context.pop();
+                      context.read<AppBloc>().add(TurnOnBluetooth());
                     },
                   ),
                 ],
-              );
-            },
-          );
+              ),
+            );
+            return;
+          }
         },
         builder: (contect, state) {
           return Padding(

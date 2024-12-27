@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/device/device_bloc.dart';
 import 'package:xmanager/src/features/home/presentation/bloc/device/device_event.dart';
@@ -28,8 +29,9 @@ class DevicesSelectScreen extends StatelessWidget {
           }
 
           return RefreshIndicator(
-            onRefresh: () async =>
-                context.read<DeviceBloc>().add(const GetDevices()),
+            onRefresh: () async {
+              context.read<DeviceBloc>().add(const GetDevices());
+            },
             child: CustomScrollView(
               slivers: [
                 SliverAppBar(
@@ -50,10 +52,11 @@ class DevicesSelectScreen extends StatelessWidget {
                       final device = state.devices[index];
 
                       final selectedDevices =
-                          context.watch<UploaderBloc>().state.devices;
+                          context.watch<UploaderBloc>().state.uploaderEntities;
 
-                      final isSelected =
-                          selectedDevices.any((e) => e.device == device);
+                      final isSelected = selectedDevices.any(
+                        (e) => e.device.macAddress == device.macAddress,
+                      );
 
                       return InkWell(
                         onTap: () {
@@ -171,14 +174,15 @@ class DevicesSelectScreen extends StatelessWidget {
                   fontWeight: FontWeight.w900,
                 ),
               ),
-              onPressed: context.watch<UploaderBloc>().state.devices.isEmpty
-                  ? null
-                  : () {
-                      // final bloc = context.read<HomeBloc>();
-                      // context.pushNamed('program select device screen');
-                      // bloc.add(const GetDevicesHomeEvent());
-                      context.pushNamed('upload program screen');
-                    },
+              onPressed:
+                  context.watch<UploaderBloc>().state.uploaderEntities.isEmpty
+                      ? null
+                      : () {
+                          // final bloc = context.read<HomeBloc>();
+                          // context.pushNamed('program select device screen');
+                          // bloc.add(const GetDevicesHomeEvent());
+                          context.pushNamed('upload program screen');
+                        },
             ),
           ],
         ),

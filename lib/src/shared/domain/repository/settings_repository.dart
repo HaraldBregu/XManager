@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import '../../../core/error/failures.dart';
-import '../entities/setttings_entity.dart';
+import 'package:xmanager/src/core/error/failures.dart';
+import 'package:xmanager/src/shared/domain/entities/setttings_entity.dart';
 
 abstract class SettingsRepository {
   Future<Either<Failure, SettingsEntity>> getSettings();

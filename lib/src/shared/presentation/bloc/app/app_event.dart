@@ -15,3 +15,5 @@ class RequestBluetoothConnectPermission extends AppEvent {}
 class RequestBluetoothScanPermission extends AppEvent {}
 
 class GoToSettings extends AppEvent {}
+
+class TurnOnBluetooth extends AppEvent {}

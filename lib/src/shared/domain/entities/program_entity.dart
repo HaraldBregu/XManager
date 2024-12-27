@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:xmanager/src/core/enums.dart';
 
-class DeviceProgramEntity extends Equatable {
+class ProgramEntity extends Equatable {
   final String title;
   final int duration;
   final DeviceFeature feature;
@@ -9,7 +9,7 @@ class DeviceProgramEntity extends Equatable {
   final DeviceType type;
   final String version;
 
-  const DeviceProgramEntity({
+  const ProgramEntity({
     required this.title,
     required this.duration,
     required this.feature,

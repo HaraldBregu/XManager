@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:xmanager/src/core/error/failures.dart';
 import 'package:xmanager/src/features/home/data/models/home_model.dart';
 import 'package:xmanager/src/features/home/domain/repositories/home_repository.dart';
-import 'package:xmanager/src/shared/domain/entities/device_program_entity.dart';
+import 'package:xmanager/src/shared/domain/entities/program_entity.dart';
 
 class HomeRepositoryImpl implements HomeRepository {
   const HomeRepositoryImpl();
@@ -13,6 +13,6 @@ class HomeRepositoryImpl implements HomeRepository {
 
   @override
   // TODO: implement myPrograms
-  Future<Either<Failure, List<DeviceProgramEntity>>> get myPrograms =>
+  Future<Either<Failure, List<ProgramEntity>>> get myPrograms =>
       throw UnimplementedError();
 }

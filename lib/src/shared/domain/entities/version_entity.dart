@@ -38,12 +38,12 @@ class CharacteristicsEntity {
   String name;
   String uuid;
   List<String> properties;
-  Map<String, dynamic>? data;
+  Map<String, dynamic> data;
 
   CharacteristicsEntity({
     required this.name,
     required this.uuid,
     required this.properties,
-    this.data,
+    required this.data,
   });
 }
