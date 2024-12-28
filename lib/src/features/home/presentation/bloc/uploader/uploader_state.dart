@@ -5,12 +5,10 @@ import 'package:xmanager/src/shared/domain/entities/uploader_entity.dart';
 class UploaderState extends Equatable {
   final ProgramEntity? program;
   final List<UploaderEntity> uploaderEntities;
-  final UploaderEntity? currentUploaderEntity;
 
   const UploaderState({
     this.program,
     this.uploaderEntities = const [],
-    this.currentUploaderEntity,
   });
 
   UploaderState copyWith({
@@ -21,8 +19,6 @@ class UploaderState extends Equatable {
     return UploaderState(
       program: program ?? this.program,
       uploaderEntities: uploaderEntities ?? this.uploaderEntities,
-      currentUploaderEntity:
-          currentUploaderEntity ?? this.currentUploaderEntity,
     );
   }
 

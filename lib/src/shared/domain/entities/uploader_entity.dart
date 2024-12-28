@@ -1,50 +1,100 @@
+import 'dart:math';
+
+import 'package:flutter/material.dart';
 import 'package:xmanager/src/core/error/failures.dart';
+import 'package:xmanager/src/core/theme_extension.dart';
 import 'package:xmanager/src/shared/domain/entities/device_entity.dart';
-import 'package:xmanager/src/shared/domain/entities/program_entity.dart';
+
+enum UploaderStatus {
+  idle(0.0),
+  connecting(0.1),
+  connected(0.2),
+  servicesDiscovering(0.3),
+  servicesDiscovered(0.4),
+  authenticating(0.5),
+  authenticated(0.6),
+  dataUploading(0.7),
+  dataUploaded(0.8),
+  dataSaving(0.9),
+  dataSaved(1.0);
+
+  const UploaderStatus(this.value);
+  final double value;
+}
 
 class UploaderEntity {
-  final ProgramEntity? program;
   final DeviceEntity device;
-  final bool connected;
-  final bool authenticated;
-  final bool dataUploaded;
-  final bool programDataSaved;
-  final bool done;
-  final double progress;
+  final UploaderStatus state;
   final Failure? failure;
 
   const UploaderEntity({
-    this.program,
     required this.device,
-    this.connected = false,
-    this.authenticated = false,
-    this.dataUploaded = false,
-    this.programDataSaved = false,
-    this.progress = 0,
-    this.done = false,
+    this.state = UploaderStatus.idle,
     this.failure,
   });
 
   UploaderEntity copyWith({
-    ProgramEntity? program,
     DeviceEntity? device,
-    bool? connected,
-    bool? authenticated,
-    bool? dataUploaded,
-    bool? programDataSaved,
-    double? progress,
+    UploaderStatus? state,
     Failure? failure,
-    bool? done,
   }) =>
       UploaderEntity(
-        program: program ?? this.program,
         device: device ?? this.device,
-        connected: connected ?? this.connected,
-        authenticated: authenticated ?? this.authenticated,
-        dataUploaded: dataUploaded ?? this.dataUploaded,
-        programDataSaved: programDataSaved ?? this.programDataSaved,
-        progress: progress ?? this.progress,
+        state: state ?? this.state,
         failure: failure ?? this.failure,
-        done: done ?? this.done,
       );
+
+  String? get errorMessage {
+    if (failure == null) return null;
+
+    switch (state) {
+      case UploaderStatus.connecting:
+        return 'Failed to connect to device';
+      case UploaderStatus.servicesDiscovering:
+        return 'Failed to discover services';
+      case UploaderStatus.authenticating:
+        return 'Failed to authenticate';
+      case UploaderStatus.dataUploading:
+        return 'Failed to upload data';
+      case UploaderStatus.dataSaving:
+        return 'Failed to save data';
+      default:
+        return '';
+    }
+  }
+
+  String get stateString {
+    switch (state) {
+      case UploaderStatus.idle:
+        return 'Default';
+      case UploaderStatus.connecting:
+        return failure == null ? 'Connecting' : 'Failed to connect';
+      case UploaderStatus.connected:
+        return 'Connected';
+      case UploaderStatus.servicesDiscovering:
+        return 'Discovering services';
+      case UploaderStatus.servicesDiscovered:
+        return 'Services discovered';
+      case UploaderStatus.authenticating:
+        return 'Authenticating';
+      case UploaderStatus.authenticated:
+        return 'Authenticated';
+      case UploaderStatus.dataUploading:
+        return 'Uploading data';
+      case UploaderStatus.dataUploaded:
+        return 'Data uploaded';
+      case UploaderStatus.dataSaving:
+        return failure == null ? 'Saving data' : 'Failed to save data';
+      case UploaderStatus.dataSaved:
+        return 'Data saved';
+    }
+  }
+
+  Color getProgressColor(BuildContext context) {
+    final defaultColor = context.colorScheme.secondary;
+    final errorColor = context.colorScheme.error;
+    if (failure != null) return errorColor;
+
+    return defaultColor;
+  }
 }

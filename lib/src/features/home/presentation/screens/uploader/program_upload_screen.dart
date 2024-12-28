@@ -91,19 +91,6 @@ class ProgramUploadScreen extends StatelessWidget {
                 final isAuthenticating = uploaderState is Authenticating;
                 final isUploading = uploaderState is Uploading;
 
-                var statusText = '';
-                if (isConnecting) {
-                  statusText = "CONNECTING";
-                } else if (isDiscoveringServices) {
-                  statusText = "DISCOVERING SERVICES";
-                } else if (isAuthenticating) {
-                  statusText = "AUTHENTICATING";
-                } else if (isUploading) {
-                  statusText = "UPLOADING";
-                } else {
-                  statusText = "STOPPED";
-                }
-
                 final typeValueWidget = Text(
                   device.type.value,
                   style: context.textTheme.titleMedium?.copyWith(
@@ -120,7 +107,7 @@ class ProgramUploadScreen extends StatelessWidget {
                 );
 
                 final statusTextWidget = Text(
-                  statusText,
+                  deviceUpload.stateString,
                   style: context.textTheme.bodySmall?.copyWith(
                     fontWeight: FontWeight.w900,
                     color: context.colorScheme.primaryFixed,
@@ -141,6 +128,8 @@ class ProgramUploadScreen extends StatelessWidget {
                     horizontal: 16,
                   ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+
                     children: [
                       Row(
                         children: [
@@ -169,14 +158,28 @@ class ProgramUploadScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
                         child: LinearProgressIndicator(
-                          value: deviceUpload.progress,
+                          value: deviceUpload.state.value,
                           minHeight: 10,
                           backgroundColor: context.colorScheme.onSecondary,
                           valueColor: AlwaysStoppedAnimation<Color>(
-                            context.colorScheme.secondary,
+                            deviceUpload.getProgressColor(context),
                           ),
                         ),
                       ),
+
+                      if (deviceUpload.errorMessage != null) ...[
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                          child: Text(
+                            deviceUpload.errorMessage!,
+                            style: context.textTheme.bodySmall?.copyWith(
+                              fontWeight: FontWeight.w900,
+                              color: context.colorScheme.error,
+                            ),
+                          ),
+                        ),
+                      ]
+                      
                     ],
                   ),
                 );

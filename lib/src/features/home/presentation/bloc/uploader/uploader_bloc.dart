@@ -82,7 +82,8 @@ class UploaderBloc extends Bloc<UploaderEvent, UploaderState> {
     late final UploaderEntity uploaderEntity;
     try {
       uploaderEntity = uploaderEntities.firstWhere(
-        (entity) => !entity.dataUploaded && entity.failure == null,
+        (entity) =>
+            entity.state != UploaderStatus.dataSaved && entity.failure == null,
         orElse: () => throw StateError('No available devices for upload'),
       );
     } catch (_) {
@@ -134,19 +135,10 @@ class UploaderBloc extends Bloc<UploaderEvent, UploaderState> {
       emit(newState);
       return;
     }
-
-    // RESET DATA
-    uploaderEntities[index] = uploaderEntity.copyWith(
-      connected: false,
-      authenticated: false,
-      dataUploaded: false,
-      programDataSaved: false,
-      progress: 0.0,
-    );
-
+    
     // 1. CONNECT TO DEVICE
     uploaderEntities[index] = uploaderEntity.copyWith(
-      progress: 0.1,
+      state: UploaderStatus.connecting,
     );
     newState = Connecting(
       program: program,
@@ -156,7 +148,10 @@ class UploaderBloc extends Bloc<UploaderEvent, UploaderState> {
     final connect = await bleConnect.call(device.macAddress);
     final connectResult = connect.fold(
       (failure) {
-        uploaderEntities[index] = uploaderEntity.copyWith(failure: failure);
+        uploaderEntities[index] = uploaderEntity.copyWith(
+          state: UploaderStatus.connecting,
+          failure: failure,
+        );
         final newState = ConnectingFailure(
           program: program,
           uploaderEntities: uploaderEntities,
@@ -166,8 +161,7 @@ class UploaderBloc extends Bloc<UploaderEvent, UploaderState> {
       },
       (_) {
         uploaderEntities[index] = uploaderEntity.copyWith(
-          connected: true,
-          progress: 0.2,
+          state: UploaderStatus.connected,
         );
         emit(
           ConnectingSuccess(
@@ -178,11 +172,14 @@ class UploaderBloc extends Bloc<UploaderEvent, UploaderState> {
         return true;
       },
     );
-    if (!connectResult) return;
+    if (!connectResult) {
+      add(const StartUploading());
+      return;
+    }
 
     // 2. DISCOVER SERVICES
     uploaderEntities[index] = uploaderEntity.copyWith(
-      progress: 0.3,
+      state: UploaderStatus.servicesDiscovering,
     );
     newState = DiscoveringServices(
       program: program,
@@ -191,7 +188,7 @@ class UploaderBloc extends Bloc<UploaderEvent, UploaderState> {
     emit(newState);
     await bleDiscoverServices.call(device.macAddress);
     uploaderEntities[index] = uploaderEntity.copyWith(
-      progress: 0.4,
+      state: UploaderStatus.servicesDiscovered,
     );
     newState = DiscoveringServicesSuccess(
       program: program,
@@ -201,7 +198,7 @@ class UploaderBloc extends Bloc<UploaderEvent, UploaderState> {
 
     // 3. AUTHENTICATE
     uploaderEntities[index] = uploaderEntity.copyWith(
-      progress: 0.5,
+      state: UploaderStatus.authenticating,
     );
     newState = Authenticating(
       program: program,
@@ -218,8 +215,7 @@ class UploaderBloc extends Bloc<UploaderEvent, UploaderState> {
       ),
     );
     uploaderEntities[index] = uploaderEntity.copyWith(
-      authenticated: true,
-      progress: 0.6,
+      state: UploaderStatus.authenticated,
     );
     newState = AuthenticatingSuccess(
       program: program,
@@ -227,10 +223,9 @@ class UploaderBloc extends Bloc<UploaderEvent, UploaderState> {
     );
     emit(newState);
 
-    // 3. UPLOAD DATA
+    // 4. UPLOAD DATA
     uploaderEntities[index] = uploaderEntity.copyWith(
-      authenticated: true,
-      progress: 0.7,
+      state: UploaderStatus.dataUploading,
     );
     newState = Uploading(
       program: program,
@@ -247,7 +242,7 @@ class UploaderBloc extends Bloc<UploaderEvent, UploaderState> {
       ),
     );
     uploaderEntities[index] = uploaderEntity.copyWith(
-      progress: 0.8,
+      state: UploaderStatus.dataUploaded,
     );
     newState = UploadingSuccess(
       program: program,
@@ -255,19 +250,12 @@ class UploaderBloc extends Bloc<UploaderEvent, UploaderState> {
     );
     emit(newState);
 
-    // 4. DISCONNECT
-    // decide if disconnect before saving or after saving
+    // DISCONNECT FROM DEVICE
     await bleDisconnect.call(device.macAddress);
 
     // 5. SAVING TRAINING DATA 
-    // On state Saving
-    // set progress to 0.9
-    // On state SavingSuccess
-    // set progress to 1.0
-    // On state SavingFailure
-    // set progress to 0.9
     uploaderEntities[index] = uploaderEntity.copyWith(
-      progress: 0.9,
+      state: UploaderStatus.dataSaving,
     );
     newState = Saving(
       program: program,
@@ -275,12 +263,15 @@ class UploaderBloc extends Bloc<UploaderEvent, UploaderState> {
     );
     emit(newState);
     uploaderEntities[index] = uploaderEntity.copyWith(
-      progress: 1.0,
+      state: UploaderStatus.dataSaved,
     );
     newState = SavingSuccess(
       program: program,
       uploaderEntities: uploaderEntities,
     );
     emit(newState);
+
+    // UPLOAD TO NEXT DEVICE
+    add(const StartUploading());
   }
 }
