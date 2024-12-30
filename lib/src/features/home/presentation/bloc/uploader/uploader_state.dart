@@ -145,27 +145,6 @@ class UploadingFailure extends UploaderState {
   });
 }
 
-class Saving extends UploaderState {
-  const Saving({
-    super.program,
-    super.uploaderEntities,
-  });
-}
-
-class SavingSuccess extends UploaderState {
-  const SavingSuccess({
-    super.program,
-    super.uploaderEntities,
-  });
-}
-
-class SavingFailure extends UploaderState {
-  const SavingFailure({
-    super.program,
-    super.uploaderEntities,
-  });
-}
-
 class NoAvailableDevicesFailure extends UploaderState {
   const NoAvailableDevicesFailure({
     required super.program,

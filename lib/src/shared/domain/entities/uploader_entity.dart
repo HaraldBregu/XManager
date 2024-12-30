@@ -5,18 +5,18 @@ import 'package:xmanager/src/core/error/failures.dart';
 import 'package:xmanager/src/core/theme_extension.dart';
 import 'package:xmanager/src/shared/domain/entities/device_entity.dart';
 
+const double kTotalSteps = 8;
+
 enum UploaderStatus {
   idle(0.0),
-  connecting(0.1),
-  connected(0.2),
-  servicesDiscovering(0.3),
-  servicesDiscovered(0.4),
-  authenticating(0.5),
-  authenticated(0.6),
-  dataUploading(0.7),
-  dataUploaded(0.8),
-  dataSaving(0.9),
-  dataSaved(1.0);
+  connecting(1.0 / kTotalSteps * 1),
+  connected(1.0 / kTotalSteps * 2),
+  servicesDiscovering(1.0 / kTotalSteps * 3),
+  servicesDiscovered(1.0 / kTotalSteps * 4),
+  authenticating(1.0 / kTotalSteps * 5),
+  authenticated(1.0 / kTotalSteps * 6),
+  dataUploading(1.0 / kTotalSteps * 7),
+  dataUploaded(1.0 / kTotalSteps * 8);
 
   const UploaderStatus(this.value);
   final double value;
@@ -56,8 +56,6 @@ class UploaderEntity {
         return 'Failed to authenticate';
       case UploaderStatus.dataUploading:
         return 'Failed to upload data';
-      case UploaderStatus.dataSaving:
-        return 'Failed to save data';
       default:
         return '';
     }
@@ -83,10 +81,6 @@ class UploaderEntity {
         return 'Uploading data';
       case UploaderStatus.dataUploaded:
         return 'Data uploaded';
-      case UploaderStatus.dataSaving:
-        return failure == null ? 'Saving data' : 'Failed to save data';
-      case UploaderStatus.dataSaved:
-        return 'Data saved';
     }
   }
 

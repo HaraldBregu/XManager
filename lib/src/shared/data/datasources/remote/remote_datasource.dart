@@ -2,9 +2,9 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:xmanager/src/core/enums.dart';
 import 'package:xmanager/src/core/error/exeptions.dart';
 import 'package:xmanager/src/shared/data/models/device_model.dart';
-import 'package:xmanager/src/shared/data/models/program_model.dart';
 import 'package:xmanager/src/shared/data/models/dinamo_model.dart';
 import 'package:xmanager/src/shared/data/models/profile_model.dart';
+import 'package:xmanager/src/shared/data/models/program_model.dart';
 import 'package:xmanager/src/shared/data/models/user_model.dart';
 
 abstract class RemoteDataSource {
@@ -85,7 +85,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<List<ProgramModel>> getPrograms() async {
-
     final data = await Supabase.instance.client.from('programs').select(
           'title, duration, feature, command, versions!inner(type, version)',
         );
@@ -104,6 +103,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         })
         .map((doc) => ProgramModel.fromJson(doc))
         .toList();
+  }
+
+  Future<void> saveProgramToDevice() async {
+    final client = await Supabase.instance.client;
+
+    client.from('programs').select();
   }
 
   // TEST

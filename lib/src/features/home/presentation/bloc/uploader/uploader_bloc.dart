@@ -83,7 +83,8 @@ class UploaderBloc extends Bloc<UploaderEvent, UploaderState> {
     try {
       uploaderEntity = uploaderEntities.firstWhere(
         (entity) =>
-            entity.state != UploaderStatus.dataSaved && entity.failure == null,
+            entity.state != UploaderStatus.dataUploaded &&
+            entity.failure == null,
         orElse: () => throw StateError('No available devices for upload'),
       );
     } catch (_) {
@@ -252,24 +253,6 @@ class UploaderBloc extends Bloc<UploaderEvent, UploaderState> {
 
     // DISCONNECT FROM DEVICE
     await bleDisconnect.call(device.macAddress);
-
-    // 5. SAVING TRAINING DATA 
-    uploaderEntities[index] = uploaderEntity.copyWith(
-      state: UploaderStatus.dataSaving,
-    );
-    newState = Saving(
-      program: program,
-      uploaderEntities: uploaderEntities,
-    );
-    emit(newState);
-    uploaderEntities[index] = uploaderEntity.copyWith(
-      state: UploaderStatus.dataSaved,
-    );
-    newState = SavingSuccess(
-      program: program,
-      uploaderEntities: uploaderEntities,
-    );
-    emit(newState);
 
     // UPLOAD TO NEXT DEVICE
     add(const StartUploading());
